@@ -1,0 +1,10 @@
+/**
+ * Storybook's Tailwind + design-token entry point.
+ *
+ * Previously this lived at apps/playground/src/index.css and was imported
+ * from here across package boundaries — meaning Storybook depended on a demo
+ * app just to get its CSS pipeline. Now that apps/playground is gone (see
+ * AGENTS.md), this is the single entry point for both.
+ */
+@import 'tailwindcss';
+@import '@nebula/react-ui/theme.css';

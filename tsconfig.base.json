@@ -1,0 +1,50 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "moduleDetection": "force",
+    "jsx": "react-jsx",
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "composite": false,
+    "incremental": true,
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "forceConsistentCasingInFileNames": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "verbatimModuleSyntax": false,
+    "skipLibCheck": true,
+    "allowJs": false,
+    "baseUrl": ".",
+    // Explicit list, not "include everything in node_modules/@types" — but
+    // that means every ambient global the codebase actually relies on (e.g.
+    // `process` in tokens/generate.ts and contrast-audit.ts) must be listed
+    // here too, not just the test-matcher packages this was added for.
+    "types": ["node", "@testing-library/jest-dom", "vitest-axe/extend-expect"],
+    "paths": {
+      // Add an entry here each time a new packages/* is scaffolded.
+      "@nebula/utilities": ["packages/utilities/src/index.ts"],
+      "@nebula/utilities/*": ["packages/utilities/src/*"],
+      "@nebula/hooks": ["packages/hooks/src/index.ts"],
+      "@nebula/hooks/*": ["packages/hooks/src/*"],
+      "@nebula/primitives": ["packages/primitives/src/index.ts"],
+      "@nebula/primitives/*": ["packages/primitives/src/*"],
+      "@nebula/styleless": ["packages/styleless/src/index.ts"],
+      "@nebula/styleless/*": ["packages/styleless/src/*"],
+      "@nebula/react-ui": ["packages/react-ui/src/index.ts"],
+      "@nebula/react-ui/*": ["packages/react-ui/src/*"],
+      "@nebula/react-ui-blocks": ["packages/react-ui-blocks/src/index.ts"],
+      "@nebula/react-ui-blocks/*": ["packages/react-ui-blocks/src/*"]
+    }
+  },
+  "exclude": ["node_modules", "dist", "build", "storybook-static"]
+}

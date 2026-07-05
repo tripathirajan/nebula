@@ -1,0 +1,131 @@
+import * as React from 'react';
+
+import { useComposedRefs } from '../compose-refs/compose-refs';
+import { Primitive } from '../primitive/primitive';
+
+import type { PrimitivePropsWithRef } from '../primitive/primitive';
+
+const FOCUSABLE_SELECTOR = [
+  'a[href]',
+  'button:not([disabled])',
+  'input:not([disabled])',
+  'select:not([disabled])',
+  'textarea:not([disabled])',
+  'iframe',
+  'audio[controls]',
+  'video[controls]',
+  '[contenteditable]:not([contenteditable="false"])',
+  '[tabindex]:not([tabindex="-1"])',
+].join(',');
+
+function getFocusableElements(container: HTMLElement): HTMLElement[] {
+  return Array.from(container.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR)).filter(
+    (element) => element.offsetParent !== null,
+  );
+}
+
+interface FocusScopeProps extends PrimitivePropsWithRef<'div'> {
+  /**
+   * Trap Tab/Shift+Tab focus cycling within this scope's subtree — for
+   * modal contexts (`Dialog`). Non-modal contexts (a `Popover` that
+   * shouldn't block interacting with the rest of the page) should leave
+   * this `false` and get auto-focus/focus-restore only.
+   * @default false
+   */
+  trapped?: boolean;
+  /** Called when the scope mounts and is about to move focus into itself; call `event.preventDefault()` to take over focusing yourself. */
+  onMountAutoFocus?: (event: Event) => void;
+  /** Called when the scope unmounts and is about to restore focus to whatever was focused before it mounted; call `event.preventDefault()` to take over. */
+  onUnmountAutoFocus?: (event: Event) => void;
+}
+
+/**
+ * Manages focus for a subtree: on mount, moves focus into itself (first
+ * focusable descendant, or the container itself if none); on unmount,
+ * restores focus to whatever was focused beforehand; while mounted, can
+ * optionally trap Tab cycling within itself (`trapped`). This is the
+ * focus-management half of the WAI-ARIA Dialog (Modal) pattern —
+ * `Dialog`/`AlertDialog` compose this with `Portal` + `DismissableLayer`.
+ *
+ * @example
+ * ```tsx
+ * function Modal({ open, onClose, children }: ModalProps) {
+ *   if (!open) return null;
+ *   return (
+ *     <Portal>
+ *       <FocusScope trapped onUnmountAutoFocus={(e) => e.preventDefault()}>
+ *         {children}
+ *       </FocusScope>
+ *     </Portal>
+ *   );
+ * }
+ * ```
+ */
+const FocusScope = React.forwardRef<HTMLDivElement, FocusScopeProps>((props, forwardedRef) => {
+  const { trapped = false, onMountAutoFocus, onUnmountAutoFocus, ...scopeProps } = props;
+  const containerRef = React.useRef<HTMLDivElement>(null);
+  const composedRef = useComposedRefs(forwardedRef, containerRef);
+
+  React.useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const previouslyFocused = document.activeElement as HTMLElement | null;
+
+    const mountEvent = new CustomEvent('nebulaFocusScopeMountAutoFocus', { cancelable: true });
+    onMountAutoFocus?.(mountEvent);
+    if (!mountEvent.defaultPrevented) {
+      const [first] = getFocusableElements(container);
+      (first ?? container).focus();
+    }
+
+    return () => {
+      const unmountEvent = new CustomEvent('nebulaFocusScopeUnmountAutoFocus', {
+        cancelable: true,
+      });
+      onUnmountAutoFocus?.(unmountEvent);
+      if (!unmountEvent.defaultPrevented) {
+        previouslyFocused?.focus();
+      }
+    };
+    // Mount/unmount effect only — intentionally not re-run on prop changes.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  React.useEffect(() => {
+    if (!trapped) return;
+    const container = containerRef.current;
+    if (!container) return;
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key !== 'Tab') return;
+      const focusables = getFocusableElements(container);
+      if (focusables.length === 0) {
+        event.preventDefault();
+        return;
+      }
+
+      const first = focusables[0]!;
+      const last = focusables[focusables.length - 1]!;
+      const active = document.activeElement;
+
+      if (event.shiftKey && active === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && active === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+
+    container.addEventListener('keydown', onKeyDown);
+    return () => container.removeEventListener('keydown', onKeyDown);
+  }, [trapped]);
+
+  return <Primitive as="div" tabIndex={-1} {...scopeProps} ref={composedRef} />;
+});
+
+FocusScope.displayName = 'FocusScope';
+
+export { FocusScope };
+export type { FocusScopeProps };

@@ -1,0 +1,121 @@
+{
+  "name": "@nebula/hooks",
+  "version": "0.1.0",
+  "description": "React hooks with no dependency on @nebula/primitives or higher layers — state/DOM/lifecycle utilities every other package can build on.",
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./use-controllable-state": {
+      "types": "./dist/use-controllable-state/index.d.ts",
+      "import": "./dist/use-controllable-state/index.js",
+      "require": "./dist/use-controllable-state/index.cjs"
+    },
+    "./use-click-outside": {
+      "types": "./dist/use-click-outside/index.d.ts",
+      "import": "./dist/use-click-outside/index.js",
+      "require": "./dist/use-click-outside/index.cjs"
+    },
+    "./use-media-query": {
+      "types": "./dist/use-media-query/index.d.ts",
+      "import": "./dist/use-media-query/index.js",
+      "require": "./dist/use-media-query/index.cjs"
+    },
+    "./use-scroll-lock": {
+      "types": "./dist/use-scroll-lock/index.d.ts",
+      "import": "./dist/use-scroll-lock/index.js",
+      "require": "./dist/use-scroll-lock/index.cjs"
+    },
+    "./use-focus-trap": {
+      "types": "./dist/use-focus-trap/index.d.ts",
+      "import": "./dist/use-focus-trap/index.js",
+      "require": "./dist/use-focus-trap/index.cjs"
+    },
+    "./use-resize-observer": {
+      "types": "./dist/use-resize-observer/index.d.ts",
+      "import": "./dist/use-resize-observer/index.js",
+      "require": "./dist/use-resize-observer/index.cjs"
+    },
+    "./use-intersection-observer": {
+      "types": "./dist/use-intersection-observer/index.d.ts",
+      "import": "./dist/use-intersection-observer/index.js",
+      "require": "./dist/use-intersection-observer/index.cjs"
+    },
+    "./use-mutation-observer": {
+      "types": "./dist/use-mutation-observer/index.d.ts",
+      "import": "./dist/use-mutation-observer/index.js",
+      "require": "./dist/use-mutation-observer/index.cjs"
+    },
+    "./use-local-storage": {
+      "types": "./dist/use-local-storage/index.d.ts",
+      "import": "./dist/use-local-storage/index.js",
+      "require": "./dist/use-local-storage/index.cjs"
+    },
+    "./use-debounce": {
+      "types": "./dist/use-debounce/index.d.ts",
+      "import": "./dist/use-debounce/index.js",
+      "require": "./dist/use-debounce/index.cjs"
+    },
+    "./use-id": {
+      "types": "./dist/use-id/index.d.ts",
+      "import": "./dist/use-id/index.js",
+      "require": "./dist/use-id/index.cjs"
+    },
+    "./use-boolean": {
+      "types": "./dist/use-boolean/index.d.ts",
+      "import": "./dist/use-boolean/index.js",
+      "require": "./dist/use-boolean/index.cjs"
+    },
+    "./use-toggle": {
+      "types": "./dist/use-toggle/index.d.ts",
+      "import": "./dist/use-toggle/index.js",
+      "require": "./dist/use-toggle/index.cjs"
+    },
+    "./use-stable-callback": {
+      "types": "./dist/use-stable-callback/index.d.ts",
+      "import": "./dist/use-stable-callback/index.js",
+      "require": "./dist/use-stable-callback/index.cjs"
+    },
+    "./use-event-listener": {
+      "types": "./dist/use-event-listener/index.d.ts",
+      "import": "./dist/use-event-listener/index.js",
+      "require": "./dist/use-event-listener/index.cjs"
+    },
+    "./use-previous": {
+      "types": "./dist/use-previous/index.d.ts",
+      "import": "./dist/use-previous/index.js",
+      "require": "./dist/use-previous/index.cjs"
+    },
+    "./use-mounted": {
+      "types": "./dist/use-mounted/index.d.ts",
+      "import": "./dist/use-mounted/index.js",
+      "require": "./dist/use-mounted/index.cjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsup && tsc -p tsconfig.build.json --emitDeclarationOnly && rm -f dist/*.tsbuildinfo",
+    "dev": "tsup --watch",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "lint": "eslint ."
+  },
+  "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "@types/react": "^18.3.12",
+    "react": "^18.3.1",
+    "tsup": "^8.3.5",
+    "typescript": "^5.6.3"
+  }
+}

@@ -1,0 +1,225 @@
+{
+  "name": "@nebula/primitives",
+  "version": "0.1.0",
+  "description": "Unstyled polymorphic base primitives (Slot, Primitive, cn, ref/event composition, scoped context) — the foundation every other @nebula/* package builds on.",
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./types": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/types/index.js",
+      "require": "./dist/types/index.cjs"
+    },
+    "./slot": {
+      "types": "./dist/slot/index.d.ts",
+      "import": "./dist/slot/index.js",
+      "require": "./dist/slot/index.cjs"
+    },
+    "./primitive": {
+      "types": "./dist/primitive/index.d.ts",
+      "import": "./dist/primitive/index.js",
+      "require": "./dist/primitive/index.cjs"
+    },
+    "./cn": {
+      "types": "./dist/cn/index.d.ts",
+      "import": "./dist/cn/index.js",
+      "require": "./dist/cn/index.cjs"
+    },
+    "./compose-refs": {
+      "types": "./dist/compose-refs/index.d.ts",
+      "import": "./dist/compose-refs/index.js",
+      "require": "./dist/compose-refs/index.cjs"
+    },
+    "./compose-event-handlers": {
+      "types": "./dist/compose-event-handlers/index.d.ts",
+      "import": "./dist/compose-event-handlers/index.js",
+      "require": "./dist/compose-event-handlers/index.cjs"
+    },
+    "./create-context-scope": {
+      "types": "./dist/create-context-scope/index.d.ts",
+      "import": "./dist/create-context-scope/index.js",
+      "require": "./dist/create-context-scope/index.cjs"
+    },
+    "./box": {
+      "types": "./dist/box/index.d.ts",
+      "import": "./dist/box/index.js",
+      "require": "./dist/box/index.cjs"
+    },
+    "./flex": {
+      "types": "./dist/flex/index.d.ts",
+      "import": "./dist/flex/index.js",
+      "require": "./dist/flex/index.cjs"
+    },
+    "./grid": {
+      "types": "./dist/grid/index.d.ts",
+      "import": "./dist/grid/index.js",
+      "require": "./dist/grid/index.cjs"
+    },
+    "./stack": {
+      "types": "./dist/stack/index.d.ts",
+      "import": "./dist/stack/index.js",
+      "require": "./dist/stack/index.cjs"
+    },
+    "./inline": {
+      "types": "./dist/inline/index.d.ts",
+      "import": "./dist/inline/index.js",
+      "require": "./dist/inline/index.cjs"
+    },
+    "./center": {
+      "types": "./dist/center/index.d.ts",
+      "import": "./dist/center/index.js",
+      "require": "./dist/center/index.cjs"
+    },
+    "./container": {
+      "types": "./dist/container/index.d.ts",
+      "import": "./dist/container/index.js",
+      "require": "./dist/container/index.cjs"
+    },
+    "./aspect-ratio": {
+      "types": "./dist/aspect-ratio/index.d.ts",
+      "import": "./dist/aspect-ratio/index.js",
+      "require": "./dist/aspect-ratio/index.cjs"
+    },
+    "./text": {
+      "types": "./dist/text/index.d.ts",
+      "import": "./dist/text/index.js",
+      "require": "./dist/text/index.cjs"
+    },
+    "./heading": {
+      "types": "./dist/heading/index.d.ts",
+      "import": "./dist/heading/index.js",
+      "require": "./dist/heading/index.cjs"
+    },
+    "./paragraph": {
+      "types": "./dist/paragraph/index.d.ts",
+      "import": "./dist/paragraph/index.js",
+      "require": "./dist/paragraph/index.cjs"
+    },
+    "./code": {
+      "types": "./dist/code/index.d.ts",
+      "import": "./dist/code/index.js",
+      "require": "./dist/code/index.cjs"
+    },
+    "./pre": {
+      "types": "./dist/pre/index.d.ts",
+      "import": "./dist/pre/index.js",
+      "require": "./dist/pre/index.cjs"
+    },
+    "./link": {
+      "types": "./dist/link/index.d.ts",
+      "import": "./dist/link/index.js",
+      "require": "./dist/link/index.cjs"
+    },
+    "./visually-hidden": {
+      "types": "./dist/visually-hidden/index.d.ts",
+      "import": "./dist/visually-hidden/index.js",
+      "require": "./dist/visually-hidden/index.cjs"
+    },
+    "./focus-scope": {
+      "types": "./dist/focus-scope/index.d.ts",
+      "import": "./dist/focus-scope/index.js",
+      "require": "./dist/focus-scope/index.cjs"
+    },
+    "./dismissable-layer": {
+      "types": "./dist/dismissable-layer/index.d.ts",
+      "import": "./dist/dismissable-layer/index.js",
+      "require": "./dist/dismissable-layer/index.cjs"
+    },
+    "./boundary": {
+      "types": "./dist/boundary/index.d.ts",
+      "import": "./dist/boundary/index.js",
+      "require": "./dist/boundary/index.cjs"
+    },
+    "./roving-focus-group": {
+      "types": "./dist/roving-focus-group/index.d.ts",
+      "import": "./dist/roving-focus-group/index.js",
+      "require": "./dist/roving-focus-group/index.cjs"
+    },
+    "./button": {
+      "types": "./dist/button/index.d.ts",
+      "import": "./dist/button/index.js",
+      "require": "./dist/button/index.cjs"
+    },
+    "./input": {
+      "types": "./dist/input/index.d.ts",
+      "import": "./dist/input/index.js",
+      "require": "./dist/input/index.cjs"
+    },
+    "./textarea": {
+      "types": "./dist/textarea/index.d.ts",
+      "import": "./dist/textarea/index.js",
+      "require": "./dist/textarea/index.cjs"
+    },
+    "./label": {
+      "types": "./dist/label/index.d.ts",
+      "import": "./dist/label/index.js",
+      "require": "./dist/label/index.cjs"
+    },
+    "./form": {
+      "types": "./dist/form/index.d.ts",
+      "import": "./dist/form/index.js",
+      "require": "./dist/form/index.cjs"
+    },
+    "./portal": {
+      "types": "./dist/portal/index.d.ts",
+      "import": "./dist/portal/index.js",
+      "require": "./dist/portal/index.cjs"
+    },
+    "./presence": {
+      "types": "./dist/presence/index.d.ts",
+      "import": "./dist/presence/index.js",
+      "require": "./dist/presence/index.cjs"
+    },
+    "./overlay": {
+      "types": "./dist/overlay/index.d.ts",
+      "import": "./dist/overlay/index.js",
+      "require": "./dist/overlay/index.cjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup && tsc -p tsconfig.build.json --emitDeclarationOnly && rm -f dist/*.tsbuildinfo",
+    "dev": "tsup --watch",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "lint": "eslint .",
+    "test": "vitest run --root ../.. packages/primitives",
+    "test:watch": "vitest --root ../.. packages/primitives"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0",
+    "react-dom": "^18.0.0 || ^19.0.0"
+  },
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^2.5.5"
+  },
+  "devDependencies": {
+    "@storybook/react": "^8.6.18",
+    "@storybook/test": "^8.6.18",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.0.1",
+    "@testing-library/user-event": "^14.5.2",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "axe-core": "^4.10.2",
+    "jsdom": "^25.0.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "tsup": "^8.3.5",
+    "typescript": "^5.6.3",
+    "vitest": "^2.1.8",
+    "vitest-axe": "^0.1.0"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    // Without this, a composite project's `.tsbuildinfo` defaults to living
+    // next to this config file (i.e. the package root, outside `dist`) —
+    // so `rm -f dist/*.tsbuildinfo` in the `build` script's cleanup never
+    // touches it. A `.tsbuildinfo` written during a *failing* build then
+    // survives untouched, and the next `tsc` run trusts it and silently
+    // skips re-emitting (zero files, zero errors) even though `dist` is
+    // missing declaration output. Keeping it inside `dist` means tsup's
+    // `clean: true` wipes it on every build, so a failed build can never
+    // leave behind a stale cache that fools the next one.
+    "tsBuildInfoFile": "./dist/tsconfig.build.tsbuildinfo"
+  },
+  "exclude": ["dist", "**/*.stories.tsx", "**/*.test.tsx", "**/*.a11y.test.tsx"]
+}

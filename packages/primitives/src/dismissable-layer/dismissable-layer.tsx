@@ -1,0 +1,92 @@
+import * as React from 'react';
+
+import { useComposedRefs } from '../compose-refs/compose-refs';
+import { Primitive } from '../primitive/primitive';
+
+import type { PrimitivePropsWithRef } from '../primitive/primitive';
+
+/**
+ * Mount-ordered stack of currently-open layers (module-level, shared across
+ * every `DismissableLayer` instance in the app) — so that with nested
+ * overlays (a `Popover` inside a `Dialog`, say), an outside click or Escape
+ * dismisses only the topmost one instead of every open layer at once.
+ */
+const openLayers: HTMLElement[] = [];
+
+interface DismissableLayerProps extends PrimitivePropsWithRef<'div'> {
+  /** Called on Escape keydown, only when this is the topmost open layer. Call `event.preventDefault()` to stop `onDismiss` from also firing. */
+  onEscapeKeyDown?: (event: KeyboardEvent) => void;
+  /** Called on a pointerdown outside this layer's subtree, only when this is the topmost open layer. Call `event.preventDefault()` to stop `onDismiss` from also firing. */
+  onPointerDownOutside?: (event: PointerEvent) => void;
+  /** Fires after `onEscapeKeyDown`/`onPointerDownOutside` unless that handler called `preventDefault()` — the common case, wire this to close the layer. */
+  onDismiss?: () => void;
+}
+
+/**
+ * Escape-key and outside-pointerdown dismissal for overlays, with correct
+ * layering: only the topmost mounted `DismissableLayer` responds, so
+ * closing a nested popover doesn't also close the dialog underneath it.
+ * Pairs with `Portal` + `FocusScope` for the full Dialog/Popover pattern.
+ *
+ * @example
+ * ```tsx
+ * <Portal>
+ *   <DismissableLayer onDismiss={() => setOpen(false)}>
+ *     <FocusScope trapped>{content}</FocusScope>
+ *   </DismissableLayer>
+ * </Portal>
+ * ```
+ */
+const DismissableLayer = React.forwardRef<HTMLDivElement, DismissableLayerProps>(
+  (props, forwardedRef) => {
+    const { onEscapeKeyDown, onPointerDownOutside, onDismiss, ...layerProps } = props;
+    const nodeRef = React.useRef<HTMLDivElement>(null);
+    const composedRef = useComposedRefs(forwardedRef, nodeRef);
+
+    React.useEffect(() => {
+      const node = nodeRef.current;
+      if (!node) return;
+
+      openLayers.push(node);
+      return () => {
+        const index = openLayers.indexOf(node);
+        if (index !== -1) openLayers.splice(index, 1);
+      };
+    }, []);
+
+    React.useEffect(() => {
+      const node = nodeRef.current;
+      if (!node) return;
+
+      const isTopmost = () => openLayers[openLayers.length - 1] === node;
+
+      const onKeyDown = (event: KeyboardEvent) => {
+        if (event.key !== 'Escape' || !isTopmost()) return;
+        onEscapeKeyDown?.(event);
+        if (!event.defaultPrevented) onDismiss?.();
+      };
+
+      const onPointerDown = (event: PointerEvent) => {
+        if (!isTopmost()) return;
+        const target = event.target as Node | null;
+        if (target && node.contains(target)) return;
+        onPointerDownOutside?.(event);
+        if (!event.defaultPrevented) onDismiss?.();
+      };
+
+      document.addEventListener('keydown', onKeyDown);
+      document.addEventListener('pointerdown', onPointerDown, true);
+      return () => {
+        document.removeEventListener('keydown', onKeyDown);
+        document.removeEventListener('pointerdown', onPointerDown, true);
+      };
+    }, [onEscapeKeyDown, onPointerDownOutside, onDismiss]);
+
+    return <Primitive as="div" {...layerProps} ref={composedRef} />;
+  },
+);
+
+DismissableLayer.displayName = 'DismissableLayer';
+
+export { DismissableLayer };
+export type { DismissableLayerProps };

@@ -1,0 +1,78 @@
+{
+  "name": "@nebula/react-ui",
+  "version": "0.1.0",
+  "description": "Tailwind-powered styled components (atoms) built on @nebula/primitives + @nebula/styleless, plus the 3-layer design token system and ThemeProvider/useTheme they're styled from. Absorbed the former @nebula/theme package — nothing else in the workspace needs tokens/theming, only this package's own components do.",
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": [
+    "*.css"
+  ],
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./button": {
+      "types": "./dist/button/index.d.ts",
+      "import": "./dist/button/index.js",
+      "require": "./dist/button/index.cjs"
+    },
+    "./tokens": {
+      "types": "./dist/tokens/index.d.ts",
+      "import": "./dist/tokens/index.js",
+      "require": "./dist/tokens/index.cjs"
+    },
+    "./theme-provider": {
+      "types": "./dist/theme-provider/index.d.ts",
+      "import": "./dist/theme-provider/index.js",
+      "require": "./dist/theme-provider/index.cjs"
+    },
+    "./theme.css": "./src/theme.css",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "src/theme.css"
+  ],
+  "scripts": {
+    "build": "tsup && tsc -p tsconfig.build.json --emitDeclarationOnly && rm -f dist/*.tsbuildinfo && tsx src/tokens/generate.ts && cp src/theme.css dist/theme.css",
+    "dev": "tsup --watch",
+    "generate-tokens": "tsx src/tokens/generate.ts",
+    "contrast-audit": "tsx src/tokens/contrast-audit.ts",
+    "typecheck": "tsc -p tsconfig.typecheck.json --noEmit",
+    "lint": "eslint .",
+    "test": "vitest run --root ../.. packages/react-ui",
+    "test:watch": "vitest --root ../.. packages/react-ui"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0",
+    "react-dom": "^18.0.0 || ^19.0.0"
+  },
+  "dependencies": {
+    "@nebula/hooks": "workspace:*",
+    "@nebula/primitives": "workspace:*",
+    "class-variance-authority": "^0.7.1"
+  },
+  "devDependencies": {
+    "@storybook/react": "^8.6.18",
+    "@storybook/test": "^8.6.18",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.0.1",
+    "@testing-library/user-event": "^14.5.2",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "axe-core": "^4.10.2",
+    "jsdom": "^25.0.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "tsup": "^8.3.5",
+    "tsx": "^4.19.2",
+    "typescript": "^5.6.3",
+    "vitest": "^2.1.8",
+    "vitest-axe": "^0.1.0"
+  }
+}

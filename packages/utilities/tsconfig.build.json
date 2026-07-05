@@ -1,0 +1,11 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    // See packages/primitives/tsconfig.build.json for why this needs to
+    // live inside `dist`: otherwise a failed build's `.tsbuildinfo` survives
+    // in the package root (untouched by `rm -f dist/*.tsbuildinfo`) and
+    // fools the next `tsc` run into silently skipping emission.
+    "tsBuildInfoFile": "./dist/tsconfig.build.tsbuildinfo"
+  },
+  "exclude": ["dist", "**/*.stories.tsx", "**/*.test.tsx", "**/*.a11y.test.tsx"]
+}

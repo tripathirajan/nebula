@@ -1,0 +1,19 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    // See packages/styleless/tsconfig.build.json for why `paths` is cleared
+    // here: without it, `tsc -p tsconfig.build.json` (composite + rootDir:
+    // './src') pulls other packages' *source* files (resolved via the
+    // workspace-wide `@nebula/*` path aliases) into this program, which
+    // then fails since they fall outside this package's rootDir. Clearing
+    // it falls back to node_modules resolution, i.e. the dependency's built
+    // `dist` output via its package.json `exports` map.
+    "paths": {},
+    // See packages/primitives/tsconfig.build.json for why this needs to
+    // live inside `dist`: otherwise a failed build's `.tsbuildinfo` survives
+    // in the package root (untouched by `rm -f dist/*.tsbuildinfo`) and
+    // fools the next `tsc` run into silently skipping emission.
+    "tsBuildInfoFile": "./dist/tsconfig.build.tsbuildinfo"
+  },
+  "exclude": ["dist", "**/*.stories.tsx", "**/*.test.tsx", "**/*.a11y.test.tsx"]
+}

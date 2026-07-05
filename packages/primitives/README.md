@@ -1,0 +1,103 @@
+# @nebula/primitives
+
+Low-level DOM abstractions and layout components for building accessible, composable React applications. Unstyled and polymorphic — no visuals, no opinions about styling; just behavior and composition that every other `@nebula/*` package builds on.
+
+## Features
+
+### 🎯 Layout Utilities
+
+`Box`, `Flex`, `Grid`, `Stack`, `Container`, `Center`, `AspectRatio`, `Inline` — polymorphic layout building blocks over `Primitive`, styled with static Tailwind classes (no arbitrary-value runtime string building).
+
+### 📝 Text Components
+
+`Text`, `Heading`, `Paragraph`, `Code`, `Pre`, `Link` — semantic text elements, each resolving its own sensible default tag (`span`, `h1`-`h6` via `level`, `p`, `code`, `pre`, `a`) independent of `Primitive`'s own `div` fallback.
+
+### ♿ Accessibility
+
+`VisuallyHidden`, `FocusScope`, `DismissableLayer`, `Boundary`, `RovingFocusGroup` + `FocusItem` — focus trapping, outside-click/Escape dismissal (topmost-layer-only via an internal open-layer stack), roving tabindex keyboard navigation, and an error boundary.
+
+### 🎛️ Form Primitives
+
+`Button`, `Input`, `Textarea`, `Label`, `Form` — unstyled form controls with sane defaults (`Button` defaults `type="button"`; `Input`/`Textarea` map `invalid` to `aria-invalid`; `Textarea` supports `autoResize`; `Label` supports a `required` indicator; `Form` always calls `preventDefault()` before your `onSubmit`).
+
+### 👁️ Visibility
+
+`Portal`, `Presence`, `Overlay` — SSR-safe portal rendering, an exit-animation-aware presence state machine (waits for `animationend`/`transitionend` before unmounting), and a bare `fixed inset-0` overlay layer.
+
+### 🔗 Composition
+
+`Primitive` — a polymorphic component supporting the `as` prop (tag swap) and `asChild` (via `Slot`, merges props/ref/className/style onto a single child instead of adding a wrapper element). `Slot` / `Slottable` back `asChild` everywhere in the library.
+
+### 📡 Observers
+
+Note: the `ResizeObserver`/`IntersectionObserver`/`MutationObserver` hooks (`useResizeObserver`, `useIntersectionObserver`, `useMutationObserver`) live in `@nebula/hooks`, not here — `primitives` has zero in-workspace dependencies by design, so observer *hooks* belong one layer up. Components in this package that need equivalent behavior (`FocusScope`, `DismissableLayer`) implement it locally instead of importing across the boundary.
+
+### 🎭 Interaction
+
+Focus management (`FocusScope`, `RovingFocusGroup`), dismissable-layer patterns (`DismissableLayer`), and overlay detection (`Presence`, `Portal`) compose to build dialogs, popovers, menus, and tooltips without pulling in a separate headless library.
+
+## Example
+
+```tsx
+import { Box, Flex, Stack, Text, Heading } from '@nebula/primitives';
+
+function Card({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <Box as="section" className="rounded-lg border p-6">
+      <Stack gap={4}>
+        <Heading level={3}>{title}</Heading>
+        <Flex direction="col" gap={2}>
+          <Text>{children}</Text>
+        </Flex>
+      </Stack>
+    </Box>
+  );
+}
+```
+
+## `Primitive` and polymorphism
+
+Every component in this package is (directly or indirectly) `Primitive` with a resolved default tag:
+
+```tsx
+import * as React from 'react';
+import { Primitive } from '@nebula/primitives/primitive';
+import type { PolymorphicComponentPropsWithRef } from '@nebula/primitives/types';
+
+type BoxProps<E extends React.ElementType = 'div'> = PolymorphicComponentPropsWithRef<E>;
+
+const Box = React.forwardRef(
+  <E extends React.ElementType = 'div'>({ as, ...props }: BoxProps<E>, forwardedRef: React.Ref<unknown>) => (
+    <Primitive as={as ?? 'div'} {...props} ref={forwardedRef} />
+  ),
+) as unknown as <E extends React.ElementType = 'div'>(
+  props: BoxProps<E>,
+) => React.ReactElement | null;
+```
+
+`as` swaps the rendered tag (`<Box as="section">`); `asChild` merges onto a single child via `Slot` instead (`<Box asChild><a href="/">...</a></Box>`) — no extra DOM node, and event handlers/`className`/`style`/`ref` compose rather than override.
+
+## Import
+
+```ts
+// barrel
+import { Slot, Primitive, Box, Flex, Button, cn } from '@nebula/primitives';
+
+// or per-component subpath (identical runtime code, just explicit — and what
+// tsup's per-entry build + the package.json `exports` map are keyed on)
+import { Slot } from '@nebula/primitives/slot';
+import { Primitive } from '@nebula/primitives/primitive';
+import { cn } from '@nebula/primitives/cn';
+```
+
+## Conventions
+
+One module per folder (`src/<name>/<name>.ts(x)` + `index.ts` barrel) — see `component-library-architecture.md` §9.1 at the repo root. Package `index.ts` and every folder's `index.ts` are re-exports only, no logic. `primitives` has no in-workspace dependencies — not even `@nebula/utilities` or `@nebula/hooks` — so small pieces of logic (focusable-element queries, outside-click detection) are duplicated locally rather than imported, keeping this package installable standalone.
+
+## Scripts
+
+```
+pnpm --filter @nebula/primitives build      # tsup -> dist (ESM + CJS + .d.ts)
+pnpm --filter @nebula/primitives dev        # tsup --watch
+pnpm --filter @nebula/primitives typecheck  # tsc --noEmit
+```

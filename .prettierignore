@@ -1,0 +1,9 @@
+node_modules
+dist
+build
+storybook-static
+pnpm-lock.yaml
+*.tsbuildinfo
+.nx
+coverage
+CHANGELOG.md
