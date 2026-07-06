@@ -7,13 +7,13 @@ import type { PrimitivePropsWithRef } from '../primitive/primitive';
 
 /**
  * Mount-ordered stack of currently-open layers (module-level, shared across
- * every `DismissableLayer` instance in the app) — so that with nested
+ * every `DismissibleLayer` instance in the app) — so that with nested
  * overlays (a `Popover` inside a `Dialog`, say), an outside click or Escape
  * dismisses only the topmost one instead of every open layer at once.
  */
 const openLayers: HTMLElement[] = [];
 
-interface DismissableLayerProps extends PrimitivePropsWithRef<'div'> {
+interface DismissibleLayerProps extends PrimitivePropsWithRef<'div'> {
   /** Called on Escape keydown, only when this is the topmost open layer. Call `event.preventDefault()` to stop `onDismiss` from also firing. */
   onEscapeKeyDown?: (event: KeyboardEvent) => void;
   /** Called on a pointerdown outside this layer's subtree, only when this is the topmost open layer. Call `event.preventDefault()` to stop `onDismiss` from also firing. */
@@ -24,20 +24,20 @@ interface DismissableLayerProps extends PrimitivePropsWithRef<'div'> {
 
 /**
  * Escape-key and outside-pointerdown dismissal for overlays, with correct
- * layering: only the topmost mounted `DismissableLayer` responds, so
+ * layering: only the topmost mounted `DismissibleLayer` responds, so
  * closing a nested popover doesn't also close the dialog underneath it.
  * Pairs with `Portal` + `FocusScope` for the full Dialog/Popover pattern.
  *
  * @example
  * ```tsx
  * <Portal>
- *   <DismissableLayer onDismiss={() => setOpen(false)}>
+ *   <DismissibleLayer onDismiss={() => setOpen(false)}>
  *     <FocusScope trapped>{content}</FocusScope>
- *   </DismissableLayer>
+ *   </DismissibleLayer>
  * </Portal>
  * ```
  */
-const DismissableLayer = React.forwardRef<HTMLDivElement, DismissableLayerProps>(
+const DismissibleLayer = React.forwardRef<HTMLDivElement, DismissibleLayerProps>(
   (props, forwardedRef) => {
     const { onEscapeKeyDown, onPointerDownOutside, onDismiss, ...layerProps } = props;
     const nodeRef = React.useRef<HTMLDivElement>(null);
@@ -86,7 +86,7 @@ const DismissableLayer = React.forwardRef<HTMLDivElement, DismissableLayerProps>
   },
 );
 
-DismissableLayer.displayName = 'DismissableLayer';
+DismissibleLayer.displayName = 'DismissibleLayer';
 
-export { DismissableLayer };
-export type { DismissableLayerProps };
+export { DismissibleLayer };
+export type { DismissibleLayerProps };

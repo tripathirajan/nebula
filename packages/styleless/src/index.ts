@@ -4,3 +4,6 @@ export * from './checkbox';
 export * from './switch';
 export * from './radio-group';
 export * from './accordion';
+export * from './dialog';
+export * from './popover';
+export * from './tooltip';

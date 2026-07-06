@@ -1,70 +1,177 @@
 /**
  * GENERATED FILE — do not hand-edit.
- * Source: packages/react-ui/src/tokens/{semantic,component}.ts
+ * Source: packages/react-ui/src/tokens/{primitive,semantic,component}.ts
  * Regenerate: pnpm --filter @nebula/react-ui generate-tokens
  */
 
 :root {
-  --color-bg-default: #f9fafb;
-  --color-bg-subtle: #ffffff;
-  --color-bg-interactive: #2563eb;
-  --color-bg-interactive-hover: #1d4ed8;
-  --color-text-default: #111827;
-  --color-text-muted: #6b7280;
-  --color-text-on-interactive: #ffffff;
-  --color-border-default: #e5e7eb;
-  --color-border-interactive: #2563eb;
-  --color-border-focus: #3b82f6;
-  --color-status-danger: #dc2626;
-  --color-status-success: #15803d;
-  --color-status-warning: #b45309;
-  --button-primary-bg: var(--color-bg-interactive);
-  --button-primary-bg-hover: var(--color-bg-interactive-hover);
-  --button-primary-text: var(--color-text-on-interactive);
-  --button-primary-border: var(--color-border-interactive);
-  --button-secondary-bg: var(--color-bg-subtle);
-  --button-secondary-bg-hover: var(--color-bg-default);
-  --button-secondary-text: var(--color-text-default);
-  --button-secondary-border: var(--color-border-default);
-  --button-danger-bg: var(--color-status-danger);
-  --button-danger-bg-hover: var(--color-status-danger);
-  --button-danger-text: var(--color-text-on-interactive);
-  --button-danger-border: var(--color-status-danger);
+  color-scheme: light;
+  --color-base-100: oklch(98% 0 0);
+  --color-base-200: oklch(96% 0.001 286.375);
+  --color-base-300: oklch(92% 0.004 286.32);
+  --color-base-content: oklch(21% 0.006 285.885);
+  --color-primary: oklch(76% 0.188 70.08);
+  --color-primary-content: oklch(22% 0.05 70.08);
+  --color-secondary: oklch(28% 0.091 267.935);
+  --color-secondary-content: oklch(98% 0.002 247.839);
+  --color-accent: oklch(65% 0.241 354.308);
+  --color-accent-content: oklch(20% 0.05 354.308);
+  --color-neutral: oklch(44% 0.043 257.281);
+  --color-neutral-content: oklch(98% 0 0);
+  --color-info: oklch(74% 0.16 232.661);
+  --color-info-content: oklch(29% 0.066 243.157);
+  --color-success: oklch(79% 0.209 151.711);
+  --color-success-content: oklch(26% 0.065 152.934);
+  --color-warning: oklch(85% 0.199 91.936);
+  --color-warning-content: oklch(28% 0.066 53.813);
+  --color-error: oklch(70% 0.191 22.216);
+  --color-error-content: oklch(25% 0.092 26.042);
+  --button-primary-bg: var(--color-primary);
+  --button-primary-text: var(--color-primary-content);
+  --button-primary-border: var(--color-primary);
+  --button-secondary-bg: var(--color-neutral);
+  --button-secondary-text: var(--color-neutral-content);
+  --button-secondary-border: var(--color-neutral);
+  --button-danger-bg: var(--color-error);
+  --button-danger-text: var(--color-error-content);
+  --button-danger-border: var(--color-error);
+  --input-bg: var(--color-base-100);
+  --input-border: var(--color-base-300);
+  --input-text: var(--color-base-content);
+  --input-ring: var(--color-base-content);
+  --input-invalid-border: var(--color-error);
+  --input-invalid-ring: var(--color-error);
+  --separator-bg: var(--color-base-300);
+  --card-bg: var(--color-base-100);
+  --card-border: var(--color-base-300);
+  --card-text: var(--color-base-content);
+  --badge-primary-bg: var(--color-primary);
+  --badge-primary-text: var(--color-primary-content);
+  --badge-secondary-bg: var(--color-secondary);
+  --badge-secondary-text: var(--color-secondary-content);
+  --badge-accent-bg: var(--color-accent);
+  --badge-accent-text: var(--color-accent-content);
+  --badge-neutral-bg: var(--color-neutral);
+  --badge-neutral-text: var(--color-neutral-content);
+  --badge-info-bg: var(--color-info);
+  --badge-info-text: var(--color-info-content);
+  --badge-success-bg: var(--color-success);
+  --badge-success-text: var(--color-success-content);
+  --badge-warning-bg: var(--color-warning);
+  --badge-warning-text: var(--color-warning-content);
+  --badge-danger-bg: var(--color-error);
+  --badge-danger-text: var(--color-error-content);
+  --avatar-bg: var(--color-neutral);
+  --avatar-text: var(--color-neutral-content);
+  --accordion-border: var(--color-base-300);
+  --accordion-trigger-hover-bg: var(--color-base-200);
+  --accordion-text: var(--color-base-content);
+  --dialog-overlay-bg: var(--color-base-content);
+  --dialog-content-bg: var(--color-base-100);
+  --dialog-content-border: var(--color-base-300);
+  --dialog-text: var(--color-base-content);
+  --popover-content-bg: var(--color-base-100);
+  --popover-content-border: var(--color-base-300);
+  --popover-text: var(--color-base-content);
+  --tooltip-content-bg: var(--color-neutral);
+  --tooltip-content-text: var(--color-neutral-content);
+  --tabs-list-border: var(--color-base-300);
+  --tabs-trigger-text: var(--color-base-content);
+  --tabs-trigger-active-text: var(--color-primary);
+  --tabs-trigger-active-border: var(--color-primary);
+  --checkbox-bg: var(--color-base-100);
+  --checkbox-border: var(--color-base-300);
+  --checkbox-checked-bg: var(--color-primary);
+  --checkbox-checked-border: var(--color-primary);
+  --checkbox-icon: var(--color-primary-content);
+  --switch-track-bg: var(--color-base-300);
+  --switch-track-checked-bg: var(--color-primary);
+  --switch-thumb-bg: var(--color-base-100);
+  --radio-border: var(--color-base-300);
+  --radio-checked-border: var(--color-primary);
+  --radio-checked-dot: var(--color-primary);
+  --radio-text: var(--color-base-content);
+  --radius-selector: 2rem;
+  --radius-field: 2rem;
+  --radius-box: 2rem;
+  --radius-button: 2rem;
+  --radius-card: 2rem;
+  --radius-dialog: 2rem;
+  --radius-badge: 2rem;
+  --radius-chip: 2rem;
+  --radius-avatar: 2rem;
+  --radius-menu: 2rem;
+  --radius-popover: 2rem;
+  --radius-tooltip: 2rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --size-button: 0.25rem;
+  --size-icon: 0.25rem;
+  --size-badge: 0.25rem;
+  --size-chip: 0.25rem;
+  --font-sans: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --font-heading: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: ui-monospace, Consolas, monospace;
+  --border: 1px;
+  --depth: 0;
+  --noise: 0;
 }
 
+/* `.dark` is the primary selector (matches Tailwind's default `dark:`
+   class strategy and this theme's DaisyUI origin); `[data-theme="dark"]`
+   is kept alongside it since ThemeProvider sets that attribute too and some
+   consumers may already have written overrides against it. */
+.dark,
 [data-theme="dark"] {
-  --color-bg-default: #030712;
-  --color-bg-subtle: #111827;
-  --color-bg-interactive: #3b82f6;
-  --color-bg-interactive-hover: #60a5fa;
-  --color-text-default: #f9fafb;
-  --color-text-muted: #9ca3af;
-  --color-text-on-interactive: #030712;
-  --color-border-default: #1f2937;
-  --color-border-interactive: #3b82f6;
-  --color-border-focus: #60a5fa;
-  --color-status-danger: #f87171;
-  --color-status-success: #4ade80;
-  --color-status-warning: #fbbf24;
+  color-scheme: dark;
+  --color-base-100: oklch(27% 0.041 260.031);
+  --color-base-200: oklch(20% 0.042 265.755);
+  --color-base-300: oklch(12% 0.042 264.695);
+  --color-base-content: oklch(97.807% 0.029 256.847);
+  --color-primary: oklch(76% 0.188 70.08);
+  --color-primary-content: oklch(22% 0.05 70.08);
+  --color-secondary: oklch(28% 0.091 267.935);
+  --color-secondary-content: oklch(93% 0.032 255.585);
+  --color-accent: oklch(65% 0.241 354.308);
+  --color-accent-content: oklch(20% 0.05 354.308);
+  --color-neutral: oklch(96% 0.003 264.542);
+  --color-neutral-content: oklch(27% 0.033 256.848);
+  --color-info: oklch(74% 0.16 232.661);
+  --color-info-content: oklch(29% 0.066 243.157);
+  --color-success: oklch(76% 0.177 163.223);
+  --color-success-content: oklch(37% 0.077 168.94);
+  --color-warning: oklch(85% 0.199 91.936);
+  --color-warning-content: oklch(42% 0.095 57.708);
+  --color-error: oklch(71% 0.194 13.428);
+  --color-error-content: oklch(27% 0.105 12.094);
 }
 
 /* Only applies when the consumer hasn't set data-theme (or set it to
-   "system") — see ThemeProvider, which sets data-theme explicitly once the
-   user's preference is known, avoiding a hydration flash. */
+   "system") and hasn't added the .dark class — see ThemeProvider, which sets
+   both explicitly once the user's preference is known, avoiding a hydration
+   flash. */
 @media (prefers-color-scheme: dark) {
   [data-theme="system"] {
-    --color-bg-default: #030712;
-    --color-bg-subtle: #111827;
-    --color-bg-interactive: #3b82f6;
-    --color-bg-interactive-hover: #60a5fa;
-    --color-text-default: #f9fafb;
-    --color-text-muted: #9ca3af;
-    --color-text-on-interactive: #030712;
-    --color-border-default: #1f2937;
-    --color-border-interactive: #3b82f6;
-    --color-border-focus: #60a5fa;
-    --color-status-danger: #f87171;
-    --color-status-success: #4ade80;
-    --color-status-warning: #fbbf24;
+    color-scheme: dark;
+    --color-base-100: oklch(27% 0.041 260.031);
+    --color-base-200: oklch(20% 0.042 265.755);
+    --color-base-300: oklch(12% 0.042 264.695);
+    --color-base-content: oklch(97.807% 0.029 256.847);
+    --color-primary: oklch(76% 0.188 70.08);
+    --color-primary-content: oklch(22% 0.05 70.08);
+    --color-secondary: oklch(28% 0.091 267.935);
+    --color-secondary-content: oklch(93% 0.032 255.585);
+    --color-accent: oklch(65% 0.241 354.308);
+    --color-accent-content: oklch(20% 0.05 354.308);
+    --color-neutral: oklch(96% 0.003 264.542);
+    --color-neutral-content: oklch(27% 0.033 256.848);
+    --color-info: oklch(74% 0.16 232.661);
+    --color-info-content: oklch(29% 0.066 243.157);
+    --color-success: oklch(76% 0.177 163.223);
+    --color-success-content: oklch(37% 0.077 168.94);
+    --color-warning: oklch(85% 0.199 91.936);
+    --color-warning-content: oklch(42% 0.095 57.708);
+    --color-error: oklch(71% 0.194 13.428);
+    --color-error-content: oklch(27% 0.105 12.094);
   }
 }

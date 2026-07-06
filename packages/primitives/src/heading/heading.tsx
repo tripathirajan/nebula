@@ -71,4 +71,4 @@ const Heading = React.forwardRef(
 Heading.displayName = 'Heading';
 
 export { Heading };
-export type { HeadingProps, HeadingLevel };
+export type { HeadingProps, HeadingLevel, HeadingOwnProps };

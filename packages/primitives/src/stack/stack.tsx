@@ -42,4 +42,4 @@ const Stack = React.forwardRef(
 Stack.displayName = 'Stack';
 
 export { Stack };
-export type { StackProps };
+export type { StackProps, StackOwnProps };

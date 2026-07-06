@@ -1,15 +1,15 @@
 import { expect, userEvent, within } from '@storybook/test';
 import { useState } from 'react';
 
-import { DismissableLayer } from './dismissable-layer';
+import { DismissibleLayer } from './dismissible-layer';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
 const meta = {
-  title: 'Primitives/DismissableLayer',
-  component: DismissableLayer,
+  title: 'Primitives/DismissibleLayer',
+  component: DismissibleLayer,
   parameters: { layout: 'centered' },
-} satisfies Meta<typeof DismissableLayer>;
+} satisfies Meta<typeof DismissibleLayer>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -20,12 +20,12 @@ function Demo() {
     <div style={{ padding: 40 }}>
       <button data-testid="outside">Outside</button>
       {open && (
-        <DismissableLayer
+        <DismissibleLayer
           onDismiss={() => setOpen(false)}
           style={{ border: '1px solid', padding: 12, marginTop: 8 }}
         >
           <p data-testid="layer-content">Click outside or press Escape to dismiss.</p>
-        </DismissableLayer>
+        </DismissibleLayer>
       )}
     </div>
   );

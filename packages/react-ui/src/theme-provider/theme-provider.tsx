@@ -26,15 +26,20 @@ interface ThemeProviderProps {
 
 /**
  * Wraps the app, persists the user's light/dark/system preference, and
- * reflects it as a single `data-theme` attribute on `<html>` — every token
- * in `theme.css` keys off that one attribute (see `tokens/generate.ts`), so
- * switching it repaints the whole app with no class-list juggling.
+ * reflects it on `<html>` two ways: a `data-theme` attribute (`"light"` /
+ * `"dark"` / `"system"` — the original mechanism) and a `.dark` class,
+ * toggled together, since `theme.css` now matches on *either* (see
+ * `tokens/generate.ts`) — `.dark` is there to match Tailwind's default
+ * `dark:` class strategy and this theme's DaisyUI origin, `data-theme` is
+ * kept for anyone who already wrote overrides against the attribute.
+ * Switching either one repaints the whole app with no other class-list
+ * juggling required.
  *
  * Note on hydration flicker: this component resolves and applies the theme
  * in an effect (after mount), which is correct for SPA navigation but will
  * still flash on a fresh SSR load. For a zero-flicker SSR app, inline a
  * small blocking script in your document `<head>` that reads `storageKey`
- * and sets `data-theme` before React hydrates — `theme.css`'s
+ * and sets `data-theme`/`.dark` before React hydrates — `theme.css`'s
  * `[data-theme="system"]` `@media (prefers-color-scheme)` fallback covers
  * everyone else acceptably in the meantime.
  *
@@ -62,7 +67,8 @@ function ThemeProvider({
 
   React.useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme === 'system' ? 'system' : theme);
-  }, [theme]);
+    document.documentElement.classList.toggle('dark', resolvedTheme === 'dark');
+  }, [theme, resolvedTheme]);
 
   const value = React.useMemo<ThemeContextValue>(
     () => ({ theme, resolvedTheme, setTheme }),

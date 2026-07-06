@@ -1,0 +1,16 @@
+export { Dialog } from './dialog';
+export type { DialogProps } from './dialog';
+export { DialogTrigger } from './dialog-trigger';
+export type { DialogTriggerProps } from './dialog-trigger';
+export { DialogPortal } from './dialog-portal';
+export type { DialogPortalProps } from './dialog-portal';
+export { DialogOverlay } from './dialog-overlay';
+export type { DialogOverlayProps } from './dialog-overlay';
+export { DialogContent } from './dialog-content';
+export type { DialogContentProps } from './dialog-content';
+export { DialogTitle } from './dialog-title';
+export type { DialogTitleProps } from './dialog-title';
+export { DialogDescription } from './dialog-description';
+export type { DialogDescriptionProps } from './dialog-description';
+export { DialogClose } from './dialog-close';
+export type { DialogCloseProps } from './dialog-close';

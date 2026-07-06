@@ -21,8 +21,18 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   render: () => {
     function Demo() {
+      // Local state is plain `boolean` — this demo only ever toggles, it
+      // never sets `'indeterminate'` (see the `Indeterminate` story below
+      // for that) — so the handler narrows `CheckedState` down instead of
+      // passing `setChecked` directly, which only accepts `boolean`.
       const [checked, setChecked] = useState(false);
-      return <Checkbox checked={checked} onCheckedChange={setChecked} aria-label="Accept terms" />;
+      return (
+        <Checkbox
+          checked={checked}
+          onCheckedChange={(next) => setChecked(next === true)}
+          aria-label="Accept terms"
+        />
+      );
     }
     return <Demo />;
   },

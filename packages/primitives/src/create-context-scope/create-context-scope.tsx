@@ -53,8 +53,20 @@ function createContext<ContextValueType extends object | null>(
 /**
  * A single component's slice of scoped context — an array of React contexts,
  * one per `createContext` call made against that component's scope.
+ *
+ * Defaults to `any` (not `unknown`) deliberately: an unparameterized `Scope`
+ * (as used internally by `ScopeHook`/`CreateScope`, and by any component that
+ * composes another's scope via `createContextScopeDeps` — e.g. Popover
+ * composing Popper's scope) is a dict whose values are heterogeneous across
+ * keys — one component's context-value type per `scopeName`. `unknown` would
+ * force every call site passing a concretely-typed `Scope<X>` into that
+ * position to satisfy `Context<unknown>[]`, which — because `React.Context`
+ * isn't covariant in its value type — doesn't structurally hold even though
+ * it's always safe in practice. `any` is the honest way to spell "don't
+ * check this one dimension"; concrete call sites still get full checking via
+ * their own explicit `Scope<ContextValueType>` annotations.
  */
-type Scope<C = unknown> = { [scopeName: string]: React.Context<C>[] } | undefined;
+type Scope<C = any> = { [scopeName: string]: React.Context<C>[] } | undefined;
 type ScopeHook = (scope: Scope) => { [__scopeProp: string]: Scope };
 
 interface CreateScope {

@@ -102,4 +102,4 @@ const Flex = React.forwardRef(
 Flex.displayName = 'Flex';
 
 export { Flex };
-export type { FlexProps, FlexDirection, FlexAlign, FlexJustify };
+export type { FlexProps, FlexDirection, FlexAlign, FlexJustify, FlexOwnProps };

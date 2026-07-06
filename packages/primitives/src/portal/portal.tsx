@@ -28,7 +28,7 @@ type PortalProps = PrimitivePropsWithRef<'div'> & PortalOwnProps;
  * @example
  * ```tsx
  * <Portal>
- *   <DismissableLayer onDismiss={onClose}>{content}</DismissableLayer>
+ *   <DismissibleLayer onDismiss={onClose}>{content}</DismissibleLayer>
  * </Portal>
  *
  * // Custom mount point, e.g. `@nebula/react-ui-blocks`' AppLayout portal root:

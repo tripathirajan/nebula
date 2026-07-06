@@ -51,7 +51,7 @@ You have **1 week** for the whole product. A full MUI-scale library (primitives 
                          usePrevious, useMounted
                          │
 @nebula/primitives   Slot, Primitive, Portal, Presence, Boundary,
-                         FocusScope, DismissableLayer, Overlay, VisuallyHidden
+                         FocusScope, DismissibleLayer, Overlay, VisuallyHidden
                          + unstyled layout/text primitives: Box, Container, Flex,
                          Grid, Stack, Inline, Center, AspectRatio, Text, Heading,
                          Paragraph, Code, Pre, Link
@@ -99,7 +99,7 @@ Cross-cutting:
 | `useControllableState` | Single hook for controlled/uncontrolled value pattern used by Checkbox, Select, Tabs, Switch, etc.                                                                          |
 | `Portal`               | Renders into `document.body` (or custom container) — backbone for Dialog/Popover/Toast/Tooltip.                                                                             |
 | `FocusScope`           | Trap/restore focus for modals, dialogs, menus.                                                                                                                              |
-| `DismissableLayer`     | Escape-key / outside-click / layered dismissal stack (so nested popovers close correctly).                                                                                  |
+| `DismissibleLayer`     | Escape-key / outside-click / layered dismissal stack (so nested popovers close correctly).                                                                                  |
 | `usePresence`          | Enables exit animations before unmount (for Dialog/Toast/Accordion content).                                                                                                |
 | `VisuallyHidden`       | Screen-reader-only content.                                                                                                                                                 |
 
@@ -136,7 +136,7 @@ Grouped by category. **Bold** = needed for Week-1 MVP.
 
 | Component                | ARIA Pattern                        | Notes                                  |
 | ------------------------ | ----------------------------------- | -------------------------------------- |
-| **Dialog / Modal**       | WAI-ARIA Dialog (Modal)             | Portal + FocusScope + DismissableLayer |
+| **Dialog / Modal**       | WAI-ARIA Dialog (Modal)             | Portal + FocusScope + DismissibleLayer |
 | AlertDialog              | WAI-ARIA Alertdialog                | confirm-delete, destructive actions    |
 | **Drawer / Sheet**       | WAI-ARIA Dialog (non-modal variant) | mobile nav, filters panel              |
 | Popover                  | WAI-ARIA Dialog (non-modal)         | anchored positioning                   |
@@ -267,7 +267,7 @@ A single `data-theme` attribute on `<html>` switches every token at once — no 
 | --------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
 | Monorepo                    | **Nx** (recommend over Lerna for this — better task caching, generators, and affected-graph for a component-library-scale repo) |
 | Package manager             | pnpm (workspaces)                                                                                                               |
-| Build                       | `tsup` (fast, dual ESM/CJS + `.d.ts`) per package                                                                               |
+| Build                       | `tsup` (fast, ESM-only + `.d.ts`) per package — CJS output was dropped once the workspace standardized on React 19; every `@nebula/*` package ships `type: "module"` with no `require` export condition |
 | Styling                     | Tailwind CSS v4 + CVA + `tailwind-merge`                                                                                        |
 | Primitives base             | Hand-rolled `Slot`/`Primitive` (Radix's MIT-licensed source is a legitimate reference implementation to study/adapt)            |
 | Docs/dev environment        | Storybook 8 (Vite builder) + `@storybook/addon-a11y` + `@storybook/test` (play functions)                                       |

@@ -11,42 +11,37 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
+      "import": "./dist/index.js"
     },
     "./clamp": {
       "types": "./dist/clamp/index.d.ts",
-      "import": "./dist/clamp/index.js",
-      "require": "./dist/clamp/index.cjs"
+      "import": "./dist/clamp/index.js"
     },
     "./debounce": {
       "types": "./dist/debounce/index.d.ts",
-      "import": "./dist/debounce/index.js",
-      "require": "./dist/debounce/index.cjs"
+      "import": "./dist/debounce/index.js"
     },
     "./throttle": {
       "types": "./dist/throttle/index.d.ts",
-      "import": "./dist/throttle/index.js",
-      "require": "./dist/throttle/index.cjs"
+      "import": "./dist/throttle/index.js"
     },
     "./deep-merge": {
       "types": "./dist/deep-merge/index.d.ts",
-      "import": "./dist/deep-merge/index.js",
-      "require": "./dist/deep-merge/index.cjs"
+      "import": "./dist/deep-merge/index.js"
     },
     "./is-html-element": {
       "types": "./dist/is-html-element/index.d.ts",
-      "import": "./dist/is-html-element/index.js",
-      "require": "./dist/is-html-element/index.cjs"
+      "import": "./dist/is-html-element/index.js"
     },
     "./is-focusable": {
       "types": "./dist/is-focusable/index.d.ts",
-      "import": "./dist/is-focusable/index.js",
-      "require": "./dist/is-focusable/index.cjs"
+      "import": "./dist/is-focusable/index.js"
     },
     "./package.json": "./package.json"
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsup && tsc -p tsconfig.build.json --emitDeclarationOnly && rm -f dist/*.tsbuildinfo",
     "dev": "tsup --watch",

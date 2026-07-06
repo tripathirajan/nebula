@@ -59,4 +59,4 @@ const Link = React.forwardRef(
 Link.displayName = 'Link';
 
 export { Link };
-export type { LinkProps };
+export type { LinkProps, LinkOwnProps };

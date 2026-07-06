@@ -13,23 +13,71 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
+      "import": "./dist/index.js"
     },
     "./button": {
       "types": "./dist/button/index.d.ts",
-      "import": "./dist/button/index.js",
-      "require": "./dist/button/index.cjs"
+      "import": "./dist/button/index.js"
+    },
+    "./input": {
+      "types": "./dist/input/index.d.ts",
+      "import": "./dist/input/index.js"
+    },
+    "./card": {
+      "types": "./dist/card/index.d.ts",
+      "import": "./dist/card/index.js"
+    },
+    "./badge": {
+      "types": "./dist/badge/index.d.ts",
+      "import": "./dist/badge/index.js"
+    },
+    "./avatar": {
+      "types": "./dist/avatar/index.d.ts",
+      "import": "./dist/avatar/index.js"
+    },
+    "./separator": {
+      "types": "./dist/separator/index.d.ts",
+      "import": "./dist/separator/index.js"
+    },
+    "./accordion": {
+      "types": "./dist/accordion/index.d.ts",
+      "import": "./dist/accordion/index.js"
+    },
+    "./dialog": {
+      "types": "./dist/dialog/index.d.ts",
+      "import": "./dist/dialog/index.js"
+    },
+    "./popover": {
+      "types": "./dist/popover/index.d.ts",
+      "import": "./dist/popover/index.js"
+    },
+    "./tooltip": {
+      "types": "./dist/tooltip/index.d.ts",
+      "import": "./dist/tooltip/index.js"
+    },
+    "./tabs": {
+      "types": "./dist/tabs/index.d.ts",
+      "import": "./dist/tabs/index.js"
+    },
+    "./checkbox": {
+      "types": "./dist/checkbox/index.d.ts",
+      "import": "./dist/checkbox/index.js"
+    },
+    "./switch": {
+      "types": "./dist/switch/index.d.ts",
+      "import": "./dist/switch/index.js"
+    },
+    "./radio-group": {
+      "types": "./dist/radio-group/index.d.ts",
+      "import": "./dist/radio-group/index.js"
     },
     "./tokens": {
       "types": "./dist/tokens/index.d.ts",
-      "import": "./dist/tokens/index.js",
-      "require": "./dist/tokens/index.cjs"
+      "import": "./dist/tokens/index.js"
     },
     "./theme-provider": {
       "types": "./dist/theme-provider/index.d.ts",
-      "import": "./dist/theme-provider/index.js",
-      "require": "./dist/theme-provider/index.cjs"
+      "import": "./dist/theme-provider/index.js"
     },
     "./theme.css": "./src/theme.css",
     "./package.json": "./package.json"
@@ -49,12 +97,13 @@
     "test:watch": "vitest --root ../.. packages/react-ui"
   },
   "peerDependencies": {
-    "react": "^18.0.0 || ^19.0.0",
-    "react-dom": "^18.0.0 || ^19.0.0"
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
   },
   "dependencies": {
     "@nebula/hooks": "workspace:*",
     "@nebula/primitives": "workspace:*",
+    "@nebula/styleless": "workspace:*",
     "class-variance-authority": "^0.7.1"
   },
   "devDependencies": {
@@ -63,12 +112,12 @@
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.0.1",
     "@testing-library/user-event": "^14.5.2",
-    "@types/react": "^18.3.12",
-    "@types/react-dom": "^18.3.1",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
     "axe-core": "^4.10.2",
     "jsdom": "^25.0.1",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
     "tsup": "^8.3.5",
     "tsx": "^4.19.2",
     "typescript": "^5.6.3",

@@ -11,33 +11,39 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
+      "import": "./dist/index.js"
     },
     "./tabs": {
       "types": "./dist/tabs/index.d.ts",
-      "import": "./dist/tabs/index.js",
-      "require": "./dist/tabs/index.cjs"
+      "import": "./dist/tabs/index.js"
     },
     "./checkbox": {
       "types": "./dist/checkbox/index.d.ts",
-      "import": "./dist/checkbox/index.js",
-      "require": "./dist/checkbox/index.cjs"
+      "import": "./dist/checkbox/index.js"
     },
     "./switch": {
       "types": "./dist/switch/index.d.ts",
-      "import": "./dist/switch/index.js",
-      "require": "./dist/switch/index.cjs"
+      "import": "./dist/switch/index.js"
     },
     "./radio-group": {
       "types": "./dist/radio-group/index.d.ts",
-      "import": "./dist/radio-group/index.js",
-      "require": "./dist/radio-group/index.cjs"
+      "import": "./dist/radio-group/index.js"
     },
     "./accordion": {
       "types": "./dist/accordion/index.d.ts",
-      "import": "./dist/accordion/index.js",
-      "require": "./dist/accordion/index.cjs"
+      "import": "./dist/accordion/index.js"
+    },
+    "./dialog": {
+      "types": "./dist/dialog/index.d.ts",
+      "import": "./dist/dialog/index.js"
+    },
+    "./popover": {
+      "types": "./dist/popover/index.d.ts",
+      "import": "./dist/popover/index.js"
+    },
+    "./tooltip": {
+      "types": "./dist/tooltip/index.d.ts",
+      "import": "./dist/tooltip/index.js"
     },
     "./package.json": "./package.json"
   },
@@ -53,8 +59,8 @@
     "test:watch": "vitest --root ../.. packages/styleless"
   },
   "peerDependencies": {
-    "react": "^18.0.0 || ^19.0.0",
-    "react-dom": "^18.0.0 || ^19.0.0"
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
   },
   "dependencies": {
     "@nebula/hooks": "workspace:*",
@@ -66,12 +72,12 @@
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.0.1",
     "@testing-library/user-event": "^14.5.2",
-    "@types/react": "^18.3.12",
-    "@types/react-dom": "^18.3.1",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
     "axe-core": "^4.10.2",
     "jsdom": "^25.0.1",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
     "tsup": "^8.3.5",
     "typescript": "^5.6.3",
     "vitest": "^2.1.8",

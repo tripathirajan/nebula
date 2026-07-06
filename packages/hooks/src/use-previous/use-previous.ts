@@ -19,7 +19,11 @@ import { useEffect, useRef } from 'react';
  * ```
  */
 function usePrevious<T>(value: T): T | undefined {
-  const ref = useRef<T>();
+  // React 19's updated types dropped the zero-argument `useRef<T>()` overload
+  // (it now requires an explicit initial value, matching `useState`'s
+  // pattern) — `useRef<T | undefined>(undefined)` is the direct replacement,
+  // with the exact same runtime behavior as before.
+  const ref = useRef<T | undefined>(undefined);
 
   useEffect(() => {
     ref.current = value;

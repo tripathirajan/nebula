@@ -45,7 +45,7 @@ interface FocusScopeProps extends PrimitivePropsWithRef<'div'> {
  * restores focus to whatever was focused beforehand; while mounted, can
  * optionally trap Tab cycling within itself (`trapped`). This is the
  * focus-management half of the WAI-ARIA Dialog (Modal) pattern —
- * `Dialog`/`AlertDialog` compose this with `Portal` + `DismissableLayer`.
+ * `Dialog`/`AlertDialog` compose this with `Portal` + `DismissibleLayer`.
  *
  * @example
  * ```tsx

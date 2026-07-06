@@ -53,4 +53,4 @@ const AspectRatio = React.forwardRef(
 AspectRatio.displayName = 'AspectRatio';
 
 export { AspectRatio };
-export type { AspectRatioProps };
+export type { AspectRatioProps, AspectRatioOwnProps };

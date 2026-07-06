@@ -1,15 +1,15 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 
-import { DismissableLayer } from './dismissable-layer';
+import { DismissibleLayer } from './dismissible-layer';
 
-describe('DismissableLayer', () => {
+describe('DismissibleLayer', () => {
   it('calls onDismiss on Escape keydown', () => {
     const onDismiss = vi.fn();
     render(
-      <DismissableLayer onDismiss={onDismiss} data-testid="layer">
+      <DismissibleLayer onDismiss={onDismiss} data-testid="layer">
         content
-      </DismissableLayer>,
+      </DismissibleLayer>,
     );
     fireEvent.keyDown(document, { key: 'Escape' });
     expect(onDismiss).toHaveBeenCalledTimes(1);
@@ -17,7 +17,7 @@ describe('DismissableLayer', () => {
 
   it('does not call onDismiss for a non-Escape key', () => {
     const onDismiss = vi.fn();
-    render(<DismissableLayer onDismiss={onDismiss}>content</DismissableLayer>);
+    render(<DismissibleLayer onDismiss={onDismiss}>content</DismissibleLayer>);
     fireEvent.keyDown(document, { key: 'Enter' });
     expect(onDismiss).not.toHaveBeenCalled();
   });
@@ -25,12 +25,12 @@ describe('DismissableLayer', () => {
   it('lets onEscapeKeyDown.preventDefault() stop onDismiss from also firing', () => {
     const onDismiss = vi.fn();
     render(
-      <DismissableLayer
+      <DismissibleLayer
         onDismiss={onDismiss}
         onEscapeKeyDown={(event) => event.preventDefault()}
       >
         content
-      </DismissableLayer>,
+      </DismissibleLayer>,
     );
     fireEvent.keyDown(document, { key: 'Escape' });
     expect(onDismiss).not.toHaveBeenCalled();
@@ -40,9 +40,9 @@ describe('DismissableLayer', () => {
     const onDismiss = vi.fn();
     render(
       <>
-        <DismissableLayer onDismiss={onDismiss} data-testid="layer">
+        <DismissibleLayer onDismiss={onDismiss} data-testid="layer">
           content
-        </DismissableLayer>
+        </DismissibleLayer>
         <button data-testid="outside">outside</button>
       </>,
     );
@@ -53,9 +53,9 @@ describe('DismissableLayer', () => {
   it('does not call onDismiss on pointerdown inside the layer', () => {
     const onDismiss = vi.fn();
     render(
-      <DismissableLayer onDismiss={onDismiss}>
+      <DismissibleLayer onDismiss={onDismiss}>
         <button data-testid="inside">inside</button>
-      </DismissableLayer>,
+      </DismissibleLayer>,
     );
     fireEvent.pointerDown(screen.getByTestId('inside'));
     expect(onDismiss).not.toHaveBeenCalled();
@@ -65,12 +65,12 @@ describe('DismissableLayer', () => {
     const onDismissOuter = vi.fn();
     const onDismissInner = vi.fn();
     render(
-      <DismissableLayer onDismiss={onDismissOuter} data-testid="outer">
+      <DismissibleLayer onDismiss={onDismissOuter} data-testid="outer">
         outer
-        <DismissableLayer onDismiss={onDismissInner} data-testid="inner">
+        <DismissibleLayer onDismiss={onDismissInner} data-testid="inner">
           inner
-        </DismissableLayer>
-      </DismissableLayer>,
+        </DismissibleLayer>
+      </DismissibleLayer>,
     );
 
     fireEvent.keyDown(document, { key: 'Escape' });

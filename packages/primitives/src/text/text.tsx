@@ -49,4 +49,4 @@ const Text = React.forwardRef(
 Text.displayName = 'Text';
 
 export { Text };
-export type { TextProps };
+export type { TextProps, TextOwnProps };

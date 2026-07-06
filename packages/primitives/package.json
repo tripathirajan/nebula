@@ -11,178 +11,167 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
+      "import": "./dist/index.js"
     },
     "./types": {
       "types": "./dist/types/index.d.ts",
-      "import": "./dist/types/index.js",
-      "require": "./dist/types/index.cjs"
+      "import": "./dist/types/index.js"
     },
     "./slot": {
       "types": "./dist/slot/index.d.ts",
-      "import": "./dist/slot/index.js",
-      "require": "./dist/slot/index.cjs"
+      "import": "./dist/slot/index.js"
     },
     "./primitive": {
       "types": "./dist/primitive/index.d.ts",
-      "import": "./dist/primitive/index.js",
-      "require": "./dist/primitive/index.cjs"
+      "import": "./dist/primitive/index.js"
     },
     "./cn": {
       "types": "./dist/cn/index.d.ts",
-      "import": "./dist/cn/index.js",
-      "require": "./dist/cn/index.cjs"
+      "import": "./dist/cn/index.js"
     },
     "./compose-refs": {
       "types": "./dist/compose-refs/index.d.ts",
-      "import": "./dist/compose-refs/index.js",
-      "require": "./dist/compose-refs/index.cjs"
+      "import": "./dist/compose-refs/index.js"
     },
     "./compose-event-handlers": {
       "types": "./dist/compose-event-handlers/index.d.ts",
-      "import": "./dist/compose-event-handlers/index.js",
-      "require": "./dist/compose-event-handlers/index.cjs"
+      "import": "./dist/compose-event-handlers/index.js"
     },
     "./create-context-scope": {
       "types": "./dist/create-context-scope/index.d.ts",
-      "import": "./dist/create-context-scope/index.js",
-      "require": "./dist/create-context-scope/index.cjs"
+      "import": "./dist/create-context-scope/index.js"
     },
     "./box": {
       "types": "./dist/box/index.d.ts",
-      "import": "./dist/box/index.js",
-      "require": "./dist/box/index.cjs"
+      "import": "./dist/box/index.js"
     },
     "./flex": {
       "types": "./dist/flex/index.d.ts",
-      "import": "./dist/flex/index.js",
-      "require": "./dist/flex/index.cjs"
+      "import": "./dist/flex/index.js"
     },
     "./grid": {
       "types": "./dist/grid/index.d.ts",
-      "import": "./dist/grid/index.js",
-      "require": "./dist/grid/index.cjs"
+      "import": "./dist/grid/index.js"
     },
     "./stack": {
       "types": "./dist/stack/index.d.ts",
-      "import": "./dist/stack/index.js",
-      "require": "./dist/stack/index.cjs"
+      "import": "./dist/stack/index.js"
+    },
+    "./vstack": {
+      "types": "./dist/vstack/index.d.ts",
+      "import": "./dist/vstack/index.js"
     },
     "./inline": {
       "types": "./dist/inline/index.d.ts",
-      "import": "./dist/inline/index.js",
-      "require": "./dist/inline/index.cjs"
+      "import": "./dist/inline/index.js"
+    },
+    "./hstack": {
+      "types": "./dist/hstack/index.d.ts",
+      "import": "./dist/hstack/index.js"
+    },
+    "./wrap": {
+      "types": "./dist/wrap/index.d.ts",
+      "import": "./dist/wrap/index.js"
+    },
+    "./spacer": {
+      "types": "./dist/spacer/index.d.ts",
+      "import": "./dist/spacer/index.js"
     },
     "./center": {
       "types": "./dist/center/index.d.ts",
-      "import": "./dist/center/index.js",
-      "require": "./dist/center/index.cjs"
+      "import": "./dist/center/index.js"
     },
     "./container": {
       "types": "./dist/container/index.d.ts",
-      "import": "./dist/container/index.js",
-      "require": "./dist/container/index.cjs"
+      "import": "./dist/container/index.js"
     },
     "./aspect-ratio": {
       "types": "./dist/aspect-ratio/index.d.ts",
-      "import": "./dist/aspect-ratio/index.js",
-      "require": "./dist/aspect-ratio/index.cjs"
+      "import": "./dist/aspect-ratio/index.js"
     },
     "./text": {
       "types": "./dist/text/index.d.ts",
-      "import": "./dist/text/index.js",
-      "require": "./dist/text/index.cjs"
+      "import": "./dist/text/index.js"
     },
     "./heading": {
       "types": "./dist/heading/index.d.ts",
-      "import": "./dist/heading/index.js",
-      "require": "./dist/heading/index.cjs"
+      "import": "./dist/heading/index.js"
     },
     "./paragraph": {
       "types": "./dist/paragraph/index.d.ts",
-      "import": "./dist/paragraph/index.js",
-      "require": "./dist/paragraph/index.cjs"
+      "import": "./dist/paragraph/index.js"
     },
     "./code": {
       "types": "./dist/code/index.d.ts",
-      "import": "./dist/code/index.js",
-      "require": "./dist/code/index.cjs"
+      "import": "./dist/code/index.js"
     },
     "./pre": {
       "types": "./dist/pre/index.d.ts",
-      "import": "./dist/pre/index.js",
-      "require": "./dist/pre/index.cjs"
+      "import": "./dist/pre/index.js"
     },
     "./link": {
       "types": "./dist/link/index.d.ts",
-      "import": "./dist/link/index.js",
-      "require": "./dist/link/index.cjs"
+      "import": "./dist/link/index.js"
+    },
+    "./image": {
+      "types": "./dist/image/index.d.ts",
+      "import": "./dist/image/index.js"
     },
     "./visually-hidden": {
       "types": "./dist/visually-hidden/index.d.ts",
-      "import": "./dist/visually-hidden/index.js",
-      "require": "./dist/visually-hidden/index.cjs"
+      "import": "./dist/visually-hidden/index.js"
     },
     "./focus-scope": {
       "types": "./dist/focus-scope/index.d.ts",
-      "import": "./dist/focus-scope/index.js",
-      "require": "./dist/focus-scope/index.cjs"
+      "import": "./dist/focus-scope/index.js"
     },
-    "./dismissable-layer": {
-      "types": "./dist/dismissable-layer/index.d.ts",
-      "import": "./dist/dismissable-layer/index.js",
-      "require": "./dist/dismissable-layer/index.cjs"
+    "./dismissible-layer": {
+      "types": "./dist/dismissible-layer/index.d.ts",
+      "import": "./dist/dismissible-layer/index.js"
     },
     "./boundary": {
       "types": "./dist/boundary/index.d.ts",
-      "import": "./dist/boundary/index.js",
-      "require": "./dist/boundary/index.cjs"
+      "import": "./dist/boundary/index.js"
     },
     "./roving-focus-group": {
       "types": "./dist/roving-focus-group/index.d.ts",
-      "import": "./dist/roving-focus-group/index.js",
-      "require": "./dist/roving-focus-group/index.cjs"
+      "import": "./dist/roving-focus-group/index.js"
     },
     "./button": {
       "types": "./dist/button/index.d.ts",
-      "import": "./dist/button/index.js",
-      "require": "./dist/button/index.cjs"
+      "import": "./dist/button/index.js"
     },
     "./input": {
       "types": "./dist/input/index.d.ts",
-      "import": "./dist/input/index.js",
-      "require": "./dist/input/index.cjs"
+      "import": "./dist/input/index.js"
     },
     "./textarea": {
       "types": "./dist/textarea/index.d.ts",
-      "import": "./dist/textarea/index.js",
-      "require": "./dist/textarea/index.cjs"
+      "import": "./dist/textarea/index.js"
     },
     "./label": {
       "types": "./dist/label/index.d.ts",
-      "import": "./dist/label/index.js",
-      "require": "./dist/label/index.cjs"
+      "import": "./dist/label/index.js"
     },
     "./form": {
       "types": "./dist/form/index.d.ts",
-      "import": "./dist/form/index.js",
-      "require": "./dist/form/index.cjs"
+      "import": "./dist/form/index.js"
     },
     "./portal": {
       "types": "./dist/portal/index.d.ts",
-      "import": "./dist/portal/index.js",
-      "require": "./dist/portal/index.cjs"
+      "import": "./dist/portal/index.js"
     },
     "./presence": {
       "types": "./dist/presence/index.d.ts",
-      "import": "./dist/presence/index.js",
-      "require": "./dist/presence/index.cjs"
+      "import": "./dist/presence/index.js"
     },
     "./overlay": {
       "types": "./dist/overlay/index.d.ts",
-      "import": "./dist/overlay/index.js",
-      "require": "./dist/overlay/index.cjs"
+      "import": "./dist/overlay/index.js"
+    },
+    "./popper": {
+      "types": "./dist/popper/index.d.ts",
+      "import": "./dist/popper/index.js"
     },
     "./package.json": "./package.json"
   },
@@ -198,8 +187,8 @@
     "test:watch": "vitest --root ../.. packages/primitives"
   },
   "peerDependencies": {
-    "react": "^18.0.0 || ^19.0.0",
-    "react-dom": "^18.0.0 || ^19.0.0"
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
   },
   "dependencies": {
     "clsx": "^2.1.1",
@@ -211,12 +200,12 @@
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.0.1",
     "@testing-library/user-event": "^14.5.2",
-    "@types/react": "^18.3.12",
-    "@types/react-dom": "^18.3.1",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
     "axe-core": "^4.10.2",
     "jsdom": "^25.0.1",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
     "tsup": "^8.3.5",
     "typescript": "^5.6.3",
     "vitest": "^2.1.8",

@@ -14,7 +14,7 @@ Low-level DOM abstractions and layout components for building accessible, compos
 
 ### ♿ Accessibility
 
-`VisuallyHidden`, `FocusScope`, `DismissableLayer`, `Boundary`, `RovingFocusGroup` + `FocusItem` — focus trapping, outside-click/Escape dismissal (topmost-layer-only via an internal open-layer stack), roving tabindex keyboard navigation, and an error boundary.
+`VisuallyHidden`, `FocusScope`, `DismissibleLayer`, `Boundary`, `RovingFocusGroup` + `FocusItem` — focus trapping, outside-click/Escape dismissal (topmost-layer-only via an internal open-layer stack), roving tabindex keyboard navigation, and an error boundary.
 
 ### 🎛️ Form Primitives
 
@@ -30,11 +30,11 @@ Low-level DOM abstractions and layout components for building accessible, compos
 
 ### 📡 Observers
 
-Note: the `ResizeObserver`/`IntersectionObserver`/`MutationObserver` hooks (`useResizeObserver`, `useIntersectionObserver`, `useMutationObserver`) live in `@nebula/hooks`, not here — `primitives` has zero in-workspace dependencies by design, so observer *hooks* belong one layer up. Components in this package that need equivalent behavior (`FocusScope`, `DismissableLayer`) implement it locally instead of importing across the boundary.
+Note: the `ResizeObserver`/`IntersectionObserver`/`MutationObserver` hooks (`useResizeObserver`, `useIntersectionObserver`, `useMutationObserver`) live in `@nebula/hooks`, not here — `primitives` has zero in-workspace dependencies by design, so observer *hooks* belong one layer up. Components in this package that need equivalent behavior (`FocusScope`, `DismissibleLayer`) implement it locally instead of importing across the boundary.
 
 ### 🎭 Interaction
 
-Focus management (`FocusScope`, `RovingFocusGroup`), dismissable-layer patterns (`DismissableLayer`), and overlay detection (`Presence`, `Portal`) compose to build dialogs, popovers, menus, and tooltips without pulling in a separate headless library.
+Focus management (`FocusScope`, `RovingFocusGroup`), dismissible-layer patterns (`DismissibleLayer`), and overlay detection (`Presence`, `Portal`) compose to build dialogs, popovers, menus, and tooltips without pulling in a separate headless library.
 
 ## Example
 
@@ -97,7 +97,7 @@ One module per folder (`src/<name>/<name>.ts(x)` + `index.ts` barrel) — see `c
 ## Scripts
 
 ```
-pnpm --filter @nebula/primitives build      # tsup -> dist (ESM + CJS + .d.ts)
+pnpm --filter @nebula/primitives build      # tsup -> dist (ESM + .d.ts)
 pnpm --filter @nebula/primitives dev        # tsup --watch
 pnpm --filter @nebula/primitives typecheck  # tsc --noEmit
 ```

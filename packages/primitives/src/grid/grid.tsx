@@ -64,4 +64,4 @@ const Grid = React.forwardRef(
 Grid.displayName = 'Grid';
 
 export { Grid };
-export type { GridProps };
+export type { GridProps, GridOwnProps };

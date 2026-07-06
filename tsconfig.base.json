@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "lib": [
+      "ES2022",
+      "DOM",
+      "DOM.Iterable"
+    ],
     "module": "ESNext",
     "moduleResolution": "Bundler",
     "moduleDetection": "force",
@@ -24,27 +28,75 @@
     "verbatimModuleSyntax": false,
     "skipLibCheck": true,
     "allowJs": false,
-    "baseUrl": ".",
     // Explicit list, not "include everything in node_modules/@types" — but
     // that means every ambient global the codebase actually relies on (e.g.
     // `process` in tokens/generate.ts and contrast-audit.ts) must be listed
     // here too, not just the test-matcher packages this was added for.
-    "types": ["node", "@testing-library/jest-dom", "vitest-axe/extend-expect"],
+    //
+    // NOTE: this does NOT cover the `vitest-axe` → Vitest 2.x `Assertion`
+    // typing gap (`toHaveNoViolations` not recognized by `tsc`) — adding a
+    // package-name `types` entry only works for things resolvable as a real
+    // node_modules package, and there's no such package for a hand-written
+    // ambient fix. That's instead fixed per-package via a checked-in
+    // `src/vitest-axe-matchers.d.ts` (see any test file using
+    // `toHaveNoViolations` — `primitives`, `styleless`, `react-ui`) picked
+    // up automatically by each package's own `"include": ["src"]`.
+    "types": [
+      "node",
+      "@testing-library/jest-dom",
+      "vitest-axe/extend-expect"
+    ],
+    // No `baseUrl` here by design (Bundler resolution shouldn't need one) —
+    // but TS 5.x's stricter `paths` validation (TS5090) requires every path
+    // value to look explicitly relative when `baseUrl` is absent, or it
+    // rejects the config outright. These were always intended to resolve
+    // relative to *this* file's directory (the repo root) — the leading
+    // "./" makes that explicit instead of implicit; it doesn't change where
+    // anything actually resolves to.
     "paths": {
       // Add an entry here each time a new packages/* is scaffolded.
-      "@nebula/utilities": ["packages/utilities/src/index.ts"],
-      "@nebula/utilities/*": ["packages/utilities/src/*"],
-      "@nebula/hooks": ["packages/hooks/src/index.ts"],
-      "@nebula/hooks/*": ["packages/hooks/src/*"],
-      "@nebula/primitives": ["packages/primitives/src/index.ts"],
-      "@nebula/primitives/*": ["packages/primitives/src/*"],
-      "@nebula/styleless": ["packages/styleless/src/index.ts"],
-      "@nebula/styleless/*": ["packages/styleless/src/*"],
-      "@nebula/react-ui": ["packages/react-ui/src/index.ts"],
-      "@nebula/react-ui/*": ["packages/react-ui/src/*"],
-      "@nebula/react-ui-blocks": ["packages/react-ui-blocks/src/index.ts"],
-      "@nebula/react-ui-blocks/*": ["packages/react-ui-blocks/src/*"]
+      "@nebula/utilities": [
+        "./packages/utilities/src/index.ts"
+      ],
+      "@nebula/utilities/*": [
+        "./packages/utilities/src/*"
+      ],
+      "@nebula/hooks": [
+        "./packages/hooks/src/index.ts"
+      ],
+      "@nebula/hooks/*": [
+        "./packages/hooks/src/*"
+      ],
+      "@nebula/primitives": [
+        "./packages/primitives/src/index.ts"
+      ],
+      "@nebula/primitives/*": [
+        "./packages/primitives/src/*"
+      ],
+      "@nebula/styleless": [
+        "./packages/styleless/src/index.ts"
+      ],
+      "@nebula/styleless/*": [
+        "./packages/styleless/src/*"
+      ],
+      "@nebula/react-ui": [
+        "./packages/react-ui/src/index.ts"
+      ],
+      "@nebula/react-ui/*": [
+        "./packages/react-ui/src/*"
+      ],
+      "@nebula/react-ui-blocks": [
+        "./packages/react-ui-blocks/src/index.ts"
+      ],
+      "@nebula/react-ui-blocks/*": [
+        "./packages/react-ui-blocks/src/*"
+      ]
     }
   },
-  "exclude": ["node_modules", "dist", "build", "storybook-static"]
+  "exclude": [
+    "node_modules",
+    "dist",
+    "build",
+    "storybook-static"
+  ]
 }

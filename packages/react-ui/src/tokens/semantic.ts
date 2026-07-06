@@ -1,65 +1,70 @@
 import { primitiveTokens } from './primitive';
 
 /**
- * Layer 2 — semantic tokens: intent-based aliases (`category.role.variant`)
- * over the primitive scale. Components should reference these, never
- * `primitiveTokens` directly — this is the layer light/dark mappings live
- * on, so a component styled with `color.bg.default` gets dark mode for free.
+ * Layer 2 — semantic tokens: intent-based roles (`base`/`primary`/`accent`/
+ * `success`/...) over the primitive OKLCH values. Components should
+ * reference these, never `primitiveTokens` directly — this is the layer
+ * light/dark mappings live on, so a component styled with `color.primary`
+ * gets dark mode for free.
+ *
+ * `colorScheme` is the native CSS `color-scheme` property value (not a
+ * custom property) — `generate.ts` emits it literally rather than flattening
+ * it into `--color-scheme`, so form controls, scrollbars, and other
+ * browser-drawn UI pick the right native light/dark rendering too.
  */
 const light = {
+  colorScheme: 'light',
   color: {
-    bg: {
-      default: primitiveTokens.color.gray[50],
-      subtle: '#ffffff',
-      interactive: primitiveTokens.color.blue[600],
-      interactiveHover: primitiveTokens.color.blue[700],
+    base: {
+      100: primitiveTokens.color.base.light100,
+      200: primitiveTokens.color.base.light200,
+      300: primitiveTokens.color.base.light300,
+      content: primitiveTokens.color.base.lightContent,
     },
-    text: {
-      default: primitiveTokens.color.gray[900],
-      muted: primitiveTokens.color.gray[500],
-      onInteractive: '#ffffff',
-    },
-    border: {
-      default: primitiveTokens.color.gray[200],
-      interactive: primitiveTokens.color.blue[600],
-      focus: primitiveTokens.color.blue[500],
-    },
-    status: {
-      danger: primitiveTokens.color.red[600],
-      // 700-weight, not 600: green-600/amber-600 read fine as fills but drop
-      // below 4.5:1 against `bg.default` when used as text (see
-      // `contrast-audit.ts` — this was a real WCAG 1.4.3 failure until this
-      // change). Dark mode doesn't have this problem since it renders these
-      // on a near-black background instead.
-      success: primitiveTokens.color.green[700],
-      warning: primitiveTokens.color.amber[700],
-    },
+    primary: primitiveTokens.color.primary,
+    primaryContent: primitiveTokens.color.primaryContent,
+    secondary: primitiveTokens.color.secondary,
+    secondaryContent: primitiveTokens.color.secondaryContent.light,
+    accent: primitiveTokens.color.accent,
+    accentContent: primitiveTokens.color.accentContent,
+    neutral: primitiveTokens.color.neutral.light,
+    neutralContent: primitiveTokens.color.neutral.lightContent,
+    info: primitiveTokens.color.info,
+    infoContent: primitiveTokens.color.infoContent,
+    success: primitiveTokens.color.success.light,
+    successContent: primitiveTokens.color.success.lightContent,
+    warning: primitiveTokens.color.warning,
+    warningContent: primitiveTokens.color.warningContent.light,
+    error: primitiveTokens.color.error.light,
+    errorContent: primitiveTokens.color.error.lightContent,
   },
 } as const;
 
 const dark = {
+  colorScheme: 'dark',
   color: {
-    bg: {
-      default: primitiveTokens.color.gray[950],
-      subtle: primitiveTokens.color.gray[900],
-      interactive: primitiveTokens.color.blue[500],
-      interactiveHover: primitiveTokens.color.blue[400],
+    base: {
+      100: primitiveTokens.color.base.dark100,
+      200: primitiveTokens.color.base.dark200,
+      300: primitiveTokens.color.base.dark300,
+      content: primitiveTokens.color.base.darkContent,
     },
-    text: {
-      default: primitiveTokens.color.gray[50],
-      muted: primitiveTokens.color.gray[400],
-      onInteractive: primitiveTokens.color.gray[950],
-    },
-    border: {
-      default: primitiveTokens.color.gray[800],
-      interactive: primitiveTokens.color.blue[500],
-      focus: primitiveTokens.color.blue[400],
-    },
-    status: {
-      danger: primitiveTokens.color.red[400],
-      success: primitiveTokens.color.green[400],
-      warning: primitiveTokens.color.amber[400],
-    },
+    primary: primitiveTokens.color.primary,
+    primaryContent: primitiveTokens.color.primaryContent,
+    secondary: primitiveTokens.color.secondary,
+    secondaryContent: primitiveTokens.color.secondaryContent.dark,
+    accent: primitiveTokens.color.accent,
+    accentContent: primitiveTokens.color.accentContent,
+    neutral: primitiveTokens.color.neutral.dark,
+    neutralContent: primitiveTokens.color.neutral.darkContent,
+    info: primitiveTokens.color.info,
+    infoContent: primitiveTokens.color.infoContent,
+    success: primitiveTokens.color.success.dark,
+    successContent: primitiveTokens.color.success.darkContent,
+    warning: primitiveTokens.color.warning,
+    warningContent: primitiveTokens.color.warningContent.dark,
+    error: primitiveTokens.color.error.dark,
+    errorContent: primitiveTokens.color.error.darkContent,
   },
 } as const;
 
@@ -70,10 +75,10 @@ const dark = {
  * ```ts
  * import { semanticTokens } from '@nebula/react-ui/tokens';
  *
- * // Consumed by generate.ts to emit `:root` / `[data-theme="dark"]` CSS vars —
- * // components should read the resulting `var(--color-...)` custom
- * // properties rather than importing this object directly.
- * const darkInteractiveBg = semanticTokens.dark.color.bg.interactive;
+ * // Consumed by generate.ts to emit `:root` / `.dark` CSS vars — components
+ * // should read the resulting `var(--color-...)` custom properties rather
+ * // than importing this object directly.
+ * const darkPrimary = semanticTokens.dark.color.primary;
  * ```
  */
 const semanticTokens = { light, dark } as const;

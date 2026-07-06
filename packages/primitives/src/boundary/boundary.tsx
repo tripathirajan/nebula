@@ -20,7 +20,7 @@ interface BoundaryState {
 
 /**
  * An error boundary — documented here as an "accessibility" primitive
- * alongside `FocusScope`/`DismissableLayer` because an uncaught render
+ * alongside `FocusScope`/`DismissibleLayer` because an uncaught render
  * error otherwise leaves the page silently blank or half-rendered, which is
  * as much a disaster for screen-reader/keyboard users as it is for anyone
  * else (there's often no visual cue anything went wrong at all). Catches

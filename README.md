@@ -14,7 +14,7 @@ utilities → hooks → primitives → styleless → react-ui → react-ui-block
 | --- | --- |
 | [`@nebula/utilities`](./packages/utilities) | Framework-agnostic helpers (`clamp`, `debounce`, `throttle`, `deepMerge`, DOM predicates). No dependencies on anything else in this repo. |
 | [`@nebula/hooks`](./packages/hooks) | Reusable React hooks (`useControllableState`, `useFocusTrap`, `useLocalStorage`, observers, ...). No dependency on `utilities` or any other workspace package, by design. |
-| [`@nebula/primitives`](./packages/primitives) | Unstyled, polymorphic low-level building blocks — `Primitive`/`Slot` (the `as`/`asChild` pattern everything else is built on), layout (`Box`/`Flex`/`Grid`/`Stack`/...), text, accessibility (`FocusScope`/`DismissableLayer`/`RovingFocusGroup`/...), form, and visibility (`Portal`/`Presence`/`Overlay`) primitives. Zero in-workspace dependencies. |
+| [`@nebula/primitives`](./packages/primitives) | Unstyled, polymorphic low-level building blocks — `Primitive`/`Slot` (the `as`/`asChild` pattern everything else is built on), layout (`Box`/`Flex`/`Grid`/`Stack`/...), text, accessibility (`FocusScope`/`DismissibleLayer`/`RovingFocusGroup`/...), form, and visibility (`Portal`/`Presence`/`Overlay`) primitives. Zero in-workspace dependencies. |
 | [`@nebula/styleless`](./packages/styleless) | Behavior-only, ARIA-complete compound components (`Tabs`, `Checkbox`, `Switch`, `RadioGroup`) — no styling opinions at all. (Formerly `@nebula/headless`.) |
 | [`@nebula/react-ui`](./packages/react-ui) | Tailwind-styled components (atoms) built on `primitives` + `styleless`, plus the 3-layer design token system and `ThemeProvider`/`useTheme` (light/dark/system) — this package absorbed the former standalone `@nebula/theme` package, since nothing else in the workspace needed tokens/theming. |
 | [`@nebula/react-ui-blocks`](./packages/react-ui-blocks) | Domain-neutral, ready-to-use screens/modules built from `react-ui` — page shells, theme switchers, and (eventually) forms, dashboards, auth flows (currently: `ThemeSwitcher`, `AppLayout`). Top of the dependency graph. |
@@ -38,7 +38,7 @@ Scope any script to a single package with `pnpm --filter @nebula/<package> <scri
 
 ## Custom theming
 
-Every color/spacing value ships as a CSS custom property (`--color-bg-default`, `--button-primary-bg`, ...), not a hardcoded Tailwind class — consuming apps can override any of them, add their own named themes beyond light/dark, or fork the token source entirely. See [`packages/react-ui/README.md`](./packages/react-ui/README.md#custom-theming--color-schemes) for the specifics and trade-offs of each approach.
+Every color/radius/size value ships as a CSS custom property (`--color-primary`, `--button-primary-bg`, `--radius-button`, ...) using OKLCH colors and a DaisyUI-style vocabulary, not a hardcoded Tailwind class — consuming apps can override any of them (via `:root`/`.dark`, no rebuild needed), add their own named themes beyond light/dark, or fork the token source entirely. See [`packages/react-ui/README.md`](./packages/react-ui/README.md#custom-theming--color-schemes) for the specifics and trade-offs of each approach.
 
 ## Docs
 

@@ -11,97 +11,81 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
+      "import": "./dist/index.js"
     },
     "./use-controllable-state": {
       "types": "./dist/use-controllable-state/index.d.ts",
-      "import": "./dist/use-controllable-state/index.js",
-      "require": "./dist/use-controllable-state/index.cjs"
+      "import": "./dist/use-controllable-state/index.js"
     },
     "./use-click-outside": {
       "types": "./dist/use-click-outside/index.d.ts",
-      "import": "./dist/use-click-outside/index.js",
-      "require": "./dist/use-click-outside/index.cjs"
+      "import": "./dist/use-click-outside/index.js"
     },
     "./use-media-query": {
       "types": "./dist/use-media-query/index.d.ts",
-      "import": "./dist/use-media-query/index.js",
-      "require": "./dist/use-media-query/index.cjs"
+      "import": "./dist/use-media-query/index.js"
     },
     "./use-scroll-lock": {
       "types": "./dist/use-scroll-lock/index.d.ts",
-      "import": "./dist/use-scroll-lock/index.js",
-      "require": "./dist/use-scroll-lock/index.cjs"
+      "import": "./dist/use-scroll-lock/index.js"
     },
     "./use-focus-trap": {
       "types": "./dist/use-focus-trap/index.d.ts",
-      "import": "./dist/use-focus-trap/index.js",
-      "require": "./dist/use-focus-trap/index.cjs"
+      "import": "./dist/use-focus-trap/index.js"
     },
     "./use-resize-observer": {
       "types": "./dist/use-resize-observer/index.d.ts",
-      "import": "./dist/use-resize-observer/index.js",
-      "require": "./dist/use-resize-observer/index.cjs"
+      "import": "./dist/use-resize-observer/index.js"
     },
     "./use-intersection-observer": {
       "types": "./dist/use-intersection-observer/index.d.ts",
-      "import": "./dist/use-intersection-observer/index.js",
-      "require": "./dist/use-intersection-observer/index.cjs"
+      "import": "./dist/use-intersection-observer/index.js"
     },
     "./use-mutation-observer": {
       "types": "./dist/use-mutation-observer/index.d.ts",
-      "import": "./dist/use-mutation-observer/index.js",
-      "require": "./dist/use-mutation-observer/index.cjs"
+      "import": "./dist/use-mutation-observer/index.js"
     },
     "./use-local-storage": {
       "types": "./dist/use-local-storage/index.d.ts",
-      "import": "./dist/use-local-storage/index.js",
-      "require": "./dist/use-local-storage/index.cjs"
+      "import": "./dist/use-local-storage/index.js"
     },
     "./use-debounce": {
       "types": "./dist/use-debounce/index.d.ts",
-      "import": "./dist/use-debounce/index.js",
-      "require": "./dist/use-debounce/index.cjs"
+      "import": "./dist/use-debounce/index.js"
     },
     "./use-id": {
       "types": "./dist/use-id/index.d.ts",
-      "import": "./dist/use-id/index.js",
-      "require": "./dist/use-id/index.cjs"
+      "import": "./dist/use-id/index.js"
     },
     "./use-boolean": {
       "types": "./dist/use-boolean/index.d.ts",
-      "import": "./dist/use-boolean/index.js",
-      "require": "./dist/use-boolean/index.cjs"
+      "import": "./dist/use-boolean/index.js"
     },
     "./use-toggle": {
       "types": "./dist/use-toggle/index.d.ts",
-      "import": "./dist/use-toggle/index.js",
-      "require": "./dist/use-toggle/index.cjs"
+      "import": "./dist/use-toggle/index.js"
     },
     "./use-stable-callback": {
       "types": "./dist/use-stable-callback/index.d.ts",
-      "import": "./dist/use-stable-callback/index.js",
-      "require": "./dist/use-stable-callback/index.cjs"
+      "import": "./dist/use-stable-callback/index.js"
     },
     "./use-event-listener": {
       "types": "./dist/use-event-listener/index.d.ts",
-      "import": "./dist/use-event-listener/index.js",
-      "require": "./dist/use-event-listener/index.cjs"
+      "import": "./dist/use-event-listener/index.js"
     },
     "./use-previous": {
       "types": "./dist/use-previous/index.d.ts",
-      "import": "./dist/use-previous/index.js",
-      "require": "./dist/use-previous/index.cjs"
+      "import": "./dist/use-previous/index.js"
     },
     "./use-mounted": {
       "types": "./dist/use-mounted/index.d.ts",
-      "import": "./dist/use-mounted/index.js",
-      "require": "./dist/use-mounted/index.cjs"
+      "import": "./dist/use-mounted/index.js"
     },
     "./package.json": "./package.json"
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsup && tsc -p tsconfig.build.json --emitDeclarationOnly && rm -f dist/*.tsbuildinfo",
     "dev": "tsup --watch",
@@ -109,12 +93,12 @@
     "lint": "eslint ."
   },
   "peerDependencies": {
-    "react": "^18.0.0 || ^19.0.0"
+    "react": "^19.0.0"
   },
   "devDependencies": {
     "@types/node": "^22.10.0",
-    "@types/react": "^18.3.12",
-    "react": "^18.3.1",
+    "@types/react": "^19.2.0",
+    "react": "^19.2.0",
     "tsup": "^8.3.5",
     "typescript": "^5.6.3"
   }

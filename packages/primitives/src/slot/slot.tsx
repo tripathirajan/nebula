@@ -79,10 +79,20 @@ const SlotClone = React.forwardRef<unknown, SlotCloneProps>((props, forwardedRef
 
   if (React.isValidElement(children)) {
     const childrenRef = getElementRef(children);
-    return React.cloneElement(children, {
+    const clonedProps = {
       ...mergeProps(slotProps, children.props as Record<string, unknown>),
       ref: forwardedRef ? composeRefs(forwardedRef, childrenRef) : childrenRef,
-    });
+    };
+    // `cloneElement`'s overload for a bare `ReactElement` (props type unknown
+    // at this generic call site) resolves to `Partial<P> & Attributes`, and
+    // React 19's `Attributes` no longer includes `ref` (ref moved to being a
+    // regular prop on the element's own `P`, which we can't name here since
+    // `children` is an arbitrary caller-supplied element). The merged object
+    // is already an untyped prop bag by construction (`mergeProps` returns
+    // `Record<string, unknown>`), so the `any` cast doesn't lose any real
+    // type safety — same rationale as `Scope<C = any>` in
+    // `create-context-scope.tsx`.
+    return React.cloneElement(children, clonedProps as any); // eslint-disable-line @typescript-eslint/no-explicit-any
   }
 
   return React.Children.count(children) > 1 ? React.Children.only(null) : null;

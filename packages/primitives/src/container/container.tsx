@@ -60,4 +60,4 @@ const Container = React.forwardRef(
 Container.displayName = 'Container';
 
 export { Container };
-export type { ContainerProps, ContainerSize };
+export type { ContainerProps, ContainerSize, ContainerOwnProps };

@@ -6,10 +6,24 @@ export default defineConfig({
   entry: {
     index: 'src/index.ts',
     'button/index': 'src/button/index.ts',
+    'input/index': 'src/input/index.ts',
+    'card/index': 'src/card/index.ts',
+    'badge/index': 'src/badge/index.ts',
+    'avatar/index': 'src/avatar/index.ts',
+    'separator/index': 'src/separator/index.ts',
+    'accordion/index': 'src/accordion/index.ts',
+    'dialog/index': 'src/dialog/index.ts',
+    'popover/index': 'src/popover/index.ts',
+    'tooltip/index': 'src/tooltip/index.ts',
+    'tabs/index': 'src/tabs/index.ts',
+    'checkbox/index': 'src/checkbox/index.ts',
+    'switch/index': 'src/switch/index.ts',
+    'radio-group/index': 'src/radio-group/index.ts',
     'tokens/index': 'src/tokens/index.ts',
     'theme-provider/index': 'src/theme-provider/index.ts',
   },
-  format: ['esm', 'cjs'],
+  format: ['esm'],
+  target: 'es2022',
   // See packages/primitives/tsup.config.ts for why dts is generated via a
   // separate `tsc --emitDeclarationOnly` pass instead of tsup's `dts: true`
   // (ERR_WORKER_OUT_OF_MEMORY — https://github.com/egoist/tsup/issues/920).
@@ -18,5 +32,5 @@ export default defineConfig({
   splitting: false,
   clean: true,
   treeshake: true,
-  external: ['react', 'react-dom', '@nebula/hooks', '@nebula/primitives'],
+  external: ['react', 'react-dom', '@nebula/hooks', '@nebula/primitives', '@nebula/styleless'],
 });

@@ -55,4 +55,4 @@ const Inline = React.forwardRef(
 Inline.displayName = 'Inline';
 
 export { Inline };
-export type { InlineProps };
+export type { InlineProps, InlineOwnProps };

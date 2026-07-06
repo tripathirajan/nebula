@@ -6,7 +6,8 @@ export default defineConfig({
     'theme-switcher/index': 'src/theme-switcher/index.ts',
     'app-layout/index': 'src/app-layout/index.ts',
   },
-  format: ['esm', 'cjs'],
+  format: ['esm'],
+  target: 'es2022',
   // See packages/primitives/tsup.config.ts for why dts is generated via a
   // separate `tsc --emitDeclarationOnly` pass instead of tsup's `dts: true`
   // (ERR_WORKER_OUT_OF_MEMORY — https://github.com/egoist/tsup/issues/920).

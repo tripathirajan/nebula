@@ -47,12 +47,12 @@ function AppLayout({ children, title, defaultTheme = 'system', hideHeader = fals
     <ThemeProvider defaultTheme={defaultTheme}>
       <Primitive
         as="div"
-        className="flex min-h-screen flex-col bg-[var(--color-bg-default)] text-[var(--color-text-default)]"
+        className="flex min-h-screen flex-col bg-[var(--color-base-100)] text-[var(--color-base-content)]"
       >
         {hideHeader ? null : (
           <Primitive
             as="header"
-            className="flex items-center justify-between border-b border-[var(--color-border-default)] px-6 py-3"
+            className="flex items-center justify-between border-b border-[var(--color-base-300)] px-6 py-3"
           >
             <div className="text-sm font-semibold">{title}</div>
             <ThemeSwitcher />

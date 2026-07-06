@@ -10,19 +10,36 @@ import type { VariantProps } from 'class-variance-authority';
 /**
  * Class recipe built on this package's own `buttonTokens` (see
  * `../tokens/component.ts`) via CSS-var-backed Tailwind arbitrary values —
- * swap themes by changing `data-theme`, not by touching this file.
+ * swap themes by changing `data-theme`/`.dark`, not by touching this file.
+ *
+ * Hover state is `hover:brightness-90` rather than a second stored
+ * `-bg-hover` token — the DaisyUI-style token set this package's theme is
+ * built from assigns exactly one shade per semantic role (no separate
+ * "hover" shade to reference), so darkening via a CSS filter keeps every
+ * variant's hover state theme-aware for free instead of needing a second
+ * token per variant. Corner radius reads `--radius-button` (see
+ * `tokens/primitive.ts`) instead of a static Tailwind class, so it follows
+ * the same override mechanism as color.
+ *
+ * Focus ring reads `--color-base-content` rather than `--color-primary` —
+ * `primary`'s 76% lightness only clears ~2:1 as a thin ring against
+ * `base-100`, well under WCAG 1.4.11's 3:1 non-text minimum (see
+ * `CONTRAST_AUDIT.md`), and it's the ring's whole job to be visible.
+ * `base-content` is guaranteed to invert correctly against `base-100` in
+ * both themes (it's the same pairing body text uses), at the cost of the
+ * ring not being brand-colored.
  */
 const buttonVariants = cva(
-  'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md border text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:ring-[var(--color-border-focus)] disabled:pointer-events-none disabled:opacity-50',
+  'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-[var(--radius-button)] border text-sm font-medium transition-colors hover:brightness-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:ring-[var(--color-base-content)] disabled:pointer-events-none disabled:opacity-50',
   {
     variants: {
       variant: {
         primary:
-          'border-[var(--button-primary-border)] bg-[var(--button-primary-bg)] text-[var(--button-primary-text)] hover:bg-[var(--button-primary-bg-hover)]',
+          'border-[var(--button-primary-border)] bg-[var(--button-primary-bg)] text-[var(--button-primary-text)]',
         secondary:
-          'border-[var(--button-secondary-border)] bg-[var(--button-secondary-bg)] text-[var(--button-secondary-text)] hover:bg-[var(--button-secondary-bg-hover)]',
+          'border-[var(--button-secondary-border)] bg-[var(--button-secondary-bg)] text-[var(--button-secondary-text)]',
         danger:
-          'border-[var(--button-danger-border)] bg-[var(--button-danger-bg)] text-[var(--button-danger-text)] hover:bg-[var(--button-danger-bg-hover)]',
+          'border-[var(--button-danger-border)] bg-[var(--button-danger-bg)] text-[var(--button-danger-text)]',
       },
       size: {
         sm: 'h-8 px-3 text-xs',

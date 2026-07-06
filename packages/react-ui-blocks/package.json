@@ -11,18 +11,15 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
+      "import": "./dist/index.js"
     },
     "./theme-switcher": {
       "types": "./dist/theme-switcher/index.d.ts",
-      "import": "./dist/theme-switcher/index.js",
-      "require": "./dist/theme-switcher/index.cjs"
+      "import": "./dist/theme-switcher/index.js"
     },
     "./app-layout": {
       "types": "./dist/app-layout/index.d.ts",
-      "import": "./dist/app-layout/index.js",
-      "require": "./dist/app-layout/index.cjs"
+      "import": "./dist/app-layout/index.js"
     },
     "./package.json": "./package.json"
   },
@@ -36,8 +33,8 @@
     "lint": "eslint ."
   },
   "peerDependencies": {
-    "react": "^18.0.0 || ^19.0.0",
-    "react-dom": "^18.0.0 || ^19.0.0"
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
   },
   "dependencies": {
     "@nebula/primitives": "workspace:*",
@@ -46,10 +43,10 @@
   "devDependencies": {
     "@storybook/react": "^8.6.18",
     "@storybook/test": "^8.6.18",
-    "@types/react": "^18.3.12",
-    "@types/react-dom": "^18.3.1",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
     "tsup": "^8.3.5",
     "typescript": "^5.6.3"
   }

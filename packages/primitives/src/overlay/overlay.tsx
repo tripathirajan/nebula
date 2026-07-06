@@ -12,7 +12,7 @@ type OverlayProps = PrimitivePropsWithRef<'div'>;
  * A full-viewport `fixed inset-0` layer — the dimmed backdrop behind a
  * modal `Dialog`. No color/opacity baked in (that's a styling choice, not a
  * structural one — set it via `className`, e.g. `bg-black/50`); pairs with
- * `Portal` (to escape any ancestor stacking context) and `DismissableLayer`
+ * `Portal` (to escape any ancestor stacking context) and `DismissibleLayer`
  * (to close on click).
  *
  * @example

@@ -6,6 +6,10 @@
     "composite": true,
     "declaration": true
   },
-  "include": ["src"],
-  "exclude": ["dist"]
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "dist"
+  ]
 }
