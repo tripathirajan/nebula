@@ -32,7 +32,10 @@ describe('Progress (ui)', () => {
   });
 
   it('has no axe violations', async () => {
-    const { container } = render(<Progress value={60} />);
+    // `Progress` has no label sub-component, so — same as any real
+    // `role="progressbar"` with no visible caption — an accessible name is
+    // on the consumer to supply via `aria-label`/`aria-labelledby`.
+    const { container } = render(<Progress value={60} aria-label="Upload progress" />);
     expect(await axe(container)).toHaveNoViolations();
   });
 });

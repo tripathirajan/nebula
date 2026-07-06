@@ -20,9 +20,22 @@ const FOCUSABLE_SELECTOR = [
   '[tabindex]:not([tabindex="-1"])',
 ].join(',');
 
+/**
+ * `offsetParent === null` is *not* a reliable "is this hidden" check — it's
+ * also null for `position: fixed` elements (the norm for floating dialogs/
+ * popovers/tooltips) and, in jsdom, for literally every element regardless
+ * of visibility, since jsdom never computes layout. Checking computed style
+ * directly works in both real browsers and jsdom.
+ */
+function isElementVisible(element: HTMLElement): boolean {
+  if (element.hidden) return false;
+  const style = window.getComputedStyle(element);
+  return style.display !== 'none' && style.visibility !== 'hidden';
+}
+
 function getFocusableElements(container: HTMLElement): HTMLElement[] {
   return Array.from(container.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR)).filter(
-    (element) => element.offsetParent !== null,
+    isElementVisible,
   );
 }
 

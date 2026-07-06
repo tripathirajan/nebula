@@ -37,13 +37,13 @@ function isFocusable(element: unknown): element is HTMLElement {
 
   if (typeof window === 'undefined') return true;
 
+  // Deliberately not using `offsetParent` here: it's null for
+  // `position: fixed` elements (the norm for floating dialogs/popovers/
+  // tooltips) in real browsers, and null for *every* element in jsdom,
+  // since jsdom never computes layout. Computed style alone is reliable in
+  // both.
   const style = window.getComputedStyle(element);
-  if (style.visibility === 'hidden' || style.display === 'none') return false;
-
-  // offsetParent is null for display:none elements (and fixed-position ones,
-  // which is an acceptable false negative here — focus-trap use cases don't
-  // typically involve fixed-position focus targets going stale mid-check).
-  return element.offsetParent !== null || style.position === 'fixed';
+  return style.visibility !== 'hidden' && style.display !== 'none';
 }
 
 export { isFocusable };

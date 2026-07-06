@@ -158,6 +158,11 @@ describe('Menu', () => {
   it('closes and restores focus to the trigger on Escape', async () => {
     render(<DemoMenu />);
     const trigger = screen.getByRole('button', { name: 'File' });
+    // Real clicks focus the clicked button natively; `fireEvent.click`
+    // doesn't emulate that, so it's done explicitly here — otherwise
+    // there's nothing for the menu to meaningfully restore focus *to* once
+    // it closes.
+    trigger.focus();
     fireEvent.click(trigger);
     await waitFor(() => expect(screen.getByRole('menu')).toBeInTheDocument());
 

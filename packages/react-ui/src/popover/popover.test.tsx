@@ -13,7 +13,12 @@ function DemoPopover() {
     <Popover>
       <PopoverTrigger>Filters</PopoverTrigger>
       <PopoverPortal>
-        <PopoverContent>
+        {/* `aria-label` here, not in `PopoverContent` itself: unlike
+            `Dialog` (which wires `aria-labelledby` to a `DialogTitle`
+            automatically), `Popover` has no title sub-component, so an
+            accessible name is on the consumer to supply — same as a real
+            `role="dialog"` with no visible heading always needs. */}
+        <PopoverContent aria-label="Filters">
           <p>Filter options.</p>
           <PopoverClose>Done</PopoverClose>
         </PopoverContent>

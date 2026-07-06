@@ -58,7 +58,15 @@ const DismissibleLayer = React.forwardRef<HTMLDivElement, DismissibleLayerProps>
       const node = nodeRef.current;
       if (!node) return;
 
-      const isTopmost = () => openLayers[openLayers.length - 1] === node;
+      // Not `openLayers[openLayers.length - 1] === node`: React fires
+      // mount effects bottom-up (children before parents), so a nested
+      // layer's effect — and its `openLayers.push` — runs *before* its
+      // ancestor's, leaving the outer layer last in the array instead of
+      // the inner one. DOM containment is reliable regardless of effect
+      // order: the topmost layer is whichever currently-open layer doesn't
+      // itself contain another currently-open one.
+      const isTopmost = () =>
+        !openLayers.some((other) => other !== node && node.contains(other));
 
       const onKeyDown = (event: KeyboardEvent) => {
         if (event.key !== 'Escape' || !isTopmost()) return;
