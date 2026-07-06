@@ -21,7 +21,12 @@ describe('Collapsible', () => {
     render(<DemoCollapsible />);
     const trigger = screen.getByRole('button', { name: 'Show more' });
     expect(trigger).toHaveAttribute('aria-expanded', 'false');
-    expect(screen.getByText('Extra detail.')).not.toBeVisible();
+    // Not just "not visible": `CollapsibleContent` wraps its content in
+    // `Presence`, which (absent a CSS animation/transition, as here) doesn't
+    // keep collapsed content mounted at all — `hidden` only matters for the
+    // brief window `Presence` keeps it around to let an exit transition
+    // finish.
+    expect(screen.queryByText('Extra detail.')).not.toBeInTheDocument();
   });
 
   it('expands on trigger click and wires up aria-controls to the content id', () => {
@@ -42,7 +47,7 @@ describe('Collapsible', () => {
     fireEvent.click(trigger);
 
     expect(trigger).toHaveAttribute('aria-expanded', 'false');
-    expect(screen.getByText('Extra detail.')).not.toBeVisible();
+    expect(screen.queryByText('Extra detail.')).not.toBeInTheDocument();
   });
 
   it('respects defaultOpen', () => {

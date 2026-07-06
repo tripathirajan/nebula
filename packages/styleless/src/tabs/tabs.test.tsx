@@ -42,7 +42,10 @@ describe('Tabs', () => {
     render(<DemoTabs />);
     expect(screen.getByRole('tab', { name: 'Account' })).toHaveAttribute('aria-selected', 'true');
     expect(screen.getByText('Account panel content.')).toBeVisible();
-    expect(screen.getByText('Password panel content.')).not.toBeVisible();
+    // `TabPanel` fully unmounts inactive panels (a plain conditional, not
+    // `Presence`) unless `forceMount` is set — so the inactive panel isn't
+    // just hidden, it isn't in the document at all.
+    expect(screen.queryByText('Password panel content.')).not.toBeInTheDocument();
   });
 
   it('automatic activation: ArrowRight moves focus and selects the newly-focused tab', () => {

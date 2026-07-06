@@ -69,11 +69,23 @@ function Presence({ present, children }: PresenceProps) {
       return;
     }
 
+    // `''` is treated the same as "unset" (`'none'`/`'0s'`) below: real
+    // browsers report the CSS spec's initial values (`animation-name: none`,
+    // `*-duration: 0s`) for an element with no animation/transition
+    // declared, but jsdom's computed style implementation reports an empty
+    // string instead for properties nothing ever set — without excluding
+    // it, `'' !== '0s'` and `'' !== 'none'` both evaluate `true`, making
+    // every element look like it has a running transition under jsdom.
     const styles = getComputedStyle(node);
     const hasAnimation =
-      styles.animationName !== 'none' && styles.animationName !== '' && styles.animationDuration !== '0s';
+      styles.animationName !== 'none' &&
+      styles.animationName !== '' &&
+      styles.animationDuration !== '0s' &&
+      styles.animationDuration !== '';
     const hasTransition =
-      styles.transitionDuration !== '0s' && styles.transitionProperty !== 'none';
+      styles.transitionDuration !== '0s' &&
+      styles.transitionDuration !== '' &&
+      styles.transitionProperty !== 'none';
 
     if (!hasAnimation && !hasTransition) {
       setIsPresent(false);

@@ -62,6 +62,11 @@ describe('Dialog', () => {
   it('closes and restores focus to the trigger on Escape', async () => {
     render(<DemoDialog />);
     const trigger = screen.getByRole('button', { name: 'Delete item' });
+    // Real clicks focus the clicked button natively; `fireEvent.click`
+    // doesn't emulate that, so it's done explicitly here — otherwise
+    // there's nothing for the dialog to meaningfully restore focus *to*
+    // once it closes.
+    trigger.focus();
     fireEvent.click(trigger);
 
     await waitFor(() => expect(screen.getByRole('dialog')).toBeInTheDocument());

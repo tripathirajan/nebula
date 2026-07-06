@@ -46,7 +46,16 @@ const FocusItem = React.forwardRef<HTMLElement, ScopedProps<FocusItemProps>>(
     const composedRef = useComposedRefs(forwardedRef, nodeRef);
     const isCurrentTabStop = context.currentTabStopId === id;
 
-    React.useEffect(() => {
+    // Layout, not passive: registration sets `currentTabStopId` state
+    // (`RovingFocusGroup`'s `registerItem`), which is what flips this item's
+    // own `tabIndex` to `0` below. `FocusScope`'s mount auto-focus effect
+    // (a passive `useEffect`) reads that `tabIndex` straight from the DOM to
+    // find "the first focusable descendant" — passive effects only run
+    // after every layout effect (and any state updates they trigger) have
+    // already been re-rendered and committed, so this needs to be a layout
+    // effect too or `FocusScope` reads stale (`-1`) `tabIndex`es and falls
+    // back to focusing its own container instead of the first item.
+    React.useLayoutEffect(() => {
       if (!focusable) return undefined;
       const node = nodeRef.current;
       if (!node) return undefined;

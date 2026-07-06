@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { act, fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { Tooltip } from './tooltip';
@@ -95,10 +95,17 @@ describe('Tooltip', () => {
       fireEvent.pointerEnter(trigger);
       expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
 
-      vi.advanceTimersByTime(299);
+      // Wrapped in `act()`: unlike `fireEvent.*`, `vi.advanceTimersByTime`
+      // doesn't automatically flush the React state update the fired
+      // `setTimeout` callback triggers (opening the tooltip).
+      act(() => {
+        vi.advanceTimersByTime(299);
+      });
       expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
 
-      vi.advanceTimersByTime(1);
+      act(() => {
+        vi.advanceTimersByTime(1);
+      });
       expect(screen.getByRole('tooltip')).toBeInTheDocument();
     });
 

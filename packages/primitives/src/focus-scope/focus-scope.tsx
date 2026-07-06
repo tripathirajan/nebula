@@ -18,9 +18,22 @@ const FOCUSABLE_SELECTOR = [
   '[tabindex]:not([tabindex="-1"])',
 ].join(',');
 
+/**
+ * `offsetParent === null` is *not* a reliable "is this hidden" check — it's
+ * also null for `position: fixed` elements (the norm for floating dialogs/
+ * popovers/tooltips) and, in jsdom, for literally every element regardless
+ * of visibility, since jsdom never computes layout. Checking computed style
+ * directly works in both real browsers and jsdom.
+ */
+function isElementVisible(element: HTMLElement): boolean {
+  if (element.hidden) return false;
+  const style = window.getComputedStyle(element);
+  return style.display !== 'none' && style.visibility !== 'hidden';
+}
+
 function getFocusableElements(container: HTMLElement): HTMLElement[] {
   return Array.from(container.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR)).filter(
-    (element) => element.offsetParent !== null,
+    isElementVisible,
   );
 }
 
@@ -76,7 +89,25 @@ const FocusScope = React.forwardRef<HTMLDivElement, FocusScopeProps>((props, for
     onMountAutoFocus?.(mountEvent);
     if (!mountEvent.defaultPrevented) {
       const [first] = getFocusableElements(container);
-      (first ?? container).focus();
+      if (first) {
+        first.focus();
+      } else {
+        // Nothing currently matches the strict (Tab-reachable) selector —
+        // this legitimately happens when the scope wraps a roving-tabindex
+        // widget (`RovingFocusGroup`): every item renders `tabIndex={-1}`
+        // until an item's own effect registers it as the "current tab
+        // stop" (`tabIndex={0}`), and that effect isn't guaranteed to have
+        // committed before this mount effect runs (both are triggered by
+        // the same mount, and passive-effect ordering across sibling
+        // subtrees doesn't guarantee the descendant's effect — even a
+        // `useLayoutEffect` — has flushed its state update yet). A `-1`
+        // item is still perfectly focusable via a direct `.focus()` call
+        // (that's the whole point of `-1` vs. omitting `tabindex`
+        // entirely), so fall back to the first descendant with *any*
+        // tabindex, not just a Tab-reachable one.
+        const fallback = container.querySelector<HTMLElement>(`${FOCUSABLE_SELECTOR}, [tabindex]`);
+        (fallback ?? container).focus();
+      }
     }
 
     return () => {

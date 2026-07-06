@@ -42,6 +42,14 @@ describe('Tooltip (ui)', () => {
     render(<DemoTooltip />);
     fireEvent.pointerEnter(screen.getByRole('button', { name: 'Save' }));
     await waitFor(() => screen.getByRole('tooltip'));
-    expect(await axe(document.body)).toHaveNoViolations();
+    // `region` (axe-core) flags page content outside a landmark (`<main>`,
+    // etc.) — a real concern for a whole page, not for this isolated
+    // fixture, which is just a trigger button + tooltip with no page chrome
+    // to put a landmark around. Disabled here rather than wrapping the demo
+    // in an artificial `<main>` just to satisfy a page-level rule this test
+    // isn't actually about.
+    expect(
+      await axe(document.body, { rules: { region: { enabled: false } } }),
+    ).toHaveNoViolations();
   });
 });

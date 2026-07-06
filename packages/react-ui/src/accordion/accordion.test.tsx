@@ -30,7 +30,11 @@ function DemoAccordion() {
 describe('Accordion (ui)', () => {
   it('renders the styleless behavior unchanged (opens on trigger click)', () => {
     render(<DemoAccordion />);
-    expect(screen.getByText('Answer two.')).not.toBeVisible();
+    // `AccordionContent` wraps its content in `Presence`, which (absent a
+    // CSS animation/transition, as here) doesn't keep collapsed content
+    // mounted at all — so the not-yet-opened item's content isn't in the
+    // document, not just hidden.
+    expect(screen.queryByText('Answer two.')).not.toBeInTheDocument();
 
     fireEvent.click(screen.getByRole('button', { name: 'Question two' }));
     expect(screen.getByText('Answer two.')).toBeVisible();

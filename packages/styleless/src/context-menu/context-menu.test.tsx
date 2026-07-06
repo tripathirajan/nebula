@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { act, fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { useState } from 'react';
 import { describe, expect, it, vi } from 'vitest';
 
@@ -52,7 +52,19 @@ describe('ContextMenu', () => {
       clientX: 120,
       clientY: 80,
     });
-    const wasNotCancelled = trigger.dispatchEvent(event);
+    // Dispatched directly (not via `fireEvent.contextMenu`) so the return
+    // value of `dispatchEvent` itself — whether `preventDefault()` was
+    // called — is available to assert on below. That means it isn't
+    // automatically wrapped in `act()` the way `fireEvent.*` helpers are,
+    // so it's done explicitly here; without it, the state update the click
+    // handler triggers (opening the menu) isn't guaranteed to have flushed
+    // yet by the time the assertions below run. `act()` itself always
+    // returns a thenable, not the callback's return value, so capture that
+    // separately via a variable in the enclosing scope.
+    let wasNotCancelled = true;
+    act(() => {
+      wasNotCancelled = trigger.dispatchEvent(event);
+    });
 
     expect(wasNotCancelled).toBe(false); // false means preventDefault() was called
     expect(screen.getByRole('menu')).toBeInTheDocument();
