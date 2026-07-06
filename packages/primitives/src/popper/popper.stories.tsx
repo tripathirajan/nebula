@@ -10,6 +10,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 const meta = {
   title: 'Primitives/Popper',
   component: Popper,
+  tags: ['autodocs'],
   parameters: { layout: 'centered' },
 } satisfies Meta<typeof Popper>;
 

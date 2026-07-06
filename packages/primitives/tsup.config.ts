@@ -40,6 +40,7 @@ export default defineConfig({
     'button/index': 'src/button/index.ts',
     'input/index': 'src/input/index.ts',
     'textarea/index': 'src/textarea/index.ts',
+    'native-select/index': 'src/native-select/index.ts',
     'label/index': 'src/label/index.ts',
     'form/index': 'src/form/index.ts',
     'portal/index': 'src/portal/index.ts',

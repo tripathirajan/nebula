@@ -12,6 +12,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 const meta = {
   title: 'Styleless/Accordion',
   component: Accordion,
+  tags: ['autodocs'],
   // `Accordion`'s `type` prop is a required discriminant (no sensible
   // default — `single` vs `multiple` is a real behavioral choice a consumer
   // must make), so `Meta`/`StoryObj` need a default `args` satisfying it.

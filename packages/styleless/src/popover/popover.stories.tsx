@@ -12,6 +12,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 const meta = {
   title: 'Styleless/Popover',
   component: Popover,
+  tags: ['autodocs'],
   parameters: { layout: 'centered' },
 } satisfies Meta<typeof Popover>;
 

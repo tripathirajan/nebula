@@ -7,6 +7,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 const meta = {
   title: 'Blocks/AppLayout',
   component: AppLayout,
+  tags: ['autodocs'],
   parameters: { layout: 'fullscreen' },
 } satisfies Meta<typeof AppLayout>;
 

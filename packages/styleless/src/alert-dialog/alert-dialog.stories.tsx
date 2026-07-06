@@ -15,6 +15,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 const meta = {
   title: 'Styleless/AlertDialog',
   component: AlertDialog,
+  tags: ['autodocs'],
   parameters: { layout: 'centered' },
 } satisfies Meta<typeof AlertDialog>;
 

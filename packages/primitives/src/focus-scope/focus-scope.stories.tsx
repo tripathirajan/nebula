@@ -8,6 +8,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 const meta = {
   title: 'Primitives/FocusScope',
   component: FocusScope,
+  tags: ['autodocs'],
   parameters: { layout: 'centered' },
 } satisfies Meta<typeof FocusScope>;
 

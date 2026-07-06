@@ -19,6 +19,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 const meta: Meta<typeof Button> = {
   title: 'React UI/Button',
   component: Button,
+  tags: ['autodocs'],
   parameters: {
     layout: 'centered',
     // theme.css must be loaded for the CSS-var-backed variants to render

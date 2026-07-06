@@ -7,6 +7,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 const meta: Meta<typeof Skeleton> = {
   title: 'React UI/Skeleton',
   component: Skeleton,
+  tags: ['autodocs'],
   parameters: { layout: 'centered' },
 };
 

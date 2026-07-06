@@ -7,6 +7,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 const meta = {
   title: 'React UI/Input',
   component: Input,
+  tags: ['autodocs'],
   parameters: { layout: 'centered' },
   argTypes: {
     invalid: { control: 'boolean' },

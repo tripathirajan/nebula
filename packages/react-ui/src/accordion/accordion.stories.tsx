@@ -11,6 +11,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 const meta = {
   title: 'React UI/Accordion',
   component: Accordion,
+  tags: ['autodocs'],
   parameters: { layout: 'padded' },
   args: { type: 'single' },
 } satisfies Meta<typeof Accordion>;

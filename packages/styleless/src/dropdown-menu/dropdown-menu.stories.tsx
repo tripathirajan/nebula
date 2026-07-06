@@ -17,6 +17,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 const meta = {
   title: 'Styleless/DropdownMenu',
   component: DropdownMenu,
+  tags: ['autodocs'],
   parameters: { layout: 'centered' },
 } satisfies Meta<typeof DropdownMenu>;
 

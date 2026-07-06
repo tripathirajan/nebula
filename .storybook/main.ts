@@ -23,6 +23,37 @@ const config: StorybookConfig = {
   },
   typescript: {
     reactDocgen: 'react-docgen-typescript',
+    // Without an explicit `tsconfigPath`, `react-docgen-typescript` falls
+    // back to default compiler options with no knowledge of this repo's
+    // `@nebula/*` path aliases — every component prop type that's imported
+    // across a package boundary (e.g. `PrimitivePropsWithRef` from
+    // `@nebula/primitives/primitive`, which is nearly all of them) then
+    // fails to resolve, and Storybook silently renders an empty Controls
+    // table instead of erroring. Pointing this at the workspace-root
+    // `tsconfig.base.json` (which owns the full `@nebula/*` -> `packages/*/src`
+    // `paths` map every package's own tsconfig extends) is what lets docgen
+    // actually see through those imports.
+    reactDocgenTypescriptOptions: {
+      tsconfigPath: '../tsconfig.base.json',
+      shouldExtractLiteralValuesFromEnum: true,
+      shouldRemoveUndefinedFromOptional: true,
+      // Every component here is built on `Primitive`, so its prop type is
+      // `ComponentPropsWithRef<'div' | 'button' | ...>` plus a handful of
+      // its own — left unfiltered, docgen would dump the full ~100-entry
+      // native DOM attribute/event-handler list (`onDrag`, `onAnimationEnd`,
+      // `suppressHydrationWarning`, ...) into every single component's
+      // Controls table, burying the handful of props that actually matter.
+      // Keeping only props declared in this repo's own `.tsx`/`.ts` files
+      // (i.e. not `node_modules`, which is where `@types/react`'s DOM
+      // attribute types live) is the standard fix for exactly this shape of
+      // component library (Radix's own docs site does the same). Also drops
+      // every `__scope<Name>` prop (`createContextScope`'s internal
+      // scope-threading mechanism, present on every compound component built
+      // in this repo) — real, but never meant to be set directly by a
+      // consumer, so it has no business in a public Controls table.
+      propFilter: (prop) =>
+        (!prop.parent || !/node_modules/.test(prop.parent.fileName)) && !prop.name.startsWith('__'),
+    },
   },
   // Storybook's react-vite framework builds its own Vite instance — it does
   // NOT inherit apps/playground/vite.config.ts (which no longer exists

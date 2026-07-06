@@ -12,6 +12,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 const meta = {
   title: 'Primitives/Portal',
   component: Portal,
+  tags: ['autodocs'],
   parameters: { layout: 'centered' },
 } satisfies Meta<typeof Portal>;
 

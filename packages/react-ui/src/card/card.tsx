@@ -18,7 +18,7 @@ type CardProps = PrimitivePropsWithRef<'div'>;
  * @example
  * ```tsx
  * <Card>
- *   <CardHeader>
+ *   <CardHeader icon={<SettingsIcon />}>
  *     <CardTitle>Project settings</CardTitle>
  *     <CardDescription>Manage your project's configuration.</CardDescription>
  *   </CardHeader>
@@ -26,6 +26,12 @@ type CardProps = PrimitivePropsWithRef<'div'>;
  *   <CardFooter>
  *     <Button>Save</Button>
  *   </CardFooter>
+ * </Card>
+ *
+ * // Only want a title, no header border/icon layout? Skip CardHeader entirely:
+ * <Card>
+ *   <CardTitle className="p-6 pb-0">Just a title</CardTitle>
+ *   <CardContent>...</CardContent>
  * </Card>
  * ```
  */
@@ -45,15 +51,51 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>((props, forwardedRef) =
 });
 Card.displayName = 'Card';
 
-const CardHeader = React.forwardRef<HTMLDivElement, CardProps>((props, forwardedRef) => {
-  const { className, ...rest } = props;
+interface CardHeaderProps extends CardProps {
+  /**
+   * Renders a dashed divider under the header, visually separating it from
+   * `CardContent` — set `false` if the header shouldn't be visually
+   * distinguished from the rest of the card (e.g. a card with no
+   * `CardContent` at all). If you only want a title with no border/icon
+   * layout at all, skip `CardHeader` entirely and render `CardTitle`
+   * directly as `Card`'s child instead.
+   * @default true
+   */
+  bordered?: boolean;
+  /**
+   * An icon (or any node) rendered beside the header's title/description
+   * stack, e.g. a section glyph next to `CardTitle`. Treated as decorative
+   * (`aria-hidden`) — the accessible name still comes from the visible
+   * `CardTitle` text, same convention `AccordionTrigger`'s chevron and
+   * `Checkbox`'s check mark use.
+   */
+  icon?: React.ReactNode;
+}
+
+const CardHeader = React.forwardRef<HTMLDivElement, CardHeaderProps>((props, forwardedRef) => {
+  const { className, bordered = true, icon, children, ...rest } = props;
   return (
     <Primitive
       as="div"
-      className={cn('flex flex-col gap-1.5 p-6', className)}
+      className={cn(
+        'flex flex-col gap-1.5 p-6',
+        bordered && 'border-b border-dashed border-[var(--card-border)] pb-6',
+        className,
+      )}
       {...rest}
       ref={forwardedRef}
-    />
+    >
+      {icon ? (
+        <div className="flex items-center gap-3">
+          <span aria-hidden="true" className="shrink-0 text-[var(--card-text)]">
+            {icon}
+          </span>
+          <div className="flex flex-1 flex-col gap-1.5">{children}</div>
+        </div>
+      ) : (
+        children
+      )}
+    </Primitive>
   );
 });
 CardHeader.displayName = 'CardHeader';
@@ -110,4 +152,4 @@ const CardFooter = React.forwardRef<HTMLDivElement, CardProps>((props, forwarded
 CardFooter.displayName = 'CardFooter';
 
 export { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter };
-export type { CardProps, CardTitleProps, CardDescriptionProps };
+export type { CardProps, CardHeaderProps, CardTitleProps, CardDescriptionProps };

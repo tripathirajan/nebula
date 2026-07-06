@@ -10,6 +10,7 @@ import type { ComponentProps } from 'react';
 const meta = {
   title: 'Styleless/RadioGroup',
   component: RadioGroup,
+  tags: ['autodocs'],
   parameters: { layout: 'centered' },
 } satisfies Meta<typeof RadioGroup>;
 

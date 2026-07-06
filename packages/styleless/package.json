@@ -93,6 +93,86 @@
       "types": "./dist/skeleton/index.d.ts",
       "import": "./dist/skeleton/index.js"
     },
+    "./field": {
+      "types": "./dist/field/index.d.ts",
+      "import": "./dist/field/index.js"
+    },
+    "./listbox": {
+      "types": "./dist/listbox/index.d.ts",
+      "import": "./dist/listbox/index.js"
+    },
+    "./select": {
+      "types": "./dist/select/index.d.ts",
+      "import": "./dist/select/index.js"
+    },
+    "./checkbox-group": {
+      "types": "./dist/checkbox-group/index.d.ts",
+      "import": "./dist/checkbox-group/index.js"
+    },
+    "./number-input": {
+      "types": "./dist/number-input/index.d.ts",
+      "import": "./dist/number-input/index.js"
+    },
+    "./combobox": {
+      "types": "./dist/combobox/index.d.ts",
+      "import": "./dist/combobox/index.js"
+    },
+    "./autocomplete": {
+      "types": "./dist/autocomplete/index.d.ts",
+      "import": "./dist/autocomplete/index.js"
+    },
+    "./slider": {
+      "types": "./dist/slider/index.d.ts",
+      "import": "./dist/slider/index.js"
+    },
+    "./rating": {
+      "types": "./dist/rating/index.d.ts",
+      "import": "./dist/rating/index.js"
+    },
+    "./otp-input": {
+      "types": "./dist/otp-input/index.d.ts",
+      "import": "./dist/otp-input/index.js"
+    },
+    "./color-picker": {
+      "types": "./dist/color-picker/index.d.ts",
+      "import": "./dist/color-picker/index.js"
+    },
+    "./file-upload": {
+      "types": "./dist/file-upload/index.d.ts",
+      "import": "./dist/file-upload/index.js"
+    },
+    "./pagination": {
+      "types": "./dist/pagination/index.d.ts",
+      "import": "./dist/pagination/index.js"
+    },
+    "./stepper": {
+      "types": "./dist/stepper/index.d.ts",
+      "import": "./dist/stepper/index.js"
+    },
+    "./tree": {
+      "types": "./dist/tree/index.d.ts",
+      "import": "./dist/tree/index.js"
+    },
+    "./navigation-menu": {
+      "types": "./dist/navigation-menu/index.d.ts",
+      "import": "./dist/navigation-menu/index.js"
+    },
+    "./drawer": {
+      "types": "./dist/drawer/index.d.ts",
+      "import": "./dist/drawer/index.js"
+    },
+    "./hover-card": {
+      "types": "./dist/hover-card/index.d.ts",
+      "import": "./dist/hover-card/index.js"
+    },
+    "./toast": {
+      "types": "./dist/toast/index.d.ts",
+      "import": "./dist/toast/index.js"
+    },
+    "./tree-view": {
+      "types": "./dist/tree-view/index.d.ts",
+      "import": "./dist/tree-view/index.js"
+    },
     "./package.json": "./package.json"
   },
   "files": [

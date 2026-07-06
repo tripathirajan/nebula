@@ -8,6 +8,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 const meta = {
   title: 'Styleless/ToggleGroup',
   component: ToggleGroup,
+  tags: ['autodocs'],
   // `ToggleGroup`'s `type` prop is a required discriminant (no sensible
   // default — same reasoning as `Accordion`'s own stories meta), so
   // `Meta`/`StoryObj` need a default `args` satisfying it. Every story below

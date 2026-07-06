@@ -10,6 +10,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 const meta: Meta<typeof Tabs> = {
   title: 'React UI/Tabs',
   component: Tabs,
+  tags: ['autodocs'],
   parameters: { layout: 'padded' },
 };
 

@@ -8,6 +8,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 const meta = {
   title: 'Primitives/DismissibleLayer',
   component: DismissibleLayer,
+  tags: ['autodocs'],
   parameters: { layout: 'centered' },
 } satisfies Meta<typeof DismissibleLayer>;
 

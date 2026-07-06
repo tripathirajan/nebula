@@ -20,6 +20,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 const meta = {
   title: 'Primitives/Layout',
   component: Box,
+  tags: ['autodocs'],
   parameters: { layout: 'padded' },
 } satisfies Meta<typeof Box>;
 

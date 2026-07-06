@@ -16,6 +16,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 const meta: Meta<typeof Dialog> = {
   title: 'React UI/Dialog',
   component: Dialog,
+  tags: ['autodocs'],
   parameters: { layout: 'centered' },
 };
 

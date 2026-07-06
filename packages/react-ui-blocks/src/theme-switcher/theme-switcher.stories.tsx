@@ -8,6 +8,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 const meta = {
   title: 'Blocks/ThemeSwitcher',
   component: ThemeSwitcher,
+  tags: ['autodocs'],
   decorators: [
     (Story) => (
       <ThemeProvider>

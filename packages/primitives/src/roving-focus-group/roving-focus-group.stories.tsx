@@ -11,6 +11,7 @@ import type { ComponentProps } from 'react';
 const meta = {
   title: 'Primitives/RovingFocusGroup',
   component: RovingFocusGroup,
+  tags: ['autodocs'],
   parameters: { layout: 'centered' },
 } satisfies Meta<typeof RovingFocusGroup>;
 

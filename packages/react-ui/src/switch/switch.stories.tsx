@@ -8,6 +8,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 const meta: Meta<typeof Switch> = {
   title: 'React UI/Switch',
   component: Switch,
+  tags: ['autodocs'],
   parameters: { layout: 'centered' },
 };
 

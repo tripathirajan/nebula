@@ -9,6 +9,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 const meta: Meta<typeof Avatar> = {
   title: 'React UI/Avatar',
   component: Avatar,
+  tags: ['autodocs'],
   parameters: { layout: 'centered' },
 };
 

@@ -149,6 +149,10 @@
       "types": "./dist/textarea/index.d.ts",
       "import": "./dist/textarea/index.js"
     },
+    "./native-select": {
+      "types": "./dist/native-select/index.d.ts",
+      "import": "./dist/native-select/index.js"
+    },
     "./label": {
       "types": "./dist/label/index.d.ts",
       "import": "./dist/label/index.js"

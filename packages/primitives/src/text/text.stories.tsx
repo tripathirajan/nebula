@@ -14,6 +14,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 const meta = {
   title: 'Primitives/Text',
   component: Text,
+  tags: ['autodocs'],
   parameters: { layout: 'padded' },
 } satisfies Meta<typeof Text>;
 

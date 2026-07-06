@@ -34,6 +34,7 @@ export * from './roving-focus-group';
 export * from './button';
 export * from './input';
 export * from './textarea';
+export * from './native-select';
 export * from './label';
 export * from './form';
 export * from './portal';

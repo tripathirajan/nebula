@@ -17,6 +17,7 @@ import type { ComponentProps } from 'react';
 const meta = {
   title: 'Styleless/Tabs',
   component: Tabs,
+  tags: ['autodocs'],
   parameters: { layout: 'centered' },
 } satisfies Meta<typeof Tabs>;
 

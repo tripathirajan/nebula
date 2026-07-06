@@ -27,6 +27,46 @@ describe('Card (ui)', () => {
     expect(screen.getByTestId('card').className).toContain('bg-[var(--card-bg)]');
   });
 
+  it('renders a dashed bottom border on CardHeader by default', () => {
+    render(
+      <CardHeader data-testid="header">
+        <CardTitle>Settings</CardTitle>
+      </CardHeader>,
+    );
+    expect(screen.getByTestId('header').className).toContain('border-dashed');
+  });
+
+  it('omits the border when bordered={false}', () => {
+    render(
+      <CardHeader bordered={false} data-testid="header">
+        <CardTitle>Settings</CardTitle>
+      </CardHeader>,
+    );
+    expect(screen.getByTestId('header').className).not.toContain('border-dashed');
+  });
+
+  it('renders the icon beside the title/description stack when provided', () => {
+    render(
+      <CardHeader icon={<span data-testid="icon">*</span>}>
+        <CardTitle>Settings</CardTitle>
+        <CardDescription>Preferences</CardDescription>
+      </CardHeader>,
+    );
+    expect(screen.getByTestId('icon')).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'Settings' })).toBeInTheDocument();
+    expect(screen.getByText('Preferences')).toBeInTheDocument();
+  });
+
+  it('the icon wrapper is aria-hidden (decorative, name comes from CardTitle)', () => {
+    render(
+      <CardHeader icon={<span>*</span>} data-testid="header">
+        <CardTitle>Settings</CardTitle>
+      </CardHeader>,
+    );
+    const iconWrapper = screen.getByTestId('header').querySelector('[aria-hidden="true"]');
+    expect(iconWrapper).not.toBeNull();
+  });
+
   it('has no axe violations', async () => {
     const { container } = render(
       <Card>

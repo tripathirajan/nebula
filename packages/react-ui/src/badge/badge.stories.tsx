@@ -5,6 +5,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 const meta = {
   title: 'React UI/Badge',
   component: Badge,
+  tags: ['autodocs'],
   parameters: { layout: 'centered' },
   args: { children: 'Badge' },
   argTypes: {
