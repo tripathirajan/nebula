@@ -1,0 +1,10 @@
+export { MultiSelect } from './multi-select';
+export type { MultiSelectProps } from './multi-select';
+export { MultiSelectTrigger } from './multi-select-trigger';
+export type { MultiSelectTriggerProps } from './multi-select-trigger';
+export { MultiSelectPortal } from './multi-select-portal';
+export type { MultiSelectPortalProps } from './multi-select-portal';
+export { MultiSelectContent } from './multi-select-content';
+export type { MultiSelectContentProps } from './multi-select-content';
+export { MultiSelectItem } from './multi-select-item';
+export type { MultiSelectItemProps } from './multi-select-item';

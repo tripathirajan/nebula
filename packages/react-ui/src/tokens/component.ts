@@ -262,6 +262,257 @@ const dndTokens = {
   dropRing: 'var(--color-primary)',
 } as const;
 
+/** Same `base-100`/`base-300`/`base-content` surface treatment as `Input`. */
+const selectTokens = {
+  triggerBg: 'var(--color-base-100)',
+  triggerBorder: 'var(--color-base-300)',
+  triggerText: 'var(--color-base-content)',
+  contentBg: 'var(--color-base-100)',
+  contentBorder: 'var(--color-base-300)',
+  text: 'var(--color-base-content)',
+  itemHighlightedBg: 'var(--color-base-200)',
+} as const;
+
+/** Same shape as `selectTokens` — `Combobox`'s input reuses `Input`'s own surface treatment, its popover reuses `Select`'s. */
+const comboboxTokens = {
+  inputBg: 'var(--color-base-100)',
+  inputBorder: 'var(--color-base-300)',
+  inputText: 'var(--color-base-content)',
+  contentBg: 'var(--color-base-100)',
+  contentBorder: 'var(--color-base-300)',
+  text: 'var(--color-base-content)',
+  itemHighlightedBg: 'var(--color-base-200)',
+} as const;
+
+/**
+ * `itemFocusBg` backs every `MenuItem`/`MenuCheckboxItem`/`MenuRadioItem`'s
+ * real `:focus` highlight (see `menu-item.tsx`'s doc comment on why this is
+ * plain focus, not `:focus-visible`); `content*` is the same
+ * `base-100`/`base-300`/`base-content` surface triple `Popover`/`Select` use.
+ */
+const menuTokens = {
+  contentBg: 'var(--color-base-100)',
+  contentBorder: 'var(--color-base-300)',
+  text: 'var(--color-base-content)',
+  itemFocusBg: 'var(--color-base-200)',
+  separator: 'var(--color-base-300)',
+} as const;
+
+/**
+ * `Menubar`'s own root chrome (the horizontal bar itself) and its
+ * trigger buttons' hover/open state — `Menubar`'s dropdown panels reuse
+ * `menuTokens` directly (see `menubar-content.tsx`), so this only needs the
+ * two things `Menu`'s tokens don't already cover.
+ */
+const menubarTokens = {
+  bg: 'var(--color-base-100)',
+  border: 'var(--color-base-300)',
+  triggerText: 'var(--color-base-content)',
+  triggerHoverBg: 'var(--color-base-200)',
+  triggerOpenBg: 'var(--color-base-200)',
+} as const;
+
+const breadcrumbTokens = {
+  text: 'var(--color-base-content)',
+  linkHoverText: 'var(--color-primary)',
+  currentText: 'var(--color-base-content)',
+} as const;
+
+/** Just the swatch's frame — the fill itself is the picker's current value, set inline by the styleless source, not read from here. */
+const colorPickerTokens = {
+  swatchBorder: 'var(--color-base-300)',
+} as const;
+
+/** Same `base-content`/`primary` pairing `paginationTokens.linkActiveBg`/`-Text` and `stepperTokens`'s active fill use — the filled-star's color. */
+const ratingTokens = {
+  empty: 'var(--color-base-300)',
+  filled: 'var(--color-primary)',
+} as const;
+
+const fileUploadTokens = {
+  text: 'var(--color-base-content)',
+  dropzoneBorder: 'var(--color-base-300)',
+  dropzoneActiveBorder: 'var(--color-primary)',
+  itemBorder: 'var(--color-base-300)',
+} as const;
+
+const sliderTokens = {
+  trackBg: 'var(--color-base-300)',
+  rangeBg: 'var(--color-primary)',
+  thumbBg: 'var(--color-base-100)',
+  thumbBorder: 'var(--color-primary)',
+} as const;
+
+const fieldTokens = {
+  labelText: 'var(--color-base-content)',
+  descriptionText: 'var(--color-base-content)',
+  errorText: 'var(--color-error)',
+} as const;
+
+/** Same `base-content`/`primary`-adjacent "filled when active" treatment `paginationTokens`'s active link and `stepperTokens`'s active indicator use. */
+const toggleTokens = {
+  text: 'var(--color-base-content)',
+  hoverBg: 'var(--color-base-200)',
+  onBg: 'var(--color-base-200)',
+  onText: 'var(--color-base-content)',
+} as const;
+
+const toggleGroupTokens = {
+  border: 'var(--color-base-300)',
+} as const;
+
+const collapsibleTokens = {
+  text: 'var(--color-base-content)',
+} as const;
+
+/** Same `base-100`/`base-300`/`base-content` surface triple `Card`/`Popover`/`Dialog` use. */
+const headerTokens = {
+  bg: 'var(--color-base-100)',
+  border: 'var(--color-base-300)',
+  text: 'var(--color-base-content)',
+} as const;
+
+/** Same surface triple as `headerTokens` — kept as its own entry (rather than reusing `headerTokens` directly) so `Header`/`Footer` stay independently themeable, per `component.ts`'s own per-component-indirection rule. */
+const footerTokens = {
+  bg: 'var(--color-base-100)',
+  border: 'var(--color-base-300)',
+  text: 'var(--color-base-content)',
+} as const;
+
+/** Same surface triple as `headerTokens`/`footerTokens`. */
+const sidebarTokens = {
+  bg: 'var(--color-base-100)',
+  border: 'var(--color-base-300)',
+  text: 'var(--color-base-content)',
+} as const;
+
+/** No border — a `Navbar` is usually nested inside a `Header` that already has one. */
+const navbarTokens = {
+  bg: 'var(--color-base-100)',
+  text: 'var(--color-base-content)',
+} as const;
+
+/** No border/radius — the plainest possible themed background, one step below `Card`/`Paper`. */
+const surfaceTokens = {
+  bg: 'var(--color-base-200)',
+  text: 'var(--color-base-content)',
+} as const;
+
+/** Same surface triple `Card` uses — `Paper` and `Card` are visually identical surfaces, just with (`Card`) or without (`Paper`) the compound header/title/footer sub-parts. */
+const paperTokens = {
+  bg: 'var(--color-base-100)',
+  border: 'var(--color-base-300)',
+  text: 'var(--color-base-content)',
+} as const;
+
+/** Shared by `Text` and `Heading` — this theme's default body text color. */
+const textTokens = {
+  color: 'var(--color-base-content)',
+} as const;
+
+/** Overrides `@nebula/primitives`' `Code`'s hardcoded pre-token-system `bg-gray-100` (see `code.tsx`'s doc comment). */
+const codeTokens = {
+  bg: 'var(--color-base-200)',
+  text: 'var(--color-base-content)',
+} as const;
+
+const blockquoteTokens = {
+  border: 'var(--color-base-300)',
+  text: 'var(--color-base-content)',
+} as const;
+
+const kbdTokens = {
+  bg: 'var(--color-base-200)',
+  border: 'var(--color-base-300)',
+  text: 'var(--color-base-content)',
+} as const;
+
+/** The ring separating overlapped avatars reads the page background, not a semantic color — same "not a text pairing" exemption `separatorTokens` relies on. */
+const avatarGroupTokens = {
+  ring: 'var(--color-base-100)',
+} as const;
+
+/** Only `neutral`/`primary` — unlike `Badge`/`Tag`'s full eight-role palette, a dismissible filter/selection chip only needs "default" vs. "actively applied," not a full status vocabulary. */
+const chipTokens = {
+  neutralBg: 'var(--color-base-200)',
+  neutralText: 'var(--color-base-content)',
+  primaryBg: 'var(--color-primary)',
+  primaryText: 'var(--color-primary-content)',
+} as const;
+
+const statTokens = {
+  labelText: 'var(--color-base-content)',
+  valueText: 'var(--color-base-content)',
+} as const;
+
+/** Purely presentational structure (no interactive state), same single-color treatment as `Text`. */
+const listTokens = {
+  text: 'var(--color-base-content)',
+} as const;
+
+/** `DescriptionTerm`/`DescriptionDetails` read separate tokens even though both currently resolve to `base-content` — kept independently themeable per the per-component indirection rule, same as `Header`/`Footer`/`Sidebar` all sharing one triple. */
+const descriptionListTokens = {
+  termText: 'var(--color-base-content)',
+  detailsText: 'var(--color-base-content)',
+} as const;
+
+/** Same `base-300`/`base-content` surface as `dataTableTokens`, plus a distinct `headerBg`/`rowHoverBg` pair since the virtualized rows scroll under a header that must stay visually separated (`dataTable`'s un-virtualized `<thead>` doesn't need its own background — it relies on border alone). */
+const dataGridTokens = {
+  border: 'var(--color-base-300)',
+  text: 'var(--color-base-content)',
+  headText: 'var(--color-base-content)',
+  headerBg: 'var(--color-base-200)',
+  rowHoverBg: 'var(--color-base-200)',
+} as const;
+
+/** Same `base-100`/`base-300`/`base-content` field treatment `selectTokens`/`inputTokens` use — `DatePicker`/`DateRangePicker` share this one object rather than each getting their own, since they're visually identical trigger buttons. */
+const datePickerTokens = {
+  triggerBg: 'var(--color-base-100)',
+  triggerBorder: 'var(--color-base-300)',
+  triggerText: 'var(--color-base-content)',
+} as const;
+
+/** `Calendar`'s day grid — `daySelectedBg`/`daySelectedText` reuse the `primary`/`primary-content` pair every other "actively chosen" state in this package uses (`SelectItem`'s checkmark, `PaginationLink`'s active page); `inRangeBg` is a lighter fill for the days between a range's two endpoints, distinct from either endpoint's own solid fill. */
+const calendarTokens = {
+  text: 'var(--color-base-content)',
+  navHoverBg: 'var(--color-base-200)',
+  weekdayText: 'var(--color-base-content)',
+  dayHoverBg: 'var(--color-base-200)',
+  daySelectedBg: 'var(--color-primary)',
+  daySelectedText: 'var(--color-primary-content)',
+  inRangeBg: 'var(--color-base-200)',
+  outsideMonthText: 'var(--color-base-content)',
+} as const;
+
+/** `dot`/`line` are the same page-recedes-into-background pairing `separatorTokens`'s divider and `avatarGroupTokens`'s ring rely on — not a text-on-background pairing, so exempt from `CONTRAST_AUDIT.md` the same way. */
+const timelineTokens = {
+  dot: 'var(--color-primary)',
+  line: 'var(--color-base-300)',
+  titleText: 'var(--color-base-content)',
+  descriptionText: 'var(--color-base-content)',
+} as const;
+
+/** Same `base-100`/`base-300`/`base-content` triple `selectTokens` uses for its trigger/content pair — a multi-select trigger/popup reads as the same kind of form field, just with a different summary-text/indicator shape (see `MultiSelectTrigger`/`MultiSelectItem`'s own doc comments). */
+const multiSelectTokens = {
+  triggerBg: 'var(--color-base-100)',
+  triggerBorder: 'var(--color-base-300)',
+  triggerText: 'var(--color-base-content)',
+  contentBg: 'var(--color-base-100)',
+  contentBorder: 'var(--color-base-300)',
+  text: 'var(--color-base-content)',
+  itemHighlightedBg: 'var(--color-base-200)',
+} as const;
+
+/** `headerBg` is a step darker than `bg` (`base-200` vs `base-100`) so the language-label/copy-button row visually separates from the code itself without needing a border between them — same "one step further into the surface" relationship `dataGridTokens.headerBg` has to `dataGridTokens.border`. */
+const codeBlockTokens = {
+  bg: 'var(--color-base-100)',
+  border: 'var(--color-base-300)',
+  text: 'var(--color-base-content)',
+  headerBg: 'var(--color-base-200)',
+  headerText: 'var(--color-base-content)',
+  lineNumberText: 'var(--color-base-content)',
+} as const;
+
 /**
  * Aggregated per-component token overrides, keyed by component name.
  *
@@ -310,6 +561,40 @@ const componentTokens = {
   carousel: carouselTokens,
   dataTable: dataTableTokens,
   dnd: dndTokens,
+  select: selectTokens,
+  combobox: comboboxTokens,
+  menu: menuTokens,
+  menubar: menubarTokens,
+  breadcrumb: breadcrumbTokens,
+  colorPicker: colorPickerTokens,
+  rating: ratingTokens,
+  fileUpload: fileUploadTokens,
+  slider: sliderTokens,
+  field: fieldTokens,
+  toggle: toggleTokens,
+  toggleGroup: toggleGroupTokens,
+  collapsible: collapsibleTokens,
+  header: headerTokens,
+  footer: footerTokens,
+  sidebar: sidebarTokens,
+  navbar: navbarTokens,
+  surface: surfaceTokens,
+  paper: paperTokens,
+  text: textTokens,
+  code: codeTokens,
+  blockquote: blockquoteTokens,
+  kbd: kbdTokens,
+  avatarGroup: avatarGroupTokens,
+  chip: chipTokens,
+  stat: statTokens,
+  list: listTokens,
+  descriptionList: descriptionListTokens,
+  dataGrid: dataGridTokens,
+  datePicker: datePickerTokens,
+  calendar: calendarTokens,
+  timeline: timelineTokens,
+  multiSelect: multiSelectTokens,
+  codeBlock: codeBlockTokens,
 } as const;
 
 export {
@@ -342,4 +627,38 @@ export {
   carouselTokens,
   dataTableTokens,
   dndTokens,
+  selectTokens,
+  comboboxTokens,
+  menuTokens,
+  menubarTokens,
+  breadcrumbTokens,
+  colorPickerTokens,
+  ratingTokens,
+  fileUploadTokens,
+  sliderTokens,
+  fieldTokens,
+  toggleTokens,
+  toggleGroupTokens,
+  collapsibleTokens,
+  headerTokens,
+  footerTokens,
+  sidebarTokens,
+  navbarTokens,
+  surfaceTokens,
+  paperTokens,
+  textTokens,
+  codeTokens,
+  blockquoteTokens,
+  kbdTokens,
+  avatarGroupTokens,
+  chipTokens,
+  statTokens,
+  listTokens,
+  descriptionListTokens,
+  dataGridTokens,
+  datePickerTokens,
+  calendarTokens,
+  timelineTokens,
+  multiSelectTokens,
+  codeBlockTokens,
 };

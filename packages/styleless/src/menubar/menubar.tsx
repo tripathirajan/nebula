@@ -12,6 +12,8 @@ interface MenubarProps {
   value?: string;
   defaultValue?: string;
   onValueChange?: (value: string | undefined) => void;
+  /** Forwarded (along with the ref) to the root `RovingFocusGroup` element — added so a consumer (e.g. `react-ui`'s styled wrapper) can lay the bar out visually without needing an extra wrapping `<div>` around it. */
+  className?: string;
   children?: React.ReactNode;
 }
 
@@ -49,8 +51,9 @@ interface MenubarProps {
  * </Menubar>
  * ```
  */
-function Menubar(props: ScopedProps<MenubarProps>) {
-  const { __scopeMenubar, value: valueProp, defaultValue, onValueChange, children } = props;
+const Menubar = React.forwardRef<HTMLDivElement, ScopedProps<MenubarProps>>((props, forwardedRef) => {
+  const { __scopeMenubar, value: valueProp, defaultValue, onValueChange, className, children } =
+    props;
 
   const [value, setValue] = useControllableState<string | undefined>({
     prop: valueProp,
@@ -60,12 +63,18 @@ function Menubar(props: ScopedProps<MenubarProps>) {
 
   return (
     <MenubarProvider scope={__scopeMenubar} value={value} onValueChange={setValue}>
-      <RovingFocusGroup orientation="horizontal" loop role="menubar">
+      <RovingFocusGroup
+        orientation="horizontal"
+        loop
+        role="menubar"
+        className={className}
+        ref={forwardedRef}
+      >
         {children}
       </RovingFocusGroup>
     </MenubarProvider>
   );
-}
+});
 
 Menubar.displayName = 'Menubar';
 

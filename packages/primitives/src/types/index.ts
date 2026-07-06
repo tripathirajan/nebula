@@ -3,4 +3,5 @@ export type {
   PolymorphicProps,
   PolymorphicComponentProps,
   PolymorphicComponentPropsWithRef,
+  PolymorphicComponent,
 } from './polymorphic';

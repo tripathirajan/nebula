@@ -147,6 +147,242 @@
       "types": "./dist/sortable/index.d.ts",
       "import": "./dist/sortable/index.js"
     },
+    "./select": {
+      "types": "./dist/select/index.d.ts",
+      "import": "./dist/select/index.js"
+    },
+    "./combobox": {
+      "types": "./dist/combobox/index.d.ts",
+      "import": "./dist/combobox/index.js"
+    },
+    "./autocomplete": {
+      "types": "./dist/autocomplete/index.d.ts",
+      "import": "./dist/autocomplete/index.js"
+    },
+    "./menu": {
+      "types": "./dist/menu/index.d.ts",
+      "import": "./dist/menu/index.js"
+    },
+    "./dropdown-menu": {
+      "types": "./dist/dropdown-menu/index.d.ts",
+      "import": "./dist/dropdown-menu/index.js"
+    },
+    "./context-menu": {
+      "types": "./dist/context-menu/index.d.ts",
+      "import": "./dist/context-menu/index.js"
+    },
+    "./menubar": {
+      "types": "./dist/menubar/index.d.ts",
+      "import": "./dist/menubar/index.js"
+    },
+    "./alert-dialog": {
+      "types": "./dist/alert-dialog/index.d.ts",
+      "import": "./dist/alert-dialog/index.js"
+    },
+    "./breadcrumb": {
+      "types": "./dist/breadcrumb/index.d.ts",
+      "import": "./dist/breadcrumb/index.js"
+    },
+    "./color-picker": {
+      "types": "./dist/color-picker/index.d.ts",
+      "import": "./dist/color-picker/index.js"
+    },
+    "./rating": {
+      "types": "./dist/rating/index.d.ts",
+      "import": "./dist/rating/index.js"
+    },
+    "./file-upload": {
+      "types": "./dist/file-upload/index.d.ts",
+      "import": "./dist/file-upload/index.js"
+    },
+    "./slider": {
+      "types": "./dist/slider/index.d.ts",
+      "import": "./dist/slider/index.js"
+    },
+    "./field": {
+      "types": "./dist/field/index.d.ts",
+      "import": "./dist/field/index.js"
+    },
+    "./textarea": {
+      "types": "./dist/textarea/index.d.ts",
+      "import": "./dist/textarea/index.js"
+    },
+    "./password-field": {
+      "types": "./dist/password-field/index.d.ts",
+      "import": "./dist/password-field/index.js"
+    },
+    "./search-field": {
+      "types": "./dist/search-field/index.d.ts",
+      "import": "./dist/search-field/index.js"
+    },
+    "./number-input": {
+      "types": "./dist/number-input/index.d.ts",
+      "import": "./dist/number-input/index.js"
+    },
+    "./checkbox-group": {
+      "types": "./dist/checkbox-group/index.d.ts",
+      "import": "./dist/checkbox-group/index.js"
+    },
+    "./toggle": {
+      "types": "./dist/toggle/index.d.ts",
+      "import": "./dist/toggle/index.js"
+    },
+    "./toggle-group": {
+      "types": "./dist/toggle-group/index.d.ts",
+      "import": "./dist/toggle-group/index.js"
+    },
+    "./collapsible": {
+      "types": "./dist/collapsible/index.d.ts",
+      "import": "./dist/collapsible/index.js"
+    },
+    "./otp-input": {
+      "types": "./dist/otp-input/index.d.ts",
+      "import": "./dist/otp-input/index.js"
+    },
+    "./header": {
+      "types": "./dist/header/index.d.ts",
+      "import": "./dist/header/index.js"
+    },
+    "./footer": {
+      "types": "./dist/footer/index.d.ts",
+      "import": "./dist/footer/index.js"
+    },
+    "./sidebar": {
+      "types": "./dist/sidebar/index.d.ts",
+      "import": "./dist/sidebar/index.js"
+    },
+    "./navbar": {
+      "types": "./dist/navbar/index.d.ts",
+      "import": "./dist/navbar/index.js"
+    },
+    "./main": {
+      "types": "./dist/main/index.d.ts",
+      "import": "./dist/main/index.js"
+    },
+    "./section": {
+      "types": "./dist/section/index.d.ts",
+      "import": "./dist/section/index.js"
+    },
+    "./surface": {
+      "types": "./dist/surface/index.d.ts",
+      "import": "./dist/surface/index.js"
+    },
+    "./paper": {
+      "types": "./dist/paper/index.d.ts",
+      "import": "./dist/paper/index.js"
+    },
+    "./text": {
+      "types": "./dist/text/index.d.ts",
+      "import": "./dist/text/index.js"
+    },
+    "./heading": {
+      "types": "./dist/heading/index.d.ts",
+      "import": "./dist/heading/index.js"
+    },
+    "./code": {
+      "types": "./dist/code/index.d.ts",
+      "import": "./dist/code/index.js"
+    },
+    "./blockquote": {
+      "types": "./dist/blockquote/index.d.ts",
+      "import": "./dist/blockquote/index.js"
+    },
+    "./kbd": {
+      "types": "./dist/kbd/index.d.ts",
+      "import": "./dist/kbd/index.js"
+    },
+    "./icon-button": {
+      "types": "./dist/icon-button/index.d.ts",
+      "import": "./dist/icon-button/index.js"
+    },
+    "./button-group": {
+      "types": "./dist/button-group/index.d.ts",
+      "import": "./dist/button-group/index.js"
+    },
+    "./split-button": {
+      "types": "./dist/split-button/index.d.ts",
+      "import": "./dist/split-button/index.js"
+    },
+    "./fab": {
+      "types": "./dist/fab/index.d.ts",
+      "import": "./dist/fab/index.js"
+    },
+    "./avatar-group": {
+      "types": "./dist/avatar-group/index.d.ts",
+      "import": "./dist/avatar-group/index.js"
+    },
+    "./chip": {
+      "types": "./dist/chip/index.d.ts",
+      "import": "./dist/chip/index.js"
+    },
+    "./tag": {
+      "types": "./dist/tag/index.d.ts",
+      "import": "./dist/tag/index.js"
+    },
+    "./stat": {
+      "types": "./dist/stat/index.d.ts",
+      "import": "./dist/stat/index.js"
+    },
+    "./video": {
+      "types": "./dist/video/index.d.ts",
+      "import": "./dist/video/index.js"
+    },
+    "./audio": {
+      "types": "./dist/audio/index.d.ts",
+      "import": "./dist/audio/index.js"
+    },
+    "./list": {
+      "types": "./dist/list/index.d.ts",
+      "import": "./dist/list/index.js"
+    },
+    "./description-list": {
+      "types": "./dist/description-list/index.d.ts",
+      "import": "./dist/description-list/index.js"
+    },
+    "./data-grid": {
+      "types": "./dist/data-grid/index.d.ts",
+      "import": "./dist/data-grid/index.js"
+    },
+    "./tree-table": {
+      "types": "./dist/tree-table/index.d.ts",
+      "import": "./dist/tree-table/index.js"
+    },
+    "./calendar": {
+      "types": "./dist/calendar/index.d.ts",
+      "import": "./dist/calendar/index.js"
+    },
+    "./date-picker": {
+      "types": "./dist/date-picker/index.d.ts",
+      "import": "./dist/date-picker/index.js"
+    },
+    "./date-range-picker": {
+      "types": "./dist/date-range-picker/index.d.ts",
+      "import": "./dist/date-range-picker/index.js"
+    },
+    "./time-picker": {
+      "types": "./dist/time-picker/index.d.ts",
+      "import": "./dist/time-picker/index.js"
+    },
+    "./multi-select": {
+      "types": "./dist/multi-select/index.d.ts",
+      "import": "./dist/multi-select/index.js"
+    },
+    "./timeline": {
+      "types": "./dist/timeline/index.d.ts",
+      "import": "./dist/timeline/index.js"
+    },
+    "./sheet": {
+      "types": "./dist/sheet/index.d.ts",
+      "import": "./dist/sheet/index.js"
+    },
+    "./code-block": {
+      "types": "./dist/code-block/index.d.ts",
+      "import": "./dist/code-block/index.js"
+    },
+    "./markdown": {
+      "types": "./dist/markdown/index.d.ts",
+      "import": "./dist/markdown/index.js"
+    },
     "./theme.css": "./src/theme.css",
     "./package.json": "./package.json"
   },

@@ -10,7 +10,7 @@ Cross-check of the target component list against the actual `packages/*/src` tre
 | --- | --- | --- | --- | --- |
 | Primitive | 20 | 0 | 0 | 20 (Core+Elements+Layout; `Utilities` subsection and `Span` out of scope — `Button`/`Input`/`Textarea`/`Label`/`Form`/`NativeSelect` aren't tracked as separate checklist items in this audit, but all exist; see `AGENTS.md`'s `packages/primitives` row) |
 | Styleless | 41 | 0 | 0 | 52 (the styleless backlog is now fully resolved — every unchecked item across the whole layer, 11 total, is explicitly N/A rather than "not started yet": `Form`/`Input`/`Textarea`/`NativeSelect` covered by `primitives` directly, `RangeSlider` subsumed by `Slider`'s multi-thumb support, `Button` covered by `primitives`' non-stateful `Button`, and — a project owner decision this session — `DataTable`/`Carousel`/`Virtualizer`/`Draggable`/`Droppable`/`Sortable` are deliberately being built directly in `react-ui`/`@nebula/hooks` instead of getting a separate unstyled layer, since they don't have the kind of independent ARIA-behavior-vs-styling split the rest of this package's components do) |
-| react-ui | 19 | 5 | 54 | 78 (recounted directly from this session's per-section tallies — Layout 1/2/8/11, Typography 0/0/5/5, Button 1/0/4/5, Form 3/1/13/17, Navigation 2/0/5/7, Overlay 3/1/2/6, Feedback 4/0/2/6, Data Display 2/0/6/8, Data 1/1/3/5, Media 1/0/3/4, Misc 1/0/3/4; the previous headline of "72" predates this session and didn't match a sum of the section totals even before this session's edits — corrected here rather than propagated) |
+| react-ui | 70 | 3 | 5 | 78 (recounted directly from this session's per-section tallies — Layout 8/2/1/11, Typography 5/0/0/5, Button 5/0/0/5, Form 17/0/0/17, Navigation 7/0/0/7, Overlay 5/1/0/6, Feedback 4/0/2/6, Data Display 8/0/0/8, Data 5/0/0/5, Media 3/0/1/4, Misc 3/0/1/4; Form/Navigation/Data Display/Data are now fully covered — `MultiSelect`/`DatePicker`/`DateRangePicker`/`TimePicker` closed out Form, the Navigation `Navbar`/`Sidebar` duplicate-listing was reconciled against the Layout section's already-built versions, `Timeline`/`Calendar` closed out Data Display, and `Markdown`/`CodeBlock` closed out all but one Misc item — `QRCode` is the one deliberate, documented scope cut in this whole audit (see the Misc section's own note for why); only Layout's `AppShell`/`Divider`, Overlay's `Modal`⚠️, Feedback's `Alert`/`EmptyState`, Media's `Image`⚠️, and `QRCode` remain, see `AGENTS.md`'s `react-ui` row for this session's full rundown) |
 
 Primitive is now fully covered for the in-scope items. Styleless and react-ui are intentionally much further behind — this list is a full "everything a mature design system could have" wishlist (roughly Radix + Chakra + Mantine combined in scope), not a near-term backlog.
 
@@ -145,78 +145,78 @@ Primitive is now fully covered for the in-scope items. Styleless and react-ui ar
 
 ### Layout
 - [ ] AppShell — ⚠️ `react-ui-blocks` has `AppLayout`, a similar concept one layer up, not this package
-- [ ] Header
-- [ ] Footer
-- [ ] Sidebar
-- [ ] Navbar
-- [ ] Main
-- [ ] Section
+- [x] Header — built this session (purely presentational, no `@nebula/styleless` compound underneath, same "thin `cn()` wrapper around `Primitive`" treatment as `Card`)
+- [x] Footer — built this session (same treatment as `Header`, `border-t` instead of `border-b`)
+- [x] Sidebar — built this session (`side` prop only flips which edge gets the border; actual page placement is left to the consumer's own flex/grid layout)
+- [x] Navbar — built this session (a `<nav>`, distinct from `Header`'s `<header>` landmark — often nested inside one alongside a logo)
+- [x] Main — built this session (`flex-1`, no background/border of its own — the neutral content region `Header`/`Footer`/`Sidebar` frame)
+- [x] Section — built this session (a `<section>` landmark with vertical spacing between its own children only, same "neutral region" treatment as `Main`)
 - [x] Card
-- [ ] Surface
-- [ ] Paper
+- [x] Surface — built this session (the plainest themed background — no border/shadow/radius at all, one step below `Paper`/`Card`)
+- [x] Paper — built this session (same bordered/elevated surface `Card` uses, but without `Card`'s compound header/title/footer sub-parts; `elevation` prop only controls shadow depth)
 - [ ] Divider — ⚠️ `Separator` (this package) covers the same job under a different name
 
-**1 solid / 2 partial / 8 missing out of 11**
+**8 solid / 2 partial / 1 missing out of 11**
 
 ### Typography
-- [ ] Text — not restyled in `react-ui` (only exists unstyled in `primitives`)
-- [ ] Heading — same
-- [ ] Code — same
-- [ ] Blockquote
-- [ ] Kbd
+- [x] Text — built this session (wraps `@nebula/primitives`' unstyled, polymorphic `Text`, adding only this theme's default body color — no font-size/weight opinion here either, matching the primitive it wraps)
+- [x] Heading — built this session (same wrap-and-color-only treatment, plus this theme's `--font-heading` stack)
+- [x] Code — built this session (overrides `@nebula/primitives`' `Code`'s hardcoded pre-token-system `bg-gray-100` with themed `--code-bg`/`-text`; found and fixed a real gap in `@nebula/primitives` while wiring this up — see below)
+- [x] Blockquote — built this session (purely presentational, no lower-layer counterpart at all, same "thin `cn()` wrapper directly around `Primitive`" treatment this session's `Header`/`Footer`/etc. use)
+- [x] Kbd — built this session (same treatment as `Blockquote`, native `<kbd>` element)
 
-**0/5**
+**5/5** — **found and fixed a real pre-existing gap in `@nebula/primitives` while building this**: `TextOwnProps`/`HeadingOwnProps`/`PolymorphicComponent` were already exported from `text.tsx`/`heading.tsx`/`polymorphic.ts` themselves but never re-exported from their package's own `index.ts` barrels (a real bug predating this session, not introduced by it) — `react-ui`'s new `Text`/`Heading` wrappers needed exactly those three types to preserve `truncate`/`level` prop typing through the wrap, which is what surfaced it. Fixed both the `src/` barrels and the already-built `dist/text`/`dist/heading`/`dist/types` `index.d.ts` files directly (their per-file `.d.ts` already had the correct exports; only the barrels were stale) rather than needing a full `tsc`-based regen.
 
 ### Button
 - [x] Button
-- [ ] IconButton
-- [ ] ButtonGroup
-- [ ] SplitButton
-- [ ] FAB
+- [x] IconButton — built this session (reuses `buttonVariants` directly for color/border/focus-ring so it always matches `Button`'s theming, only the size classes are overridden to be square; `aria-label` is a required prop, not just documented convention)
+- [x] ButtonGroup — built this session (purely a CSS child-combinator trick visually merging adjacent buttons — no shared state or roving tabindex, unlike `ToggleGroup`'s actual single/multi-select state machine)
+- [x] SplitButton — built this session (the same visual-merge trick as `ButtonGroup`, fixed to a horizontal pair; composition, not a new state machine — wrap a `DropdownMenu`'s trigger around the second button yourself)
+- [x] FAB — built this session (circular, elevated, reuses `--button-*` tokens directly rather than a separate `fabTokens` entry, since it's a specialized `Button` shape, not a differently-themed one; deliberately doesn't apply `fixed` positioning itself)
 
-**1/5**
+**5/5**
 
 ### Form
 - [ ] TextField — ⚠️ `Input` covers this job under a different name
-- [ ] PasswordField
-- [ ] SearchField
-- [ ] NumberField
-- [ ] TextArea
+- [x] PasswordField — built this session (a genuinely new `react-ui`-layer component, no `@nebula/styleless` counterpart — a built-in show/hide toggle that swaps the underlying native `<input>`'s `type` between `"password"`/`"text"` rather than hiding text via CSS, so autofill/password managers keep working correctly either way)
+- [x] SearchField — built this session (also `react-ui`-layer-only; a preset `type="search"` `Input` with a built-in leading search icon — the platform's own clear-button/Escape-to-clear affordance already comes free with the native input type)
+- [x] NumberField — built this session as `NumberInput`/`NumberInputField`/`NumberInputIncrement`/`NumberInputDecrement`, mirroring the styleless source's own naming (the +/- buttons default to a "+"/"-" icon when no `children` given, same convention `RatingItem`'s default star uses; both are `tabIndex={-1}` since the native `<input type="number">` already gives equivalent keyboard increment)
+- [x] TextArea — built this session (wraps `@nebula/primitives`' unstyled `Textarea` the same way this package's `Input` wraps `@nebula/primitives`' `Input` — there's no `@nebula/styleless` layer for it either, mirroring how `styleless` itself has no `Textarea`)
 - [x] Checkbox — built this session (checkmark/dash indicator, `data-state`-driven)
 - [x] Radio — built this session as `RadioGroup`/`RadioGroupItem` (indicator circle + dot rendered before the item's own children)
 - [x] Switch — built this session (track + sliding thumb)
-- [ ] Select
-- [ ] MultiSelect
-- [ ] Combobox
-- [ ] DatePicker
-- [ ] DateRangePicker
-- [ ] TimePicker
-- [ ] ColorPicker
-- [ ] Rating
-- [ ] FileUploader
+- [x] Select — built this session (`SelectTrigger` styled like `Input` with a chevron rotating via `group-data-[state=open]:rotate-180`; `SelectItem`'s checkmark uses `group`/`group-data-[state=selected]:block`, same technique `MenuCheckboxItem`'s indicator uses; root/value/portal are chrome-free re-exports)
+- [x] MultiSelect — built this session, directly in `react-ui` with no `@nebula/styleless` layer underneath (same project-owner call `Carousel`/`DataTable`/`DataGrid` make): composes this package's own `Popover` for positioning with `@nebula/styleless`'s `Listbox` (`type="multiple"`) for the actual selection behavior; `MultiSelectItem`'s checkbox-square indicator (not a bare checkmark) is the deliberate visual distinction from `SelectItem`, reusing `checkboxTokens`' exact box+checkmark treatment since a multi-select option reads as *toggled*, closer to `CheckboxGroupItem` than `SelectItem`
+- [x] Combobox — built this session (`ComboboxInput` styled identically to `Input`; `ComboboxItem`'s `data-[highlighted]` fill is virtual-highlight state, not real focus, per the styleless source); `Autocomplete` also covered — thin renamed re-export of these same parts, not a distinct item on this wishlist
+- [x] DatePicker — built this session as a single self-contained component (not a compound) — mints its own ambient `Popover` plus a `Calendar` (`mode="single"`), since unlike `MultiSelect`'s items there's no arbitrary consumer content to compose; selecting a date both sets `value` and closes the popover, a `DatePicker`-level UX decision `Calendar` itself never makes
+- [x] DateRangePicker — built this session, `DatePicker`'s two-endpoint sibling (same self-contained shape); wraps a `Calendar` in `mode="range"` and only closes once both `from`/`to` are picked
+- [x] TimePicker — built this session as an `Input` preset to `type="time"`, same "native input already gives the behavior for free" reasoning `SearchField`/`PasswordField` document — a locale-aware (12h/24h per the OS setting), fully keyboard-operable time control with nothing left to build from scratch
+- [x] ColorPicker — built this session (`ColorPickerTrigger` is the one real second implementation — a swatch button whose own fill *is* the current value, set inline by the styleless source, so this only adds the border/rounding/focus-ring frame around it; everything else is a thin renamed re-export of this package's own `Popover` parts, mirroring the styleless source's own `ColorPicker`-mints-`Popover` relationship)
+- [x] Rating — built this session (`RatingItem` renders a built-in filled/outline star by default, toggled purely off the styleless source's `data-state`, same "no icon dependency" approach `AccordionTrigger`'s chevron uses)
+- [x] FileUploader — built this session as `FileUpload`/`FileUploadDropzone`/`FileUploadInput`/`FileUploadFileList`/`FileUploadFileItem`/`FileUploadRemoveTrigger`, mirroring the styleless source's own naming (`FileUploadDropzone`'s `data-dragging-over` fills the border with `--file-upload-dropzone-active-border`)
 
-**3 solid / 1 partial / 13 missing out of 17**
+**17 solid / 0 partial / 0 missing out of 17** *(this session also gave `react-ui` styled wrappers to `Slider`, `CheckboxGroup`, `Toggle`/`ToggleGroup`, `Collapsible`, and `OTPInput` — none are distinct line items on this particular wishlist; there's no separate `RangeSlider` wrapper either, same "value is always an array" reasoning the styleless source documents. `Calendar` itself — the shared engine `DatePicker`/`DateRangePicker` both build on, plain native-`Date`-arithmetic month grid with WAI-ARIA Date Picker Dialog grid keyboard semantics — isn't a distinct item on this particular wishlist either, but is the Data Display section's own `Calendar` item, now built too.)*
 
 ### Navigation
 - [x] Tabs — built this session (underline treatment via `data-[state=active]` + `-mb-px`)
-- [ ] Breadcrumb
+- [x] Breadcrumb — built this session (`BreadcrumbSeparator` defaults to a chevron icon when no `children` given, same convention `FileUploadRemoveTrigger`'s default "×" icon uses; everything else is purely structural styling — flex layout on `BreadcrumbList`, link hover color on `BreadcrumbLink`)
 - [x] Pagination — built this session (styled wrapper: `PaginationLink`'s `data-[state=active]` fills with `--pagination-link-active-bg`/`-text`; root itself is a chrome-free re-export)
-- [ ] Navbar
-- [ ] Sidebar
-- [ ] Menu
-- [ ] DropdownMenu
+- [x] Navbar — ⚠️ same component as the Layout section's `Navbar`, listed twice in the source wishlist; built there, not a distinct item
+- [x] Sidebar — ⚠️ same component as the Layout section's `Sidebar`, listed twice in the source wishlist; built there, not a distinct item
+- [x] Menu — built this session (`MenuItem` styles on plain `focus:`, not `:focus-visible` — a `MenuItem` genuinely moves real DOM focus for both keyboard nav and pointer-hover, unlike `Combobox`/`Command`'s virtual-highlight items)
+- [x] DropdownMenu — built this session (thin renamed re-export of every `Menu` part, same as `styleless`)
 
-**2/7** *(this session also gave `react-ui` styled wrappers to `Stepper`/`Tree`/`NavigationMenu` — not distinct items on this particular wishlist, but see `AGENTS.md`'s `react-ui` row for the full list)*
+**7/7** *(this session also gave `react-ui` styled wrappers to `Stepper`/`Tree`/`NavigationMenu`/`ContextMenu`/`Menubar` — the latter two aren't distinct items on this particular wishlist, but see `AGENTS.md`'s `react-ui` row for the full list; `Menubar`'s root was the one real second implementation in that whole batch, needing actual flex-row/border/bg chrome unlike this package's own chrome-free `Menu` root)
 
 ### Overlay
 - [ ] Modal — ⚠️ `Dialog` (this package) covers the same job under a different name
 - [x] Drawer — built this session (`DrawerContent` is the one real second implementation: four `data-[side=*]` variants, each with its own fixed edge + `data-[state=closed]` translate-out transform; everything else reuses `Dialog`'s own parts restyled against `drawerTokens`)
-- [ ] Sheet
+- [x] Sheet — built this session as a thin renamed re-export of this package's own `Drawer` parts (`Sheet`/`SheetTrigger`/`SheetPortal`/`SheetOverlay`/`SheetContent`/`SheetTitle`/`SheetDescription`/`SheetClose`) — "Sheet" and "Drawer" are the same edge-anchored overlay pattern under two different naming vocabularies, same `DropdownMenu`-reuses-`Menu` convention
 - [x] Popover
 - [x] Tooltip — built this session (styled off `neutral`/`neutral-content` rather than `Popover`/`Dialog`'s `base-100`/`base-content`)
-- [ ] AlertDialog
+- [x] AlertDialog — built this session (`AlertDialogContent` reuses `DialogContent`'s exact card treatment minus the built-in close button — an alert dialog is never dismissed by an incidental click; `AlertDialogAction`/`AlertDialogCancel` give the two `DialogClose`-contract buttons different default looks, a filled `danger` button vs. a plain one, since the underlying styleless behavior is identical for both)
 
-**3 solid / 1 partial / 2 missing out of 6** *(this session also gave `react-ui` styled wrappers to `HoverCard` — not a distinct item on this wishlist)*
+**5 solid / 1 partial / 0 missing out of 6** *(this session also gave `react-ui` styled wrappers to `HoverCard` — not a distinct item on this wishlist)*
 
 ### Feedback
 - [ ] Alert
@@ -230,40 +230,40 @@ Primitive is now fully covered for the in-scope items. Styleless and react-ui ar
 
 ### Data Display
 - [x] Avatar
-- [ ] AvatarGroup
+- [x] AvatarGroup — built this session (overlapping row via negative margin + a ring in the page background color; `max` truncates via a plain `React.Children` slice, no registration system, plus a `+N` `Avatar`-styled overflow indicator)
 - [x] Badge
-- [ ] Chip
-- [ ] Tag
-- [ ] Timeline
-- [ ] Calendar
-- [ ] Stat
+- [x] Chip — built this session (the dismissible/interactive pill `Badge`'s own doc comment points at building separately; renders the "×" button only when `onDismiss` is passed)
+- [x] Tag — built this session (reuses `badgeTokens`' semantic colors directly, outlined instead of filled — the one visual distinction from `Badge`, so a filled status pill and an outlined category label read as different affordances despite sharing a palette)
+- [x] Timeline — built this session as `Timeline`/`TimelineItem`/`TimelineTitle`/`TimelineDescription` (purely presentational, `<ol>` since a timeline's events are inherently ordered, same reasoning `List`'s `ordered` prop exists for; `TimelineItem`'s dot + connecting line are two real `<span>`s, not pseudo-elements, so the line can size to `100%` of the item's own content height)
+- [x] Calendar — built this session as the shared engine `DatePicker`/`DateRangePicker` both build on (see the Form section) — a month-grid date picker core following the WAI-ARIA Date Picker Dialog grid pattern, plain native-`Date` arithmetic (`calendar-utils.ts`) rather than a date library, manual roving-tabindex arrow-key handling since a 2D grid needs both axes unlike `@nebula/primitives`' 1D `RovingFocusGroup`
+- [x] Stat — built this session as `Stat`/`StatLabel`/`StatValue`/`StatDescription` (single-file compound, no matching lower-layer counterpart, same treatment `Card` documents)
 
-**2/8**
+**8/8**
 
 ### Data
 - [x] Table — built this session as `DataTable`/`DataTableHeader`/`DataTableBody`/`DataTableRow`/`DataTableHead`/`DataTableCell`/`DataTableCaption`/`DataTableSelectionCell`/`DataTableSelectAllCell` (native `<table>` + sort state via `aria-sort` + row-selection state via two dedicated cells reusing this package's own `Checkbox`; sorting the actual data is left to the consumer, same convention `Combobox`/`Command` use for filtering)
-- [ ] DataGrid — ⚠️ `DataTable` covers sort/selection; no virtualized-grid variant yet (would compose with `useVirtualizer`)
-- [ ] TreeTable
-- [ ] List
-- [ ] DescriptionList
+- [x] DataGrid — built this session (composes `@nebula/hooks`' `useVirtualizer` directly rather than `DataTable`, since a native `<table>`'s row model resists absolute positioning; renders the WAI-ARIA Grid pattern over plain `div`s — `role="grid"`/`"row"`/`"columnheader"`/`"gridcell"` — with a column-config API instead of JSX-composed rows, sticky un-virtualized header, virtual rows positioned via `transform: translateY()`)
+- [x] TreeTable — built this session (composes react-ui's own `DataTable`/`DataTableHeader`/`DataTableBody`/`DataTableRow`/`DataTableHead`/`DataTableCell` parts rather than reinventing table chrome; recursive `{id, children?}` tree flattened depth-first at render time — real tables can't nest `<tr>`s — with per-row indentation and a local `Set`-based expand/collapse toggle, mirroring `Tree`'s own local-state precedent)
+- [x] List — built this session as `List`/`ListItem` (purely presentational `<ul>`/`<ol>` + `<li>`, `ordered` prop switches tag; no matching styleless compound, explicitly contrasted with `Menu`/`Tree`'s real interactive behavior)
+- [x] DescriptionList — built this session as `DescriptionList`/`DescriptionTerm`/`DescriptionDetails` (`<dl>`/`<dt>`/`<dd>`, two-column grid layout so pairs line up instead of the browser's default stacking; same single-file-compound treatment `Stat`/`Card` use)
 
-**1 solid / 1 partial / 3 missing out of 5**
+**5 solid / 0 partial / 0 missing out of 5**
 
 ### Media
 - [ ] Image
 - [x] Avatar *(same component as above, listed twice in the source list)*
-- [ ] Video
-- [ ] Audio
+- [x] Video — built this session (themed rounding only — no custom player chrome; native browser `controls` shown by default, since a native `<video controls>` already has full keyboard/screen-reader operability for free)
+- [x] Audio — built this session (same "just rounding, native controls stay in charge" treatment as `Video`)
 
-**1/4**
+**3/4**
 
 ### Misc
 - [x] CommandPalette — built this session as `Command`/`CommandInput`/`CommandList`/`CommandItem`/`CommandGroup`/`CommandEmpty`/`CommandSeparator` (`CommandInput` is a bottom-rule field reading as one continuous surface with the palette card, not a boxed `Input`) — also gave `react-ui` a `TreeView` wrapper (thin renamed re-export of this package's own `Tree`), not a distinct item on this wishlist
-- [ ] Markdown
-- [ ] CodeBlock
-- [ ] QRCode
+- [x] Markdown — built this session as a deliberately-scoped subset renderer (headings, paragraphs, fenced code, blockquotes, lists, inline bold/italic/code/links) — not full CommonMark; see `markdown-utils.ts`'s header comment for why a real parser dependency isn't available in this sandbox and why hand-rolling a spec-correct one isn't a responsible substitute. Block/inline parsing logic was smoke-tested against a real `node` run (compiled via a scratch `tsc` invocation, since `tsx`/`esbuild` don't work in this sandbox either) rather than left unverified — both block splitting and inline formatting produced correct output against a representative sample.
+- [x] CodeBlock — built this session as a themed `<pre>`/`<code>` block with a header (language label + copy-to-clipboard button) and optional line numbers — **deliberately not a syntax highlighter**; real tokenization needs a highlighting engine (Shiki/Prism/highlight.js) as an actual dependency, unavailable in this sandbox, so this ships the honest useful subset instead of a fragile hand-rolled tokenizer
+- [ ] QRCode — ❌ **deliberately not built, a real scope cut, not an oversight.** Generating a scannable QR code requires implementing the actual QR encoding algorithm (Reed-Solomon error correction, module placement, mask-pattern scoring) — genuinely complex, easy to get subtly wrong, and not something to responsibly hand-roll without a reference implementation to check against; there's no npm registry access in this sandbox to add `qrcode`/`qrcode.react`. Faking a QR-code-*looking* image that doesn't actually decode would be actively worse than not building the component at all (it would silently fail whoever scans it) — this is being left explicitly unbuilt until a real encoding library can be installed, unlike every other item in this document, which is either done, partial, or genuinely just not-gotten-to-yet.
 
-**1/4** *(this session also built `Carousel`/`CarouselContent`/`CarouselItem`/`CarouselPrevious`/`CarouselNext`/`CarouselIndicators` and `Draggable`/`Droppable`/`Sortable`/`SortableItem` directly in `react-ui` — none is a distinct item on this particular wishlist, since it predates the project owner's decision to build them here instead of in `styleless`; see the Collections/Drag & Drop sections above and `AGENTS.md`'s `react-ui` row for the full rationale)
+**3/4** *(this session also built `Carousel`/`CarouselContent`/`CarouselItem`/`CarouselPrevious`/`CarouselNext`/`CarouselIndicators` and `Draggable`/`Droppable`/`Sortable`/`SortableItem` directly in `react-ui` — none is a distinct item on this particular wishlist, since it predates the project owner's decision to build them here instead of in `styleless`; see the Collections/Drag & Drop sections above and `AGENTS.md`'s `react-ui` row for the full rationale)
 
 ---
 
