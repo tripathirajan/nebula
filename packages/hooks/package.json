@@ -81,6 +81,10 @@
       "types": "./dist/use-mounted/index.d.ts",
       "import": "./dist/use-mounted/index.js"
     },
+    "./use-virtualizer": {
+      "types": "./dist/use-virtualizer/index.d.ts",
+      "import": "./dist/use-virtualizer/index.js"
+    },
     "./package.json": "./package.json"
   },
   "files": [

@@ -165,6 +165,103 @@ const skeletonTokens = {
   bg: 'var(--color-base-300)',
 } as const;
 
+const paginationTokens = {
+  linkText: 'var(--color-base-content)',
+  linkHoverBg: 'var(--color-base-200)',
+  linkActiveBg: 'var(--color-primary)',
+  linkActiveText: 'var(--color-primary-content)',
+} as const;
+
+/** Same `base-content`/`primary` pairing `paginationTokens.linkActiveBg`/`-Text` use — the active step's fill. */
+const stepperTokens = {
+  text: 'var(--color-base-content)',
+  indicatorBg: 'var(--color-base-200)',
+  indicatorText: 'var(--color-base-content)',
+  activeIndicatorBg: 'var(--color-primary)',
+  activeIndicatorText: 'var(--color-primary-content)',
+  completeIndicatorBg: 'var(--color-primary)',
+  completeIndicatorText: 'var(--color-primary-content)',
+  separator: 'var(--color-base-300)',
+} as const;
+
+const treeTokens = {
+  text: 'var(--color-base-content)',
+  hoverBg: 'var(--color-base-200)',
+  selectedBg: 'var(--color-primary)',
+  selectedText: 'var(--color-primary-content)',
+} as const;
+
+/**
+ * `NavigationMenuContent` reuses the same `base-100`/`base-300`/`base-content`
+ * surface triple `Popover`/`Dialog` use — a mega-menu panel is "more page
+ * surface," not a high-contrast callout the way `Tooltip` is.
+ */
+const navigationMenuTokens = {
+  triggerText: 'var(--color-base-content)',
+  triggerHoverBg: 'var(--color-base-200)',
+  contentBg: 'var(--color-base-100)',
+  contentBorder: 'var(--color-base-300)',
+  linkActiveText: 'var(--color-primary)',
+} as const;
+
+const drawerTokens = {
+  overlayBg: 'var(--color-base-content)',
+  contentBg: 'var(--color-base-100)',
+  contentBorder: 'var(--color-base-300)',
+  text: 'var(--color-base-content)',
+} as const;
+
+const hoverCardTokens = {
+  contentBg: 'var(--color-base-100)',
+  contentBorder: 'var(--color-base-300)',
+  text: 'var(--color-base-content)',
+} as const;
+
+/**
+ * A toast is a small high-contrast callout that should visually pop off the
+ * page (like `tooltipTokens`), not blend in as page surface — same
+ * `neutral`/`neutral-content` reasoning.
+ */
+const toastTokens = {
+  bg: 'var(--color-neutral)',
+  text: 'var(--color-neutral-content)',
+  border: 'var(--color-neutral)',
+} as const;
+
+const commandTokens = {
+  bg: 'var(--color-base-100)',
+  border: 'var(--color-base-300)',
+  text: 'var(--color-base-content)',
+  itemHighlightedBg: 'var(--color-base-200)',
+} as const;
+
+/** Nav buttons read the same `base-100`/`base-300`/`base-content` surface triple `Popover`/`Dialog` use; the indicator dots' active fill reuses `primary`, same "small pop of the theme's brand color" role `switchTokens`'s checked track plays. */
+const carouselTokens = {
+  navBg: 'var(--color-base-100)',
+  navBorder: 'var(--color-base-300)',
+  navText: 'var(--color-base-content)',
+  indicatorBg: 'var(--color-base-300)',
+  indicatorActiveBg: 'var(--color-primary)',
+} as const;
+
+const dataTableTokens = {
+  border: 'var(--color-base-300)',
+  headText: 'var(--color-base-content)',
+  text: 'var(--color-base-content)',
+  rowHoverBg: 'var(--color-base-200)',
+  rowSelectedBg: 'var(--color-base-200)',
+} as const;
+
+/**
+ * Shared between `Droppable`'s and `SortableItem`'s "you can drop here"
+ * outline — one token rather than two identical ones, since they're
+ * genuinely the same visual affordance for the same drag-and-drop
+ * interaction, not two independently-themeable components.
+ */
+const dndTokens = {
+  dropRing: 'var(--color-primary)',
+} as const;
+
 /**
  * Aggregated per-component token overrides, keyed by component name.
  *
@@ -202,6 +299,17 @@ const componentTokens = {
   progress: progressTokens,
   spinner: spinnerTokens,
   skeleton: skeletonTokens,
+  pagination: paginationTokens,
+  stepper: stepperTokens,
+  tree: treeTokens,
+  navigationMenu: navigationMenuTokens,
+  drawer: drawerTokens,
+  hoverCard: hoverCardTokens,
+  toast: toastTokens,
+  command: commandTokens,
+  carousel: carouselTokens,
+  dataTable: dataTableTokens,
+  dnd: dndTokens,
 } as const;
 
 export {
@@ -223,4 +331,15 @@ export {
   progressTokens,
   spinnerTokens,
   skeletonTokens,
+  paginationTokens,
+  stepperTokens,
+  treeTokens,
+  navigationMenuTokens,
+  drawerTokens,
+  hoverCardTokens,
+  toastTokens,
+  commandTokens,
+  carouselTokens,
+  dataTableTokens,
+  dndTokens,
 };

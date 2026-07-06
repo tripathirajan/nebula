@@ -173,6 +173,10 @@
       "types": "./dist/tree-view/index.d.ts",
       "import": "./dist/tree-view/index.js"
     },
+    "./command": {
+      "types": "./dist/command/index.d.ts",
+      "import": "./dist/command/index.js"
+    },
     "./package.json": "./package.json"
   },
   "files": [

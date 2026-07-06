@@ -43,6 +43,7 @@ export default defineConfig({
     'hover-card/index': 'src/hover-card/index.ts',
     'toast/index': 'src/toast/index.ts',
     'tree-view/index': 'src/tree-view/index.ts',
+    'command/index': 'src/command/index.ts',
   },
   format: ['esm'],
   target: 'es2022',

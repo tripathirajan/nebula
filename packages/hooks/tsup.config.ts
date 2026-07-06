@@ -21,6 +21,7 @@ export default defineConfig({
     'use-event-listener/index': 'src/use-event-listener/index.ts',
     'use-previous/index': 'src/use-previous/index.ts',
     'use-mounted/index': 'src/use-mounted/index.ts',
+    'use-virtualizer/index': 'src/use-virtualizer/index.ts',
   },
   format: ['esm'],
   target: 'es2022',

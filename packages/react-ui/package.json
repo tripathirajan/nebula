@@ -91,6 +91,62 @@
       "types": "./dist/theme-provider/index.d.ts",
       "import": "./dist/theme-provider/index.js"
     },
+    "./pagination": {
+      "types": "./dist/pagination/index.d.ts",
+      "import": "./dist/pagination/index.js"
+    },
+    "./stepper": {
+      "types": "./dist/stepper/index.d.ts",
+      "import": "./dist/stepper/index.js"
+    },
+    "./tree": {
+      "types": "./dist/tree/index.d.ts",
+      "import": "./dist/tree/index.js"
+    },
+    "./navigation-menu": {
+      "types": "./dist/navigation-menu/index.d.ts",
+      "import": "./dist/navigation-menu/index.js"
+    },
+    "./drawer": {
+      "types": "./dist/drawer/index.d.ts",
+      "import": "./dist/drawer/index.js"
+    },
+    "./hover-card": {
+      "types": "./dist/hover-card/index.d.ts",
+      "import": "./dist/hover-card/index.js"
+    },
+    "./toast": {
+      "types": "./dist/toast/index.d.ts",
+      "import": "./dist/toast/index.js"
+    },
+    "./tree-view": {
+      "types": "./dist/tree-view/index.d.ts",
+      "import": "./dist/tree-view/index.js"
+    },
+    "./command": {
+      "types": "./dist/command/index.d.ts",
+      "import": "./dist/command/index.js"
+    },
+    "./carousel": {
+      "types": "./dist/carousel/index.d.ts",
+      "import": "./dist/carousel/index.js"
+    },
+    "./data-table": {
+      "types": "./dist/data-table/index.d.ts",
+      "import": "./dist/data-table/index.js"
+    },
+    "./draggable": {
+      "types": "./dist/draggable/index.d.ts",
+      "import": "./dist/draggable/index.js"
+    },
+    "./droppable": {
+      "types": "./dist/droppable/index.d.ts",
+      "import": "./dist/droppable/index.js"
+    },
+    "./sortable": {
+      "types": "./dist/sortable/index.d.ts",
+      "import": "./dist/sortable/index.js"
+    },
     "./theme.css": "./src/theme.css",
     "./package.json": "./package.json"
   },

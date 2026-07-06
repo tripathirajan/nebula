@@ -9,8 +9,8 @@ Cross-check of the target component list against the actual `packages/*/src` tre
 | Layer | Covered | Partial | Missing | Total (in scope) |
 | --- | --- | --- | --- | --- |
 | Primitive | 20 | 0 | 0 | 20 (Core+Elements+Layout; `Utilities` subsection and `Span` out of scope — `Button`/`Input`/`Textarea`/`Label`/`Form`/`NativeSelect` aren't tracked as separate checklist items in this audit, but all exist; see `AGENTS.md`'s `packages/primitives` row) |
-| Styleless | 40 | 0 | 7 | 52 (5 of the original 31 gaps — `Form`/`Input`/`Textarea`/`NativeSelect`/`RangeSlider` — are now marked N/A: the first three covered by `primitives` directly, `NativeSelect` likewise, `RangeSlider` subsumed by `Slider`'s multi-thumb support) |
-| react-ui | 15 | 4 | 53 | 72 |
+| Styleless | 41 | 0 | 0 | 52 (the styleless backlog is now fully resolved — every unchecked item across the whole layer, 11 total, is explicitly N/A rather than "not started yet": `Form`/`Input`/`Textarea`/`NativeSelect` covered by `primitives` directly, `RangeSlider` subsumed by `Slider`'s multi-thumb support, `Button` covered by `primitives`' non-stateful `Button`, and — a project owner decision this session — `DataTable`/`Carousel`/`Virtualizer`/`Draggable`/`Droppable`/`Sortable` are deliberately being built directly in `react-ui`/`@nebula/hooks` instead of getting a separate unstyled layer, since they don't have the kind of independent ARIA-behavior-vs-styling split the rest of this package's components do) |
+| react-ui | 19 | 5 | 54 | 78 (recounted directly from this session's per-section tallies — Layout 1/2/8/11, Typography 0/0/5/5, Button 1/0/4/5, Form 3/1/13/17, Navigation 2/0/5/7, Overlay 3/1/2/6, Feedback 4/0/2/6, Data Display 2/0/6/8, Data 1/1/3/5, Media 1/0/3/4, Misc 1/0/3/4; the previous headline of "72" predates this session and didn't match a sum of the section totals even before this session's edits — corrected here rather than propagated) |
 
 Primitive is now fully covered for the in-scope items. Styleless and react-ui are intentionally much further behind — this list is a full "everything a mature design system could have" wishlist (roughly Radix + Chakra + Mantine combined in scope), not a near-term backlog.
 
@@ -117,13 +117,13 @@ Primitive is now fully covered for the in-scope items. Styleless and react-ui ar
 
 ### Collections
 - [x] Listbox — built this session (`ListboxOption`, `type="single"|"multiple"`, reused directly by `Select`)
-- [ ] Command
-- [ ] DataTable
-- [ ] TreeView
-- [ ] Carousel
-- [ ] Virtualizer
+- [x] Command — built this session (`CommandInput`/`CommandList`/`CommandItem`/`CommandGroup`/`CommandEmpty`/`CommandSeparator` — the WAI-ARIA combobox-with-list pattern like `Combobox`, but always "open"; no popup, since `CommandList` is always visible right below `CommandInput`, matching the command-palette shape)
+- [ ] DataTable — N/A in `styleless` (project owner decision): mostly sort/selection *state* over a native `<table>`, not a distinct ARIA widget worth a separate unstyled layer — **built directly in `react-ui`** this session (see that layer's Data section below)
+- [x] TreeView — built this session (thin renamed re-export of every `Tree` part, same call `Autocomplete` makes reusing `Combobox`)
+- [ ] Carousel — N/A in `styleless` (project owner decision) — **built directly in `react-ui`** this session (see that layer's Misc section below)
+- [ ] Virtualizer — N/A in `styleless`/`react-ui` (project owner decision): pure windowing math with no ARIA semantics of its own — **built this session** as `useVirtualizer` in `@nebula/hooks`, not a component in either layer
 
-**1/6**
+**3/6 (3 marked N/A — see notes)**
 
 ### Feedback
 - [x] Progress — built this session (`Progress`/`ProgressIndicator`, WAI-ARIA Progress Meter pattern, indeterminate via `value={null}`)
@@ -133,11 +133,11 @@ Primitive is now fully covered for the in-scope items. Styleless and react-ui ar
 **3/3**
 
 ### Drag & Drop
-- [ ] Draggable
-- [ ] Droppable
-- [ ] Sortable
+- [ ] Draggable — N/A in `styleless` (project owner decision) — **built directly in `react-ui`** this session (native HTML5 Drag and Drop API; see `react-ui`'s row in `AGENTS.md` for the documented keyboard-accessibility limitation)
+- [ ] Droppable — N/A in `styleless`, same reasoning — **built this session**
+- [ ] Sortable — N/A in `styleless`, same reasoning — **built this session** as `Sortable`/`SortableItem`
 
-**0/3**
+**0/3 (all 3 marked N/A in this layer — moved to `react-ui` and built there this session, see notes)**
 
 ---
 
@@ -200,33 +200,33 @@ Primitive is now fully covered for the in-scope items. Styleless and react-ui ar
 ### Navigation
 - [x] Tabs — built this session (underline treatment via `data-[state=active]` + `-mb-px`)
 - [ ] Breadcrumb
-- [ ] Pagination
+- [x] Pagination — built this session (styled wrapper: `PaginationLink`'s `data-[state=active]` fills with `--pagination-link-active-bg`/`-text`; root itself is a chrome-free re-export)
 - [ ] Navbar
 - [ ] Sidebar
 - [ ] Menu
 - [ ] DropdownMenu
 
-**1/7**
+**2/7** *(this session also gave `react-ui` styled wrappers to `Stepper`/`Tree`/`NavigationMenu` — not distinct items on this particular wishlist, but see `AGENTS.md`'s `react-ui` row for the full list)*
 
 ### Overlay
 - [ ] Modal — ⚠️ `Dialog` (this package) covers the same job under a different name
-- [ ] Drawer
+- [x] Drawer — built this session (`DrawerContent` is the one real second implementation: four `data-[side=*]` variants, each with its own fixed edge + `data-[state=closed]` translate-out transform; everything else reuses `Dialog`'s own parts restyled against `drawerTokens`)
 - [ ] Sheet
 - [x] Popover
 - [x] Tooltip — built this session (styled off `neutral`/`neutral-content` rather than `Popover`/`Dialog`'s `base-100`/`base-content`)
 - [ ] AlertDialog
 
-**2 solid / 1 partial / 3 missing out of 6**
+**3 solid / 1 partial / 2 missing out of 6** *(this session also gave `react-ui` styled wrappers to `HoverCard` — not a distinct item on this wishlist)*
 
 ### Feedback
 - [ ] Alert
-- [ ] Toast
+- [x] Toast — built this session (reads `--toast-*`, the same `neutral`/`neutral-content` "pop off the page" pairing `tooltipTokens` uses; `ToastViewport` is fixed bottom-right, newest-on-top)
 - [x] Progress — built this session (styled wrapper: fill percentage computed from `value`/`max` and applied as an inline `translateX`; indeterminate uses Tailwind's built-in `animate-pulse` rather than a custom sliding-bar `@keyframes`)
 - [x] Spinner — built this session (border-ring + `animate-spin`, both Tailwind-core)
 - [x] Skeleton — built this session (`animate-pulse` fill, default `--radius-box`, override via `className` for other shapes)
 - [ ] EmptyState
 
-**3/6**
+**4/6**
 
 ### Data Display
 - [x] Avatar
@@ -241,13 +241,13 @@ Primitive is now fully covered for the in-scope items. Styleless and react-ui ar
 **2/8**
 
 ### Data
-- [ ] Table
-- [ ] DataGrid
+- [x] Table — built this session as `DataTable`/`DataTableHeader`/`DataTableBody`/`DataTableRow`/`DataTableHead`/`DataTableCell`/`DataTableCaption`/`DataTableSelectionCell`/`DataTableSelectAllCell` (native `<table>` + sort state via `aria-sort` + row-selection state via two dedicated cells reusing this package's own `Checkbox`; sorting the actual data is left to the consumer, same convention `Combobox`/`Command` use for filtering)
+- [ ] DataGrid — ⚠️ `DataTable` covers sort/selection; no virtualized-grid variant yet (would compose with `useVirtualizer`)
 - [ ] TreeTable
 - [ ] List
 - [ ] DescriptionList
 
-**0/5**
+**1 solid / 1 partial / 3 missing out of 5**
 
 ### Media
 - [ ] Image
@@ -258,12 +258,12 @@ Primitive is now fully covered for the in-scope items. Styleless and react-ui ar
 **1/4**
 
 ### Misc
-- [ ] CommandPalette
+- [x] CommandPalette — built this session as `Command`/`CommandInput`/`CommandList`/`CommandItem`/`CommandGroup`/`CommandEmpty`/`CommandSeparator` (`CommandInput` is a bottom-rule field reading as one continuous surface with the palette card, not a boxed `Input`) — also gave `react-ui` a `TreeView` wrapper (thin renamed re-export of this package's own `Tree`), not a distinct item on this wishlist
 - [ ] Markdown
 - [ ] CodeBlock
 - [ ] QRCode
 
-**0/4**
+**1/4** *(this session also built `Carousel`/`CarouselContent`/`CarouselItem`/`CarouselPrevious`/`CarouselNext`/`CarouselIndicators` and `Draggable`/`Droppable`/`Sortable`/`SortableItem` directly in `react-ui` — none is a distinct item on this particular wishlist, since it predates the project owner's decision to build them here instead of in `styleless`; see the Collections/Drag & Drop sections above and `AGENTS.md`'s `react-ui` row for the full rationale)
 
 ---
 
@@ -273,4 +273,7 @@ Primitive is now fully covered for the in-scope items. Styleless and react-ui ar
 2. ~~**Styleless Menu family**: `Menu` unlocks `DropdownMenu`, `ContextMenu`, `Menubar`~~ — **done.** `Menu` built first; `DropdownMenu`/`ContextMenu`/`Menubar` all reuse its `Content`/`Item`/`CheckboxItem`/`RadioGroup`/`RadioItem`/`Separator`/`Label` parts as thin renamed re-exports, with only each one's trigger/root genuinely new. `Select`/`Combobox` remain unbuilt but would follow the same reuse pattern (listbox semantics differ enough from menu semantics that they're not simple re-exports, unlike the three built here).
 3. ~~**Feedback primitives** (`Progress`, `Spinner`, `Skeleton`)~~ — **done.** `Progress` got real ARIA Progress Meter semantics (indeterminate via `value={null}`, `aria-valuetext` via `getValueLabel`); `Spinner`/`Skeleton` turned out to need no styleless-layer state at all beyond `role="status"`/`aria-hidden` respectively, confirming the "almost pure CSS" read — all visual animation (`animate-spin`/`animate-pulse`) is Tailwind-core, no new `@keyframes` added to the project.
 4. ~~**Field + Listbox + Select**~~ — **done.** `Field` factors out the label/description/error id-wiring every form field needs; `Listbox` is the reusable single/multi-select list `Select`'s popup builds on (same "build the primitive once, reuse it" strategy `Menu`→`DropdownMenu` established) — `NativeSelect` was added to `primitives` instead of `styleless`, mirroring how `Input`/`Textarea` are handled there.
-5. Everything else (remaining Form fields — `NumberInput`/`CheckboxGroup`/`Combobox`/`Autocomplete`/`Slider`/`RangeSlider`/`Rating`/`OTPInput`/`ColorPicker`/`FileUpload` — plus Navigation/Overlay/Collections/Drag-and-Drop in `styleless`; Layout/Typography/Data/Media/Misc in `react-ui`) is queued but not yet started — see the project's task list for the current breakdown.
+5. ~~**Everything else queued in `styleless`**~~ — **done.** Form/Navigation/Overlay/Collections/Drag-and-Drop are all resolved: every remaining item is either built (see each section above) or explicitly marked N/A this session (project owner decision to build `DataTable`/`Carousel`/`Virtualizer`/`Draggable`/`Droppable`/`Sortable` directly in `react-ui`/`@nebula/hooks` instead of adding a redundant unstyled layer for them). The entire `styleless` backlog is now closed out.
+6. ~~**`react-ui` styled wrappers for every `styleless` primitive built in the Navigation/Overlay/Collections batches**: `Pagination`, `Stepper`, `Tree`, `NavigationMenu`, `Drawer`, `HoverCard`, `Toast`, `TreeView`, `Command`~~ — **done.** All nine now have `react-ui` styled wrappers (8 new component-token entries added to `component.ts`, still 23/28 on `CONTRAST_AUDIT.md` since all of them reuse already-audited semantic pairings) — see `AGENTS.md`'s `react-ui` row for the per-component rationale.
+7. ~~**The six components/hook moved to `react-ui`/`@nebula/hooks` by the Collections/Drag-and-Drop decision**: `Carousel`, `DataTable`, `Draggable`/`Droppable`/`Sortable`, `useVirtualizer`~~ — **done.** All built this session — `Carousel`/`DataTable` each with their own plain (non-`createContextScope`) React context, `Draggable`/`Droppable`/`Sortable` on the native HTML5 Drag and Drop API (documented keyboard-accessibility limitation — no fake keyboard drag support), `useVirtualizer` as an estimate-then-measure-and-correct hook in `@nebula/hooks`. **Real gap left by this batch**: none of the five components have stories or tests yet, unlike everything else in `react-ui` — worth prioritizing next since (unlike every other `react-ui` wrapper) there's no `@nebula/styleless` test coverage underneath them to lean on.
+8. Remaining work is all in `react-ui`: the still-unbuilt Layout/Typography/Button/Form/Navigation/Overlay/Feedback/Data Display/Data/Media/Misc items in the sections above — see the project's task list for the current breakdown.
