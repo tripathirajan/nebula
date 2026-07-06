@@ -91,6 +91,11 @@
   --radio-checked-border: var(--color-primary);
   --radio-checked-dot: var(--color-primary);
   --radio-text: var(--color-base-content);
+  --progress-track-bg: var(--color-base-300);
+  --progress-indicator-bg: var(--color-primary);
+  --spinner-track: var(--color-base-300);
+  --spinner-indicator: var(--color-primary);
+  --skeleton-bg: var(--color-base-300);
   --radius-selector: 2rem;
   --radius-field: 2rem;
   --radius-box: 2rem;
@@ -103,6 +108,7 @@
   --radius-menu: 2rem;
   --radius-popover: 2rem;
   --radius-tooltip: 2rem;
+  --radius-progress: 2rem;
   --size-selector: 0.25rem;
   --size-field: 0.25rem;
   --size-button: 0.25rem;

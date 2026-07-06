@@ -9,8 +9,8 @@ Cross-check of the target component list against the actual `packages/*/src` tre
 | Layer | Covered | Partial | Missing | Total (in scope) |
 | --- | --- | --- | --- | --- |
 | Primitive | 20 | 0 | 0 | 20 (Core+Elements+Layout; `Utilities` subsection and `Span` out of scope) |
-| Styleless | 8 | 0 | 44 | 52 |
-| react-ui | 11 | 4 | 57 | 72 |
+| Styleless | 21 | 0 | 31 | 52 |
+| react-ui | 14 | 4 | 54 | 72 |
 
 Primitive is now fully covered for the in-scope items. Styleless and react-ui are intentionally much further behind — this list is a full "everything a mature design system could have" wishlist (roughly Radix + Chakra + Mantine combined in scope), not a near-term backlog.
 
@@ -61,10 +61,10 @@ Primitive is now fully covered for the in-scope items. Styleless and react-ui ar
 
 ### Button
 - [ ] Button — not built (native `<button>` + `primitives`' `Button` covers the non-stateful case; no styleless wrapper needed unless it grows state)
-- [ ] Toggle — not built
-- [ ] ToggleGroup — not built
+- [x] Toggle — built this session (`aria-pressed`, no hidden native input — not a form field the way `Checkbox`/`Switch` are)
+- [x] ToggleGroup — built this session (`type="single"|"multiple"`, same discriminated-union split as `Accordion`; `role="group"`, not `radiogroup`, even in single mode)
 
-**0/3**
+**2/3**
 
 ### Form
 - [ ] Form
@@ -92,28 +92,28 @@ Primitive is now fully covered for the in-scope items. Styleless and react-ui ar
 ### Navigation
 - [x] Tabs
 - [x] Accordion
-- [ ] Collapsible — not built as its own primitive (Accordion has its own expand/collapse logic inline rather than composing a shared `Collapsible`)
-- [ ] Breadcrumb
+- [x] Collapsible — built this session, as its own standalone primitive (`Accordion` itself hasn't been migrated onto it — a separate, orthogonal change — but the shared primitive the note here previously flagged as missing now exists)
+- [x] Breadcrumb — built this session (`nav`/`ol`/`li` structural composition + `BreadcrumbPage`'s `aria-current="page"`; no state machine, same "almost pure markup" profile as `Progress`/`Spinner`/`Skeleton`)
 - [ ] Pagination
 - [ ] NavigationMenu
-- [ ] Menu
-- [ ] Menubar
-- [ ] ContextMenu
+- [x] Menu — built this session, along with `DropdownMenu` (thin renamed re-export) as its own subpath, not separately tracked in this list
+- [x] Menubar — built this session
+- [x] ContextMenu — built this session
 - [ ] Tree
 - [ ] Stepper
 
-**2/11**
+**7/11**
 
 ### Overlay
 - [x] Dialog
-- [ ] AlertDialog — not built (could compose on top of `Dialog`, not done yet)
+- [x] AlertDialog — built this session, composed on top of `Dialog` exactly as previously flagged: reuses `Dialog`'s root/context/Trigger/Portal/Overlay/Title/Description directly, only `AlertDialogContent` (`role="alertdialog"`, no outside-click dismissal — deliberately no `onPointerDownOutside` prop at all) is a real second implementation
 - [ ] Drawer
 - [x] Popover
 - [x] Tooltip — built this session
 - [ ] HoverCard
 - [ ] Toast
 
-**3/7**
+**4/7**
 
 ### Collections
 - [ ] Listbox
@@ -126,11 +126,11 @@ Primitive is now fully covered for the in-scope items. Styleless and react-ui ar
 **0/6**
 
 ### Feedback
-- [ ] Progress
-- [ ] Spinner
-- [ ] Skeleton
+- [x] Progress — built this session (`Progress`/`ProgressIndicator`, WAI-ARIA Progress Meter pattern, indeterminate via `value={null}`)
+- [x] Spinner — built this session (`role="status"` + visually-hidden label; no visual spin animation at this layer, that's `react-ui`'s job)
+- [x] Skeleton — built this session (`aria-hidden` placeholder; no shimmer at this layer)
 
-**0/3**
+**3/3**
 
 ### Drag & Drop
 - [ ] Draggable
@@ -221,12 +221,12 @@ Primitive is now fully covered for the in-scope items. Styleless and react-ui ar
 ### Feedback
 - [ ] Alert
 - [ ] Toast
-- [ ] Progress
-- [ ] Spinner
-- [ ] Skeleton
+- [x] Progress — built this session (styled wrapper: fill percentage computed from `value`/`max` and applied as an inline `translateX`; indeterminate uses Tailwind's built-in `animate-pulse` rather than a custom sliding-bar `@keyframes`)
+- [x] Spinner — built this session (border-ring + `animate-spin`, both Tailwind-core)
+- [x] Skeleton — built this session (`animate-pulse` fill, default `--radius-box`, override via `className` for other shapes)
 - [ ] EmptyState
 
-**0/6**
+**3/6**
 
 ### Data Display
 - [x] Avatar
@@ -270,6 +270,6 @@ Primitive is now fully covered for the in-scope items. Styleless and react-ui ar
 ## Highest-leverage gaps (if picking what to build next)
 
 1. ~~**react-ui parity wrappers**: `Tabs`, `Checkbox`, `Radio`, `Switch`, `Tooltip`~~ — **done.** All five now have styled `react-ui` wrappers over their existing `styleless` behavior.
-2. **Styleless Menu family**: `Menu` unlocks `DropdownMenu`, `ContextMenu`, `Menubar`, and `Select`/`Combobox` (all of these are usually thin variations on one underlying menu/listbox pattern in real component libraries) — highest reuse-per-component-built ratio of what's left.
-3. **Feedback primitives** (`Progress`, `Spinner`, `Skeleton`): no ARIA state machine needed, almost pure CSS — low effort, currently 0% covered across both `styleless` and `react-ui`.
+2. ~~**Styleless Menu family**: `Menu` unlocks `DropdownMenu`, `ContextMenu`, `Menubar`~~ — **done.** `Menu` built first; `DropdownMenu`/`ContextMenu`/`Menubar` all reuse its `Content`/`Item`/`CheckboxItem`/`RadioGroup`/`RadioItem`/`Separator`/`Label` parts as thin renamed re-exports, with only each one's trigger/root genuinely new. `Select`/`Combobox` remain unbuilt but would follow the same reuse pattern (listbox semantics differ enough from menu semantics that they're not simple re-exports, unlike the three built here).
+3. ~~**Feedback primitives** (`Progress`, `Spinner`, `Skeleton`)~~ — **done.** `Progress` got real ARIA Progress Meter semantics (indeterminate via `value={null}`, `aria-valuetext` via `getValueLabel`); `Spinner`/`Skeleton` turned out to need no styleless-layer state at all beyond `role="status"`/`aria-hidden` respectively, confirming the "almost pure CSS" read — all visual animation (`animate-spin`/`animate-pulse`) is Tailwind-core, no new `@keyframes` added to the project.
 4. Everything else (Form fields, remaining Navigation/Overlay/Collections/Drag-and-Drop in `styleless`; Layout/Typography/Data/Media/Misc in `react-ui`) is queued but not yet started — see the project's task list for the current breakdown.

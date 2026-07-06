@@ -14,5 +14,8 @@ export * from './tabs';
 export * from './checkbox';
 export * from './switch';
 export * from './radio-group';
+export * from './progress';
+export * from './spinner';
+export * from './skeleton';
 export * from './tokens';
 export * from './theme-provider';

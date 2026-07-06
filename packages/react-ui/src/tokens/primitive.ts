@@ -101,6 +101,7 @@ const radius = {
   menu: '2rem',
   popover: '2rem',
   tooltip: '2rem',
+  progress: '2rem',
 } as const;
 
 /**

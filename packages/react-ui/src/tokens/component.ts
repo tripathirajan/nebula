@@ -143,6 +143,29 @@ const radioTokens = {
 } as const;
 
 /**
+ * `trackBg`/`indicatorBg` reuse the same `base-300`/`primary` pairing
+ * `switchTokens`'s track/thumb already does — a progress fill against its
+ * own track isn't a WCAG text-contrast pairing (nothing here is text), same
+ * exemption `separatorTokens`'s divider-on-page-background use already
+ * relies on, so no new `CONTRAST_AUDIT.md` entry is needed.
+ */
+const progressTokens = {
+  trackBg: 'var(--color-base-300)',
+  indicatorBg: 'var(--color-primary)',
+} as const;
+
+/** Same `base-300`/`primary` pairing and rationale as `progressTokens` — a spinner ring isn't text either. */
+const spinnerTokens = {
+  track: 'var(--color-base-300)',
+  indicator: 'var(--color-primary)',
+} as const;
+
+/** A skeleton placeholder is a decorative fill, not text — `base-300` alone (no paired foreground color) is all it needs. */
+const skeletonTokens = {
+  bg: 'var(--color-base-300)',
+} as const;
+
+/**
  * Aggregated per-component token overrides, keyed by component name.
  *
  * Radius/size/border/depth/noise/font tokens don't need an entry here —
@@ -176,6 +199,9 @@ const componentTokens = {
   checkbox: checkboxTokens,
   switch: switchTokens,
   radio: radioTokens,
+  progress: progressTokens,
+  spinner: spinnerTokens,
+  skeleton: skeletonTokens,
 } as const;
 
 export {
@@ -194,4 +220,7 @@ export {
   checkboxTokens,
   switchTokens,
   radioTokens,
+  progressTokens,
+  spinnerTokens,
+  skeletonTokens,
 };
