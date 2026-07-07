@@ -75,6 +75,10 @@
       "types": "./dist/progress/index.d.ts",
       "import": "./dist/progress/index.js"
     },
+    "./circular-progress": {
+      "types": "./dist/circular-progress/index.d.ts",
+      "import": "./dist/circular-progress/index.js"
+    },
     "./spinner": {
       "types": "./dist/spinner/index.d.ts",
       "import": "./dist/spinner/index.js"
@@ -195,6 +199,10 @@
       "types": "./dist/file-upload/index.d.ts",
       "import": "./dist/file-upload/index.js"
     },
+    "./image-upload": {
+      "types": "./dist/image-upload/index.d.ts",
+      "import": "./dist/image-upload/index.js"
+    },
     "./slider": {
       "types": "./dist/slider/index.d.ts",
       "import": "./dist/slider/index.js"
@@ -215,6 +223,18 @@
       "types": "./dist/search-field/index.d.ts",
       "import": "./dist/search-field/index.js"
     },
+    "./email-field": {
+      "types": "./dist/email-field/index.d.ts",
+      "import": "./dist/email-field/index.js"
+    },
+    "./url-field": {
+      "types": "./dist/url-field/index.d.ts",
+      "import": "./dist/url-field/index.js"
+    },
+    "./tel-field": {
+      "types": "./dist/tel-field/index.d.ts",
+      "import": "./dist/tel-field/index.js"
+    },
     "./number-input": {
       "types": "./dist/number-input/index.d.ts",
       "import": "./dist/number-input/index.js"
@@ -230,6 +250,10 @@
     "./toggle-group": {
       "types": "./dist/toggle-group/index.d.ts",
       "import": "./dist/toggle-group/index.js"
+    },
+    "./segmented-control": {
+      "types": "./dist/segmented-control/index.d.ts",
+      "import": "./dist/segmented-control/index.js"
     },
     "./collapsible": {
       "types": "./dist/collapsible/index.d.ts",
@@ -382,6 +406,10 @@
     "./markdown": {
       "types": "./dist/markdown/index.d.ts",
       "import": "./dist/markdown/index.js"
+    },
+    "./empty-state": {
+      "types": "./dist/empty-state/index.d.ts",
+      "import": "./dist/empty-state/index.js"
     },
     "./theme.css": "./src/theme.css",
     "./package.json": "./package.json"

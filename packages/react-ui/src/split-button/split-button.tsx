@@ -1,15 +1,18 @@
 import { cn } from '@nebula/primitives/cn';
-import { Primitive } from '@nebula/primitives/primitive';
+import { SplitButton as StylelessSplitButton } from '@nebula/styleless/split-button';
 import * as React from 'react';
 
-import type { PrimitivePropsWithRef } from '@nebula/primitives/primitive';
+import type { SplitButtonProps as StylelessSplitButtonProps } from '@nebula/styleless/split-button';
 
-type SplitButtonProps = PrimitivePropsWithRef<'div'>;
+type SplitButtonProps = StylelessSplitButtonProps;
 
 /**
  * A primary action button attached to a second, smaller trigger button
  * (typically an `IconButton` chevron opening a `DropdownMenu` of related
- * actions) — the same visual-merge CSS trick `ButtonGroup` uses, just
+ * actions). Wraps `@nebula/styleless`'s `SplitButton` (which already
+ * supplies the `role="group"` structural contract) and adds only the
+ * visual-merge CSS trick `ButtonGroup` also uses — border-radius removal
+ * between adjacent children, `-ml-px`, and focus-visible `z-index` — just
  * without an `orientation` option (a split button is always a horizontal
  * pair). Composition, not a new state machine: wrap a `DropdownMenu`'s
  * `MenuTrigger asChild` around the second button yourself.
@@ -34,11 +37,9 @@ type SplitButtonProps = PrimitivePropsWithRef<'div'>;
  * ```
  */
 const SplitButton = React.forwardRef<HTMLDivElement, SplitButtonProps>((props, forwardedRef) => {
-  const { className, role = 'group', ...rest } = props;
+  const { className, ...rest } = props;
   return (
-    <Primitive
-      as="div"
-      role={role}
+    <StylelessSplitButton
       className={cn(
         'inline-flex [&>*:not(:first-child)]:-ml-px [&>*:not(:first-child)]:rounded-l-none [&>*:not(:last-child)]:rounded-r-none [&>*]:relative [&>*:focus-visible]:z-10',
         className,

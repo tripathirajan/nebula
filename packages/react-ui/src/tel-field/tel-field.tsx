@@ -1,0 +1,30 @@
+import { cn } from '@nebula/primitives/cn';
+import { TelInput as StylelessTelInput } from '@nebula/styleless/tel-input';
+import * as React from 'react';
+
+import { inputClassName } from '../input/input';
+
+import type { TelInputProps as StylelessTelInputProps } from '@nebula/styleless/tel-input';
+
+type TelFieldProps = StylelessTelInputProps;
+
+/**
+ * Styled `type="tel"` `Input` preset — wraps `@nebula/styleless`'s
+ * `TelInput` and reuses `Input`'s exact class recipe (`inputClassName`).
+ *
+ * @example
+ * ```tsx
+ * <TelField name="phone" placeholder="+1 (555) 123-4567" />
+ * ```
+ */
+const TelField = React.forwardRef<HTMLInputElement, TelFieldProps>((props, forwardedRef) => {
+  const { className, ...rest } = props;
+  return (
+    <StylelessTelInput className={cn(inputClassName, className)} {...rest} ref={forwardedRef} />
+  );
+});
+
+TelField.displayName = 'TelField';
+
+export { TelField };
+export type { TelFieldProps };

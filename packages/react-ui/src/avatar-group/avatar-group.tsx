@@ -1,27 +1,22 @@
 import { cn } from '@nebula/primitives/cn';
-import { Primitive } from '@nebula/primitives/primitive';
+import { AvatarGroup as StylelessAvatarGroup } from '@nebula/styleless/avatar-group';
 import * as React from 'react';
 
 import { Avatar } from '../avatar/avatar';
 import { AvatarFallback } from '../avatar/avatar-fallback';
 
-import type { PrimitivePropsWithRef } from '@nebula/primitives/primitive';
+import type { AvatarGroupProps as StylelessAvatarGroupProps } from '@nebula/styleless/avatar-group';
 
-interface AvatarGroupOwnProps {
-  /** Show at most this many `Avatar` children, replacing the rest with a `+N` overflow indicator. Omit to show every child. */
-  max?: number;
-}
-
-type AvatarGroupProps = PrimitivePropsWithRef<'div'> & AvatarGroupOwnProps;
+type AvatarGroupProps = StylelessAvatarGroupProps;
 
 /**
- * Overlaps a row of `Avatar`s (negative margin + a ring in the page
- * background color, so each avatar reads as a distinct circle rather than
- * abutting edges) — purely a layout wrapper, no shared state of its own;
- * `max` is the one behavior, truncating `children` and rendering a `+N`
- * `Avatar`-styled indicator for the rest via a plain `React.Children` slice
- * rather than a registration system, since a static list of `Avatar`
- * children needs nothing fancier.
+ * Styled wrapper around `@nebula/styleless`'s `AvatarGroup` — the `max`
+ * truncation math comes from there unchanged. This layer adds the overlap
+ * treatment (negative margin + a ring in the page background color, so each
+ * avatar reads as a distinct circle rather than abutting edges) and supplies
+ * `renderOverflow` with this package's own styled `Avatar`/`AvatarFallback`
+ * so the `+N` badge matches the rest of the row instead of styleless's
+ * unstyled default.
  *
  * @example
  * ```tsx
@@ -34,25 +29,21 @@ type AvatarGroupProps = PrimitivePropsWithRef<'div'> & AvatarGroupOwnProps;
  * ```
  */
 const AvatarGroup = React.forwardRef<HTMLDivElement, AvatarGroupProps>((props, forwardedRef) => {
-  const { className, max, children, ...rest } = props;
-  const items = React.Children.toArray(children);
-  const visible = max !== undefined ? items.slice(0, max) : items;
-  const overflow = max !== undefined ? items.length - visible.length : 0;
-
+  const { className, renderOverflow, ...rest } = props;
   return (
-    <Primitive
-      as="div"
+    <StylelessAvatarGroup
       className={cn('flex -space-x-3 [&>*]:ring-2 [&>*]:ring-[var(--avatar-group-ring)]', className)}
+      renderOverflow={
+        renderOverflow ??
+        ((count) => (
+          <Avatar>
+            <AvatarFallback>+{count}</AvatarFallback>
+          </Avatar>
+        ))
+      }
       {...rest}
       ref={forwardedRef}
-    >
-      {visible}
-      {overflow > 0 ? (
-        <Avatar>
-          <AvatarFallback>+{overflow}</AvatarFallback>
-        </Avatar>
-      ) : null}
-    </Primitive>
+    />
   );
 });
 

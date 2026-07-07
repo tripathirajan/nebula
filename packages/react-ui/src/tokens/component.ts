@@ -492,6 +492,13 @@ const timelineTokens = {
   descriptionText: 'var(--color-base-content)',
 } as const;
 
+/** `icon` is muted (`base-content` at reduced opacity via the component's own `className`, same as `CardDescription`) rather than a dedicated dim semantic token — an empty-state glyph is decorative, not a second text color needing its own contrast audit entry. */
+const emptyStateTokens = {
+  icon: 'var(--color-base-content)',
+  titleText: 'var(--color-base-content)',
+  descriptionText: 'var(--color-base-content)',
+} as const;
+
 /** Same `base-100`/`base-300`/`base-content` triple `selectTokens` uses for its trigger/content pair — a multi-select trigger/popup reads as the same kind of form field, just with a different summary-text/indicator shape (see `MultiSelectTrigger`/`MultiSelectItem`'s own doc comments). */
 const multiSelectTokens = {
   triggerBg: 'var(--color-base-100)',
@@ -595,6 +602,7 @@ const componentTokens = {
   timeline: timelineTokens,
   multiSelect: multiSelectTokens,
   codeBlock: codeBlockTokens,
+  emptyState: emptyStateTokens,
 } as const;
 
 export {
@@ -661,4 +669,5 @@ export {
   timelineTokens,
   multiSelectTokens,
   codeBlockTokens,
+  emptyStateTokens,
 };

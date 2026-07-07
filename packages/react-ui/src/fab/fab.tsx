@@ -1,9 +1,9 @@
-import { Button as PrimitiveButton } from '@nebula/primitives/button';
 import { cn } from '@nebula/primitives/cn';
+import { FAB as StylelessFAB } from '@nebula/styleless/fab';
 import { cva } from 'class-variance-authority';
 import * as React from 'react';
 
-import type { ButtonProps as PrimitiveButtonProps } from '@nebula/primitives/button';
+import type { FABProps as StylelessFABProps } from '@nebula/styleless/fab';
 import type { VariantProps } from 'class-variance-authority';
 
 /**
@@ -36,19 +36,15 @@ const fabVariants = cva(
   },
 );
 
-type FABProps = Omit<PrimitiveButtonProps, 'children'> &
-  VariantProps<typeof fabVariants> & {
-    /** A single icon — no visible text, so `aria-label` is required. */
-    children: React.ReactNode;
-    'aria-label': string;
-  };
+type FABProps = StylelessFABProps & VariantProps<typeof fabVariants>;
 
 /**
- * Floating Action Button — a circular, elevated icon button for a page's
- * single most prominent action. Deliberately does not apply `fixed`
- * positioning itself (position is a page-layout concern the consumer owns,
- * same "don't hardcode placement" rule `Sidebar`'s `side` prop follows) —
- * pair with `className="fixed bottom-6 right-6"` at the call site.
+ * Floating Action Button — wraps `@nebula/styleless`'s `FAB` (required
+ * `aria-label`, `Button`'s `loading` semantics) and adds the circular,
+ * elevated styling. Deliberately does not apply `fixed` positioning itself
+ * (position is a page-layout concern the consumer owns, same "don't
+ * hardcode placement" rule `Sidebar`'s `side` prop follows) — pair with
+ * `className="fixed bottom-6 right-6"` at the call site.
  *
  * @example
  * ```tsx
@@ -58,12 +54,11 @@ type FABProps = Omit<PrimitiveButtonProps, 'children'> &
  * ```
  */
 const FAB = React.forwardRef<HTMLButtonElement, FABProps>((props, forwardedRef) => {
-  const { className, variant, size, disabled, ...buttonProps } = props;
+  const { className, variant, size, ...buttonProps } = props;
 
   return (
-    <PrimitiveButton
+    <StylelessFAB
       className={cn(fabVariants({ variant, size }), className)}
-      disabled={disabled}
       {...buttonProps}
       ref={forwardedRef}
     />

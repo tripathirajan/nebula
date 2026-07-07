@@ -1,25 +1,15 @@
 import { cn } from '@nebula/primitives/cn';
-import { Primitive } from '@nebula/primitives/primitive';
+import { AvatarFallback as StylelessAvatarFallback } from '@nebula/styleless/avatar';
 import * as React from 'react';
 
-import { useAvatarContext } from './avatar-context';
+import type { AvatarFallbackProps as StylelessAvatarFallbackProps } from '@nebula/styleless/avatar';
 
-import type { PrimitivePropsWithRef } from '@nebula/primitives/primitive';
-
-const AVATAR_FALLBACK_NAME = 'AvatarFallback';
-
-interface AvatarFallbackOwnProps {
-  /** Delay before rendering, so a fast-loading image doesn't flash the fallback first. */
-  delayMs?: number;
-}
-
-type AvatarFallbackProps = PrimitivePropsWithRef<'span'> & AvatarFallbackOwnProps;
+type AvatarFallbackProps = StylelessAvatarFallbackProps;
 
 /**
- * Renders (usually initials, or a generic icon) whenever `AvatarImage`
- * hasn't successfully loaded yet — covers the no-`src`, still-loading, and
- * errored cases alike, so a consumer never needs to branch on *why* the
- * image isn't showing.
+ * Styled wrapper around `@nebula/styleless`'s `AvatarFallback` — the
+ * loading-status check and `delayMs` timer come from there unchanged. This
+ * layer adds only the centered-text visual treatment.
  *
  * @example
  * ```tsx
@@ -28,21 +18,9 @@ type AvatarFallbackProps = PrimitivePropsWithRef<'span'> & AvatarFallbackOwnProp
  */
 const AvatarFallback = React.forwardRef<HTMLSpanElement, AvatarFallbackProps>(
   (props, forwardedRef) => {
-    const { className, delayMs, ...rest } = props;
-    const { imageLoadingStatus } = useAvatarContext(AVATAR_FALLBACK_NAME);
-    const [canRender, setCanRender] = React.useState(delayMs === undefined);
-
-    React.useEffect(() => {
-      if (delayMs === undefined) return;
-      const timer = window.setTimeout(() => setCanRender(true), delayMs);
-      return () => window.clearTimeout(timer);
-    }, [delayMs]);
-
-    if (!canRender || imageLoadingStatus === 'loaded') return null;
-
+    const { className, ...rest } = props;
     return (
-      <Primitive
-        as="span"
+      <StylelessAvatarFallback
         className={cn(
           'flex h-full w-full items-center justify-center bg-[var(--avatar-bg)] text-[var(--avatar-text)] text-sm font-medium',
           className,
@@ -54,7 +32,7 @@ const AvatarFallback = React.forwardRef<HTMLSpanElement, AvatarFallbackProps>(
   },
 );
 
-AvatarFallback.displayName = AVATAR_FALLBACK_NAME;
+AvatarFallback.displayName = 'AvatarFallback';
 
 export { AvatarFallback };
 export type { AvatarFallbackProps };

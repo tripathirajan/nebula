@@ -17,6 +17,58 @@
       "types": "./dist/button/index.d.ts",
       "import": "./dist/button/index.js"
     },
+    "./icon-button": {
+      "types": "./dist/icon-button/index.d.ts",
+      "import": "./dist/icon-button/index.js"
+    },
+    "./fab": {
+      "types": "./dist/fab/index.d.ts",
+      "import": "./dist/fab/index.js"
+    },
+    "./split-button": {
+      "types": "./dist/split-button/index.d.ts",
+      "import": "./dist/split-button/index.js"
+    },
+    "./input": {
+      "types": "./dist/input/index.d.ts",
+      "import": "./dist/input/index.js"
+    },
+    "./textarea": {
+      "types": "./dist/textarea/index.d.ts",
+      "import": "./dist/textarea/index.js"
+    },
+    "./password-input": {
+      "types": "./dist/password-input/index.d.ts",
+      "import": "./dist/password-input/index.js"
+    },
+    "./search-input": {
+      "types": "./dist/search-input/index.d.ts",
+      "import": "./dist/search-input/index.js"
+    },
+    "./email-input": {
+      "types": "./dist/email-input/index.d.ts",
+      "import": "./dist/email-input/index.js"
+    },
+    "./url-input": {
+      "types": "./dist/url-input/index.d.ts",
+      "import": "./dist/url-input/index.js"
+    },
+    "./tel-input": {
+      "types": "./dist/tel-input/index.d.ts",
+      "import": "./dist/tel-input/index.js"
+    },
+    "./image-preview": {
+      "types": "./dist/image-preview/index.d.ts",
+      "import": "./dist/image-preview/index.js"
+    },
+    "./avatar": {
+      "types": "./dist/avatar/index.d.ts",
+      "import": "./dist/avatar/index.js"
+    },
+    "./avatar-group": {
+      "types": "./dist/avatar-group/index.d.ts",
+      "import": "./dist/avatar-group/index.js"
+    },
     "./package.json": "./package.json"
   },
   "files": [

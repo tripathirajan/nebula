@@ -1,56 +1,31 @@
 import { cn } from '@nebula/primitives/cn';
-import { Primitive } from '@nebula/primitives/primitive';
+import { AvatarImage as StylelessAvatarImage } from '@nebula/styleless/avatar';
 import * as React from 'react';
 
-import { useAvatarContext } from './avatar-context';
+import type { AvatarImageProps as StylelessAvatarImageProps } from '@nebula/styleless/avatar';
 
-import type { PrimitivePropsWithRef } from '@nebula/primitives/primitive';
-
-const AVATAR_IMAGE_NAME = 'AvatarImage';
-
-type AvatarImageProps = PrimitivePropsWithRef<'img'>;
+type AvatarImageProps = StylelessAvatarImageProps;
 
 /**
- * Renders an `img`, reporting its load/error state up to `Avatar` so
- * `AvatarFallback` knows whether to show itself — this component never
- * renders the fallback itself, it only ever renders (or doesn't render) the
- * `img` tag, since a broken `<img>` left in the DOM shows the browser's
- * broken-image icon even when a sibling `AvatarFallback` is meant to cover
- * for it.
+ * Styled wrapper around `@nebula/styleless`'s `AvatarImage` — the
+ * load/error reporting to `Avatar`'s context, and hiding the `img` entirely
+ * on error, come from there unchanged. This layer adds only the fill/crop
+ * treatment.
  */
 const AvatarImage = React.forwardRef<HTMLImageElement, AvatarImageProps>(
   (props, forwardedRef) => {
-    const { className, src, onLoad, onError, ...rest } = props;
-    const context = useAvatarContext(AVATAR_IMAGE_NAME);
-    const { onImageLoadingStatusChange } = context;
-
-    React.useEffect(() => {
-      onImageLoadingStatusChange(src ? 'loading' : 'error');
-    }, [src, onImageLoadingStatusChange]);
-
-    if (context.imageLoadingStatus === 'error') return null;
-
+    const { className, ...rest } = props;
     return (
-      <Primitive
-        as="img"
-        src={src}
+      <StylelessAvatarImage
         className={cn('aspect-square h-full w-full object-cover', className)}
         {...rest}
         ref={forwardedRef}
-        onLoad={(event) => {
-          onImageLoadingStatusChange('loaded');
-          onLoad?.(event);
-        }}
-        onError={(event) => {
-          onImageLoadingStatusChange('error');
-          onError?.(event);
-        }}
       />
     );
   },
 );
 
-AvatarImage.displayName = AVATAR_IMAGE_NAME;
+AvatarImage.displayName = 'AvatarImage';
 
 export { AvatarImage };
 export type { AvatarImageProps };

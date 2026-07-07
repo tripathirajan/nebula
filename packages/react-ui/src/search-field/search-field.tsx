@@ -1,18 +1,20 @@
 import { cn } from '@nebula/primitives/cn';
+import { SearchInput as StylelessSearchInput } from '@nebula/styleless/search-input';
 import * as React from 'react';
 
-import { Input } from '../input/input';
+import { inputClassName } from '../input/input';
 
-import type { InputProps } from '../input/input';
+import type { SearchInputProps as StylelessSearchInputProps } from '@nebula/styleless/search-input';
 
-type SearchFieldProps = Omit<InputProps, 'type'>;
+type SearchFieldProps = StylelessSearchInputProps;
 
 /**
- * An `Input` preset to `type="search"` with a built-in leading search icon —
- * like `PasswordField`, a `react-ui`-layer-only convenience (no
- * `@nebula/headless` counterpart), since a native `type="search"` input
- * already gives the platform's own clear-button/Escape-to-clear affordance
- * for free, with nothing left for this layer to add behaviorally.
+ * Wraps `@nebula/styleless`'s `SearchInput` (the `type="search"` preset)
+ * and adds a leading search icon — like `PasswordField`, a `react-ui`-
+ * layer-only visual addition (no `@nebula/headless` counterpart), since a
+ * native `type="search"` input already gives the platform's own clear-
+ * button/Escape-to-clear affordance for free, with nothing left for a
+ * lower layer to add behaviorally.
  *
  * @example
  * ```tsx
@@ -36,7 +38,11 @@ const SearchField = React.forwardRef<HTMLInputElement, SearchFieldProps>((props,
         <circle cx={11} cy={11} r={8} />
         <path d="m21 21-4.3-4.3" />
       </svg>
-      <Input type="search" className={cn('pl-9', className)} {...rest} ref={forwardedRef} />
+      <StylelessSearchInput
+        className={cn(inputClassName, 'pl-9', className)}
+        {...rest}
+        ref={forwardedRef}
+      />
     </div>
   );
 });

@@ -1,11 +1,11 @@
-import { Button as PrimitiveButton } from '@nebula/primitives/button';
 import { cn } from '@nebula/primitives/cn';
+import { IconButton as StylelessIconButton } from '@nebula/styleless/icon-button';
 import { cva } from 'class-variance-authority';
 import * as React from 'react';
 
 import { buttonVariants } from '../button/button';
 
-import type { ButtonProps as PrimitiveButtonProps } from '@nebula/primitives/button';
+import type { IconButtonProps as StylelessIconButtonProps } from '@nebula/styleless/icon-button';
 import type { VariantProps } from 'class-variance-authority';
 
 const iconButtonSizeVariants = cva('', {
@@ -21,25 +21,15 @@ const iconButtonSizeVariants = cva('', {
   },
 });
 
-interface IconButtonOwnProps {
-  loading?: boolean;
-}
-
-type IconButtonProps = Omit<PrimitiveButtonProps, 'children'> &
-  VariantProps<typeof buttonVariants> &
-  IconButtonOwnProps & {
-    /** A single icon — no visible text, so `aria-label` is required to name the button for assistive tech. */
-    children: React.ReactNode;
-    'aria-label': string;
-  };
+type IconButtonProps = StylelessIconButtonProps & VariantProps<typeof buttonVariants>;
 
 /**
- * A square, icon-only `Button` — reuses this package's own `buttonVariants`
- * recipe for color/border/focus-ring so it always matches `Button`'s
- * theming exactly, then overrides just the size classes to be square
+ * A square, icon-only `Button` — wraps `@nebula/styleless`'s `IconButton`
+ * (which already enforces the required-`aria-label` contract and carries
+ * `Button`'s `loading` semantics), then reuses this package's own
+ * `buttonVariants` recipe for color/border/focus-ring so it always matches
+ * `Button`'s theming exactly, overriding just the size classes to be square
  * (`h-*` == `w-*`, `p-0`) instead of `Button`'s padded-with-text shape.
- * `aria-label` is a required prop (not just documented convention) since a
- * bare icon has no accessible name of its own.
  *
  * @example
  * ```tsx
@@ -49,14 +39,11 @@ type IconButtonProps = Omit<PrimitiveButtonProps, 'children'> &
  * ```
  */
 const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>((props, forwardedRef) => {
-  const { className, variant, size, loading = false, disabled, ...buttonProps } = props;
+  const { className, variant, size, ...buttonProps } = props;
 
   return (
-    <PrimitiveButton
+    <StylelessIconButton
       className={cn(buttonVariants({ variant, size }), iconButtonSizeVariants({ size }), className)}
-      disabled={disabled || loading}
-      aria-busy={loading || undefined}
-      data-loading={loading ? '' : undefined}
       {...buttonProps}
       ref={forwardedRef}
     />

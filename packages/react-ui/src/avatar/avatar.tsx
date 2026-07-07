@@ -1,20 +1,18 @@
 import { cn } from '@nebula/primitives/cn';
-import { Primitive } from '@nebula/primitives/primitive';
+import { Avatar as StylelessAvatar } from '@nebula/styleless/avatar';
 import * as React from 'react';
 
-import { AvatarProvider } from './avatar-context';
+import type { AvatarProps as StylelessAvatarProps } from '@nebula/styleless/avatar';
 
-import type { ImageLoadingStatus } from './avatar-context';
-import type { PrimitivePropsWithRef } from '@nebula/primitives/primitive';
-
-type AvatarProps = PrimitivePropsWithRef<'span'>;
+type AvatarProps = StylelessAvatarProps;
 
 /**
- * Root — tracks whether `AvatarImage` has loaded, errored, or is still
- * loading, so `AvatarFallback` knows when to render. Split into three
- * components (`Avatar`/`AvatarImage`/`AvatarFallback`) rather than one
- * `src`+`fallback`-prop component so the fallback can be arbitrary markup
- * (initials, an icon, a skeleton) instead of a single `ReactNode` prop.
+ * Styled wrapper around `@nebula/styleless`'s `Avatar` — the image
+ * load/error tracking that lets `AvatarFallback` know when to render comes
+ * from there unchanged (moved down this session, since it's reusable
+ * non-visual state with no styling opinion, same bucket `PasswordInput`'s
+ * visibility toggle already lives in). This layer only adds the circular
+ * frame (`--avatar-bg`/`-text`, fixed 40px size, `overflow-hidden`).
  *
  * @example
  * ```tsx
@@ -26,23 +24,15 @@ type AvatarProps = PrimitivePropsWithRef<'span'>;
  */
 const Avatar = React.forwardRef<HTMLSpanElement, AvatarProps>((props, forwardedRef) => {
   const { className, ...rest } = props;
-  const [imageLoadingStatus, setImageLoadingStatus] = React.useState<ImageLoadingStatus>('idle');
-
   return (
-    <AvatarProvider
-      imageLoadingStatus={imageLoadingStatus}
-      onImageLoadingStatusChange={setImageLoadingStatus}
-    >
-      <Primitive
-        as="span"
-        className={cn(
-          'relative flex h-10 w-10 shrink-0 overflow-hidden rounded-[var(--radius-avatar)] bg-[var(--avatar-bg)] text-[var(--avatar-text)]',
-          className,
-        )}
-        {...rest}
-        ref={forwardedRef}
-      />
-    </AvatarProvider>
+    <StylelessAvatar
+      className={cn(
+        'relative flex h-10 w-10 shrink-0 overflow-hidden rounded-[var(--radius-avatar)] bg-[var(--avatar-bg)] text-[var(--avatar-text)]',
+        className,
+      )}
+      {...rest}
+      ref={forwardedRef}
+    />
   );
 });
 
