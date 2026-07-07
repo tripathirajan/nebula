@@ -18,7 +18,7 @@ type DraggableProps = PrimitivePropsWithRef<'div'> & DraggableOwnProps;
 /**
  * Makes its content draggable via the native HTML5 Drag and Drop API
  * (`draggable`, `dragstart`/`dragend`) — built directly in `react-ui`, no
- * `@nebula/styleless` layer underneath (project owner decision, see
+ * `@nebula/headless` layer underneath (project owner decision, see
  * `AGENTS.md`'s `react-ui` row): drag-and-drop *is* its own behavior, but
  * the native API it's built on has no ARIA semantics of its own to
  * decouple from styling the way `Dialog`/`Menu`/etc. do.

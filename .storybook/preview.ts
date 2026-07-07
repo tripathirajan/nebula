@@ -17,7 +17,7 @@ const preview: Preview = {
     },
     options: {
       storySort: {
-        order: ['Primitives', 'Styleless', 'React UI', 'Blocks'],
+        order: ['Primitives', 'Headless', 'Styleless', 'React UI', 'Blocks'],
       },
     },
   },

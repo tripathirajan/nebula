@@ -1,10 +1,10 @@
 
-import { Button as PrimitiveButton } from '@nebula/primitives/button';
 import { cn } from '@nebula/primitives/cn';
+import { Button as StylelessButton } from '@nebula/styleless/button';
 import { cva } from 'class-variance-authority';
 import * as React from 'react';
 
-import type { ButtonProps as PrimitiveButtonProps } from '@nebula/primitives/button';
+import type { ButtonProps as StylelessButtonProps } from '@nebula/styleless/button';
 import type { VariantProps } from 'class-variance-authority';
 
 /**
@@ -54,23 +54,17 @@ const buttonVariants = cva(
   },
 );
 
-interface ButtonProps extends PrimitiveButtonProps, VariantProps<typeof buttonVariants> {
-  /**
-   * Shows a busy state (`aria-busy`, `data-loading`) and disables the
-   * button. No spinner icon is rendered here — style `[data-loading]` or
-   * compose with a `Spinner` once that primitive exists; keeping this
-   * component free of an opinion on the icon.
-   */
-  loading?: boolean;
-}
+type ButtonProps = StylelessButtonProps & VariantProps<typeof buttonVariants>;
 
 /**
- * Styled `Button` — the `ui` layer's job is purely visual, so this wraps
- * `@nebula/primitives`' unstyled `Button` (which already gives `asChild`
- * support and the `type="button"` default) rather than reaching for
- * `Primitive` directly, per the layering in
- * `component-library-architecture.md` §2: `ui` builds on `primitives`, not
- * around it.
+ * Styled `Button` — the `react-ui` layer's job is purely visual, so this
+ * wraps `@nebula/styleless`'s `Button` (which already gives `asChild`
+ * support, the `type="button"` default, and real `loading` semantics —
+ * `aria-busy`/`data-loading`/forced-`disabled`) rather than reaching for
+ * `@nebula/primitives` directly, per the layering in
+ * `component-library-architecture.md` §2: `react-ui` builds on `styleless`,
+ * not around it. This file's own job is exactly one thing: turning
+ * `variant`/`size` into Tailwind classes via `buttonVariants`.
  *
  * @example
  * ```tsx
@@ -80,14 +74,11 @@ interface ButtonProps extends PrimitiveButtonProps, VariantProps<typeof buttonVa
  * ```
  */
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>((props, forwardedRef) => {
-  const { className, variant, size, loading = false, disabled, ...buttonProps } = props;
+  const { className, variant, size, ...buttonProps } = props;
 
   return (
-    <PrimitiveButton
+    <StylelessButton
       className={cn(buttonVariants({ variant, size }), className)}
-      disabled={disabled || loading}
-      aria-busy={loading || undefined}
-      data-loading={loading ? '' : undefined}
       {...buttonProps}
       ref={forwardedRef}
     />

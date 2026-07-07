@@ -1,17 +1,17 @@
+import { SelectTrigger as HeadlessSelectTrigger } from '@nebula/headless/select';
 import { cn } from '@nebula/primitives/cn';
-import { SelectTrigger as StylelessSelectTrigger } from '@nebula/styleless/select';
 import * as React from 'react';
 
-import type { SelectTriggerProps as StylelessSelectTriggerProps } from '@nebula/styleless/select';
+import type { SelectTriggerProps as HeadlessSelectTriggerProps } from '@nebula/headless/select';
 
-type SelectTriggerProps = StylelessSelectTriggerProps;
+type SelectTriggerProps = HeadlessSelectTriggerProps;
 
 /** Styled like `Input` (same border/bg/text triple) with a built-in chevron that rotates on `data-state=open` — reads as a form field, since a `Select` trigger fills the same visual role an `<input>`/native `<select>` would. */
 const SelectTrigger = React.forwardRef<HTMLButtonElement, SelectTriggerProps>(
   (props, forwardedRef) => {
     const { className, children, ...rest } = props;
     return (
-      <StylelessSelectTrigger
+      <HeadlessSelectTrigger
         className={cn(
           'group flex w-full items-center justify-between gap-2 rounded-[var(--radius-field)] border border-[var(--select-trigger-border)] bg-[var(--select-trigger-bg)] px-3 py-2 text-sm text-[var(--select-trigger-text)] outline-none focus-visible:ring-2 focus-visible:ring-[var(--select-trigger-text)] disabled:cursor-not-allowed disabled:opacity-50',
           className,
@@ -32,7 +32,7 @@ const SelectTrigger = React.forwardRef<HTMLButtonElement, SelectTriggerProps>(
         >
           <path d="m6 9 6 6 6-6" />
         </svg>
-      </StylelessSelectTrigger>
+      </HeadlessSelectTrigger>
     );
   },
 );

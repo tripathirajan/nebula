@@ -23,7 +23,7 @@ interface RovingFocusGroupProps extends PrimitivePropsWithRef<'div'> {
  * Tab stop (`tabIndex={0}`) at a time — everyone else is `tabIndex={-1}` —
  * and arrow keys move which item that is. Wrap a group of `FocusItem`s in
  * this to get that behavior generically instead of re-implementing it per
- * component (see `@nebula/styleless`'s `Tabs`, which currently hand-rolls an
+ * component (see `@nebula/headless`'s `Tabs`, which currently hand-rolls an
  * equivalent of this and is a candidate to migrate onto it).
  *
  * @example

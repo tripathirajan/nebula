@@ -16,7 +16,7 @@ function DemoGroup() {
 }
 
 describe('RadioGroup (ui)', () => {
-  it('renders the styleless behavior unchanged (selects on click)', () => {
+  it('renders the headless behavior unchanged (selects on click)', () => {
     render(<DemoGroup />);
     const compact = screen.getByRole('radio', { name: 'Compact' });
 

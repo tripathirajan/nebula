@@ -5,7 +5,7 @@ import { axe } from 'vitest-axe';
 import { Switch } from './switch';
 
 describe('Switch (ui)', () => {
-  it('renders the styleless behavior unchanged (toggles on click)', () => {
+  it('renders the headless behavior unchanged (toggles on click)', () => {
     render(<Switch defaultChecked={false} aria-label="Enable notifications" />);
     const toggle = screen.getByRole('switch');
     expect(toggle).toHaveAttribute('aria-checked', 'false');

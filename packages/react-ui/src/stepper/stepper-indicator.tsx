@@ -1,10 +1,10 @@
+import { StepperIndicator as HeadlessStepperIndicator } from '@nebula/headless/stepper';
 import { cn } from '@nebula/primitives/cn';
-import { StepperIndicator as StylelessStepperIndicator } from '@nebula/styleless/stepper';
 import * as React from 'react';
 
-import type { StepperIndicatorProps as StylelessStepperIndicatorProps } from '@nebula/styleless/stepper';
+import type { StepperIndicatorProps as HeadlessStepperIndicatorProps } from '@nebula/headless/stepper';
 
-type StepperIndicatorProps = StylelessStepperIndicatorProps;
+type StepperIndicatorProps = HeadlessStepperIndicatorProps;
 
 /**
  * A small circle badge — `upcoming` reads `--stepper-indicator-bg`/`-text`,
@@ -17,7 +17,7 @@ const StepperIndicator = React.forwardRef<HTMLSpanElement, StepperIndicatorProps
   (props, forwardedRef) => {
     const { className, ...rest } = props;
     return (
-      <StylelessStepperIndicator
+      <HeadlessStepperIndicator
         className={cn(
           'flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[var(--stepper-indicator-bg)] text-sm font-medium text-[var(--stepper-indicator-text)] data-[state=complete]:bg-[var(--stepper-complete-indicator-bg)] data-[state=complete]:text-[var(--stepper-complete-indicator-text)] data-[state=current]:bg-[var(--stepper-active-indicator-bg)] data-[state=current]:text-[var(--stepper-active-indicator-text)]',
           className,

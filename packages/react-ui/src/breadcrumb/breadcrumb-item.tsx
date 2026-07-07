@@ -1,16 +1,16 @@
+import { BreadcrumbItem as HeadlessBreadcrumbItem } from '@nebula/headless/breadcrumb';
 import { cn } from '@nebula/primitives/cn';
-import { BreadcrumbItem as StylelessBreadcrumbItem } from '@nebula/styleless/breadcrumb';
 import * as React from 'react';
 
-import type { BreadcrumbItemProps as StylelessBreadcrumbItemProps } from '@nebula/styleless/breadcrumb';
+import type { BreadcrumbItemProps as HeadlessBreadcrumbItemProps } from '@nebula/headless/breadcrumb';
 
-type BreadcrumbItemProps = StylelessBreadcrumbItemProps;
+type BreadcrumbItemProps = HeadlessBreadcrumbItemProps;
 
 const BreadcrumbItem = React.forwardRef<HTMLLIElement, BreadcrumbItemProps>(
   (props, forwardedRef) => {
     const { className, ...rest } = props;
     return (
-      <StylelessBreadcrumbItem
+      <HeadlessBreadcrumbItem
         className={cn('inline-flex items-center gap-1.5', className)}
         {...rest}
         ref={forwardedRef}

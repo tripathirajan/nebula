@@ -9,9 +9,9 @@ import type { TextareaProps as PrimitiveTextareaProps } from '@nebula/primitives
  * (which already gives `invalid` -> `aria-invalid` wiring, ref forwarding,
  * and the optional `autoResize` behavior) the same way this package's
  * `Input` wraps `@nebula/primitives`' `Input`; there's no separate
- * `@nebula/styleless` layer for this the way most other form fields have,
- * mirroring how `styleless` itself has no `Textarea` (see `AGENTS.md`'s
- * `packages/styleless` row).
+ * `@nebula/headless` layer for this the way most other form fields have,
+ * mirroring how `headless` itself has no `Textarea` (see `AGENTS.md`'s
+ * `packages/headless` row).
  *
  * @example
  * ```tsx

@@ -8,7 +8,7 @@ type BlockquoteProps = PrimitivePropsWithRef<'blockquote'>;
 
 /**
  * A quoted passage — purely presentational, no `@nebula/primitives`/
- * `@nebula/styleless` counterpart underneath (unlike `Text`/`Heading`/
+ * `@nebula/headless` counterpart underneath (unlike `Text`/`Heading`/
  * `Code`, which wrap an existing unstyled primitive), same "thin `cn()`
  * wrapper directly around `Primitive`" treatment this session's `Header`/
  * `Footer`/etc. use — there was nowhere else in the layer stack this

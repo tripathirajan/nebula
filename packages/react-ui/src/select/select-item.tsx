@@ -1,16 +1,16 @@
+import { SelectItem as HeadlessSelectItem } from '@nebula/headless/select';
 import { cn } from '@nebula/primitives/cn';
-import { SelectItem as StylelessSelectItem } from '@nebula/styleless/select';
 import * as React from 'react';
 
-import type { SelectItemProps as StylelessSelectItemProps } from '@nebula/styleless/select';
+import type { SelectItemProps as HeadlessSelectItemProps } from '@nebula/headless/select';
 
-type SelectItemProps = StylelessSelectItemProps;
+type SelectItemProps = HeadlessSelectItemProps;
 
 /** A built-in checkmark appears at `data-state=selected` — reads real DOM focus (`FocusItem`'s roving tabindex), not a virtual highlight the way `Command`'s items do, so this styles off `:focus-visible` rather than a `data-highlighted` attribute. */
 const SelectItem = React.forwardRef<HTMLDivElement, SelectItemProps>((props, forwardedRef) => {
   const { className, children, ...rest } = props;
   return (
-    <StylelessSelectItem
+    <HeadlessSelectItem
       className={cn(
         'group relative flex cursor-pointer select-none items-center rounded-[var(--radius-selector)] py-1.5 pl-7 pr-2 text-sm outline-none focus-visible:bg-[var(--select-item-highlighted-bg)] data-[disabled]:cursor-not-allowed data-[disabled]:opacity-50',
         className,
@@ -31,7 +31,7 @@ const SelectItem = React.forwardRef<HTMLDivElement, SelectItemProps>((props, for
         <path d="M20 6 9 17l-5-5" />
       </svg>
       {children}
-    </StylelessSelectItem>
+    </HeadlessSelectItem>
   );
 });
 

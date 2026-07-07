@@ -37,7 +37,7 @@ interface Virtualizer {
  * List virtualization — computes which of `count` items actually fall (plus
  * `overscan`) inside the scroll element's visible window, so a consumer only
  * renders those instead of the full list. Deliberately a plain hook, not a
- * `styleless`/`react-ui` component: unlike everything else in this project,
+ * `headless`/`react-ui` component: unlike everything else in this project,
  * windowing math has no ARIA semantics of its own to separate from styling —
  * it's the same "just state, no behavior worth a compound component" call
  * this project made for `useControllableState` (see project owner decision

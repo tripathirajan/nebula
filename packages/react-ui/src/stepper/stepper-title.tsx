@@ -1,17 +1,17 @@
+import { StepperTitle as HeadlessStepperTitle } from '@nebula/headless/stepper';
 import { cn } from '@nebula/primitives/cn';
-import { StepperTitle as StylelessStepperTitle } from '@nebula/styleless/stepper';
 import * as React from 'react';
 
-import type { StepperTitleProps as StylelessStepperTitleProps } from '@nebula/styleless/stepper';
+import type { StepperTitleProps as HeadlessStepperTitleProps } from '@nebula/headless/stepper';
 
-type StepperTitleProps = StylelessStepperTitleProps;
+type StepperTitleProps = HeadlessStepperTitleProps;
 
 /** The `current` step's title is bolded so the active step reads clearly at a glance. */
 const StepperTitle = React.forwardRef<HTMLSpanElement, StepperTitleProps>(
   (props, forwardedRef) => {
     const { className, ...rest } = props;
     return (
-      <StylelessStepperTitle
+      <HeadlessStepperTitle
         className={cn(
           'text-sm text-[var(--stepper-text)] data-[state=current]:font-semibold',
           className,

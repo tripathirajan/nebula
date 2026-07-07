@@ -1,7 +1,7 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    // See packages/styleless/tsconfig.typecheck.json for why `paths` is
+    // See packages/headless/tsconfig.typecheck.json for why `paths` is
     // cleared here — same rootDir violation (TS6059/TS6307) that
     // tsconfig.build.json already works around for the build pass, applied
     // to typecheck too. Safe because nx.json's `typecheck: { dependsOn:

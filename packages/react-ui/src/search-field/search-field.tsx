@@ -10,7 +10,7 @@ type SearchFieldProps = Omit<InputProps, 'type'>;
 /**
  * An `Input` preset to `type="search"` with a built-in leading search icon —
  * like `PasswordField`, a `react-ui`-layer-only convenience (no
- * `@nebula/styleless` counterpart), since a native `type="search"` input
+ * `@nebula/headless` counterpart), since a native `type="search"` input
  * already gives the platform's own clear-button/Escape-to-clear affordance
  * for free, with nothing left for this layer to add behaviorally.
  *

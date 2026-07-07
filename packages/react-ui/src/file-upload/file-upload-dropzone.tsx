@@ -1,17 +1,17 @@
+import { FileUploadDropzone as HeadlessFileUploadDropzone } from '@nebula/headless/file-upload';
 import { cn } from '@nebula/primitives/cn';
-import { FileUploadDropzone as StylelessFileUploadDropzone } from '@nebula/styleless/file-upload';
 import * as React from 'react';
 
-import type { FileUploadDropzoneProps as StylelessFileUploadDropzoneProps } from '@nebula/styleless/file-upload';
+import type { FileUploadDropzoneProps as HeadlessFileUploadDropzoneProps } from '@nebula/headless/file-upload';
 
-type FileUploadDropzoneProps = StylelessFileUploadDropzoneProps;
+type FileUploadDropzoneProps = HeadlessFileUploadDropzoneProps;
 
-/** Dashed drop-zone card — `data-dragging-over` (set by the styleless source while a drag is over it) fills the border with `--file-upload-dropzone-active-border`. */
+/** Dashed drop-zone card — `data-dragging-over` (set by the headless source while a drag is over it) fills the border with `--file-upload-dropzone-active-border`. */
 const FileUploadDropzone = React.forwardRef<HTMLLabelElement, FileUploadDropzoneProps>(
   (props, forwardedRef) => {
     const { className, ...rest } = props;
     return (
-      <StylelessFileUploadDropzone
+      <HeadlessFileUploadDropzone
         className={cn(
           'flex cursor-pointer flex-col items-center justify-center gap-1 rounded-[var(--radius-box)] border-2 border-dashed border-[var(--file-upload-dropzone-border)] p-6 text-center text-sm text-[var(--file-upload-text)]/70 transition-colors data-[dragging-over]:border-[var(--file-upload-dropzone-active-border)] data-[disabled]:cursor-not-allowed data-[disabled]:opacity-50',
           className,

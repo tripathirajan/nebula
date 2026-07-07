@@ -2,7 +2,7 @@
   "name": "nebula",
   "version": "0.1.0",
   "private": true,
-  "description": "Composable React UI platform — design tokens, styleless components, hooks, and a Tailwind-powered design system.",
+  "description": "Composable React UI platform — design tokens, headless components, hooks, and a Tailwind-powered design system.",
   "license": "MIT",
   "packageManager": "pnpm@9.15.0",
   "engines": {

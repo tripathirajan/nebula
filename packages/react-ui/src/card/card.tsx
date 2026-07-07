@@ -10,7 +10,7 @@ type CardProps = PrimitivePropsWithRef<'div'>;
  * A bordered container — `CardHeader`/`CardTitle`/`CardDescription`/
  * `CardContent`/`CardFooter` are purely presentational structure, no
  * behavior, so (unlike `Accordion`/`Dialog`/`Popover`) there's no matching
- * `@nebula/styleless` compound underneath this one; it's a thin `cn()`
+ * `@nebula/headless` compound underneath this one; it's a thin `cn()`
  * wrapper around `Primitive` directly, same as `Badge`/`Separator`.
  *
  * Colors read `--card-*` (see `../tokens/component.ts`).

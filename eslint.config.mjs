@@ -70,7 +70,9 @@ export default tseslint.config(
   },
 
   // Package-boundary / layering rules from component-library-architecture.md §2:
-  // utilities -> hooks -> primitives -> styleless -> react-ui -> react-ui-blocks.
+  // utilities -> hooks -> primitives -> headless -> styleless -> react-ui -> react-ui-blocks.
+  // (`styleless` only has one component (`Button`) extracted so far — see LAYER_TAXONOMY.md
+  // §4 for the ~49 remaining — but its layering block below is already in place.)
   // Each block below blocks imports from higher layers than itself.
   // `utilities` and `hooks` sit at the bottom and depend on nothing else in
   // the workspace (not even each other — see packages/hooks/README.md).
@@ -121,9 +123,27 @@ export default tseslint.config(
         {
           patterns: [
             {
-              group: ['@nebula/styleless*', '@nebula/react-ui*', '@nebula/react-ui-blocks*'],
+              group: ['@nebula/headless*', '@nebula/react-ui*', '@nebula/react-ui-blocks*'],
               message:
                 'Layering violation: packages/primitives cannot depend on higher layers. See component-library-architecture.md §2.',
+            },
+          ],
+        },
+      ],
+    },
+  },
+
+  {
+    files: ['packages/headless/**/*.{ts,tsx}'],
+    rules: {
+      'no-restricted-imports': [
+        'error',
+        {
+          patterns: [
+            {
+              group: ['@nebula/react-ui*', '@nebula/react-ui-blocks*'],
+              message:
+                'Layering violation: packages/headless depends only on primitives + hooks. See component-library-architecture.md §2.',
             },
           ],
         },
@@ -141,7 +161,7 @@ export default tseslint.config(
             {
               group: ['@nebula/react-ui*', '@nebula/react-ui-blocks*'],
               message:
-                'Layering violation: packages/styleless depends only on primitives + hooks. See component-library-architecture.md §2.',
+                'Layering violation: packages/styleless depends only on primitives + hooks + headless. See component-library-architecture.md §2 and LAYER_TAXONOMY.md.',
             },
           ],
         },

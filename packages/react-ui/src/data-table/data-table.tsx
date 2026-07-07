@@ -28,7 +28,7 @@ type DataTableProps = PrimitivePropsWithRef<'table'> & DataTableOwnProps;
  * Root of the DataTable compound component — a real `<table>` plus sort and
  * row-selection *state*, not an independent ARIA behavior layer, which is
  * why (per the project owner decision in `AGENTS.md`'s `react-ui` row) this
- * has no separate `@nebula/styleless` primitive underneath it: sortable
+ * has no separate `@nebula/headless` primitive underneath it: sortable
  * column headers already have well-defined native semantics
  * (`aria-sort` on a native `<table>`'s `<th>`) and row selection is just
  * checkboxes, neither of which needs a bespoke widget pattern the way

@@ -1,10 +1,10 @@
+import { Toast as HeadlessToast } from '@nebula/headless/toast';
 import { cn } from '@nebula/primitives/cn';
-import { Toast as StylelessToast } from '@nebula/styleless/toast';
 import * as React from 'react';
 
-import type { ToastProps as StylelessToastProps } from '@nebula/styleless/toast';
+import type { ToastProps as HeadlessToastProps } from '@nebula/headless/toast';
 
-type ToastProps = StylelessToastProps;
+type ToastProps = HeadlessToastProps;
 
 /**
  * A single notification card — reads `--toast-bg`/`-text`/`-border`
@@ -17,7 +17,7 @@ type ToastProps = StylelessToastProps;
 const Toast = React.forwardRef<HTMLLIElement, ToastProps>((props, forwardedRef) => {
   const { className, ...rest } = props;
   return (
-    <StylelessToast
+    <HeadlessToast
       className={cn(
         'flex w-full items-start gap-3 rounded-[var(--radius-box)] border border-[var(--toast-border)] bg-[var(--toast-bg)] p-4 text-sm text-[var(--toast-text)] shadow-lg transition-all data-[state=closed]:translate-x-full data-[state=closed]:opacity-0',
         className,

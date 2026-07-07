@@ -1,16 +1,16 @@
+import { BreadcrumbList as HeadlessBreadcrumbList } from '@nebula/headless/breadcrumb';
 import { cn } from '@nebula/primitives/cn';
-import { BreadcrumbList as StylelessBreadcrumbList } from '@nebula/styleless/breadcrumb';
 import * as React from 'react';
 
-import type { BreadcrumbListProps as StylelessBreadcrumbListProps } from '@nebula/styleless/breadcrumb';
+import type { BreadcrumbListProps as HeadlessBreadcrumbListProps } from '@nebula/headless/breadcrumb';
 
-type BreadcrumbListProps = StylelessBreadcrumbListProps;
+type BreadcrumbListProps = HeadlessBreadcrumbListProps;
 
 const BreadcrumbList = React.forwardRef<HTMLOListElement, BreadcrumbListProps>(
   (props, forwardedRef) => {
     const { className, ...rest } = props;
     return (
-      <StylelessBreadcrumbList
+      <HeadlessBreadcrumbList
         className={cn(
           'flex flex-wrap items-center gap-1.5 text-sm text-[var(--breadcrumb-text)] sm:gap-2.5',
           className,

@@ -1,6 +1,6 @@
 ---
 name: new-component
-description: Scaffold a new nebula component (primitive, styleless, react-ui, or react-ui-blocks) with the correct file-per-component folder structure, barrel exports, package.json exports-map entry, and tsup entry point. Use whenever adding a component to any packages/* in the nebula monorepo, or when asked to "add a component", "scaffold X", "create a new primitive/styleless component", etc.
+description: Scaffold a new nebula component (primitive, headless, styleless, react-ui, or react-ui-blocks) with the correct file-per-component folder structure, barrel exports, package.json exports-map entry, and tsup entry point. Use whenever adding a component to any packages/* in the nebula monorepo, or when asked to "add a component", "scaffold X", "create a new primitive/headless/styleless component", etc.
 ---
 
 # new-component
@@ -9,9 +9,9 @@ Scaffolds one nebula component following the repo's non-negotiable convention (s
 
 ## Before scaffolding
 
-1. Ask (or infer from context) which layer the component belongs in: `primitives`, `styleless`, `react-ui`, or `react-ui-blocks`.
+1. Ask (or infer from context) which layer the component belongs in: `primitives`, `headless`, `styleless` (not yet built, see `LAYER_TAXONOMY.md`), `react-ui`, or `react-ui-blocks`.
 2. Check `packages/<layer>/src/` to confirm it doesn't already exist under a different name.
-3. Check the target layer only depends on layers below it (`utilities` -> `hooks` -> `primitives` -> `styleless` -> `react-ui` -> `react-ui-blocks`) -- don't import from a higher layer.
+3. Check the target layer only depends on layers below it (`utilities` -> `hooks` -> `primitives` -> `headless` -> `styleless` -> `react-ui` -> `react-ui-blocks`) -- don't import from a higher layer.
 
 ## Folder structure to create
 
@@ -36,7 +36,7 @@ If the component has sub-parts (e.g. `Dialog` -> `DialogTrigger`, `DialogContent
 - Controlled + uncontrolled support (`value`/`defaultValue` + `onValueChange`) if it holds state -- use `useControllableState` from `@nebula/hooks`.
 - State reflected via `data-state` / `data-disabled` / `data-orientation` attributes, not conditional class toggling.
 - If interactive: full keyboard support per its WAI-ARIA APG pattern, `:focus-visible` ring, correct `role`/`aria-*` attributes.
-- Styled components (`react-ui` layer and above) use `cn()` from `@nebula/primitives`, never hardcoded classes/colors -- pull from this package's own tokens (`@nebula/react-ui/tokens`, since `react-ui` owns tokens/theming), and build on the matching `@nebula/styleless` component where one exists rather than wrapping raw `Primitive` directly.
+- Styled components (`react-ui` layer and above) use `cn()` from `@nebula/primitives`, never hardcoded classes/colors -- pull from this package's own tokens (`@nebula/react-ui/tokens`, since `react-ui` owns tokens/theming), and build on the matching `@nebula/headless` component where one exists rather than wrapping raw `Primitive` directly.
 - Add TSDoc with an `@example` block on every exported symbol.
 
 ## Wiring it in

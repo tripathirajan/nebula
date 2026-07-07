@@ -1,17 +1,17 @@
+import { NavigationMenuTrigger as HeadlessNavigationMenuTrigger } from '@nebula/headless/navigation-menu';
 import { cn } from '@nebula/primitives/cn';
-import { NavigationMenuTrigger as StylelessNavigationMenuTrigger } from '@nebula/styleless/navigation-menu';
 import * as React from 'react';
 
-import type { NavigationMenuTriggerProps as StylelessNavigationMenuTriggerProps } from '@nebula/styleless/navigation-menu';
+import type { NavigationMenuTriggerProps as HeadlessNavigationMenuTriggerProps } from '@nebula/headless/navigation-menu';
 
-type NavigationMenuTriggerProps = StylelessNavigationMenuTriggerProps;
+type NavigationMenuTriggerProps = HeadlessNavigationMenuTriggerProps;
 
 /** Built-in chevron rotates 180° when `data-state="open"` — same `data-[state=open]:rotate-180` treatment `AccordionTrigger` uses. */
 const NavigationMenuTrigger = React.forwardRef<HTMLButtonElement, NavigationMenuTriggerProps>(
   (props, forwardedRef) => {
     const { className, children, ...rest } = props;
     return (
-      <StylelessNavigationMenuTrigger
+      <HeadlessNavigationMenuTrigger
         className={cn(
           'group flex items-center gap-1 rounded-[var(--radius-selector)] px-3 py-2 text-sm font-medium text-[var(--navigation-menu-trigger-text)] outline-none hover:bg-[var(--navigation-menu-trigger-hover-bg)] focus-visible:ring-2 focus-visible:ring-[var(--navigation-menu-link-active-text)]',
           className,
@@ -32,7 +32,7 @@ const NavigationMenuTrigger = React.forwardRef<HTMLButtonElement, NavigationMenu
         >
           <path d="m6 9 6 6 6-6" />
         </svg>
-      </StylelessNavigationMenuTrigger>
+      </HeadlessNavigationMenuTrigger>
     );
   },
 );

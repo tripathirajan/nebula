@@ -3,7 +3,7 @@
 // once at the repo root) because each package's `tsc` run only sees its own
 // `src` (`"include": ["src"]"`) — a root-level file wouldn't be picked up.
 // Present in every package that has a `*.test.tsx` calling
-// `toHaveNoViolations()` (currently `primitives`, `styleless`, `react-ui`).
+// `toHaveNoViolations()` (currently `primitives`, `headless`, `styleless`, `react-ui`).
 //
 // `vitest-axe@0.1.0`'s own `extend-expect.d.ts` augments `declare global {
 // namespace Vi { interface Assertion<T> {} } }` — a pre-Vitest-2 convention.

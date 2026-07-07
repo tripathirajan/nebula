@@ -1,15 +1,15 @@
+import { ToastTitle as HeadlessToastTitle } from '@nebula/headless/toast';
 import { cn } from '@nebula/primitives/cn';
-import { ToastTitle as StylelessToastTitle } from '@nebula/styleless/toast';
 import * as React from 'react';
 
-import type { ToastTitleProps as StylelessToastTitleProps } from '@nebula/styleless/toast';
+import type { ToastTitleProps as HeadlessToastTitleProps } from '@nebula/headless/toast';
 
-type ToastTitleProps = StylelessToastTitleProps;
+type ToastTitleProps = HeadlessToastTitleProps;
 
 const ToastTitle = React.forwardRef<HTMLDivElement, ToastTitleProps>((props, forwardedRef) => {
   const { className, ...rest } = props;
   return (
-    <StylelessToastTitle className={cn('font-semibold', className)} {...rest} ref={forwardedRef} />
+    <HeadlessToastTitle className={cn('font-semibold', className)} {...rest} ref={forwardedRef} />
   );
 });
 

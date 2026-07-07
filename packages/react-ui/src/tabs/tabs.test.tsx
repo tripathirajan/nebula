@@ -21,7 +21,7 @@ function DemoTabs() {
 }
 
 describe('Tabs (ui)', () => {
-  it('renders the styleless behavior unchanged (switches panel on click)', () => {
+  it('renders the headless behavior unchanged (switches panel on click)', () => {
     render(<DemoTabs />);
     expect(screen.getByText('Account settings.')).toBeVisible();
 

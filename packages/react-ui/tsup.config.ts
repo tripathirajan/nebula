@@ -108,5 +108,5 @@ export default defineConfig({
   splitting: false,
   clean: true,
   treeshake: true,
-  external: ['react', 'react-dom', '@nebula/hooks', '@nebula/primitives', '@nebula/styleless'],
+  external: ['react', 'react-dom', '@nebula/hooks', '@nebula/primitives', '@nebula/headless'],
 });

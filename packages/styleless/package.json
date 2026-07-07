@@ -1,7 +1,7 @@
 {
   "name": "@nebula/styleless",
   "version": "0.1.0",
-  "description": "Behavior-only, ARIA-complete compound components — no styling opinions (formerly @nebula/headless; renamed since \"styleless\" says directly what this layer guarantees). Built on @nebula/primitives + @nebula/hooks; styled by @nebula/react-ui.",
+  "description": "Reusable UI components with a complete, semantic API but zero visual opinion — composes @nebula/primitives + @nebula/headless. Styled by @nebula/react-ui. See LAYER_TAXONOMY.md for the full component list this package extracts from react-ui.",
   "license": "MIT",
   "type": "module",
   "sideEffects": false,
@@ -13,169 +13,9 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
     },
-    "./toggle": {
-      "types": "./dist/toggle/index.d.ts",
-      "import": "./dist/toggle/index.js"
-    },
-    "./toggle-group": {
-      "types": "./dist/toggle-group/index.d.ts",
-      "import": "./dist/toggle-group/index.js"
-    },
-    "./breadcrumb": {
-      "types": "./dist/breadcrumb/index.d.ts",
-      "import": "./dist/breadcrumb/index.js"
-    },
-    "./tabs": {
-      "types": "./dist/tabs/index.d.ts",
-      "import": "./dist/tabs/index.js"
-    },
-    "./checkbox": {
-      "types": "./dist/checkbox/index.d.ts",
-      "import": "./dist/checkbox/index.js"
-    },
-    "./switch": {
-      "types": "./dist/switch/index.d.ts",
-      "import": "./dist/switch/index.js"
-    },
-    "./radio-group": {
-      "types": "./dist/radio-group/index.d.ts",
-      "import": "./dist/radio-group/index.js"
-    },
-    "./collapsible": {
-      "types": "./dist/collapsible/index.d.ts",
-      "import": "./dist/collapsible/index.js"
-    },
-    "./accordion": {
-      "types": "./dist/accordion/index.d.ts",
-      "import": "./dist/accordion/index.js"
-    },
-    "./dialog": {
-      "types": "./dist/dialog/index.d.ts",
-      "import": "./dist/dialog/index.js"
-    },
-    "./alert-dialog": {
-      "types": "./dist/alert-dialog/index.d.ts",
-      "import": "./dist/alert-dialog/index.js"
-    },
-    "./popover": {
-      "types": "./dist/popover/index.d.ts",
-      "import": "./dist/popover/index.js"
-    },
-    "./tooltip": {
-      "types": "./dist/tooltip/index.d.ts",
-      "import": "./dist/tooltip/index.js"
-    },
-    "./menu": {
-      "types": "./dist/menu/index.d.ts",
-      "import": "./dist/menu/index.js"
-    },
-    "./dropdown-menu": {
-      "types": "./dist/dropdown-menu/index.d.ts",
-      "import": "./dist/dropdown-menu/index.js"
-    },
-    "./context-menu": {
-      "types": "./dist/context-menu/index.d.ts",
-      "import": "./dist/context-menu/index.js"
-    },
-    "./menubar": {
-      "types": "./dist/menubar/index.d.ts",
-      "import": "./dist/menubar/index.js"
-    },
-    "./progress": {
-      "types": "./dist/progress/index.d.ts",
-      "import": "./dist/progress/index.js"
-    },
-    "./spinner": {
-      "types": "./dist/spinner/index.d.ts",
-      "import": "./dist/spinner/index.js"
-    },
-    "./skeleton": {
-      "types": "./dist/skeleton/index.d.ts",
-      "import": "./dist/skeleton/index.js"
-    },
-    "./field": {
-      "types": "./dist/field/index.d.ts",
-      "import": "./dist/field/index.js"
-    },
-    "./listbox": {
-      "types": "./dist/listbox/index.d.ts",
-      "import": "./dist/listbox/index.js"
-    },
-    "./select": {
-      "types": "./dist/select/index.d.ts",
-      "import": "./dist/select/index.js"
-    },
-    "./checkbox-group": {
-      "types": "./dist/checkbox-group/index.d.ts",
-      "import": "./dist/checkbox-group/index.js"
-    },
-    "./number-input": {
-      "types": "./dist/number-input/index.d.ts",
-      "import": "./dist/number-input/index.js"
-    },
-    "./combobox": {
-      "types": "./dist/combobox/index.d.ts",
-      "import": "./dist/combobox/index.js"
-    },
-    "./autocomplete": {
-      "types": "./dist/autocomplete/index.d.ts",
-      "import": "./dist/autocomplete/index.js"
-    },
-    "./slider": {
-      "types": "./dist/slider/index.d.ts",
-      "import": "./dist/slider/index.js"
-    },
-    "./rating": {
-      "types": "./dist/rating/index.d.ts",
-      "import": "./dist/rating/index.js"
-    },
-    "./otp-input": {
-      "types": "./dist/otp-input/index.d.ts",
-      "import": "./dist/otp-input/index.js"
-    },
-    "./color-picker": {
-      "types": "./dist/color-picker/index.d.ts",
-      "import": "./dist/color-picker/index.js"
-    },
-    "./file-upload": {
-      "types": "./dist/file-upload/index.d.ts",
-      "import": "./dist/file-upload/index.js"
-    },
-    "./pagination": {
-      "types": "./dist/pagination/index.d.ts",
-      "import": "./dist/pagination/index.js"
-    },
-    "./stepper": {
-      "types": "./dist/stepper/index.d.ts",
-      "import": "./dist/stepper/index.js"
-    },
-    "./tree": {
-      "types": "./dist/tree/index.d.ts",
-      "import": "./dist/tree/index.js"
-    },
-    "./navigation-menu": {
-      "types": "./dist/navigation-menu/index.d.ts",
-      "import": "./dist/navigation-menu/index.js"
-    },
-    "./drawer": {
-      "types": "./dist/drawer/index.d.ts",
-      "import": "./dist/drawer/index.js"
-    },
-    "./hover-card": {
-      "types": "./dist/hover-card/index.d.ts",
-      "import": "./dist/hover-card/index.js"
-    },
-    "./toast": {
-      "types": "./dist/toast/index.d.ts",
-      "import": "./dist/toast/index.js"
-    },
-    "./tree-view": {
-      "types": "./dist/tree-view/index.d.ts",
-      "import": "./dist/tree-view/index.js"
-    },
-    "./command": {
-      "types": "./dist/command/index.d.ts",
-      "import": "./dist/command/index.js"
+    "./button": {
+      "types": "./dist/button/index.d.ts",
+      "import": "./dist/button/index.js"
     },
     "./package.json": "./package.json"
   },
@@ -195,6 +35,7 @@
     "react-dom": "^19.0.0"
   },
   "dependencies": {
+    "@nebula/headless": "workspace:*",
     "@nebula/hooks": "workspace:*",
     "@nebula/primitives": "workspace:*"
   },

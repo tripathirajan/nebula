@@ -8,7 +8,7 @@ type HeaderProps = PrimitivePropsWithRef<'header'>;
 
 /**
  * A page/app-level `<header>` — purely presentational structure, no
- * behavior, so (like `Card`) there's no matching `@nebula/styleless`
+ * behavior, so (like `Card`) there's no matching `@nebula/headless`
  * compound underneath this one; a thin `cn()` wrapper around `Primitive`
  * directly. Sits alongside `Footer`/`Navbar`/`Sidebar`/`Main` as this
  * package's page-shell building blocks — `react-ui-blocks`' `AppLayout`

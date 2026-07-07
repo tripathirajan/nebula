@@ -5,7 +5,7 @@ import { axe } from 'vitest-axe';
 import { Skeleton } from './skeleton';
 
 describe('Skeleton (ui)', () => {
-  it('renders the styleless behavior unchanged (aria-hidden by default)', () => {
+  it('renders the headless behavior unchanged (aria-hidden by default)', () => {
     render(<Skeleton data-testid="skeleton" />);
     expect(screen.getByTestId('skeleton')).toHaveAttribute('aria-hidden', 'true');
   });

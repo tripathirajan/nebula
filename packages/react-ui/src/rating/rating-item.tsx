@@ -1,16 +1,16 @@
+import { RatingItem as HeadlessRatingItem } from '@nebula/headless/rating';
 import { cn } from '@nebula/primitives/cn';
-import { RatingItem as StylelessRatingItem } from '@nebula/styleless/rating';
 import * as React from 'react';
 
-import type { RatingItemProps as StylelessRatingItemProps } from '@nebula/styleless/rating';
+import type { RatingItemProps as HeadlessRatingItemProps } from '@nebula/headless/rating';
 
-type RatingItemProps = StylelessRatingItemProps;
+type RatingItemProps = HeadlessRatingItemProps;
 
-/** Renders a built-in filled/outline star by default (toggled purely off the styleless source's `data-state`), same "no icon dependency" approach `AccordionTrigger`'s chevron uses — pass `children` to swap in a different icon entirely. */
+/** Renders a built-in filled/outline star by default (toggled purely off the headless source's `data-state`), same "no icon dependency" approach `AccordionTrigger`'s chevron uses — pass `children` to swap in a different icon entirely. */
 const RatingItem = React.forwardRef<HTMLButtonElement, RatingItemProps>((props, forwardedRef) => {
   const { className, children, ...rest } = props;
   return (
-    <StylelessRatingItem
+    <HeadlessRatingItem
       className={cn(
         'cursor-pointer text-[var(--rating-empty)] outline-none transition-colors data-[state=filled]:text-[var(--rating-filled)] disabled:cursor-not-allowed disabled:opacity-50',
         className,
@@ -28,7 +28,7 @@ const RatingItem = React.forwardRef<HTMLButtonElement, RatingItemProps>((props, 
           <path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2Z" />
         </svg>
       )}
-    </StylelessRatingItem>
+    </HeadlessRatingItem>
   );
 });
 

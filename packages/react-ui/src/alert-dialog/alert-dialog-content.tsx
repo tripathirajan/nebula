@@ -1,10 +1,10 @@
+import { AlertDialogContent as HeadlessAlertDialogContent } from '@nebula/headless/alert-dialog';
 import { cn } from '@nebula/primitives/cn';
-import { AlertDialogContent as StylelessAlertDialogContent } from '@nebula/styleless/alert-dialog';
 import * as React from 'react';
 
-import type { AlertDialogContentProps as StylelessAlertDialogContentProps } from '@nebula/styleless/alert-dialog';
+import type { AlertDialogContentProps as HeadlessAlertDialogContentProps } from '@nebula/headless/alert-dialog';
 
-type AlertDialogContentProps = StylelessAlertDialogContentProps;
+type AlertDialogContentProps = HeadlessAlertDialogContentProps;
 
 /**
  * Same fixed, centered card treatment as `DialogContent` (reads the same
@@ -30,7 +30,7 @@ const AlertDialogContent = React.forwardRef<HTMLDivElement, AlertDialogContentPr
   (props, forwardedRef) => {
     const { className, ...rest } = props;
     return (
-      <StylelessAlertDialogContent
+      <HeadlessAlertDialogContent
         className={cn(
           'fixed left-1/2 top-1/2 z-50 w-full max-w-md -translate-x-1/2 -translate-y-1/2 rounded-[var(--radius-dialog)] border border-[var(--dialog-content-border)] bg-[var(--dialog-content-bg)] p-6 text-[var(--dialog-text)] shadow-lg focus-visible:outline-none',
           className,

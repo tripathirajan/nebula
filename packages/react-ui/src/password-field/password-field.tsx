@@ -9,7 +9,7 @@ type PasswordFieldProps = Omit<InputProps, 'type'>;
 
 /**
  * A password `Input` with a built-in show/hide toggle — a genuinely new
- * component (no `@nebula/styleless` counterpart the way `Select`/`Combobox`
+ * component (no `@nebula/headless` counterpart the way `Select`/`Combobox`
  * have; the visibility toggle is a `react-ui`-layer-only affordance, not
  * ARIA-behavior worth decoupling into an unstyled layer of its own). Local
  * `visible` state starts `false` (masked); toggling it swaps the underlying

@@ -1,17 +1,17 @@
+import { NumberInputDecrement as HeadlessNumberInputDecrement } from '@nebula/headless/number-input';
 import { cn } from '@nebula/primitives/cn';
-import { NumberInputDecrement as StylelessNumberInputDecrement } from '@nebula/styleless/number-input';
 import * as React from 'react';
 
-import type { NumberInputDecrementProps as StylelessNumberInputDecrementProps } from '@nebula/styleless/number-input';
+import type { NumberInputDecrementProps as HeadlessNumberInputDecrementProps } from '@nebula/headless/number-input';
 
-type NumberInputDecrementProps = StylelessNumberInputDecrementProps;
+type NumberInputDecrementProps = HeadlessNumberInputDecrementProps;
 
 /** Defaults to a "-" icon when no `children` is given — see `NumberInputIncrement`. */
 const NumberInputDecrement = React.forwardRef<HTMLButtonElement, NumberInputDecrementProps>(
   (props, forwardedRef) => {
     const { className, children, ...rest } = props;
     return (
-      <StylelessNumberInputDecrement
+      <HeadlessNumberInputDecrement
         className={cn(
           'flex h-10 w-10 shrink-0 items-center justify-center rounded-[var(--radius-field)] border border-[var(--input-border)] text-[var(--input-text)] outline-none hover:bg-[var(--input-border)]/20 focus-visible:ring-2 focus-visible:ring-[var(--input-ring)] disabled:cursor-not-allowed disabled:opacity-50',
           className,
@@ -33,7 +33,7 @@ const NumberInputDecrement = React.forwardRef<HTMLButtonElement, NumberInputDecr
             <path d="M5 12h14" />
           </svg>
         )}
-      </StylelessNumberInputDecrement>
+      </HeadlessNumberInputDecrement>
     );
   },
 );

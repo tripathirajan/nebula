@@ -1,15 +1,15 @@
+import { Rating as HeadlessRating } from '@nebula/headless/rating';
 import { cn } from '@nebula/primitives/cn';
-import { Rating as StylelessRating } from '@nebula/styleless/rating';
 import * as React from 'react';
 
-import type { RatingProps as StylelessRatingProps } from '@nebula/styleless/rating';
+import type { RatingProps as HeadlessRatingProps } from '@nebula/headless/rating';
 
-type RatingProps = StylelessRatingProps;
+type RatingProps = HeadlessRatingProps;
 
 const Rating = React.forwardRef<HTMLDivElement, RatingProps>((props, forwardedRef) => {
   const { className, ...rest } = props;
   return (
-    <StylelessRating
+    <HeadlessRating
       className={cn('inline-flex items-center gap-1', className)}
       {...rest}
       ref={forwardedRef}

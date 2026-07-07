@@ -1,14 +1,14 @@
+import { RadioGroupItem as HeadlessRadioGroupItem } from '@nebula/headless/radio-group';
 import { cn } from '@nebula/primitives/cn';
-import { RadioGroupItem as StylelessRadioGroupItem } from '@nebula/styleless/radio-group';
 import * as React from 'react';
 
-import type { RadioGroupItemProps as StylelessRadioGroupItemProps } from '@nebula/styleless/radio-group';
+import type { RadioGroupItemProps as HeadlessRadioGroupItemProps } from '@nebula/headless/radio-group';
 
-type RadioGroupItemProps = StylelessRadioGroupItemProps;
+type RadioGroupItemProps = HeadlessRadioGroupItemProps;
 
 /**
- * Styled wrapper around `@nebula/styleless`'s `RadioGroupItem`. Note the
- * underlying `styleless` item is itself the full clickable control — its
+ * Styled wrapper around `@nebula/headless`'s `RadioGroupItem`. Note the
+ * underlying `headless` item is itself the full clickable control — its
  * `children` become the accessible name (see its stories:
  * `<RadioGroupItem value="compact">Compact</RadioGroupItem>`), not a
  * separate `<label>` next to a bare circle. So this layer renders a small
@@ -30,7 +30,7 @@ const RadioGroupItem = React.forwardRef<HTMLButtonElement, RadioGroupItemProps>(
   (props, forwardedRef) => {
     const { className, children, ...rest } = props;
     return (
-      <StylelessRadioGroupItem
+      <HeadlessRadioGroupItem
         className={cn(
           'group inline-flex items-center gap-2 rounded-[var(--radius-selector)] text-sm text-[var(--radio-text)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--radio-checked-border)] focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
           className,
@@ -45,7 +45,7 @@ const RadioGroupItem = React.forwardRef<HTMLButtonElement, RadioGroupItemProps>(
           />
         </span>
         {children}
-      </StylelessRadioGroupItem>
+      </HeadlessRadioGroupItem>
     );
   },
 );

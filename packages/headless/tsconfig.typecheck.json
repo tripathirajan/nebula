@@ -1,0 +1,20 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    // Same fix as tsconfig.build.json, for the same reason: with the
+    // workspace-wide `@nebula/*` -> `packages/*/src` path aliases in effect,
+    // `tsc -p ... --noEmit` (composite + rootDir: './src') pulls other
+    // packages' *source* files into this program, which then fails since
+    // they fall outside this package's rootDir (TS6059/TS6307). Unlike
+    // tsconfig.build.json, this config is NOT used for emitting output, so
+    // there's no tsBuildInfoFile-in-dist concern here — but resolving
+    // `@nebula/*` via node_modules means this package's dependencies must
+    // already be built (have a `dist`) before this can typecheck; nx.json's
+    // `typecheck: { dependsOn: ['^build'] }` already guarantees that via the
+    // task graph, so this is safe for every real invocation (`pnpm
+    // typecheck` / `nx run-many -t typecheck`), just not for running this
+    // exact `tsc` command standalone against a never-built workspace.
+    "paths": {}
+  },
+  "exclude": ["dist"]
+}

@@ -1,10 +1,10 @@
+import { StepperItem as HeadlessStepperItem } from '@nebula/headless/stepper';
 import { cn } from '@nebula/primitives/cn';
-import { StepperItem as StylelessStepperItem } from '@nebula/styleless/stepper';
 import * as React from 'react';
 
-import type { StepperItemProps as StylelessStepperItemProps } from '@nebula/styleless/stepper';
+import type { StepperItemProps as HeadlessStepperItemProps } from '@nebula/headless/stepper';
 
-type StepperItemProps = StylelessStepperItemProps;
+type StepperItemProps = HeadlessStepperItemProps;
 
 /**
  * A single step's layout slot — `flex-1` on the horizontal axis so items
@@ -15,7 +15,7 @@ const StepperItem = React.forwardRef<HTMLLIElement, StepperItemProps>(
   (props, forwardedRef) => {
     const { className, ...rest } = props;
     return (
-      <StylelessStepperItem
+      <HeadlessStepperItem
         className={cn(
           'flex flex-1 flex-col items-center gap-1 text-center data-[orientation=vertical]:flex-none data-[orientation=vertical]:flex-row data-[orientation=vertical]:text-left',
           className,

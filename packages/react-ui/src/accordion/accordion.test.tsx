@@ -28,7 +28,7 @@ function DemoAccordion() {
 }
 
 describe('Accordion (ui)', () => {
-  it('renders the styleless behavior unchanged (opens on trigger click)', () => {
+  it('renders the headless behavior unchanged (opens on trigger click)', () => {
     render(<DemoAccordion />);
     // `AccordionContent` wraps its content in `Presence`, which (absent a
     // CSS animation/transition, as here) doesn't keep collapsed content

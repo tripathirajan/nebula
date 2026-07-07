@@ -1,5 +1,5 @@
 // Thin renamed re-export of this package's own `Tree` — mirrors
-// `@nebula/styleless/tree-view`'s relationship to `@nebula/styleless/tree`.
+// `@nebula/headless/tree-view`'s relationship to `@nebula/headless/tree`.
 export { Tree as TreeView } from '../tree/tree';
 export type {
   TreeProps as TreeViewProps,

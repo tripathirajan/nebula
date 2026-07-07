@@ -9,7 +9,7 @@ type TimePickerProps = Omit<InputProps, 'type'>;
 
 /**
  * An `Input` preset to `type="time"` — same "`react-ui`-layer-only
- * convenience, no `@nebula/styleless` counterpart" reasoning `SearchField`/
+ * convenience, no `@nebula/headless` counterpart" reasoning `SearchField`/
  * `PasswordField` document: a native `type="time"` input already gives a
  * fully keyboard-operable, locale-aware (12h/24h per the user's own OS
  * setting) time-entry UI for free, including the platform's own picker

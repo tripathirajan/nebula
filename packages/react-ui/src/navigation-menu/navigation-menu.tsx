@@ -1,17 +1,17 @@
+import { NavigationMenu as HeadlessNavigationMenu } from '@nebula/headless/navigation-menu';
 import { cn } from '@nebula/primitives/cn';
-import { NavigationMenu as StylelessNavigationMenu } from '@nebula/styleless/navigation-menu';
 import * as React from 'react';
 
-import type { NavigationMenuProps as StylelessNavigationMenuProps } from '@nebula/styleless/navigation-menu';
+import type { NavigationMenuProps as HeadlessNavigationMenuProps } from '@nebula/headless/navigation-menu';
 
-type NavigationMenuProps = StylelessNavigationMenuProps;
+type NavigationMenuProps = HeadlessNavigationMenuProps;
 
 /** Root `<nav>` — relative positioning so a consumer's own `NavigationMenuContent` can be absolutely placed against it if not portalled. */
 const NavigationMenu = React.forwardRef<HTMLElement, NavigationMenuProps>(
   (props, forwardedRef) => {
     const { className, ...rest } = props;
     return (
-      <StylelessNavigationMenu
+      <HeadlessNavigationMenu
         className={cn('relative', className)}
         {...rest}
         ref={forwardedRef}

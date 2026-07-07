@@ -1,13 +1,13 @@
+import { Skeleton as HeadlessSkeleton } from '@nebula/headless/skeleton';
 import { cn } from '@nebula/primitives/cn';
-import { Skeleton as StylelessSkeleton } from '@nebula/styleless/skeleton';
 import * as React from 'react';
 
-import type { SkeletonProps as StylelessSkeletonProps } from '@nebula/styleless/skeleton';
+import type { SkeletonProps as HeadlessSkeletonProps } from '@nebula/headless/skeleton';
 
-type SkeletonProps = StylelessSkeletonProps;
+type SkeletonProps = HeadlessSkeletonProps;
 
 /**
- * Styled wrapper around `@nebula/styleless`'s `Skeleton` — the `aria-hidden`
+ * Styled wrapper around `@nebula/headless`'s `Skeleton` — the `aria-hidden`
  * behavior comes from there unchanged. This layer adds the visual shimmer: a
  * muted fill (`--skeleton-bg`) pulsing via Tailwind's built-in
  * `animate-pulse`, plus a default box radius (`--radius-box`, the same
@@ -23,7 +23,7 @@ type SkeletonProps = StylelessSkeletonProps;
 const Skeleton = React.forwardRef<HTMLDivElement, SkeletonProps>((props, forwardedRef) => {
   const { className, ...rest } = props;
   return (
-    <StylelessSkeleton
+    <HeadlessSkeleton
       className={cn('animate-pulse rounded-[var(--radius-box)] bg-[var(--skeleton-bg)]', className)}
       {...rest}
       ref={forwardedRef}

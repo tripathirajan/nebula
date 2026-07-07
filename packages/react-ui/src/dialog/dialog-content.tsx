@@ -1,17 +1,17 @@
+import { DialogContent as HeadlessDialogContent } from '@nebula/headless/dialog';
 import { cn } from '@nebula/primitives/cn';
-import { DialogContent as StylelessDialogContent } from '@nebula/styleless/dialog';
 import * as React from 'react';
 
 import { DialogClose } from './dialog-close';
 
-import type { DialogContentProps as StylelessDialogContentProps } from '@nebula/styleless/dialog';
+import type { DialogContentProps as HeadlessDialogContentProps } from '@nebula/headless/dialog';
 
 interface DialogContentOwnProps {
   /** Hide the built-in top-right close icon (e.g. for a dialog that only closes via an explicit in-body action). @default false */
   hideCloseButton?: boolean;
 }
 
-type DialogContentProps = StylelessDialogContentProps & DialogContentOwnProps;
+type DialogContentProps = HeadlessDialogContentProps & DialogContentOwnProps;
 
 /**
  * Fixed, centered card — styled off `--dialog-content-bg`/`-border`/`-text`
@@ -32,7 +32,7 @@ const DialogContent = React.forwardRef<HTMLDivElement, DialogContentProps>(
   (props, forwardedRef) => {
     const { className, children, hideCloseButton = false, ...rest } = props;
     return (
-      <StylelessDialogContent
+      <HeadlessDialogContent
         className={cn(
           'fixed left-1/2 top-1/2 z-50 w-full max-w-md -translate-x-1/2 -translate-y-1/2 rounded-[var(--radius-dialog)] border border-[var(--dialog-content-border)] bg-[var(--dialog-content-bg)] p-6 text-[var(--dialog-text)] shadow-lg focus-visible:outline-none',
           className,
@@ -60,7 +60,7 @@ const DialogContent = React.forwardRef<HTMLDivElement, DialogContentProps>(
             </svg>
           </DialogClose>
         )}
-      </StylelessDialogContent>
+      </HeadlessDialogContent>
     );
   },
 );

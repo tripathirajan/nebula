@@ -1,16 +1,16 @@
+import { CollapsibleTrigger as HeadlessCollapsibleTrigger } from '@nebula/headless/collapsible';
 import { cn } from '@nebula/primitives/cn';
-import { CollapsibleTrigger as StylelessCollapsibleTrigger } from '@nebula/styleless/collapsible';
 import * as React from 'react';
 
-import type { CollapsibleTriggerProps as StylelessCollapsibleTriggerProps } from '@nebula/styleless/collapsible';
+import type { CollapsibleTriggerProps as HeadlessCollapsibleTriggerProps } from '@nebula/headless/collapsible';
 
-type CollapsibleTriggerProps = StylelessCollapsibleTriggerProps;
+type CollapsibleTriggerProps = HeadlessCollapsibleTriggerProps;
 
 const CollapsibleTrigger = React.forwardRef<HTMLButtonElement, CollapsibleTriggerProps>(
   (props, forwardedRef) => {
     const { className, ...rest } = props;
     return (
-      <StylelessCollapsibleTrigger
+      <HeadlessCollapsibleTrigger
         className={cn(
           'inline-flex items-center gap-1 text-sm font-medium text-[var(--collapsible-text)] outline-none hover:underline focus-visible:ring-2 focus-visible:ring-[var(--collapsible-text)] disabled:cursor-not-allowed disabled:opacity-50',
           className,

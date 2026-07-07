@@ -1,14 +1,14 @@
+import { AccordionTrigger as HeadlessAccordionTrigger } from '@nebula/headless/accordion';
 import { cn } from '@nebula/primitives/cn';
-import { AccordionTrigger as StylelessAccordionTrigger } from '@nebula/styleless/accordion';
 import * as React from 'react';
 
-import type { AccordionTriggerProps as StylelessAccordionTriggerProps } from '@nebula/styleless/accordion';
+import type { AccordionTriggerProps as HeadlessAccordionTriggerProps } from '@nebula/headless/accordion';
 
-type AccordionTriggerProps = StylelessAccordionTriggerProps;
+type AccordionTriggerProps = HeadlessAccordionTriggerProps;
 
 /**
  * Adds hover/focus styling and a chevron that rotates 180° off
- * `data-state="open"` (set by the underlying `@nebula/styleless` trigger) —
+ * `data-state="open"` (set by the underlying `@nebula/headless` trigger) —
  * a plain CSS transform driven by a data attribute, no JS/animation library.
  * No external icon dependency — this package doesn't have one yet, so the
  * chevron is a small inline `<svg>` rather than pulling one in for a single
@@ -18,7 +18,7 @@ const AccordionTrigger = React.forwardRef<HTMLButtonElement, AccordionTriggerPro
   (props, forwardedRef) => {
     const { className, children, ...rest } = props;
     return (
-      <StylelessAccordionTrigger
+      <HeadlessAccordionTrigger
         className={cn(
           'group flex flex-1 items-center justify-between gap-4 py-4 text-left text-sm font-medium text-[var(--accordion-text)] transition-colors hover:bg-[var(--accordion-trigger-hover-bg)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accordion-text)] focus-visible:ring-inset',
           className,
@@ -39,7 +39,7 @@ const AccordionTrigger = React.forwardRef<HTMLButtonElement, AccordionTriggerPro
         >
           <path d="m6 9 6 6 6-6" />
         </svg>
-      </StylelessAccordionTrigger>
+      </HeadlessAccordionTrigger>
     );
   },
 );

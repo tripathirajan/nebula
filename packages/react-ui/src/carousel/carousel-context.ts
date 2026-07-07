@@ -16,7 +16,7 @@ interface CarouselContextValue {
  * exists so a *different* component can compose its own instance into the
  * same scope (e.g. `NavigationMenuItem` minting an unscoped `Popover`, or
  * `AlertDialog` reusing `Dialog`'s scope directly). `Carousel` has no
- * `styleless` counterpart and nothing else in this project ever needs to
+ * `headless` counterpart and nothing else in this project ever needs to
  * nest another component into its scope, so the extra
  * scope-composition machinery `createContextScope` provides would be unused
  * ceremony here — same reasoning applies to `DataTable`'s context.

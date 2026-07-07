@@ -1,13 +1,13 @@
+import { Spinner as HeadlessSpinner } from '@nebula/headless/spinner';
 import { cn } from '@nebula/primitives/cn';
-import { Spinner as StylelessSpinner } from '@nebula/styleless/spinner';
 import * as React from 'react';
 
-import type { SpinnerProps as StylelessSpinnerProps } from '@nebula/styleless/spinner';
+import type { SpinnerProps as HeadlessSpinnerProps } from '@nebula/headless/spinner';
 
-type SpinnerProps = StylelessSpinnerProps;
+type SpinnerProps = HeadlessSpinnerProps;
 
 /**
- * Styled wrapper around `@nebula/styleless`'s `Spinner` — the `role="status"`
+ * Styled wrapper around `@nebula/headless`'s `Spinner` — the `role="status"`
  * + visually-hidden label announcement come from there unchanged. This
  * layer adds the actual spinning visual: a ring built from two stacked
  * borders (a dim full circle via `--spinner-track`, a bright quarter-arc via
@@ -23,7 +23,7 @@ type SpinnerProps = StylelessSpinnerProps;
 const Spinner = React.forwardRef<HTMLDivElement, SpinnerProps>((props, forwardedRef) => {
   const { className, ...rest } = props;
   return (
-    <StylelessSpinner
+    <HeadlessSpinner
       className={cn(
         'inline-block h-5 w-5 animate-spin rounded-full border-2 border-[var(--spinner-track)] border-t-[var(--spinner-indicator)]',
         className,

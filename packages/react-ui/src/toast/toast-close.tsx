@@ -1,15 +1,15 @@
+import { ToastClose as HeadlessToastClose } from '@nebula/headless/toast';
 import { cn } from '@nebula/primitives/cn';
-import { ToastClose as StylelessToastClose } from '@nebula/styleless/toast';
 import * as React from 'react';
 
-import type { ToastCloseProps as StylelessToastCloseProps } from '@nebula/styleless/toast';
+import type { ToastCloseProps as HeadlessToastCloseProps } from '@nebula/headless/toast';
 
-type ToastCloseProps = StylelessToastCloseProps;
+type ToastCloseProps = HeadlessToastCloseProps;
 
 const ToastClose = React.forwardRef<HTMLButtonElement, ToastCloseProps>((props, forwardedRef) => {
   const { className, children, ...rest } = props;
   return (
-    <StylelessToastClose
+    <HeadlessToastClose
       className={cn(
         'ml-auto shrink-0 rounded-[var(--radius-selector)] text-[var(--toast-text)]/60 hover:text-[var(--toast-text)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--toast-text)]',
         className,
@@ -31,7 +31,7 @@ const ToastClose = React.forwardRef<HTMLButtonElement, ToastCloseProps>((props, 
           <path d="M18 6 6 18M6 6l12 12" />
         </svg>
       )}
-    </StylelessToastClose>
+    </HeadlessToastClose>
   );
 });
 

@@ -1,16 +1,16 @@
-import { BreadcrumbSeparator as StylelessBreadcrumbSeparator } from '@nebula/styleless/breadcrumb';
+import { BreadcrumbSeparator as HeadlessBreadcrumbSeparator } from '@nebula/headless/breadcrumb';
 import * as React from 'react';
 
-import type { BreadcrumbSeparatorProps as StylelessBreadcrumbSeparatorProps } from '@nebula/styleless/breadcrumb';
+import type { BreadcrumbSeparatorProps as HeadlessBreadcrumbSeparatorProps } from '@nebula/headless/breadcrumb';
 
-type BreadcrumbSeparatorProps = StylelessBreadcrumbSeparatorProps;
+type BreadcrumbSeparatorProps = HeadlessBreadcrumbSeparatorProps;
 
 /** Defaults to a chevron icon when no `children` is given — a consumer can still pass e.g. `"/"` or their own icon instead. */
 const BreadcrumbSeparator = React.forwardRef<HTMLLIElement, BreadcrumbSeparatorProps>(
   (props, forwardedRef) => {
     const { children, ...rest } = props;
     return (
-      <StylelessBreadcrumbSeparator {...rest} ref={forwardedRef}>
+      <HeadlessBreadcrumbSeparator {...rest} ref={forwardedRef}>
         {children ?? (
           <svg
             aria-hidden="true"
@@ -25,7 +25,7 @@ const BreadcrumbSeparator = React.forwardRef<HTMLLIElement, BreadcrumbSeparatorP
             <path d="m9 18 6-6-6-6" />
           </svg>
         )}
-      </StylelessBreadcrumbSeparator>
+      </HeadlessBreadcrumbSeparator>
     );
   },
 );

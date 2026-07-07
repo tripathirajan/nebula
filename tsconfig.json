@@ -4,6 +4,7 @@
     { "path": "./packages/utilities" },
     { "path": "./packages/hooks" },
     { "path": "./packages/primitives" },
+    { "path": "./packages/headless" },
     { "path": "./packages/styleless" },
     { "path": "./packages/react-ui" },
     { "path": "./packages/react-ui-blocks" }

@@ -13,7 +13,7 @@ type ListProps = PrimitivePropsWithRef<'ul'> & ListOwnProps;
 
 /**
  * A plain list of `ListItem`s — purely presentational structure, no
- * `@nebula/styleless` compound underneath (unlike `Menu`/`Tree`, this has no
+ * `@nebula/headless` compound underneath (unlike `Menu`/`Tree`, this has no
  * interactive selection/focus behavior at all; for that, reach for
  * `Listbox`/`Menu` instead). No default bullet/number marker styling —
  * `list-none` by default, since most product UI lists (settings rows,

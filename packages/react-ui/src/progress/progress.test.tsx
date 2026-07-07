@@ -5,7 +5,7 @@ import { axe } from 'vitest-axe';
 import { Progress } from './progress';
 
 describe('Progress (ui)', () => {
-  it('renders the styleless behavior unchanged (role + aria-value*)', () => {
+  it('renders the headless behavior unchanged (role + aria-value*)', () => {
     render(<Progress value={40} />);
     const bar = screen.getByRole('progressbar');
     expect(bar).toHaveAttribute('aria-valuenow', '40');

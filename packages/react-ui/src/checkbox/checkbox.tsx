@@ -1,13 +1,13 @@
+import { Checkbox as HeadlessCheckbox } from '@nebula/headless/checkbox';
 import { cn } from '@nebula/primitives/cn';
-import { Checkbox as StylelessCheckbox } from '@nebula/styleless/checkbox';
 import * as React from 'react';
 
-import type { CheckboxProps as StylelessCheckboxProps } from '@nebula/styleless/checkbox';
+import type { CheckboxProps as HeadlessCheckboxProps } from '@nebula/headless/checkbox';
 
-type CheckboxProps = StylelessCheckboxProps;
+type CheckboxProps = HeadlessCheckboxProps;
 
 /**
- * Styled wrapper around `@nebula/styleless`'s `Checkbox` — tri-state
+ * Styled wrapper around `@nebula/headless`'s `Checkbox` — tri-state
  * behavior (`checked`/`false`/`'indeterminate'`), keyboard handling
  * (Space), and hidden-native-input form participation all come from there
  * unchanged. This layer only adds the box's visual styling (`--checkbox-*`
@@ -27,7 +27,7 @@ type CheckboxProps = StylelessCheckboxProps;
 const Checkbox = React.forwardRef<HTMLButtonElement, CheckboxProps>((props, forwardedRef) => {
   const { className, ...rest } = props;
   return (
-    <StylelessCheckbox
+    <HeadlessCheckbox
       className={cn(
         'group inline-flex h-4 w-4 shrink-0 items-center justify-center rounded-[var(--radius-selector)] border border-[var(--checkbox-border)] bg-[var(--checkbox-bg)] transition-colors data-[state=checked]:border-[var(--checkbox-checked-border)] data-[state=checked]:bg-[var(--checkbox-checked-bg)] data-[state=indeterminate]:border-[var(--checkbox-checked-border)] data-[state=indeterminate]:bg-[var(--checkbox-checked-bg)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--checkbox-checked-border)] focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
         className,
@@ -58,7 +58,7 @@ const Checkbox = React.forwardRef<HTMLButtonElement, CheckboxProps>((props, forw
       >
         <path d="M5 12h14" />
       </svg>
-    </StylelessCheckbox>
+    </HeadlessCheckbox>
   );
 });
 

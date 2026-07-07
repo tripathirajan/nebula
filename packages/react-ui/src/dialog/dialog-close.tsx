@@ -1,10 +1,10 @@
+import { DialogClose as HeadlessDialogClose } from '@nebula/headless/dialog';
 import { cn } from '@nebula/primitives/cn';
-import { DialogClose as StylelessDialogClose } from '@nebula/styleless/dialog';
 import * as React from 'react';
 
-import type { DialogCloseProps as StylelessDialogCloseProps } from '@nebula/styleless/dialog';
+import type { DialogCloseProps as HeadlessDialogCloseProps } from '@nebula/headless/dialog';
 
-type DialogCloseProps = StylelessDialogCloseProps;
+type DialogCloseProps = HeadlessDialogCloseProps;
 
 /**
  * Unopinionated beyond a focus ring — used both as `DialogContent`'s
@@ -16,7 +16,7 @@ const DialogClose = React.forwardRef<HTMLButtonElement, DialogCloseProps>(
   (props, forwardedRef) => {
     const { className, ...rest } = props;
     return (
-      <StylelessDialogClose
+      <HeadlessDialogClose
         className={cn(
           'rounded-[var(--radius-selector)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--dialog-text)] focus-visible:ring-offset-1',
           className,

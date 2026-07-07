@@ -1,17 +1,17 @@
+import { FileUploadRemoveTrigger as HeadlessFileUploadRemoveTrigger } from '@nebula/headless/file-upload';
 import { cn } from '@nebula/primitives/cn';
-import { FileUploadRemoveTrigger as StylelessFileUploadRemoveTrigger } from '@nebula/styleless/file-upload';
 import * as React from 'react';
 
-import type { FileUploadRemoveTriggerProps as StylelessFileUploadRemoveTriggerProps } from '@nebula/styleless/file-upload';
+import type { FileUploadRemoveTriggerProps as HeadlessFileUploadRemoveTriggerProps } from '@nebula/headless/file-upload';
 
-type FileUploadRemoveTriggerProps = StylelessFileUploadRemoveTriggerProps;
+type FileUploadRemoveTriggerProps = HeadlessFileUploadRemoveTriggerProps;
 
 /** Defaults to a small "×" icon when no `children` is given — same convention `BreadcrumbSeparator`'s default chevron uses. */
 const FileUploadRemoveTrigger = React.forwardRef<HTMLButtonElement, FileUploadRemoveTriggerProps>(
   (props, forwardedRef) => {
     const { className, children, ...rest } = props;
     return (
-      <StylelessFileUploadRemoveTrigger
+      <HeadlessFileUploadRemoveTrigger
         className={cn(
           'rounded-[var(--radius-selector)] p-1 text-[var(--file-upload-text)]/60 outline-none hover:text-[var(--file-upload-text)] focus-visible:ring-2 focus-visible:ring-[var(--file-upload-text)]',
           className,
@@ -33,7 +33,7 @@ const FileUploadRemoveTrigger = React.forwardRef<HTMLButtonElement, FileUploadRe
             <path d="M18 6 6 18M6 6l12 12" />
           </svg>
         )}
-      </StylelessFileUploadRemoveTrigger>
+      </HeadlessFileUploadRemoveTrigger>
     );
   },
 );

@@ -1,23 +1,23 @@
+import { DrawerContent as HeadlessDrawerContent } from '@nebula/headless/drawer';
 import { cn } from '@nebula/primitives/cn';
-import { DrawerContent as StylelessDrawerContent } from '@nebula/styleless/drawer';
 import * as React from 'react';
 
 import { DrawerClose } from './drawer-close';
 
-import type { DrawerContentProps as StylelessDrawerContentProps } from '@nebula/styleless/drawer';
+import type { DrawerContentProps as HeadlessDrawerContentProps } from '@nebula/headless/drawer';
 
 interface DrawerContentOwnProps {
   /** Hide the built-in top-right close icon. @default false */
   hideCloseButton?: boolean;
 }
 
-type DrawerContentProps = StylelessDrawerContentProps & DrawerContentOwnProps;
+type DrawerContentProps = HeadlessDrawerContentProps & DrawerContentOwnProps;
 
 /**
  * The sliding panel — fixed to whichever edge `side` (default `'right'`)
  * names, sized to a fixed cross-axis dimension and full-bleed on the other,
  * with a `data-[state=closed]` translate-out transform per side (this is the
- * "consumer's own CSS" work the styleless `DrawerContent`'s doc comment
+ * "consumer's own CSS" work the headless `DrawerContent`'s doc comment
  * calls out as unowned by that layer). Sizing every side the same (20rem) is
  * a reasonable single default; a consumer overriding `side="top"`/`"bottom"`
  * for a shorter panel passes their own `className` height.
@@ -26,7 +26,7 @@ const DrawerContent = React.forwardRef<HTMLDivElement, DrawerContentProps>(
   (props, forwardedRef) => {
     const { className, children, hideCloseButton = false, side = 'right', ...rest } = props;
     return (
-      <StylelessDrawerContent
+      <HeadlessDrawerContent
         side={side}
         className={cn(
           'fixed z-50 flex flex-col border-[var(--drawer-content-border)] bg-[var(--drawer-content-bg)] p-6 text-[var(--drawer-text)] shadow-lg transition-transform focus-visible:outline-none',
@@ -59,7 +59,7 @@ const DrawerContent = React.forwardRef<HTMLDivElement, DrawerContentProps>(
             </svg>
           </DrawerClose>
         )}
-      </StylelessDrawerContent>
+      </HeadlessDrawerContent>
     );
   },
 );
@@ -68,4 +68,4 @@ DrawerContent.displayName = 'DrawerContent';
 
 export { DrawerContent };
 export type { DrawerContentProps };
-export type { DrawerSide } from '@nebula/styleless/drawer';
+export type { DrawerSide } from '@nebula/headless/drawer';

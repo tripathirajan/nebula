@@ -21,6 +21,26 @@
       "types": "./dist/app-layout/index.d.ts",
       "import": "./dist/app-layout/index.js"
     },
+    "./login-form": {
+      "types": "./dist/login-form/index.d.ts",
+      "import": "./dist/login-form/index.js"
+    },
+    "./transaction-form": {
+      "types": "./dist/transaction-form/index.d.ts",
+      "import": "./dist/transaction-form/index.js"
+    },
+    "./dashboard-layout": {
+      "types": "./dist/dashboard-layout/index.d.ts",
+      "import": "./dist/dashboard-layout/index.js"
+    },
+    "./auth-layout": {
+      "types": "./dist/auth-layout/index.d.ts",
+      "import": "./dist/auth-layout/index.js"
+    },
+    "./settings-layout": {
+      "types": "./dist/settings-layout/index.d.ts",
+      "import": "./dist/settings-layout/index.js"
+    },
     "./package.json": "./package.json"
   },
   "files": [

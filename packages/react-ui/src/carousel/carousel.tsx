@@ -25,7 +25,7 @@ interface CarouselOwnProps {
 type CarouselProps = PrimitivePropsWithRef<'div'> & CarouselOwnProps;
 
 /**
- * Root of the Carousel compound component. No `@nebula/styleless` layer
+ * Root of the Carousel compound component. No `@nebula/headless` layer
  * behind this one — a `react-ui`/`@nebula/hooks` project owner decision this
  * session (see `AGENTS.md`'s `react-ui` row): a carousel's complexity is
  * slide-index state plus a CSS transform, not an independent ARIA-behavior

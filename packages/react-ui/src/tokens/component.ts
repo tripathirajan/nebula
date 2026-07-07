@@ -318,7 +318,7 @@ const breadcrumbTokens = {
   currentText: 'var(--color-base-content)',
 } as const;
 
-/** Just the swatch's frame — the fill itself is the picker's current value, set inline by the styleless source, not read from here. */
+/** Just the swatch's frame — the fill itself is the picker's current value, set inline by the headless source, not read from here. */
 const colorPickerTokens = {
   swatchBorder: 'var(--color-base-300)',
 } as const;

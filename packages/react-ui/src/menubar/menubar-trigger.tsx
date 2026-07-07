@@ -1,10 +1,10 @@
+import { MenubarTrigger as HeadlessMenubarTrigger } from '@nebula/headless/menubar';
 import { cn } from '@nebula/primitives/cn';
-import { MenubarTrigger as StylelessMenubarTrigger } from '@nebula/styleless/menubar';
 import * as React from 'react';
 
-import type { MenubarTriggerProps as StylelessMenubarTriggerProps } from '@nebula/styleless/menubar';
+import type { MenubarTriggerProps as HeadlessMenubarTriggerProps } from '@nebula/headless/menubar';
 
-type MenubarTriggerProps = StylelessMenubarTriggerProps;
+type MenubarTriggerProps = HeadlessMenubarTriggerProps;
 
 /**
  * A visible bar button (unlike `MenuTrigger`, typically an already-styled
@@ -17,7 +17,7 @@ const MenubarTrigger = React.forwardRef<HTMLButtonElement, MenubarTriggerProps>(
   (props, forwardedRef) => {
     const { className, ...rest } = props;
     return (
-      <StylelessMenubarTrigger
+      <HeadlessMenubarTrigger
         className={cn(
           'rounded-[var(--radius-selector)] px-3 py-1.5 text-sm text-[var(--menubar-trigger-text)] outline-none hover:bg-[var(--menubar-trigger-hover-bg)] data-[state=open]:bg-[var(--menubar-trigger-open-bg)]',
           className,

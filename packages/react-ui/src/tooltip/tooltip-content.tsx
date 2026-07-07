@@ -1,10 +1,10 @@
+import { TooltipContent as HeadlessTooltipContent } from '@nebula/headless/tooltip';
 import { cn } from '@nebula/primitives/cn';
-import { TooltipContent as StylelessTooltipContent } from '@nebula/styleless/tooltip';
 import * as React from 'react';
 
-import type { TooltipContentProps as StylelessTooltipContentProps } from '@nebula/styleless/tooltip';
+import type { TooltipContentProps as HeadlessTooltipContentProps } from '@nebula/headless/tooltip';
 
-type TooltipContentProps = StylelessTooltipContentProps;
+type TooltipContentProps = HeadlessTooltipContentProps;
 
 /**
  * Small, high-contrast label anchored to `TooltipTrigger` — styled off
@@ -14,7 +14,7 @@ type TooltipContentProps = StylelessTooltipContentProps;
  * tooltip visually pops off the page instead of blending in as "more page
  * surface." Radius from `--radius-tooltip`. All positioning (`side`/
  * `align`/`sideOffset`/collision handling) and the hover/focus open-delay
- * behavior are inherited unchanged from `@nebula/styleless`.
+ * behavior are inherited unchanged from `@nebula/headless`.
  *
  * @example
  * ```tsx
@@ -27,7 +27,7 @@ const TooltipContent = React.forwardRef<HTMLDivElement, TooltipContentProps>(
   (props, forwardedRef) => {
     const { className, ...rest } = props;
     return (
-      <StylelessTooltipContent
+      <HeadlessTooltipContent
         className={cn(
           'z-50 rounded-[var(--radius-tooltip)] bg-[var(--tooltip-content-bg)] px-2.5 py-1.5 text-xs text-[var(--tooltip-content-text)] shadow-md',
           className,

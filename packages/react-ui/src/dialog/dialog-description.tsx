@@ -1,16 +1,16 @@
+import { DialogDescription as HeadlessDialogDescription } from '@nebula/headless/dialog';
 import { cn } from '@nebula/primitives/cn';
-import { DialogDescription as StylelessDialogDescription } from '@nebula/styleless/dialog';
 import * as React from 'react';
 
-import type { DialogDescriptionProps as StylelessDialogDescriptionProps } from '@nebula/styleless/dialog';
+import type { DialogDescriptionProps as HeadlessDialogDescriptionProps } from '@nebula/headless/dialog';
 
-type DialogDescriptionProps = StylelessDialogDescriptionProps;
+type DialogDescriptionProps = HeadlessDialogDescriptionProps;
 
 const DialogDescription = React.forwardRef<HTMLParagraphElement, DialogDescriptionProps>(
   (props, forwardedRef) => {
     const { className, ...rest } = props;
     return (
-      <StylelessDialogDescription
+      <HeadlessDialogDescription
         className={cn('text-sm text-[var(--dialog-text)]/70', className)}
         {...rest}
         ref={forwardedRef}

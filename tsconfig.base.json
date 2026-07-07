@@ -39,7 +39,7 @@
     // node_modules package, and there's no such package for a hand-written
     // ambient fix. That's instead fixed per-package via a checked-in
     // `src/vitest-axe-matchers.d.ts` (see any test file using
-    // `toHaveNoViolations` — `primitives`, `styleless`, `react-ui`) picked
+    // `toHaveNoViolations` — `primitives`, `headless`, `react-ui`) picked
     // up automatically by each package's own `"include": ["src"]`.
     "types": [
       "node",
@@ -72,6 +72,12 @@
       ],
       "@nebula/primitives/*": [
         "./packages/primitives/src/*"
+      ],
+      "@nebula/headless": [
+        "./packages/headless/src/index.ts"
+      ],
+      "@nebula/headless/*": [
+        "./packages/headless/src/*"
       ],
       "@nebula/styleless": [
         "./packages/styleless/src/index.ts"

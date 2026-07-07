@@ -1,13 +1,13 @@
+import { TabPanel as HeadlessTabPanel } from '@nebula/headless/tabs';
 import { cn } from '@nebula/primitives/cn';
-import { TabPanel as StylelessTabPanel } from '@nebula/styleless/tabs';
 import * as React from 'react';
 
-import type { TabPanelProps as StylelessTabPanelProps } from '@nebula/styleless/tabs';
+import type { TabPanelProps as HeadlessTabPanelProps } from '@nebula/headless/tabs';
 
-type TabPanelProps = StylelessTabPanelProps;
+type TabPanelProps = HeadlessTabPanelProps;
 
 /**
- * Styled wrapper around `@nebula/styleless`'s `TabPanel` — mount/unmount
+ * Styled wrapper around `@nebula/headless`'s `TabPanel` — mount/unmount
  * (`forceMount`) and `role="tabpanel"` wiring come from there unchanged.
  * This layer only adds spacing above the panel content and resets the
  * focus outline (the panel itself is focusable per the WAI-ARIA Tabs
@@ -24,7 +24,7 @@ type TabPanelProps = StylelessTabPanelProps;
 const TabPanel = React.forwardRef<HTMLDivElement, TabPanelProps>((props, forwardedRef) => {
   const { className, ...rest } = props;
   return (
-    <StylelessTabPanel
+    <HeadlessTabPanel
       className={cn('pt-4 text-sm text-[var(--tabs-trigger-text)] focus-visible:outline-none', className)}
       {...rest}
       ref={forwardedRef}

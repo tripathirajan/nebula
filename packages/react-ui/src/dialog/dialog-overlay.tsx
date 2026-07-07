@@ -1,17 +1,17 @@
+import { DialogOverlay as HeadlessDialogOverlay } from '@nebula/headless/dialog';
 import { cn } from '@nebula/primitives/cn';
-import { DialogOverlay as StylelessDialogOverlay } from '@nebula/styleless/dialog';
 import * as React from 'react';
 
-import type { DialogOverlayProps as StylelessDialogOverlayProps } from '@nebula/styleless/dialog';
+import type { DialogOverlayProps as HeadlessDialogOverlayProps } from '@nebula/headless/dialog';
 
-type DialogOverlayProps = StylelessDialogOverlayProps;
+type DialogOverlayProps = HeadlessDialogOverlayProps;
 
 /** The dimmed backdrop — styled off `--dialog-overlay-bg` at low opacity (see `../tokens/component.ts`). */
 const DialogOverlay = React.forwardRef<HTMLDivElement, DialogOverlayProps>(
   (props, forwardedRef) => {
     const { className, ...rest } = props;
     return (
-      <StylelessDialogOverlay
+      <HeadlessDialogOverlay
         className={cn('fixed inset-0 z-50 bg-[var(--dialog-overlay-bg)]/50', className)}
         {...rest}
         ref={forwardedRef}

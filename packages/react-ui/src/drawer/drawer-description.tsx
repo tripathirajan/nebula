@@ -1,16 +1,16 @@
+import { DrawerDescription as HeadlessDrawerDescription } from '@nebula/headless/drawer';
 import { cn } from '@nebula/primitives/cn';
-import { DrawerDescription as StylelessDrawerDescription } from '@nebula/styleless/drawer';
 import * as React from 'react';
 
-import type { DrawerDescriptionProps as StylelessDrawerDescriptionProps } from '@nebula/styleless/drawer';
+import type { DrawerDescriptionProps as HeadlessDrawerDescriptionProps } from '@nebula/headless/drawer';
 
-type DrawerDescriptionProps = StylelessDrawerDescriptionProps;
+type DrawerDescriptionProps = HeadlessDrawerDescriptionProps;
 
 const DrawerDescription = React.forwardRef<HTMLParagraphElement, DrawerDescriptionProps>(
   (props, forwardedRef) => {
     const { className, ...rest } = props;
     return (
-      <StylelessDrawerDescription
+      <HeadlessDrawerDescription
         className={cn('text-sm text-[var(--drawer-text)]/70', className)}
         {...rest}
         ref={forwardedRef}

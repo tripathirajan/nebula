@@ -8,7 +8,7 @@ type TimelineProps = PrimitivePropsWithRef<'ol'>;
 
 /**
  * A vertical sequence of dated/ordered events — purely presentational
- * structure, no matching `@nebula/styleless` compound, same treatment
+ * structure, no matching `@nebula/headless` compound, same treatment
  * `List`/`Stat`/`Card` document (nothing here is a widget with its own ARIA
  * behavior to separate out; it's a real `<ol>` since a timeline's items are
  * inherently ordered, same reasoning `List`'s `ordered` prop exists for).

@@ -1,17 +1,17 @@
+import { MenuCheckboxItem as HeadlessMenuCheckboxItem } from '@nebula/headless/menu';
 import { cn } from '@nebula/primitives/cn';
-import { MenuCheckboxItem as StylelessMenuCheckboxItem } from '@nebula/styleless/menu';
 import * as React from 'react';
 
-import type { MenuCheckboxItemProps as StylelessMenuCheckboxItemProps } from '@nebula/styleless/menu';
+import type { MenuCheckboxItemProps as HeadlessMenuCheckboxItemProps } from '@nebula/headless/menu';
 
-type MenuCheckboxItemProps = StylelessMenuCheckboxItemProps;
+type MenuCheckboxItemProps = HeadlessMenuCheckboxItemProps;
 
 /** Same row treatment as `MenuItem`, plus a built-in checkmark shown at `data-state=checked` in a reserved left-hand slot. */
 const MenuCheckboxItem = React.forwardRef<HTMLDivElement, MenuCheckboxItemProps>(
   (props, forwardedRef) => {
     const { className, children, ...rest } = props;
     return (
-      <StylelessMenuCheckboxItem
+      <HeadlessMenuCheckboxItem
         className={cn(
           'group relative flex cursor-pointer items-center gap-2 rounded-[var(--radius-selector)] py-1.5 pl-7 pr-2 text-sm outline-none focus:bg-[var(--menu-item-focus-bg)] data-[disabled]:cursor-not-allowed data-[disabled]:opacity-50',
           className,
@@ -32,7 +32,7 @@ const MenuCheckboxItem = React.forwardRef<HTMLDivElement, MenuCheckboxItemProps>
           <path d="M20 6 9 17l-5-5" />
         </svg>
         {children}
-      </StylelessMenuCheckboxItem>
+      </HeadlessMenuCheckboxItem>
     );
   },
 );

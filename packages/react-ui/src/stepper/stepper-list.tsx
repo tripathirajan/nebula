@@ -1,17 +1,17 @@
+import { StepperList as HeadlessStepperList } from '@nebula/headless/stepper';
 import { cn } from '@nebula/primitives/cn';
-import { StepperList as StylelessStepperList } from '@nebula/styleless/stepper';
 import * as React from 'react';
 
-import type { StepperListProps as StylelessStepperListProps } from '@nebula/styleless/stepper';
+import type { StepperListProps as HeadlessStepperListProps } from '@nebula/headless/stepper';
 
-type StepperListProps = StylelessStepperListProps;
+type StepperListProps = HeadlessStepperListProps;
 
 /** Lays steps out in a row (or column, via `data-[orientation=vertical]`) with even gaps. */
 const StepperList = React.forwardRef<HTMLOListElement, StepperListProps>(
   (props, forwardedRef) => {
     const { className, ...rest } = props;
     return (
-      <StylelessStepperList
+      <HeadlessStepperList
         className={cn(
           'flex items-start gap-2 data-[orientation=vertical]:flex-col',
           className,

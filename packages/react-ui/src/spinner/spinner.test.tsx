@@ -5,7 +5,7 @@ import { axe } from 'vitest-axe';
 import { Spinner } from './spinner';
 
 describe('Spinner (ui)', () => {
-  it('renders the styleless behavior unchanged (role="status" + label)', () => {
+  it('renders the headless behavior unchanged (role="status" + label)', () => {
     render(<Spinner />);
     expect(screen.getByRole('status')).toHaveTextContent('Loading...');
   });

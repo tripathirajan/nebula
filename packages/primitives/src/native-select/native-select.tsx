@@ -14,11 +14,11 @@ type NativeSelectProps = PrimitivePropsWithRef<'select'> & NativeSelectOwnProps;
 
 /**
  * Unstyled native `<select>` — no popup/listbox behavior to add on top of
- * what the browser already provides (unlike `@nebula/styleless`'s `Select`,
+ * what the browser already provides (unlike `@nebula/headless`'s `Select`,
  * which builds a fully custom popup listbox for cases that need one), so
  * this stays exactly here at the primitives layer, same treatment `Input`/
  * `Textarea` get: a thin `aria-invalid` wiring wrapper around the real
- * native element, no separate `@nebula/styleless` compound needed.
+ * native element, no separate `@nebula/headless` compound needed.
  *
  * @example
  * ```tsx

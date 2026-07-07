@@ -1,10 +1,10 @@
+import { TreeItem as HeadlessTreeItem } from '@nebula/headless/tree';
 import { cn } from '@nebula/primitives/cn';
-import { TreeItem as StylelessTreeItem } from '@nebula/styleless/tree';
 import * as React from 'react';
 
-import type { TreeItemProps as StylelessTreeItemProps } from '@nebula/styleless/tree';
+import type { TreeItemProps as HeadlessTreeItemProps } from '@nebula/headless/tree';
 
-type TreeItemProps = StylelessTreeItemProps;
+type TreeItemProps = HeadlessTreeItemProps;
 
 /**
  * One row — hover/selected fills read `--tree-hover-bg`/`--tree-selected-bg`
@@ -17,7 +17,7 @@ type TreeItemProps = StylelessTreeItemProps;
 const TreeItem = React.forwardRef<HTMLLIElement, TreeItemProps>((props, forwardedRef) => {
   const { className, ...rest } = props;
   return (
-    <StylelessTreeItem
+    <HeadlessTreeItem
       className={cn(
         'flex cursor-pointer items-center gap-1 rounded-[var(--radius-selector)] px-2 py-1 outline-none hover:bg-[var(--tree-hover-bg)] focus-visible:ring-2 focus-visible:ring-[var(--tree-selected-bg)] data-[state=selected]:bg-[var(--tree-selected-bg)] data-[state=selected]:text-[var(--tree-selected-text)] data-[disabled]:cursor-not-allowed data-[disabled]:opacity-50',
         className,

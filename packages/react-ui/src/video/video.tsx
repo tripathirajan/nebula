@@ -10,7 +10,7 @@ type VideoProps = PrimitivePropsWithRef<'video'>;
  * A themed `<video>` — purely presentational (rounded, clipped corners),
  * no custom player chrome of its own; native browser `controls` are shown
  * by default (pass `controls={false}` to drive playback entirely yourself).
- * No `@nebula/primitives`/`@nebula/styleless` layer underneath — a native
+ * No `@nebula/primitives`/`@nebula/headless` layer underneath — a native
  * `<video controls>` already has full keyboard/screen-reader operability
  * for free, same "nothing to decouple" reasoning `SearchField`'s native
  * `type="search"` affordances document.

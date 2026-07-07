@@ -47,7 +47,7 @@ interface TreeTableProps<T extends TreeTableNode>
  * sort/selection, there's no obvious controlled-prop shape a consumer would
  * want to own — collapse the tree in-place, not in URL/query state, is the
  * overwhelmingly common case (mirrors `Tree`'s own local-state precedent
- * in `@nebula/styleless`).
+ * in `@nebula/headless`).
  *
  * Rows are flattened depth-first at render time, skipping any subtree whose
  * parent isn't in the expanded set, rather than each row-recursion emitting

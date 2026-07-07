@@ -8,7 +8,7 @@ type StatProps = PrimitivePropsWithRef<'div'>;
 
 /**
  * A single metric display — `StatLabel`/`StatValue`/`StatDescription` are
- * purely presentational structure, same "no matching `@nebula/styleless`
+ * purely presentational structure, same "no matching `@nebula/headless`
  * compound" treatment `Card` documents (single-file compound, not a
  * folder-per-sub-part family, since none of these have behavior of their
  * own either).

@@ -1,92 +1,31 @@
 # @nebula/styleless
 
-Behavior-only, ARIA-complete compound components. No styling opinions — that's `@nebula/react-ui`'s job, built on top of this package. (Formerly `@nebula/headless` — renamed because "styleless" says directly what this layer guarantees, without the overloaded "headless UI" jargon.)
+Reusable UI components with a complete, semantic API — but zero visual opinion. Composes `@nebula/primitives` + `@nebula/headless`; styled by `@nebula/react-ui`, which wraps each of these and adds Tailwind classes/variants/tokens on top.
+
+This is the newest layer in the pipeline (`primitives → headless → styleless → react-ui → react-ui-blocks`), confirmed via the project owner's decision guide:
+
+```
+1. Is it a low-level DOM abstraction?                                        → Primitive
+2. Does it solve reusable interaction/state/a11y/keyboard/focus/positioning?  → Headless
+3. Is it a reusable UI component composing primitives/headless, unstyled?     → Styleless
+4. Does it add the Nebula design system (Tailwind, variants, themes)?        → React UI
+```
+
+See `LAYER_TAXONOMY.md` (repo root) for the full ~50-component extraction plan — every component tagged **[extract]** there is currently styled directly in `@nebula/react-ui` and needs an unstyled version factored out into this package. Only `Button` has been extracted so far.
 
 ## What's here
 
-- `Tabs` / `TabList` / `Tab` / `TabPanel` — WAI-ARIA Tabs pattern: roving-tabindex arrow-key navigation (Left/Right or Up/Down depending on `orientation`, plus Home/End), `automatic` or `manual` activation mode, controlled or uncontrolled `value`. Nested `Tabs` instances don't collide (scoped context via `@nebula/primitives`).
-- `Checkbox` — tri-state (`checked` / `unchecked` / `indeterminate`), hidden-native-input technique so it participates in real `<form>`/`FormData` submission and fires genuine `click`/`input`/`change` events.
-- `Switch` — same hidden-native-input pattern as `Checkbox`, WAI-ARIA Switch role.
-- `RadioGroup` / `RadioGroupItem` — WAI-ARIA Radio Group pattern, built on `@nebula/primitives`' `RovingFocusGroup`/`FocusItem` rather than hand-rolling roving-tabindex again.
-- `Accordion` / `AccordionItem` / `AccordionHeader` / `AccordionTrigger` / `AccordionContent` — WAI-ARIA Accordion pattern, `type="single"` (with `collapsible`) or `type="multiple"`, arrow-key navigation between triggers via `RovingFocusGroup`/`FocusItem`, panel wrapped in `@nebula/primitives`' `Presence` so consumers can animate expand/collapse off `data-state` instead of it unmounting instantly.
-- `Dialog` / `DialogTrigger` / `DialogPortal` / `DialogOverlay` / `DialogContent` / `DialogTitle` / `DialogDescription` / `DialogClose` — WAI-ARIA Dialog (Modal) pattern. `DialogContent` composes `@nebula/primitives`' `Presence` + `DismissibleLayer` (Escape/outside-click) + `FocusScope` (`trapped` when `modal`, the root's default) via `asChild` chaining, so it's one real DOM node despite the layered behavior.
-- `Popover` / `PopoverTrigger` / `PopoverPortal` / `PopoverContent` / `PopoverClose` — the non-modal sibling of `Dialog`: anchor-positioned (via `@nebula/primitives`' `Popper`, composed into `Popover`'s own scope so a single `__scopePopover` threads through both), `role="dialog"` without `aria-modal`, `FocusScope` with `trapped={false}` (focus moves in on open and restores to the trigger on close, but Tab isn't cycled), dismissed via `Escape`/outside-click same as `Dialog`. `PopoverTrigger` toggles open/closed on click, unlike `DialogTrigger` which only opens.
+- `Button` — wraps `@nebula/primitives`' bare `Button` and adds real `loading` semantics (`aria-busy`, `data-loading`, forced `disabled`) — no Tailwind classes, no `cva` variants. `@nebula/react-ui`'s `Button` wraps this one and adds only styling.
 
 ## Import
 
 ```tsx
-import { Tabs, TabList, Tab, TabPanel } from '@nebula/styleless';
+import { Button } from '@nebula/styleless';
 // or per-component subpath
-import { Tabs, TabList, Tab, TabPanel } from '@nebula/styleless/tabs';
-import { Checkbox } from '@nebula/styleless/checkbox';
-import { Switch } from '@nebula/styleless/switch';
-import { RadioGroup, RadioGroupItem } from '@nebula/styleless/radio-group';
-import {
-  Accordion,
-  AccordionItem,
-  AccordionHeader,
-  AccordionTrigger,
-  AccordionContent,
-} from '@nebula/styleless/accordion';
-import {
-  Dialog,
-  DialogTrigger,
-  DialogPortal,
-  DialogOverlay,
-  DialogContent,
-  DialogTitle,
-  DialogDescription,
-  DialogClose,
-} from '@nebula/styleless/dialog';
-import {
-  Popover,
-  PopoverTrigger,
-  PopoverPortal,
-  PopoverContent,
-  PopoverClose,
-} from '@nebula/styleless/popover';
+import { Button } from '@nebula/styleless/button';
 ```
 
 ```tsx
-<Tabs defaultValue="account">
-  <TabList>
-    <Tab value="account">Account</Tab>
-    <Tab value="password">Password</Tab>
-  </TabList>
-  <TabPanel value="account">...</TabPanel>
-  <TabPanel value="password">...</TabPanel>
-</Tabs>
-
-<Accordion type="single" collapsible defaultValue="item-1">
-  <AccordionItem value="item-1">
-    <AccordionHeader>
-      <AccordionTrigger>What is nebula?</AccordionTrigger>
-    </AccordionHeader>
-    <AccordionContent>A composable React UI platform.</AccordionContent>
-  </AccordionItem>
-</Accordion>
-
-<Dialog>
-  <DialogTrigger>Delete item</DialogTrigger>
-  <DialogPortal>
-    <DialogOverlay />
-    <DialogContent>
-      <DialogTitle>Delete item?</DialogTitle>
-      <DialogDescription>This can&apos;t be undone.</DialogDescription>
-      <DialogClose>Cancel</DialogClose>
-    </DialogContent>
-  </DialogPortal>
-</Dialog>
-
-<Popover>
-  <PopoverTrigger>Filters</PopoverTrigger>
-  <PopoverPortal>
-    <PopoverContent side="bottom" align="start" sideOffset={4}>
-      <p>Filter options.</p>
-      <PopoverClose>Done</PopoverClose>
-    </PopoverContent>
-  </PopoverPortal>
-</Popover>
+<Button onClick={() => {}}>Click me</Button>
+<Button loading>Saving…</Button>
 ```
-
-Next up in this layer (not yet built): `Tooltip` — see `component-library-architecture.md` §4.2–§4.3 and `AGENTS.md`'s status table for what's actually built.

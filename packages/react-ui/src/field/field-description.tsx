@@ -1,5 +1,5 @@
+import { FieldDescription as HeadlessFieldDescription } from '@nebula/headless/field';
 import { cn } from '@nebula/primitives/cn';
-import { FieldDescription as StylelessFieldDescription } from '@nebula/styleless/field';
 import * as React from 'react';
 
 import type { PrimitivePropsWithRef } from '@nebula/primitives/primitive';
@@ -10,7 +10,7 @@ const FieldDescription = React.forwardRef<HTMLParagraphElement, FieldDescription
   (props, forwardedRef) => {
     const { className, ...rest } = props;
     return (
-      <StylelessFieldDescription
+      <HeadlessFieldDescription
         className={cn('text-xs text-[var(--field-description-text)]', className)}
         {...rest}
         ref={forwardedRef}

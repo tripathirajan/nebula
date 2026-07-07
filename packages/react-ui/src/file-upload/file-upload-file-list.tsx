@@ -1,16 +1,16 @@
+import { FileUploadFileList as HeadlessFileUploadFileList } from '@nebula/headless/file-upload';
 import { cn } from '@nebula/primitives/cn';
-import { FileUploadFileList as StylelessFileUploadFileList } from '@nebula/styleless/file-upload';
 import * as React from 'react';
 
-import type { FileUploadFileListProps as StylelessFileUploadFileListProps } from '@nebula/styleless/file-upload';
+import type { FileUploadFileListProps as HeadlessFileUploadFileListProps } from '@nebula/headless/file-upload';
 
-type FileUploadFileListProps = StylelessFileUploadFileListProps;
+type FileUploadFileListProps = HeadlessFileUploadFileListProps;
 
 const FileUploadFileList = React.forwardRef<HTMLUListElement, FileUploadFileListProps>(
   (props, forwardedRef) => {
     const { className, ...rest } = props;
     return (
-      <StylelessFileUploadFileList
+      <HeadlessFileUploadFileList
         className={cn('mt-2 flex flex-col gap-2', className)}
         {...rest}
         ref={forwardedRef}

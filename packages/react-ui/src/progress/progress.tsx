@@ -1,16 +1,16 @@
-import { cn } from '@nebula/primitives/cn';
 import {
-  Progress as StylelessProgress,
-  ProgressIndicator as StylelessProgressIndicator,
-} from '@nebula/styleless/progress';
+  Progress as HeadlessProgress,
+  ProgressIndicator as HeadlessProgressIndicator,
+} from '@nebula/headless/progress';
+import { cn } from '@nebula/primitives/cn';
 import * as React from 'react';
 
-import type { ProgressProps as StylelessProgressProps } from '@nebula/styleless/progress';
+import type { ProgressProps as HeadlessProgressProps } from '@nebula/headless/progress';
 
-type ProgressProps = StylelessProgressProps;
+type ProgressProps = HeadlessProgressProps;
 
 /**
- * Styled wrapper around `@nebula/styleless`'s `Progress`/`ProgressIndicator`
+ * Styled wrapper around `@nebula/headless`'s `Progress`/`ProgressIndicator`
  * pair — the `role="progressbar"` semantics, `aria-valuenow`/`valuemin`/
  * `valuemax`/`valuetext`, and indeterminate handling all come from there
  * unchanged. Unlike `Accordion`/`Dialog`/etc., this layer doesn't re-expose
@@ -43,7 +43,7 @@ const Progress = React.forwardRef<HTMLDivElement, ProgressProps>((props, forward
   const percent = value == null ? null : Math.min(100, Math.max(0, (value / max) * 100));
 
   return (
-    <StylelessProgress
+    <HeadlessProgress
       value={value}
       max={max}
       className={cn(
@@ -53,14 +53,14 @@ const Progress = React.forwardRef<HTMLDivElement, ProgressProps>((props, forward
       {...rest}
       ref={forwardedRef}
     >
-      <StylelessProgressIndicator
+      <HeadlessProgressIndicator
         className={cn(
           'h-full rounded-[var(--radius-progress)] bg-[var(--progress-indicator-bg)]',
           percent == null ? 'w-full animate-pulse' : 'transition-transform duration-300 ease-out',
         )}
         style={percent == null ? { width: '100%' } : { width: '100%', transform: `translateX(-${100 - percent}%)` }}
       />
-    </StylelessProgress>
+    </HeadlessProgress>
   );
 });
 

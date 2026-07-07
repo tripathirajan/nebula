@@ -5,7 +5,7 @@ import { axe } from 'vitest-axe';
 import { Checkbox } from './checkbox';
 
 describe('Checkbox (ui)', () => {
-  it('renders the styleless behavior unchanged (toggles on click)', () => {
+  it('renders the headless behavior unchanged (toggles on click)', () => {
     render(<Checkbox defaultChecked={false} aria-label="Accept terms" />);
     const checkbox = screen.getByRole('checkbox');
     expect(checkbox).toHaveAttribute('aria-checked', 'false');

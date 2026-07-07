@@ -1,16 +1,16 @@
+import { CommandSeparator as HeadlessCommandSeparator } from '@nebula/headless/command';
 import { cn } from '@nebula/primitives/cn';
-import { CommandSeparator as StylelessCommandSeparator } from '@nebula/styleless/command';
 import * as React from 'react';
 
-import type { CommandSeparatorProps as StylelessCommandSeparatorProps } from '@nebula/styleless/command';
+import type { CommandSeparatorProps as HeadlessCommandSeparatorProps } from '@nebula/headless/command';
 
-type CommandSeparatorProps = StylelessCommandSeparatorProps;
+type CommandSeparatorProps = HeadlessCommandSeparatorProps;
 
 const CommandSeparator = React.forwardRef<HTMLDivElement, CommandSeparatorProps>(
   (props, forwardedRef) => {
     const { className, ...rest } = props;
     return (
-      <StylelessCommandSeparator
+      <HeadlessCommandSeparator
         className={cn('my-1 h-px bg-[var(--command-border)]', className)}
         {...rest}
         ref={forwardedRef}

@@ -1,17 +1,17 @@
+import { NumberInputIncrement as HeadlessNumberInputIncrement } from '@nebula/headless/number-input';
 import { cn } from '@nebula/primitives/cn';
-import { NumberInputIncrement as StylelessNumberInputIncrement } from '@nebula/styleless/number-input';
 import * as React from 'react';
 
-import type { NumberInputIncrementProps as StylelessNumberInputIncrementProps } from '@nebula/styleless/number-input';
+import type { NumberInputIncrementProps as HeadlessNumberInputIncrementProps } from '@nebula/headless/number-input';
 
-type NumberInputIncrementProps = StylelessNumberInputIncrementProps;
+type NumberInputIncrementProps = HeadlessNumberInputIncrementProps;
 
 /** Defaults to a "+" icon when no `children` is given — same convention `RatingItem`'s default star and `BreadcrumbSeparator`'s default chevron use. */
 const NumberInputIncrement = React.forwardRef<HTMLButtonElement, NumberInputIncrementProps>(
   (props, forwardedRef) => {
     const { className, children, ...rest } = props;
     return (
-      <StylelessNumberInputIncrement
+      <HeadlessNumberInputIncrement
         className={cn(
           'flex h-10 w-10 shrink-0 items-center justify-center rounded-[var(--radius-field)] border border-[var(--input-border)] text-[var(--input-text)] outline-none hover:bg-[var(--input-border)]/20 focus-visible:ring-2 focus-visible:ring-[var(--input-ring)] disabled:cursor-not-allowed disabled:opacity-50',
           className,
@@ -33,7 +33,7 @@ const NumberInputIncrement = React.forwardRef<HTMLButtonElement, NumberInputIncr
             <path d="M12 5v14M5 12h14" />
           </svg>
         )}
-      </StylelessNumberInputIncrement>
+      </HeadlessNumberInputIncrement>
     );
   },
 );

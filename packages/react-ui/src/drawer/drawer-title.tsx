@@ -1,16 +1,16 @@
+import { DrawerTitle as HeadlessDrawerTitle } from '@nebula/headless/drawer';
 import { cn } from '@nebula/primitives/cn';
-import { DrawerTitle as StylelessDrawerTitle } from '@nebula/styleless/drawer';
 import * as React from 'react';
 
-import type { DrawerTitleProps as StylelessDrawerTitleProps } from '@nebula/styleless/drawer';
+import type { DrawerTitleProps as HeadlessDrawerTitleProps } from '@nebula/headless/drawer';
 
-type DrawerTitleProps = StylelessDrawerTitleProps;
+type DrawerTitleProps = HeadlessDrawerTitleProps;
 
 const DrawerTitle = React.forwardRef<HTMLHeadingElement, DrawerTitleProps>(
   (props, forwardedRef) => {
     const { className, ...rest } = props;
     return (
-      <StylelessDrawerTitle
+      <HeadlessDrawerTitle
         className={cn('font-[var(--font-heading)] text-lg font-semibold', className)}
         {...rest}
         ref={forwardedRef}

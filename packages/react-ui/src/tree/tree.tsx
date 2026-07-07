@@ -1,16 +1,16 @@
+import { Tree as HeadlessTree } from '@nebula/headless/tree';
 import { cn } from '@nebula/primitives/cn';
-import { Tree as StylelessTree } from '@nebula/styleless/tree';
 import * as React from 'react';
 
-import type { TreeProps as StylelessTreeProps } from '@nebula/styleless/tree';
+import type { TreeProps as HeadlessTreeProps } from '@nebula/headless/tree';
 
-type TreeProps = StylelessTreeProps;
+type TreeProps = HeadlessTreeProps;
 
 /** Root `role="tree"` list — sets the base text size/color every nested `TreeItem` inherits. */
 const Tree = React.forwardRef<HTMLUListElement, TreeProps>((props, forwardedRef) => {
   const { className, ...rest } = props;
   return (
-    <StylelessTree
+    <HeadlessTree
       className={cn('text-sm text-[var(--tree-text)]', className)}
       {...rest}
       ref={forwardedRef}
@@ -22,4 +22,4 @@ Tree.displayName = 'Tree';
 
 export { Tree };
 export type { TreeProps };
-export type { TreeSingleProps, TreeMultipleProps } from '@nebula/styleless/tree';
+export type { TreeSingleProps, TreeMultipleProps } from '@nebula/headless/tree';
