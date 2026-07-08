@@ -2,11 +2,12 @@ import { cn } from '@nebula/primitives/cn';
 import { PasswordInput as StylelessPasswordInput } from '@nebula/styleless/password-input';
 import * as React from 'react';
 
-import { inputClassName } from '../input/input';
+import { inputVariants } from '../input/input';
 
 import type { PasswordInputProps as StylelessPasswordInputProps } from '@nebula/styleless/password-input';
+import type { VariantProps } from 'class-variance-authority';
 
-type PasswordFieldProps = StylelessPasswordInputProps;
+type PasswordFieldProps = StylelessPasswordInputProps & VariantProps<typeof inputVariants>;
 
 /**
  * Wraps `@nebula/styleless`'s `PasswordInput` (which owns the real
@@ -24,12 +25,12 @@ type PasswordFieldProps = StylelessPasswordInputProps;
  */
 const PasswordField = React.forwardRef<HTMLInputElement, PasswordFieldProps>(
   (props, forwardedRef) => {
-    const { className, ...rest } = props;
+    const { className, variant, ...rest } = props;
 
     return (
       <div className="relative">
         <StylelessPasswordInput
-          className={cn(inputClassName, 'pr-10', className)}
+          className={cn(inputVariants({ variant }), 'pr-10', className)}
           toggleClassName="absolute right-2 top-1/2 -translate-y-1/2 rounded-[var(--radius-selector)] p-1 text-[var(--input-text)]/60 outline-none hover:text-[var(--input-text)] focus-visible:ring-2 focus-visible:ring-[var(--input-ring)]"
           renderToggle={(visible) =>
             visible ? (

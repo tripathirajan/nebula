@@ -36,6 +36,7 @@
   --button-danger-text: var(--color-error-content);
   --button-danger-border: var(--color-error);
   --input-bg: var(--color-base-100);
+  --input-filled-bg: var(--color-base-200);
   --input-border: var(--color-base-300);
   --input-text: var(--color-base-content);
   --input-ring: var(--color-base-content);

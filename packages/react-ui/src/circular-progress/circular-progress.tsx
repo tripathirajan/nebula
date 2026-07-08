@@ -9,9 +9,21 @@ interface CircularProgressOwnProps {
   size?: number;
   /** Stroke width in pixels. @default 4 */
   strokeWidth?: number;
+  /** Track/indicator color pair — same `primary`/`secondary` axis `Progress` uses. @default 'primary' */
+  variant?: 'primary' | 'secondary';
 }
 
 type CircularProgressProps = HeadlessProgressProps & CircularProgressOwnProps;
+
+const STROKE_TRACK = {
+  primary: 'stroke-[var(--progress-primary-track-bg)]',
+  secondary: 'stroke-[var(--progress-secondary-track-bg)]',
+} as const;
+
+const STROKE_INDICATOR = {
+  primary: 'stroke-[var(--progress-primary-indicator-bg)]',
+  secondary: 'stroke-[var(--progress-secondary-indicator-bg)]',
+} as const;
 
 /**
  * An SVG-ring variant of `Progress` — same `@nebula/headless` `Progress`
@@ -29,9 +41,12 @@ type CircularProgressProps = HeadlessProgressProps & CircularProgressOwnProps;
  * mirroring `Spinner`'s own indeterminate treatment rather than introducing
  * a second animation vocabulary.
  *
+ * `variant` picks the same track/indicator color pair `Progress` uses.
+ *
  * @example
  * ```tsx
  * <CircularProgress value={60} />
+ * <CircularProgress value={60} variant="secondary" />
  * <CircularProgress value={null} /> // indeterminate
  * <CircularProgress value={3} max={5} size={56} strokeWidth={6} />
  * ```
@@ -44,6 +59,7 @@ const CircularProgress = React.forwardRef<HTMLDivElement, CircularProgressProps>
       max = 100,
       size = 40,
       strokeWidth = 4,
+      variant = 'primary',
       ...rest
     } = props;
     const percent = value == null ? null : Math.min(100, Math.max(0, (value / max) * 100));
@@ -69,7 +85,7 @@ const CircularProgress = React.forwardRef<HTMLDivElement, CircularProgressProps>
             r={radius}
             fill="none"
             strokeWidth={strokeWidth}
-            className="stroke-[var(--progress-track-bg)]"
+            className={STROKE_TRACK[variant]}
           />
           <circle
             cx={size / 2}
@@ -81,7 +97,7 @@ const CircularProgress = React.forwardRef<HTMLDivElement, CircularProgressProps>
             strokeDasharray={circumference}
             strokeDashoffset={dashoffset}
             className={cn(
-              'stroke-[var(--progress-indicator-bg)]',
+              STROKE_INDICATOR[variant],
               percent != null && 'transition-[stroke-dashoffset] duration-300 ease-out',
             )}
           />

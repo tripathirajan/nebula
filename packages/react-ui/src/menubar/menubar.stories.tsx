@@ -63,7 +63,7 @@ export const Default: Story = {
   render: () => <AppMenubar />,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const fileTrigger = canvas.getByRole('button', { name: 'File' });
+    const fileTrigger = canvas.getByRole('menuitem', { name: 'File' });
 
     await userEvent.click(fileTrigger);
     const body = within(document.body);
@@ -79,8 +79,8 @@ export const HoverSwitchesOpenMenu: Story = {
   render: () => <AppMenubar />,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const fileTrigger = canvas.getByRole('button', { name: 'File' });
-    const editTrigger = canvas.getByRole('button', { name: 'Edit' });
+    const fileTrigger = canvas.getByRole('menuitem', { name: 'File' });
+    const editTrigger = canvas.getByRole('menuitem', { name: 'Edit' });
 
     await userEvent.click(fileTrigger);
     const body = within(document.body);

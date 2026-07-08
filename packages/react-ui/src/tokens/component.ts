@@ -48,6 +48,10 @@ const buttonTokens = {
 
 const inputTokens = {
   bg: 'var(--color-base-100)',
+  // One step darker than `bg` — backs the `filled` variant, which needs a
+  // background visibly distinct from plain page surface (unlike `bg`,
+  // which is the same `base-100` `Card`/`Paper` use for their own surface).
+  filledBg: 'var(--color-base-200)',
   border: 'var(--color-base-300)',
   text: 'var(--color-base-content)',
   ring: 'var(--color-base-content)',
@@ -148,16 +152,32 @@ const radioTokens = {
  * own track isn't a WCAG text-contrast pairing (nothing here is text), same
  * exemption `separatorTokens`'s divider-on-page-background use already
  * relies on, so no new `CONTRAST_AUDIT.md` entry is needed.
+ *
+ * `secondary` maps to `neutral`, same as `buttonTokens.secondary` — the
+ * track stays the shared `base-300` regardless of variant, since a dim
+ * track color reads consistently against either indicator color.
  */
 const progressTokens = {
-  trackBg: 'var(--color-base-300)',
-  indicatorBg: 'var(--color-primary)',
+  primary: {
+    trackBg: 'var(--color-base-300)',
+    indicatorBg: 'var(--color-primary)',
+  },
+  secondary: {
+    trackBg: 'var(--color-base-300)',
+    indicatorBg: 'var(--color-neutral)',
+  },
 } as const;
 
-/** Same `base-300`/`primary` pairing and rationale as `progressTokens` — a spinner ring isn't text either. */
+/** Same `base-300`/`primary`-or-`neutral` pairing and rationale as `progressTokens` — a spinner ring isn't text either. */
 const spinnerTokens = {
-  track: 'var(--color-base-300)',
-  indicator: 'var(--color-primary)',
+  primary: {
+    track: 'var(--color-base-300)',
+    indicator: 'var(--color-primary)',
+  },
+  secondary: {
+    track: 'var(--color-base-300)',
+    indicator: 'var(--color-neutral)',
+  },
 } as const;
 
 /** A skeleton placeholder is a decorative fill, not text — `base-300` alone (no paired foreground color) is all it needs. */

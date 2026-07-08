@@ -2,15 +2,16 @@ import { cn } from '@nebula/primitives/cn';
 import { TelInput as StylelessTelInput } from '@nebula/styleless/tel-input';
 import * as React from 'react';
 
-import { inputClassName } from '../input/input';
+import { inputVariants } from '../input/input';
 
 import type { TelInputProps as StylelessTelInputProps } from '@nebula/styleless/tel-input';
+import type { VariantProps } from 'class-variance-authority';
 
-type TelFieldProps = StylelessTelInputProps;
+type TelFieldProps = StylelessTelInputProps & VariantProps<typeof inputVariants>;
 
 /**
  * Styled `type="tel"` `Input` preset — wraps `@nebula/styleless`'s
- * `TelInput` and reuses `Input`'s exact class recipe (`inputClassName`).
+ * `TelInput` and reuses `Input`'s exact class recipe (`inputVariants`).
  *
  * @example
  * ```tsx
@@ -18,9 +19,13 @@ type TelFieldProps = StylelessTelInputProps;
  * ```
  */
 const TelField = React.forwardRef<HTMLInputElement, TelFieldProps>((props, forwardedRef) => {
-  const { className, ...rest } = props;
+  const { className, variant, ...rest } = props;
   return (
-    <StylelessTelInput className={cn(inputClassName, className)} {...rest} ref={forwardedRef} />
+    <StylelessTelInput
+      className={cn(inputVariants({ variant }), className)}
+      {...rest}
+      ref={forwardedRef}
+    />
   );
 });
 

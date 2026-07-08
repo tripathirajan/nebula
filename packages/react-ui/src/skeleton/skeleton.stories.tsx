@@ -23,14 +23,18 @@ export const Default: Story = {
 };
 
 export const AvatarPlaceholder: Story = {
-  args: { className: 'h-12 w-12 rounded-full' },
+  args: { shape: 'circle', className: 'h-12 w-12' },
+};
+
+export const Square: Story = {
+  args: { shape: 'square', className: 'h-12 w-12' },
 };
 
 export const ProfileCardGroup: Story = {
   name: 'Grouped under one announced status',
   render: () => (
     <div role="status" aria-label="Loading profile" style={{ display: 'flex', gap: 12 }}>
-      <Skeleton className="h-12 w-12 rounded-full" />
+      <Skeleton shape="circle" className="h-12 w-12" />
       <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
         <Skeleton className="h-3 w-40" />
         <Skeleton className="h-3 w-28" />

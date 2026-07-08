@@ -1,5 +1,6 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
+import { axe } from 'vitest-axe';
 
 import { Menubar } from './menubar';
 import { MenubarContent } from './menubar-content';
@@ -36,8 +37,8 @@ describe('Menubar', () => {
   it('renders role="menubar" with a trigger per MenubarMenu', () => {
     render(<DemoMenubar />);
     expect(screen.getByRole('menubar')).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'File' })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'Edit' })).toBeInTheDocument();
+    expect(screen.getByRole('menuitem', { name: 'File' })).toBeInTheDocument();
+    expect(screen.getByRole('menuitem', { name: 'Edit' })).toBeInTheDocument();
   });
 
   it('is closed initially', () => {
@@ -47,7 +48,7 @@ describe('Menubar', () => {
 
   it('opens the clicked menu', () => {
     render(<DemoMenubar />);
-    fireEvent.click(screen.getByRole('button', { name: 'File' }));
+    fireEvent.click(screen.getByRole('menuitem', { name: 'File' }));
 
     expect(screen.getByRole('menu')).toBeInTheDocument();
     expect(screen.getByRole('menuitem', { name: 'New file' })).toBeInTheDocument();
@@ -55,10 +56,10 @@ describe('Menubar', () => {
 
   it('only one menu is open at a time — opening Edit closes File', async () => {
     render(<DemoMenubar />);
-    fireEvent.click(screen.getByRole('button', { name: 'File' }));
+    fireEvent.click(screen.getByRole('menuitem', { name: 'File' }));
     await waitFor(() => expect(screen.getByRole('menuitem', { name: 'New file' })).toBeInTheDocument());
 
-    fireEvent.click(screen.getByRole('button', { name: 'Edit' }));
+    fireEvent.click(screen.getByRole('menuitem', { name: 'Edit' }));
     await waitFor(() => {
       expect(screen.queryByRole('menuitem', { name: 'New file' })).not.toBeInTheDocument();
       expect(screen.getByRole('menuitem', { name: 'Undo' })).toBeInTheDocument();
@@ -67,7 +68,7 @@ describe('Menubar', () => {
 
   it('clicking the open trigger again closes its menu', async () => {
     render(<DemoMenubar />);
-    const fileTrigger = screen.getByRole('button', { name: 'File' });
+    const fileTrigger = screen.getByRole('menuitem', { name: 'File' });
     fireEvent.click(fileTrigger);
     await waitFor(() => expect(screen.getByRole('menu')).toBeInTheDocument());
 
@@ -77,10 +78,10 @@ describe('Menubar', () => {
 
   it('focusing a sibling trigger switches the open menu once one is already open', async () => {
     render(<DemoMenubar />);
-    fireEvent.click(screen.getByRole('button', { name: 'File' }));
+    fireEvent.click(screen.getByRole('menuitem', { name: 'File' }));
     await waitFor(() => expect(screen.getByRole('menuitem', { name: 'New file' })).toBeInTheDocument());
 
-    fireEvent.focus(screen.getByRole('button', { name: 'Edit' }));
+    fireEvent.focus(screen.getByRole('menuitem', { name: 'Edit' }));
     await waitFor(() => {
       expect(screen.queryByRole('menuitem', { name: 'New file' })).not.toBeInTheDocument();
       expect(screen.getByRole('menuitem', { name: 'Undo' })).toBeInTheDocument();
@@ -89,14 +90,14 @@ describe('Menubar', () => {
 
   it('focusing a sibling trigger does nothing while no menu is open', () => {
     render(<DemoMenubar />);
-    fireEvent.focus(screen.getByRole('button', { name: 'Edit' }));
+    fireEvent.focus(screen.getByRole('menuitem', { name: 'Edit' }));
     expect(screen.queryByRole('menu')).not.toBeInTheDocument();
   });
 
   it('ArrowRight moves focus from File to Edit trigger', () => {
     render(<DemoMenubar />);
-    const fileTrigger = screen.getByRole('button', { name: 'File' });
-    const editTrigger = screen.getByRole('button', { name: 'Edit' });
+    const fileTrigger = screen.getByRole('menuitem', { name: 'File' });
+    const editTrigger = screen.getByRole('menuitem', { name: 'Edit' });
     fileTrigger.focus();
 
     fireEvent.keyDown(fileTrigger, { key: 'ArrowRight' });
@@ -105,10 +106,15 @@ describe('Menubar', () => {
 
   it('selects an item and closes the menu', async () => {
     render(<DemoMenubar />);
-    fireEvent.click(screen.getByRole('button', { name: 'File' }));
+    fireEvent.click(screen.getByRole('menuitem', { name: 'File' }));
     const save = await screen.findByRole('menuitem', { name: 'Save' });
 
     fireEvent.click(save);
     await waitFor(() => expect(screen.queryByRole('menu')).not.toBeInTheDocument());
+  });
+
+  it('has no axe violations (menubar role requires menuitem-role children)', async () => {
+    const { container } = render(<DemoMenubar />);
+    expect(await axe(container)).toHaveNoViolations();
   });
 });

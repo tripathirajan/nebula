@@ -1,10 +1,40 @@
 import { cn } from '@nebula/primitives/cn';
 import { Primitive } from '@nebula/primitives/primitive';
+import { cva } from 'class-variance-authority';
 import * as React from 'react';
 
 import type { PrimitivePropsWithRef } from '@nebula/primitives/primitive';
+import type { VariantProps } from 'class-variance-authority';
 
-type CardProps = PrimitivePropsWithRef<'div'>;
+/**
+ * Same two-axis shape `Paper` uses (see `paper.tsx`) — `variant="outlined"`
+ * always renders a visible border and no shadow regardless of `elevation`;
+ * `variant="elevation"` renders a shadow (depth controlled by `elevation`)
+ * and no border. `elevation={0}` under the default `"elevation"` variant is
+ * the flat/borderless look (no shadow, no border).
+ */
+const cardVariants = cva('rounded-[var(--radius-card)] bg-[var(--card-bg)] text-[var(--card-text)]', {
+  variants: {
+    variant: {
+      elevation: 'border-0',
+      outlined: 'border border-[var(--card-border)] shadow-none',
+    },
+    elevation: {
+      0: 'shadow-none',
+      1: 'shadow-sm',
+      2: 'shadow-md',
+      3: 'shadow-lg',
+    },
+  },
+  compoundVariants: [
+    // `elevation` is only visually meaningful under variant="elevation" —
+    // force it inert under "outlined" so passing both never doubles up a shadow.
+    { variant: 'outlined', elevation: [0, 1, 2, 3], class: 'shadow-none' },
+  ],
+  defaultVariants: { variant: 'elevation', elevation: 1 },
+});
+
+type CardProps = PrimitivePropsWithRef<'div'> & VariantProps<typeof cardVariants>;
 
 /**
  * A bordered container — `CardHeader`/`CardTitle`/`CardDescription`/
@@ -33,17 +63,19 @@ type CardProps = PrimitivePropsWithRef<'div'>;
  *   <CardTitle className="p-6 pb-0">Just a title</CardTitle>
  *   <CardContent>...</CardContent>
  * </Card>
+ *
+ * // Outlined instead of the default shadow-elevated look, flat (no border,
+ * // no shadow) via elevation={0}:
+ * <Card variant="outlined">...</Card>
+ * <Card elevation={0}>...</Card>
  * ```
  */
 const Card = React.forwardRef<HTMLDivElement, CardProps>((props, forwardedRef) => {
-  const { className, ...rest } = props;
+  const { className, variant, elevation, ...rest } = props;
   return (
     <Primitive
       as="div"
-      className={cn(
-        'rounded-[var(--radius-card)] border border-[var(--card-border)] bg-[var(--card-bg)] text-[var(--card-text)]',
-        className,
-      )}
+      className={cn(cardVariants({ variant, elevation }), className)}
       {...rest}
       ref={forwardedRef}
     />
@@ -151,5 +183,5 @@ const CardFooter = React.forwardRef<HTMLDivElement, CardProps>((props, forwarded
 });
 CardFooter.displayName = 'CardFooter';
 
-export { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter };
+export { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter, cardVariants };
 export type { CardProps, CardHeaderProps, CardTitleProps, CardDescriptionProps };

@@ -2,11 +2,12 @@ import { cn } from '@nebula/primitives/cn';
 import { SearchInput as StylelessSearchInput } from '@nebula/styleless/search-input';
 import * as React from 'react';
 
-import { inputClassName } from '../input/input';
+import { inputVariants } from '../input/input';
 
 import type { SearchInputProps as StylelessSearchInputProps } from '@nebula/styleless/search-input';
+import type { VariantProps } from 'class-variance-authority';
 
-type SearchFieldProps = StylelessSearchInputProps;
+type SearchFieldProps = StylelessSearchInputProps & VariantProps<typeof inputVariants>;
 
 /**
  * Wraps `@nebula/styleless`'s `SearchInput` (the `type="search"` preset)
@@ -22,7 +23,7 @@ type SearchFieldProps = StylelessSearchInputProps;
  * ```
  */
 const SearchField = React.forwardRef<HTMLInputElement, SearchFieldProps>((props, forwardedRef) => {
-  const { className, ...rest } = props;
+  const { className, variant, ...rest } = props;
   return (
     <div className="relative">
       <svg
@@ -39,7 +40,7 @@ const SearchField = React.forwardRef<HTMLInputElement, SearchFieldProps>((props,
         <path d="m21 21-4.3-4.3" />
       </svg>
       <StylelessSearchInput
-        className={cn(inputClassName, 'pl-9', className)}
+        className={cn(inputVariants({ variant }), 'pl-9', className)}
         {...rest}
         ref={forwardedRef}
       />

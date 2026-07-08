@@ -48,3 +48,20 @@ export const NoSrc: Story = {
     </Avatar>
   ),
 };
+
+export const Shapes: Story = {
+  name: 'shape: circle / rounded / square',
+  render: () => (
+    <div className="flex items-center gap-4">
+      <Avatar shape="circle">
+        <AvatarFallback>C</AvatarFallback>
+      </Avatar>
+      <Avatar shape="rounded">
+        <AvatarFallback>R</AvatarFallback>
+      </Avatar>
+      <Avatar shape="square">
+        <AvatarFallback>S</AvatarFallback>
+      </Avatar>
+    </div>
+  ),
+};
