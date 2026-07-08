@@ -99,7 +99,18 @@ const radius = {
   chip: '2rem',
   avatar: '2rem',
   menu: '2rem',
-  popover: '2rem',
+  // Deliberately smaller than every other role here: `--radius-popover`
+  // backs every floating list/panel surface (`Popover`, `Menu` and its
+  // `ContextMenu`/`Menubar`/`DropdownMenu` variants, `Combobox`, `Select`,
+  // `MultiSelect`, `HoverCard` — see each `*-content.tsx`'s
+  // `rounded-[var(--radius-popover)]`), all of which pad their content by
+  // only `p-1`. At the same pill radius as `button`/`card`/etc. (`2rem`),
+  // that corner curve is far bigger than the padding meant to keep content
+  // clear of it, so items nearest a corner visually clip into the rounded
+  // edge instead of sitting inside a clean rectangle — the "weird padding"
+  // a menu/popover reads at a glance. A modest radius keeps the same
+  // rounded-corner language without outgrowing a compact panel's padding.
+  popover: '0.75rem',
   tooltip: '2rem',
   progress: '2rem',
 } as const;
