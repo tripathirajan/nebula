@@ -12,6 +12,7 @@ const meta = {
   argTypes: {
     invalid: { control: 'boolean' },
     disabled: { control: 'boolean' },
+    variant: { control: 'select', options: ['outline', 'filled', 'underline'] },
   },
 } satisfies Meta<typeof Input>;
 
@@ -38,4 +39,12 @@ export const Invalid: Story = {
 
 export const Disabled: Story = {
   args: { disabled: true, placeholder: 'Unavailable', 'aria-label': 'Email' },
+};
+
+export const Filled: Story = {
+  args: { variant: 'filled', placeholder: 'you@example.com', 'aria-label': 'Email' },
+};
+
+export const Underline: Story = {
+  args: { variant: 'underline', placeholder: 'you@example.com', 'aria-label': 'Email' },
 };

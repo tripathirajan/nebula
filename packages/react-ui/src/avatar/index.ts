@@ -1,4 +1,4 @@
-export { Avatar } from './avatar';
+export { Avatar, avatarVariants } from './avatar';
 export type { AvatarProps } from './avatar';
 export { AvatarImage } from './avatar-image';
 export type { AvatarImageProps } from './avatar-image';

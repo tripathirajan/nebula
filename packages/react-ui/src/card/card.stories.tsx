@@ -97,3 +97,48 @@ export const TitleOnly: Story = {
     </Card>
   ),
 };
+
+export const Outlined: Story = {
+  name: 'variant="outlined"',
+  render: () => (
+    <Card variant="outlined" className="w-80">
+      <CardHeader>
+        <CardTitle>Outlined</CardTitle>
+        <CardDescription>Visible border, no shadow.</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <p className="text-sm">Use when the surrounding page already has enough depth cues.</p>
+      </CardContent>
+    </Card>
+  ),
+};
+
+export const Elevation0: Story = {
+  name: 'elevation={0} (flat, no border)',
+  render: () => (
+    <Card elevation={0} className="w-80">
+      <CardHeader>
+        <CardTitle>Flat</CardTitle>
+        <CardDescription>No shadow, no border — just the surface color.</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <p className="text-sm">The flattest available Card look.</p>
+      </CardContent>
+    </Card>
+  ),
+};
+
+export const Elevation3: Story = {
+  name: 'elevation={3} (most elevated)',
+  render: () => (
+    <Card elevation={3} className="w-80">
+      <CardHeader>
+        <CardTitle>Elevated</CardTitle>
+        <CardDescription>Deepest shadow, no border.</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <p className="text-sm">Use to draw attention above surrounding content.</p>
+      </CardContent>
+    </Card>
+  ),
+};

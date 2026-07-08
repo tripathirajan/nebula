@@ -58,6 +58,7 @@ const MenubarTrigger = React.forwardRef<HTMLButtonElement, ScopedProps<MenubarTr
           <Primitive
             as="button"
             type="button"
+            role="menuitem"
             aria-haspopup="menu"
             aria-expanded={menuContext.open}
             aria-controls={menuContext.open ? menuContext.contentId : undefined}
