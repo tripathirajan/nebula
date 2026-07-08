@@ -3,9 +3,11 @@ import { Popper } from '@nebula/primitives/popper';
 import { VisuallyHidden } from '@nebula/primitives/visually-hidden';
 import * as React from 'react';
 
+import { SelectItem } from './select-item';
 import { SelectProvider, usePopperScope } from './select-context';
 
 import type { ScopedProps } from './select-context';
+import type { SelectItemProps } from './select-item';
 
 interface SelectProps {
   open?: boolean;
@@ -21,6 +23,32 @@ interface SelectProps {
   /** Mirrored onto a visually-hidden native `<select>` so this participates in native `<form>` submission. */
   name?: string;
   children?: React.ReactNode;
+}
+
+/**
+ * Walks `children` (recursing into every element's own `children`, so it
+ * sees through `SelectPortal`/`SelectContent`/any wrapping fragments) and
+ * collects each `SelectItem`'s `value` -> label mapping, the same label
+ * `SelectItem`'s own registration effect would eventually report — but
+ * available synchronously from `Select`'s own render, before `SelectItem`
+ * has ever mounted. Needed because `SelectContent`'s children only mount
+ * once the popup has been opened at least once (see `Presence` in
+ * `select-content.tsx`), so the registration effect alone can't explain a
+ * `defaultValue`'s label on the very first render, or the label surviving
+ * after the item unmounts when the popup closes post-selection.
+ */
+function collectStaticItemLabels(children: React.ReactNode, labels: Map<string, string>): void {
+  React.Children.forEach(children, (child) => {
+    if (!React.isValidElement(child)) return;
+    if (child.type === SelectItem) {
+      const { value, textValue, children: itemChildren } = child.props as SelectItemProps;
+      const label = textValue ?? (typeof itemChildren === 'string' ? itemChildren : undefined);
+      if (label !== undefined) labels.set(value, label);
+      return;
+    }
+    const childProps = child.props as { children?: React.ReactNode } | undefined;
+    if (childProps?.children) collectStaticItemLabels(childProps.children, labels);
+  });
 }
 
 /**
@@ -108,9 +136,34 @@ function Select(props: ScopedProps<SelectProps>) {
     });
   }, []);
 
+  const staticLabels = React.useMemo(() => {
+    const labels = new Map<string, string>();
+    collectStaticItemLabels(children, labels);
+    return labels;
+  }, [children]);
+
   const getItemLabel = React.useCallback(
-    (itemValue: string) => labelMap.get(itemValue),
-    [labelMap],
+    (itemValue: string) => labelMap.get(itemValue) ?? staticLabels.get(itemValue),
+    [labelMap, staticLabels],
+  );
+
+  // Memoized, not an inline arrow function: `SelectProvider`'s context value
+  // is itself `useMemo`'d off every prop it's given, so a fresh closure here
+  // recomputes a new context object on every render — every consumer of
+  // that context (including `SelectTrigger`, which also composes a
+  // `PopperAnchor` ref) re-renders needlessly on every `Select` render, and
+  // since `PopperAnchor`'s `asChild` ref composition isn't itself memoized,
+  // each of those extra re-renders recreates the anchor ref, causing
+  // `Popper` to detach/reattach it (a real state change) — which re-renders
+  // `Select` again, feeding right back into this same unstable context.
+  // Self-limiting for most consumers (a couple of wasted renders that
+  // settle), but genuinely infinite paired with this closure.
+  const handleValueChange = React.useCallback(
+    (next: string) => {
+      setValue(next);
+      setOpen(false);
+    },
+    [setValue, setOpen],
   );
 
   return (
@@ -120,10 +173,7 @@ function Select(props: ScopedProps<SelectProps>) {
         open={open}
         onOpenChange={setOpen}
         value={value}
-        onValueChange={(next) => {
-          setValue(next);
-          setOpen(false);
-        }}
+        onValueChange={handleValueChange}
         disabled={disabled}
         required={required}
         name={name}
@@ -150,11 +200,13 @@ function Select(props: ScopedProps<SelectProps>) {
               onChange={() => {}}
             >
               <option value="" />
-              {Array.from(labelMap.entries()).map(([itemValue, label]) => (
-                <option key={itemValue} value={itemValue}>
-                  {label}
-                </option>
-              ))}
+              {Array.from(new Map([...staticLabels, ...labelMap]).entries()).map(
+                ([itemValue, label]) => (
+                  <option key={itemValue} value={itemValue}>
+                    {label}
+                  </option>
+                ),
+              )}
             </select>
           </VisuallyHidden>
         ) : null}

@@ -94,7 +94,15 @@ const TreeItem = React.forwardRef<HTMLLIElement, ScopedProps<ItemScopedProps<Tre
           tabIndex={disabled ? undefined : rootContext.activeValue === value ? 0 : -1}
           {...itemProps}
           ref={forwardedRef}
-          onClick={composeEventHandlers(onClick, select)}
+          onClick={composeEventHandlers(onClick, (event) => {
+            // A click on a nested item's row bubbles up through every
+            // ancestor `TreeItem`'s own `<li>` (real DOM nesting — a
+            // `TreeGroup` renders inside its parent `TreeItem`), so without
+            // this every ancestor's `onClick` fires too, each re-selecting
+            // itself last and clobbering the click's actual target.
+            event.stopPropagation();
+            select();
+          })}
           onFocus={composeEventHandlers(onFocus, () => rootContext.setActiveValue(value))}
           onKeyDown={composeEventHandlers(onKeyDown, (event) => {
             if (event.key === ' ' || event.key === 'Enter') {

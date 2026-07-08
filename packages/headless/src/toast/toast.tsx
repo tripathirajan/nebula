@@ -8,7 +8,7 @@ import { ToastProvider } from './toast-context';
 import type { ScopedProps } from './toast-context';
 import type { PrimitivePropsWithRef } from '@nebula/primitives/primitive';
 
-interface ToastProps extends PrimitivePropsWithRef<'li'> {
+interface ToastProps extends PrimitivePropsWithRef<'div'> {
   open?: boolean;
   defaultOpen?: boolean;
   onOpenChange?: (open: boolean) => void;
@@ -25,8 +25,12 @@ interface ToastProps extends PrimitivePropsWithRef<'li'> {
  * `role="status"` + `aria-live="polite"` + `aria-atomic="true"` — announces
  * itself to assistive tech without stealing focus or interrupting whatever
  * the user is doing (the WAI-ARIA "status message" pattern; a toast is
- * fundamentally a live region, not a dialog). Renders `<li>` since a
- * `Toast` is meant to live inside a `ToastViewport`'s `<ol>`.
+ * fundamentally a live region, not a dialog). Renders a plain `<div>`, not
+ * an `<li>`: `role="status"` is an invalid role override for `<li>` (its
+ * implicit role is `listitem`, and forcing a non-`listitem` role onto it
+ * also invalidates the parent list — a real `aria-allowed-role`/`list`
+ * violation, not a pedantic one), so `ToastViewport` renders as a labelled
+ * `role="region"` rather than an `<ol>` to match.
  *
  * Unlike `Dialog`, there's no shared root managing "which toast is open" —
  * toasts are independent and usually several are visible simultaneously, so
@@ -46,7 +50,7 @@ interface ToastProps extends PrimitivePropsWithRef<'li'> {
  * </Toast>
  * ```
  */
-const Toast = React.forwardRef<HTMLLIElement, ScopedProps<ToastProps>>((props, forwardedRef) => {
+const Toast = React.forwardRef<HTMLDivElement, ScopedProps<ToastProps>>((props, forwardedRef) => {
   const {
     __scopeToast,
     open: openProp,
@@ -125,7 +129,7 @@ const Toast = React.forwardRef<HTMLLIElement, ScopedProps<ToastProps>>((props, f
         resumeTimer={resumeTimer}
       >
         <Primitive
-          as="li"
+          as="div"
           role="status"
           aria-live="polite"
           aria-atomic="true"

@@ -135,6 +135,61 @@ importers:
         specifier: ^0.1.0
         version: 0.1.0(vitest@2.1.9(@types/node@22.20.0)(jsdom@25.0.1)(lightningcss@1.32.0))
 
+  packages/headless:
+    dependencies:
+      '@nebula/hooks':
+        specifier: workspace:*
+        version: link:../hooks
+      '@nebula/primitives':
+        specifier: workspace:*
+        version: link:../primitives
+    devDependencies:
+      '@storybook/react':
+        specifier: ^8.6.18
+        version: 8.6.18(@storybook/test@8.6.18(storybook@8.6.18(prettier@3.9.4)))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(storybook@8.6.18(prettier@3.9.4))(typescript@5.9.3)
+      '@storybook/test':
+        specifier: ^8.6.18
+        version: 8.6.18(storybook@8.6.18(prettier@3.9.4))
+      '@testing-library/jest-dom':
+        specifier: ^6.6.3
+        version: 6.9.1
+      '@testing-library/react':
+        specifier: ^16.0.1
+        version: 16.3.2(@testing-library/dom@10.4.0)(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+      '@testing-library/user-event':
+        specifier: ^14.5.2
+        version: 14.6.1(@testing-library/dom@10.4.0)
+      '@types/react':
+        specifier: ^19.2.0
+        version: 19.2.17
+      '@types/react-dom':
+        specifier: ^19.2.0
+        version: 19.2.3(@types/react@19.2.17)
+      axe-core:
+        specifier: ^4.10.2
+        version: 4.12.1
+      jsdom:
+        specifier: ^25.0.1
+        version: 25.0.1
+      react:
+        specifier: ^19.2.0
+        version: 19.2.7
+      react-dom:
+        specifier: ^19.2.0
+        version: 19.2.7(react@19.2.7)
+      tsup:
+        specifier: ^8.3.5
+        version: 8.5.1(jiti@2.7.0)(postcss@8.5.16)(tsx@4.23.0)(typescript@5.9.3)(yaml@2.9.0)
+      typescript:
+        specifier: ^5.6.3
+        version: 5.9.3
+      vitest:
+        specifier: ^2.1.8
+        version: 2.1.9(@types/node@22.20.0)(jsdom@25.0.1)(lightningcss@1.32.0)
+      vitest-axe:
+        specifier: ^0.1.0
+        version: 0.1.0(vitest@2.1.9(@types/node@22.20.0)(jsdom@25.0.1)(lightningcss@1.32.0))
+
   packages/hooks:
     devDependencies:
       '@types/node':
@@ -210,6 +265,9 @@ importers:
 
   packages/react-ui:
     dependencies:
+      '@nebula/headless':
+        specifier: workspace:*
+        version: link:../headless
       '@nebula/hooks':
         specifier: workspace:*
         version: link:../hooks
@@ -308,6 +366,9 @@ importers:
 
   packages/styleless:
     dependencies:
+      '@nebula/headless':
+        specifier: workspace:*
+        version: link:../headless
       '@nebula/hooks':
         specifier: workspace:*
         version: link:../hooks

@@ -71,15 +71,22 @@ function OTPInput(props: ScopedProps<OTPInputProps>) {
       setValue((current) => {
         const currentValue = current ?? '';
         const chars = currentValue.padEnd(length, ' ').split('');
-        const insertChars = text.split('').slice(0, length - startIndex);
-        insertChars.forEach((char, offset) => {
-          chars[startIndex + offset] = char;
-        });
+        if (text.length === 0) {
+          // Explicitly clearing this one slot (e.g. Backspace) — there's no
+          // character to "insert", but `insertChars.forEach` below iterates
+          // zero times for an empty string, so without this the slot's old
+          // character was never actually erased.
+          chars[startIndex] = ' ';
+        } else {
+          const insertChars = text.split('').slice(0, length - startIndex);
+          insertChars.forEach((char, offset) => {
+            chars[startIndex + offset] = char;
+          });
+        }
         return chars.join('').trimEnd();
       });
       const nextIndex = Math.min(startIndex + text.length, length - 1);
-      // Deferred so it runs after this render commits the new value.
-      requestAnimationFrame(() => focusSlot(nextIndex));
+      focusSlot(nextIndex);
     },
     [setValue, length, focusSlot],
   );
