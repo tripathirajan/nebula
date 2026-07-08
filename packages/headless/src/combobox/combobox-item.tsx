@@ -43,12 +43,22 @@ const ComboboxItem = React.forwardRef<HTMLDivElement, ScopedProps<ComboboxItemPr
     const context = useComboboxContext(COMBOBOX_ITEM_NAME, __scopeCombobox);
     const highlighted = context.highlightedValue === value;
     const selected = context.value === value;
+    const { registerItemLabel, unregisterItemLabel } = context;
 
     React.useEffect(() => {
       const label = textValue ?? (typeof children === 'string' ? children : undefined);
-      if (label !== undefined) context.registerItemLabel(value, label);
-      return () => context.unregisterItemLabel(value);
-    }, [context, value, textValue, children]);
+      if (label !== undefined) registerItemLabel(value, label);
+      return () => unregisterItemLabel(value);
+      // Deliberately depends on `registerItemLabel`/`unregisterItemLabel`
+      // directly, not the whole `context` object: `context.getItemLabel`
+      // (unrelated to this effect) is itself recomputed every time
+      // `Combobox`'s `labelMap` state changes — the *same* state this
+      // effect writes to — so depending on `context` as a whole would
+      // create a circular loop: register → `labelMap` changes → `context`
+      // changes → effect re-runs → unregister+register → `labelMap`
+      // changes → ... forever.
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [registerItemLabel, unregisterItemLabel, value, textValue, children]);
 
     return (
       <Primitive

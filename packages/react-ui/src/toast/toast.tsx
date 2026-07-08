@@ -14,7 +14,7 @@ type ToastProps = HeadlessToastProps;
  * `ToastViewport` stacking context to actually position; this card itself
  * only owns its own visual chrome.
  */
-const Toast = React.forwardRef<HTMLLIElement, ToastProps>((props, forwardedRef) => {
+const Toast = React.forwardRef<HTMLDivElement, ToastProps>((props, forwardedRef) => {
   const { className, ...rest } = props;
   return (
     <HeadlessToast

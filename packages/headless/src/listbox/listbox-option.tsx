@@ -56,7 +56,11 @@ const ListboxOption = React.forwardRef<HTMLDivElement, ScopedProps<ListboxOption
             // Native <select>/RadioGroup select on arrow-key focus in
             // single-select mode; multi-select never selects on focus alone
             // (`context.selectOnFocus` is `false`), matching `ToggleGroup`.
-            if (context.selectOnFocus) select();
+            // `consumeInitialFocusSuppression()` guards against the one
+            // focus event that isn't a real navigation: `FocusScope`
+            // programmatically focusing the first option when this
+            // `Listbox` mounts inside a freshly-opened popover.
+            if (context.selectOnFocus && !context.consumeInitialFocusSuppression()) select();
           })}
           onKeyDown={composeEventHandlers(onKeyDown, (event) => {
             if (!context.selectOnFocus && (event.key === ' ' || event.key === 'Enter')) {

@@ -10,7 +10,14 @@ function DemoHoverCard(props: { openDelay?: number; closeDelay?: number }) {
   return (
     <HoverCard openDelay={props.openDelay ?? 0} closeDelay={props.closeDelay ?? 0}>
       <HoverCardTrigger href="/u/jane">@jane</HoverCardTrigger>
-      <HoverCardContent>Jane Doe — Product Designer</HoverCardContent>
+      {/* `aria-label` here, not in `HoverCardContent` itself: unlike `Dialog`
+          (which wires `aria-labelledby` to a `DialogTitle` automatically),
+          `HoverCard` has no title sub-component, so an accessible name is on
+          the consumer to supply — same as a real `role="dialog"` with no
+          visible heading always needs. */}
+      <HoverCardContent aria-label="Jane Doe's profile preview">
+        Jane Doe — Product Designer
+      </HoverCardContent>
     </HoverCard>
   );
 }
@@ -131,6 +138,12 @@ describe('HoverCard', () => {
     fireEvent.pointerEnter(screen.getByRole('link', { name: '@jane' }));
     await waitFor(() => expect(screen.getByRole('dialog')).toBeInTheDocument());
 
-    expect(await axe(document.body)).toHaveNoViolations();
+    // `region` (axe-core) flags page content outside a landmark (`<main>`,
+    // etc.) — a real concern for a whole page, not for this isolated
+    // fixture, which is just a trigger link + card with no page chrome to
+    // put a landmark around.
+    expect(
+      await axe(document.body, { rules: { region: { enabled: false } } }),
+    ).toHaveNoViolations();
   });
 });

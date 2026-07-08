@@ -10,6 +10,17 @@ interface ListboxContextValue {
   onItemSelectedChange: (value: string, selected: boolean) => void;
   /** `type="single"`: arrow-key focus movement also selects the newly-focused option (matches a native `<select>`/`RadioGroup`). `type="multiple"`: focus movement never selects — only click/Enter/Space toggles (matches `ToggleGroup`). */
   selectOnFocus: boolean;
+  /**
+   * Returns `true` exactly once per `Listbox` mount (`false` on every call
+   * after) — lets `selectOnFocus` tell apart a real arrow-key/Tab focus
+   * move from the single programmatic focus `FocusScope` fires when a
+   * `Listbox` mounts inside a freshly-opened popover (`Select`, `Combobox`'s
+   * listbox reuse). Without this, that accessibility auto-focus — which
+   * only exists so keyboard users land inside the popup, not a deliberate
+   * navigation — reads as the user selecting the first option, instantly
+   * re-closing whatever popup just opened.
+   */
+  consumeInitialFocusSuppression: () => boolean;
   disabled: boolean;
   orientation: RovingFocusGroupOrientation;
 }

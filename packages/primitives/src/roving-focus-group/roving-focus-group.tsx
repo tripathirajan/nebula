@@ -63,10 +63,19 @@ const RovingFocusGroup = React.forwardRef<HTMLDivElement, ScopedProps<RovingFocu
         .map(([id, node]) => ({ id, node }))
         .sort((a, b) => {
           const position = a.node.compareDocumentPosition(b.node);
-           
+
           return position & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1;
         });
     }, []);
+
+    // Memoized, not an inline arrow function: `RovingFocusGroupProvider`'s
+    // context value is itself `useMemo`'d off every prop it's given, so a
+    // fresh closure here recomputes a new context object on every render —
+    // every `FocusItem` inside is a context consumer, and each one's own
+    // registration effect is keyed on that context, so an unstable context
+    // means every item unregisters and re-registers on every render, not
+    // just when something the group actually cares about changes.
+    const onItemShiftTab = React.useCallback(() => setCurrentTabStopId(null), []);
 
     return (
       <RovingFocusGroupProvider
@@ -75,7 +84,7 @@ const RovingFocusGroup = React.forwardRef<HTMLDivElement, ScopedProps<RovingFocu
         loop={loop}
         currentTabStopId={currentTabStopId}
         onItemFocus={setCurrentTabStopId}
-        onItemShiftTab={() => setCurrentTabStopId(null)}
+        onItemShiftTab={onItemShiftTab}
         getItems={getItems}
         registerItem={registerItem}
       >

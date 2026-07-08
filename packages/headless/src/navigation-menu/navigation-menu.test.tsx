@@ -54,13 +54,18 @@ describe('NavigationMenu', () => {
     render(<DemoNavigationMenu />);
     fireEvent.pointerEnter(screen.getByRole('button', { name: 'Products' }));
 
-    await waitFor(() =>
+    // Both assertions in the same `waitFor`: the trigger's `aria-expanded`
+    // and the content's `Presence`-gated mount don't necessarily settle in
+    // the same commit, so asserting the trigger alone and then checking
+    // the content synchronously right after was a race — flaky depending
+    // on exactly how many render passes each took to settle.
+    await waitFor(() => {
       expect(screen.getByRole('button', { name: 'Products' })).toHaveAttribute(
         'aria-expanded',
         'true',
-      ),
-    );
-    expect(screen.getByText('Product A')).toBeInTheDocument();
+      );
+      expect(screen.getByText('Product A')).toBeInTheDocument();
+    });
   });
 
   it('closes on pointer leave (after closeDelay)', async () => {

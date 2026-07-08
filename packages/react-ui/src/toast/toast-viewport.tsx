@@ -7,7 +7,7 @@ import type { ToastViewportProps as HeadlessToastViewportProps } from '@nebula/h
 type ToastViewportProps = HeadlessToastViewportProps;
 
 /** Fixed to the bottom-right corner, stacking newest-on-top — the conventional toast placement; override `className` for a different corner. */
-const ToastViewport = React.forwardRef<HTMLOListElement, ToastViewportProps>(
+const ToastViewport = React.forwardRef<HTMLDivElement, ToastViewportProps>(
   (props, forwardedRef) => {
     const { className, ...rest } = props;
     return (

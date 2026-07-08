@@ -119,6 +119,26 @@ function Combobox(props: ScopedProps<ComboboxProps>) {
     contentId,
   ]);
 
+  // Memoized, not an inline arrow function: `ComboboxProvider`'s context
+  // value is itself `useMemo`'d off every prop it's given (see
+  // `createContext`'s `Provider` in `create-context-scope.tsx`), so a fresh
+  // closure here would recompute a new context object on *every* render —
+  // which was retriggering `ComboboxItem`'s label-registration effect
+  // (keyed on `context`) every render, each pass unregistering then
+  // re-registering the item's label, each of which is itself a state update
+  // that triggers another render. That's a genuine infinite loop, not just
+  // wasted work: `setLabelMap` → re-render → new `context` → effect re-runs
+  // → `setLabelMap` → ...
+  const handleValueChange = React.useCallback(
+    (next: string, label: string) => {
+      setValue(next);
+      setInputValue(label);
+      setOpen(false);
+      setHighlightedValue(undefined);
+    },
+    [setValue, setInputValue, setOpen],
+  );
+
   return (
     <Popper {...popperScope}>
       <ComboboxProvider
@@ -126,12 +146,7 @@ function Combobox(props: ScopedProps<ComboboxProps>) {
         open={open}
         onOpenChange={setOpen}
         value={value}
-        onValueChange={(next, label) => {
-          setValue(next);
-          setInputValue(label);
-          setOpen(false);
-          setHighlightedValue(undefined);
-        }}
+        onValueChange={handleValueChange}
         inputValue={inputValue}
         onInputValueChange={setInputValue}
         highlightedValue={highlightedValue}

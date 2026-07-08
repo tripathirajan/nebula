@@ -90,15 +90,30 @@ const ListboxImplSingle = React.forwardRef<HTMLDivElement, ScopedProps<ListboxSi
       onChange: onValueChange,
     });
 
+    // Memoized, not inline arrow functions: these become part of
+    // `ListboxProvider`'s context value (see `ListboxImpl` below), which is
+    // itself `useMemo`'d off every prop it's given — a fresh closure here
+    // recomputes a new context object on every render, which every
+    // `ListboxOption`/`FocusItem` inside re-renders in response to, since
+    // they're all context consumers.
+    const isItemSelected = React.useCallback(
+      (itemValue: string) => itemValue === value,
+      [value],
+    );
+    const onItemSelectedChange = React.useCallback(
+      (itemValue: string, selected: boolean) => {
+        if (selected) setValue(itemValue);
+      },
+      [setValue],
+    );
+
     return (
       <ListboxImpl
         {...implProps}
         ref={forwardedRef}
         selectOnFocus
-        isItemSelected={(itemValue) => itemValue === value}
-        onItemSelectedChange={(itemValue, selected) => {
-          if (selected) setValue(itemValue);
-        }}
+        isItemSelected={isItemSelected}
+        onItemSelectedChange={onItemSelectedChange}
       />
     );
   },
@@ -116,20 +131,30 @@ const ListboxImplMultiple = React.forwardRef<HTMLDivElement, ScopedProps<Listbox
       onChange: onValueChange,
     });
 
+    // See `ListboxImplSingle`'s matching comment above.
+    const isItemSelected = React.useCallback(
+      (itemValue: string) => (value ?? []).includes(itemValue),
+      [value],
+    );
+    const onItemSelectedChange = React.useCallback(
+      (itemValue: string, selected: boolean) => {
+        setValue((current) => {
+          const currentValues = current ?? [];
+          return selected
+            ? [...currentValues, itemValue]
+            : currentValues.filter((v) => v !== itemValue);
+        });
+      },
+      [setValue],
+    );
+
     return (
       <ListboxImpl
         {...implProps}
         ref={forwardedRef}
         selectOnFocus={false}
-        isItemSelected={(itemValue) => (value ?? []).includes(itemValue)}
-        onItemSelectedChange={(itemValue, selected) => {
-          setValue((current) => {
-            const currentValues = current ?? [];
-            return selected
-              ? [...currentValues, itemValue]
-              : currentValues.filter((v) => v !== itemValue);
-          });
-        }}
+        isItemSelected={isItemSelected}
+        onItemSelectedChange={onItemSelectedChange}
       />
     );
   },
@@ -167,6 +192,14 @@ const ListboxImpl = React.forwardRef<HTMLDivElement, ScopedProps<ListboxImplProp
     const typeaheadBuffer = React.useRef('');
     const typeaheadTimer = React.useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
+    // See `ListboxContextValue.consumeInitialFocusSuppression`'s doc comment.
+    const suppressInitialFocusSelectRef = React.useRef(true);
+    const consumeInitialFocusSuppression = React.useCallback(() => {
+      if (!suppressInitialFocusSelectRef.current) return false;
+      suppressInitialFocusSelectRef.current = false;
+      return true;
+    }, []);
+
     const handleTypeahead = (event: React.KeyboardEvent) => {
       if (event.key.length !== 1 || event.altKey || event.ctrlKey || event.metaKey) return;
       const root = rootRef.current;
@@ -190,6 +223,7 @@ const ListboxImpl = React.forwardRef<HTMLDivElement, ScopedProps<ListboxImplProp
         isItemSelected={isItemSelected}
         onItemSelectedChange={onItemSelectedChange}
         selectOnFocus={selectOnFocus}
+        consumeInitialFocusSuppression={consumeInitialFocusSuppression}
         disabled={disabled}
         orientation={orientation}
       >

@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { composeRefs } from '../compose-refs/compose-refs';
+import { useComposedRefs } from '../compose-refs/compose-refs';
 
 /**
  * `Slot` merges the props (and ref) it receives onto its single child element
@@ -76,12 +76,26 @@ interface SlotCloneProps {
 
 const SlotClone = React.forwardRef<unknown, SlotCloneProps>((props, forwardedRef) => {
   const { children, ...slotProps } = props;
+  const childrenRef = React.isValidElement(children) ? getElementRef(children) : undefined;
+  // Memoized, not a fresh `composeRefs(...)` call every render: a `ref`
+  // prop that changes identity between renders makes React detach (call
+  // the old one with `null`) then reattach (call the new one with the
+  // node) on every single render, regardless of whether the underlying
+  // node actually changed. Harmless for a plain `useRef` target, but when
+  // an `asChild` chain's composed ref ultimately lands on a `useState`
+  // setter (e.g. `Popper`'s `setAnchor`, registering the anchor element),
+  // each of those phantom detach/reattach cycles is a real state
+  // transition (`null` then the node again) that triggers a re-render —
+  // which recreates this same unmemoized ref again, forever. Real bug, not
+  // just wasted work: this is what was causing "Maximum update depth
+  // exceeded" for any `asChild`-composed trigger whose anchor ref chain
+  // included a state setter and re-rendered for any other reason too.
+  const composedRef = useComposedRefs(forwardedRef, childrenRef);
 
   if (React.isValidElement(children)) {
-    const childrenRef = getElementRef(children);
     const clonedProps = {
       ...mergeProps(slotProps, children.props as Record<string, unknown>),
-      ref: forwardedRef ? composeRefs(forwardedRef, childrenRef) : childrenRef,
+      ref: composedRef,
     };
     // `cloneElement`'s overload for a bare `ReactElement` (props type unknown
     // at this generic call site) resolves to `Partial<P> & Attributes`, and

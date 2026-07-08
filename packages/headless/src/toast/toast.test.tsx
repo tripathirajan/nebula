@@ -32,7 +32,7 @@ describe('Toast', () => {
 
   it('renders inside a ToastViewport labelled "Notifications" by default', () => {
     render(<DemoToast duration={Infinity} />);
-    expect(screen.getByRole('list', { name: 'Notifications' })).toBeInTheDocument();
+    expect(screen.getByRole('region', { name: 'Notifications' })).toBeInTheDocument();
   });
 
   it('closes on ToastClose click', () => {

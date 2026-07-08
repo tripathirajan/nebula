@@ -38,12 +38,21 @@ const SelectItem = React.forwardRef<HTMLDivElement, ScopedProps<SelectItemProps>
   (props, forwardedRef) => {
     const { __scopeSelect, value, textValue, children, ...itemProps } = props;
     const context = useSelectContext(SELECT_ITEM_NAME, __scopeSelect);
+    const { registerItemLabel, unregisterItemLabel } = context;
 
     React.useEffect(() => {
       const label = textValue ?? (typeof children === 'string' ? children : undefined);
-      if (label !== undefined) context.registerItemLabel(value, label);
-      return () => context.unregisterItemLabel(value);
-    }, [context, value, textValue, children]);
+      if (label !== undefined) registerItemLabel(value, label);
+      return () => unregisterItemLabel(value);
+      // Deliberately depends on `registerItemLabel`/`unregisterItemLabel`
+      // directly, not the whole `context` object: `context.getItemLabel`
+      // (unrelated to this effect) is itself recomputed every time
+      // `Select`'s `labelMap` state changes — the *same* state this effect
+      // writes to — so depending on `context` as a whole created a circular
+      // loop: register → `labelMap` changes → `context` changes → effect
+      // re-runs → unregister+register → `labelMap` changes → ... forever.
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [registerItemLabel, unregisterItemLabel, value, textValue, children]);
 
     return (
       <ListboxOption value={value} {...itemProps} ref={forwardedRef}>
