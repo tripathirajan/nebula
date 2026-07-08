@@ -193,7 +193,15 @@ const PopperContent = React.forwardRef<HTMLDivElement, ScopedProps<PopperContent
       const anchor = context.anchor;
       const observer = new ResizeObserver(measure);
       if (content) observer.observe(content);
-      if (anchor) observer.observe(anchor);
+      // `anchor` isn't always a real `Element` — `ContextMenuTrigger`
+      // registers a virtual point-anchor here (an object that duck-types
+      // only `getBoundingClientRect()`, documented in that file, since a
+      // right-click has no element of its own to anchor against).
+      // `ResizeObserver.observe()` throws synchronously for anything that
+      // isn't a real `Element`, so this needs the same guard `measure`
+      // implicitly gets away without (it only ever calls
+      // `getBoundingClientRect()`, which the virtual anchor does support).
+      if (anchor instanceof Element) observer.observe(anchor);
       return () => observer.disconnect();
     }, [context.anchor, measure]);
 
