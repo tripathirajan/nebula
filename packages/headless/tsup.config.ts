@@ -52,7 +52,27 @@ export default defineConfig({
   // (ERR_WORKER_OUT_OF_MEMORY — https://github.com/egoist/tsup/issues/920).
   dts: false,
   sourcemap: true,
-  splitting: false,
+  // Unlike every other package here, `headless` has several components that
+  // reuse another component's scoped context across a *relative* (not
+  // package-specifier) import — `AlertDialogContent` reads `Dialog`'s
+  // context from `../dialog/dialog-context`, `DropdownMenu`/`ContextMenu`/
+  // `Menubar`'s triggers read `Menu`'s, `NavigationMenu`/`Drawer` read their
+  // own equivalents (see each file's doc comment: "same cross-folder
+  // relative-import pattern DropdownMenu uses for Menu's context"). With
+  // `splitting: false`, tsup bundles each `entry` fully self-contained, so a
+  // relatively-imported shared module like `dialog-context.ts` gets inlined
+  // — and its module-level `React.createContext()` call re-run — separately
+  // in *both* `dist/dialog/index.js` and `dist/alert-dialog/index.js`,
+  // producing two distinct Context objects from React's point of view. A
+  // consumer that mixes `Dialog`'s exports (trigger/portal/etc.) with
+  // `AlertDialogContent` then fails with "must be used within Dialog" even
+  // though they're correctly nested — the two entries' copies of that
+  // Provider/consumer pair don't refer to the same Context. `splitting:
+  // true` lets tsup/rollup extract shared modules like this into one
+  // chunk file that every entry importing it references, so there's only
+  // ever one `createContext()` call for a shared context, no matter how
+  // many public subpaths end up needing it.
+  splitting: true,
   clean: true,
   treeshake: true,
   external: ['react', 'react-dom', '@nebula/hooks', '@nebula/primitives'],
