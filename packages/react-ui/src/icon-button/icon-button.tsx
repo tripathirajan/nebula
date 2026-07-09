@@ -33,17 +33,21 @@ type IconButtonProps = StylelessIconButtonProps & VariantProps<typeof buttonVari
  *
  * @example
  * ```tsx
- * <IconButton aria-label="Settings" variant="secondary">
+ * <IconButton aria-label="Settings" color="secondary">
  *   <SettingsIcon />
  * </IconButton>
  * ```
  */
 const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>((props, forwardedRef) => {
-  const { className, variant, size, ...buttonProps } = props;
+  const { className, variant, color, size, ...buttonProps } = props;
 
   return (
     <StylelessIconButton
-      className={cn(buttonVariants({ variant, size }), iconButtonSizeVariants({ size }), className)}
+      className={cn(
+        buttonVariants({ variant, color, size }),
+        iconButtonSizeVariants({ size }),
+        className,
+      )}
       {...buttonProps}
       ref={forwardedRef}
     />

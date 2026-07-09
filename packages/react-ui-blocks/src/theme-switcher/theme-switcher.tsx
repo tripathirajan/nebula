@@ -36,7 +36,7 @@ function ThemeSwitcher({ size = 'sm' }: ThemeSwitcherProps) {
           key={option.value}
           type="button"
           size={size}
-          variant={theme === option.value ? 'primary' : 'secondary'}
+          color={theme === option.value ? 'primary' : 'secondary'}
           aria-pressed={theme === option.value}
           onClick={() => setTheme(option.value)}
         >

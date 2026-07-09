@@ -9,24 +9,37 @@ import * as React from 'react';
 import type { ProgressProps as HeadlessProgressProps } from '@nebula/headless/progress';
 import type { VariantProps } from 'class-variance-authority';
 
+/** No shape axis applies to a progress bar/fill — the one axis is named `color`, matching `Spinner`/`Badge`/`Chip`'s vocabulary. */
 const progressTrackVariants = cva('h-2 w-full overflow-hidden rounded-[var(--radius-progress)]', {
   variants: {
-    variant: {
+    color: {
       primary: 'bg-[var(--progress-primary-track-bg)]',
       secondary: 'bg-[var(--progress-secondary-track-bg)]',
+      accent: 'bg-[var(--progress-accent-track-bg)]',
+      neutral: 'bg-[var(--progress-neutral-track-bg)]',
+      info: 'bg-[var(--progress-info-track-bg)]',
+      success: 'bg-[var(--progress-success-track-bg)]',
+      warning: 'bg-[var(--progress-warning-track-bg)]',
+      danger: 'bg-[var(--progress-danger-track-bg)]',
     },
   },
-  defaultVariants: { variant: 'primary' },
+  defaultVariants: { color: 'primary' },
 });
 
 const progressIndicatorVariants = cva('h-full rounded-[var(--radius-progress)]', {
   variants: {
-    variant: {
+    color: {
       primary: 'bg-[var(--progress-primary-indicator-bg)]',
       secondary: 'bg-[var(--progress-secondary-indicator-bg)]',
+      accent: 'bg-[var(--progress-accent-indicator-bg)]',
+      neutral: 'bg-[var(--progress-neutral-indicator-bg)]',
+      info: 'bg-[var(--progress-info-indicator-bg)]',
+      success: 'bg-[var(--progress-success-indicator-bg)]',
+      warning: 'bg-[var(--progress-warning-indicator-bg)]',
+      danger: 'bg-[var(--progress-danger-indicator-bg)]',
     },
   },
-  defaultVariants: { variant: 'primary' },
+  defaultVariants: { color: 'primary' },
 });
 
 type ProgressProps = HeadlessProgressProps & VariantProps<typeof progressTrackVariants>;
@@ -53,32 +66,33 @@ type ProgressProps = HeadlessProgressProps & VariantProps<typeof progressTrackVa
  * option and a fine default. Swap it for a custom animation later if a
  * sliding bar is wanted.
  *
- * `variant` picks the track/indicator color pair (see `progressTrackVariants`/
- * `progressIndicatorVariants`), same `primary`/`secondary` axis `Button` uses.
+ * `color` picks the track/indicator color pair from the full eight-role
+ * palette (see `progressTrackVariants`/`progressIndicatorVariants`), same
+ * vocabulary `Spinner`/`Badge`/`Chip` use.
  *
  * @example
  * ```tsx
  * <Progress value={60} />
- * <Progress value={60} variant="secondary" />
+ * <Progress value={60} color="secondary" />
  * <Progress value={null} /> // indeterminate
  * <Progress value={3} max={5} getValueLabel={(v, m) => `${v} of ${m} steps`} />
  * ```
  */
 const Progress = React.forwardRef<HTMLDivElement, ProgressProps>((props, forwardedRef) => {
-  const { className, variant, value = null, max = 100, ...rest } = props;
+  const { className, color, value = null, max = 100, ...rest } = props;
   const percent = value == null ? null : Math.min(100, Math.max(0, (value / max) * 100));
 
   return (
     <HeadlessProgress
       value={value}
       max={max}
-      className={cn(progressTrackVariants({ variant }), className)}
+      className={cn(progressTrackVariants({ color }), className)}
       {...rest}
       ref={forwardedRef}
     >
       <HeadlessProgressIndicator
         className={cn(
-          progressIndicatorVariants({ variant }),
+          progressIndicatorVariants({ color }),
           percent == null ? 'w-full animate-pulse' : 'transition-transform duration-300 ease-out',
         )}
         style={percent == null ? { width: '100%' } : { width: '100%', transform: `translateX(-${100 - percent}%)` }}

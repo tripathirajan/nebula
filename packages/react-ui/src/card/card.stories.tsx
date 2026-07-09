@@ -11,14 +11,55 @@ const meta: Meta<typeof Card> = {
   component: Card,
   tags: ['autodocs'],
   parameters: { layout: 'centered' },
+  argTypes: {
+    variant: { control: 'select', options: ['elevation', 'outlined'] },
+    elevation: { control: 'select', options: [0, 1, 2, 3] },
+  },
 };
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
+/** Every distinct look at a glance — use `Playground` to try one interactively. */
+export const AllVariants: Story = {
+  name: 'All variants',
+  parameters: { controls: { disable: true } },
   render: () => (
-    <Card className="w-80">
+    <div style={{ display: 'flex', flexWrap: 'wrap', gap: 16 }}>
+      {(
+        [
+          { label: 'Outlined', props: { variant: 'outlined' as const } },
+          { label: 'Elevation 0', props: { elevation: 0 as const } },
+          { label: 'Elevation 1', props: { elevation: 1 as const } },
+          { label: 'Elevation 2', props: { elevation: 2 as const } },
+          { label: 'Elevation 3', props: { elevation: 3 as const } },
+        ]
+      ).map(({ label, props }) => (
+        <div key={label} style={{ display: 'flex', flexDirection: 'column', gap: 8, alignItems: 'center' }}>
+          <div
+            style={{
+              fontSize: 11,
+              fontWeight: 600,
+              textTransform: 'uppercase',
+              letterSpacing: '0.05em',
+            }}
+          >
+            {label}
+          </div>
+          <Card {...props} className="w-48 p-4 text-sm">
+            {label}
+          </Card>
+        </div>
+      ))}
+    </div>
+  ),
+};
+
+/** Try any `variant`/`elevation` combination via the Controls panel. */
+export const Playground: Story = {
+  args: { variant: 'elevation', elevation: 1 },
+  render: (args) => (
+    <Card {...args} className="w-80">
       <CardHeader>
         <CardTitle>Project settings</CardTitle>
         <CardDescription>Manage your project&apos;s configuration.</CardDescription>
@@ -39,6 +80,7 @@ export const Default: Story = {
 };
 
 export const ContentOnly: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <Card className="w-80">
       <CardContent className="pt-6">Just body content, no header/footer.</CardContent>
@@ -48,6 +90,7 @@ export const ContentOnly: Story = {
 
 export const WithIcon: Story = {
   name: 'Header with icon',
+  parameters: { controls: { disable: true } },
   render: () => (
     <Card className="w-80">
       <CardHeader
@@ -73,6 +116,7 @@ export const WithIcon: Story = {
 
 export const NoBorder: Story = {
   name: 'Header without the dashed border',
+  parameters: { controls: { disable: true } },
   render: () => (
     <Card className="w-80">
       <CardHeader bordered={false}>
@@ -88,56 +132,12 @@ export const NoBorder: Story = {
 
 export const TitleOnly: Story = {
   name: 'Title only, no CardHeader',
+  parameters: { controls: { disable: true } },
   render: () => (
     <Card className="w-80">
       <CardTitle className="p-6 pb-0">Just a title</CardTitle>
       <CardContent>
         <p className="text-sm">Skips CardHeader entirely — no border, no icon layout.</p>
-      </CardContent>
-    </Card>
-  ),
-};
-
-export const Outlined: Story = {
-  name: 'variant="outlined"',
-  render: () => (
-    <Card variant="outlined" className="w-80">
-      <CardHeader>
-        <CardTitle>Outlined</CardTitle>
-        <CardDescription>Visible border, no shadow.</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <p className="text-sm">Use when the surrounding page already has enough depth cues.</p>
-      </CardContent>
-    </Card>
-  ),
-};
-
-export const Elevation0: Story = {
-  name: 'elevation={0} (flat, no border)',
-  render: () => (
-    <Card elevation={0} className="w-80">
-      <CardHeader>
-        <CardTitle>Flat</CardTitle>
-        <CardDescription>No shadow, no border — just the surface color.</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <p className="text-sm">The flattest available Card look.</p>
-      </CardContent>
-    </Card>
-  ),
-};
-
-export const Elevation3: Story = {
-  name: 'elevation={3} (most elevated)',
-  render: () => (
-    <Card elevation={3} className="w-80">
-      <CardHeader>
-        <CardTitle>Elevated</CardTitle>
-        <CardDescription>Deepest shadow, no border.</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <p className="text-sm">Use to draw attention above surrounding content.</p>
       </CardContent>
     </Card>
   ),

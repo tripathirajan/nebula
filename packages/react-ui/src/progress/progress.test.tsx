@@ -14,7 +14,14 @@ describe('Progress (ui)', () => {
 
   it('applies the token classes to the track', () => {
     render(<Progress value={40} />);
-    expect(screen.getByRole('progressbar').className).toContain('bg-[var(--progress-track-bg)]');
+    expect(screen.getByRole('progressbar').className).toContain('bg-[var(--progress-primary-track-bg)]');
+  });
+
+  it('applies the secondary variant token classes to the track', () => {
+    render(<Progress value={40} color="secondary" />);
+    expect(screen.getByRole('progressbar').className).toContain(
+      'bg-[var(--progress-secondary-track-bg)]',
+    );
   });
 
   it('applies an inline transform to the indicator matching the percentage', () => {

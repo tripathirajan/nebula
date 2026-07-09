@@ -57,7 +57,6 @@ const ComboboxItem = React.forwardRef<HTMLDivElement, ScopedProps<ComboboxItemPr
       // create a circular loop: register → `labelMap` changes → `context`
       // changes → effect re-runs → unregister+register → `labelMap`
       // changes → ... forever.
-      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [registerItemLabel, unregisterItemLabel, value, textValue, children]);
 
     return (

@@ -51,7 +51,6 @@ const SelectItem = React.forwardRef<HTMLDivElement, ScopedProps<SelectItemProps>
       // writes to — so depending on `context` as a whole created a circular
       // loop: register → `labelMap` changes → `context` changes → effect
       // re-runs → unregister+register → `labelMap` changes → ... forever.
-      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [registerItemLabel, unregisterItemLabel, value, textValue, children]);
 
     return (

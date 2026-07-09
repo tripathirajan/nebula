@@ -1,2 +1,2 @@
-export { Tag, tagVariants } from './tag';
+export { Tag } from './tag';
 export type { TagProps } from './tag';

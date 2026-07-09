@@ -3,8 +3,8 @@ import { Popper } from '@nebula/primitives/popper';
 import { VisuallyHidden } from '@nebula/primitives/visually-hidden';
 import * as React from 'react';
 
-import { SelectItem } from './select-item';
 import { SelectProvider, usePopperScope } from './select-context';
+import { SelectItem } from './select-item';
 
 import type { ScopedProps } from './select-context';
 import type { SelectItemProps } from './select-item';

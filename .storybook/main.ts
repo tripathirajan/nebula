@@ -6,11 +6,7 @@ const config: StorybookConfig = {
   // (packages/<pkg>/src/**/*.stories.tsx) — add new packages automatically
   // via this glob, no per-package registration needed.
   stories: ['../packages/*/src/**/*.stories.@(ts|tsx|mdx)', '../packages/*/src/**/*.mdx'],
-  addons: [
-    '@storybook/addon-essentials',
-    '@storybook/addon-interactions',
-    '@storybook/addon-a11y',
-  ],
+  addons: ['@storybook/addon-essentials', '@storybook/addon-interactions', '@storybook/addon-a11y'],
   framework: {
     name: '@storybook/react-vite',
     options: {},
@@ -65,6 +61,25 @@ const config: StorybookConfig = {
     const { mergeConfig } = await import('vite');
     return mergeConfig(viteConfig, {
       plugins: [tailwindcss()],
+      build: {
+        // Raise the warning limit so Storybook's preview build doesn't warn
+        // unnecessarily for large but expected chunks in a component library.
+        chunkSizeWarningLimit: 1000, // in kB
+        rollupOptions: {
+          output: {
+            // Split @nebula packages into their own chunk, and third-party
+            // node_modules into `vendor`. This reduces single large bundles
+            // and makes caching more effective.
+            manualChunks(id: string | undefined) {
+              if (!id) return undefined;
+              if (id.includes('node_modules')) {
+                if (id.includes('@nebula')) return 'nebula';
+                return 'vendor';
+              }
+            },
+          },
+        },
+      },
     });
   },
 };

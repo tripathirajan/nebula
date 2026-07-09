@@ -1,8 +1,30 @@
 import { expect, fn, userEvent, within } from '@storybook/test';
+import * as React from 'react';
 
 import { Button } from './button';
 
 import type { Meta, StoryObj } from '@storybook/react';
+
+const VARIANTS = ['default', 'ghost', 'text', 'link'] as const;
+const COLORS = [
+  'primary',
+  'secondary',
+  'accent',
+  'neutral',
+  'info',
+  'success',
+  'warning',
+  'danger',
+] as const;
+
+/** Row/column labels in the `AllVariants` matrix — all caps for a clear visual break from the rendered examples themselves. */
+const GRID_HEADING_STYLE: React.CSSProperties = {
+  fontSize: 11,
+  fontWeight: 600,
+  textAlign: 'center',
+  textTransform: 'uppercase',
+  letterSpacing: '0.05em',
+};
 
 // Explicit `Meta<typeof Button>` annotation rather than `satisfies` — with
 // `satisfies`, `tsc` has to infer and print `meta`'s full literal type
@@ -25,9 +47,10 @@ const meta: Meta<typeof Button> = {
     // theme.css must be loaded for the CSS-var-backed variants to render
     // meaningfully — see .storybook/preview.ts.
   },
-  args: { onClick: fn() },
+  args: { onClick: fn(), children: 'Button' },
   argTypes: {
-    variant: { control: 'select', options: ['primary', 'secondary', 'danger'] },
+    variant: { control: 'select', options: VARIANTS },
+    color: { control: 'select', options: COLORS },
     size: { control: 'select', options: ['sm', 'md', 'lg'] },
   },
 };
@@ -35,20 +58,52 @@ const meta: Meta<typeof Button> = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Primary: Story = {
-  args: { variant: 'primary', children: 'Save changes' },
+/**
+ * Every `variant` × `color` combination at a glance — rows are shape,
+ * columns are hue. This is the reference for "what does X look like",
+ * so individual variant/color combinations don't each need their own
+ * story; use `Playground` below to try a specific combination interactively.
+ */
+export const AllVariants: Story = {
+  name: 'All variants',
+  parameters: { controls: { disable: true } },
+  render: () => (
+    <div
+      style={{
+        display: 'grid',
+        gridTemplateColumns: `80px repeat(${COLORS.length}, max-content)`,
+        gap: '12px 16px',
+        alignItems: 'center',
+      }}
+    >
+      <div />
+      {COLORS.map((color) => (
+        <div key={color} style={GRID_HEADING_STYLE}>
+          {color}
+        </div>
+      ))}
+      {VARIANTS.map((variant) => (
+        <React.Fragment key={variant}>
+          <div style={{ ...GRID_HEADING_STYLE, textAlign: 'left' }}>{variant}</div>
+          {COLORS.map((color) => (
+            <Button key={`${variant}-${color}`} variant={variant} color={color}>
+              Button
+            </Button>
+          ))}
+        </React.Fragment>
+      ))}
+    </div>
+  ),
 };
 
-export const Secondary: Story = {
-  args: { variant: 'secondary', children: 'Cancel' },
-};
-
-export const Danger: Story = {
-  args: { variant: 'danger', children: 'Delete account' },
+/** Try any `variant`/`color`/`size` combination via the Controls panel. */
+export const Playground: Story = {
+  args: { variant: 'default', color: 'primary' },
 };
 
 export const Loading: Story = {
-  args: { variant: 'primary', loading: true, children: 'Saving…' },
+  args: { color: 'primary', loading: true, children: 'Saving…' },
+  parameters: { controls: { disable: true } },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const button = canvas.getByRole('button');
@@ -57,12 +112,9 @@ export const Loading: Story = {
   },
 };
 
-export const Disabled: Story = {
-  args: { variant: 'primary', disabled: true, children: "Can't click me" },
-};
-
 export const AsChildLink: Story = {
   name: 'asChild renders an anchor',
+  parameters: { controls: { disable: true } },
   render: (args) => (
     <Button {...args} asChild>
       <a href="#nebula">Link styled as a button</a>

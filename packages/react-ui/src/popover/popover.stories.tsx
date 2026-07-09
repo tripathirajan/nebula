@@ -24,7 +24,7 @@ function FilterPopover() {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button variant="secondary" size="sm">
+        <Button color="secondary" size="sm">
           Filters
         </Button>
       </PopoverTrigger>

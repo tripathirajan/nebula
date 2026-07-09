@@ -31,7 +31,7 @@ function ConfirmDeleteDialog() {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button variant="danger">Delete item</Button>
+        <Button color="danger">Delete item</Button>
       </AlertDialogTrigger>
       <AlertDialogPortal>
         <AlertDialogOverlay />

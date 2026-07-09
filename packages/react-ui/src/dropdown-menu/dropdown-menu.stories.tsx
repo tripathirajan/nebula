@@ -34,7 +34,7 @@ function AccountMenu() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="secondary" size="sm">
+        <Button color="secondary" size="sm">
           Account
         </Button>
       </DropdownMenuTrigger>

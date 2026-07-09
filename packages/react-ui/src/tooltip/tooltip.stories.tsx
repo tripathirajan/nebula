@@ -23,7 +23,7 @@ function SaveButtonWithTooltip() {
   return (
     <Tooltip delayDuration={0}>
       <TooltipTrigger asChild>
-        <Button variant="secondary" size="sm">
+        <Button color="secondary" size="sm">
           Save
         </Button>
       </TooltipTrigger>

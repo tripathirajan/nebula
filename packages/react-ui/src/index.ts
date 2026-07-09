@@ -99,3 +99,4 @@ export * from './code-block';
 export * from './markdown';
 export * from './circular-progress';
 export * from './empty-state';
+export * from './bottom-nav';

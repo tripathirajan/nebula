@@ -104,6 +104,7 @@ export default defineConfig({
     'markdown/index': 'src/markdown/index.ts',
     'circular-progress/index': 'src/circular-progress/index.ts',
     'empty-state/index': 'src/empty-state/index.ts',
+    'bottom-nav/index': 'src/bottom-nav/index.ts',
   },
   format: ['esm'],
   target: 'es2022',

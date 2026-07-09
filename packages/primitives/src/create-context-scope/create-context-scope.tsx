@@ -66,6 +66,7 @@ function createContext<ContextValueType extends object | null>(
  * check this one dimension"; concrete call sites still get full checking via
  * their own explicit `Scope<ContextValueType>` annotations.
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- see doc comment above: `unknown` doesn't structurally hold here even though it's always safe in practice.
 type Scope<C = any> = { [scopeName: string]: React.Context<C>[] } | undefined;
 type ScopeHook = (scope: Scope) => { [__scopeProp: string]: Scope };
 

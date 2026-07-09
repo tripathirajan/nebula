@@ -411,6 +411,10 @@
       "types": "./dist/empty-state/index.d.ts",
       "import": "./dist/empty-state/index.js"
     },
+    "./bottom-nav": {
+      "types": "./dist/bottom-nav/index.d.ts",
+      "import": "./dist/bottom-nav/index.js"
+    },
     "./theme.css": "./src/theme.css",
     "./package.json": "./package.json"
   },

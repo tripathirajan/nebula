@@ -27,7 +27,7 @@ function DemoDialog() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="danger">Delete item</Button>
+        <Button color="danger">Delete item</Button>
       </DialogTrigger>
       <DialogPortal>
         <DialogOverlay />
@@ -36,11 +36,11 @@ function DemoDialog() {
           <DialogDescription>This can&apos;t be undone.</DialogDescription>
           <div className="mt-4 flex justify-end gap-2">
             <DialogClose asChild>
-              <Button variant="secondary" size="sm">
+              <Button color="secondary" size="sm">
                 Cancel
               </Button>
             </DialogClose>
-            <Button variant="danger" size="sm">
+            <Button color="danger" size="sm">
               Delete
             </Button>
           </div>

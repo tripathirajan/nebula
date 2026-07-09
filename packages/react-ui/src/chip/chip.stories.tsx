@@ -1,6 +1,6 @@
-import { expect, within } from '@storybook/test';
+import { fn } from '@storybook/test';
 
-import { Spinner } from './spinner';
+import { Chip } from './chip';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
@@ -15,15 +15,16 @@ const COLORS = [
   'danger',
 ] as const;
 
-const meta: Meta<typeof Spinner> = {
-  title: 'React UI/Spinner',
-  component: Spinner,
+const meta = {
+  title: 'React UI/Chip',
+  component: Chip,
   tags: ['autodocs'],
   parameters: { layout: 'centered' },
+  args: { children: 'Chip' },
   argTypes: {
     color: { control: 'select', options: COLORS },
   },
-};
+} satisfies Meta<typeof Chip>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -32,9 +33,11 @@ type Story = StoryObj<typeof meta>;
 export const AllColors: Story = {
   parameters: { controls: { disable: true } },
   render: () => (
-    <div style={{ display: 'flex', gap: 12 }}>
+    <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
       {COLORS.map((color) => (
-        <Spinner key={color} color={color} />
+        <Chip key={color} color={color}>
+          {color}
+        </Chip>
       ))}
     </div>
   ),
@@ -42,17 +45,14 @@ export const AllColors: Story = {
 
 /** Try any `color` via the Controls panel. */
 export const Playground: Story = {
-  args: { color: 'primary' },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    await expect(canvas.getByRole('status')).toBeInTheDocument();
+  args: { color: 'neutral' },
+};
+
+export const Dismissible: Story = {
+  args: {
+    color: 'info',
+    children: 'Color: Blue',
+    onDismiss: fn(),
+    dismissLabel: 'Remove color filter',
   },
-};
-
-export const Large: Story = {
-  args: { className: 'h-8 w-8 border-4' },
-};
-
-export const CustomLabel: Story = {
-  args: { label: 'Loading search results' },
 };

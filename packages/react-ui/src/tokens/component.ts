@@ -19,14 +19,20 @@
  */
 
 /**
- * `secondary` maps to the `neutral` semantic role rather than `secondary` —
- * nebula's `secondary` variant means "muted/outline style," which is what
- * the old token set's `bg.subtle`/`text.default` pairing gave it, and
- * `neutral` is this theme's closest equivalent to that. DaisyUI's own
- * `secondary` is a second bold brand hue, not a muted style — if a future
- * variant wants that instead, add a fourth `Button` variant rather than
- * repointing this one (would be a visual break for anyone already using
- * `variant="secondary"`).
+ * All eight semantic color roles, same palette `Badge`/`Tag` use — `Button`'s
+ * `color` axis is fully independent of its `variant` (shape: `default`/
+ * `ghost`/`text`/`link`) axis; `variant` decides which of `bg`/`text`/
+ * `border` gets used and how (see `buttonVariants`' `compoundVariants` in
+ * `button.tsx`), this object only ever supplies the raw semantic values for
+ * the filled (`default`) look.
+ *
+ * `secondary` now points at the true `var(--color-secondary)` bold hue,
+ * matching `Badge`/`Tag`'s own `secondary` — previously this aliased to
+ * `var(--color-neutral)` as a "muted/outline style" stand-in, back when
+ * `Button` only had one axis and no room for a real `neutral` option. Now
+ * that `neutral` is its own color (below) and shape is a separate axis, the
+ * old muted-gray "Sign in with Google" look is `variant="ghost"
+ * color="neutral"` instead of a repurposed `secondary`.
  */
 const buttonTokens = {
   primary: {
@@ -35,9 +41,34 @@ const buttonTokens = {
     border: 'var(--color-primary)',
   },
   secondary: {
+    bg: 'var(--color-secondary)',
+    text: 'var(--color-secondary-content)',
+    border: 'var(--color-secondary)',
+  },
+  accent: {
+    bg: 'var(--color-accent)',
+    text: 'var(--color-accent-content)',
+    border: 'var(--color-accent)',
+  },
+  neutral: {
     bg: 'var(--color-neutral)',
     text: 'var(--color-neutral-content)',
     border: 'var(--color-neutral)',
+  },
+  info: {
+    bg: 'var(--color-info)',
+    text: 'var(--color-info-content)',
+    border: 'var(--color-info)',
+  },
+  success: {
+    bg: 'var(--color-success)',
+    text: 'var(--color-success-content)',
+    border: 'var(--color-success)',
+  },
+  warning: {
+    bg: 'var(--color-warning)',
+    text: 'var(--color-warning-content)',
+    border: 'var(--color-warning)',
   },
   danger: {
     bg: 'var(--color-error)',
@@ -153,31 +184,37 @@ const radioTokens = {
  * exemption `separatorTokens`'s divider-on-page-background use already
  * relies on, so no new `CONTRAST_AUDIT.md` entry is needed.
  *
- * `secondary` maps to `neutral`, same as `buttonTokens.secondary` — the
- * track stays the shared `base-300` regardless of variant, since a dim
- * track color reads consistently against either indicator color.
+ * Widened from the original `primary`/`secondary` pair to the full
+ * eight-role palette `Badge`/`Chip` use — a progress bar's "in what state
+ * am I loading" (e.g. red on failure) is at least as meaningful a status
+ * signal as a badge's. `secondary` now correctly points at
+ * `var(--color-secondary)` (matching `buttonTokens`' own fix), not
+ * `var(--color-neutral)` — `Button`'s `color="secondary"` and `Progress`'s
+ * must agree on what "secondary" means. The track stays the shared
+ * `base-300` regardless of color, since a dim track reads consistently
+ * against any indicator color.
  */
 const progressTokens = {
-  primary: {
-    trackBg: 'var(--color-base-300)',
-    indicatorBg: 'var(--color-primary)',
-  },
-  secondary: {
-    trackBg: 'var(--color-base-300)',
-    indicatorBg: 'var(--color-neutral)',
-  },
+  primary: { trackBg: 'var(--color-base-300)', indicatorBg: 'var(--color-primary)' },
+  secondary: { trackBg: 'var(--color-base-300)', indicatorBg: 'var(--color-secondary)' },
+  accent: { trackBg: 'var(--color-base-300)', indicatorBg: 'var(--color-accent)' },
+  neutral: { trackBg: 'var(--color-base-300)', indicatorBg: 'var(--color-neutral)' },
+  info: { trackBg: 'var(--color-base-300)', indicatorBg: 'var(--color-info)' },
+  success: { trackBg: 'var(--color-base-300)', indicatorBg: 'var(--color-success)' },
+  warning: { trackBg: 'var(--color-base-300)', indicatorBg: 'var(--color-warning)' },
+  danger: { trackBg: 'var(--color-base-300)', indicatorBg: 'var(--color-error)' },
 } as const;
 
-/** Same `base-300`/`primary`-or-`neutral` pairing and rationale as `progressTokens` — a spinner ring isn't text either. */
+/** Same widened eight-role palette and `secondary`-fix rationale as `progressTokens` — a spinner ring isn't text either. */
 const spinnerTokens = {
-  primary: {
-    track: 'var(--color-base-300)',
-    indicator: 'var(--color-primary)',
-  },
-  secondary: {
-    track: 'var(--color-base-300)',
-    indicator: 'var(--color-neutral)',
-  },
+  primary: { track: 'var(--color-base-300)', indicator: 'var(--color-primary)' },
+  secondary: { track: 'var(--color-base-300)', indicator: 'var(--color-secondary)' },
+  accent: { track: 'var(--color-base-300)', indicator: 'var(--color-accent)' },
+  neutral: { track: 'var(--color-base-300)', indicator: 'var(--color-neutral)' },
+  info: { track: 'var(--color-base-300)', indicator: 'var(--color-info)' },
+  success: { track: 'var(--color-base-300)', indicator: 'var(--color-success)' },
+  warning: { track: 'var(--color-base-300)', indicator: 'var(--color-warning)' },
+  danger: { track: 'var(--color-base-300)', indicator: 'var(--color-error)' },
 } as const;
 
 /** A skeleton placeholder is a decorative fill, not text — `base-300` alone (no paired foreground color) is all it needs. */
@@ -412,6 +449,20 @@ const navbarTokens = {
   text: 'var(--color-base-content)',
 } as const;
 
+/**
+ * `bg`/`border` are the tab-bar's own chrome (same `base-100`/`base-300`
+ * surface pairing `navbarTokens` uses); `itemText`/`itemActiveText` mirror
+ * `tabsTokens.triggerText`/`triggerActiveText` — the inactive-vs-active
+ * text-color pair every other tab-like component in this package already
+ * uses `primary` for.
+ */
+const bottomNavTokens = {
+  bg: 'var(--color-base-100)',
+  border: 'var(--color-base-300)',
+  itemText: 'var(--color-base-content)',
+  itemActiveText: 'var(--color-primary)',
+} as const;
+
 /** No border/radius — the plainest possible themed background, one step below `Card`/`Paper`. */
 const surfaceTokens = {
   bg: 'var(--color-base-200)',
@@ -453,11 +504,20 @@ const avatarGroupTokens = {
 } as const;
 
 /** Only `neutral`/`primary` — unlike `Badge`/`Tag`'s full eight-role palette, a dismissible filter/selection chip only needs "default" vs. "actively applied," not a full status vocabulary. */
+/**
+ * All eight semantic color roles, same palette `Badge`/`Tag` expose —
+ * widened from the original two (`neutral`/`primary`) to match. Chip stays
+ * a single filled-pill shape (no `outline`/`ghost` axis in this pass).
+ */
 const chipTokens = {
-  neutralBg: 'var(--color-base-200)',
-  neutralText: 'var(--color-base-content)',
-  primaryBg: 'var(--color-primary)',
-  primaryText: 'var(--color-primary-content)',
+  primary: { bg: 'var(--color-primary)', text: 'var(--color-primary-content)' },
+  secondary: { bg: 'var(--color-secondary)', text: 'var(--color-secondary-content)' },
+  accent: { bg: 'var(--color-accent)', text: 'var(--color-accent-content)' },
+  neutral: { bg: 'var(--color-neutral)', text: 'var(--color-neutral-content)' },
+  info: { bg: 'var(--color-info)', text: 'var(--color-info-content)' },
+  success: { bg: 'var(--color-success)', text: 'var(--color-success-content)' },
+  warning: { bg: 'var(--color-warning)', text: 'var(--color-warning-content)' },
+  danger: { bg: 'var(--color-error)', text: 'var(--color-error-content)' },
 } as const;
 
 const statTokens = {
@@ -605,6 +665,7 @@ const componentTokens = {
   footer: footerTokens,
   sidebar: sidebarTokens,
   navbar: navbarTokens,
+  bottomNav: bottomNavTokens,
   surface: surfaceTokens,
   paper: paperTokens,
   text: textTokens,
@@ -672,6 +733,7 @@ export {
   footerTokens,
   sidebarTokens,
   navbarTokens,
+  bottomNavTokens,
   surfaceTokens,
   paperTokens,
   textTokens,

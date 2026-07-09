@@ -16,6 +16,12 @@ jobs:
     name: Lint, typecheck, test, and build
     runs-on: ubuntu-latest
     timeout-minutes: 45
+    env:
+      # Authenticates `typecheck`/`build`'s `nx run-many` calls against Nx
+      # Cloud (nxCloudId is set in nx.json) for remote caching across runs —
+      # set the NX_CLOUD_ACCESS_TOKEN secret in repo settings to enable it;
+      # harmless no-op if unset.
+      NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
 
     steps:
       - name: Checkout repository

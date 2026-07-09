@@ -33,6 +33,10 @@ jobs:
     name: Version, tag, and publish workspace packages
     runs-on: ubuntu-latest
     environment: npm
+    env:
+      # See ci.yml — authenticates `nx release`'s underlying `build` step
+      # against Nx Cloud for remote caching; harmless no-op if unset.
+      NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
 
     steps:
       - name: Checkout repository

@@ -20,6 +20,11 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+    env:
+      # See ci.yml — authenticates the "Build workspace packages" step's
+      # `nx run-many` call against Nx Cloud for remote caching; harmless
+      # no-op if unset.
+      NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
 
     steps:
       - name: Checkout repository
@@ -36,6 +41,9 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+
+      - name: Build workspace packages
+        run: pnpm build
 
       - name: Build Storybook
         run: pnpm build-storybook

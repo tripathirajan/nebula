@@ -14,7 +14,13 @@ describe('Spinner (ui)', () => {
     render(<Spinner />);
     const status = screen.getByRole('status');
     expect(status.className).toContain('animate-spin');
-    expect(status.className).toContain('border-t-[var(--spinner-indicator)]');
+    expect(status.className).toContain('border-t-[var(--spinner-primary-indicator)]');
+  });
+
+  it('applies the secondary variant token classes', () => {
+    render(<Spinner color="secondary" />);
+    const status = screen.getByRole('status');
+    expect(status.className).toContain('border-t-[var(--spinner-secondary-indicator)]');
   });
 
   it('lets a consumer override size via className (tailwind-merge resolves the conflict)', () => {

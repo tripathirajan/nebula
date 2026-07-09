@@ -25,9 +25,9 @@ type ButtonGroupProps = PrimitivePropsWithRef<'div'> & ButtonGroupOwnProps;
  * @example
  * ```tsx
  * <ButtonGroup>
- *   <Button variant="secondary">Cut</Button>
- *   <Button variant="secondary">Copy</Button>
- *   <Button variant="secondary">Paste</Button>
+ *   <Button color="secondary">Cut</Button>
+ *   <Button color="secondary">Copy</Button>
+ *   <Button color="secondary">Paste</Button>
  * </ButtonGroup>
  * ```
  */

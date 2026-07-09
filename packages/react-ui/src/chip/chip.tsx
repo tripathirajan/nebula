@@ -6,20 +6,24 @@ import * as React from 'react';
 import type { PrimitivePropsWithRef } from '@nebula/primitives/primitive';
 import type { VariantProps } from 'class-variance-authority';
 
-const chipVariants = cva(
-  'inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium',
-  {
-    variants: {
-      variant: {
-        neutral: 'bg-[var(--chip-neutral-bg)] text-[var(--chip-neutral-text)]',
-        primary: 'bg-[var(--chip-primary-bg)] text-[var(--chip-primary-text)]',
-      },
-    },
-    defaultVariants: {
-      variant: 'neutral',
+/** Same eight semantic color roles `Badge`/`Tag` expose — Chip stays a single filled-pill shape, no shape axis in this pass. */
+const chipVariants = cva('inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium', {
+  variants: {
+    color: {
+      primary: 'bg-[var(--chip-primary-bg)] text-[var(--chip-primary-text)]',
+      secondary: 'bg-[var(--chip-secondary-bg)] text-[var(--chip-secondary-text)]',
+      accent: 'bg-[var(--chip-accent-bg)] text-[var(--chip-accent-text)]',
+      neutral: 'bg-[var(--chip-neutral-bg)] text-[var(--chip-neutral-text)]',
+      info: 'bg-[var(--chip-info-bg)] text-[var(--chip-info-text)]',
+      success: 'bg-[var(--chip-success-bg)] text-[var(--chip-success-text)]',
+      warning: 'bg-[var(--chip-warning-bg)] text-[var(--chip-warning-text)]',
+      danger: 'bg-[var(--chip-danger-bg)] text-[var(--chip-danger-text)]',
     },
   },
-);
+  defaultVariants: {
+    color: 'neutral',
+  },
+});
 
 interface ChipOwnProps extends VariantProps<typeof chipVariants> {
   /** Called when the built-in "×" button is clicked — omit entirely for a non-dismissible chip (reach for `Tag` if it's never meant to be interactive at all). */
@@ -28,7 +32,7 @@ interface ChipOwnProps extends VariantProps<typeof chipVariants> {
   dismissLabel?: string;
 }
 
-type ChipProps = PrimitivePropsWithRef<'span'> & ChipOwnProps;
+type ChipProps = Omit<PrimitivePropsWithRef<'span'>, 'color'> & ChipOwnProps;
 
 /**
  * The interactive/removable pill `Badge`'s own doc comment points at
@@ -45,9 +49,9 @@ type ChipProps = PrimitivePropsWithRef<'span'> & ChipOwnProps;
  * ```
  */
 const Chip = React.forwardRef<HTMLSpanElement, ChipProps>((props, forwardedRef) => {
-  const { className, variant, onDismiss, dismissLabel, children, ...rest } = props;
+  const { className, color, onDismiss, dismissLabel, children, ...rest } = props;
   return (
-    <Primitive as="span" className={cn(chipVariants({ variant }), className)} {...rest} ref={forwardedRef}>
+    <Primitive as="span" className={cn(chipVariants({ color }), className)} {...rest} ref={forwardedRef}>
       {children}
       {onDismiss ? (
         <button

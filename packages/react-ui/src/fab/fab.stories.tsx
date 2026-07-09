@@ -1,10 +1,26 @@
+import { expect, within } from '@storybook/test';
 import * as React from 'react';
 
-import { Badge } from './badge';
+import { FAB } from './fab';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-const VARIANTS = ['default', 'outline'] as const;
+const PlusIcon = () => (
+  <svg
+    aria-hidden="true"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth={2}
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className="h-6 w-6"
+  >
+    <path d="M12 5v14M5 12h14" />
+  </svg>
+);
+
+const VARIANTS = ['default', 'ghost'] as const;
 const COLORS = [
   'primary',
   'secondary',
@@ -25,17 +41,18 @@ const GRID_HEADING_STYLE: React.CSSProperties = {
   letterSpacing: '0.05em',
 };
 
-const meta = {
-  title: 'React UI/Badge',
-  component: Badge,
+const meta: Meta<typeof FAB> = {
+  title: 'React UI/FAB',
+  component: FAB,
   tags: ['autodocs'],
   parameters: { layout: 'centered' },
-  args: { children: 'Badge' },
+  args: { 'aria-label': 'Compose', children: <PlusIcon /> },
   argTypes: {
     variant: { control: 'select', options: VARIANTS },
     color: { control: 'select', options: COLORS },
+    size: { control: 'select', options: ['sm', 'md', 'lg'] },
   },
-} satisfies Meta<typeof Badge>;
+};
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -63,9 +80,9 @@ export const AllVariants: Story = {
         <React.Fragment key={variant}>
           <div style={{ ...GRID_HEADING_STYLE, textAlign: 'left' }}>{variant}</div>
           {COLORS.map((color) => (
-            <Badge key={`${variant}-${color}`} variant={variant} color={color}>
-              Badge
-            </Badge>
+            <FAB key={`${variant}-${color}`} variant={variant} color={color} aria-label="Compose">
+              <PlusIcon />
+            </FAB>
           ))}
         </React.Fragment>
       ))}
@@ -73,7 +90,11 @@ export const AllVariants: Story = {
   ),
 };
 
-/** Try any `variant`/`color` combination via the Controls panel. */
+/** Try any `variant`/`color`/`size` combination via the Controls panel. */
 export const Playground: Story = {
   args: { variant: 'default', color: 'primary' },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByRole('button', { name: 'Compose' })).toBeInTheDocument();
+  },
 };

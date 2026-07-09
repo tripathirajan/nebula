@@ -32,7 +32,7 @@ function FileMenu() {
   return (
     <Menu>
       <MenuTrigger asChild>
-        <Button variant="secondary" size="sm">
+        <Button color="secondary" size="sm">
           File
         </Button>
       </MenuTrigger>
