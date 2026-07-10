@@ -23,8 +23,8 @@
  */
 const color = {
   base: {
-    light100: 'oklch(98% 0 0)',
-    light200: 'oklch(96% 0.001 286.375)',
+    light100: 'oklch(100% 0 29.234)',
+    light200: 'oklch(98% 0.003 247.858)',
     light300: 'oklch(92% 0.004 286.32)',
     lightContent: 'oklch(21% 0.006 285.885)',
     dark100: 'oklch(27% 0.041 260.031)',
@@ -32,7 +32,10 @@ const color = {
     dark300: 'oklch(12% 0.042 264.695)',
     darkContent: 'oklch(97.807% 0.029 256.847)',
   },
-  primary: 'oklch(76% 0.188 70.08)',
+  primary: {
+    light: 'oklch(28% 0.091 267.935)',
+    dark: 'oklch(62% 0.214 259.815)',
+  },
   // Overridden from the source theme file's `oklch(98% 0.014 180.72)`/
   // `oklch(96% 0.018 272.314)` (both near-white) — those failed WCAG 1.4.3
   // against `primary` at 2.10:1/1.97:1 (needs 4.5:1; see CONTRAST_AUDIT.md).
@@ -43,8 +46,8 @@ const color = {
   // near-black, so filled buttons/badges still read as "on-brand" rather
   // than tinted gray. One shared value (not a `{ light, dark }` pair) since
   // `primary` itself is identical in both themes. 7.86:1 against `primary`.
-  primaryContent: 'oklch(22% 0.05 70.08)',
-  secondary: 'oklch(28% 0.091 267.935)',
+  primaryContent: 'oklch(98% 0.014 180.72)',
+  secondary: 'oklch(66% 0.179 58.318)',
   secondaryContent: {
     light: 'oklch(98% 0.002 247.839)',
     dark: 'oklch(93% 0.032 255.585)',
@@ -90,7 +93,7 @@ const color = {
  */
 const radius = {
   selector: '2rem',
-  field: '2rem',
+  field: '1rem',
   box: '2rem',
   button: '2rem',
   card: '2rem',

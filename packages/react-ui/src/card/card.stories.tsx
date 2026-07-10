@@ -29,7 +29,7 @@ export const AllVariants: Story = {
       {(
         [
           { label: 'Outlined', props: { variant: 'outlined' as const } },
-          { label: 'Elevation 0', props: { elevation: 0 as const } },
+          { label: 'Elevation 0', props: { elevation: 0 as const, variant: 'outlined' as const } },
           { label: 'Elevation 1', props: { elevation: 1 as const } },
           { label: 'Elevation 2', props: { elevation: 2 as const } },
           { label: 'Elevation 3', props: { elevation: 3 as const } },
@@ -62,7 +62,7 @@ export const Playground: Story = {
     <Card {...args} className="w-80">
       <CardHeader>
         <CardTitle>Project settings</CardTitle>
-        <CardDescription>Manage your project&apos;s configuration.</CardDescription>
+        {/* <CardDescription>Manage your project&apos;s configuration.</CardDescription> */}
       </CardHeader>
       <CardContent>
         <p className="text-sm">Everything here is scoped to the current workspace.</p>

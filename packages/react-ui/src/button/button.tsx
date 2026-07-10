@@ -88,52 +88,23 @@ const buttonVariants = cva(
           'border-[var(--button-primary-border)] bg-[var(--button-primary-bg)] text-[var(--button-primary-text)]',
       },
       {
-        variant: 'default',
-        color: 'secondary',
-        class:
-          'border-[var(--button-secondary-border)] bg-[var(--button-secondary-bg)] text-[var(--button-secondary-text)]',
-      },
-      {
-        variant: 'default',
-        color: 'accent',
-        class:
-          'border-[var(--button-accent-border)] bg-[var(--button-accent-bg)] text-[var(--button-accent-text)]',
-      },
-      {
-        variant: 'default',
-        color: 'neutral',
-        class:
-          'border-[var(--button-neutral-border)] bg-[var(--button-neutral-bg)] text-[var(--button-neutral-text)]',
-      },
-      {
-        variant: 'default',
-        color: 'info',
-        class:
-          'border-[var(--button-info-border)] bg-[var(--button-info-bg)] text-[var(--button-info-text)]',
-      },
-      {
-        variant: 'default',
-        color: 'success',
-        class:
-          'border-[var(--button-success-border)] bg-[var(--button-success-bg)] text-[var(--button-success-text)]',
-      },
-      {
-        variant: 'default',
-        color: 'warning',
-        class:
-          'border-[var(--button-warning-border)] bg-[var(--button-warning-bg)] text-[var(--button-warning-text)]',
-      },
-      {
-        variant: 'default',
-        color: 'danger',
-        class:
-          'border-[var(--button-danger-border)] bg-[var(--button-danger-bg)] text-[var(--button-danger-text)]',
-      },
-      {
         variant: 'ghost',
         color: 'primary',
         class:
           'border-[var(--button-primary-border)] bg-[color-mix(in_oklch,var(--button-primary-bg)_10%,transparent)] text-[var(--button-primary-border)] hover:bg-[color-mix(in_oklch,var(--button-primary-bg)_20%,transparent)]',
+      },
+      {
+        variant: 'text',
+        color: 'primary',
+        class:
+          'text-[var(--button-primary-border)] hover:bg-[color-mix(in_oklch,var(--button-primary-bg)_10%,transparent)]',
+      },
+      { variant: 'link', color: 'primary', class: 'text-[var(--button-primary-border)]' },
+      {
+        variant: 'default',
+        color: 'secondary',
+        class:
+          'border-[var(--button-secondary-border)] bg-[var(--button-secondary-bg)] text-[var(--button-secondary-text)]',
       },
       {
         variant: 'ghost',
@@ -142,10 +113,36 @@ const buttonVariants = cva(
           'border-[var(--button-secondary-border)] bg-[color-mix(in_oklch,var(--button-secondary-bg)_10%,transparent)] text-[var(--button-secondary-border)] hover:bg-[color-mix(in_oklch,var(--button-secondary-bg)_20%,transparent)]',
       },
       {
+        variant: 'text',
+        color: 'secondary',
+        class:
+          'text-[var(--button-secondary-border)] hover:bg-[color-mix(in_oklch,var(--button-secondary-bg)_10%,transparent)]',
+      },
+      { variant: 'link', color: 'secondary', class: 'text-[var(--button-secondary-border)]' },
+      {
+        variant: 'default',
+        color: 'accent',
+        class:
+          'border-[var(--button-accent-border)] bg-[var(--button-accent-bg)] text-[var(--button-accent-text)]',
+      },
+      {
         variant: 'ghost',
         color: 'accent',
         class:
           'border-[var(--button-accent-border)] bg-[color-mix(in_oklch,var(--button-accent-bg)_10%,transparent)] text-[var(--button-accent-border)] hover:bg-[color-mix(in_oklch,var(--button-accent-bg)_20%,transparent)]',
+      },
+      {
+        variant: 'text',
+        color: 'accent',
+        class:
+          'text-[var(--button-accent-border)] hover:bg-[color-mix(in_oklch,var(--button-accent-bg)_10%,transparent)]',
+      },
+      { variant: 'link', color: 'accent', class: 'text-[var(--button-accent-border)]' },
+      {
+        variant: 'default',
+        color: 'neutral',
+        class:
+          'border-[var(--button-neutral-border)] bg-[var(--button-neutral-bg)] text-[var(--button-neutral-text)]',
       },
       {
         variant: 'ghost',
@@ -154,10 +151,36 @@ const buttonVariants = cva(
           'border-[var(--button-neutral-border)] bg-[color-mix(in_oklch,var(--button-neutral-bg)_10%,transparent)] text-[var(--button-neutral-border)] hover:bg-[color-mix(in_oklch,var(--button-neutral-bg)_20%,transparent)]',
       },
       {
+        variant: 'text',
+        color: 'neutral',
+        class:
+          'text-[var(--button-neutral-border)] hover:bg-[color-mix(in_oklch,var(--button-neutral-bg)_10%,transparent)]',
+      },
+      { variant: 'link', color: 'neutral', class: 'text-[var(--button-neutral-border)]' },
+      {
+        variant: 'default',
+        color: 'info',
+        class:
+          'border-[var(--button-info-border)] bg-[var(--button-info-bg)] text-[var(--button-info-text)]',
+      },
+      {
         variant: 'ghost',
         color: 'info',
         class:
           'border-[var(--button-info-border)] bg-[color-mix(in_oklch,var(--button-info-bg)_10%,transparent)] text-[var(--button-info-border)] hover:bg-[color-mix(in_oklch,var(--button-info-bg)_20%,transparent)]',
+      },
+      {
+        variant: 'text',
+        color: 'info',
+        class:
+          'text-[var(--button-info-border)] hover:bg-[color-mix(in_oklch,var(--button-info-bg)_10%,transparent)]',
+      },
+      { variant: 'link', color: 'info', class: 'text-[var(--button-info-border)]' },
+      {
+        variant: 'default',
+        color: 'success',
+        class:
+          'border-[var(--button-success-border)] bg-[var(--button-success-bg)] text-[var(--button-success-text)]',
       },
       {
         variant: 'ghost',
@@ -166,10 +189,36 @@ const buttonVariants = cva(
           'border-[var(--button-success-border)] bg-[color-mix(in_oklch,var(--button-success-bg)_10%,transparent)] text-[var(--button-success-border)] hover:bg-[color-mix(in_oklch,var(--button-success-bg)_20%,transparent)]',
       },
       {
+        variant: 'text',
+        color: 'success',
+        class:
+          'text-[var(--button-success-border)] hover:bg-[color-mix(in_oklch,var(--button-success-bg)_10%,transparent)]',
+      },
+      { variant: 'link', color: 'success', class: 'text-[var(--button-success-border)]' },
+      {
+        variant: 'default',
+        color: 'warning',
+        class:
+          'border-[var(--button-warning-border)] bg-[var(--button-warning-bg)] text-[var(--button-warning-text)]',
+      },
+      {
         variant: 'ghost',
         color: 'warning',
         class:
           'border-[var(--button-warning-border)] bg-[color-mix(in_oklch,var(--button-warning-bg)_10%,transparent)] text-[var(--button-warning-border)] hover:bg-[color-mix(in_oklch,var(--button-warning-bg)_20%,transparent)]',
+      },
+      {
+        variant: 'text',
+        color: 'warning',
+        class:
+          'text-[var(--button-warning-border)] hover:bg-[color-mix(in_oklch,var(--button-warning-bg)_10%,transparent)]',
+      },
+      { variant: 'link', color: 'warning', class: 'text-[var(--button-warning-border)]' },
+      {
+        variant: 'default',
+        color: 'danger',
+        class:
+          'border-[var(--button-danger-border)] bg-[var(--button-danger-bg)] text-[var(--button-danger-text)]',
       },
       {
         variant: 'ghost',
@@ -179,59 +228,10 @@ const buttonVariants = cva(
       },
       {
         variant: 'text',
-        color: 'primary',
-        class:
-          'text-[var(--button-primary-border)] hover:bg-[color-mix(in_oklch,var(--button-primary-bg)_10%,transparent)]',
-      },
-      {
-        variant: 'text',
-        color: 'secondary',
-        class:
-          'text-[var(--button-secondary-border)] hover:bg-[color-mix(in_oklch,var(--button-secondary-bg)_10%,transparent)]',
-      },
-      {
-        variant: 'text',
-        color: 'accent',
-        class:
-          'text-[var(--button-accent-border)] hover:bg-[color-mix(in_oklch,var(--button-accent-bg)_10%,transparent)]',
-      },
-      {
-        variant: 'text',
-        color: 'neutral',
-        class:
-          'text-[var(--button-neutral-border)] hover:bg-[color-mix(in_oklch,var(--button-neutral-bg)_10%,transparent)]',
-      },
-      {
-        variant: 'text',
-        color: 'info',
-        class:
-          'text-[var(--button-info-border)] hover:bg-[color-mix(in_oklch,var(--button-info-bg)_10%,transparent)]',
-      },
-      {
-        variant: 'text',
-        color: 'success',
-        class:
-          'text-[var(--button-success-border)] hover:bg-[color-mix(in_oklch,var(--button-success-bg)_10%,transparent)]',
-      },
-      {
-        variant: 'text',
-        color: 'warning',
-        class:
-          'text-[var(--button-warning-border)] hover:bg-[color-mix(in_oklch,var(--button-warning-bg)_10%,transparent)]',
-      },
-      {
-        variant: 'text',
         color: 'danger',
         class:
           'text-[var(--button-danger-border)] hover:bg-[color-mix(in_oklch,var(--button-danger-bg)_10%,transparent)]',
       },
-      { variant: 'link', color: 'primary', class: 'text-[var(--button-primary-border)]' },
-      { variant: 'link', color: 'secondary', class: 'text-[var(--button-secondary-border)]' },
-      { variant: 'link', color: 'accent', class: 'text-[var(--button-accent-border)]' },
-      { variant: 'link', color: 'neutral', class: 'text-[var(--button-neutral-border)]' },
-      { variant: 'link', color: 'info', class: 'text-[var(--button-info-border)]' },
-      { variant: 'link', color: 'success', class: 'text-[var(--button-success-border)]' },
-      { variant: 'link', color: 'warning', class: 'text-[var(--button-warning-border)]' },
       { variant: 'link', color: 'danger', class: 'text-[var(--button-danger-border)]' },
     ],
     defaultVariants: {
