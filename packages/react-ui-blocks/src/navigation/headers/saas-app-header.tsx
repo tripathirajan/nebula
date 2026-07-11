@@ -78,7 +78,7 @@ function SaasAppHeader(props: SaasAppHeaderProps) {
     >
       <div className="flex items-center gap-8">
         {typeof brand === 'string' ? (
-          <Heading as={brandHref ? 'a' : 'span'} href={brandHref} level={5} className="font-bold">
+          <Heading as={brandHref ? 'a' : 'span'} level={5} className="font-bold">
             {brand}
           </Heading>
         ) : (

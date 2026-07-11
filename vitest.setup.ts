@@ -17,6 +17,26 @@ import 'vitest-axe/extend-expect';
 
 expect.extend({ toHaveNoViolations });
 
+// JSDOM doesn't implement certain browser APIs that axe-core can query.
+// These shims let axe run in tests without requiring a real browser.
+if (typeof window !== 'undefined' && window?.document) {
+  const originalGetComputedStyle = window.getComputedStyle.bind(window);
+
+  window.getComputedStyle = (elt: Element, pseudoElt?: string | null) => {
+    try {
+      return originalGetComputedStyle(elt, pseudoElt);
+    } catch {
+      return originalGetComputedStyle(elt);
+    }
+  };
+
+  if (typeof window.HTMLCanvasElement !== 'undefined') {
+    window.HTMLCanvasElement.prototype.getContext = function () {
+      return null;
+    };
+  }
+}
+
 // `@testing-library/react` only self-registers its `afterEach(cleanup)` when
 // it finds a global `afterEach` — with `test.globals: false` (vitest.config.ts)
 // there isn't one, so nothing ever unmounted prior renders. Every `render()`
