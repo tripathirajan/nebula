@@ -17,13 +17,13 @@ export const Default: Story = {
     title: 'Acme Admin',
     sidebar: (
       <nav className="flex flex-col gap-2 p-4 text-sm">
-        <a className="rounded px-3 py-2 hover:bg-[var(--color-base-200)]" href="#">
+        <a className="rounded px-3 py-2 hover:bg-[var(--color-base-200)]" href="#overview">
           Overview
         </a>
-        <a className="rounded px-3 py-2 hover:bg-[var(--color-base-200)]" href="#">
+        <a className="rounded px-3 py-2 hover:bg-[var(--color-base-200)]" href="#reports">
           Reports
         </a>
-        <a className="rounded px-3 py-2 hover:bg-[var(--color-base-200)]" href="#">
+        <a className="rounded px-3 py-2 hover:bg-[var(--color-base-200)]" href="#settings">
           Settings
         </a>
       </nav>

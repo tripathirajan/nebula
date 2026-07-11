@@ -117,7 +117,7 @@ export const AsChildLink: Story = {
   parameters: { controls: { disable: true } },
   render: (args) => (
     <Button {...args} asChild>
-      <a href="#">Link styled as a button</a>
+      <a href="#nebula">Link styled as a button</a>
     </Button>
   ),
   play: async ({ canvasElement }) => {

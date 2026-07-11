@@ -16,7 +16,7 @@ export const Default: Story = {
   args: {
     onSubmit: (values) => console.log(values),
     footer: (
-      <a className="text-sm text-[var(--color-primary)]" href="#">
+      <a className="text-sm text-[var(--color-primary)]" href="#forgot-password">
         Forgot password?
       </a>
     ),

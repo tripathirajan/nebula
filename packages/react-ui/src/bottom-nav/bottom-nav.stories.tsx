@@ -69,7 +69,16 @@ const meta: Meta<typeof BottomNav> = {
   title: 'React UI/BottomNav',
   component: BottomNav,
   tags: ['autodocs'],
-  parameters: { layout: 'fullscreen' },
+  parameters: {
+    layout: 'fullscreen',
+    // `BottomNav` is `md:hidden` by design — without pinning the canvas to
+    // a mobile-width viewport, Storybook's default (desktop-width) preview
+    // hides it entirely, both visually (confusing for anyone just opening
+    // this story) and for the interaction test below (`display: none` at
+    // desktop width removes it from the accessibility tree, so `getByRole`
+    // can't find it even though the DOM node is present).
+    viewport: { defaultViewport: 'mobile1' },
+  },
 };
 
 export default meta;
@@ -88,8 +97,20 @@ export const Default: Story = {
   ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    await expect(canvas.getByRole('navigation')).toBeInTheDocument();
-    await expect(canvas.getByRole('link', { name: 'Home' })).toHaveAttribute('aria-current', 'page');
-    await expect(canvas.getByRole('link', { name: 'Search' })).not.toHaveAttribute('aria-current');
+    // `{ hidden: true }` includes elements Testing Library would otherwise
+    // exclude from the accessibility tree for being CSS-hidden (`md:hidden`)
+    // — needed here because the *environment's* viewport width (not this
+    // story's `parameters.viewport`, which only affects Storybook's own
+    // canvas iframe, not every possible runner) isn't guaranteed to be
+    // below the `md` breakpoint wherever this play function executes.
+    // `find*` (not `get*`) also gives the render itself a moment to settle.
+    const navigation = await canvas.findByRole('navigation', { hidden: true });
+    await expect(navigation).toBeInTheDocument();
+    await expect(
+      await canvas.findByRole('link', { name: 'Home', hidden: true }),
+    ).toHaveAttribute('aria-current', 'page');
+    await expect(
+      await canvas.findByRole('link', { name: 'Search', hidden: true }),
+    ).not.toHaveAttribute('aria-current');
   },
 };

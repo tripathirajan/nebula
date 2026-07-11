@@ -34,9 +34,10 @@ const BottomNav = React.forwardRef<HTMLElement, BottomNavProps>((props, forwarde
     <Primitive
       as="nav"
       className={cn(
-        'fixed inset-x-0 bottom-0 z-40 flex items-stretch justify-around border-t bg-[var(--bottom-nav-bg)] text-[var(--bottom-nav-item-text)] border-[var(--bottom-nav-border)] pb-[env(safe-area-inset-bottom)] md:hidden',
+        'fixed inset-x-0 bottom-0 z-40 flex items-stretch justify-around border-t bg-(--bottom-nav-bg) text-(--bottom-nav-item-text) border-(--bottom-nav-border) pb-[env(safe-area-inset-bottom)] md:hidden',
         className,
       )}
+      role='navigation'
       {...rest}
       ref={forwardedRef}
     />
