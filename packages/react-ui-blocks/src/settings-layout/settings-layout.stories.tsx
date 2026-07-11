@@ -17,13 +17,13 @@ export const Default: Story = {
     title: 'Settings',
     sidebar: (
       <nav className="flex flex-col gap-2 p-4 text-sm">
-        <a className="rounded px-3 py-2 hover:bg-[var(--color-base-200)]" href="#">
+        <a className="rounded px-3 py-2 hover:bg-[var(--color-base-200)]" href="#profile">
           Profile
         </a>
-        <a className="rounded px-3 py-2 hover:bg-[var(--color-base-200)]" href="#">
+        <a className="rounded px-3 py-2 hover:bg-[var(--color-base-200)]" href="#security">
           Security
         </a>
-        <a className="rounded px-3 py-2 hover:bg-[var(--color-base-200)]" href="#">
+        <a className="rounded px-3 py-2 hover:bg-[var(--color-base-200)]" href="#billing">
           Billing
         </a>
       </nav>

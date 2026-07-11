@@ -18,6 +18,10 @@ export default tseslint.config(
       '**/.nx/**',
       '**/coverage/**',
       '**/*.d.ts',
+      // Isolated git worktrees the Claude Code harness creates for
+      // background/parallel sessions — each is its own independent
+      // checkout with its own lint state, not part of this tree's surface.
+      '**/.claude/worktrees/**',
     ],
   },
 

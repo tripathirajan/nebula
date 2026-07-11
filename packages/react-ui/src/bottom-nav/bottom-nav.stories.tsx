@@ -88,8 +88,9 @@ export const Default: Story = {
   ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    await expect(canvas.getByRole('navigation')).toBeInTheDocument();
-    await expect(canvas.getByRole('link', { name: 'Home' })).toHaveAttribute('aria-current', 'page');
-    await expect(canvas.getByRole('link', { name: 'Search' })).not.toHaveAttribute('aria-current');
+    const navigation = await canvas.findByRole('navigation');
+    await expect(navigation).toBeInTheDocument();
+    await expect(await canvas.findByRole('link', { name: 'Home' })).toHaveAttribute('aria-current', 'page');
+    await expect(await canvas.findByRole('link', { name: 'Search' })).not.toHaveAttribute('aria-current');
   },
 };
