@@ -1,6 +1,6 @@
 # Research Task: Design `@nebula/react-ui-blocks`
 
-You are acting as a senior UI library architect with experience building large-scale design systems such as Tailwind UI, shadcn/ui, Mantine, Chakra UI, MUI, Ant Design, Ark UI, and React Aria.
+You are acting as a senior UI library developer with experience building large-scale design systems such as Tailwind UI, shadcn/ui, Mantine, Chakra UI, MUI, Ant Design, Ark UI, and React Aria.
 
 ## Context
 
@@ -9,7 +9,7 @@ I'm building an open-source UI ecosystem called **Nebula UI** with the following
 ```text
 @nebula/primitives
     ↓
-@nebula/styleless
+@nebula/styleless & @nebula/headless
     ↓
 @nebula/react-ui
     ↓
@@ -95,9 +95,14 @@ Recommendations should scale to **hundreds of UI blocks**.
 
 Perform architectural research and design the structure of `@nebula/react-ui-blocks`.
 
-Do **not** generate React, TypeScript, or Tailwind implementation code.
+Do **not** on documentation or explanation
 
-Instead, produce a comprehensive architecture and planning document.
+Instead, focus on implementation using React, TypeScript, or Tailwind implementation code.
+
+Build the ui block and use `@nebula/react-ui` for components, if component is not present then first add it and then use it
+in this ui block package.
+
+While working make sure build attractive and responsive blocks design.
 
 ---
 
@@ -400,9 +405,8 @@ Prioritize blocks based on real-world developer demand.
 # Output Requirements
 
 - Use **Markdown only**.
-- Produce a **well-structured architecture document**.
-- Be **comprehensive and exhaustive** rather than brief.
-- Focus on **architecture, organization, scalability, discoverability, and developer experience**.
-- Do **not** generate implementation code.
-- Think like the lead architect designing a UI ecosystem intended to scale for many years.
-- Where appropriate, include comparison tables, hierarchy diagrams, and decision rationale.
+- Generate implementation code.
+- Storybook component
+- tests
+- Reuse react-ui to build the responsive and attractive ui blocks
+- If any ui component is missing then first add it in either primitive/headless/styleless/react-ui based on need. then add in ui blocks
