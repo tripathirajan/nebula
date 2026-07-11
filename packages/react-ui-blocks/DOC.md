@@ -1,10 +1,10 @@
-# Research Task: Design `@nebula/react-ui-blocks`
+# Implementation Task: Build `@nebula/react-ui-blocks`
 
 You are acting as a senior UI library developer with experience building large-scale design systems such as Tailwind UI, shadcn/ui, Mantine, Chakra UI, MUI, Ant Design, Ark UI, and React Aria.
 
 ## Context
 
-I'm building an open-source UI ecosystem called **Nebula UI** with the following package architecture:
+The Nebula UI ecosystem is built on this package architecture:
 
 ```text
 @nebula/primitives
@@ -16,248 +16,147 @@ I'm building an open-source UI ecosystem called **Nebula UI** with the following
 @nebula/react-ui-blocks
 ```
 
-The first three packages already exist and provide the foundation of the ecosystem.
+`@nebula/react-ui-blocks` is the package that composes `@nebula/react-ui` components into ready-to-use page sections, pages, and interface patterns.
 
-My current focus is **only** on designing **`@nebula/react-ui-blocks`**.
-
----
-
-## About `@nebula/react-ui-blocks`
-
-`@nebula/react-ui-blocks` is a collection of **production-ready, reusable UI blocks** built entirely by composing components from `@nebula/react-ui`.
-
-This package should **not** introduce new primitives, behaviors, or low-level components.
-
-Instead, it should provide complete, reusable sections that developers can copy, customize, and integrate into real-world applications with minimal effort.
-
-Examples include (but are not limited to):
-
-- Headers
-- Footers
-- Navigation
-- Hero Sections
-- Feature Sections
-- Pricing Sections
-- Testimonials
-- Newsletter Sections
-- Authentication Screens
-- Dashboard Widgets
-- Product Lists
-- Product Details
-- Shopping Cart
-- Checkout Flow
-- Profile Panels
-- Settings Pages
-- Documentation Layouts
-- Blog Layouts
-- Mobile Commerce Screens
-- Admin Layouts
-
-Think of it similarly to:
-
-- Tailwind UI Sections
-- shadcn/ui Registry Examples
-- Aceternity UI Blocks
-- Flowbite Blocks
-- Preline Sections
-
-The goal is to build the **most comprehensive open-source collection of production-ready UI blocks** for modern React applications.
+This task is implementation-first: add real UI block components, Storybook stories, and tests.
 
 ---
 
-## Documentation & Development
+## What to Build
 
-The Nebula UI ecosystem already uses **Storybook** as the primary development, documentation, and preview environment.
+Implement a scalable block library inside `packages/react-ui-blocks` that includes:
 
-`@nebula/react-ui-blocks` must integrate seamlessly with Storybook.
+- A clear folder structure for block categories
+- Reusable block components built from `@nebula/react-ui`
+- Responsive Tailwind-based layouts
+- Attractive, production-ready visuals
+- Storybook stories for each block
+- Tests covering rendering and basic accessibility
 
-Assume every block will have dedicated Storybook stories.
+Use existing `@nebula/react-ui` components whenever possible.
 
-When making recommendations, consider:
+If a needed component is missing, add it in the appropriate package layer first:
 
-- Component previews
-- Responsive viewport testing
-- Light/Dark themes
-- Controls (Args)
-- Autodocs / MDX
-- Accessibility testing
-- Interaction tests
-- Visual regression
-- Source code preview
-- Multiple variants
-- Composition examples
+- `@nebula/primitives` for low-level DOM abstractions
+- `@nebula/headless` for behavior/ARIA patterns
+- `@nebula/styleless` for unstyled reusable UI shells
+- `@nebula/react-ui` for styled components
 
-Recommendations should scale to **hundreds of UI blocks**.
+Then use that component inside `@nebula/react-ui-blocks`.
 
 ---
 
-# Your Task
+## Block Scope
 
-Perform architectural research and design the structure of `@nebula/react-ui-blocks`.
-
-Do **not** on documentation or explanation
-
-Instead, focus on implementation using React, TypeScript, or Tailwind implementation code.
-
-Build the ui block and use `@nebula/react-ui` for components, if component is not present then first add it and then use it
-in this ui block package.
-
-While working make sure build attractive and responsive blocks design.
-
----
-
-# Deliverable 1 — Folder Structure
-
-Design a scalable folder structure.
-
-Example:
-
-```text
-blocks/
-├── marketing/
-├── ecommerce/
-├── dashboard/
-├── authentication/
-├── navigation/
-├── layouts/
-└── ...
-```
-
-Explain why the structure is scalable.
-
----
-
-# Deliverable 2 — Categories
-
-Identify every major category that belongs in a UI Blocks library.
-
-Examples:
+Build actual example blocks in these categories first:
 
 - Marketing
-- Ecommerce
 - Dashboard
 - Authentication
-- Documentation
-- Blog
-- Mobile
-- Social
-- SaaS
-- Settings
-- Portfolio
-- Enterprise
-
-Do not limit yourself to these examples.
-
----
-
-# Deliverable 3 — Complete Block Inventory
-
-For every category, list **all possible reusable UI blocks**.
-
-Example:
-
-## Marketing
-
-- Hero Center
-- Hero Split
-- Hero Video
-- Hero Product
-- Logo Cloud
-- Feature Grid
-- Feature Comparison
-- CTA Banner
-- Pricing Cards
-- Pricing Table
-- FAQ
-- Newsletter
-- Testimonials
-- Statistics
-- Trust Badges
-
-Continue this level of detail for every category.
-
-The goal is to build the most complete inventory possible.
-
----
-
-# Deliverable 4 — Complexity Classification
-
-Organize every block by complexity.
-
-Example:
-
-### Small
-
-- Search Bar
-- User Menu
-- Breadcrumb
-- Notification Dropdown
-
-### Medium
-
-- Sidebar Navigation
-- Product Grid
-- Profile Widget
-- Pricing Section
-
-### Large
-
-- Checkout Page
-- Admin Dashboard
-- Documentation Layout
-- Landing Page
-
----
-
-# Deliverable 5 — Variants
-
-Identify which block families should support multiple variants.
-
-Example:
-
-## Header
-
-Variants:
-
-- Marketing
-- SaaS
 - Ecommerce
-- Dashboard
-- Documentation
-- Blog
-- Mobile
-- Enterprise
+- Navigation
+- Layouts
 
-Repeat for all applicable block families.
+Each block should be:
+
+- Responsive across mobile, tablet, and desktop
+- Theme-aware where possible (light/dark)
+- Built from reusable UI components, not raw HTML
+- Simple to customize via props
 
 ---
 
-# Deliverable 6 — Directory Naming Convention
+## Implementation Requirements
 
-Recommend a scalable directory structure.
+For each block you add, include:
 
-Example:
+- `src/blocks/<category>/<BlockName>/<BlockName>.tsx`
+- `src/blocks/<category>/<BlockName>/index.ts`
+- `src/blocks/<category>/<BlockName>/<BlockName>.stories.tsx`
+- `src/blocks/<category>/<BlockName>/<BlockName>.test.tsx`
+
+Use a one-component-per-folder convention.
+
+Write Storybook stories that demonstrate:
+
+- Block default appearance
+- Responsive breakpoints
+- Variant examples if applicable
+- Light/Dark theme preview
+
+Write tests that verify:
+
+- The component renders without crashing
+- Key text and structure exist
+- Basic accessibility attributes are present
+
+---
+
+## Example Blocks to Implement
+
+Start by delivering at least one complete block in each category:
+
+- Marketing: `MarketingHero`
+- Dashboard: `DashboardOverview`
+- Authentication: `AuthCard`
+- Ecommerce: `ProductFeature`
+- Navigation: `AppHeader`
+- Layouts: `PageSection`
+
+Each block should use `@nebula/react-ui` components such as `Button`, `Card`, `Heading`, `Text`, `Badge`, `Input`, etc.
+
+If a styled wrapper or UI component is missing in `@nebula/react-ui`, add it there before using it.
+
+---
+
+## Folder Structure
+
+Create a scalable block folder structure such as:
 
 ```text
-navigation/
-    headers/
-    footers/
-    sidebars/
-
-marketing/
-    hero/
-    pricing/
-    faq/
-
-ecommerce/
-    products/
-    cart/
-    checkout/
+packages/react-ui-blocks/src/blocks/
+  marketing/
+  dashboard/
+  authentication/
+  ecommerce/
+  navigation/
+  layouts/
 ```
 
-Explain why your convention is maintainable.
+This structure should support hundreds of blocks and keep related patterns grouped by category.
 
 ---
+
+## Storybook & Tests
+
+Integrate each block into Storybook and include dedicated stories.
+
+Add tests using Vitest and React Testing Library for every block implemented.
+
+If Storybook or testing support is not already configured in `packages/react-ui-blocks`, add the minimal files required to make stories and tests work.
+
+---
+
+## Output Requirements
+
+- Use **Markdown only** for this prompt file.
+- Focus on implementation code, not architecture research.
+- Add real components, stories, and tests.
+- Reuse `@nebula/react-ui` components.
+- Add missing UI components in the correct package layer when needed.
+- Build attractive, responsive block designs.
+
+---
+
+## Implementation Checklist
+
+- [ ] Add block folder structure under `packages/react-ui-blocks/src/blocks`
+- [ ] Implement at least one block in each target category
+- [ ] Add Storybook stories for each block
+- [ ] Add tests for each block
+- [ ] Add any missing UI components in `@nebula/react-ui` or lower layers
+- [ ] Ensure all new code is TypeScript and uses existing Nebula conventions
+- [ ] Keep the package layer dependency direction correct
 
 # Deliverable 7 — Naming Convention
 
