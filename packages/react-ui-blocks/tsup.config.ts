@@ -3,13 +3,7 @@ import { defineConfig } from 'tsup';
 export default defineConfig({
   entry: {
     index: 'src/index.ts',
-    'theme-switcher/index': 'src/theme-switcher/index.ts',
-    'app-layout/index': 'src/app-layout/index.ts',
-    'login-form/index': 'src/login-form/index.ts',
-    'transaction-form/index': 'src/transaction-form/index.ts',
-    'dashboard-layout/index': 'src/dashboard-layout/index.ts',
-    'auth-layout/index': 'src/auth-layout/index.ts',
-    'settings-layout/index': 'src/settings-layout/index.ts',
+    'authentication/index': 'src/authentication/index.ts',
   },
   format: ['esm'],
   target: 'es2022',

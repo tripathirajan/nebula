@@ -13,33 +13,9 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
     },
-    "./theme-switcher": {
-      "types": "./dist/theme-switcher/index.d.ts",
-      "import": "./dist/theme-switcher/index.js"
-    },
-    "./app-layout": {
-      "types": "./dist/app-layout/index.d.ts",
-      "import": "./dist/app-layout/index.js"
-    },
-    "./login-form": {
-      "types": "./dist/login-form/index.d.ts",
-      "import": "./dist/login-form/index.js"
-    },
-    "./transaction-form": {
-      "types": "./dist/transaction-form/index.d.ts",
-      "import": "./dist/transaction-form/index.js"
-    },
-    "./dashboard-layout": {
-      "types": "./dist/dashboard-layout/index.d.ts",
-      "import": "./dist/dashboard-layout/index.js"
-    },
-    "./auth-layout": {
-      "types": "./dist/auth-layout/index.d.ts",
-      "import": "./dist/auth-layout/index.js"
-    },
-    "./settings-layout": {
-      "types": "./dist/settings-layout/index.d.ts",
-      "import": "./dist/settings-layout/index.js"
+    "./authentication": {
+      "types": "./dist/authentication/index.d.ts",
+      "import": "./dist/authentication/index.js"
     },
     "./package.json": "./package.json"
   },
