@@ -1,6 +1,6 @@
 # AGENTS.md — nebula
 
-Instructions for any AI coding agent (Claude, Codex, Cursor, etc.) working in this repo. Read `component-library-architecture.md` for the full rationale and inventory; this file is the condensed, load-bearing rule set — follow it even where the architecture doc is more discursive.
+Instructions for any AI coding agent (Claude, Codex, Cursor, etc.) working in this repo. Read `component-library-architecture.md` for the full rationale and inventory; this file is the condensed, load-bearing rule set — follow it even where the architecture doc is more discursive. Read `DESIGN_REFERENCE.md` before any visual/UX work (new component, restyle, layout) — it's the project owner's standing design charter (Minimals-dashboard-quality benchmark, Nebula's color scheme locked, every other token — spacing/radius/elevation/motion/etc. — open to refine as one cohesive system, never one-off per component).
 
 ## What this is
 
