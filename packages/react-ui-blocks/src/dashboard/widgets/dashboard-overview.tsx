@@ -21,11 +21,9 @@ interface DashboardOverviewProps {
 
 /**
  * A responsive grid of metric cards — the metrics-grid half of a dashboard
- * "overview" screen. Deliberately does not include any charting: no
- * charting library exists anywhere in this repo's dependency graph, and
- * picking one is a separate, larger decision than "add a block" (see
- * `AGENTS.md`'s still-open `ChartCard` backlog item, which this doesn't
- * fulfil).
+ * "overview" screen. No charting of its own — pair with `ChartCard`
+ * (`../charts/chart-card`) for that; see `compositions/saas-dashboard-home.stories.tsx`
+ * for an example combining both on one page alongside `WelcomeBanner`.
  *
  * @example
  * ```tsx

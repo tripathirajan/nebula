@@ -52,7 +52,8 @@
   },
   "dependencies": {
     "@nebula/primitives": "workspace:*",
-    "@nebula/react-ui": "workspace:*"
+    "@nebula/react-ui": "workspace:*",
+    "recharts": "^3.9.2"
   },
   "devDependencies": {
     "@storybook/react": "^8.6.18",
