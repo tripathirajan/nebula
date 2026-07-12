@@ -4,11 +4,31 @@ import { ImagePreview } from './image-preview';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
+/**
+ * `ImagePreviewProps` extends `Omit<ImageProps, 'src'>`, and `ImageProps<E>`
+ * is `PolymorphicComponentPropsWithRef<E>` — a generic/conditional type.
+ * `react-docgen-typescript` (see `.storybook/main.ts`) can't expand that
+ * shape, so it can't auto-derive controls for the inherited `<img>` props
+ * (`alt`, `className`, `as`, ...) the way it does for a component with a
+ * flat, non-generic prop interface. `argTypes` below spells them out by
+ * hand instead. `file` gets `control: false` — there's no Controls widget
+ * for a real browser `File` object (no text/number/select/etc. maps onto
+ * it), so it can only ever come from `render`, never from the Controls
+ * panel, regardless of how docgen resolves its type.
+ */
 const meta: Meta<typeof ImagePreview> = {
   title: 'Styleless/ImagePreview',
   component: ImagePreview,
   tags: ['autodocs'],
   parameters: { layout: 'centered' },
+  argTypes: {
+    file: { control: false, description: 'Not controllable — supply a real `File` via `render`.' },
+    alt: { control: 'text' },
+    className: { control: 'text' },
+  },
+  args: {
+    alt: 'Preview of swatch.png',
+  },
 };
 
 export default meta;
@@ -28,9 +48,13 @@ function base64ToFile(base64: string, filename: string, mimeType: string): File 
 }
 
 export const Default: Story = {
-  render: () => {
+  // Spreads `args` onto the real element (unlike the previous version,
+  // which hardcoded `alt` and ignored `args` entirely) so `alt`/`className`
+  // edits in the Controls panel actually take effect — only `file` stays
+  // fixed, since it isn't controllable (see the `meta.argTypes` comment).
+  render: (args) => {
     const file = base64ToFile(samplePngBase64, 'swatch.png', 'image/png');
-    return <ImagePreview file={file} alt="Preview of swatch.png" />;
+    return <ImagePreview {...args} file={file} />;
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
