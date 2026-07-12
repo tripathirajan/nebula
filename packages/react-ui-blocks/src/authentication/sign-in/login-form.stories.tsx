@@ -3,7 +3,7 @@ import { LoginForm } from './login-form';
 import type { Meta, StoryObj } from '@storybook/react';
 
 const meta = {
-  title: 'Blocks/LoginForm',
+  title: 'Blocks/Authentication/Sign In/Login Form',
   component: LoginForm,
   tags: ['autodocs'],
   parameters: { layout: 'centered' },

@@ -3,7 +3,7 @@ import { TransactionForm } from './transaction-form';
 import type { Meta, StoryObj } from '@storybook/react';
 
 const meta = {
-  title: 'Blocks/TransactionForm',
+  title: 'Blocks/Forms/Transaction Form',
   component: TransactionForm,
   tags: ['autodocs'],
   parameters: { layout: 'centered' },

@@ -5,7 +5,7 @@ import { AuthLayout } from './auth-layout';
 import type { Meta, StoryObj } from '@storybook/react';
 
 const meta = {
-  title: 'Blocks/AuthLayout',
+  title: 'Blocks/Layouts/Auth Layout',
   component: AuthLayout,
   tags: ['autodocs'],
   parameters: { layout: 'fullscreen' },

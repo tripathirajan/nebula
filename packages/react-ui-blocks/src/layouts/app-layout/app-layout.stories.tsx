@@ -5,7 +5,7 @@ import { AppLayout } from './app-layout';
 import type { Meta, StoryObj } from '@storybook/react';
 
 const meta = {
-  title: 'Blocks/AppLayout',
+  title: 'Blocks/Layouts/App Layout',
   component: AppLayout,
   tags: ['autodocs'],
   parameters: { layout: 'fullscreen' },

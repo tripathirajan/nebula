@@ -6,7 +6,7 @@ import { ThemeSwitcher } from './theme-switcher';
 import type { Meta, StoryObj } from '@storybook/react';
 
 const meta = {
-  title: 'Blocks/ThemeSwitcher',
+  title: 'Blocks/Core/Theme Switcher',
   component: ThemeSwitcher,
   tags: ['autodocs'],
   decorators: [

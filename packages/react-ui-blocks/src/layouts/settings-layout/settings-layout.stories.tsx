@@ -3,7 +3,7 @@ import { SettingsLayout } from './settings-layout';
 import type { Meta, StoryObj } from '@storybook/react';
 
 const meta = {
-  title: 'Blocks/SettingsLayout',
+  title: 'Blocks/Layouts/Settings Layout',
   component: SettingsLayout,
   tags: ['autodocs'],
   parameters: { layout: 'fullscreen' },

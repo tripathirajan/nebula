@@ -3,7 +3,7 @@ import { DashboardLayout } from './dashboard-layout';
 import type { Meta, StoryObj } from '@storybook/react';
 
 const meta = {
-  title: 'Blocks/DashboardLayout',
+  title: 'Blocks/Layouts/Dashboard Layout',
   component: DashboardLayout,
   tags: ['autodocs'],
   parameters: { layout: 'fullscreen' },
