@@ -14,9 +14,11 @@ interface ListingCardProps {
   /** The leading visual — a logo tile, single image, or a custom mosaic. Left entirely to the consumer since the shape varies a lot by domain (a Job listing's square company logo vs. a Tour listing's photo mosaic) — this component only reserves the slot and rounds its top corners to match the card. */
   media: React.ReactNode;
   title: React.ReactNode;
-  /** e.g. "Posted 2 days ago". */
+  /** e.g. "Posted 2 days ago", or an author avatar + date composed together — accepts any node, not just text. */
   subtitle?: React.ReactNode;
-  /** Icon+label meta rows below the title (experience level, salary, location, date range, ...). */
+  /** A short excerpt/summary below the subtitle (e.g. a blog post excerpt). Omit for listings that don't need one (Job, Tour). */
+  description?: React.ReactNode;
+  /** Icon+label meta rows below the description (experience level, salary, location, date range, comment/view counts, ...). */
   meta?: ListingCardMetaItem[];
   /** A badge overlaid on the top-right corner of the media slot (e.g. a price badge). */
   mediaBadge?: React.ReactNode;
@@ -54,7 +56,18 @@ interface ListingCardProps {
  * ```
  */
 function ListingCard(props: ListingCardProps) {
-  const { media, title, subtitle, meta, mediaBadge, actions, actionsLabel = 'More actions', href, className } = props;
+  const {
+    media,
+    title,
+    subtitle,
+    description,
+    meta,
+    mediaBadge,
+    actions,
+    actionsLabel = 'More actions',
+    href,
+    className,
+  } = props;
 
   return (
     <Card variant="outlined" className={cn('flex flex-col overflow-hidden', className)}>
@@ -83,6 +96,7 @@ function ListingCard(props: ListingCardProps) {
           ) : null}
         </div>
         {subtitle ? <Text className="text-xs opacity-70">{subtitle}</Text> : null}
+        {description ? <Text className="text-sm opacity-90 line-clamp-2">{description}</Text> : null}
         {meta && meta.length > 0 ? (
           <div className="mt-1 grid grid-cols-2 gap-x-4 gap-y-1.5">
             {meta.map((item, index) => (

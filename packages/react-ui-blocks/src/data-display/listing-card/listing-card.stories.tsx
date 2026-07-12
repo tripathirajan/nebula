@@ -84,6 +84,25 @@ export const Tour: Story = {
   ),
 };
 
+export const BlogPost: Story = {
+  name: 'Blog post card (description slot)',
+  args: {
+    media: <div className="h-full w-full bg-[var(--color-accent)]" />,
+    mediaBadge: <Badge color="success">Published</Badge>,
+    title: 'The future of design systems',
+    subtitle: 'Jayvion Simon · 2 days ago',
+    description:
+      'A look at how design tokens and composable primitives are changing the way teams build and maintain UI at scale.',
+    meta: [{ label: '24 comments' }, { label: '1.2k views' }],
+    actions: <MenuItem onSelect={() => {}}>Share</MenuItem>,
+  },
+  render: (args) => (
+    <div style={{ maxWidth: 320 }}>
+      <ListingCard {...args} />
+    </div>
+  ),
+};
+
 export const NoActionsOrBadge: Story = {
   args: {
     media: <div className="h-full w-full bg-[var(--color-base-300)]" />,

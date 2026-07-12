@@ -21,6 +21,14 @@ describe('ListingCard (block)', () => {
     expect(screen.getByText('$90k - $120k')).toBeInTheDocument();
   });
 
+  it('renders the description only when given (e.g. a blog post excerpt)', () => {
+    const { rerender } = render(<ListingCard media={<div />} title="Post" />);
+    expect(screen.queryByText('An excerpt.')).not.toBeInTheDocument();
+
+    rerender(<ListingCard media={<div />} title="Post" description="An excerpt." />);
+    expect(screen.getByText('An excerpt.')).toBeInTheDocument();
+  });
+
   it('wraps the title in a link when href is given', () => {
     render(<ListingCard media={<div />} title="Senior Product Designer" href="/jobs/1" />);
     expect(screen.getByRole('link', { name: 'Senior Product Designer' })).toHaveAttribute('href', '/jobs/1');

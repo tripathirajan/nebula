@@ -2,3 +2,4 @@
 export * from './widgets';
 export * from './charts';
 export * from './billing';
+export * from './team';

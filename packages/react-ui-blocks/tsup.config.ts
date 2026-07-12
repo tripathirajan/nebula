@@ -8,6 +8,7 @@ export default defineConfig({
     'ecommerce/index': 'src/ecommerce/index.ts',
     'dashboard/index': 'src/dashboard/index.ts',
     'communication/index': 'src/communication/index.ts',
+    'social/index': 'src/social/index.ts',
   },
   format: ['esm'],
   target: 'es2022',
