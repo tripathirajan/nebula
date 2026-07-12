@@ -26,7 +26,9 @@
     "build": "tsup && tsc -p tsconfig.build.json --emitDeclarationOnly && rm -f dist/*.tsbuildinfo",
     "dev": "tsup --watch",
     "typecheck": "tsc -p tsconfig.typecheck.json --noEmit",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "test": "vitest run --root ../.. packages/react-ui-blocks",
+    "test:watch": "vitest --root ../.. packages/react-ui-blocks"
   },
   "peerDependencies": {
     "react": "^19.0.0",
@@ -39,11 +41,18 @@
   "devDependencies": {
     "@storybook/react": "^8.6.18",
     "@storybook/test": "^8.6.18",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.0.1",
+    "@testing-library/user-event": "^14.5.2",
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
+    "axe-core": "^4.10.2",
+    "jsdom": "^25.0.1",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "tsup": "^8.3.5",
-    "typescript": "^5.6.3"
+    "typescript": "^5.6.3",
+    "vitest": "^2.1.8",
+    "vitest-axe": "^0.1.0"
   }
 }
