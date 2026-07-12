@@ -17,6 +17,18 @@
       "types": "./dist/authentication/index.d.ts",
       "import": "./dist/authentication/index.js"
     },
+    "./marketing": {
+      "types": "./dist/marketing/index.d.ts",
+      "import": "./dist/marketing/index.js"
+    },
+    "./ecommerce": {
+      "types": "./dist/ecommerce/index.d.ts",
+      "import": "./dist/ecommerce/index.js"
+    },
+    "./dashboard": {
+      "types": "./dist/dashboard/index.d.ts",
+      "import": "./dist/dashboard/index.js"
+    },
     "./package.json": "./package.json"
   },
   "files": [

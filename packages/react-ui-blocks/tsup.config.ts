@@ -4,6 +4,9 @@ export default defineConfig({
   entry: {
     index: 'src/index.ts',
     'authentication/index': 'src/authentication/index.ts',
+    'marketing/index': 'src/marketing/index.ts',
+    'ecommerce/index': 'src/ecommerce/index.ts',
+    'dashboard/index': 'src/dashboard/index.ts',
   },
   format: ['esm'],
   target: 'es2022',
