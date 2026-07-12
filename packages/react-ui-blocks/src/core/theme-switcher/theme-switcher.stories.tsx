@@ -33,3 +33,14 @@ export const SwitchesTheme: Story = {
     await expect(darkButton).toHaveAttribute('aria-pressed', 'true');
   },
 };
+
+export const IconVariant: Story = {
+  args: { variant: 'icon' },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const darkButton = canvas.getByRole('button', { name: 'Dark' });
+
+    await userEvent.click(darkButton);
+    await expect(darkButton).toHaveAttribute('aria-pressed', 'true');
+  },
+};

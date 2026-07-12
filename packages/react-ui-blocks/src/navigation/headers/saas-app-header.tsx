@@ -398,17 +398,17 @@ function SaasAppHeader(props: SaasAppHeaderProps) {
               <button
                 type="button"
                 aria-label={`${user.name} account menu`}
-                className="flex items-center gap-2 rounded-[var(--radius-selector)] p-1 transition-colors hover:bg-[var(--color-base-200)]"
+                className="flex shrink-0 items-center gap-2 rounded-[var(--radius-selector)] p-1 transition-colors hover:bg-[var(--color-base-200)]"
               >
-                <Avatar>
+                <Avatar className="shrink-0">
                   {user.avatarSrc ? <AvatarImage src={user.avatarSrc} alt="" /> : null}
                   <AvatarFallback>{user.name.charAt(0).toUpperCase()}</AvatarFallback>
                 </Avatar>
-                <span className="hidden flex-col items-start leading-tight sm:flex">
+                <span className="hidden flex-col items-start whitespace-nowrap leading-tight sm:flex">
                   <span className="text-sm font-medium">{user.name}</span>
                   {user.role ? <span className="text-xs opacity-70">{user.role}</span> : null}
                 </span>
-                <ChevronDownIcon className="hidden opacity-60 sm:block" />
+                <ChevronDownIcon className="hidden shrink-0 opacity-60 sm:block" />
               </button>
             </DropdownMenuTrigger>
             <DropdownMenuPortal>

@@ -1,3 +1,4 @@
+import { cn } from '@nebula/primitives/cn';
 import { Image } from '@nebula/primitives/image';
 import { Badge } from '@nebula/react-ui/badge';
 import { Button } from '@nebula/react-ui/button';
@@ -44,25 +45,26 @@ function ProductCard(props: ProductCardProps) {
   const { imageSrc, imageAlt, name, price, description, badge, action, className } = props;
 
   return (
-    <Card variant="elevation" elevation={1} className={className}>
+    <Card variant="elevation" elevation={1} className={cn('overflow-hidden', className)}>
       <div className="relative">
-        <Image
-          src={imageSrc}
-          alt={imageAlt}
-          className="aspect-square w-full rounded-t-[var(--radius-card)] object-cover"
-        />
+        <Image src={imageSrc} alt={imageAlt} className="aspect-square w-full object-cover" />
         {badge ? (
-          <Badge color={badge.color ?? 'accent'} className="absolute right-2 top-2">
+          // `--radius-card` is a large pill radius (2rem) — an inset this
+          // close to the corner would sit inside the curve and visually
+          // clip against it (the same "weird padding" class of issue
+          // `tokens/primitive.ts`'s `--radius-popover` comment documents
+          // for panels); `top-4 right-4` clears it.
+          <Badge color={badge.color ?? 'accent'} className="absolute right-4 top-4">
             {badge.label}
           </Badge>
         ) : null}
       </div>
-      <CardContent className="flex flex-col gap-2">
-        <Heading as="h3" level={4}>
+      <CardContent className="flex flex-col gap-1.5">
+        <Heading as="h3" level={6} className="truncate">
           {name}
         </Heading>
-        <Text className="text-lg font-semibold">{price}</Text>
-        {description ? <Text className="opacity-70">{description}</Text> : null}
+        <Text className="text-base font-bold">{price}</Text>
+        {description ? <Text className="text-sm opacity-70">{description}</Text> : null}
         {action ? (
           <Button color="primary" className="mt-2 w-full" onClick={action.onClick}>
             {action.label ?? 'Add to cart'}
