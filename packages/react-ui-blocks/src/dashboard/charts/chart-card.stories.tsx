@@ -63,3 +63,89 @@ export const Donut: Story = {
     </div>
   ),
 };
+
+export const Line: Story = {
+  name: 'Line chart',
+  args: {
+    title: 'Active users',
+    description: 'Last 6 months',
+    type: 'line',
+    data: monthlyData,
+    categoryKey: 'month',
+    series: [
+      { key: 'us', label: 'US', color: 'primary' },
+      { key: 'eu', label: 'EU', color: 'info' },
+    ],
+  },
+  render: (args) => (
+    <div style={{ maxWidth: 480 }}>
+      <ChartCard {...args} />
+    </div>
+  ),
+};
+
+export const Area: Story = {
+  name: 'Area chart',
+  args: {
+    title: 'Sessions over time',
+    description: 'Last 6 months',
+    type: 'area',
+    data: monthlyData,
+    categoryKey: 'month',
+    stacked: true,
+    series: [
+      { key: 'us', label: 'US', color: 'primary' },
+      { key: 'eu', label: 'EU', color: 'success' },
+    ],
+  },
+  render: (args) => (
+    <div style={{ maxWidth: 480 }}>
+      <ChartCard {...args} />
+    </div>
+  ),
+};
+
+const skillData = [
+  { skill: 'Speed', us: 120, eu: 98 },
+  { skill: 'Reliability', us: 98, eu: 130 },
+  { skill: 'Comfort', us: 86, eu: 130 },
+  { skill: 'Safety', us: 99, eu: 100 },
+  { skill: 'Efficiency', us: 85, eu: 90 },
+  { skill: 'Fuel type', us: 65, eu: 85 },
+];
+
+export const Radar: Story = {
+  name: 'Radar chart',
+  args: {
+    title: 'Series comparison',
+    type: 'radar',
+    data: skillData,
+    categoryKey: 'skill',
+    series: [
+      { key: 'us', label: 'US', color: 'primary' },
+      { key: 'eu', label: 'EU', color: 'warning' },
+    ],
+  },
+  render: (args) => (
+    <div style={{ maxWidth: 480 }}>
+      <ChartCard {...args} />
+    </div>
+  ),
+};
+
+export const Gauge: Story = {
+  name: 'Gauge',
+  args: {
+    title: 'Storage used',
+    type: 'gauge',
+    data: [{ used: 72 }],
+    valueKey: 'used',
+    valueLabel: 'of 100 GB',
+    color: 'primary',
+  },
+  render: (args) => (
+    <div style={{ maxWidth: 320 }}>
+      <ChartCard {...args} />
+    </div>
+  ),
+};
