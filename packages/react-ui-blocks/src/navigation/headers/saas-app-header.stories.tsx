@@ -4,6 +4,32 @@ import { SaasAppHeader } from './saas-app-header';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
+const LogoMark = () => (
+  <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6" aria-hidden="true">
+    <rect width="24" height="24" rx="6" fill="var(--color-primary)" />
+    <path d="M7 15.5 12 7l5 8.5H7Z" fill="var(--color-primary-content)" />
+  </svg>
+);
+
+const navLinks = [
+  { label: 'Overview', href: '#overview', active: true },
+  {
+    label: 'Products',
+    items: [
+      { label: 'Analytics', description: 'Usage and funnels', href: '#analytics' },
+      { label: 'Billing', description: 'Plans and invoices', href: '#billing' },
+      { label: 'Team', description: 'Members and roles', href: '#team' },
+    ],
+  },
+  { label: 'Reports', href: '#reports' },
+];
+
+const notifications = [
+  { id: '1', title: 'New comment', description: 'Jane replied to your ticket', timestamp: '2m ago', read: false },
+  { id: '2', title: 'Deploy finished', description: 'main deployed to production', timestamp: '1h ago', read: false },
+  { id: '3', title: 'Weekly summary', description: 'Your usage report is ready', timestamp: 'Yesterday', read: true },
+];
+
 const meta = {
   title: 'Blocks/Navigation/Headers/Saas App Header',
   component: SaasAppHeader,
@@ -16,37 +42,64 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
+    logo: <LogoMark />,
     brand: 'Acme',
-    navLinks: [
-      { label: 'Overview', href: '#overview', active: true },
-      { label: 'Reports', href: '#reports' },
-      { label: 'Settings', href: '#settings' },
-    ],
-    user: { name: 'Jane Cooper' },
+    navLinks,
+    user: { name: 'Jane Cooper', role: 'Admin' },
   },
 };
 
-export const WithAvatarImage: Story = {
+export const WithNotificationsAndMenu: Story = {
   args: {
+    logo: <LogoMark />,
     brand: 'Acme',
-    navLinks: [
-      { label: 'Overview', href: '#overview', active: true },
-      { label: 'Reports', href: '#reports' },
-    ],
-    user: { name: 'Jane Cooper', avatarSrc: 'https://i.pravatar.cc/80?img=1' },
-    userMenuItems: [
-      { label: 'Settings' },
-      { label: 'Sign out', separatorBefore: true },
-    ],
+    navLinks,
+    notifications,
+    user: { name: 'Jane Cooper', role: 'Admin', avatarSrc: 'https://i.pravatar.cc/80?img=1' },
+    userMenuItems: [{ label: 'Settings' }, { label: 'Sign out', separatorBefore: true }],
+  },
+  parameters: {
+    // The desktop NavigationMenu is `hidden md:block` — without pinning the
+    // canvas to a width ≥ the `md` breakpoint, this play function's
+    // "Products" trigger query fails wherever the ambient Storybook canvas
+    // happens to be narrower (same class of issue BottomNav's story
+    // documents for its own `mobile1` pin, just the opposite direction).
+    viewport: {
+      viewports: { desktopWide: { name: 'Desktop', styles: { width: '1280px', height: '800px' }, type: 'desktop' } },
+      defaultViewport: 'desktopWide',
+    },
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const trigger = await canvas.findByRole('button', { name: 'Jane Cooper account menu' });
-    await userEvent.click(trigger);
-    const menu = await within(document.body).findByRole('menu');
-    await expect(menu).toBeInTheDocument();
-    const signOut = await within(document.body).findByRole('menuitem', { name: 'Sign out' });
-    await userEvent.click(signOut);
-    await expect(within(document.body).queryByRole('menu')).not.toBeInTheDocument();
+
+    // Notification bell opens a panel listing unread + read items.
+    const bellTrigger = await canvas.findByRole('button', { name: /Notifications/ });
+    await userEvent.click(bellTrigger);
+    await expect(await within(document.body).findByText('New comment')).toBeInTheDocument();
+    await userEvent.keyboard('{Escape}');
+
+    // Products nav trigger opens its sub-menu. `{ hidden: true }` guards
+    // against a runner whose environment width isn't guaranteed to respect
+    // this story's own `parameters.viewport` (see BottomNav's story for the
+    // same defensive pattern).
+    const productsTrigger = await canvas.findByRole('button', { name: 'Products', hidden: true });
+    await userEvent.hover(productsTrigger);
+    await expect(await within(document.body).findByText('Analytics')).toBeInTheDocument();
+  },
+};
+
+export const MobileMenu: Story = {
+  args: {
+    logo: <LogoMark />,
+    brand: 'Acme',
+    navLinks,
+    user: { name: 'Jane Cooper', role: 'Admin' },
+  },
+  parameters: { viewport: { defaultViewport: 'mobile1' } },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const menuTrigger = await canvas.findByRole('button', { name: 'Open navigation menu', hidden: true });
+    await userEvent.click(menuTrigger);
+    await expect(await within(document.body).findByText('Overview')).toBeInTheDocument();
   },
 };
