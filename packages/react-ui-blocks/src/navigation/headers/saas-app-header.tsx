@@ -318,7 +318,7 @@ function SaasAppHeader(props: SaasAppHeaderProps) {
             <PopoverTrigger asChild>
               <IconButton
                 aria-label={unreadCount > 0 ? `Notifications (${unreadCount} unread)` : 'Notifications'}
-                variant="ghost"
+                variant="text"
                 color="neutral"
                 size="sm"
                 className="relative"
