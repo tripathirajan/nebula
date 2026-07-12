@@ -3,6 +3,7 @@
 // dashboard, authentication, ...) are reachable only via their own subpath
 // export (e.g. `@nebula/react-ui-blocks/authentication`), never from here.
 export * from './core/theme-switcher';
+export * from './navigation/headers';
 export * from './layouts/app-layout';
 export * from './layouts/auth-layout';
 export * from './layouts/dashboard-layout';
