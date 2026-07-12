@@ -10,3 +10,4 @@ export * from './layouts/dashboard-layout';
 export * from './layouts/settings-layout';
 export * from './layouts/page-section';
 export * from './forms/transaction-form';
+export * from './forms/filter-bar';

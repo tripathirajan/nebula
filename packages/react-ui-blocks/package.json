@@ -29,6 +29,10 @@
       "types": "./dist/dashboard/index.d.ts",
       "import": "./dist/dashboard/index.js"
     },
+    "./communication": {
+      "types": "./dist/communication/index.d.ts",
+      "import": "./dist/communication/index.js"
+    },
     "./package.json": "./package.json"
   },
   "files": [
