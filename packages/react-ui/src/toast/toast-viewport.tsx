@@ -13,7 +13,7 @@ const ToastViewport = React.forwardRef<HTMLDivElement, ToastViewportProps>(
     return (
       <HeadlessToastViewport
         className={cn(
-          'fixed bottom-0 right-0 z-50 flex max-h-screen w-full flex-col-reverse gap-2 p-4 sm:max-w-sm',
+          'fixed bottom-0 right-0 z-[var(--z-overlay)] flex max-h-screen w-full flex-col-reverse gap-2 p-4 sm:max-w-sm',
           className,
         )}
         {...rest}

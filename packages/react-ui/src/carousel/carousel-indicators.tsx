@@ -25,7 +25,7 @@ const CarouselIndicators = React.forwardRef<HTMLDivElement, CarouselIndicatorsPr
         as="div"
         role="tablist"
         aria-label="Slides"
-        className={cn('absolute bottom-2 left-1/2 z-10 flex -translate-x-1/2 gap-1.5', className)}
+        className={cn('absolute bottom-2 left-1/2 z-[var(--z-local)] flex -translate-x-1/2 gap-1.5', className)}
         {...rest}
         ref={forwardedRef}
       >

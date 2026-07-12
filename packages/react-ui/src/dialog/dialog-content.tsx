@@ -20,6 +20,15 @@ type DialogContentProps = HeadlessDialogContentProps & DialogContentOwnProps;
  * dialog); pass `hideCloseButton` to omit it for a dialog that should only
  * close via an explicit action.
  *
+ * Fades/scales in on open and out on close via `data-[state]` (same
+ * `--motion-duration-base`/`--motion-ease-out` treatment every overlay
+ * content component in this repo now shares — see `PopoverContent`'s own
+ * doc comment for why) — the headless `Dialog` root already composes
+ * `Presence`, so this stays mounted for the transition's duration instead
+ * of unmounting immediately on close. Shadow reads `--elevation-modal`
+ * (the heavier of this repo's two overlay elevation tiers, for surfaces
+ * that take over the interaction rather than follow a trigger).
+ *
  * @example
  * ```tsx
  * <DialogContent>
@@ -34,7 +43,7 @@ const DialogContent = React.forwardRef<HTMLDivElement, DialogContentProps>(
     return (
       <HeadlessDialogContent
         className={cn(
-          'fixed left-1/2 top-1/2 z-50 w-full max-w-md -translate-x-1/2 -translate-y-1/2 rounded-[var(--radius-dialog)] border border-[var(--dialog-content-border)] bg-[var(--dialog-content-bg)] p-6 text-[var(--dialog-text)] shadow-lg focus-visible:outline-none',
+          'fixed left-1/2 top-1/2 z-[var(--z-overlay)] w-full max-w-md -translate-x-1/2 -translate-y-1/2 rounded-[var(--radius-dialog)] border border-[var(--dialog-content-border)] bg-[var(--dialog-content-bg)] p-6 text-[var(--dialog-text)] shadow-[var(--elevation-modal)] transition-[opacity,transform] duration-[var(--motion-duration-base)] ease-[var(--motion-ease-out)] focus-visible:outline-none data-[state=closed]:scale-95 data-[state=closed]:opacity-0 data-[state=open]:scale-100 data-[state=open]:opacity-100',
           className,
         )}
         {...rest}

@@ -13,7 +13,7 @@ const SelectContent = React.forwardRef<HTMLDivElement, SelectContentProps>(
     return (
       <HeadlessSelectContent
         className={cn(
-          'z-50 max-h-72 min-w-32 overflow-y-auto rounded-[var(--radius-popover)] border border-[var(--select-content-border)] bg-[var(--select-content-bg)] p-1 text-[var(--select-text)] shadow-md focus-visible:outline-none',
+          'z-[var(--z-overlay)] max-h-72 min-w-32 overflow-y-auto rounded-[var(--radius-popover)] border border-[var(--select-content-border)] bg-[var(--select-content-bg)] p-1 text-[var(--select-text)] shadow-[var(--elevation-anchored)] focus-visible:outline-none',
           className,
         )}
         {...rest}

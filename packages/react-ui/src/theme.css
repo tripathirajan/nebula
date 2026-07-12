@@ -344,6 +344,16 @@
   --border: 1px;
   --depth: 0;
   --noise: 0;
+  --motion-duration-fast: 150ms;
+  --motion-duration-base: 200ms;
+  --motion-duration-slow: 300ms;
+  --motion-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --elevation-anchored: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --elevation-modal: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --z-local: 10;
+  --z-sticky: 30;
+  --z-bottom-nav: 40;
+  --z-overlay: 50;
 }
 
 /* `.dark` is the primary selector (matches Tailwind's default `dark:`

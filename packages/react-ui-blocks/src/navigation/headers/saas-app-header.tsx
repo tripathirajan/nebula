@@ -179,10 +179,10 @@ function MobileNavEntry({ link }: { link: AppHeaderNavLink }) {
  * GitHub's own account menu uses), not lost, just not competing for header
  * height.
  *
- * `sticky top-0 z-30` by default so it stays visible while scrolling long
- * dashboard content — below every floating overlay in this repo (`z-50`)
- * and `BottomNav`'s `z-40`, so overlays and the mobile tab bar always stack
- * above it.
+ * `sticky top-0` at `--z-sticky` by default so it stays visible while
+ * scrolling long dashboard content — below every floating overlay in this
+ * repo (`--z-overlay`) and `BottomNav`'s `--z-bottom-nav`, so overlays and
+ * the mobile tab bar always stack above it.
  *
  * @example
  * ```tsx
@@ -225,7 +225,7 @@ function SaasAppHeader(props: SaasAppHeaderProps) {
   return (
     <header
       className={cn(
-        'sticky top-0 z-30 flex h-14 items-center justify-between gap-4 border-b border-[var(--color-base-300)] bg-[var(--color-base-100)] px-4 sm:px-6',
+        'sticky top-0 z-[var(--z-sticky)] flex h-14 items-center justify-between gap-4 border-b border-[var(--color-base-300)] bg-[var(--color-base-100)] px-4 sm:px-6',
         className,
       )}
     >

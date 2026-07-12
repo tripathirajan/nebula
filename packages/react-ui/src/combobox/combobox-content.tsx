@@ -13,7 +13,7 @@ const ComboboxContent = React.forwardRef<HTMLDivElement, ComboboxContentProps>(
     return (
       <HeadlessComboboxContent
         className={cn(
-          'z-50 max-h-72 min-w-32 overflow-y-auto rounded-[var(--radius-popover)] border border-[var(--combobox-content-border)] bg-[var(--combobox-content-bg)] p-1 text-[var(--combobox-text)] shadow-md focus-visible:outline-none',
+          'z-[var(--z-overlay)] max-h-72 min-w-32 overflow-y-auto rounded-[var(--radius-popover)] border border-[var(--combobox-content-border)] bg-[var(--combobox-content-bg)] p-1 text-[var(--combobox-text)] shadow-[var(--elevation-anchored)] focus-visible:outline-none',
           className,
         )}
         {...rest}

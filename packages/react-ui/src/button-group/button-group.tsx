@@ -45,7 +45,7 @@ const ButtonGroup = React.forwardRef<HTMLDivElement, ButtonGroupProps>((props, f
         isHorizontal
           ? '[&>*:not(:first-child)]:-ml-px [&>*:not(:first-child)]:rounded-l-none [&>*:not(:last-child)]:rounded-r-none'
           : 'flex-col [&>*:not(:first-child)]:-mt-px [&>*:not(:first-child)]:rounded-t-none [&>*:not(:last-child)]:rounded-b-none',
-        '[&>*]:relative [&>*:focus-visible]:z-10',
+        '[&>*]:relative [&>*:focus-visible]:z-[var(--z-local)]',
         className,
       )}
       {...rest}

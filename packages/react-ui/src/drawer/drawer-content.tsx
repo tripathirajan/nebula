@@ -20,7 +20,11 @@ type DrawerContentProps = HeadlessDrawerContentProps & DrawerContentOwnProps;
  * "consumer's own CSS" work the headless `DrawerContent`'s doc comment
  * calls out as unowned by that layer). Sizing every side the same (20rem) is
  * a reasonable single default; a consumer overriding `side="top"`/`"bottom"`
- * for a shorter panel passes their own `className` height.
+ * for a shorter panel passes their own `className` height. Slide duration
+ * reads `--motion-duration-base` explicitly rather than Tailwind's implicit
+ * default — a fade+scale doesn't fit an edge-anchored panel the way it
+ * does `DialogContent`/`PopoverContent`, so this keeps its own slide
+ * transform but still shares the same named duration token.
  */
 const DrawerContent = React.forwardRef<HTMLDivElement, DrawerContentProps>(
   (props, forwardedRef) => {
@@ -29,7 +33,7 @@ const DrawerContent = React.forwardRef<HTMLDivElement, DrawerContentProps>(
       <HeadlessDrawerContent
         side={side}
         className={cn(
-          'fixed z-50 flex flex-col border-[var(--drawer-content-border)] bg-[var(--drawer-content-bg)] p-6 text-[var(--drawer-text)] shadow-lg transition-transform focus-visible:outline-none',
+          'fixed z-[var(--z-overlay)] flex flex-col border-[var(--drawer-content-border)] bg-[var(--drawer-content-bg)] p-6 text-[var(--drawer-text)] shadow-[var(--elevation-modal)] transition-transform duration-[var(--motion-duration-base)] ease-[var(--motion-ease-out)] focus-visible:outline-none',
           'data-[side=right]:inset-y-0 data-[side=right]:right-0 data-[side=right]:h-full data-[side=right]:w-80 data-[side=right]:border-l data-[side=right]:data-[state=closed]:translate-x-full',
           'data-[side=left]:inset-y-0 data-[side=left]:left-0 data-[side=left]:h-full data-[side=left]:w-80 data-[side=left]:border-r data-[side=left]:data-[state=closed]:-translate-x-full',
           'data-[side=top]:inset-x-0 data-[side=top]:top-0 data-[side=top]:w-full data-[side=top]:border-b data-[side=top]:data-[state=closed]:-translate-y-full',

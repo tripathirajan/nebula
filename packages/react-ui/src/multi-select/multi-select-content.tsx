@@ -26,7 +26,7 @@ const MultiSelectContent = React.forwardRef<HTMLDivElement, MultiSelectContentPr
     return (
       <HeadlessPopoverContent
         className={cn(
-          'z-50 max-h-72 min-w-40 overflow-y-auto rounded-[var(--radius-popover)] border border-[var(--multi-select-content-border)] bg-[var(--multi-select-content-bg)] p-1 text-[var(--multi-select-text)] shadow-md focus-visible:outline-none',
+          'z-[var(--z-overlay)] max-h-72 min-w-40 overflow-y-auto rounded-[var(--radius-popover)] border border-[var(--multi-select-content-border)] bg-[var(--multi-select-content-bg)] p-1 text-[var(--multi-select-text)] shadow-[var(--elevation-anchored)] focus-visible:outline-none',
           className,
         )}
         {...rest}

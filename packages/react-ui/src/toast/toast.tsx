@@ -12,14 +12,16 @@ type ToastProps = HeadlessToastProps;
  * `tooltipTokens` uses — see `../tokens/component.ts`). Slides/fades via
  * `data-[state=open]`/`data-[state=closed]`, left to the consumer's
  * `ToastViewport` stacking context to actually position; this card itself
- * only owns its own visual chrome.
+ * only owns its own visual chrome. Shadow reads `--elevation-modal` — a
+ * toast takes over attention the same way a Dialog does, just without the
+ * centered position.
  */
 const Toast = React.forwardRef<HTMLDivElement, ToastProps>((props, forwardedRef) => {
   const { className, ...rest } = props;
   return (
     <HeadlessToast
       className={cn(
-        'flex w-full items-start gap-3 rounded-[var(--radius-box)] border border-[var(--toast-border)] bg-[var(--toast-bg)] p-4 text-sm text-[var(--toast-text)] shadow-lg transition-all data-[state=closed]:translate-x-full data-[state=closed]:opacity-0',
+        'flex w-full items-start gap-3 rounded-[var(--radius-box)] border border-[var(--toast-border)] bg-[var(--toast-bg)] p-4 text-sm text-[var(--toast-text)] shadow-[var(--elevation-modal)] transition-all duration-[var(--motion-duration-base)] ease-[var(--motion-ease-out)] data-[state=closed]:translate-x-full data-[state=closed]:opacity-0',
         className,
       )}
       {...rest}

@@ -149,6 +149,65 @@ const fontStack = {
 } as const;
 
 /**
+ * Transition durations and easing — theme-independent, no light/dark
+ * variant. `durationFast`/`durationSlow` aren't invented values: they
+ * promote durations that were already hardcoded ad hoc across several
+ * components (`durationFast` was `Popover`/`Menu`/`NavigationMenu`'s own
+ * `duration-150`; `durationSlow` was `Progress`/`CircularProgress`/
+ * `Carousel`'s own `duration-300`) into one shared, overridable token each
+ * consumer now reads instead of repeating the literal. `durationBase` is
+ * new — the middle tier for components that had no explicit duration at
+ * all (`Dialog`/`AlertDialog`/`HoverCard`/`Drawer`), previously relying on
+ * Tailwind's implicit default (or, for `Dialog`/`AlertDialog`/`HoverCard`,
+ * no transition whatsoever). `easeOut` is a real cubic-bezier rather than
+ * Tailwind's bare `ease-out` keyword so the curve itself is a named,
+ * overridable token too, not just the duration.
+ */
+const motion = {
+  durationFast: '150ms',
+  durationBase: '200ms',
+  durationSlow: '300ms',
+  easeOut: 'cubic-bezier(0.16, 1, 0.3, 1)',
+} as const;
+
+/**
+ * Two named shadow tiers for floating/overlay surfaces — formalizes a
+ * distinction that already existed as two different hardcoded Tailwind
+ * shadow classes with no shared name: `modal` (`shadow-lg`'s value) for
+ * surfaces that take over the interaction — `Dialog`, `AlertDialog`,
+ * `Drawer`, `Toast`, `FAB` — and `anchored` (`shadow-md`'s value) for
+ * surfaces that follow a trigger — `Popover`, `Menu` (and its
+ * `DropdownMenu`/`ContextMenu` variants), `NavigationMenu`, `Select`,
+ * `Combobox`, `MultiSelect`, `HoverCard`, `Tooltip`. Deliberately distinct
+ * from `Card`/`Paper`'s own `elevation` prop (0-3, `shadow-none` through
+ * `shadow-lg`) — that's a per-instance design choice for content surfaces;
+ * this is a fixed property of what *kind* of overlay a component is.
+ * Literal shadow values (not `shadow-md`/`shadow-lg` class references) so
+ * these are real, independent, themeable tokens.
+ */
+const elevation = {
+  anchored: '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
+  modal: '0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)',
+} as const;
+
+/**
+ * Formalizes the 4-tier stacking order every floating/sticky component
+ * already followed by convention (each documented in its own file) but
+ * never shared as a named scale: `local` (in-component stacking — carousel
+ * nav arrows, adjacent-button focus rings), `sticky` (`SaasAppHeader`),
+ * `bottomNav` (`BottomNav`, deliberately below every overlay), `overlay`
+ * (every `Dialog`/`Popover`/`Menu`/`Drawer`/`Toast`/... floating surface —
+ * always the topmost layer). Pure codification: the numeric values are
+ * unchanged from what was already hardcoded per file.
+ */
+const zIndex = {
+  local: '10',
+  sticky: '30',
+  bottomNav: '40',
+  overlay: '50',
+} as const;
+
+/**
  * The full primitive token tree — raw values only, grouped by category.
  *
  * @example
@@ -160,6 +219,6 @@ const fontStack = {
  * const brandPrimary = primitiveTokens.color.primary;
  * ```
  */
-const primitiveTokens = { color, radius, size, effect, fontStack } as const;
+const primitiveTokens = { color, radius, size, effect, fontStack, motion, elevation, zIndex } as const;
 
 export { primitiveTokens };

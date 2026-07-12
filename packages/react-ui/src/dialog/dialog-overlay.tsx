@@ -12,7 +12,7 @@ const DialogOverlay = React.forwardRef<HTMLDivElement, DialogOverlayProps>(
     const { className, ...rest } = props;
     return (
       <HeadlessDialogOverlay
-        className={cn('fixed inset-0 z-50 bg-[var(--dialog-overlay-bg)]/50', className)}
+        className={cn('fixed inset-0 z-[var(--z-overlay)] bg-[var(--dialog-overlay-bg)]/50', className)}
         {...rest}
         ref={forwardedRef}
       />

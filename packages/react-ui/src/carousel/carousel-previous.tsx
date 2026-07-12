@@ -22,7 +22,7 @@ const CarouselPrevious = React.forwardRef<HTMLButtonElement, CarouselPreviousPro
         aria-label="Previous slide"
         disabled={disabled}
         className={cn(
-          'absolute left-2 top-1/2 z-10 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border border-[var(--carousel-nav-border)] bg-[var(--carousel-nav-bg)] text-[var(--carousel-nav-text)] shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--carousel-indicator-active-bg)] disabled:cursor-not-allowed disabled:opacity-40',
+          'absolute left-2 top-1/2 z-[var(--z-local)] flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border border-[var(--carousel-nav-border)] bg-[var(--carousel-nav-bg)] text-[var(--carousel-nav-text)] shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--carousel-indicator-active-bg)] disabled:cursor-not-allowed disabled:opacity-40',
           className,
         )}
         {...rest}

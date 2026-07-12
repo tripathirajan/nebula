@@ -29,7 +29,7 @@ const TooltipContent = React.forwardRef<HTMLDivElement, TooltipContentProps>(
     return (
       <HeadlessTooltipContent
         className={cn(
-          'z-50 rounded-[var(--radius-tooltip)] bg-[var(--tooltip-content-bg)] px-2.5 py-1.5 text-xs text-[var(--tooltip-content-text)] shadow-md',
+          'z-[var(--z-overlay)] rounded-[var(--radius-tooltip)] bg-[var(--tooltip-content-bg)] px-2.5 py-1.5 text-xs text-[var(--tooltip-content-text)] shadow-[var(--elevation-anchored)]',
           className,
         )}
         {...rest}

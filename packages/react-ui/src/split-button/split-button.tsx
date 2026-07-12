@@ -41,7 +41,7 @@ const SplitButton = React.forwardRef<HTMLDivElement, SplitButtonProps>((props, f
   return (
     <StylelessSplitButton
       className={cn(
-        'inline-flex [&>*:not(:first-child)]:-ml-px [&>*:not(:first-child)]:rounded-l-none [&>*:not(:last-child)]:rounded-r-none [&>*]:relative [&>*:focus-visible]:z-10',
+        'inline-flex [&>*:not(:first-child)]:-ml-px [&>*:not(:first-child)]:rounded-l-none [&>*:not(:last-child)]:rounded-r-none [&>*]:relative [&>*:focus-visible]:z-[var(--z-local)]',
         className,
       )}
       {...rest}

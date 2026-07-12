@@ -12,7 +12,7 @@ const DrawerOverlay = React.forwardRef<HTMLDivElement, DrawerOverlayProps>(
     const { className, ...rest } = props;
     return (
       <HeadlessDrawerOverlay
-        className={cn('fixed inset-0 z-50 bg-[var(--drawer-overlay-bg)]/50', className)}
+        className={cn('fixed inset-0 z-[var(--z-overlay)] bg-[var(--drawer-overlay-bg)]/50', className)}
         {...rest}
         ref={forwardedRef}
       />

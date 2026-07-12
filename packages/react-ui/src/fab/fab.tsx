@@ -14,7 +14,7 @@ import type { VariantProps } from 'class-variance-authority';
  * `fabTokens` entry was added.
  */
 const fabVariants = cva(
-  'inline-flex shrink-0 items-center justify-center rounded-full border shadow-lg outline-none transition-colors focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:ring-[var(--color-base-content)] disabled:pointer-events-none disabled:opacity-50',
+  'inline-flex shrink-0 items-center justify-center rounded-full border shadow-[var(--elevation-modal)] outline-none transition-colors focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:ring-[var(--color-base-content)] disabled:pointer-events-none disabled:opacity-50',
   {
     variants: {
       variant: {

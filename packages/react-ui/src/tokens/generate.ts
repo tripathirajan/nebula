@@ -108,6 +108,9 @@ const radiusEntries = flatten(primitiveTokens.radius, ['radius']);
 const sizeEntries = flatten(primitiveTokens.size, ['size']);
 const fontEntries = flatten(primitiveTokens.fontStack, ['font']);
 const effectEntries = flatten(primitiveTokens.effect);
+const motionEntries = flatten(primitiveTokens.motion, ['motion']);
+const elevationEntries = flatten(primitiveTokens.elevation, ['elevation']);
+const zIndexEntries = flatten(primitiveTokens.zIndex, ['z']);
 
 const css = `/**
  * GENERATED FILE — do not hand-edit.
@@ -115,7 +118,7 @@ const css = `/**
  * Regenerate: pnpm --filter @nebula/react-ui generate-tokens
  */
 
-${toCssBlock(':root', [...lightEntries, ...componentEntries, ...radiusEntries, ...sizeEntries, ...fontEntries, ...effectEntries])}
+${toCssBlock(':root', [...lightEntries, ...componentEntries, ...radiusEntries, ...sizeEntries, ...fontEntries, ...effectEntries, ...motionEntries, ...elevationEntries, ...zIndexEntries])}
 
 /* \`.dark\` is the primary selector (matches Tailwind's default \`dark:\`
    class strategy and this theme's DaisyUI origin); \`[data-theme="dark"]\`
@@ -137,5 +140,5 @@ writeFileSync(outPath, css, 'utf8');
 
 
 console.log(
-  `Wrote ${lightEntries.length + darkEntries.length + componentEntries.length + radiusEntries.length + sizeEntries.length + fontEntries.length + effectEntries.length} tokens to ${outPath.pathname}`,
+  `Wrote ${lightEntries.length + darkEntries.length + componentEntries.length + radiusEntries.length + sizeEntries.length + fontEntries.length + effectEntries.length + motionEntries.length + elevationEntries.length + zIndexEntries.length} tokens to ${outPath.pathname}`,
 );

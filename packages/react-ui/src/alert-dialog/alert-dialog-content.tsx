@@ -14,6 +14,9 @@ type AlertDialogContentProps = HeadlessAlertDialogContentProps;
  * an incidental click, only by an explicit `AlertDialogCancel`/
  * `AlertDialogAction` the consumer places in the body themselves.
  *
+ * Same fade/scale `data-[state]` transition and `--elevation-modal` shadow
+ * as `DialogContent` — see that component's doc comment for why.
+ *
  * @example
  * ```tsx
  * <AlertDialogContent>
@@ -32,7 +35,7 @@ const AlertDialogContent = React.forwardRef<HTMLDivElement, AlertDialogContentPr
     return (
       <HeadlessAlertDialogContent
         className={cn(
-          'fixed left-1/2 top-1/2 z-50 w-full max-w-md -translate-x-1/2 -translate-y-1/2 rounded-[var(--radius-dialog)] border border-[var(--dialog-content-border)] bg-[var(--dialog-content-bg)] p-6 text-[var(--dialog-text)] shadow-lg focus-visible:outline-none',
+          'fixed left-1/2 top-1/2 z-[var(--z-overlay)] w-full max-w-md -translate-x-1/2 -translate-y-1/2 rounded-[var(--radius-dialog)] border border-[var(--dialog-content-border)] bg-[var(--dialog-content-bg)] p-6 text-[var(--dialog-text)] shadow-[var(--elevation-modal)] transition-[opacity,transform] duration-[var(--motion-duration-base)] ease-[var(--motion-ease-out)] focus-visible:outline-none data-[state=closed]:scale-95 data-[state=closed]:opacity-0 data-[state=open]:scale-100 data-[state=open]:opacity-100',
           className,
         )}
         {...rest}
