@@ -1,5 +1,5 @@
 import { cn } from '@nebula/primitives/cn';
-import { Main, Section, Sidebar } from '@nebula/react-ui';
+import { Section, Sidebar } from '@nebula/react-ui';
 import * as React from 'react';
 
 import { AppLayout } from '../app-layout/app-layout';
@@ -36,10 +36,14 @@ interface SettingsLayoutProps {
  * the same rule `BLOCKS_ARCHITECTURE.md` §5 uses to decide when something
  * needs to be a separate family vs. a shared component with a variant prop.
  *
- * Content is capped to `max-w-2xl` and centered within `Main` — unlike
- * `DashboardLayout`'s content (which is often wide widget grids/tables), a
- * settings panel is almost always a single column of stacked form sections,
- * and a full-bleed-width settings form reads worse on a wide viewport.
+ * Content is capped to `max-w-2xl` and centered within the content region —
+ * unlike `DashboardLayout`'s content (which is often wide widget
+ * grids/tables), a settings panel is almost always a single column of
+ * stacked form sections, and a full-bleed-width settings form reads worse
+ * on a wide viewport. Like `DashboardLayout`, uses a plain `<div>` (not
+ * `react-ui`'s `Main`) for that region — `Main` renders its own `<main>`
+ * landmark, which would nest inside `AppLayout`'s already-rendered `<main>`
+ * (a real WCAG violation, not just a stylistic choice).
  *
  * @example
  * ```tsx
@@ -61,9 +65,9 @@ function SettingsLayout(props: SettingsLayoutProps) {
     <AppLayout title={title} defaultTheme={defaultTheme}>
       <div className={cn('flex min-h-full', className)}>
         <Sidebar aria-label="Settings">{sidebar}</Sidebar>
-        <Main>
+        <div className="flex-1 p-4">
           <Section className="mx-auto max-w-2xl">{children}</Section>
-        </Main>
+        </div>
       </div>
     </AppLayout>
   );

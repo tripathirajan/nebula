@@ -1,5 +1,5 @@
 import { cn } from '@nebula/primitives/cn';
-import { Main, Sidebar } from '@nebula/react-ui';
+import { Sidebar } from '@nebula/react-ui';
 import * as React from 'react';
 
 import { AppLayout } from '../app-layout/app-layout';
@@ -34,6 +34,13 @@ interface DashboardLayoutProps {
  * around `AppLayout` (passing `hideHeader` and rolling their own header)
  * instead of using this component.
  *
+ * The content region deliberately uses a plain `<div>` (`Main`'s own
+ * `flex-1 p-4` classes, hand-applied) rather than `react-ui`'s `Main`
+ * component — `Main` renders its own `<main>` landmark, and nesting one
+ * inside `AppLayout`'s already-rendered `<main>` is a real WCAG violation
+ * (duplicate/non-top-level main landmarks), not just a stylistic choice
+ * like the `Sidebar` trade-off above.
+ *
  * @example
  * ```tsx
  * <DashboardLayout title="Acme Admin" sidebar={<PrimaryNav />}>
@@ -48,7 +55,7 @@ function DashboardLayout(props: DashboardLayoutProps) {
     <AppLayout title={title} defaultTheme={defaultTheme}>
       <div className={cn('flex min-h-full', className)}>
         <Sidebar>{sidebar}</Sidebar>
-        <Main>{children}</Main>
+        <div className="flex-1 p-4">{children}</div>
       </div>
     </AppLayout>
   );
