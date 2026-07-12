@@ -8,4 +8,5 @@ export * from './layouts/app-layout';
 export * from './layouts/auth-layout';
 export * from './layouts/dashboard-layout';
 export * from './layouts/settings-layout';
+export * from './layouts/page-section';
 export * from './forms/transaction-form';
