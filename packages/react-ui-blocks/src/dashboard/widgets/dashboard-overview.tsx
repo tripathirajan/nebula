@@ -1,5 +1,7 @@
 import { cn } from '@nebula/primitives/cn';
-import { Card, CardContent, Heading, Stat, StatDescription, StatLabel, StatValue } from '@nebula/react-ui';
+import { Card, CardContent } from '@nebula/react-ui/card';
+import { Heading } from '@nebula/react-ui/heading';
+import { Stat, StatDescription, StatLabel, StatValue } from '@nebula/react-ui/stat';
 import * as React from 'react';
 
 interface DashboardMetric {

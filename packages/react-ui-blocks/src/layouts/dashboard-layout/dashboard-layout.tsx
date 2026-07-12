@@ -1,10 +1,10 @@
 import { cn } from '@nebula/primitives/cn';
-import { Sidebar } from '@nebula/react-ui';
+import { Sidebar } from '@nebula/react-ui/sidebar';
 import * as React from 'react';
 
 import { AppLayout } from '../app-layout/app-layout';
 
-import type { Theme } from '@nebula/react-ui';
+import type { Theme } from '@nebula/react-ui/theme-provider';
 
 interface DashboardLayoutProps {
   children: React.ReactNode;

@@ -1,5 +1,7 @@
 import { cn } from '@nebula/primitives/cn';
-import { Button, Heading, Text } from '@nebula/react-ui';
+import { Button } from '@nebula/react-ui/button';
+import { Heading } from '@nebula/react-ui/heading';
+import { Text } from '@nebula/react-ui/text';
 import * as React from 'react';
 
 interface HeroAction {

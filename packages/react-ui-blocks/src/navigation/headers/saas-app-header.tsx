@@ -1,16 +1,16 @@
 import { cn } from '@nebula/primitives/cn';
+import { Avatar, AvatarFallback, AvatarImage } from '@nebula/react-ui/avatar';
 import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuPortal,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-  Heading,
-  IconButton,
+} from '@nebula/react-ui/dropdown-menu';
+import { Heading } from '@nebula/react-ui/heading';
+import { IconButton } from '@nebula/react-ui/icon-button';
+import {
   NavigationMenu,
   NavigationMenuContent,
   NavigationMenuItem,
@@ -18,17 +18,10 @@ import {
   NavigationMenuList,
   NavigationMenuPortal,
   NavigationMenuTrigger,
-  Popover,
-  PopoverContent,
-  PopoverPortal,
-  PopoverTrigger,
-  Sheet,
-  SheetContent,
-  SheetPortal,
-  SheetTitle,
-  SheetTrigger,
-  Text,
-} from '@nebula/react-ui';
+} from '@nebula/react-ui/navigation-menu';
+import { Popover, PopoverContent, PopoverPortal, PopoverTrigger } from '@nebula/react-ui/popover';
+import { Sheet, SheetContent, SheetPortal, SheetTitle, SheetTrigger } from '@nebula/react-ui/sheet';
+import { Text } from '@nebula/react-ui/text';
 import * as React from 'react';
 
 const BellIcon = (props: React.SVGProps<SVGSVGElement>) => (

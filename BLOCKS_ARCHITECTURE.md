@@ -910,6 +910,52 @@ AI/Chat Applications · Mobile Commerce (as a fully-distinct, mobile-first-desig
 
 ---
 
+## 14. Bundle-Size Plan
+
+No bundle-size measurement or budget exists anywhere in this repo today — confirmed via a full sweep: no `size-limit`/`bundlesize`/`rollup-plugin-visualizer` in any `package.json`, no size-checking step in `.github/workflows/ci.yml`. This section is the plan to close that gap, grounded in real measurements taken against the current `packages/react-ui-blocks` build (all figures unminified ESM, matching this repo's actual `tsup.config.ts` settings for both `react-ui` and `react-ui-blocks` — neither sets `minify: true`).
+
+### Baseline (measured, current build)
+
+`react-ui-blocks` output size **excludes** `@nebula/react-ui`/`@nebula/primitives` (both declared `external` in `tsup.config.ts` — a consumer's bundler resolves them separately):
+
+| Entry | Blocks | Raw | Gzip |
+| --- | --- | --- | --- |
+| `.` (root barrel) | 7 neutral blocks | 20.2 KB | 4.6 KB |
+| `./authentication` | `LoginForm`, `SignupForm` | 7.0 KB | 1.3 KB |
+| `./marketing` | `Hero` | 1.9 KB | 0.7 KB |
+| `./ecommerce` | `ProductCard` | 1.5 KB | 0.7 KB |
+| `./dashboard` | `DashboardOverview` | 1.3 KB | 0.6 KB |
+
+For comparison, `@nebula/react-ui`'s own **root barrel** (all ~100 components) is 215.5 KB raw / 33.8 KB gzip, while a **single subpath** (`@nebula/react-ui/button`) is 8.5 KB raw / 1.6 KB gzip — a >25x difference.
+
+### Finding 1 (highest impact): blocks import `@nebula/react-ui`'s root barrel, not per-component subpaths
+
+Every block does `import { Button, Card, ... } from '@nebula/react-ui'` rather than `from '@nebula/react-ui/button'`, `'@nebula/react-ui/card'`, etc. `react-ui`'s `package.json` already declares `"sideEffects": ["*.css"]`, so a sufficiently capable bundler (Vite/esbuild/Rollup, Webpack 5+) *can* tree-shake a barrel import down to only the named exports actually used — but that's relying on the consumer's bundler doing full cross-module dead-code elimination correctly, which isn't guaranteed in every setup (older Webpack 4/CRA configs, some Metro/React Native pipelines). Switching every block's `@nebula/react-ui` import to its specific subpath(s) guarantees minimal bundle impact regardless of consumer tooling — the same subpath-export philosophy this package already applies to itself, just threaded one layer down into how it consumes its own dependency. **Applied this session** across all 13 block source files (test/story files intentionally left importing from the root barrel — they're excluded from `dist` via `tsconfig.build.json`, so they don't affect a consumer's bundle at all).
+
+**Load-bearing caveat found while applying this**: `react-ui`'s `tsup.config.ts` has `splitting: false`, so every subpath entry is bundled *independently* — no shared chunk. For any component pair built on React Context (`ThemeProvider`/`useTheme` today; potentially others later), the `Provider` and its consuming hook/component **must both be imported from the same entry point** (both root-barrel, or both the same subpath) — otherwise each resolves to a separately-bundled `React.createContext()` call, producing two distinct context instances and a real runtime "`useTheme` must be used within `ThemeProvider`" failure even though the tree looks correct. Hit this exact bug converting `ThemeSwitcher`: its `useTheme` moved to `@nebula/react-ui/theme-provider`, and `AppLayout`'s internal `ThemeProvider` already matched — but `theme-switcher.test.tsx`/`.stories.tsx` still wrapped it with `ThemeProvider` from the root barrel, breaking at runtime despite typechecking cleanly. Fixed by aligning both to `@nebula/react-ui/theme-provider`. This is a genuine footgun for any consumer too, not just this fix — worth a follow-up look at whether `react-ui`'s tsup config should enable `splitting: true` (shared chunk for common internals like context creation) to remove the trap structurally rather than relying on every call site staying consistent by convention.
+
+### Finding 2: tree-shaking infrastructure at the `react-ui-blocks` layer is already correct
+
+- `"sideEffects": false` in `react-ui-blocks/package.json` ✓
+- Per-vertical subpath exports mean importing one vertical never pulls in another — confirmed by the baseline table above (each vertical subpath is independently small).
+- `tsup.config.ts`'s `treeshake: true` + `splitting: false` (one file per entry, no shared-chunk fragmentation a consumer's bundler has to resolve) is the right call at this package's current size.
+
+### Finding 3: no minification — correct as-is, not a gap
+
+Shipping unminified, readable ESM and letting the *consumer's* bundler minify once in their final app build (with full knowledge of what's actually reachable) is standard library best practice — double-minifying wastes build time for zero runtime benefit and can hurt some bundlers' own dead-code elimination. No change recommended here.
+
+### Recommendation: `size-limit` CI budget
+
+Add `@size-limit/preset-small-lib` at the repo root with one budget entry per `react-ui-blocks` subpath, sized off the baseline gzip figures above plus ~25% headroom (root barrel 6 KB, `./authentication` 2 KB, `./marketing`/`./ecommerce`/`./dashboard` 1 KB each), wired into `.github/workflows/ci.yml` as a new job — so a regression (e.g. an accidental root-barrel import creeping into a block) fails CI instead of surfacing only after publish.
+
+### Priority order
+
+1. **`size-limit` CI tooling** — cheap to add, and makes every subsequent change to this section measured rather than assumed.
+2. **Switch blocks' `@nebula/react-ui` imports to per-component subpaths** (Finding 1) — mechanical, guarantees the tree-shaking story independent of consumer bundler.
+3. Re-baseline and set final CI budgets once both land.
+
+---
+
 ## Appendix — Summary Decision Log
 
 | Decision | Rationale (short) |

@@ -1,25 +1,18 @@
+import { Button } from '@nebula/react-ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@nebula/react-ui/card';
+import { DatePicker } from '@nebula/react-ui/date-picker';
+import { Field, FieldControl, FieldLabel } from '@nebula/react-ui/field';
+import { Input } from '@nebula/react-ui/input';
 import {
-  Button,
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-  DatePicker,
-  Field,
-  FieldControl,
-  FieldLabel,
-  Input,
   Select,
   SelectContent,
   SelectItem,
   SelectPortal,
   SelectTrigger,
   SelectValue,
-  TextArea,
-  ToggleGroup,
-  ToggleGroupItem,
-} from '@nebula/react-ui';
+} from '@nebula/react-ui/select';
+import { TextArea } from '@nebula/react-ui/textarea';
+import { ToggleGroup, ToggleGroupItem } from '@nebula/react-ui/toggle-group';
 import * as React from 'react';
 
 interface TransactionFormValues {

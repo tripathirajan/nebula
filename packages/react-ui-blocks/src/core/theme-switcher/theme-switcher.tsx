@@ -1,6 +1,8 @@
-import { Button, useTheme } from '@nebula/react-ui';
+import { Button } from '@nebula/react-ui/button';
+import { useTheme } from '@nebula/react-ui/theme-provider';
 
-import type { ButtonProps, Theme } from '@nebula/react-ui';
+import type { ButtonProps } from '@nebula/react-ui/button';
+import type { Theme } from '@nebula/react-ui/theme-provider';
 
 const OPTIONS: Array<{ value: Theme; label: string }> = [
   { value: 'light', label: 'Light' },
