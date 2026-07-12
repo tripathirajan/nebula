@@ -89,6 +89,26 @@ const color = {
     dark: 'oklch(71% 0.194 13.428)',
     darkContent: 'oklch(27% 0.105 12.094)',
   },
+  // For `success`/`error` used as *inline text on `base.100`* (a trend
+  // arrow's "+2.6%", not a filled badge) — a distinct pairing from
+  // `-Content` above (that's for text *on the fill*). `success`/`error`
+  // themselves fail WCAG 1.4.3 as light-mode text (`CONTRAST_AUDIT.md`
+  // documented this as a known, deliberately-unfixed gap until something
+  // actually needed it — `DashboardOverview`'s `trend` prop now does).
+  // `dark` mode already passes using the existing fill color directly (a
+  // bright, saturated hue reads fine against dark-mode's near-black
+  // `base.100`), so only `light` needed a real new value: a dark,
+  // low-chroma shade of the same hue, same pattern as `primaryContent`/
+  // `secondaryContent`/`accentContent`. 13.21:1 / 14.22:1 against
+  // `base.light100`.
+  successText: {
+    light: 'oklch(30% 0.065 151.711)',
+    dark: 'oklch(76% 0.177 163.223)',
+  },
+  errorText: {
+    light: 'oklch(30% 0.092 22.216)',
+    dark: 'oklch(71% 0.194 13.428)',
+  },
 } as const;
 
 /**
@@ -140,6 +160,14 @@ const size = {
   icon: '0.25rem',
   badge: '0.25rem',
   chip: '0.25rem',
+  // `Card`'s own padding scale (`CardHeader`/`CardContent`/`CardFooter` all
+  // read `calc(var(--size-card) * 3)`) — the first real consumer of this
+  // group's documented pattern. Previously hand-patched directly into
+  // `theme.css` as an orphaned `--card-spacing` var with no primitive
+  // behind it, which silently disappeared the next time `generate.ts` ran
+  // (a generated file, not meant to carry hand edits) — moved here so it
+  // regenerates correctly going forward.
+  card: '0.5rem',
 } as const;
 
 /** Border width, and two DaisyUI "effect" knobs (`depth` for pseudo-3D shading, `noise` for a subtle texture overlay) — 0/1 rather than boolean so they can be dialed in CSS (`calc()`, `opacity`) rather than only switched on/off. Not yet consumed by any component. */

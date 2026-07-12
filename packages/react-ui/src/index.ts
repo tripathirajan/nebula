@@ -82,6 +82,7 @@ export * from './avatar-group';
 export * from './chip';
 export * from './tag';
 export * from './stat';
+export * from './sparkline';
 export * from './video';
 export * from './audio';
 export * from './list';

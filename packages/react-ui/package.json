@@ -347,6 +347,10 @@
       "types": "./dist/stat/index.d.ts",
       "import": "./dist/stat/index.js"
     },
+    "./sparkline": {
+      "types": "./dist/sparkline/index.d.ts",
+      "import": "./dist/sparkline/index.js"
+    },
     "./video": {
       "types": "./dist/video/index.d.ts",
       "import": "./dist/video/index.js"

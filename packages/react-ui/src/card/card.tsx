@@ -110,7 +110,7 @@ const CardHeader = React.forwardRef<HTMLDivElement, CardHeaderProps>((props, for
     <Primitive
       as="div"
       className={cn(
-        'flex flex-col gap-1.5 p-[calc(var(--card-spacing)*3)]',
+        'flex flex-col gap-1.5 p-[calc(var(--size-card)*3)]',
         bordered && 'border-b border-dashed border-[var(--card-border)]',
         className,
       )}
@@ -166,7 +166,7 @@ CardDescription.displayName = 'CardDescription';
 
 const CardContent = React.forwardRef<HTMLDivElement, CardProps>((props, forwardedRef) => {
   const { className, ...rest } = props;
-  return <Primitive as="div" className={cn('p-[calc(var(--card-spacing)*3)] gap-4', className)} {...rest} ref={forwardedRef} />;
+  return <Primitive as="div" className={cn('p-[calc(var(--size-card)*3)] gap-4', className)} {...rest} ref={forwardedRef} />;
 });
 CardContent.displayName = 'CardContent';
 
@@ -175,7 +175,7 @@ const CardFooter = React.forwardRef<HTMLDivElement, CardProps>((props, forwarded
   return (
     <Primitive
       as="div"
-      className={cn('flex items-center gap-2 p-[calc(var(--card-spacing)*3)] pt-0', className)}
+      className={cn('flex items-center gap-2 p-[calc(var(--size-card)*3)] pt-0', className)}
       {...rest}
       ref={forwardedRef}
     />

@@ -119,10 +119,12 @@ function buildPairings(theme: SemanticTheme, themeName: string): Pairing[] {
     infoContent,
     success,
     successContent,
+    successText,
     warning,
     warningContent,
     error,
     errorContent,
+    errorText,
   } = theme.color;
 
   return [
@@ -154,6 +156,18 @@ function buildPairings(theme: SemanticTheme, themeName: string): Pairing[] {
     { label: `[${themeName}] error on base.100 (inline error text)`, fg: error, bg: base[100], level: 'text' },
     { label: `[${themeName}] success on base.100 (inline success text)`, fg: success, bg: base[100], level: 'text' },
     { label: `[${themeName}] warning on base.100 (inline warning text)`, fg: warning, bg: base[100], level: 'text' },
+    {
+      label: `[${themeName}] successText on base.100 (trend/status text, e.g. DashboardOverview's trend arrow)`,
+      fg: successText,
+      bg: base[100],
+      level: 'text',
+    },
+    {
+      label: `[${themeName}] errorText on base.100 (trend/status text, e.g. DashboardOverview's trend arrow)`,
+      fg: errorText,
+      bg: base[100],
+      level: 'text',
+    },
     {
       label: `[${themeName}] base.300 on base.100 (default divider/border)`,
       fg: base[300],

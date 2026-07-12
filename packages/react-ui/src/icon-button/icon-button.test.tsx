@@ -5,10 +5,10 @@ import { axe } from 'vitest-axe';
 import { IconButton } from './icon-button';
 
 describe('IconButton (ui)', () => {
-  it('applies the default variant / primary color / md size classes by default', () => {
+  it('applies the text variant / neutral color / md size classes by default', () => {
     render(<IconButton aria-label="Settings">*</IconButton>);
     const button = screen.getByRole('button', { name: 'Settings' });
-    expect(button.className).toContain('bg-[var(--button-primary-bg)]');
+    expect(button.className).toContain('text-[var(--button-neutral-border)]');
     expect(button.className).toContain('h-10');
   });
 
@@ -19,8 +19,18 @@ describe('IconButton (ui)', () => {
       </IconButton>,
     );
     const button = screen.getByRole('button', { name: 'Settings' });
-    expect(button.className).toContain('bg-[var(--button-danger-bg)]');
+    expect(button.className).toContain('text-[var(--button-danger-border)]');
     expect(button.className).toContain('h-8');
+  });
+
+  it('applies an explicit filled default variant', () => {
+    render(
+      <IconButton aria-label="Settings" variant="default" color="primary">
+        *
+      </IconButton>,
+    );
+    const button = screen.getByRole('button', { name: 'Settings' });
+    expect(button.className).toContain('bg-[var(--button-primary-bg)]');
   });
 
   it('has no axe violations', async () => {

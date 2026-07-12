@@ -37,6 +37,8 @@ const light = {
     warningContent: primitiveTokens.color.warningContent.light,
     error: primitiveTokens.color.error.light,
     errorContent: primitiveTokens.color.error.lightContent,
+    successText: primitiveTokens.color.successText.light,
+    errorText: primitiveTokens.color.errorText.light,
   },
 } as const;
 
@@ -65,6 +67,8 @@ const dark = {
     warningContent: primitiveTokens.color.warningContent.dark,
     error: primitiveTokens.color.error.dark,
     errorContent: primitiveTokens.color.error.darkContent,
+    successText: primitiveTokens.color.successText.dark,
+    errorText: primitiveTokens.color.errorText.dark,
   },
 } as const;
 

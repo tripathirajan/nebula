@@ -87,6 +87,7 @@ export default defineConfig({
     'chip/index': 'src/chip/index.ts',
     'tag/index': 'src/tag/index.ts',
     'stat/index': 'src/stat/index.ts',
+    'sparkline/index': 'src/sparkline/index.ts',
     'video/index': 'src/video/index.ts',
     'audio/index': 'src/audio/index.ts',
     'list/index': 'src/list/index.ts',

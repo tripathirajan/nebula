@@ -11,3 +11,4 @@ export * from './layouts/settings-layout';
 export * from './layouts/page-section';
 export * from './forms/transaction-form';
 export * from './forms/filter-bar';
+export * from './data-display/data-table';

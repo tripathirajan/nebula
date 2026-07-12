@@ -6,14 +6,14 @@ Thresholds: **4.5:1** for text (WCAG 1.4.3), **3:1** for required UI-component b
 
 Colors are `oklch()` — see `contrast-audit.ts`'s file header for how the ratio math gets from OKLCH to WCAG relative luminance without round-tripping through hex.
 
-## Result: 23/28 pass
+## Result: 27/32 pass
 
 | Pairing | Ratio | Needs | Result |
 | --- | --- | --- | --- |
 | [light] base.content on base.100 (body text) | 17.73:1 | 4.5:1 | PASS |
 | [light] base.content on base.200 | 16.74:1 | 4.5:1 | PASS |
 | [light] primaryContent on primary (filled primary button) | 14.06:1 | 4.5:1 | PASS |
-| [light] secondaryContent on secondary (filled secondary button) | 5.35:1 | 4.5:1 | PASS (fixed — was 3.09:1) |
+| [light] secondaryContent on secondary (filled secondary button) | 5.35:1 | 4.5:1 | PASS |
 | [light] accentContent on accent | 5.00:1 | 4.5:1 | PASS |
 | [light] neutralContent on neutral | 7.33:1 | 4.5:1 | PASS |
 | [light] infoContent on info | 6.31:1 | 4.5:1 | PASS |
@@ -23,11 +23,13 @@ Colors are `oklch()` — see `contrast-audit.ts`'s file header for how the ratio
 | [light] error on base.100 (inline error text) | 2.92:1 | 4.5:1 | **FAIL** |
 | [light] success on base.100 (inline success text) | 1.79:1 | 4.5:1 | **FAIL** |
 | [light] warning on base.100 (inline warning text) | 1.58:1 | 4.5:1 | **FAIL** |
+| [light] successText on base.100 (trend/status text) | 13.29:1 | 4.5:1 | PASS (new) |
+| [light] errorText on base.100 (trend/status text) | 14.17:1 | 4.5:1 | PASS (new) |
 | [light] base.300 on base.100 (default divider/border) | 1.27:1 | 3:1 | **FAIL** |
 | [dark] base.content on base.100 (body text) | 14.05:1 | 4.5:1 | PASS |
 | [dark] base.content on base.200 | 16.91:1 | 4.5:1 | PASS |
-| [dark] primaryContent on primary (filled primary button) | 5.12:1 | 4.5:1 | PASS (fixed — was 3.60:1) |
-| [dark] secondaryContent on secondary (filled secondary button) | 5.35:1 | 4.5:1 | PASS (fixed — was 2.66:1) |
+| [dark] primaryContent on primary (filled primary button) | 5.12:1 | 4.5:1 | PASS |
+| [dark] secondaryContent on secondary (filled secondary button) | 5.35:1 | 4.5:1 | PASS |
 | [dark] accentContent on accent | 5.00:1 | 4.5:1 | PASS |
 | [dark] neutralContent on neutral | 13.41:1 | 4.5:1 | PASS |
 | [dark] infoContent on info | 6.31:1 | 4.5:1 | PASS |
@@ -37,22 +39,23 @@ Colors are `oklch()` — see `contrast-audit.ts`'s file header for how the ratio
 | [dark] error on base.100 (inline error text) | 5.26:1 | 4.5:1 | PASS |
 | [dark] success on base.100 (inline success text) | 7.68:1 | 4.5:1 | PASS |
 | [dark] warning on base.100 (inline warning text) | 9.56:1 | 4.5:1 | PASS |
+| [dark] successText on base.100 (trend/status text) | 7.68:1 | 4.5:1 | PASS (new) |
+| [dark] errorText on base.100 (trend/status text) | 5.26:1 | 4.5:1 | PASS (new) |
 | [dark] base.300 on base.100 (default divider/border) | 1.35:1 | 3:1 | **FAIL** |
 
 ## Fixed this pass
 
-A live Storybook Accessibility-panel scan of `Popover`'s `Default` story flagged the "Filters" trigger button (`color="secondary"`) at 3.08:1 — far under the `CONTRAST_AUDIT.md`-documented 13.99:1 for that exact pairing. Re-running `contrast-audit` confirmed the script's *live* output no longer matched this document at all: `secondary` and `primary`'s primitive values had changed in a later pass of work (`primary` was split from one shared value into a `{ light, dark }` pair) without re-running the audit or updating `-Content` to match, so the checked-in table had gone stale and was hiding two real, shipping failures:
+`react-ui-blocks`' `DashboardOverview` grew a `trend` prop (an up/down arrow + colored "+2.6%" text, for Minimals-style stat cards) and reached for `text-[var(--color-success)]`/`text-[var(--color-error)]` — exactly the "future component wants inline status text" scenario the previous pass's "Known failures" section predicted, and a live Storybook Accessibility-panel scan confirmed it immediately (1.77:1 / 2.92:1, both **Serious**).
 
-- **`secondaryContent` on `secondary`** (the filled `secondary` button's text, also inherited by `Badge`/`Tag`/`Progress`/`Spinner`'s `secondary` variants) — the near-white `{ light, dark }` pair left over from before `secondary` itself was widened both failed (3.09:1/2.66:1). Collapsed to a single shared `oklch(22% 0.05 58.318)` — a dark, low-chroma shade of `secondary`'s own hue, same pattern as `accentContent` — since `secondary` is one shared value in both themes. Now 5.35:1 in both themes.
-- **`primaryContent` on `primary`, dark theme only** — `primaryContent` was still a single shared near-white value from when `primary` itself was also shared; once `primary` was split into `{ light: 28% lightness, dark: 62% lightness }`, the near-white text kept working against the dark navy `light` value (14.06:1) but dropped to 3.60:1 against the much brighter `dark` value. Restructured `primaryContent` into its own `{ light, dark }` pair — `light` keeps the original near-white value, `dark` gets `oklch(16% 0.05 259.815)` (dark, low-chroma, `primary.dark`'s own hue). Now 5.12:1 in dark mode; light mode unchanged.
+Added **`successText`/`errorText`** — new primitive tokens distinct from `success`/`error` (which stay fills-only) and from `successContent`/`errorContent` (which are for text *on* a filled background, not standalone text on `base.100`). Same "dark, low-chroma shade of the fill's own hue" pattern as `primaryContent`/`secondaryContent`/`accentContent`: `light` gets a new dark value (13.29:1 / 14.17:1 against `base.light100`), `dark` reuses the existing `success`/`error` fill value unchanged (it already passed as inline text in dark mode — a bright, saturated hue reads fine against dark mode's near-black `base.100`). `DashboardOverview`'s trend text now reads `--color-success-text`/`--color-error-text`.
 
-Both fixes follow the same "low-lightness, low-chroma shade of the fill's own hue" pattern this file already documents for `accentContent` and the `success`/`warning`/`error` `-Content` pairs — chosen over a generic near-black so filled buttons/badges still read as "on-brand" rather than tinted gray.
+**Separately caught while regenerating `theme.css` for the above**: an orphaned `--card-spacing: 0.50rem` custom property (plus three unused `p-c-*`/`px-c-*`/`py-c-*` Tailwind `@utility` blocks) had been hand-patched directly into the *generated* `theme.css` at some point, with no backing primitive in `primitive.ts` — `Card`'s own `CardHeader`/`CardContent`/`CardFooter` genuinely depend on `--card-spacing` for padding, but since it was never wired through `generate.ts`, the next regeneration silently deleted it. Moved into `primitive.ts`'s existing `size` group as `size.card` (which this file's own doc comment already described as exactly this pattern, just not yet consumed by anything) — regenerates as `--size-card: 0.5rem`, same value, no visual change. `card.tsx` now reads `var(--size-card)` instead of the orphaned `var(--card-spacing)`. The three dead `p-c-*` utilities weren't referenced anywhere in the codebase and were dropped, not restored.
 
-**Process gap this exposed**: this document has no automated check tying it to `contrast-audit.ts`'s actual output — it's hand-transcribed and can silently drift out of sync with real token values, which is exactly what let both of the above ship. Re-run `pnpm --filter @nebula/react-ui contrast-audit` and hand-diff the numbers into this table after *any* `primitive.ts`/`semantic.ts` color edit, not just ones that look color-related at a glance.
+**Process gap this doc keeps exposing**: nothing enforces `CONTRAST_AUDIT.md` staying in sync with `contrast-audit.ts`'s actual output, and (new, this pass) nothing prevents a generated file like `theme.css` from silently losing a hand-patched value it was never supposed to carry in the first place. Re-run `pnpm --filter @nebula/react-ui contrast-audit` and hand-diff the numbers into this table after *any* `primitive.ts`/`semantic.ts` edit — and never hand-edit `theme.css` directly; add the value to `primitive.ts` (or `component.ts`) and let `generate.ts` produce it.
 
 ## Known failures — not fixed, left for a design decision
 
-The remaining four failures were not touched, for the same reason as the previous pass's `border.default` finding: no shipped component renders them today, and "fixing" them would mean inventing token values beyond what the provided theme file defines, rather than picking a different point on an internal scale nebula already owns.
+The remaining two failure pairs were not touched, for the same reason as the previous pass's `border.default` finding: no shipped component renders them today, and "fixing" them would mean inventing token values beyond what the provided theme file defines, rather than picking a different point on an internal scale nebula already owns.
 
-- **`error`/`success`/`warning` used as inline text fail badly in light mode only** (2.92:1 / 1.79:1 / 1.58:1) — these three read fine as *fills* (their `-Content` pairings all pass comfortably), but are too pale for direct use as a text color on `base.100`. Not load-bearing since nothing renders inline status text off these tokens today (`Stat`'s own JSDoc `@example` shows `text-[var(--color-success)]` as a possible usage, but no shipped story or component actually renders it). If a future `Alert`/inline-status component wants e.g. `text-[var(--color-error)]`, it will need a darker text-specific variant of these tokens (following the same "dark, low-chroma, same hue" pattern used for `primaryContent`/`secondaryContent`/`accentContent` above), not the fill color directly.
+- **`error`/`success`/`warning` used directly as inline text still fail in light mode** (2.92:1 / 1.79:1 / 1.58:1) — these three read fine as *fills* (their `-Content` pairings all pass comfortably) and, as of this pass, `success`/`error` also have dedicated `-Text` variants for the inline-text case (see above). `warning` still has no `-Text` counterpart — nothing has needed colored inline *warning* text yet; add `warningText` following the same pattern the moment something does, rather than pre-building it unused.
 - **`base.300` on `base.100`** (divider/border) fails the 3:1 non-text bar in both themes (1.27:1 / 1.35:1) — carried over unchanged from the previous hex-based palette's identical, previously-documented `border.default` failure. Still not load-bearing (`primitives`' `Input`/`Textarea`/`Container` are deliberately unstyled). Re-evaluate when a styled `Input`/`Card`/`Container` in `ui` uses `base.300` as its only visible edge.
