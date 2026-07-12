@@ -285,7 +285,7 @@ function SaasAppHeader(props: SaasAppHeaderProps) {
                   <NavigationMenuItem key={String(link.label)} value={`nav-item-${index}`}>
                     <NavigationMenuTrigger>{link.label}</NavigationMenuTrigger>
                     <NavigationMenuPortal>
-                      <NavigationMenuContent>
+                      <NavigationMenuContent aria-label={String(link.label)}>
                         <div className="flex flex-col gap-1">
                           {link.items.map((item) => (
                             <NavigationMenuLink key={String(item.label)} href={item.href} onClick={item.onClick}>
@@ -333,7 +333,7 @@ function SaasAppHeader(props: SaasAppHeaderProps) {
               </IconButton>
             </PopoverTrigger>
             <PopoverPortal>
-              <PopoverContent align="end" className="w-80 p-0">
+              <PopoverContent align="end" aria-label="Notifications" className="w-80 p-0">
                 <div className="flex items-center justify-between border-b border-[var(--popover-content-border)] px-4 py-3">
                   <Text className="text-sm font-semibold">Notifications</Text>
                   {unreadCount > 0 && onMarkAllNotificationsRead ? (

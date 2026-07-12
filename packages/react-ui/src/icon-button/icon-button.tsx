@@ -31,15 +31,27 @@ type IconButtonProps = StylelessIconButtonProps & VariantProps<typeof buttonVari
  * `Button`'s theming exactly, overriding just the size classes to be square
  * (`h-*` == `w-*`, `p-0`) instead of `Button`'s padded-with-text shape.
  *
+ * Defaults to `variant="text"`/`color="neutral"` — unlike `Button`, whose
+ * `default`/`primary` defaults suit a standalone CTA, an icon-only button is
+ * almost always one of several sitting in a toolbar/header (a settings gear,
+ * a close `X`, a bell) where a filled, bordered, brand-colored square per
+ * icon reads as visual noise. `text`/`neutral` renders as a plain glyph in
+ * the theme's body-text color until hovered, matching the "toolbar icon"
+ * convention this design system's Minimals-inspired reference charter calls
+ * for; pass an explicit `variant`/`color` (as `ThemeSwitcher`'s icon variant
+ * and `SaasAppHeader`'s notification bell already do) for an icon button
+ * that should stand out on its own.
+ *
  * @example
  * ```tsx
- * <IconButton aria-label="Settings" color="secondary">
- *   <SettingsIcon />
+ * <IconButton aria-label="Settings"><SettingsIcon /></IconButton>
+ * <IconButton aria-label="Delete" variant="default" color="danger">
+ *   <TrashIcon />
  * </IconButton>
  * ```
  */
 const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>((props, forwardedRef) => {
-  const { className, variant, color, size, ...buttonProps } = props;
+  const { className, variant = 'text', color = 'neutral', size, ...buttonProps } = props;
 
   return (
     <StylelessIconButton

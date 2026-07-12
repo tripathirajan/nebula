@@ -1,4 +1,4 @@
-import { expect, userEvent, within } from '@storybook/test';
+import { expect, userEvent, waitFor, within } from '@storybook/test';
 
 import { Button } from '../button/button';
 
@@ -57,10 +57,25 @@ export const Default: Story = {
     await userEvent.click(canvas.getByRole('button', { name: 'Delete item' }));
 
     const body = within(document.body);
-    await expect(body.getByRole('dialog')).toBeInTheDocument();
+    const dialog = await body.findByRole('dialog');
+    await expect(dialog).toBeInTheDocument();
     await expect(body.getByText("This can't be undone.")).toBeInTheDocument();
 
+    // `DialogContent` fades/scales in over `--motion-duration-base` (200ms)
+    // — without waiting for it to settle, an a11y scan racing this play
+    // function can catch a still-near-transparent frame and misreport a
+    // color-contrast violation that no real user ever perceives (the
+    // animation is well under a user's reaction time). Same fix applied to
+    // every story in this repo that opens an animated overlay and then
+    // immediately asserts/interacts further.
+    await waitFor(() => expect(getComputedStyle(dialog).opacity).toBe('1'));
+
     await userEvent.click(body.getByRole('button', { name: 'Cancel' }));
-    await expect(body.queryByRole('dialog')).not.toBeInTheDocument();
+
+    // Same `Presence`-driven exit-animation delay documented above for the
+    // open side — the closed node stays mounted through
+    // `--motion-duration-base` (200ms), so this has to poll rather than
+    // assert once.
+    await waitFor(() => expect(body.queryByRole('dialog')).not.toBeInTheDocument());
   },
 };

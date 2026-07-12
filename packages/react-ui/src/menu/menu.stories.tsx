@@ -1,4 +1,4 @@
-import { expect, userEvent, within } from '@storybook/test';
+import { expect, userEvent, waitFor, within } from '@storybook/test';
 import { useState } from 'react';
 
 import { Button } from '../button/button';
@@ -70,8 +70,16 @@ export const Default: Story = {
     const menu = await body.findByRole('menu');
     await expect(menu).toBeInTheDocument();
 
+    // See `dialog.stories.tsx`'s `Default` story for why this wait exists —
+    // `MenuContent` fades/scales in over `--motion-duration-fast` (150ms).
+    await waitFor(() => expect(getComputedStyle(menu).opacity).toBe('1'));
+
     await userEvent.click(body.getByRole('menuitem', { name: 'New file' }));
-    await expect(body.queryByRole('menu')).not.toBeInTheDocument();
+
+    // Same `Presence`-driven exit-animation delay as the open side above —
+    // poll rather than assert once, or a still-fading `data-state="closed"`
+    // node gets caught.
+    await waitFor(() => expect(body.queryByRole('menu')).not.toBeInTheDocument());
   },
 };
 
@@ -84,11 +92,22 @@ export const KeyboardNavigation: Story = {
     trigger.focus();
     await userEvent.keyboard('{ArrowDown}');
     const body = within(document.body);
-    await body.findByRole('menu');
-    await expect(body.getByRole('menuitem', { name: 'New file' })).toHaveFocus();
+    const menu = await body.findByRole('menu');
+    await waitFor(() => expect(getComputedStyle(menu).opacity).toBe('1'));
+
+    // `toHaveFocus()` is a synchronous jest-dom matcher — it doesn't poll.
+    // `FocusScope`'s mount-auto-focus (the effect that moves focus onto
+    // "New file") runs in a passive `useEffect`, so a bare
+    // `expect(...).toHaveFocus()` right after the opacity wait can still
+    // read stale focus if that effect hasn't committed yet.
+    await waitFor(() => expect(body.getByRole('menuitem', { name: 'New file' })).toHaveFocus());
 
     await userEvent.keyboard('{Escape}');
-    await expect(body.queryByRole('menu')).not.toBeInTheDocument();
-    await expect(trigger).toHaveFocus();
+    await waitFor(() => expect(body.queryByRole('menu')).not.toBeInTheDocument());
+
+    // Same reasoning as above — `FocusScope`'s unmount auto-focus (restoring
+    // focus to the trigger) is also effect-driven, not synchronous with the
+    // dismiss.
+    await waitFor(() => expect(trigger).toHaveFocus());
   },
 };

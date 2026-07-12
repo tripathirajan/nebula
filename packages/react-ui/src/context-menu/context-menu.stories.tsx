@@ -1,4 +1,4 @@
-import { expect, userEvent, within } from '@storybook/test';
+import { expect, userEvent, waitFor, within } from '@storybook/test';
 import { useState } from 'react';
 
 import {
@@ -70,6 +70,10 @@ export const Default: Story = {
     await expect(menu).toBeInTheDocument();
 
     await userEvent.click(body.getByRole('menuitem', { name: 'Copy' }));
-    await expect(body.queryByRole('menu')).not.toBeInTheDocument();
+
+    // `ContextMenuContent` is `MenuContent` (see `../menu/menu-content.tsx`)
+    // — same `Presence`-driven exit-animation delay, so this has to poll
+    // rather than assert once.
+    await waitFor(() => expect(body.queryByRole('menu')).not.toBeInTheDocument());
   },
 };

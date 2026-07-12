@@ -36,22 +36,29 @@ const color = {
     light: 'oklch(28% 0.091 267.935)',
     dark: 'oklch(62% 0.214 259.815)',
   },
-  // Overridden from the source theme file's `oklch(98% 0.014 180.72)`/
-  // `oklch(96% 0.018 272.314)` (both near-white) — those failed WCAG 1.4.3
-  // against `primary` at 2.10:1/1.97:1 (needs 4.5:1; see CONTRAST_AUDIT.md).
-  // `primary`'s 76% lightness just isn't dark enough to support light text,
-  // so this follows the same pattern already used elsewhere in this same
-  // theme for `success`/`warning`/`error` `-Content` pairs: a low-lightness,
+  // `light` keeps the source theme's near-white value — `primary.light`'s
+  // 28% lightness is dark enough to support it (14.06:1). `dark` can't
+  // reuse it: `primary.dark` is a much brighter 62%-lightness blue, so
+  // near-white text on it only clears ~3.6:1 (fails WCAG 1.4.3's 4.5:1; see
+  // `CONTRAST_AUDIT.md`, re-run after `primary` was split into a `{ light,
+  // dark }` pair). Fixed the same way this theme's `success`/`warning`/
+  // `error` `-Content` pairs and `accentContent` below are: a low-lightness,
   // low-chroma shade *of the fill's own hue* rather than a generic
   // near-black, so filled buttons/badges still read as "on-brand" rather
-  // than tinted gray. One shared value (not a `{ light, dark }` pair) since
-  // `primary` itself is identical in both themes. 7.86:1 against `primary`.
-  primaryContent: 'oklch(98% 0.014 180.72)',
-  secondary: 'oklch(66% 0.179 58.318)',
-  secondaryContent: {
-    light: 'oklch(98% 0.002 247.839)',
-    dark: 'oklch(93% 0.032 255.585)',
+  // than tinted gray. 5.12:1 against `primary.dark`.
+  primaryContent: {
+    light: 'oklch(98% 0.014 180.72)',
+    dark: 'oklch(16% 0.05 259.815)',
   },
+  secondary: 'oklch(66% 0.179 58.318)',
+  // Was a near-white `{ light, dark }` pair (`oklch(98%.../93%...)`) —
+  // both failed WCAG 1.4.3 against `secondary` (3.09:1/2.66:1; see
+  // `CONTRAST_AUDIT.md`, re-run after `secondary`'s value changed and this
+  // pairing was never rechecked). `secondary` itself is one shared value in
+  // both themes, so — same fix pattern as `accentContent` — this collapses
+  // to a single low-lightness, low-chroma shade of `secondary`'s own hue.
+  // 5.35:1 against `secondary`.
+  secondaryContent: 'oklch(22% 0.05 58.318)',
   accent: 'oklch(65% 0.241 354.308)',
   // Same fix and reasoning as `primaryContent` above — the source theme's
   // `oklch(97%.../94%...)` near-white pair failed at 3.35:1/3.05:1 against

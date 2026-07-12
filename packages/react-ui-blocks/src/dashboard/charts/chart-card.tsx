@@ -7,7 +7,6 @@ import {
   BarChart as RechartsBarChart,
   CartesianGrid,
   Cell,
-  Legend,
   Pie,
   PieChart as RechartsPieChart,
   ResponsiveContainer,
@@ -101,6 +100,42 @@ function ChartTooltipContent({ active, payload, label }: Partial<TooltipContentP
   );
 }
 
+interface ChartLegendItem {
+  label: string;
+  color: ChartCardColor;
+}
+
+/**
+ * A plain, real (non-`recharts`) legend list — rendered as a sibling of the
+ * `role="img"` chart region, never inside it. `recharts`' own built-in
+ * `<Legend>` renders real, readable DOM (text + small SVG swatch icons per
+ * item), and nesting that inside a `role="img"` ancestor is what an
+ * automated a11y scan (Storybook's addon-a11y / axe-core) flags as
+ * "element's background color could not be determined because element
+ * contains an image node" — `role="img"` tells assistive tech the whole
+ * subtree is one flattened picture, which the legend's real text content
+ * contradicts. Rolling this instead of using `recharts`' `<Legend>` also
+ * means the legend's type/spacing/color read off this repo's own tokens
+ * (`Text`, `--color-*`) like everything else, rather than `recharts`'
+ * default inline styles.
+ */
+function ChartLegend({ items }: { items: ChartLegendItem[] }) {
+  return (
+    <ul className="mt-3 flex flex-wrap justify-center gap-x-4 gap-y-1.5">
+      {items.map((item) => (
+        <li key={item.label} className="flex items-center gap-1.5">
+          <span
+            aria-hidden="true"
+            className="h-2 w-2 shrink-0 rounded-full"
+            style={{ backgroundColor: colorVar(item.color) }}
+          />
+          <Text className="text-xs opacity-70">{item.label}</Text>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
 /**
  * A dashboard chart card — bar or donut, both themed entirely off Nebula's
  * own `--color-*` semantic tokens (never a hardcoded hex), so a chart
@@ -154,72 +189,90 @@ function ChartCard(props: ChartCardProps) {
         <CardTitle className="text-base">{title}</CardTitle>
         {description ? <Text className="text-sm opacity-70">{description}</Text> : null}
       </CardHeader>
-      <CardContent
-        role="img"
-        aria-label={`${typeof title === 'string' ? title : 'Chart'}${description && typeof description === 'string' ? `: ${description}` : ''}`}
-        className="pt-0"
-      >
+      <CardContent className="pt-0">
         {props.type === 'bar' ? (
-          <ResponsiveContainer width="100%" height={height}>
-            <RechartsBarChart data={data} barGap={4}>
-              <CartesianGrid strokeDasharray="3 3" stroke="var(--color-base-300)" vertical={false} />
-              <XAxis
-                dataKey={props.categoryKey}
-                tick={{ fill: 'var(--color-base-content)', fontSize: 12 }}
-                tickLine={false}
-                axisLine={{ stroke: 'var(--color-base-300)' }}
-              />
-              <YAxis
-                tick={{ fill: 'var(--color-base-content)', fontSize: 12 }}
-                tickLine={false}
-                axisLine={false}
-                width={32}
-              />
-              <Tooltip content={<ChartTooltipContent />} cursor={{ fill: 'var(--color-base-200)' }} />
-              <Legend wrapperStyle={{ fontSize: 12 }} />
-              {props.series.map((series) => (
-                <Bar
-                  key={series.key}
-                  dataKey={series.key}
-                  name={series.label}
-                  fill={colorVar(series.color)}
-                  radius={[4, 4, 0, 0]}
-                />
-              ))}
-            </RechartsBarChart>
-          </ResponsiveContainer>
-        ) : (
-          <div className="relative">
-            <ResponsiveContainer width="100%" height={height}>
-              <RechartsPieChart>
-                <Pie
-                  data={data}
-                  dataKey={props.valueKey}
-                  nameKey={props.nameKey}
-                  innerRadius="62%"
-                  outerRadius="90%"
-                  paddingAngle={2}
-                  strokeWidth={0}
-                >
-                  {data.map((point, index) => {
-                    const palette = props.colors ?? DEFAULT_DONUT_COLORS;
-                    return (
-                      <Cell
-                        key={String(point[props.nameKey])}
-                        fill={colorVar(palette[index % palette.length] ?? 'primary')}
-                      />
-                    );
-                  })}
-                </Pie>
-                <Tooltip content={<ChartTooltipContent />} />
-                <Legend wrapperStyle={{ fontSize: 12 }} />
-              </RechartsPieChart>
-            </ResponsiveContainer>
-            <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center pb-8">
-              <Text className="text-2xl font-bold">{total?.toLocaleString()}</Text>
-              <Text className="text-xs opacity-70">Total</Text>
+          <>
+            <div
+              role="img"
+              aria-label={`${typeof title === 'string' ? title : 'Chart'}${description && typeof description === 'string' ? `: ${description}` : ''}`}
+            >
+              <ResponsiveContainer width="100%" height={height}>
+                <RechartsBarChart data={data} barGap={4}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="var(--color-base-300)" vertical={false} />
+                  <XAxis
+                    dataKey={props.categoryKey}
+                    tick={{ fill: 'var(--color-base-content)', fontSize: 12 }}
+                    tickLine={false}
+                    axisLine={{ stroke: 'var(--color-base-300)' }}
+                  />
+                  <YAxis
+                    tick={{ fill: 'var(--color-base-content)', fontSize: 12 }}
+                    tickLine={false}
+                    axisLine={false}
+                    width={32}
+                  />
+                  <Tooltip content={<ChartTooltipContent />} cursor={{ fill: 'var(--color-base-200)' }} />
+                  {props.series.map((series) => (
+                    <Bar
+                      key={series.key}
+                      dataKey={series.key}
+                      name={series.label}
+                      fill={colorVar(series.color)}
+                      radius={[4, 4, 0, 0]}
+                    />
+                  ))}
+                </RechartsBarChart>
+              </ResponsiveContainer>
             </div>
-          </div>
+            <ChartLegend items={props.series.map((series) => ({ label: series.label, color: series.color }))} />
+          </>
+        ) : (
+          <>
+            <div className="relative">
+              <div
+                role="img"
+                aria-label={`${typeof title === 'string' ? title : 'Chart'}${description && typeof description === 'string' ? `: ${description}` : ''}`}
+              >
+                <ResponsiveContainer width="100%" height={height}>
+                  <RechartsPieChart>
+                    <Pie
+                      data={data}
+                      dataKey={props.valueKey}
+                      nameKey={props.nameKey}
+                      innerRadius="62%"
+                      outerRadius="90%"
+                      paddingAngle={2}
+                      strokeWidth={0}
+                    >
+                      {data.map((point, index) => {
+                        const palette = props.colors ?? DEFAULT_DONUT_COLORS;
+                        return (
+                          <Cell
+                            key={String(point[props.nameKey])}
+                            fill={colorVar(palette[index % palette.length] ?? 'primary')}
+                          />
+                        );
+                      })}
+                    </Pie>
+                    <Tooltip content={<ChartTooltipContent />} />
+                  </RechartsPieChart>
+                </ResponsiveContainer>
+              </div>
+              <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center pb-8">
+                <Text className="text-2xl font-bold">{total?.toLocaleString()}</Text>
+                <Text className="text-xs opacity-70">Total</Text>
+              </div>
+            </div>
+            <ChartLegend
+              items={data.map((point, index) => {
+                const palette = props.colors ?? DEFAULT_DONUT_COLORS;
+                return {
+                  label: String(point[props.nameKey]),
+                  color: palette[index % palette.length] ?? 'primary',
+                };
+              })}
+            />
+          </>
         )}
       </CardContent>
     </Card>

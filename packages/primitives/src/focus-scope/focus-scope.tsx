@@ -116,7 +116,24 @@ const FocusScope = React.forwardRef<HTMLDivElement, FocusScopeProps>((props, for
       });
       onUnmountAutoFocus?.(unmountEvent);
       if (!unmountEvent.defaultPrevented) {
-        previouslyFocused?.focus();
+        // Only restore focus if nothing else has legitimately claimed it
+        // since mount — i.e. focus is still somewhere inside this scope
+        // (about to be orphaned by the unmount) or has already fallen back
+        // to `document.body` (the browser's default when a focused element
+        // is removed from the DOM). If focus is on some other specific
+        // element, a real, deliberate focus change already happened after
+        // this scope mounted — don't fight it. This matters once a scope's
+        // unmount is delayed past the interaction that moved focus away
+        // (e.g. `Presence` keeping this mounted through an exit animation):
+        // without this check, a `Menubar` switching from one open menu to
+        // a sibling via focus would have the closing menu's belated
+        // unmount steal focus right back to its own trigger a moment
+        // later, undoing the switch.
+        const active = document.activeElement;
+        const focusStillClaimable = active === document.body || container.contains(active);
+        if (focusStillClaimable) {
+          previouslyFocused?.focus();
+        }
       }
     };
     // Mount/unmount effect only — intentionally not re-run on prop changes.

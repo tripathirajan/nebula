@@ -1,4 +1,4 @@
-import { expect, userEvent, within } from '@storybook/test';
+import { expect, userEvent, waitFor, within } from '@storybook/test';
 import { useState } from 'react';
 
 import { Button } from '../button/button';
@@ -73,7 +73,11 @@ export const Default: Story = {
     await expect(menu).toBeInTheDocument();
 
     await userEvent.click(body.getByRole('menuitem', { name: 'Profile' }));
-    await expect(body.queryByRole('menu')).not.toBeInTheDocument();
+
+    // `DropdownMenuContent` is `MenuContent` (see `../menu/menu-content.tsx`)
+    // — same `Presence`-driven exit-animation delay, so this has to poll
+    // rather than assert once.
+    await waitFor(() => expect(body.queryByRole('menu')).not.toBeInTheDocument());
   },
 };
 
@@ -90,7 +94,7 @@ export const KeyboardNavigation: Story = {
     await expect(body.getByRole('menuitem', { name: 'Profile' })).toHaveFocus();
 
     await userEvent.keyboard('{Escape}');
-    await expect(body.queryByRole('menu')).not.toBeInTheDocument();
+    await waitFor(() => expect(body.queryByRole('menu')).not.toBeInTheDocument());
     await expect(trigger).toHaveFocus();
   },
 };

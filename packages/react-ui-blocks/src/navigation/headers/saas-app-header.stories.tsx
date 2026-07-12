@@ -100,6 +100,13 @@ export const MobileMenu: Story = {
     const canvas = within(canvasElement);
     const menuTrigger = await canvas.findByRole('button', { name: 'Open navigation menu', hidden: true });
     await userEvent.click(menuTrigger);
-    await expect(await within(document.body).findByText('Overview')).toBeInTheDocument();
+
+    // `findByText` (unlike `findByRole`) doesn't exclude CSS-hidden elements
+    // from its match, so an unscoped query for "Overview" matches both the
+    // mobile Sheet's own link AND the desktop NavigationMenu's `hidden
+    // md:block` copy, which is still present in the DOM at this viewport —
+    // scope to the open Sheet (`role="dialog"`) to disambiguate.
+    const sheet = await within(document.body).findByRole('dialog');
+    await expect(within(sheet).getByText('Overview')).toBeInTheDocument();
   },
 };

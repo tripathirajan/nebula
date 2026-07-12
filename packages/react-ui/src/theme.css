@@ -13,7 +13,7 @@
   --color-primary: oklch(28% 0.091 267.935);
   --color-primary-content: oklch(98% 0.014 180.72);
   --color-secondary: oklch(66% 0.179 58.318);
-  --color-secondary-content: oklch(98% 0.002 247.839);
+  --color-secondary-content: oklch(22% 0.05 58.318);
   --color-accent: oklch(65% 0.241 354.308);
   --color-accent-content: oklch(20% 0.05 354.308);
   --color-neutral: oklch(44% 0.043 257.281);
@@ -354,6 +354,7 @@
   --z-sticky: 30;
   --z-bottom-nav: 40;
   --z-overlay: 50;
+  --card-spacing: 0.50rem;
 }
 
 /* `.dark` is the primary selector (matches Tailwind's default `dark:`
@@ -368,9 +369,9 @@
   --color-base-300: oklch(12% 0.042 264.695);
   --color-base-content: oklch(97.807% 0.029 256.847);
   --color-primary: oklch(62% 0.214 259.815);
-  --color-primary-content: oklch(98% 0.014 180.72);
+  --color-primary-content: oklch(16% 0.05 259.815);
   --color-secondary: oklch(66% 0.179 58.318);
-  --color-secondary-content: oklch(93% 0.032 255.585);
+  --color-secondary-content: oklch(22% 0.05 58.318);
   --color-accent: oklch(65% 0.241 354.308);
   --color-accent-content: oklch(20% 0.05 354.308);
   --color-neutral: oklch(96% 0.003 264.542);
@@ -397,9 +398,9 @@
     --color-base-300: oklch(12% 0.042 264.695);
     --color-base-content: oklch(97.807% 0.029 256.847);
     --color-primary: oklch(62% 0.214 259.815);
-    --color-primary-content: oklch(98% 0.014 180.72);
+    --color-primary-content: oklch(16% 0.05 259.815);
     --color-secondary: oklch(66% 0.179 58.318);
-    --color-secondary-content: oklch(93% 0.032 255.585);
+    --color-secondary-content: oklch(22% 0.05 58.318);
     --color-accent: oklch(65% 0.241 354.308);
     --color-accent-content: oklch(20% 0.05 354.308);
     --color-neutral: oklch(96% 0.003 264.542);
@@ -413,4 +414,20 @@
     --color-error: oklch(71% 0.194 13.428);
     --color-error-content: oklch(27% 0.105 12.094);
   }
+}
+
+@utility p-c-* {
+  /* This targets ONLY the component it's applied to */
+  padding: calc(var(--card-spacing) * var(--value));
+}
+
+/* Optional: Add directional variations if you ever need them */
+@utility px-c-* {
+  padding-left: calc(var(--card-spacing) * var(--value));
+  padding-right: calc(var(--card-spacing) * var(--value));
+}
+
+@utility py-c-* {
+  padding-top: calc(var(--card-spacing) * var(--value));
+  padding-bottom: calc(var(--card-spacing) * var(--value));
 }
