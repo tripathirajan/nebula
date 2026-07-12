@@ -28,6 +28,11 @@ describe('Popover', () => {
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
   });
 
+  it('omits aria-controls while closed (PopoverContent is unmounted, so the id would be dangling)', () => {
+    render(<DemoPopover />);
+    expect(screen.getByRole('button', { name: 'Filters' })).not.toHaveAttribute('aria-controls');
+  });
+
   it('opens on trigger click and wires up role="dialog" with a matching id', () => {
     render(<DemoPopover />);
     const trigger = screen.getByRole('button', { name: 'Filters' });

@@ -39,7 +39,7 @@ const PopoverTrigger = React.forwardRef<HTMLButtonElement, ScopedProps<PopoverTr
           type="button"
           aria-haspopup="dialog"
           aria-expanded={context.open}
-          aria-controls={context.contentId}
+          aria-controls={context.open ? context.contentId : undefined}
           data-state={context.open ? 'open' : 'closed'}
           {...triggerProps}
           ref={forwardedRef}
