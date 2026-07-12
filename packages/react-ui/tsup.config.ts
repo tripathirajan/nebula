@@ -113,7 +113,34 @@ export default defineConfig({
   // (ERR_WORKER_OUT_OF_MEMORY — https://github.com/egoist/tsup/issues/920).
   dts: false,
   sourcemap: true,
-  splitting: false,
+  // Same reasoning `packages/headless/tsup.config.ts` documents for its own
+  // `splitting: true` — but here the duplication doesn't come from a
+  // cross-folder *relative* import (headless's Dialog/AlertDialog case);
+  // every one of this package's ~100 entries is genuinely self-contained.
+  // It comes from the root barrel (`index.ts`) doing `export * from './X'`
+  // for every subpath — so any component that owns its own
+  // `React.createContext()` call (`theme-provider`, `multi-select`,
+  // `carousel`, `sortable`, `data-table` — confirmed via
+  // `grep -rl "React.createContext" src`, none of the others are re-exported
+  // from more than their own single entry) is reachable from *two* separate
+  // public entry points: its own subpath (`@nebula/react-ui/theme-provider`)
+  // and the root barrel (`@nebula/react-ui`). Under `splitting: false` each
+  // entry bundles that module fully self-contained, re-running its
+  // module-level `createContext()` call separately in both `dist/index.js`
+  // and `dist/theme-provider/index.js` — a consumer that imports
+  // `ThemeProvider` from one and `useTheme` from the other gets two
+  // distinct Context objects and a "must be used within ThemeProvider"
+  // runtime error, despite typechecking cleanly (reproduced building
+  // `packages/react-ui-blocks`'s `SaasAppHeader`/`ThemeSwitcher` this
+  // session — see `BLOCKS_ARCHITECTURE.md` §14). `splitting: true` lets
+  // tsup/rollup extract a shared chunk for a module referenced by multiple
+  // entries, so there's exactly one `createContext()` call per context,
+  // regardless of which public entry point a consumer reaches it through.
+  // Regression test: `theme-provider/theme-provider.test.tsx` imports
+  // `ThemeProvider`/`useTheme` from the two different entry points
+  // deliberately, via the package specifier (not a relative path), so it
+  // actually exercises the built `dist/` output this comment describes.
+  splitting: true,
   clean: true,
   treeshake: true,
   external: ['react', 'react-dom', '@nebula/hooks', '@nebula/primitives', '@nebula/headless'],
