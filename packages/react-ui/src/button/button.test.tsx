@@ -25,7 +25,7 @@ describe('Button (ui)', () => {
     expect(button.className).toContain('h-12'); // lg size
   });
 
-  it('ghost variant renders a colored border/text with no filled background', () => {
+  it('ghost variant renders a colored border with no filled background', () => {
     render(
       <Button variant="ghost" color="danger">
         Delete
@@ -33,8 +33,24 @@ describe('Button (ui)', () => {
     );
     const button = screen.getByRole('button', { name: 'Delete' });
     expect(button.className).toContain('border-[var(--button-danger-border)]');
-    expect(button.className).toContain('text-[var(--button-danger-border)]');
     expect(button.className).not.toContain('text-[var(--button-danger-text)]');
+  });
+
+  it("ghost/text danger variants read the contrast-safe --color-error-text token, not the raw --button-danger-border hue", () => {
+    render(
+      <>
+        <Button variant="ghost" color="danger">
+          Ghost delete
+        </Button>
+        <Button variant="text" color="danger">
+          Text delete
+        </Button>
+      </>,
+    );
+    expect(screen.getByRole('button', { name: 'Ghost delete' }).className).toContain(
+      'text-[var(--color-error-text)]',
+    );
+    expect(screen.getByRole('button', { name: 'Text delete' }).className).toContain('text-[var(--color-error-text)]');
   });
 
   it('text variant renders colored text with no border or filled background', () => {

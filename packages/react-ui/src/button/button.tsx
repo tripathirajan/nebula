@@ -17,10 +17,19 @@ import type { VariantProps } from 'class-variance-authority';
  * `link` `text` plus an underline), `color` is the *hue* — every shape/color
  * combination reads the same `buttonTokens.<color>` triple, just applies
  * `bg`/`text`/`border` differently per shape (see `compoundVariants` below),
- * so no per-shape token entries exist. `ghost`/`text`/`link` all read the
+ * so no per-shape token entries exist. `ghost`/`text`/`link` read the
  * color's `-border` token for their text color (the raw hue itself), not
  * `-text` (that's the *on-filled-bg* content color, e.g. white-on-primary —
- * wrong once there's no filled background to sit on).
+ * wrong once there's no filled background to sit on) — **except `danger`**,
+ * which reads `--color-error-text` instead: `EntityFormLayout`'s danger
+ * actions were the first real consumer of `ghost`/`text`-shaped danger
+ * buttons, and the raw `--color-error` hue (`--button-danger-border`) fails
+ * contrast as literal text on a light background, live-verified via
+ * Storybook's a11y panel. The same latent gap plausibly exists for the
+ * other 6 non-primary colors' `ghost`/`text`/`link` shapes too, but per
+ * `CONTRAST_AUDIT.md`'s own stated policy nothing else renders those
+ * pairings for real yet, so they stay deferred rather than fixed
+ * speculatively — revisit if/when a real consumer needs one.
  *
  * Hover state on `default` is `hover:brightness-90` rather than a second
  * stored `-bg-hover` token — the DaisyUI-style token set this package's
@@ -224,15 +233,15 @@ const buttonVariants = cva(
         variant: 'ghost',
         color: 'danger',
         class:
-          'border-[var(--button-danger-border)] bg-[color-mix(in_oklch,var(--button-danger-bg)_10%,transparent)] text-[var(--button-danger-border)] hover:bg-[color-mix(in_oklch,var(--button-danger-bg)_20%,transparent)]',
+          'border-[var(--button-danger-border)] bg-[color-mix(in_oklch,var(--button-danger-bg)_10%,transparent)] text-[var(--color-error-text)] hover:bg-[color-mix(in_oklch,var(--button-danger-bg)_20%,transparent)]',
       },
       {
         variant: 'text',
         color: 'danger',
         class:
-          'text-[var(--button-danger-border)] hover:bg-[color-mix(in_oklch,var(--button-danger-bg)_10%,transparent)]',
+          'text-[var(--color-error-text)] hover:bg-[color-mix(in_oklch,var(--button-danger-bg)_10%,transparent)]',
       },
-      { variant: 'link', color: 'danger', class: 'text-[var(--button-danger-border)]' },
+      { variant: 'link', color: 'danger', class: 'text-[var(--color-error-text)]' },
     ],
     defaultVariants: {
       variant: 'default',
