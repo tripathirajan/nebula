@@ -57,22 +57,6 @@ const MenuIcon = (props: React.SVGProps<SVGSVGElement>) => (
   </svg>
 );
 
-const ChevronDownIcon = (props: React.SVGProps<SVGSVGElement>) => (
-  <svg
-    aria-hidden="true"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth={2}
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    className="h-4 w-4"
-    {...props}
-  >
-    <path d="m6 9 6 6 6-6" />
-  </svg>
-);
-
 interface AppHeaderNavSubItem {
   label: React.ReactNode;
   description?: React.ReactNode;
@@ -178,16 +162,22 @@ function MobileNavEntry({ link }: { link: AppHeaderNavLink }) {
  * `NavigationMenu` with optional dropdown sub-menus; mobile: a `Sheet` slide-
  * over, `md:hidden`/`hidden md:block` split, same breakpoint convention
  * `BottomNav` uses) on the left, a notification bell (`Popover` panel,
- * unread-count pulse dot) and a user profile widget (avatar + name/role +
- * `DropdownMenu`) on the right. Built purely from `@nebula/react-ui`
- * (`NavigationMenu`, `Popover`, `Sheet`, `DropdownMenu`, `Avatar`,
- * `IconButton`) — no marketing-specific primitive exists below this layer,
- * so this block owns the whole composition, matching every other block in
- * this package. Named `SaasAppHeader` rather than `AppHeader` —
- * `BLOCKS_ARCHITECTURE.md` §7's naming table explicitly flags `AppHeader`
- * as ambiguous ("which app context?"); this is specifically the "logo +
- * nav + user menu, no marketing nav" header variant it lists as "SaaS App
- * Header".
+ * unread-count pulse dot) and a user profile menu on the right. Built
+ * purely from `@nebula/react-ui` (`NavigationMenu`, `Popover`, `Sheet`,
+ * `DropdownMenu`, `Avatar`, `IconButton`) — no marketing-specific primitive
+ * exists below this layer, so this block owns the whole composition,
+ * matching every other block in this package. Named `SaasAppHeader` rather
+ * than `AppHeader` — `BLOCKS_ARCHITECTURE.md` §7's naming table explicitly
+ * flags `AppHeader` as ambiguous ("which app context?"); this is
+ * specifically the "logo + nav + user menu, no marketing nav" header
+ * variant it lists as "SaaS App Header".
+ *
+ * The trigger for the user menu is the bare `Avatar` — no name/role text
+ * beside it — keeping a fixed, compact `h-14` header regardless of how long
+ * `user.name`/`user.role` are; `name`/`role` are shown at the top of the
+ * opened `DropdownMenuContent` instead (the same "signed in as" placement
+ * GitHub's own account menu uses), not lost, just not competing for header
+ * height.
  *
  * `sticky top-0 z-30` by default so it stays visible while scrolling long
  * dashboard content — below every floating overlay in this repo (`z-50`)
@@ -235,7 +225,7 @@ function SaasAppHeader(props: SaasAppHeaderProps) {
   return (
     <header
       className={cn(
-        'sticky top-0 z-30 flex items-center justify-between gap-4 border-b border-[var(--color-base-300)] bg-[var(--color-base-100)] px-4 py-3 sm:px-6',
+        'sticky top-0 z-30 flex h-14 items-center justify-between gap-4 border-b border-[var(--color-base-300)] bg-[var(--color-base-100)] px-4 sm:px-6',
         className,
       )}
     >
@@ -398,21 +388,25 @@ function SaasAppHeader(props: SaasAppHeaderProps) {
               <button
                 type="button"
                 aria-label={`${user.name} account menu`}
-                className="flex shrink-0 items-center gap-2 rounded-[var(--radius-selector)] p-1 transition-colors hover:bg-[var(--color-base-200)]"
+                className="shrink-0 rounded-full transition-opacity hover:opacity-80"
               >
-                <Avatar className="shrink-0">
+                <Avatar>
                   {user.avatarSrc ? <AvatarImage src={user.avatarSrc} alt="" /> : null}
                   <AvatarFallback>{user.name.charAt(0).toUpperCase()}</AvatarFallback>
                 </Avatar>
-                <span className="hidden flex-col items-start whitespace-nowrap leading-tight sm:flex">
-                  <span className="text-sm font-medium">{user.name}</span>
-                  {user.role ? <span className="text-xs opacity-70">{user.role}</span> : null}
-                </span>
-                <ChevronDownIcon className="hidden shrink-0 opacity-60 sm:block" />
               </button>
             </DropdownMenuTrigger>
             <DropdownMenuPortal>
-              <DropdownMenuContent align="end">
+              <DropdownMenuContent align="end" className="w-56">
+                {/* Name/role live here rather than beside the trigger, so the
+                    header stays a compact icon-only avatar (matches the
+                    header-height feedback this block got) — same "signed
+                    in as" placement GitHub's own account menu uses. */}
+                <div className="flex flex-col gap-0.5 px-2 py-1.5">
+                  <span className="truncate text-sm font-medium">{user.name}</span>
+                  {user.role ? <span className="truncate text-xs opacity-70">{user.role}</span> : null}
+                </div>
+                <DropdownMenuSeparator />
                 {userMenuItems?.map((item, index) => (
                   <React.Fragment key={String(item.label)}>
                     {item.separatorBefore && index > 0 ? <DropdownMenuSeparator /> : null}

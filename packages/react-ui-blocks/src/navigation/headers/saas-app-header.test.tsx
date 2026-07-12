@@ -111,9 +111,15 @@ describe('SaasAppHeader (block)', () => {
     expect(screen.getByRole('button', { name: 'Jane Cooper account menu' })).toBeInTheDocument();
   });
 
-  it('renders the user role when provided', () => {
+  it('shows name and role at the top of the opened user menu, not beside the trigger', async () => {
+    const user = userEvent.setup();
     render(<SaasAppHeader brand="Acme" user={{ name: 'Jane Cooper', role: 'Admin' }} />);
-    expect(screen.getByText('Admin')).toBeInTheDocument();
+    expect(screen.queryByText('Jane Cooper')).not.toBeInTheDocument();
+    expect(screen.queryByText('Admin')).not.toBeInTheDocument();
+
+    await user.click(screen.getByRole('button', { name: 'Jane Cooper account menu' }));
+    expect(await within(document.body).findByText('Jane Cooper')).toBeInTheDocument();
+    expect(within(document.body).getByText('Admin')).toBeInTheDocument();
   });
 
   it('opens the user menu and calls onSelect for a clicked item', async () => {
