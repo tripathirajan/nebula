@@ -44,6 +44,31 @@ function BagIcon() {
   );
 }
 
+function ClockIcon() {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-5 w-5">
+      <circle cx="12" cy="12" r="9" />
+      <path strokeLinecap="round" d="M12 7v5l3 3" />
+    </svg>
+  );
+}
+
+function TrendingDownIcon() {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-5 w-5">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M4 7l6 6 4-4 6 6M14 15h6v-6" />
+    </svg>
+  );
+}
+
+function FlagIcon() {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-5 w-5">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M5 4v16M5 4h11l-2 3.5L16 11H5" />
+    </svg>
+  );
+}
+
 export const Default: Story = {
   render: () => (
     <div className="min-h-screen bg-[var(--color-base-200)] p-6">
@@ -55,20 +80,25 @@ export const Default: Story = {
               label: 'Total visits',
               value: '18.4k',
               icon: <BagIcon />,
+              color: 'primary',
               trend: { direction: 'up', value: '+11.2%', description: 'vs last week' },
               sparkline: [2400, 1398, 3200, 2780, 4100, 3490, 2100],
             },
             {
               label: 'Avg. session',
               value: '3m 42s',
+              icon: <ClockIcon />,
+              color: 'info',
               trend: { direction: 'up', value: '+8%', description: 'vs last week' },
             },
             {
               label: 'Bounce rate',
               value: '32.1%',
+              icon: <TrendingDownIcon />,
+              color: 'warning',
               trend: { direction: 'down', value: '-2.4%', description: 'vs last week' },
             },
-            { label: 'Goal completions', value: '482' },
+            { label: 'Goal completions', value: '482', icon: <FlagIcon />, color: 'success' },
           ]}
         />
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
