@@ -47,13 +47,22 @@ import type { VariantProps } from 'class-variance-authority';
  * `--radius-button` (see `tokens/primitive.ts`) instead of a static
  * Tailwind class, so it follows the same override mechanism as color.
  *
- * Focus ring reads `--color-base-content` rather than `--color-primary` —
- * `primary`'s 76% lightness only clears ~2:1 as a thin ring against
- * `base-100`, well under WCAG 1.4.11's 3:1 non-text minimum (see
- * `CONTRAST_AUDIT.md`), and it's the ring's whole job to be visible.
- * `base-content` is guaranteed to invert correctly against `base-100` in
- * both themes (it's the same pairing body text uses), at the cost of the
- * ring not being brand-colored.
+ * Focus ring reads `--color-base-content` regardless of `color` — not
+ * because `primary` itself fails contrast (recomputed via
+ * `contrast-audit.ts`: `primary` vs `base.100` is 14.82:1 in light mode and
+ * 3.97:1 in dark mode, both comfortably clearing WCAG 1.4.11's 3:1 non-text
+ * minimum — an earlier version of this comment claimed a stale ~2:1 figure
+ * from before the palette was finalized to today's dark-navy `primary`, no
+ * longer accurate), but because ringing every color the same neutral keeps
+ * the ring itself a single, predictable, always-safe visual regardless of
+ * which `color` a given `Button` uses — several other colors genuinely do
+ * fail as a standalone ring (`CONTRAST_AUDIT.md`'s `error`/`success`/
+ * `warning`-on-`base.100` entries all fail even the looser 3:1 bar, e.g.
+ * `error` at 2.92:1 — see `alert-dialog-action.tsx`'s own fix for exactly
+ * this). `base-content` is guaranteed to invert correctly against `base-100`
+ * in both themes (it's the same pairing body text uses) for every color,
+ * not just the ones that happen to already pass, at the cost of the ring
+ * not being brand-colored.
  */
 const buttonVariants = cva(
   'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-[var(--radius-button)] border text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:ring-[var(--color-base-content)] disabled:pointer-events-none disabled:opacity-50',

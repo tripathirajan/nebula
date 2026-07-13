@@ -13,7 +13,7 @@ const ToastAction = React.forwardRef<HTMLButtonElement, ToastActionProps>(
     return (
       <HeadlessToastAction
         className={cn(
-          'shrink-0 self-start rounded-[var(--radius-selector)] font-medium underline underline-offset-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--toast-text)]',
+          'shrink-0 self-start rounded-[var(--radius-selector)] font-medium underline underline-offset-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--toast-text)] focus-visible:ring-offset-1',
           className,
         )}
         {...rest}

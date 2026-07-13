@@ -11,7 +11,7 @@ const ToastClose = React.forwardRef<HTMLButtonElement, ToastCloseProps>((props, 
   return (
     <HeadlessToastClose
       className={cn(
-        'ml-auto shrink-0 rounded-[var(--radius-selector)] text-[var(--toast-text)]/60 hover:text-[var(--toast-text)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--toast-text)]',
+        'ml-auto shrink-0 rounded-[var(--radius-selector)] text-[var(--toast-text)]/60 hover:text-[var(--toast-text)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--toast-text)] focus-visible:ring-offset-1',
         className,
       )}
       {...rest}

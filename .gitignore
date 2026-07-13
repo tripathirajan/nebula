@@ -31,5 +31,16 @@ pnpm-debug.log*
 # testing
 coverage/
 
+# stray compiled declaration output checked into src/ by mistake (see
+# AGENTS.md's "Stray compiled .d.ts/.d.ts.map removed from src/" note — an
+# out-of-band `tsc --declaration --emitDeclarationOnly` run without
+# `-p <tsconfig>` ignores each package's configured outDir/rootDir and emits
+# next to the source instead of under dist/). Real declaration output only
+# ever belongs under dist/, already covered above — anything matching this
+# under src/ is always accidental.
+packages/*/src/**/*.d.ts.map
+packages/*/src/**/*.d.ts
+!packages/primitives/src/vitest-axe-matchers.d.ts
+
 # misc
 *.local

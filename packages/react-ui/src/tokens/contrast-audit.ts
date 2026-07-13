@@ -174,14 +174,17 @@ function buildPairings(theme: SemanticTheme, themeName: string): Pairing[] {
       bg: base[100],
       level: 'ui',
     },
-    // No `primary`-on-`base.100` pairing here (there was one) — `Button`
-    // used to ring itself in `primary`, which only clears ~2:1 against
-    // `base.100` in light mode (well under the 3:1 non-text minimum); it now
-    // rings in `base.content` instead (see `button.tsx`), which is exactly
-    // the already-covered "body text" pairing above, so a separate entry
-    // would be redundant. `primary` itself is unaffected — it's still fine
-    // as a *fill* (see `primaryContent on primary` above), just not as a
-    // thin outline on `base.100`.
+    // No `primary`-on-`base.100` pairing here — recomputed directly (not
+    // just inferred from `primaryContent on primary` above): 14.82:1 in
+    // light mode, 3.97:1 in dark, both clearing the 3:1 non-text minimum
+    // with room to spare. `Button` still rings every color in
+    // `base.content` regardless (see its own doc comment) — a uniform,
+    // always-safe ring across every `color` value, not a workaround for
+    // `primary` specifically, since several *other* colors genuinely do
+    // fail as a standalone ring (see `error`/`success`/`warning`-on-
+    // `base.100` below). A `primary`-on-`base.100` entry would just
+    // duplicate what `primaryContent on primary` already establishes about
+    // `primary`'s lightness, so it's omitted rather than added back.
   ];
 }
 

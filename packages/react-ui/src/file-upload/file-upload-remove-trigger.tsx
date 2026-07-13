@@ -13,7 +13,7 @@ const FileUploadRemoveTrigger = React.forwardRef<HTMLButtonElement, FileUploadRe
     return (
       <HeadlessFileUploadRemoveTrigger
         className={cn(
-          'rounded-[var(--radius-selector)] p-1 text-[var(--file-upload-text)]/60 outline-none hover:text-[var(--file-upload-text)] focus-visible:ring-2 focus-visible:ring-[var(--file-upload-text)]',
+          'rounded-[var(--radius-selector)] p-1 text-[var(--file-upload-text)]/60 outline-none hover:text-[var(--file-upload-text)] focus-visible:ring-2 focus-visible:ring-[var(--file-upload-text)] focus-visible:ring-offset-1',
           className,
         )}
         {...rest}

@@ -170,6 +170,78 @@ const size = {
   card: '0.5rem',
 } as const;
 
+/**
+ * Icon-size convention (documented, not tokenized as a new CSS var group).
+ * `size.icon` above is a DaisyUI-style *multiplier* primitive, unrelated to
+ * this — no component reads it for an icon's actual width/height. An icon's
+ * real dimensions come straight from Tailwind's own `h-*`/`w-*` spacing
+ * scale, which is already a systematic, consistent token system on its own
+ * (each step is a fixed `rem` value derived from one base unit) — wrapping
+ * it in a second, parallel `--icon-size-*` CSS var layer would just be
+ * indirection with no behavioral or override benefit, since nothing needs
+ * an icon size independently overridable from the rest of the spacing
+ * scale. What was actually missing (per `DESIGN_REFERENCE.md`'s "cover all
+ * the elements" audit) wasn't a value — every step below already existed,
+ * consistently, before this comment — it was *which step to reach for*:
+ *
+ * - `h-3 w-3` (12px, "xs") — a glyph nested inside another already-sized
+ *   control: `Checkbox`'s check/indeterminate mark, `Chip`'s remove icon,
+ *   `Tree`/`TreeTable`'s expand chevron, `MultiSelect`'s item checkmark.
+ * - `h-4 w-4` (16px, "sm") — the default. Standalone icons in buttons, menu
+ *   items, form-field adornments, and most inline icons not covered by
+ *   another row here. Reach for this first; only step away from it for one
+ *   of the specific reasons below.
+ * - `h-5 w-5` (20px, "md") — an icon carrying more visual weight than a
+ *   neighboring `sm` icon would: `Rating`'s stars, `BottomNav`'s nav icons
+ *   (a primary navigation surface, not an inline affordance), `Spinner`'s
+ *   own default size.
+ * - `h-6 w-6`/`h-7 w-7` (24-28px, "lg") — a larger tap target around the
+ *   icon itself, not just a bigger glyph: `Calendar`'s prev/next month
+ *   buttons size the *button* to `h-7 w-7` with a `h-4 w-4` icon inside, for
+ *   touch-target area rather than icon emphasis.
+ *
+ * New components should default to `sm` and only pick `xs`/`md`/`lg` for
+ * one of the reasons above — not by eyeballing a size that looks right next
+ * to whatever's already on screen.
+ */
+
+/**
+ * Focus-ring offset convention (also documented, not tokenized — same
+ * reasoning as the icon-size convention above: `ring-offset-1`/`-2` are
+ * already Tailwind's own systematic scale, nothing new to add). An audit
+ * found this split across ~48 files initially read as arbitrary
+ * inconsistency, but component-by-component it's actually a real, mostly-
+ * already-followed rule — formalizing it here so new components pick
+ * consistently instead of by eye:
+ *
+ * - `ring-offset-2` — small, boxy selection controls where the ring needs
+ *   visible separation from an already-small target: `Checkbox`, `Switch`,
+ *   `CheckboxGroupItem`, `RadioGroupItem`.
+ * - `ring-offset-1` — standalone controls with their own visual weight
+ *   (border, fill, or size) where a smaller offset already reads clearly:
+ *   `Button`, `Input`, `Textarea`, `FAB`, `Slider` thumb, `NumberInput`
+ *   field, `OTPInput` slot, `ColorPicker` trigger/hex input, and the
+ *   dismiss/action button family sitting on an overlay surface
+ *   (`Dialog`/`Popover`/`Drawer`/`AlertDialog`'s close+action buttons,
+ *   `Toast`'s close+action, `FileUpload`'s remove trigger).
+ * - `ring-inset` — full-width or strip-embedded controls where an *outward*
+ *   ring would get clipped by a parent's overflow or read oddly against
+ *   neighboring items: `Tab`, `AccordionTrigger`.
+ * - no offset — compact controls embedded in a list, row, or toolbar, where
+ *   the ring is meant to hug the element rather than float apart from it:
+ *   menu/nav items, pagination links, carousel arrows/indicators, tree
+ *   items, stepper triggers, toggle-group/segmented-control items, table
+ *   headers, and boxed field triggers (`Select`/`Combobox`/`MultiSelect`/
+ *   `DatePicker` and friends) that already carry their own border.
+ *
+ * Ring *color* is a separate, already-covered concern — see `Button`'s own
+ * doc comment and `CONTRAST_AUDIT.md`'s "Focus-ring color audit" section for
+ * why almost everything rings `--color-base-content` (or, for `Checkbox`/
+ * `Switch`/`RadioGroup`/the calendar/pagination/tree/etc.-active family
+ * covered there, `--color-primary` — confirmed safe at 14.82:1 light /
+ * 3.97:1 dark against `base.100`), not a raw per-component state color.
+ */
+
 /** Border width, and two DaisyUI "effect" knobs (`depth` for pseudo-3D shading, `noise` for a subtle texture overlay) — 0/1 rather than boolean so they can be dialed in CSS (`calc()`, `opacity`) rather than only switched on/off. Not yet consumed by any component. */
 const effect = {
   border: '1px',
