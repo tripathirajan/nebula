@@ -331,6 +331,10 @@
       "types": "./dist/kbd/index.d.ts",
       "import": "./dist/kbd/index.js"
     },
+    "./kbd-shortcut": {
+      "types": "./dist/kbd-shortcut/index.d.ts",
+      "import": "./dist/kbd-shortcut/index.js"
+    },
     "./icon-button": {
       "types": "./dist/icon-button/index.d.ts",
       "import": "./dist/icon-button/index.js"

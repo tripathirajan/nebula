@@ -78,6 +78,7 @@ export * from './heading';
 export * from './code';
 export * from './blockquote';
 export * from './kbd';
+export * from './kbd-shortcut';
 export * from './icon-button';
 export * from './button-group';
 export * from './split-button';

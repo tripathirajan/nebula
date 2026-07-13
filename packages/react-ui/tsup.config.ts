@@ -83,6 +83,7 @@ export default defineConfig({
     'code/index': 'src/code/index.ts',
     'blockquote/index': 'src/blockquote/index.ts',
     'kbd/index': 'src/kbd/index.ts',
+    'kbd-shortcut/index': 'src/kbd-shortcut/index.ts',
     'icon-button/index': 'src/icon-button/index.ts',
     'button-group/index': 'src/button-group/index.ts',
     'split-button/index': 'src/split-button/index.ts',
