@@ -1,4 +1,12 @@
 import { Button } from '@nebula/react-ui/button';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuPortal,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuTrigger,
+} from '@nebula/react-ui/dropdown-menu';
 import { IconButton } from '@nebula/react-ui/icon-button';
 import { useTheme } from '@nebula/react-ui/theme-provider';
 import * as React from 'react';
@@ -56,25 +64,40 @@ const MonitorIcon = (props: React.SVGProps<SVGSVGElement>) => (
   </svg>
 );
 
-const OPTIONS: Array<{ value: Theme; label: string; icon: React.ReactNode }> = [
-  { value: 'light', label: 'Light', icon: <SunIcon /> },
-  { value: 'dark', label: 'Dark', icon: <MoonIcon /> },
-  { value: 'system', label: 'System', icon: <MonitorIcon /> },
-];
+interface ThemeOption {
+  value: Theme;
+  label: string;
+  icon: React.ReactNode;
+}
+
+// A `Record`, not an array — indexing `OPTION_BY_THEME[theme]` with a
+// value already known to be `Theme` returns a `ThemeOption` directly, not
+// `ThemeOption | undefined` the way `OPTIONS.find(...)`/an array index
+// would, so the `dropdown` variant's current-selection lookup below needs
+// no fallback-or-assert for a case that can never actually happen (`theme`
+// is always one of these three values). `OPTIONS` (for iterating the full
+// list) is derived from this, not hand-duplicated.
+const OPTION_BY_THEME: Record<Theme, ThemeOption> = {
+  light: { value: 'light', label: 'Light', icon: <SunIcon /> },
+  dark: { value: 'dark', label: 'Dark', icon: <MoonIcon /> },
+  system: { value: 'system', label: 'System', icon: <MonitorIcon /> },
+};
+
+const OPTIONS: ThemeOption[] = Object.values(OPTION_BY_THEME);
 
 interface ThemeSwitcherProps {
   size?: ButtonProps['size'];
-  /** `'button'` — labeled buttons (original look). `'icon'` — a compact icon-only toggle group (sun/moon/monitor), same behavior, less horizontal space. @default 'button' */
-  variant?: 'button' | 'icon';
+  /** `'button'` — labeled buttons (original look). `'icon'` — a compact icon-only toggle group (sun/moon/monitor), same behavior, less horizontal space. `'dropdown'` — a single icon button (its icon tracks the current selection) that opens a Light/Dark/System menu — the least horizontal space of the three, since only one control is ever on screen at once. @default 'button' */
+  variant?: 'button' | 'icon' | 'dropdown';
 }
 
 /**
  * A three-way light/dark/system switcher — built purely from this
- * package's own `Button`/`IconButton` and `ThemeProvider`, no new
- * primitives. Originally shipped as `react-ui-blocks`' first component (a
- * demonstration of composing domain-neutral UI purely from `@nebula/
- * react-ui`); moved here since it has no domain knowledge of its own —
- * exactly the "atoms and molecules belong in `react-ui`" rule
+ * package's own `Button`/`IconButton`/`DropdownMenu` and `ThemeProvider`,
+ * no new primitives. Originally shipped as `react-ui-blocks`' first
+ * component (a demonstration of composing domain-neutral UI purely from
+ * `@nebula/react-ui`); moved here since it has no domain knowledge of its
+ * own — exactly the "atoms and molecules belong in `react-ui`" rule
  * `react-ui-blocks` is supposed to sit on top of, not include. Must be
  * rendered inside a `ThemeProvider`.
  *
@@ -83,11 +106,45 @@ interface ThemeSwitcherProps {
  * <ThemeProvider>
  *   <ThemeSwitcher size="md" />
  *   <ThemeSwitcher variant="icon" />
+ *   <ThemeSwitcher variant="dropdown" />
  * </ThemeProvider>
  * ```
  */
 function ThemeSwitcher({ size = 'sm', variant = 'button' }: ThemeSwitcherProps) {
   const { theme, setTheme } = useTheme();
+
+  if (variant === 'dropdown') {
+    const current = OPTION_BY_THEME[theme];
+    return (
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <IconButton
+            type="button"
+            size={size}
+            variant="ghost"
+            color="neutral"
+            aria-label={`Theme: ${current.label}`}
+          >
+            {current.icon}
+          </IconButton>
+        </DropdownMenuTrigger>
+        <DropdownMenuPortal>
+          <DropdownMenuContent align="end">
+            <DropdownMenuRadioGroup value={theme} onValueChange={(value) => setTheme(value as Theme)}>
+              {OPTIONS.map((option) => (
+                <DropdownMenuRadioItem key={option.value} value={option.value}>
+                  <span className="flex items-center gap-2">
+                    {option.icon}
+                    {option.label}
+                  </span>
+                </DropdownMenuRadioItem>
+              ))}
+            </DropdownMenuRadioGroup>
+          </DropdownMenuContent>
+        </DropdownMenuPortal>
+      </DropdownMenu>
+    );
+  }
 
   if (variant === 'icon') {
     return (

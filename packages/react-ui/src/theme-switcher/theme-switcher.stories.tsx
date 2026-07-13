@@ -44,3 +44,22 @@ export const IconVariant: Story = {
     await expect(darkButton).toHaveAttribute('aria-pressed', 'true');
   },
 };
+
+export const DropdownVariant: Story = {
+  name: 'Dropdown variant',
+  args: { variant: 'dropdown' },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const trigger = canvas.getByRole('button', { name: 'Theme: System' });
+
+    await userEvent.click(trigger);
+    const body = within(document.body);
+    await expect(await body.findByRole('menuitemradio', { name: 'System' })).toHaveAttribute(
+      'aria-checked',
+      'true',
+    );
+
+    await userEvent.click(body.getByRole('menuitemradio', { name: 'Dark' }));
+    await expect(await canvas.findByRole('button', { name: 'Theme: Dark' })).toBeInTheDocument();
+  },
+};
