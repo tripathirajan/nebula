@@ -69,11 +69,14 @@ interface ThemeSwitcherProps {
 }
 
 /**
- * A three-way light/dark/system switcher — the first `react-ui-blocks`
- * component, demonstrating the intended composition for this layer:
- * domain-neutral, ready-to-use UI built purely from `@nebula/react-ui`
- * (components, tokens, and `ThemeProvider` all live in that one package),
- * no new primitives. Must be rendered inside a `ThemeProvider`.
+ * A three-way light/dark/system switcher — built purely from this
+ * package's own `Button`/`IconButton` and `ThemeProvider`, no new
+ * primitives. Originally shipped as `react-ui-blocks`' first component (a
+ * demonstration of composing domain-neutral UI purely from `@nebula/
+ * react-ui`); moved here since it has no domain knowledge of its own —
+ * exactly the "atoms and molecules belong in `react-ui`" rule
+ * `react-ui-blocks` is supposed to sit on top of, not include. Must be
+ * rendered inside a `ThemeProvider`.
  *
  * @example
  * ```tsx

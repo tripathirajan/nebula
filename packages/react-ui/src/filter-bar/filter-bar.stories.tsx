@@ -6,7 +6,7 @@ import { FilterBar } from './filter-bar';
 import type { Meta, StoryObj } from '@storybook/react';
 
 const meta = {
-  title: 'Blocks/Forms/Filter Bar',
+  title: 'React UI/FilterBar',
   component: FilterBar,
   tags: ['autodocs'],
   parameters: { layout: 'padded' },

@@ -7,6 +7,7 @@ import { IconButton } from '@nebula/react-ui/icon-button';
 import { NumberInput, NumberInputDecrement, NumberInputField, NumberInputIncrement } from '@nebula/react-ui/number-input';
 import { RadioGroup, RadioGroupItem } from '@nebula/react-ui/radio-group';
 import { SegmentedControl, SegmentedControlItem } from '@nebula/react-ui/segmented-control';
+import { StaticRating } from '@nebula/react-ui/static-rating';
 import { Text } from '@nebula/react-ui/text';
 import * as React from 'react';
 
@@ -65,45 +66,6 @@ interface ProductInfoPanelProps {
   favorited?: boolean;
   onShare?: () => void;
   className?: string;
-}
-
-function StarIcon(props: { filled: boolean }) {
-  return (
-    <svg
-      aria-hidden="true"
-      viewBox="0 0 24 24"
-      fill={props.filled ? 'currentColor' : 'none'}
-      stroke="currentColor"
-      strokeWidth={1.5}
-      className={cn('h-4 w-4', props.filled ? 'text-[var(--color-warning)]' : 'text-[var(--color-base-300)]')}
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="m12 2.5 2.9 6.6 7.1.7-5.4 4.8 1.6 7-6.2-3.8-6.2 3.8 1.6-7-5.4-4.8 7.1-.7z"
-      />
-    </svg>
-  );
-}
-
-/**
- * A read-only star display — deliberately not `react-ui`'s `Rating` (a
- * `role="radiogroup"` *input* for collecting a score); reusing it here
- * would announce a static review average as an editable control to
- * assistive tech. Same `role="img"` pattern `ReviewsList`'s own
- * `StaticRating` already uses — copied locally rather than shared, per
- * this package's own "not worth extracting until a third consumer needs
- * it" convention.
- */
-function StaticRating(props: { value: number }) {
-  const rounded = Math.round(props.value);
-  return (
-    <span role="img" aria-label={`${props.value} out of 5 stars`} className="flex gap-0.5">
-      {Array.from({ length: 5 }, (_, index) => (
-        <StarIcon key={index} filled={index < rounded} />
-      ))}
-    </span>
-  );
 }
 
 /**

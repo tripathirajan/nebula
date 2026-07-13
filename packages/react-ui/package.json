@@ -95,6 +95,10 @@
       "types": "./dist/theme-provider/index.d.ts",
       "import": "./dist/theme-provider/index.js"
     },
+    "./theme-switcher": {
+      "types": "./dist/theme-switcher/index.d.ts",
+      "import": "./dist/theme-switcher/index.js"
+    },
     "./pagination": {
       "types": "./dist/pagination/index.d.ts",
       "import": "./dist/pagination/index.js"
@@ -194,6 +198,10 @@
     "./rating": {
       "types": "./dist/rating/index.d.ts",
       "import": "./dist/rating/index.js"
+    },
+    "./static-rating": {
+      "types": "./dist/static-rating/index.d.ts",
+      "import": "./dist/static-rating/index.js"
     },
     "./file-upload": {
       "types": "./dist/file-upload/index.d.ts",
@@ -338,6 +346,10 @@
     "./chip": {
       "types": "./dist/chip/index.d.ts",
       "import": "./dist/chip/index.js"
+    },
+    "./filter-bar": {
+      "types": "./dist/filter-bar/index.d.ts",
+      "import": "./dist/filter-bar/index.js"
     },
     "./tag": {
       "types": "./dist/tag/index.d.ts",

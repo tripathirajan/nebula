@@ -1,9 +1,8 @@
 
 import { Primitive } from '@nebula/primitives/primitive';
 import { ThemeProvider } from '@nebula/react-ui/theme-provider';
+import { ThemeSwitcher } from '@nebula/react-ui/theme-switcher';
 import * as React from 'react';
-
-import { ThemeSwitcher } from '../../core/theme-switcher/theme-switcher';
 
 import type { Theme } from '@nebula/react-ui/theme-provider';
 

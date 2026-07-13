@@ -54,6 +54,13 @@ interface FilterBarProps {
  * the same bar filters a product grid, a data table, or an activity feed
  * equally well; this component has no opinion on what a "filter" means in
  * a consumer's app, only how to display and manage the active set.
+ * Originally shipped in `react-ui-blocks`' `forms` category; moved here
+ * since its own doc comment already argued it has no domain knowledge of
+ * its own — this package, not `react-ui-blocks`, is where domain-neutral
+ * molecules belong. (`DataTableBlock` composes its own status-tab
+ * filtering and search inline rather than reusing this — a different,
+ * more specific shape than this generic chip-row pattern, not an
+ * oversight.)
  *
  * @example
  * ```tsx
