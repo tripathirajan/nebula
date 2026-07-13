@@ -227,6 +227,10 @@
       "types": "./dist/password-field/index.d.ts",
       "import": "./dist/password-field/index.js"
     },
+    "./password-strength-indicator": {
+      "types": "./dist/password-strength-indicator/index.d.ts",
+      "import": "./dist/password-strength-indicator/index.js"
+    },
     "./search-field": {
       "types": "./dist/search-field/index.d.ts",
       "import": "./dist/search-field/index.js"

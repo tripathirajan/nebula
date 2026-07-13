@@ -321,6 +321,8 @@
   --empty-state-icon: var(--color-base-content);
   --empty-state-title-text: var(--color-base-content);
   --empty-state-description-text: var(--color-base-content);
+  --password-strength-track: var(--color-base-300);
+  --password-strength-label-text: var(--color-base-content);
   --radius-selector: 2rem;
   --radius-field: 1rem;
   --radius-box: 2rem;

@@ -81,6 +81,10 @@
       "types": "./dist/data-grid/index.d.ts",
       "import": "./dist/data-grid/index.js"
     },
+    "./password-strength-indicator": {
+      "types": "./dist/password-strength-indicator/index.d.ts",
+      "import": "./dist/password-strength-indicator/index.js"
+    },
     "./package.json": "./package.json"
   },
   "files": [

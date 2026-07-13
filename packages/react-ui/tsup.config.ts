@@ -57,6 +57,7 @@ export default defineConfig({
     'field/index': 'src/field/index.ts',
     'textarea/index': 'src/textarea/index.ts',
     'password-field/index': 'src/password-field/index.ts',
+    'password-strength-indicator/index': 'src/password-strength-indicator/index.ts',
     'search-field/index': 'src/search-field/index.ts',
     'email-field/index': 'src/email-field/index.ts',
     'url-field/index': 'src/url-field/index.ts',

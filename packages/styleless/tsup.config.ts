@@ -20,6 +20,7 @@ export default defineConfig({
     'code-block/index': 'src/code-block/index.ts',
     'data-table/index': 'src/data-table/index.ts',
     'data-grid/index': 'src/data-grid/index.ts',
+    'password-strength-indicator/index': 'src/password-strength-indicator/index.ts',
   },
   format: ['esm'],
   target: 'es2022',

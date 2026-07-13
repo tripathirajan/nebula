@@ -52,6 +52,7 @@ export * from './slider';
 export * from './field';
 export * from './textarea';
 export * from './password-field';
+export * from './password-strength-indicator';
 export * from './search-field';
 export * from './email-field';
 export * from './url-field';

@@ -600,6 +600,12 @@ const codeBlockTokens = {
   lineNumberText: 'var(--color-base-content)',
 } as const;
 
+/** `track` is the unfilled segment color (a neutral `base-300`, same "empty track" role `progressTokens`/`sliderTokens` already use) — the filled color itself is score-dependent (error/warning/success) and read directly off `--color-*`, not duplicated into this per-component group. */
+const passwordStrengthTokens = {
+  track: 'var(--color-base-300)',
+  labelText: 'var(--color-base-content)',
+} as const;
+
 /**
  * Aggregated per-component token overrides, keyed by component name.
  *
@@ -684,6 +690,7 @@ const componentTokens = {
   multiSelect: multiSelectTokens,
   codeBlock: codeBlockTokens,
   emptyState: emptyStateTokens,
+  passwordStrength: passwordStrengthTokens,
 } as const;
 
 export {
@@ -752,4 +759,5 @@ export {
   multiSelectTokens,
   codeBlockTokens,
   emptyStateTokens,
+  passwordStrengthTokens,
 };
