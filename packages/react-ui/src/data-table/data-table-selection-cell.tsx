@@ -1,6 +1,6 @@
-import { Checkbox } from '../checkbox/checkbox';
+import { useDataTableContext } from '@nebula/styleless/data-table';
 
-import { useDataTableContext } from './data-table-context';
+import { Checkbox } from '../checkbox/checkbox';
 
 interface DataTableSelectionCellProps {
   /** The row's selection id — same id passed to the enclosing `DataTableRow`. */

@@ -16,4 +16,4 @@ export { DataTableSelectionCell } from './data-table-selection-cell';
 export type { DataTableSelectionCellProps } from './data-table-selection-cell';
 export { DataTableSelectAllCell } from './data-table-select-all-cell';
 export type { DataTableSelectAllCellProps } from './data-table-select-all-cell';
-export type { SortDirection } from './data-table-context';
+export type { SortDirection } from '@nebula/styleless/data-table';

@@ -1,29 +1,22 @@
 import { cn } from '@nebula/primitives/cn';
-import { Primitive } from '@nebula/primitives/primitive';
+import { DataTableRow as StylelessDataTableRow } from '@nebula/styleless/data-table';
 import * as React from 'react';
 
-import { useDataTableContext } from './data-table-context';
+import type { DataTableRowProps as StylelessDataTableRowProps } from '@nebula/styleless/data-table';
 
-import type { PrimitivePropsWithRef } from '@nebula/primitives/primitive';
+type DataTableRowProps = StylelessDataTableRowProps & { className?: string };
 
-interface DataTableRowOwnProps {
-  /** This row's selection id — omit for a header row, which is never selectable itself. */
-  id?: string;
-}
-
-type DataTableRowProps = PrimitivePropsWithRef<'tr'> & DataTableRowOwnProps;
-
-/** `data-state="selected"` (read from `DataTable`'s selection, via `id`) tints the row so a selected row is visible even without looking at its checkbox. */
+/**
+ * Wraps `@nebula/styleless`'s `DataTableRow` (which owns the real
+ * behavior: computing `data-state="selected"` from `DataTable`'s selection,
+ * via `id`) and adds only the hover/selected-tint classes — a selected row
+ * is visible even without looking at its checkbox.
+ */
 const DataTableRow = React.forwardRef<HTMLTableRowElement, DataTableRowProps>(
   (props, forwardedRef) => {
-    const { className, id, ...rest } = props;
-    const context = useDataTableContext('DataTableRow');
-    const selected = id !== undefined && context.isSelected(id);
-
+    const { className, ...rest } = props;
     return (
-      <Primitive
-        as="tr"
-        data-state={selected ? 'selected' : undefined}
+      <StylelessDataTableRow
         className={cn(
           'hover:bg-[var(--data-table-row-hover-bg)] data-[state=selected]:bg-[var(--data-table-row-selected-bg)]',
           className,

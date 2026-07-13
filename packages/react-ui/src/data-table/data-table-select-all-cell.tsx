@@ -1,6 +1,6 @@
-import { Checkbox } from '../checkbox/checkbox';
+import { useDataTableContext } from '@nebula/styleless/data-table';
 
-import { useDataTableContext } from './data-table-context';
+import { Checkbox } from '../checkbox/checkbox';
 
 interface DataTableSelectAllCellProps {
   /** Every selectable row's id — known upfront by the consumer (same convention `Carousel`'s `count` and `StepperItem`'s `index` use), since this cell needs the full set to decide "select all" vs. "clear all" and to compute the indeterminate state. */

@@ -13,3 +13,4 @@ export * from './image-preview';
 export * from './avatar';
 export * from './avatar-group';
 export * from './code-block';
+export * from './data-table';

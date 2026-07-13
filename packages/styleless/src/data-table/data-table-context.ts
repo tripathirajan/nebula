@@ -9,7 +9,7 @@ interface DataTableContextValue {
   onSort: (key: string) => void;
   isSelected: (id: string) => boolean;
   toggleSelected: (id: string) => void;
-  /** Replaces the whole selection — used by `DataTableSelectAllCell`'s checkbox rather than a per-id loop. */
+  /** Replaces the whole selection — used by a "select all" checkbox rather than a per-id loop. */
   setSelected: (ids: string[]) => void;
   selected: string[];
 }
