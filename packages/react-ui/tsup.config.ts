@@ -9,6 +9,7 @@ export default defineConfig({
     'input/index': 'src/input/index.ts',
     'card/index': 'src/card/index.ts',
     'badge/index': 'src/badge/index.ts',
+    'alert/index': 'src/alert/index.ts',
     'avatar/index': 'src/avatar/index.ts',
     'separator/index': 'src/separator/index.ts',
     'accordion/index': 'src/accordion/index.ts',

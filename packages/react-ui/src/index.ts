@@ -4,6 +4,7 @@ export * from './button';
 export * from './input';
 export * from './card';
 export * from './badge';
+export * from './alert';
 export * from './avatar';
 export * from './separator';
 export * from './accordion';

@@ -607,6 +607,27 @@ const passwordStrengthTokens = {
 } as const;
 
 /**
+ * Only 4 semantic severities, unlike `badgeTokens`/`chipTokens`' full
+ * 8-color palette — `primary`/`secondary`/`accent`/`neutral` don't map to
+ * any real alert *severity*, so `Alert`'s `color` axis is deliberately
+ * narrower. `text` reads each color's `-content` pairing (the dark,
+ * low-lightness shade designed for text-on-fill) for every shape, including
+ * `soft`/`outline` where there's no fill behind it — unlike `buttonTokens`'
+ * own `ghost`/`text` shapes, which read the raw hue for non-`danger` colors
+ * (a documented, still-open contrast gap there). `-content` already reads
+ * dark enough to double as literal text on a light `base.100` background too
+ * (same reasoning `primaryContent`/`accentContent` in `primitive.ts` note),
+ * so `Alert` starts from the safer choice for all 4 colors instead of
+ * inheriting that gap.
+ */
+const alertTokens = {
+  info: { bg: 'var(--color-info)', text: 'var(--color-info-content)', border: 'var(--color-info)' },
+  success: { bg: 'var(--color-success)', text: 'var(--color-success-content)', border: 'var(--color-success)' },
+  warning: { bg: 'var(--color-warning)', text: 'var(--color-warning-content)', border: 'var(--color-warning)' },
+  danger: { bg: 'var(--color-error)', text: 'var(--color-error-content)', border: 'var(--color-error)' },
+} as const;
+
+/**
  * Aggregated per-component token overrides, keyed by component name.
  *
  * Radius/size/border/depth/noise/font tokens don't need an entry here —
@@ -691,6 +712,7 @@ const componentTokens = {
   codeBlock: codeBlockTokens,
   emptyState: emptyStateTokens,
   passwordStrength: passwordStrengthTokens,
+  alert: alertTokens,
 } as const;
 
 export {
@@ -760,4 +782,5 @@ export {
   codeBlockTokens,
   emptyStateTokens,
   passwordStrengthTokens,
+  alertTokens,
 };

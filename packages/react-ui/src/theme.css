@@ -323,6 +323,18 @@
   --empty-state-description-text: var(--color-base-content);
   --password-strength-track: var(--color-base-300);
   --password-strength-label-text: var(--color-base-content);
+  --alert-info-bg: var(--color-info);
+  --alert-info-text: var(--color-info-content);
+  --alert-info-border: var(--color-info);
+  --alert-success-bg: var(--color-success);
+  --alert-success-text: var(--color-success-content);
+  --alert-success-border: var(--color-success);
+  --alert-warning-bg: var(--color-warning);
+  --alert-warning-text: var(--color-warning-content);
+  --alert-warning-border: var(--color-warning);
+  --alert-danger-bg: var(--color-error);
+  --alert-danger-text: var(--color-error-content);
+  --alert-danger-border: var(--color-error);
   --radius-selector: 2rem;
   --radius-field: 1rem;
   --radius-box: 2rem;
