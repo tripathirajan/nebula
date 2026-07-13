@@ -37,6 +37,16 @@ describe('Dialog', () => {
     expect(trigger).toHaveAttribute('aria-expanded', 'false');
   });
 
+  it('omits aria-controls while closed (DialogContent is unmounted, so the id would be dangling) and sets it once open', async () => {
+    render(<DemoDialog />);
+    const trigger = screen.getByRole('button', { name: 'Delete item' });
+    expect(trigger).not.toHaveAttribute('aria-controls');
+
+    fireEvent.click(trigger);
+    await waitFor(() => expect(screen.getByRole('dialog')).toBeInTheDocument());
+    expect(trigger).toHaveAttribute('aria-controls', screen.getByRole('dialog').id);
+  });
+
   it('opens on trigger click, portals to document.body, and wires up aria-modal/labelledby/describedby', () => {
     render(<DemoDialog />);
     fireEvent.click(screen.getByRole('button', { name: 'Delete item' }));

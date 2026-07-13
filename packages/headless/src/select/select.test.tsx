@@ -36,10 +36,15 @@ describe('Select', () => {
     render(<DemoSelect />);
     const trigger = screen.getByRole('button');
     expect(trigger).toHaveAttribute('aria-haspopup', 'listbox');
+    // While closed, SelectContent is unmounted — aria-controls must be
+    // omitted rather than pointing at a dangling id.
+    expect(trigger).not.toHaveAttribute('aria-controls');
 
     fireEvent.click(trigger);
-    expect(screen.getByRole('listbox')).toBeInTheDocument();
+    const listbox = screen.getByRole('listbox');
+    expect(listbox).toBeInTheDocument();
     expect(trigger).toHaveAttribute('aria-expanded', 'true');
+    expect(trigger).toHaveAttribute('aria-controls', listbox.id);
   });
 
   it('selecting an item updates SelectValue and closes the popup', async () => {

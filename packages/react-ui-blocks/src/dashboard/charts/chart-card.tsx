@@ -3,12 +3,21 @@ import { Card, CardContent, CardHeader, CardTitle } from '@nebula/react-ui/card'
 import { Text } from '@nebula/react-ui/text';
 import * as React from 'react';
 import {
+  Area,
+  AreaChart as RechartsAreaChart,
   Bar,
   BarChart as RechartsBarChart,
   CartesianGrid,
   Cell,
+  Line,
+  LineChart as RechartsLineChart,
   Pie,
   PieChart as RechartsPieChart,
+  PolarAngleAxis,
+  PolarGrid,
+  PolarRadiusAxis,
+  Radar,
+  RadarChart as RechartsRadarChart,
   ResponsiveContainer,
   Tooltip,
   XAxis,
@@ -43,13 +52,15 @@ interface ChartCardDataPoint {
   [field: string]: string | number;
 }
 
+/** Shared by every chart kind that plots one or more `series` against a category axis (`bar`/`line`/`area`/`radar`). */
+interface ChartCardCategorySeriesProps {
+  /** The field in each `data` item used as the category axis (`bar`/`line`/`area`'s x-axis, `radar`'s angle axis). */
+  categoryKey: string;
+  series: ChartCardSeries[];
+}
+
 type ChartCardKindProps =
-  | {
-      type: 'bar';
-      /** The field in each `data` item used as the category axis (x-axis). */
-      categoryKey: string;
-      series: ChartCardSeries[];
-    }
+  | ({ type: 'bar' } & ChartCardCategorySeriesProps)
   | {
       type: 'donut';
       /** The field in each `data` item holding the numeric value to plot. */
@@ -58,6 +69,24 @@ type ChartCardKindProps =
       nameKey: string;
       /** One color per data point, in order — cycles if there are more points than colors. @default ['primary', 'secondary', 'accent', 'info', 'success', 'warning'] */
       colors?: ChartCardColor[];
+    }
+  | ({ type: 'line' } & ChartCardCategorySeriesProps)
+  | ({
+      type: 'area';
+      /** Stack series on top of each other instead of overlaying them. @default false */
+      stacked?: boolean;
+    } & ChartCardCategorySeriesProps)
+  | ({ type: 'radar' } & ChartCardCategorySeriesProps)
+  | {
+      type: 'gauge';
+      /** The field in `data`'s first item holding the current value. */
+      valueKey: string;
+      /** The value that represents a full gauge. @default 100 */
+      max?: number;
+      /** @default 'primary' */
+      color?: ChartCardColor;
+      /** Small label under the value, e.g. "of monthly goal". */
+      valueLabel?: string;
     };
 
 type ChartCardProps = {
@@ -136,24 +165,36 @@ function ChartLegend({ items }: { items: ChartLegendItem[] }) {
   );
 }
 
+/** `role="img"` on a chart's wrapping `<div>` needs a real accessible name — `recharts` renders no text a screen reader can use on its own. */
+function chartAriaLabel(title: React.ReactNode, description?: React.ReactNode): string {
+  const titleText = typeof title === 'string' ? title : 'Chart';
+  const descriptionText = description && typeof description === 'string' ? `: ${description}` : '';
+  return `${titleText}${descriptionText}`;
+}
+
 /**
- * A dashboard chart card — bar or donut, both themed entirely off Nebula's
- * own `--color-*` semantic tokens (never a hardcoded hex), so a chart
- * re-themes for free the same way every other component in this repo does.
- * Built on `recharts` (the one external, non-`@nebula/*` runtime dependency
- * this package has — no charting primitive exists at any lower layer, and
- * building one from scratch is a much larger investment than this single
- * block needs; `recharts` is marked `external` in `tsup.config.ts` like
- * `react`/`react-dom`, resolved from the consumer's own `node_modules`,
- * not bundled into this package's `dist`).
+ * A dashboard chart card — bar, line, area, radar, donut, or gauge, all
+ * themed entirely off Nebula's own `--color-*` semantic tokens (never a
+ * hardcoded hex), so a chart re-themes for free the same way every other
+ * component in this repo does. Built on `recharts` (the one external,
+ * non-`@nebula/*` runtime dependency this package has — no charting
+ * primitive exists at any lower layer, and building one from scratch is a
+ * much larger investment than this single block needs; `recharts` is
+ * marked `external` in `tsup.config.ts` like `react`/`react-dom`, resolved
+ * from the consumer's own `node_modules`, not bundled into this package's
+ * `dist`).
  *
- * `type: 'bar'` plots one or more `series` (each its own color) against a
- * shared category axis. `type: 'donut'` plots a single numeric field with
- * one color per data point (a donut's "series" is really "one color per
- * category", the opposite axis a bar chart's colors work along) — a
- * discriminated union on `type` keeps each shape's actual prop
- * requirements distinct rather than one loosely-typed props object with
- * fields that only apply to one chart kind.
+ * `bar`/`line`/`area`/`radar` all plot one or more `series` (each its own
+ * color) against a shared `categoryKey` axis — `area` additionally accepts
+ * `stacked`. `donut` plots a single numeric field with one color per data
+ * point (a donut's "series" is really "one color per category", the
+ * opposite axis the other four work along). `gauge` is the odd one out —
+ * a single scalar against a `max`, rendered as a semi-circle (recharts has
+ * no dedicated gauge primitive; this is the standard half-donut technique:
+ * a two-segment `Pie` spanning 180°, `value` colored, the remainder in the
+ * neutral track color). A discriminated union on `type` keeps each shape's
+ * actual prop requirements distinct rather than one loosely-typed props
+ * object with fields that only apply to one chart kind.
  *
  * @example
  * ```tsx
@@ -175,13 +216,26 @@ function ChartLegend({ items }: { items: ChartLegendItem[] }) {
  *   valueKey="visits"
  *   nameKey="source"
  * />
+ *
+ * <ChartCard
+ *   title="Storage used"
+ *   type="gauge"
+ *   data={[{ used: 72 }]}
+ *   valueKey="used"
+ *   valueLabel="of 100 GB"
+ * />
  * ```
  */
 function ChartCard(props: ChartCardProps) {
   const { title, description, data, className, height = 280 } = props;
+  // Only consumed by `type: 'area'`, but hooks must run unconditionally —
+  // cheap enough to call for every chart kind.
+  const gradientBaseId = React.useId();
 
   const total =
     props.type === 'donut' ? data.reduce((sum, point) => sum + Number(point[props.valueKey] ?? 0), 0) : null;
+
+  const ariaLabel = chartAriaLabel(title, description);
 
   return (
     <Card variant="outlined" className={cn('flex flex-col', className)}>
@@ -192,10 +246,7 @@ function ChartCard(props: ChartCardProps) {
       <CardContent className="pt-0">
         {props.type === 'bar' ? (
           <>
-            <div
-              role="img"
-              aria-label={`${typeof title === 'string' ? title : 'Chart'}${description && typeof description === 'string' ? `: ${description}` : ''}`}
-            >
+            <div role="img" aria-label={ariaLabel}>
               <ResponsiveContainer width="100%" height={height}>
                 <RechartsBarChart data={data} barGap={4}>
                   <CartesianGrid strokeDasharray="3 3" stroke="var(--color-base-300)" vertical={false} />
@@ -226,13 +277,173 @@ function ChartCard(props: ChartCardProps) {
             </div>
             <ChartLegend items={props.series.map((series) => ({ label: series.label, color: series.color }))} />
           </>
+        ) : props.type === 'line' ? (
+          <>
+            <div role="img" aria-label={ariaLabel}>
+              <ResponsiveContainer width="100%" height={height}>
+                <RechartsLineChart data={data}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="var(--color-base-300)" vertical={false} />
+                  <XAxis
+                    dataKey={props.categoryKey}
+                    tick={{ fill: 'var(--color-base-content)', fontSize: 12 }}
+                    tickLine={false}
+                    axisLine={{ stroke: 'var(--color-base-300)' }}
+                  />
+                  <YAxis
+                    tick={{ fill: 'var(--color-base-content)', fontSize: 12 }}
+                    tickLine={false}
+                    axisLine={false}
+                    width={32}
+                  />
+                  <Tooltip content={<ChartTooltipContent />} cursor={{ stroke: 'var(--color-base-300)' }} />
+                  {props.series.map((series) => (
+                    <Line
+                      key={series.key}
+                      type="monotone"
+                      dataKey={series.key}
+                      name={series.label}
+                      stroke={colorVar(series.color)}
+                      strokeWidth={2}
+                      dot={{ r: 3, fill: colorVar(series.color), strokeWidth: 0 }}
+                      activeDot={{ r: 5 }}
+                    />
+                  ))}
+                </RechartsLineChart>
+              </ResponsiveContainer>
+            </div>
+            <ChartLegend items={props.series.map((series) => ({ label: series.label, color: series.color }))} />
+          </>
+        ) : props.type === 'area' ? (
+          <>
+            <div role="img" aria-label={ariaLabel}>
+              <ResponsiveContainer width="100%" height={height}>
+                <RechartsAreaChart data={data}>
+                  <defs>
+                    {props.series.map((series) => (
+                      <linearGradient
+                        key={series.key}
+                        id={`${gradientBaseId}-${series.key}`}
+                        x1="0"
+                        y1="0"
+                        x2="0"
+                        y2="1"
+                      >
+                        <stop offset="5%" stopColor={colorVar(series.color)} stopOpacity={0.35} />
+                        <stop offset="95%" stopColor={colorVar(series.color)} stopOpacity={0} />
+                      </linearGradient>
+                    ))}
+                  </defs>
+                  <CartesianGrid strokeDasharray="3 3" stroke="var(--color-base-300)" vertical={false} />
+                  <XAxis
+                    dataKey={props.categoryKey}
+                    tick={{ fill: 'var(--color-base-content)', fontSize: 12 }}
+                    tickLine={false}
+                    axisLine={{ stroke: 'var(--color-base-300)' }}
+                  />
+                  <YAxis
+                    tick={{ fill: 'var(--color-base-content)', fontSize: 12 }}
+                    tickLine={false}
+                    axisLine={false}
+                    width={32}
+                  />
+                  <Tooltip content={<ChartTooltipContent />} cursor={{ stroke: 'var(--color-base-300)' }} />
+                  {props.series.map((series) => (
+                    <Area
+                      key={series.key}
+                      type="monotone"
+                      dataKey={series.key}
+                      name={series.label}
+                      stroke={colorVar(series.color)}
+                      strokeWidth={2}
+                      fill={`url(#${gradientBaseId}-${series.key})`}
+                      stackId={props.stacked ? 'stack' : undefined}
+                    />
+                  ))}
+                </RechartsAreaChart>
+              </ResponsiveContainer>
+            </div>
+            <ChartLegend items={props.series.map((series) => ({ label: series.label, color: series.color }))} />
+          </>
+        ) : props.type === 'radar' ? (
+          <>
+            <div role="img" aria-label={ariaLabel}>
+              <ResponsiveContainer width="100%" height={height}>
+                <RechartsRadarChart data={data}>
+                  <PolarGrid stroke="var(--color-base-300)" />
+                  <PolarAngleAxis
+                    dataKey={props.categoryKey}
+                    tick={{ fill: 'var(--color-base-content)', fontSize: 12 }}
+                  />
+                  <PolarRadiusAxis tick={{ fill: 'var(--color-base-content)', fontSize: 10 }} axisLine={false} />
+                  <Tooltip content={<ChartTooltipContent />} />
+                  {props.series.map((series) => (
+                    <Radar
+                      key={series.key}
+                      dataKey={series.key}
+                      name={series.label}
+                      stroke={colorVar(series.color)}
+                      fill={colorVar(series.color)}
+                      fillOpacity={0.25}
+                      // Real recharts 3.9 bug, confirmed by reading Radar.js: its
+                      // mount-in animation interpolates from a collapsed (radius 0)
+                      // start point but never advances past frame 0 on first paint —
+                      // the polygon stays collapsed at the center until something
+                      // else (e.g. a window resize) forces a second layout pass.
+                      // Every other chart type here animates fine; only Radar needs
+                      // this off.
+                      isAnimationActive={false}
+                    />
+                  ))}
+                </RechartsRadarChart>
+              </ResponsiveContainer>
+            </div>
+            <ChartLegend items={props.series.map((series) => ({ label: series.label, color: series.color }))} />
+          </>
+        ) : props.type === 'gauge' ? (
+          (() => {
+            const max = props.max ?? 100;
+            const value = Number(data[0]?.[props.valueKey] ?? 0);
+            const percentage = Math.min(100, Math.max(0, max === 0 ? 0 : (value / max) * 100));
+            const color = props.color ?? 'primary';
+            const gaugeHeight = Math.round(height * 0.6);
+            return (
+              <div className="relative">
+                <div
+                  role="img"
+                  aria-label={`${ariaLabel}: ${value} of ${max}${props.valueLabel ? ` (${props.valueLabel})` : ''}`}
+                >
+                  <ResponsiveContainer width="100%" height={gaugeHeight}>
+                    <RechartsPieChart>
+                      <Pie
+                        data={[{ name: 'value', amount: percentage }, { name: 'remainder', amount: 100 - percentage }]}
+                        dataKey="amount"
+                        nameKey="name"
+                        startAngle={180}
+                        endAngle={0}
+                        cy="85%"
+                        innerRadius="72%"
+                        outerRadius="100%"
+                        paddingAngle={0}
+                        strokeWidth={0}
+                        isAnimationActive={false}
+                      >
+                        <Cell fill={colorVar(color)} />
+                        <Cell fill="var(--color-base-300)" />
+                      </Pie>
+                    </RechartsPieChart>
+                  </ResponsiveContainer>
+                </div>
+                <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-end pb-1">
+                  <Text className="text-2xl font-bold">{value.toLocaleString()}</Text>
+                  {props.valueLabel ? <Text className="text-xs opacity-70">{props.valueLabel}</Text> : null}
+                </div>
+              </div>
+            );
+          })()
         ) : (
           <>
             <div className="relative">
-              <div
-                role="img"
-                aria-label={`${typeof title === 'string' ? title : 'Chart'}${description && typeof description === 'string' ? `: ${description}` : ''}`}
-              >
+              <div role="img" aria-label={ariaLabel}>
                 <ResponsiveContainer width="100%" height={height}>
                   <RechartsPieChart>
                     <Pie

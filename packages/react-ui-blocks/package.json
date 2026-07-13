@@ -33,6 +33,10 @@
       "types": "./dist/communication/index.d.ts",
       "import": "./dist/communication/index.js"
     },
+    "./social": {
+      "types": "./dist/social/index.d.ts",
+      "import": "./dist/social/index.js"
+    },
     "./package.json": "./package.json"
   },
   "files": [

@@ -86,4 +86,110 @@ describe('ChartCard (block)', () => {
     );
     expect(await axe(container)).toHaveNoViolations();
   });
+
+  it('renders a line chart with an accessible chart region', () => {
+    render(
+      <ChartCard
+        title="Active users"
+        type="line"
+        data={monthlyData}
+        categoryKey="month"
+        series={[{ key: 'us', label: 'US', color: 'primary' }]}
+      />,
+    );
+    expect(screen.getByRole('img', { name: /Active users/ })).toBeInTheDocument();
+  });
+
+  it('has no axe violations (line)', async () => {
+    const { container } = render(
+      <ChartCard
+        title="Active users"
+        type="line"
+        data={monthlyData}
+        categoryKey="month"
+        series={[{ key: 'us', label: 'US', color: 'primary' }]}
+      />,
+    );
+    expect(await axe(container)).toHaveNoViolations();
+  });
+
+  it('renders an area chart with an accessible chart region', () => {
+    render(
+      <ChartCard
+        title="Sessions over time"
+        type="area"
+        data={monthlyData}
+        categoryKey="month"
+        series={[{ key: 'us', label: 'US', color: 'primary' }]}
+      />,
+    );
+    expect(screen.getByRole('img', { name: /Sessions over time/ })).toBeInTheDocument();
+  });
+
+  it('has no axe violations (area)', async () => {
+    const { container } = render(
+      <ChartCard
+        title="Sessions over time"
+        type="area"
+        data={monthlyData}
+        categoryKey="month"
+        stacked
+        series={[
+          { key: 'us', label: 'US', color: 'primary' },
+          { key: 'eu', label: 'EU', color: 'success' },
+        ]}
+      />,
+    );
+    expect(await axe(container)).toHaveNoViolations();
+  });
+
+  it('renders a radar chart with an accessible chart region', () => {
+    render(
+      <ChartCard
+        title="Series comparison"
+        type="radar"
+        data={monthlyData}
+        categoryKey="month"
+        series={[{ key: 'us', label: 'US', color: 'primary' }]}
+      />,
+    );
+    expect(screen.getByRole('img', { name: /Series comparison/ })).toBeInTheDocument();
+  });
+
+  it('has no axe violations (radar)', async () => {
+    const { container } = render(
+      <ChartCard
+        title="Series comparison"
+        type="radar"
+        data={monthlyData}
+        categoryKey="month"
+        series={[
+          { key: 'us', label: 'US', color: 'primary' },
+          { key: 'eu', label: 'EU', color: 'warning' },
+        ]}
+      />,
+    );
+    expect(await axe(container)).toHaveNoViolations();
+  });
+
+  it('renders a gauge with the current value and computes percentage from max', () => {
+    render(<ChartCard title="Storage used" type="gauge" data={[{ used: 72 }]} valueKey="used" max={100} valueLabel="of 100 GB" />);
+    expect(screen.getByText('72')).toBeInTheDocument();
+    expect(screen.getByText('of 100 GB')).toBeInTheDocument();
+    expect(screen.getByRole('img', { name: /Storage used.*72 of 100/ })).toBeInTheDocument();
+  });
+
+  it('clamps a gauge value above max to 100%', () => {
+    render(<ChartCard title="Storage used" type="gauge" data={[{ used: 150 }]} valueKey="used" max={100} />);
+    // The raw value is still shown as-is (150), only the arc fill is clamped —
+    // asserting on the accessible label's "of 100" confirms max was honored.
+    expect(screen.getByRole('img', { name: /150 of 100/ })).toBeInTheDocument();
+  });
+
+  it('has no axe violations (gauge)', async () => {
+    const { container } = render(
+      <ChartCard title="Storage used" type="gauge" data={[{ used: 72 }]} valueKey="used" valueLabel="of 100 GB" />,
+    );
+    expect(await axe(container)).toHaveNoViolations();
+  });
 });

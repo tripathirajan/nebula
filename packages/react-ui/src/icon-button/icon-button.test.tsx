@@ -19,7 +19,9 @@ describe('IconButton (ui)', () => {
       </IconButton>,
     );
     const button = screen.getByRole('button', { name: 'Settings' });
-    expect(button.className).toContain('text-[var(--button-danger-border)]');
+    // danger's text variant reads --color-error-text (contrast-safe), not
+    // the raw --button-danger-border hue — see button.tsx's header comment.
+    expect(button.className).toContain('text-[var(--color-error-text)]');
     expect(button.className).toContain('h-8');
   });
 
