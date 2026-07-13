@@ -102,8 +102,13 @@ interface SaasAppHeaderProps {
   /** Omitting `avatarSrc` falls back to `AvatarFallback` showing `name`'s first letter. */
   user?: { name: string; role?: React.ReactNode; avatarSrc?: string };
   userMenuItems?: AppHeaderUserMenuItem[];
+  /** Starts fully transparent (no border, no background) and gains a frosted `backdrop-blur` + semi-transparent surface once the page scrolls past a small threshold — the header-over-hero-image treatment marketing/landing-style app shells use. `false` (the default) keeps the header a plain, always-solid surface. @default false */
+  glass?: boolean;
   className?: string;
 }
+
+/** How far (px) the page must scroll before a `glass` header switches from fully transparent to its frosted, scrolled surface. */
+const GLASS_SCROLL_THRESHOLD = 8;
 
 function MobileNavLink(props: {
   label: React.ReactNode;
@@ -184,6 +189,18 @@ function MobileNavEntry({ link }: { link: AppHeaderNavLink }) {
  * repo (`--z-overlay`) and `BottomNav`'s `--z-bottom-nav`, so overlays and
  * the mobile tab bar always stack above it.
  *
+ * `glass` swaps the always-solid surface for a scroll-reactive one: fully
+ * transparent (no border, no background) at the top of the page, then a
+ * frosted `backdrop-blur` over a translucent `--color-base-100` once
+ * scrolled past `GLASS_SCROLL_THRESHOLD`. The translucent background is
+ * built with `color-mix()` via inline `style`, not a Tailwind `/opacity`
+ * suffix on the arbitrary `bg-[var(--color-base-100)]` value — that suffix
+ * form doesn't reliably generate a rule for arbitrary CSS-variable values
+ * in this project's Tailwind setup (see `button.tsx`'s header comment for
+ * the same finding). The scroll listener only attaches when `glass` is
+ * true, and only listens on `window` — a `glass` header inside its own
+ * scroll container (e.g. a modal) isn't a supported case yet.
+ *
  * @example
  * ```tsx
  * <SaasAppHeader
@@ -202,6 +219,7 @@ function MobileNavEntry({ link }: { link: AppHeaderNavLink }) {
  *     { label: 'Settings' },
  *     { label: 'Sign out', separatorBefore: true },
  *   ]}
+ *   glass
  * />
  * ```
  */
@@ -216,18 +234,34 @@ function SaasAppHeader(props: SaasAppHeaderProps) {
     onMarkAllNotificationsRead,
     user,
     userMenuItems,
+    glass = false,
     className,
   } = props;
 
   const hasNavLinks = Boolean(navLinks && navLinks.length > 0);
   const unreadCount = notifications?.filter((notification) => !notification.read).length ?? 0;
 
+  const [scrolled, setScrolled] = React.useState(false);
+  React.useEffect(() => {
+    if (!glass) return;
+    function handleScroll() {
+      setScrolled(window.scrollY > GLASS_SCROLL_THRESHOLD);
+    }
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [glass]);
+
   return (
     <header
       className={cn(
-        'sticky top-0 z-[var(--z-sticky)] flex h-14 items-center justify-between gap-4 border-b border-[var(--color-base-300)] bg-[var(--color-base-100)] px-4 sm:px-6',
+        'sticky top-0 z-[var(--z-sticky)] flex h-14 items-center justify-between gap-4 px-4 transition-[background-color,backdrop-filter,border-color] duration-[var(--motion-duration-fast)] sm:px-6',
+        glass
+          ? cn('border-b', scrolled ? 'border-[var(--color-base-300)] backdrop-blur-md' : 'border-transparent')
+          : 'border-b border-[var(--color-base-300)] bg-[var(--color-base-100)]',
         className,
       )}
+      style={glass && scrolled ? { backgroundColor: 'color-mix(in oklch, var(--color-base-100) 70%, transparent)' } : undefined}
     >
       <div className="flex min-w-0 items-center gap-3 sm:gap-6">
         {hasNavLinks ? (

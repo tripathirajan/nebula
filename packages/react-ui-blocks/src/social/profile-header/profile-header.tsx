@@ -89,19 +89,21 @@ function ProfileHeader(props: ProfileHeaderProps) {
         style={coverSrc ? { backgroundImage: `url(${coverSrc})` } : undefined}
       />
       <div className="px-6 pb-6">
-        <div className="-mt-12 flex flex-col items-center gap-3 sm:flex-row sm:items-end sm:gap-4">
-          <Avatar className="h-24 w-24 border-4 border-[var(--card-bg)]">
-            {avatarSrc ? <AvatarImage src={avatarSrc} alt="" /> : null}
-            <AvatarFallback className="text-2xl">{avatarFallback}</AvatarFallback>
-          </Avatar>
-          <div className="flex flex-1 flex-col items-center gap-0.5 sm:items-start sm:pb-2">
-            <Heading as="h1" level={4}>
-              {name}
-            </Heading>
-            {jobTitle ? <Text className="text-sm opacity-70">{jobTitle}</Text> : null}
+        <div className="-mt-12 flex flex-col items-center gap-3 sm:flex-row sm:items-end sm:justify-between sm:gap-4">
+          <div className="flex flex-col items-center gap-3 sm:flex-row sm:items-end sm:gap-4">
+            <Avatar className="h-24 w-24 border-4 border-[var(--card-bg)]">
+              {avatarSrc ? <AvatarImage src={avatarSrc} alt="" /> : null}
+              <AvatarFallback className="text-2xl">{avatarFallback}</AvatarFallback>
+            </Avatar>
+            <div className="flex flex-col items-center gap-0.5 pb-1 sm:items-start">
+              <Heading as="h1" level={4}>
+                {name}
+              </Heading>
+              {jobTitle ? <Text className="text-sm opacity-70">{jobTitle}</Text> : null}
+            </div>
           </div>
           {stats && stats.length > 0 ? (
-            <div className="flex gap-6 sm:pb-2">
+            <div className="flex gap-6">
               {stats.map((stat) => (
                 <div key={stat.label} className="flex flex-col items-center">
                   <Text className="text-base font-semibold">{stat.value}</Text>

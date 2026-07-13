@@ -65,6 +65,38 @@ describe('DashboardOverview (block)', () => {
     expect(screen.getByTestId('metric-icon')).toBeInTheDocument();
   });
 
+  it("tints the icon badge with the metric's color, defaulting to primary", () => {
+    render(
+      <DashboardOverview
+        metrics={[
+          { label: 'Revenue', value: '$1', icon: <svg data-testid="icon-default" /> },
+          { label: 'Bookings', value: '$2', icon: <svg data-testid="icon-warning" />, color: 'warning' },
+        ]}
+      />,
+    );
+    const defaultBadge = screen.getByTestId('icon-default').parentElement;
+    const warningBadge = screen.getByTestId('icon-warning').parentElement;
+    expect(defaultBadge).toHaveStyle({ color: 'var(--color-primary)' });
+    expect(warningBadge).toHaveStyle({ color: 'var(--color-warning)' });
+  });
+
+  it('truncates a long trend description instead of wrapping it', () => {
+    render(
+      <DashboardOverview
+        metrics={[
+          {
+            label: 'Total visits',
+            value: '18.4k',
+            trend: { value: '+11.2%', direction: 'up', description: 'vs last week' },
+          },
+        ]}
+      />,
+    );
+    const description = screen.getByText('vs last week');
+    expect(description).toHaveClass('truncate');
+    expect(description).not.toHaveClass('whitespace-normal');
+  });
+
   it('renders a sparkline only when provided', () => {
     const { container } = render(
       <DashboardOverview metrics={[{ label: 'Revenue', value: '$12,450', sparkline: [1, 2, 3] }]}

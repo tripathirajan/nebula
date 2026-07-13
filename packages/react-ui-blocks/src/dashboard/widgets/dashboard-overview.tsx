@@ -13,6 +13,17 @@ interface DashboardMetricTrend {
   description?: React.ReactNode;
 }
 
+/** One of Nebula's 8 semantic color roles — matches `ChartCardColor`'s vocabulary, kept as its own local type since this block has no dependency on `ChartCard`. */
+type DashboardMetricColor =
+  | 'primary'
+  | 'secondary'
+  | 'accent'
+  | 'neutral'
+  | 'info'
+  | 'success'
+  | 'warning'
+  | 'danger';
+
 interface DashboardMetric {
   label: React.ReactNode;
   value: React.ReactNode;
@@ -21,10 +32,16 @@ interface DashboardMetric {
   descriptionClassName?: string;
   /** Decorative icon/illustration shown in a tinted circle above the label — `aria-hidden`, the metric's own text already carries the meaning (matches Minimals' "App"/"Booking" dashboard-home stat cards). */
   icon?: React.ReactNode;
+  /** Tints `icon`'s badge — varying this per metric is what gives a stat-card row the colorful look Minimals' dashboard homes have, instead of every card reading the same brand color. Ignored when `icon` is omitted. @default 'primary' */
+  color?: DashboardMetricColor;
   /** A structured up/down trend — renders a colored arrow + `value` (+ optional trailing `description`) in place of the plain `description` slot. */
   trend?: DashboardMetricTrend;
   /** Inline mini chart plotted beside the trend/description line (Minimals' Ecommerce stat cards) — color follows `trend.direction` (success/error) when `trend` is set, else a neutral tone. */
   sparkline?: number[];
+}
+
+function iconColorVar(color: DashboardMetricColor): string {
+  return `var(--color-${color === 'danger' ? 'error' : color})`;
 }
 
 interface DashboardOverviewProps {
@@ -112,7 +129,11 @@ function DashboardOverview(props: DashboardOverviewProps) {
                 {metric.icon ? (
                   <span
                     aria-hidden="true"
-                    className="flex h-9 w-9 items-center justify-center rounded-full bg-[var(--color-primary)]/10 text-[var(--color-primary)]"
+                    className="flex h-9 w-9 items-center justify-center rounded-full"
+                    style={{
+                      backgroundColor: `color-mix(in oklch, ${iconColorVar(metric.color ?? 'primary')} 12%, transparent)`,
+                      color: iconColorVar(metric.color ?? 'primary'),
+                    }}
                   >
                     {metric.icon}
                   </span>
@@ -129,11 +150,15 @@ function DashboardOverview(props: DashboardOverviewProps) {
                 {metric.trend || metric.sparkline ? (
                   <div className="flex items-center justify-between gap-2">
                     {metric.trend ? (
-                      <StatDescription className={cn('flex items-center gap-1', trendColorClassName)}>
+                      <StatDescription className={cn('flex min-w-0 items-center gap-1', trendColorClassName)}>
                         <TrendArrow direction={metric.trend.direction} />
-                        <span className={trendColorClassName}>{metric.trend.value}</span>
+                        <span className={cn('shrink-0 whitespace-nowrap', trendColorClassName)}>
+                          {metric.trend.value}
+                        </span>
                         {metric.trend.description ? (
-                          <span className="text-[var(--stat-label-text)]">{metric.trend.description}</span>
+                          <span className="min-w-0 truncate text-[var(--stat-label-text)]">
+                            {metric.trend.description}
+                          </span>
                         ) : null}
                       </StatDescription>
                     ) : null}
@@ -155,4 +180,4 @@ function DashboardOverview(props: DashboardOverviewProps) {
 }
 
 export { DashboardOverview };
-export type { DashboardOverviewProps, DashboardMetric, DashboardMetricTrend };
+export type { DashboardOverviewProps, DashboardMetric, DashboardMetricTrend, DashboardMetricColor };

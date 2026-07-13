@@ -88,6 +88,47 @@ export const WithNotificationsAndMenu: Story = {
   },
 };
 
+export const Glass: Story = {
+  name: 'Glass (scroll-reactive blur)',
+  args: {
+    logo: <LogoMark />,
+    brand: 'Acme',
+    navLinks,
+    user: { name: 'Jane Cooper', role: 'Admin' },
+    glass: true,
+  },
+  render: (args) => (
+    <div>
+      <SaasAppHeader {...args} />
+      <div
+        className="flex h-[70vh] items-end justify-center bg-gradient-to-b from-[var(--color-primary)] to-[var(--color-accent)] p-10 text-center text-[var(--color-primary-content)]"
+        style={{ marginTop: '-56px' }}
+      >
+        <p className="max-w-md pb-10 text-2xl font-bold">
+          Scroll down — the header above starts transparent, then gains a frosted blur.
+        </p>
+      </div>
+      <div className="mx-auto max-w-2xl space-y-4 p-10">
+        {Array.from({ length: 12 }, (_, index) => (
+          <p key={index} className="text-sm opacity-70">
+            Page content paragraph {index + 1}. Scroll the page to see the header pick up its frosted-glass
+            surface once it clears the hero above.
+          </p>
+        ))}
+      </div>
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const header = canvas.getByRole('banner');
+    expect(header).not.toHaveClass('backdrop-blur-md');
+
+    canvasElement.ownerDocument.defaultView?.scrollTo(0, 400);
+    await new Promise((resolve) => setTimeout(resolve, 50));
+    await expect(header).toHaveClass('backdrop-blur-md');
+  },
+};
+
 export const MobileMenu: Story = {
   args: {
     logo: <LogoMark />,
