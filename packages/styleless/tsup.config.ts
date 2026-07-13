@@ -17,6 +17,7 @@ export default defineConfig({
     'image-preview/index': 'src/image-preview/index.ts',
     'avatar/index': 'src/avatar/index.ts',
     'avatar-group/index': 'src/avatar-group/index.ts',
+    'code-block/index': 'src/code-block/index.ts',
   },
   format: ['esm'],
   target: 'es2022',

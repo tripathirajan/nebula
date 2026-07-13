@@ -69,6 +69,10 @@
       "types": "./dist/avatar-group/index.d.ts",
       "import": "./dist/avatar-group/index.js"
     },
+    "./code-block": {
+      "types": "./dist/code-block/index.d.ts",
+      "import": "./dist/code-block/index.js"
+    },
     "./package.json": "./package.json"
   },
   "files": [
