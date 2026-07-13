@@ -14,3 +14,4 @@ export * from './avatar';
 export * from './avatar-group';
 export * from './code-block';
 export * from './data-table';
+export * from './data-grid';

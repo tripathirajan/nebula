@@ -77,6 +77,10 @@
       "types": "./dist/data-table/index.d.ts",
       "import": "./dist/data-table/index.js"
     },
+    "./data-grid": {
+      "types": "./dist/data-grid/index.d.ts",
+      "import": "./dist/data-grid/index.js"
+    },
     "./package.json": "./package.json"
   },
   "files": [
