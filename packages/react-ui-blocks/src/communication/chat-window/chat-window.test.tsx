@@ -86,6 +86,12 @@ describe('ChatWindow (block)', () => {
     expect(screen.getByRole('button', { name: 'Send' })).toBeDisabled();
   });
 
+  it('exposes the transcript as a polite live region so new messages get announced', () => {
+    render(<ChatWindow contacts={contacts} activeContactId="1" messages={messages} currentUserId="me" />);
+    const log = screen.getByRole('log', { name: 'Conversation with Jayvion Simon' });
+    expect(log).toHaveAttribute('aria-live', 'polite');
+  });
+
   it('has no axe violations', async () => {
     const { container } = render(
       <ChatWindow

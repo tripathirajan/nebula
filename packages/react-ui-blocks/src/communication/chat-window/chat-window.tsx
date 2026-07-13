@@ -155,7 +155,12 @@ function ChatWindow(props: ChatWindowProps) {
               </Avatar>
               <Text className="text-sm font-medium">{activeContact.name}</Text>
             </div>
-            <div className="flex flex-1 flex-col gap-3 overflow-y-auto p-4">
+            <div
+              role="log"
+              aria-live="polite"
+              aria-label={`Conversation with ${activeContact.name}`}
+              className="flex flex-1 flex-col gap-3 overflow-y-auto p-4"
+            >
               {messages.map((message) => {
                 const isMine = message.authorId === currentUserId;
                 return (
