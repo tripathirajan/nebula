@@ -12,11 +12,51 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+function RevenueIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="h-4 w-4">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+    </svg>
+  );
+}
+
+function UsersIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="h-4 w-4">
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"
+      />
+    </svg>
+  );
+}
+
+function ConversionIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="h-4 w-4">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M22 12h-4l-3 9L9 3l-3 9H2" />
+    </svg>
+  );
+}
+
+function ChurnIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="h-4 w-4">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M18 6 6 18M6 6l12 12" />
+    </svg>
+  );
+}
+
+// One distinct icon + semantic `color` per metric — `color` is inert
+// without an `icon` (see the prop's own doc comment), so this demo used to
+// render four plain text-only cards with no color at all despite the block
+// existing specifically to support a colorful stat-card row.
 const sampleMetrics = [
-  { label: 'Revenue', value: '$12,450', description: '+12% from last month' },
-  { label: 'Active users', value: '1,204', description: '+4% from last month' },
-  { label: 'Conversion rate', value: '3.2%', description: '-0.4% from last month' },
-  { label: 'Churn', value: '1.1%', description: '+0.2% from last month' },
+  { label: 'Revenue', value: '$12,450', icon: <RevenueIcon />, color: 'success' as const, description: '+12% from last month' },
+  { label: 'Active users', value: '1,204', icon: <UsersIcon />, color: 'info' as const, description: '+4% from last month' },
+  { label: 'Conversion rate', value: '3.2%', icon: <ConversionIcon />, color: 'accent' as const, description: '-0.4% from last month' },
+  { label: 'Churn', value: '1.1%', icon: <ChurnIcon />, color: 'warning' as const, description: '+0.2% from last month' },
 ];
 
 export const Default: Story = {
