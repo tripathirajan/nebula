@@ -30,6 +30,55 @@ interface DataGridProps<T> {
   classNames?: DataGridClassNames;
 }
 
+interface DataGridRowProps<T> {
+  row: T;
+  index: number;
+  columns: DataGridColumn<T>[];
+  start: number;
+  measureElement: (index: number, element: HTMLElement | null) => void;
+  className: string | undefined;
+  cellClassName: string | undefined;
+}
+
+/**
+ * One virtualized row, its own component rather than inlined in `.map()` so
+ * its `ref` callback (`measureElement`, wired to a `ResizeObserver`) can be
+ * `useCallback`-stabilized per row via `index` — an inline
+ * `(element) => measureElement(index, element)` created fresh inside a
+ * `.map()` gets a new identity every render, which makes React tear down and
+ * reattach every *visible* row's `ResizeObserver` on every single re-render
+ * of the grid, not just when that row's own content actually changes.
+ */
+function DataGridRow<T>(props: DataGridRowProps<T>) {
+  const { row, index, columns, start, measureElement, className, cellClassName } = props;
+
+  const measureRef = React.useCallback(
+    (element: HTMLElement | null) => measureElement(index, element),
+    [measureElement, index],
+  );
+
+  return (
+    <div
+      role="row"
+      aria-rowindex={index + 1}
+      ref={measureRef}
+      className={className}
+      style={{ position: 'absolute', left: 0, top: 0, width: '100%', transform: `translateY(${start}px)` }}
+    >
+      {columns.map((column) => (
+        <div
+          key={column.key}
+          role="gridcell"
+          className={cellClassName}
+          style={column.width ? { flex: `0 0 ${column.width}` } : undefined}
+        >
+          {column.render(row, index)}
+        </div>
+      ))}
+    </div>
+  );
+}
+
 /**
  * `styleless`-tier `DataGrid` — the real behavior extracted from
  * `@nebula/react-ui`'s `DataGrid`: composes `@nebula/hooks`' `useVirtualizer`
@@ -71,10 +120,19 @@ function DataGrid<T>(props: DataGridProps<T>) {
 
   const scrollRef = React.useRef<HTMLDivElement>(null);
 
+  // Both stabilized via `useCallback` — passing fresh closures here on every
+  // render would make `useVirtualizer`'s scroll/resize-observer effect (keyed
+  // on `getScrollElement`) tear down and re-attach every render, and force
+  // its O(`rows.length`) `measurements` recomputation (keyed on
+  // `estimateSize`) to re-run every render too, even though neither actually
+  // changes between renders of this component.
+  const getScrollElement = React.useCallback(() => scrollRef.current, []);
+  const estimateSize = React.useCallback(() => estimateRowHeight, [estimateRowHeight]);
+
   const virtualizer = useVirtualizer({
     count: rows.length,
-    getScrollElement: () => scrollRef.current,
-    estimateSize: () => estimateRowHeight,
+    getScrollElement,
+    estimateSize,
   });
 
   return (
@@ -102,31 +160,16 @@ function DataGrid<T>(props: DataGridProps<T>) {
             const row = rows[virtualItem.index];
             if (row === undefined) return null;
             return (
-              <div
+              <DataGridRow
                 key={getRowId(row, virtualItem.index)}
-                role="row"
-                aria-rowindex={virtualItem.index + 1}
-                ref={(element) => virtualizer.measureElement(virtualItem.index, element)}
+                row={row}
+                index={virtualItem.index}
+                columns={columns}
+                start={virtualItem.start}
+                measureElement={virtualizer.measureElement}
                 className={classNames?.row}
-                style={{
-                  position: 'absolute',
-                  left: 0,
-                  top: 0,
-                  width: '100%',
-                  transform: `translateY(${virtualItem.start}px)`,
-                }}
-              >
-                {columns.map((column) => (
-                  <div
-                    key={column.key}
-                    role="gridcell"
-                    className={classNames?.cell}
-                    style={column.width ? { flex: `0 0 ${column.width}` } : undefined}
-                  >
-                    {column.render(row, virtualItem.index)}
-                  </div>
-                ))}
-              </div>
+                cellClassName={classNames?.cell}
+              />
             );
           })}
         </div>
