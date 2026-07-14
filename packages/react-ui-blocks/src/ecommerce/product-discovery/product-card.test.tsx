@@ -46,15 +46,78 @@ describe('ProductCard (block)', () => {
     expect(onClick).toHaveBeenCalledTimes(1);
   });
 
+  it('renders a rating row when rating is provided', () => {
+    render(
+      <ProductCard
+        imageSrc="/sneaker.jpg"
+        imageAlt="Sneaker"
+        name="Cloud Runner"
+        price="$89.00"
+        rating={4.5}
+        reviewCount={128}
+      />,
+    );
+    expect(screen.getByText('(128)')).toBeInTheDocument();
+  });
+
+  it('renders a struck-through original price when provided', () => {
+    render(
+      <ProductCard
+        imageSrc="/sneaker.jpg"
+        imageAlt="Sneaker"
+        name="Cloud Runner"
+        price="$71.20"
+        originalPrice="$89.00"
+      />,
+    );
+    expect(screen.getByText('$89.00')).toBeInTheDocument();
+  });
+
+  it('renders a favorite toggle and calls onFavorite', () => {
+    const onFavorite = vi.fn();
+    render(
+      <ProductCard
+        imageSrc="/sneaker.jpg"
+        imageAlt="Sneaker"
+        name="Cloud Runner"
+        price="$89.00"
+        favorited={false}
+        onFavorite={onFavorite}
+      />,
+    );
+    const favoriteButton = screen.getByRole('button', { name: 'Add to favorites' });
+    favoriteButton.click();
+    expect(onFavorite).toHaveBeenCalledTimes(1);
+  });
+
+  it('flips the favorite button label when favorited is true', () => {
+    render(
+      <ProductCard
+        imageSrc="/sneaker.jpg"
+        imageAlt="Sneaker"
+        name="Cloud Runner"
+        price="$89.00"
+        favorited
+        onFavorite={() => {}}
+      />,
+    );
+    expect(screen.getByRole('button', { name: 'Remove from favorites' })).toBeInTheDocument();
+  });
+
   it('has no axe violations', async () => {
     const { container } = render(
       <ProductCard
         imageSrc="/sneaker.jpg"
         imageAlt="Sneaker"
         name="Cloud Runner"
-        price="$89.00"
+        price="$71.20"
+        originalPrice="$89.00"
         description="Breathable knit upper."
+        rating={4.5}
+        reviewCount={128}
         badge={{ label: 'Sale', color: 'danger' }}
+        favorited={false}
+        onFavorite={() => {}}
         action={{ label: 'Add to cart' }}
       />,
     );

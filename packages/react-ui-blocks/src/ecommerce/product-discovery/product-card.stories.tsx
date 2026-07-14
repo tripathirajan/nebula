@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import { ProductCard } from './product-card';
 
 import type { Meta, StoryObj } from '@storybook/react';
@@ -41,4 +43,36 @@ export const OnSale: Story = {
       <ProductCard {...args} />
     </div>
   ),
+};
+
+function FullEcommerceDemo() {
+  const [favorited, setFavorited] = useState(false);
+  return (
+    <div style={{ width: 280 }}>
+      <ProductCard
+        imageSrc="https://placehold.co/400x400"
+        imageAlt="Street Pulse running shoe on a plain background"
+        name="Street Pulse"
+        price="$71.20"
+        originalPrice="$89.00"
+        rating={4.5}
+        reviewCount={128}
+        badge={{ label: 'Sale', color: 'danger' }}
+        favorited={favorited}
+        onFavorite={() => setFavorited((prev) => !prev)}
+        action={{ label: 'Add to cart' }}
+      />
+    </div>
+  );
+}
+
+export const FullEcommerceCard: Story = {
+  name: 'Full ecommerce card (rating + discount + wishlist)',
+  args: {
+    imageSrc: 'https://placehold.co/400x400',
+    imageAlt: 'Street Pulse running shoe on a plain background',
+    name: 'Street Pulse',
+    price: '$71.20',
+  },
+  render: () => <FullEcommerceDemo />,
 };
