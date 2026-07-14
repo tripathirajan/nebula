@@ -303,6 +303,7 @@ const carouselTokens = {
 
 const dataTableTokens = {
   border: 'var(--color-base-300)',
+  headBg: 'var(--color-base-200)',
   headText: 'var(--color-base-content)',
   text: 'var(--color-base-content)',
   rowHoverBg: 'var(--color-base-200)',

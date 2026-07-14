@@ -183,6 +183,7 @@
   --carousel-indicator-bg: var(--color-base-300);
   --carousel-indicator-active-bg: var(--color-primary);
   --data-table-border: var(--color-base-300);
+  --data-table-head-bg: var(--color-base-200);
   --data-table-head-text: var(--color-base-content);
   --data-table-text: var(--color-base-content);
   --data-table-row-hover-bg: var(--color-base-200);

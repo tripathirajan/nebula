@@ -12,7 +12,7 @@ const DataTableHeader = React.forwardRef<HTMLTableSectionElement, DataTableHeade
     return (
       <Primitive
         as="thead"
-        className={cn('border-b border-[var(--data-table-border)]', className)}
+        className={cn('border-b border-[var(--data-table-border)] bg-[var(--data-table-head-bg)]', className)}
         {...rest}
         ref={forwardedRef}
       />

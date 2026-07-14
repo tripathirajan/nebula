@@ -89,7 +89,7 @@ function ProfileHeader(props: ProfileHeaderProps) {
         style={coverSrc ? { backgroundImage: `url(${coverSrc})` } : undefined}
       />
       <div className="px-6 pb-6">
-        <div className="-mt-12 flex flex-col items-center gap-3 sm:flex-row sm:items-end sm:justify-between sm:gap-4">
+        <div className="-mt-8 flex flex-col items-center gap-3 sm:flex-row sm:items-end sm:justify-between sm:gap-4">
           <div className="flex flex-col items-center gap-3 sm:flex-row sm:items-end sm:gap-4">
             <Avatar className="h-24 w-24 border-4 border-[var(--card-bg)]">
               {avatarSrc ? <AvatarImage src={avatarSrc} alt="" /> : null}
