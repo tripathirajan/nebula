@@ -15,8 +15,11 @@ type DialogDescriptionProps = PrimitivePropsWithRef<'p'>;
 /**
  * Optional supporting text — its `id` is what `DialogContent`'s
  * `aria-describedby` points to. Unlike `DialogTitle` this isn't required;
- * `DialogContent`'s `aria-describedby` simply has nothing to point at
- * usefully if omitted (still valid, just less descriptive for AT users).
+ * registers its id with `Dialog` (via `useLayoutEffect`) so `DialogContent`'s
+ * `aria-describedby` includes it only while this is actually mounted,
+ * instead of dangling-referencing an id with no matching element when
+ * omitted (still valid ARIA either way, but a dangling reference is a real,
+ * flagged violation — see `Field`'s identical fix for the same problem).
  *
  * @example
  * ```tsx
@@ -25,12 +28,17 @@ type DialogDescriptionProps = PrimitivePropsWithRef<'p'>;
  */
 const DialogDescription = React.forwardRef<HTMLParagraphElement, ScopedProps<DialogDescriptionProps>>(
   (props, forwardedRef) => {
-    const { __scopeDialog, ...descriptionProps } = props;
+    const { __scopeDialog, id, ...descriptionProps } = props;
     const context = useDialogContext(DIALOG_DESCRIPTION_NAME, __scopeDialog);
+    const resolvedId = id ?? context.descriptionId;
 
-    return (
-      <Primitive as="p" id={context.descriptionId} {...descriptionProps} ref={forwardedRef} />
-    );
+    const { registerDescribedBy, unregisterDescribedBy } = context;
+    React.useLayoutEffect(() => {
+      registerDescribedBy(resolvedId);
+      return () => unregisterDescribedBy(resolvedId);
+    }, [registerDescribedBy, unregisterDescribedBy, resolvedId]);
+
+    return <Primitive as="p" id={resolvedId} {...descriptionProps} ref={forwardedRef} />;
   },
 );
 

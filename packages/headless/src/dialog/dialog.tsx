@@ -29,6 +29,15 @@ interface DialogProps {
  * nested inside an extra wrapper element), just provides shared state via
  * scoped context. Follows the WAI-ARIA Dialog (Modal) pattern.
  *
+ * Tracks at runtime whether `DialogDescription` is actually mounted
+ * (`describedByIds`, updated via its own `useLayoutEffect` register/
+ * unregister call — same mechanism `Field` uses for the identical problem)
+ * so `DialogContent`'s `aria-describedby` only ever points at an id with a
+ * real matching element, rather than unconditionally referencing
+ * `descriptionId` whether or not a `DialogDescription` was actually
+ * rendered. `AlertDialogContent`/`DrawerContent` reuse this same context and
+ * get the fix for free.
+ *
  * @example
  * ```tsx
  * <Dialog>
@@ -64,6 +73,18 @@ function Dialog(props: ScopedProps<DialogProps>) {
   const titleId = useId('nebula-dialog-title');
   const descriptionId = useId('nebula-dialog-description');
 
+  const [describedByIds, setDescribedByIds] = React.useState<string[]>([]);
+  const registerDescribedBy = React.useCallback((describedById: string) => {
+    setDescribedByIds((previous) =>
+      previous.includes(describedById) ? previous : [...previous, describedById],
+    );
+  }, []);
+  const unregisterDescribedBy = React.useCallback((describedById: string) => {
+    setDescribedByIds((previous) =>
+      previous.includes(describedById) ? previous.filter((existing) => existing !== describedById) : previous,
+    );
+  }, []);
+
   return (
     <DialogProvider
       scope={__scopeDialog}
@@ -73,6 +94,9 @@ function Dialog(props: ScopedProps<DialogProps>) {
       contentId={contentId}
       titleId={titleId}
       descriptionId={descriptionId}
+      describedByIds={describedByIds}
+      registerDescribedBy={registerDescribedBy}
+      unregisterDescribedBy={unregisterDescribedBy}
     >
       {children}
     </DialogProvider>

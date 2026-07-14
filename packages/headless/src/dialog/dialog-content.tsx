@@ -31,9 +31,14 @@ interface DialogContentProps extends PrimitivePropsWithRef<'div'> {
  * another dialog/popover), `FocusScope` (`trapped` when the root's `modal` is
  * true, moves focus in on mount and restores it to the trigger on unmount).
  *
+ * `aria-describedby` is built from whichever `DialogDescription` ids are
+ * actually mounted (see `Dialog`'s own doc comment) — omitted entirely when
+ * none are, rather than dangling-referencing an id with no element. Pass an
+ * explicit `aria-describedby` prop to override this.
+ *
  * @example
  * ```tsx
- * <DialogContent aria-describedby={undefined}>
+ * <DialogContent>
  *   <DialogTitle>Delete item?</DialogTitle>
  *   <DialogDescription>This can't be undone.</DialogDescription>
  *   <DialogClose>Cancel</DialogClose>
@@ -50,6 +55,7 @@ const DialogContent = React.forwardRef<HTMLDivElement, ScopedProps<DialogContent
       ...contentProps
     } = props;
     const context = useDialogContext(DIALOG_CONTENT_NAME, __scopeDialog);
+    const describedBy = context.describedByIds.length > 0 ? context.describedByIds.join(' ') : undefined;
 
     return (
       <Presence present={forceMount || context.open}>
@@ -67,7 +73,7 @@ const DialogContent = React.forwardRef<HTMLDivElement, ScopedProps<DialogContent
               id={context.contentId}
               aria-modal={context.modal}
               aria-labelledby={context.titleId}
-              aria-describedby={context.descriptionId}
+              aria-describedby={describedBy}
               data-state={context.open ? 'open' : 'closed'}
               {...contentProps}
             />

@@ -52,6 +52,7 @@ const AlertDialogContent = React.forwardRef<HTMLDivElement, ScopedProps<AlertDia
   (props, forwardedRef) => {
     const { __scopeDialog, forceMount = false, onEscapeKeyDown, ...contentProps } = props;
     const context = useDialogContext(ALERT_DIALOG_CONTENT_NAME, __scopeDialog);
+    const describedBy = context.describedByIds.length > 0 ? context.describedByIds.join(' ') : undefined;
 
     return (
       <Presence present={forceMount || context.open}>
@@ -69,7 +70,7 @@ const AlertDialogContent = React.forwardRef<HTMLDivElement, ScopedProps<AlertDia
               id={context.contentId}
               aria-modal="true"
               aria-labelledby={context.titleId}
-              aria-describedby={context.descriptionId}
+              aria-describedby={describedBy}
               data-state={context.open ? 'open' : 'closed'}
               {...contentProps}
             />

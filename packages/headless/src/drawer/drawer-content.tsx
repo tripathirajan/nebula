@@ -56,6 +56,7 @@ const DrawerContent = React.forwardRef<HTMLDivElement, ScopedProps<DrawerContent
       ...contentProps
     } = props;
     const context = useDialogContext(DRAWER_CONTENT_NAME, __scopeDialog);
+    const describedBy = context.describedByIds.length > 0 ? context.describedByIds.join(' ') : undefined;
 
     return (
       <Presence present={forceMount || context.open}>
@@ -73,7 +74,7 @@ const DrawerContent = React.forwardRef<HTMLDivElement, ScopedProps<DrawerContent
               id={context.contentId}
               aria-modal={context.modal}
               aria-labelledby={context.titleId}
-              aria-describedby={context.descriptionId}
+              aria-describedby={describedBy}
               data-state={context.open ? 'open' : 'closed'}
               data-side={side}
               {...contentProps}

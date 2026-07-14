@@ -60,6 +60,21 @@ describe('Dialog', () => {
     expect(dialog).toHaveAttribute('aria-describedby', description.id);
   });
 
+  it('omits aria-describedby entirely when DialogDescription is not rendered', () => {
+    render(
+      <Dialog>
+        <DialogTrigger>Open</DialogTrigger>
+        <DialogPortal>
+          <DialogContent>
+            <DialogTitle>Title only</DialogTitle>
+          </DialogContent>
+        </DialogPortal>
+      </Dialog>,
+    );
+    fireEvent.click(screen.getByRole('button', { name: 'Open' }));
+    expect(screen.getByRole('dialog')).not.toHaveAttribute('aria-describedby');
+  });
+
   it('moves focus into the dialog on open', async () => {
     render(<DemoDialog />);
     fireEvent.click(screen.getByRole('button', { name: 'Delete item' }));

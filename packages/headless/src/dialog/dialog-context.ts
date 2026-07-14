@@ -10,6 +10,10 @@ interface DialogContextValue {
   contentId: string;
   titleId: string;
   descriptionId: string;
+  /** Ids of currently-mounted `DialogDescription` instances (in practice 0 or 1) — see `Dialog`'s own doc comment for why `DialogContent`'s `aria-describedby` is built from this instead of `descriptionId` unconditionally. Shared by `AlertDialogContent`/`DrawerContent`, which reuse this same context. */
+  describedByIds: string[];
+  registerDescribedBy: (id: string) => void;
+  unregisterDescribedBy: (id: string) => void;
 }
 
 const DIALOG_NAME = 'Dialog';
