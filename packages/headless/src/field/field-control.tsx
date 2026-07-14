@@ -39,6 +39,8 @@ const FieldControl = React.forwardRef<HTMLInputElement, ScopedProps<FieldControl
       ...controlProps
     } = props;
     const context = useFieldContext(FIELD_CONTROL_NAME, __scopeField);
+    const describedBy =
+      ariaDescribedBy ?? (context.describedByIds.length > 0 ? context.describedByIds.join(' ') : undefined);
 
     return (
       <Primitive
@@ -46,7 +48,7 @@ const FieldControl = React.forwardRef<HTMLInputElement, ScopedProps<FieldControl
         id={id ?? context.id}
         aria-invalid={ariaInvalid ?? (context.invalid || undefined)}
         aria-required={ariaRequired ?? (context.required || undefined)}
-        aria-describedby={ariaDescribedBy ?? `${context.descriptionId} ${context.errorId}`}
+        aria-describedby={describedBy}
         disabled={disabled ?? context.disabled}
         {...controlProps}
         ref={forwardedRef}

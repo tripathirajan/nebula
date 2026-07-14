@@ -22,14 +22,15 @@ interface FieldProps extends PrimitivePropsWithRef<'div'> {
  * accessible form field needs, factored out once instead of hand-wired per
  * field.
  *
- * Deliberately does NOT track at runtime whether `FieldDescription`/
- * `FieldError` are actually rendered as children — `FieldControl` always
- * sets `aria-describedby` to both ids unconditionally (space-joined).
- * `aria-describedby` pointing at an id with no matching element is a no-op
- * for assistive tech (the missing id is simply skipped), so this avoids a
- * mount-registration effect for what would otherwise be a purely cosmetic
- * correctness gain — the same kind of documented simplification `Tooltip`'s
- * no-shared-delay-group note makes elsewhere in this package.
+ * Tracks at runtime which of `FieldDescription`/`FieldError` are actually
+ * mounted (`describedByIds`, updated via their own `useLayoutEffect`
+ * register/unregister calls) so `FieldControl`'s `aria-describedby` only
+ * ever points at ids with a real matching element — an `aria-describedby`
+ * referencing a non-existent id is a real, flagged a11y violation (axe's
+ * `aria-valid-attr-value` rule, not a silently-ignored no-op the way some
+ * assistive tech handles a merely-empty attribute), so this can't be
+ * simplified to an unconditional two-id join the way an earlier version of
+ * this component did.
  *
  * @example
  * ```tsx
@@ -56,6 +57,18 @@ const Field = React.forwardRef<HTMLDivElement, ScopedProps<FieldProps>>((props, 
   const generatedId = useId('nebula-field');
   const id = idProp ?? generatedId;
 
+  const [describedByIds, setDescribedByIds] = React.useState<string[]>([]);
+  const registerDescribedBy = React.useCallback((describedById: string) => {
+    setDescribedByIds((previous) =>
+      previous.includes(describedById) ? previous : [...previous, describedById],
+    );
+  }, []);
+  const unregisterDescribedBy = React.useCallback((describedById: string) => {
+    setDescribedByIds((previous) =>
+      previous.includes(describedById) ? previous.filter((existing) => existing !== describedById) : previous,
+    );
+  }, []);
+
   return (
     <FieldProvider
       scope={__scopeField}
@@ -65,6 +78,9 @@ const Field = React.forwardRef<HTMLDivElement, ScopedProps<FieldProps>>((props, 
       invalid={invalid}
       disabled={disabled}
       required={required}
+      describedByIds={describedByIds}
+      registerDescribedBy={registerDescribedBy}
+      unregisterDescribedBy={unregisterDescribedBy}
     >
       <Primitive
         as="div"

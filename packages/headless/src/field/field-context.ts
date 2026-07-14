@@ -9,6 +9,10 @@ interface FieldContextValue {
   invalid: boolean;
   disabled: boolean;
   required: boolean;
+  /** Ids of currently-mounted `FieldDescription`/`FieldError` instances, in mount order — see `Field`'s own doc comment for why `FieldControl`'s `aria-describedby` is built from this instead of the two ids unconditionally. */
+  describedByIds: string[];
+  registerDescribedBy: (id: string) => void;
+  unregisterDescribedBy: (id: string) => void;
 }
 
 const FIELD_NAME = 'Field';

@@ -39,6 +39,41 @@ describe('Field', () => {
     expect(input.getAttribute('aria-describedby')).toContain(description.id);
   });
 
+  it('omits aria-describedby entirely when neither FieldDescription nor FieldError is rendered', () => {
+    render(
+      <Field>
+        <FieldControl asChild>
+          <input type="email" />
+        </FieldControl>
+      </Field>,
+    );
+
+    expect(screen.getByRole('textbox')).not.toHaveAttribute('aria-describedby');
+  });
+
+  it('drops the error id from aria-describedby once FieldError unmounts', () => {
+    function Wrapper({ showError }: { showError: boolean }) {
+      return (
+        <Field>
+          <FieldControl asChild>
+            <input type="email" />
+          </FieldControl>
+          <FieldDescription>Helper text</FieldDescription>
+          {showError ? <FieldError>Required</FieldError> : null}
+        </Field>
+      );
+    }
+
+    const { rerender } = render(<Wrapper showError />);
+    const input = screen.getByRole('textbox');
+    const errorId = screen.getByRole('alert').id;
+    expect(input.getAttribute('aria-describedby')).toContain(errorId);
+
+    rerender(<Wrapper showError={false} />);
+    expect(input.getAttribute('aria-describedby')).not.toContain(errorId);
+    expect(document.getElementById(errorId)).toBeNull();
+  });
+
   it('reflects invalid/required/disabled from Field onto FieldControl', () => {
     render(
       <Field invalid required disabled>
