@@ -392,6 +392,8 @@ const fileUploadTokens = {
   dropzoneBorder: 'var(--color-base-300)',
   dropzoneActiveBorder: 'var(--color-primary)',
   itemBorder: 'var(--color-base-300)',
+  /** `ImageUpload`'s remove-button overlay, sitting directly on top of an arbitrary uploaded photo — needs a real opaque-ish surface behind it (same `--card-bg`/`base-100` role `ProductCard`'s favorite-icon overlay already uses) so the dark `text` icon stays visible regardless of what's underneath, instead of the dangling `--file-upload-dropzone-bg` reference this replaced, which was never defined anywhere and silently resolved to `transparent`. */
+  removeButtonBg: 'var(--color-base-100)',
 } as const;
 
 const sliderTokens = {
@@ -529,6 +531,11 @@ const statTokens = {
 /** Purely presentational structure (no interactive state), same single-color treatment as `Text`. */
 const listTokens = {
   text: 'var(--color-base-content)',
+  /** `ListItemButton`'s hover fill — same neutral surface tint `DataTable`'s row hover and `MenuItem`'s focus fill both already use. */
+  itemHoverBg: 'var(--color-base-200)',
+  /** `ListItemButton[data-selected]`'s fill/text — a low-opacity tint of `primary` plus the solid hue as text, the same "tinted badge" pairing `DashboardMetric`'s icon badges use, so a selected list row and a colored stat icon read as the same "primary, softened" affordance. */
+  itemSelectedBg: 'color-mix(in oklch, var(--color-primary) 12%, transparent)',
+  itemSelectedText: 'var(--color-primary)',
 } as const;
 
 /** `DescriptionTerm`/`DescriptionDetails` read separate tokens even though both currently resolve to `base-content` — kept independently themeable per the per-component indirection rule, same as `Header`/`Footer`/`Sidebar` all sharing one triple. */

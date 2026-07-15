@@ -395,6 +395,10 @@
       "types": "./dist/data-grid/index.d.ts",
       "import": "./dist/data-grid/index.js"
     },
+    "./virtual-list": {
+      "types": "./dist/virtual-list/index.d.ts",
+      "import": "./dist/virtual-list/index.js"
+    },
     "./tree-table": {
       "types": "./dist/tree-table/index.d.ts",
       "import": "./dist/tree-table/index.js"

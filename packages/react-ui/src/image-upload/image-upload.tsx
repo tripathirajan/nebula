@@ -81,7 +81,7 @@ const ImageUpload = React.forwardRef<HTMLDivElement, ImageUploadProps>((props, f
                 <FileUploadRemoveTrigger
                   index={index}
                   aria-label={`Remove ${file.name}`}
-                  className="absolute right-1 top-1 rounded-full bg-[var(--file-upload-dropzone-bg,transparent)]/80 opacity-0 group-hover:opacity-100"
+                  className="absolute right-1 top-1 rounded-full bg-[var(--file-upload-remove-button-bg)]/90 shadow-sm opacity-0 group-hover:opacity-100"
                 />
               </li>
             ))}

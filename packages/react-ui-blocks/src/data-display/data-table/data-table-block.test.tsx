@@ -133,6 +133,54 @@ describe('DataTableBlock (block)', () => {
     expect(screen.getByText('1–2 of 2')).toBeInTheDocument();
   });
 
+  function mockMatchMedia(matches: boolean) {
+    window.matchMedia = vi.fn().mockImplementation((query: string) => ({
+      matches,
+      media: query,
+      onchange: null,
+      addListener: vi.fn(),
+      removeListener: vi.fn(),
+      addEventListener: vi.fn(),
+      removeEventListener: vi.fn(),
+      dispatchEvent: vi.fn(),
+    }));
+  }
+
+  it('renders the table (not a card list) when renderCard is omitted, regardless of viewport', () => {
+    mockMatchMedia(false);
+    render(<DataTableBlock columns={columns} rows={rows} getRowId={(row) => row.id} />);
+    expect(screen.getByRole('table')).toBeInTheDocument();
+  });
+
+  it('renders a stacked card list instead of the table below cardBreakpoint when renderCard is given', () => {
+    mockMatchMedia(false);
+    render(
+      <DataTableBlock
+        columns={columns}
+        rows={rows}
+        getRowId={(row) => row.id}
+        renderCard={(row) => <div data-testid={`card-${row.id}`}>{row.name}</div>}
+      />,
+    );
+    expect(screen.queryByRole('table')).not.toBeInTheDocument();
+    expect(screen.getByTestId('card-1')).toBeInTheDocument();
+    expect(screen.getByTestId('card-2')).toBeInTheDocument();
+  });
+
+  it('renders the table instead of the card list at/above cardBreakpoint when renderCard is given', () => {
+    mockMatchMedia(true);
+    render(
+      <DataTableBlock
+        columns={columns}
+        rows={rows}
+        getRowId={(row) => row.id}
+        renderCard={(row) => <div data-testid={`card-${row.id}`}>{row.name}</div>}
+      />,
+    );
+    expect(screen.getByRole('table')).toBeInTheDocument();
+    expect(screen.queryByTestId('card-1')).not.toBeInTheDocument();
+  });
+
   it('has no axe violations', async () => {
     const { container } = render(
       <DataTableBlock

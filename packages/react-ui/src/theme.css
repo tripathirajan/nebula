@@ -223,6 +223,7 @@
   --file-upload-dropzone-border: var(--color-base-300);
   --file-upload-dropzone-active-border: var(--color-primary);
   --file-upload-item-border: var(--color-base-300);
+  --file-upload-remove-button-bg: var(--color-base-100);
   --slider-track-bg: var(--color-base-300);
   --slider-range-bg: var(--color-primary);
   --slider-thumb-bg: var(--color-base-100);
@@ -284,6 +285,9 @@
   --stat-label-text: var(--color-base-content);
   --stat-value-text: var(--color-base-content);
   --list-text: var(--color-base-content);
+  --list-item-hover-bg: var(--color-base-200);
+  --list-item-selected-bg: color-mix(in oklch, var(--color-primary) 12%, transparent);
+  --list-item-selected-text: var(--color-primary);
   --description-list-term-text: var(--color-base-content);
   --description-list-details-text: var(--color-base-content);
   --data-grid-border: var(--color-base-300);
