@@ -223,6 +223,7 @@
   --file-upload-dropzone-border: var(--color-base-300);
   --file-upload-dropzone-active-border: var(--color-primary);
   --file-upload-item-border: var(--color-base-300);
+  --file-upload-remove-button-bg: var(--color-base-100);
   --slider-track-bg: var(--color-base-300);
   --slider-range-bg: var(--color-primary);
   --slider-thumb-bg: var(--color-base-100);

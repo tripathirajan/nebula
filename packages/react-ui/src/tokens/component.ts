@@ -392,6 +392,8 @@ const fileUploadTokens = {
   dropzoneBorder: 'var(--color-base-300)',
   dropzoneActiveBorder: 'var(--color-primary)',
   itemBorder: 'var(--color-base-300)',
+  /** `ImageUpload`'s remove-button overlay, sitting directly on top of an arbitrary uploaded photo — needs a real opaque-ish surface behind it (same `--card-bg`/`base-100` role `ProductCard`'s favorite-icon overlay already uses) so the dark `text` icon stays visible regardless of what's underneath, instead of the dangling `--file-upload-dropzone-bg` reference this replaced, which was never defined anywhere and silently resolved to `transparent`. */
+  removeButtonBg: 'var(--color-base-100)',
 } as const;
 
 const sliderTokens = {
