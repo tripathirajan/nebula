@@ -5,6 +5,7 @@ import { MenuItem } from '@nebula/react-ui/menu';
 import { Text } from '@nebula/react-ui/text';
 import { useState } from 'react';
 
+import { CardListItem } from '../data-display/card-list-item/card-list-item';
 import { DataTableBlock } from '../data-display/data-table/data-table-block';
 import { PageSection } from '../layouts/page-section/page-section';
 
@@ -15,7 +16,10 @@ import type { Meta, StoryObj } from '@storybook/react';
 // No component of its own — PageSection + DataTableBlock wrapping is the
 // generic entity-list shell §5's own "Table Block" variant note describes:
 // swap the column schema and this becomes the Product/Order/Invoice list
-// too, not a bespoke page per entity.
+// too, not a bespoke page per entity. `renderCard` demonstrates
+// `DataTableBlock`'s responsive table/card switch — resize the Storybook
+// viewport below 768px (or use the toolbar's Mobile preset) to see it swap
+// to a stacked `CardListItem` list.
 const meta = {
   title: 'Blocks/Compositions/User List',
   tags: ['autodocs'],
@@ -116,6 +120,28 @@ function UserListPage() {
               </>
             )}
             rowActionsLabel={(user) => `Actions for ${user.name}`}
+            renderCard={(user) => (
+              <CardListItem
+                avatar={
+                  <Avatar>
+                    <AvatarFallback>{user.name.charAt(0)}</AvatarFallback>
+                  </Avatar>
+                }
+                title={user.name}
+                description={user.email}
+                trailing={
+                  <Badge color={statusColor[user.status]}>
+                    {user.status.charAt(0).toUpperCase() + user.status.slice(1)}
+                  </Badge>
+                }
+                actions={
+                  <>
+                    <MenuItem onSelect={() => {}}>Edit</MenuItem>
+                    <MenuItem onSelect={() => {}}>Delete</MenuItem>
+                  </>
+                }
+              />
+            )}
             page={1}
             totalCount={filtered.length}
           />

@@ -64,7 +64,7 @@ function RankedList(props: RankedListProps) {
                 {item.rank ?? index + 1}
               </span>
               {item.media ? <span className="shrink-0">{item.media}</span> : null}
-              <Text className="flex-1 truncate text-sm font-medium">{item.label}</Text>
+              <Text className="block flex-1 truncate text-sm font-medium">{item.label}</Text>
               <Text className="shrink-0 text-sm font-medium">{item.value}</Text>
             </ListItem>
           ))}

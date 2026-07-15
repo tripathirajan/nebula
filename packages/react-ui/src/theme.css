@@ -284,6 +284,9 @@
   --stat-label-text: var(--color-base-content);
   --stat-value-text: var(--color-base-content);
   --list-text: var(--color-base-content);
+  --list-item-hover-bg: var(--color-base-200);
+  --list-item-selected-bg: color-mix(in oklch, var(--color-primary) 12%, transparent);
+  --list-item-selected-text: var(--color-primary);
   --description-list-term-text: var(--color-base-content);
   --description-list-details-text: var(--color-base-content);
   --data-grid-border: var(--color-base-300);

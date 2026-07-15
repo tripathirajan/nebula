@@ -99,6 +99,7 @@ export default defineConfig({
     'list/index': 'src/list/index.ts',
     'description-list/index': 'src/description-list/index.ts',
     'data-grid/index': 'src/data-grid/index.ts',
+    'virtual-list/index': 'src/virtual-list/index.ts',
     'tree-table/index': 'src/tree-table/index.ts',
     'calendar/index': 'src/calendar/index.ts',
     'date-picker/index': 'src/date-picker/index.ts',

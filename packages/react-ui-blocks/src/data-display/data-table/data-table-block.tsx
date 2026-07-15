@@ -1,3 +1,4 @@
+import { useMediaQuery } from '@nebula/hooks';
 import { cn } from '@nebula/primitives/cn';
 import { Badge } from '@nebula/react-ui/badge';
 import { Card } from '@nebula/react-ui/card';
@@ -70,6 +71,18 @@ interface DataTableBlockProps<TRow> {
   rowActions?: (row: TRow) => React.ReactNode;
   /** Accessible label for each row's actions trigger — `row` is passed so it can include the row's own identity, e.g. `(row) => \`Actions for ${row.name}\`\`. @default () => 'Row actions' */
   rowActionsLabel?: (row: TRow) => string;
+
+  /**
+   * Renders one row as a card (typically a `CardListItem`) instead of a
+   * `<tr>` — when given, the block switches from the table to a stacked
+   * list of these below `cardBreakpoint`, since a `<table>`'s fixed columns
+   * don't reflow onto a narrow viewport the way a stacked list of cards
+   * does. Omit to always render the table regardless of viewport (the
+   * existing, backward-compatible behavior).
+   */
+  renderCard?: (row: TRow) => React.ReactNode;
+  /** The media query at and above which the table renders instead of `renderCard`'s card list — matches Tailwind's `md` breakpoint by default ("table on medium screens and up, a stacked card list on small screens"). Ignored when `renderCard` is omitted. @default '(min-width: 768px)' */
+  cardBreakpoint?: string;
 
   /** Omit `page`/`totalCount` entirely for a table with no pagination footer. */
   page?: number;
@@ -154,6 +167,8 @@ function DataTableBlock<TRow>(props: DataTableBlockProps<TRow>) {
     onSortChange,
     rowActions,
     rowActionsLabel = () => 'Row actions',
+    renderCard,
+    cardBreakpoint = '(min-width: 768px)',
     page,
     defaultPage,
     onPageChange,
@@ -165,6 +180,13 @@ function DataTableBlock<TRow>(props: DataTableBlockProps<TRow>) {
     emptyState,
     className,
   } = props;
+
+  // Always called (rules of hooks) even when `renderCard` is omitted, so
+  // this component's hook order never changes across renders — its result
+  // is simply unused in that case, since `isTableView` short-circuits to
+  // `true` first.
+  const isAboveCardBreakpoint = useMediaQuery(cardBreakpoint);
+  const isTableView = renderCard === undefined || isAboveCardBreakpoint;
 
   const [uncontrolledPageSize, setUncontrolledPageSize] = React.useState(defaultPageSize);
   const resolvedPageSize = pageSize ?? uncontrolledPageSize;
@@ -232,6 +254,14 @@ function DataTableBlock<TRow>(props: DataTableBlockProps<TRow>) {
             <EmptyStateDescription>Try adjusting your search or filters.</EmptyStateDescription>
           </EmptyState>
         )
+      ) : !isTableView && renderCard ? (
+        <div role="list" className="flex flex-col gap-2 p-3">
+          {rows.map((row) => (
+            <div role="listitem" key={getRowId(row)}>
+              {renderCard(row)}
+            </div>
+          ))}
+        </div>
       ) : (
         <div className="overflow-x-auto">
           <DataTable

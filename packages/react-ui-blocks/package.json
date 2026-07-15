@@ -55,6 +55,7 @@
     "react-dom": "^19.0.0"
   },
   "dependencies": {
+    "@nebula/hooks": "workspace:*",
     "@nebula/primitives": "workspace:*",
     "@nebula/react-ui": "workspace:*",
     "recharts": "^3.9.2"

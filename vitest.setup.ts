@@ -35,6 +35,29 @@ if (typeof window !== 'undefined' && window?.document) {
       return null;
     };
   }
+
+  // JSDOM doesn't implement `window.matchMedia` at all — `@nebula/hooks`'
+  // `useMediaQuery` (and anything built on it, e.g. `DataTableBlock`'s
+  // responsive card/table switch) throws immediately without this. Defaults
+  // to `matches: false` (the safe, non-surprising default — "no viewport
+  // matches" rather than accidentally reporting every query as matching);
+  // a test that specifically needs `matches: true` overrides
+  // `window.matchMedia` locally, same as any other per-test browser-API mock
+  // in this codebase (e.g. `DataGrid`/`VirtualList`'s local `ResizeObserver`
+  // mocks) rather than this global default trying to guess it.
+  if (typeof window.matchMedia !== 'function') {
+    window.matchMedia = (query: string) =>
+      ({
+        matches: false,
+        media: query,
+        onchange: null,
+        addListener: () => {},
+        removeListener: () => {},
+        addEventListener: () => {},
+        removeEventListener: () => {},
+        dispatchEvent: () => false,
+      }) as MediaQueryList;
+  }
 }
 
 // `@testing-library/react` only self-registers its `afterEach(cleanup)` when
