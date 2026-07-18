@@ -3,6 +3,12 @@
   "version": "0.1.0",
   "description": "Tailwind-powered styled components (atoms) built on @nebula/primitives + @nebula/headless, plus the 3-layer design token system and ThemeProvider/useTheme they're styled from. Absorbed the former @nebula/theme package — nothing else in the workspace needs tokens/theming, only this package's own components do.",
   "license": "MIT",
+  "author": "Rajan Tripathi <tripathirajan3@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tripathirajan/nebula.git",
+    "directory": "packages/react-ui"
+  },
   "type": "module",
   "sideEffects": [
     "*.css"
