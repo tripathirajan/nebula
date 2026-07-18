@@ -3,6 +3,12 @@
   "version": "0.1.0",
   "description": "Reusable UI components with a complete, semantic API but zero visual opinion — composes @nebula/primitives + @nebula/headless. Styled by @nebula/react-ui. See LAYER_TAXONOMY.md for the full component list this package extracts from react-ui.",
   "license": "MIT",
+  "author": "Rajan Tripathi <tripathirajan3@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tripathirajan/nebula.git",
+    "directory": "packages/styleless"
+  },
   "type": "module",
   "sideEffects": false,
   "main": "./dist/index.js",

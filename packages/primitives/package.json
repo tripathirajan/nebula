@@ -3,6 +3,12 @@
   "version": "0.1.0",
   "description": "Unstyled polymorphic base primitives (Slot, Primitive, cn, ref/event composition, scoped context) — the foundation every other @nebula/* package builds on.",
   "license": "MIT",
+  "author": "Rajan Tripathi <tripathirajan3@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tripathirajan/nebula.git",
+    "directory": "packages/primitives"
+  },
   "type": "module",
   "sideEffects": false,
   "main": "./dist/index.js",

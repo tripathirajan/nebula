@@ -3,6 +3,12 @@
   "version": "0.1.0",
   "description": "Behavior-only, ARIA-complete compound components — no styling opinions. Renamed @nebula/headless -> @nebula/styleless -> back to @nebula/headless; the project owner's confirmed 5-tier model treats headless (this package) and styleless (a distinct, new, not-yet-built layer) as two different things. Built on @nebula/primitives + @nebula/hooks; styled by @nebula/react-ui.",
   "license": "MIT",
+  "author": "Rajan Tripathi <tripathirajan3@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tripathirajan/nebula.git",
+    "directory": "packages/headless"
+  },
   "type": "module",
   "sideEffects": false,
   "main": "./dist/index.js",
