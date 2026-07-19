@@ -5,10 +5,20 @@ Behavior-only, ARIA-complete compound components. No styling opinions — that's
 ## Installation
 
 ```bash
+npm install @nebula-lab/headless
+# or
+yarn add @nebula-lab/headless
+# or
 pnpm add @nebula-lab/headless
+# or
+bun add @nebula-lab/headless
 ```
 
-Peer dependencies: `react ^19.0.0`, `react-dom ^19.0.0`.
+Peer dependencies: `react ^19.0.0`, `react-dom ^19.0.0`. Works with any of the above package managers — pick whichever your project already uses.
+
+**Module format:** ESM only (no CommonJS build). Works out of the box with any bundler (Vite, Next.js, Webpack 5+, esbuild, Parcel) or native Node.js ESM. A plain CommonJS `require('@nebula-lab/headless')` is **not** supported and throws `ERR_REQUIRE_ESM` — use `import` (or dynamic `import()` from a CJS file) instead.
+
+**TypeScript / JavaScript:** Ships hand-written `.d.ts` types alongside the JS output, but nothing requires TypeScript — plain JavaScript works identically. TypeScript users get full autocomplete/type-checking for free; JavaScript users just don't see the type annotations.
 
 ## What's here
 

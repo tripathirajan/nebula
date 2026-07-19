@@ -5,10 +5,20 @@ Framework-agnostic helpers — no React dependency, nothing in the workspace dep
 ## Installation
 
 ```bash
+npm install @nebula-lab/utilities
+# or
+yarn add @nebula-lab/utilities
+# or
 pnpm add @nebula-lab/utilities
+# or
+bun add @nebula-lab/utilities
 ```
 
-No peer dependencies — works in any JS/TS environment, browser or Node.
+No peer dependencies — works in any JS/TS environment, browser or Node, regardless of which package manager your project uses.
+
+**Module format:** ESM only (no CommonJS build). Works out of the box with any bundler (Vite, Webpack, esbuild, Rollup, Parcel) or native Node.js ESM. A plain CommonJS `require('@nebula-lab/utilities')` is **not** supported and throws `ERR_REQUIRE_ESM` — use `import` (or dynamic `import()` from a CJS file) instead.
+
+**TypeScript / JavaScript:** Ships hand-written `.d.ts` types alongside the JS output, but nothing requires TypeScript — plain JavaScript works identically. TypeScript users get full autocomplete/type-checking for free; JavaScript users just don't see the type annotations.
 
 ## What's here
 

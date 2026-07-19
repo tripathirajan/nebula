@@ -7,10 +7,20 @@ This package merges what used to be two separate packages, `sections` (composite
 ## Installation
 
 ```bash
+npm install @nebula-lab/react-ui-blocks
+# or
+yarn add @nebula-lab/react-ui-blocks
+# or
 pnpm add @nebula-lab/react-ui-blocks
+# or
+bun add @nebula-lab/react-ui-blocks
 ```
 
-Peer dependencies: `react ^19.0.0`, `react-dom ^19.0.0`. Also pulls in `recharts` for the chart blocks.
+Peer dependencies: `react ^19.0.0`, `react-dom ^19.0.0`. Also pulls in `recharts` for the chart blocks. Works with any of the above package managers — pick whichever your project already uses.
+
+**Module format:** ESM only (no CommonJS build). Works out of the box with any bundler (Vite, Next.js, Webpack 5+, esbuild, Parcel) or native Node.js ESM. A plain CommonJS `require('@nebula-lab/react-ui-blocks')` is **not** supported and throws `ERR_REQUIRE_ESM` — use `import` (or dynamic `import()` from a CJS file) instead.
+
+**TypeScript / JavaScript:** Ships hand-written `.d.ts` types alongside the JS output, but nothing requires TypeScript — plain JavaScript works identically (props just won't be type-checked/autocompleted without a TS-aware editor).
 
 ## What's here
 
