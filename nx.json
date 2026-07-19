@@ -60,6 +60,10 @@
       "generatorOptions": {
         "skipLockFileUpdate": true
       }
+    },
+    "changelog": {
+      "projectChangelogs": true,
+      "workspaceChangelog": false
     }
   },
   "plugins": [
