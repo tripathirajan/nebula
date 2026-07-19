@@ -157,10 +157,6 @@ Every component here accepts `className`, merged via `cn()` (`clsx` + `tailwind-
 
 `ThemeProvider`/`useTheme`'s `Theme` type is currently a fixed union — `'light' | 'dark' | 'system'` — not an arbitrary string. Approach #1 above works today for reskinning light/dark with a single brand's colors (as shown), but if you want multiple **selectable** named themes (e.g. a white-label app offering "Ocean"/"Sunset"/"Forest" schemes, not just light/dark), `ThemeProvider` doesn't have a slot for that yet — you'd currently need to bypass it and manage your own `data-theme`/`.dark` value/CSS blocks. Widening `Theme` to `string` (or a generic type param) and updating `theme-provider.tsx` accordingly would be a small, backwards-compatible change if this comes up — flagging it here rather than pretending it's already supported.
 
-## Adding the next component
-
-Most components here should be a thin `cva` + `cn` wrapper around either a `Primitive.<tag>` (for stateless components like `Button`, `Badge`, `Card`) or the matching `@nebula-lab/headless` component (for anything stateful/ARIA-heavy, e.g. the styled `Checkbox`/`Switch`/`RadioGroup` wrapping `@nebula-lab/headless`'s versions). See the [monorepo's CONTRIBUTING.md](../../CONTRIBUTING.md) for the full convention, including how to regenerate design tokens.
-
 ## API reference
 
 Every component here ships with a live Storybook entry (controls, source, interaction tests) — that's the authoritative API reference, not this README: **https://tripathirajan.github.io/nebula/**
