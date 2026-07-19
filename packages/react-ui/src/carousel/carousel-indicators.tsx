@@ -6,7 +6,19 @@ import { useCarouselContext } from './carousel-context';
 
 import type { PrimitivePropsWithRef } from '@nebula/primitives/primitive';
 
-type CarouselIndicatorsProps = PrimitivePropsWithRef<'div'>;
+interface CarouselIndicatorsOwnProps {
+  /**
+   * `true` (the default) absolutely positions the dot row over the trailing
+   * edge of the slide, matching how a full-bleed image carousel usually
+   * wants it. Set `false` to render in normal document flow instead — no
+   * position/inset classes at all, just the flex dot row — for a layout
+   * where the dots must never overlap the card (e.g. sitting in their own
+   * row underneath it, which is the caller's own layout to build).
+   */
+  overlay?: boolean;
+}
+
+type CarouselIndicatorsProps = PrimitivePropsWithRef<'div'> & CarouselIndicatorsOwnProps;
 
 /**
  * Renders `count` dot buttons directly, one per slide — no separate
@@ -17,7 +29,7 @@ type CarouselIndicatorsProps = PrimitivePropsWithRef<'div'>;
  */
 const CarouselIndicators = React.forwardRef<HTMLDivElement, CarouselIndicatorsProps>(
   (props, forwardedRef) => {
-    const { className, ...rest } = props;
+    const { className, overlay = true, ...rest } = props;
     const context = useCarouselContext('CarouselIndicators');
     const vertical = context.orientation === 'vertical';
 
@@ -28,10 +40,13 @@ const CarouselIndicators = React.forwardRef<HTMLDivElement, CarouselIndicatorsPr
         aria-label="Slides"
         aria-orientation={context.orientation}
         className={cn(
-          'absolute z-[var(--z-local)] flex gap-1.5',
-          vertical
-            ? 'right-2 top-1/2 -translate-y-1/2 flex-col'
-            : 'bottom-2 left-1/2 -translate-x-1/2',
+          'flex gap-1.5',
+          overlay
+            ? cn(
+                'absolute z-[var(--z-local)]',
+                vertical ? 'right-2 top-1/2 -translate-y-1/2 flex-col' : 'bottom-2 left-1/2 -translate-x-1/2',
+              )
+            : cn('justify-center', vertical && 'flex-col'),
           className,
         )}
         {...rest}

@@ -96,7 +96,12 @@ export const Default: Story = {
   ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    await expect(canvas.getByText(/Debit Card|Credit Card/)).toBeInTheDocument();
+    // `getByText` (unlike `getByRole`) doesn't exclude `aria-hidden`/`inert`
+    // elements, so a query matching text that repeats across cards (every
+    // card says "Debit Card" or "Credit Card") finds more than one even
+    // though only the front card is genuinely visible/interactive — query
+    // the masked card number instead, which is unique per card.
+    await expect(canvas.getByText('•••• •••• •••• 4321')).toBeInTheDocument();
 
     const front = canvas.getByText('•••• •••• •••• 4321').closest('[role="group"]')!;
     fireEvent.pointerDown(front, { pointerId: 1, clientX: 200, clientY: 0 });

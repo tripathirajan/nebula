@@ -20,6 +20,20 @@ interface CarouselOwnProps {
   loop?: boolean;
   /** @default 'horizontal' */
   orientation?: CarouselOrientation;
+  /**
+   * Auto-advances the index on this interval (ms) — `undefined` (the
+   * default) means off. Advancing pauses while the user is actively
+   * dragging, resets on *any* index change (autoswipe's own or a manual
+   * swipe/wheel/click), and is skipped entirely when the user has
+   * `prefers-reduced-motion: reduce` set, so this never fights or overrides
+   * a real interaction. Respects `loop` the same way manual navigation
+   * does: cycles forever when `loop` is set, otherwise stops advancing once
+   * it reaches the last slide rather than wrapping back to the first on its
+   * own. Deliberately opt-in and off by default — autoplay is a
+   * well-documented a11y anti-pattern unless it's pausable, per this file's
+   * own header comment; a plain swipe already counts as "pausing" it.
+   */
+  autoSwipeInterval?: number;
 }
 
 type CarouselProps = PrimitivePropsWithRef<'div'> & CarouselOwnProps;
@@ -35,10 +49,11 @@ type CarouselProps = PrimitivePropsWithRef<'div'> & CarouselOwnProps;
  * [Carousel pattern](https://www.w3.org/WAI/ARIA/apg/patterns/carousel/):
  * `role="region"` + `aria-roledescription="carousel"` on the root, each
  * `CarouselItem` is `role="group"` + `aria-roledescription="slide"` with an
- * `aria-label` announcing its position — no built-in autoplay (autoplay
- * carousels are a well-documented a11y anti-pattern unless they're pausable
- * and default-off, which is squarely a consumer-level decision, not
- * something to bake in here).
+ * `aria-label` announcing its position. Autoplay (`autoSwipeInterval`) is
+ * opt-in and off by default — autoplay carousels are a well-documented a11y
+ * anti-pattern unless they're pausable, so this only advances between real
+ * user interactions and skips entirely under `prefers-reduced-motion`; see
+ * that prop's own doc for the full contract.
  *
  * @example
  * ```tsx
@@ -61,6 +76,7 @@ const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>((props, forward
     onIndexChange,
     loop = false,
     orientation = 'horizontal',
+    autoSwipeInterval,
     'aria-label': ariaLabel,
     ...rest
   } = props;
@@ -81,8 +97,15 @@ const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>((props, forward
   );
 
   const contextValue = React.useMemo(
-    () => ({ index: index ?? defaultIndex, setIndex: clampedSetIndex, count, loop, orientation }),
-    [index, defaultIndex, clampedSetIndex, count, loop, orientation],
+    () => ({
+      index: index ?? defaultIndex,
+      setIndex: clampedSetIndex,
+      count,
+      loop,
+      orientation,
+      autoSwipeInterval,
+    }),
+    [index, defaultIndex, clampedSetIndex, count, loop, orientation, autoSwipeInterval],
   );
 
   return (

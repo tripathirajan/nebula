@@ -84,6 +84,7 @@
   --accordion-border: var(--color-base-300);
   --accordion-trigger-hover-bg: var(--color-base-200);
   --accordion-text: var(--color-base-content);
+  --backdrop-bg: var(--color-base-content);
   --dialog-overlay-bg: var(--color-base-content);
   --dialog-content-bg: var(--color-base-100);
   --dialog-content-border: var(--color-base-300);
@@ -353,6 +354,7 @@
   --radius-popover: 0.75rem;
   --radius-tooltip: 2rem;
   --radius-progress: 2rem;
+  --radius-alert: 1rem;
   --size-selector: 0.25rem;
   --size-field: 0.25rem;
   --size-button: 0.25rem;

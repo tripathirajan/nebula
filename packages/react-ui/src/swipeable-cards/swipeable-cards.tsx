@@ -34,9 +34,13 @@ interface SwipeableCardsProps<T> {
  * the same `@nebula/hooks`' `useSwipe` primitive `Carousel` uses, just with
  * a per-card fan transform instead of one shared track transform.
  *
- * Sizing is the caller's responsibility (e.g. a fixed-aspect-ratio
- * `className`) since every card renders `absolute inset-0` to stack in
- * place — see the story for a typical bank-card aspect ratio.
+ * The root always renders `h-full w-full` (not left to the caller to
+ * remember): every card is `absolute inset-0`, which — being out of normal
+ * flow — contributes nothing to this root's own auto-height, so without an
+ * explicit height here the whole stack silently collapses to zero and every
+ * card disappears. `h-full`/`w-full` just means "fill whatever the parent
+ * gives me," so sizing is still entirely up to the caller — a fixed-height
+ * div, a flex child, or (as in the story) an `aspect-[…]` wrapper.
  *
  * @example
  * ```tsx
@@ -94,7 +98,7 @@ function SwipeableCards<T>(props: SwipeableCardsProps<T>) {
       role="region"
       aria-roledescription="card stack"
       aria-label={ariaLabel ?? 'Cards'}
-      className={cn('relative', className)}
+      className={cn('relative h-full w-full', className)}
     >
       {items.map((item, itemIndex) => {
         let offset = itemIndex - current;
