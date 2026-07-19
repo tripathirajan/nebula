@@ -137,10 +137,10 @@ importers:
 
   packages/headless:
     dependencies:
-      '@nebula/hooks':
+      '@nebula-lab/hooks':
         specifier: workspace:*
         version: link:../hooks
-      '@nebula/primitives':
+      '@nebula-lab/primitives':
         specifier: workspace:*
         version: link:../primitives
     devDependencies:
@@ -265,16 +265,16 @@ importers:
 
   packages/react-ui:
     dependencies:
-      '@nebula/headless':
+      '@nebula-lab/headless':
         specifier: workspace:*
         version: link:../headless
-      '@nebula/hooks':
+      '@nebula-lab/hooks':
         specifier: workspace:*
         version: link:../hooks
-      '@nebula/primitives':
+      '@nebula-lab/primitives':
         specifier: workspace:*
         version: link:../primitives
-      '@nebula/styleless':
+      '@nebula-lab/styleless':
         specifier: workspace:*
         version: link:../styleless
       class-variance-authority:
@@ -332,13 +332,13 @@ importers:
 
   packages/react-ui-blocks:
     dependencies:
-      '@nebula/hooks':
+      '@nebula-lab/hooks':
         specifier: workspace:*
         version: link:../hooks
-      '@nebula/primitives':
+      '@nebula-lab/primitives':
         specifier: workspace:*
         version: link:../primitives
-      '@nebula/react-ui':
+      '@nebula-lab/react-ui':
         specifier: workspace:*
         version: link:../react-ui
       recharts:
@@ -393,13 +393,13 @@ importers:
 
   packages/styleless:
     dependencies:
-      '@nebula/headless':
+      '@nebula-lab/headless':
         specifier: workspace:*
         version: link:../headless
-      '@nebula/hooks':
+      '@nebula-lab/hooks':
         specifier: workspace:*
         version: link:../hooks
-      '@nebula/primitives':
+      '@nebula-lab/primitives':
         specifier: workspace:*
         version: link:../primitives
     devDependencies:

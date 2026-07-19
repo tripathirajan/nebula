@@ -1,4 +1,4 @@
-import { useControllableState } from '@nebula/hooks';
+import { useControllableState } from '@nebula-lab/hooks';
 import * as React from 'react';
 
 import { Popover } from '../popover/popover';
@@ -19,21 +19,21 @@ interface MultiSelectProps {
 
 /**
  * Root of the MultiSelect compound component — built directly in `react-ui`
- * with no `@nebula/headless` layer underneath, the same project-owner call
+ * with no `@nebula-lab/headless` layer underneath, the same project-owner call
  * `Carousel`/`DataTable`/`DataGrid` make: this composes two already-built
  * pieces (this package's own `Popover` for anchor positioning, and
- * `@nebula/headless`'s `Listbox` `type="multiple"` for the actual
+ * `@nebula-lab/headless`'s `Listbox` `type="multiple"` for the actual
  * multi-selection behavior) rather than being a new independent ARIA
  * pattern needing its own unstyled primitive — see `MultiSelectContent`'s
  * doc comment for exactly how the two compose into one DOM node.
  *
- * Unlike this package's own `Select` (single-value, built on `@nebula/headless/select`
+ * Unlike this package's own `Select` (single-value, built on `@nebula-lab/headless/select`
  * directly), there is no multi-value `headless` `Select` variant to build
  * on, so `MultiSelect` instead mints its own ambient `Popover` — the same
  * "mint one ambient instance" reuse `ColorPicker`/`MenubarMenu` make of
  * `Popover`/`Menu` — and tracks label registration itself via a plain
  * `React.createContext` (see `multi-select-context.tsx`) rather than
- * `@nebula/primitives`' scoped context, since nothing else needs to compose
+ * `@nebula-lab/primitives`' scoped context, since nothing else needs to compose
  * into this scope.
  *
  * @example

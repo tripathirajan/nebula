@@ -1,14 +1,14 @@
-import { cn } from '@nebula/primitives/cn';
-import { Primitive } from '@nebula/primitives/primitive';
+import { cn } from '@nebula-lab/primitives/cn';
+import { Primitive } from '@nebula-lab/primitives/primitive';
 import * as React from 'react';
 
-import type { PrimitivePropsWithRef } from '@nebula/primitives/primitive';
+import type { PrimitivePropsWithRef } from '@nebula-lab/primitives/primitive';
 
 type HeaderProps = PrimitivePropsWithRef<'header'>;
 
 /**
  * A page/app-level `<header>` — purely presentational structure, no
- * behavior, so (like `Card`) there's no matching `@nebula/headless`
+ * behavior, so (like `Card`) there's no matching `@nebula-lab/headless`
  * compound underneath this one; a thin `cn()` wrapper around `Primitive`
  * directly. Sits alongside `Footer`/`Navbar`/`Sidebar`/`Main` as this
  * package's page-shell building blocks — `react-ui-blocks`' `AppLayout`

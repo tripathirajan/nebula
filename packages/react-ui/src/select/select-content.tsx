@@ -1,8 +1,8 @@
-import { SelectContent as HeadlessSelectContent } from '@nebula/headless/select';
-import { cn } from '@nebula/primitives/cn';
+import { SelectContent as HeadlessSelectContent } from '@nebula-lab/headless/select';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
-import type { SelectContentProps as HeadlessSelectContentProps } from '@nebula/headless/select';
+import type { SelectContentProps as HeadlessSelectContentProps } from '@nebula-lab/headless/select';
 
 type SelectContentProps = HeadlessSelectContentProps;
 

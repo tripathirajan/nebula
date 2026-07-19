@@ -2,11 +2,11 @@ import { useEffect, useRef } from 'react';
 
 import type { RefObject } from 'react';
 
-// `@nebula/hooks` intentionally has no workspace dependencies (see
+// `@nebula-lab/hooks` intentionally has no workspace dependencies (see
 // component-library-architecture.md §2), so this duplicates the small
-// focusable-element query that also lives in `@nebula/utilities` rather than
+// focusable-element query that also lives in `@nebula-lab/utilities` rather than
 // importing it. If that layering rule ever relaxes, collapse this into a
-// shared import from `@nebula/utilities/is-focusable`.
+// shared import from `@nebula-lab/utilities/is-focusable`.
 const FOCUSABLE_SELECTOR = [
   'a[href]',
   'button:not([disabled])',
@@ -43,7 +43,7 @@ function getFocusableElements(container: HTMLElement): HTMLElement[] {
  * Traps Tab/Shift+Tab focus cycling within `ref`'s subtree while `active` is
  * true, and restores focus to whatever was focused beforehand on cleanup —
  * the keyboard-behavior half of the WAI-ARIA Dialog (Modal) pattern. Note:
- * `@nebula/primitives`' `FocusScope` component implements the equivalent
+ * `@nebula-lab/primitives`' `FocusScope` component implements the equivalent
  * behavior itself rather than depending on this hook (see that package's
  * README on why `primitives` doesn't import from `hooks`) — reach for this
  * hook when you're not already using `FocusScope`/`Primitive`-based

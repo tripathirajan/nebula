@@ -1,8 +1,8 @@
-import { MenuCheckboxItem as HeadlessMenuCheckboxItem } from '@nebula/headless/menu';
-import { cn } from '@nebula/primitives/cn';
+import { MenuCheckboxItem as HeadlessMenuCheckboxItem } from '@nebula-lab/headless/menu';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
-import type { MenuCheckboxItemProps as HeadlessMenuCheckboxItemProps } from '@nebula/headless/menu';
+import type { MenuCheckboxItemProps as HeadlessMenuCheckboxItemProps } from '@nebula-lab/headless/menu';
 
 type MenuCheckboxItemProps = HeadlessMenuCheckboxItemProps;
 

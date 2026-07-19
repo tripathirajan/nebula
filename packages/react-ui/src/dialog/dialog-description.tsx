@@ -1,8 +1,8 @@
-import { DialogDescription as HeadlessDialogDescription } from '@nebula/headless/dialog';
-import { cn } from '@nebula/primitives/cn';
+import { DialogDescription as HeadlessDialogDescription } from '@nebula-lab/headless/dialog';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
-import type { DialogDescriptionProps as HeadlessDialogDescriptionProps } from '@nebula/headless/dialog';
+import type { DialogDescriptionProps as HeadlessDialogDescriptionProps } from '@nebula-lab/headless/dialog';
 
 type DialogDescriptionProps = HeadlessDialogDescriptionProps;
 

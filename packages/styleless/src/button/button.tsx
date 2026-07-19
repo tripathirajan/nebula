@@ -1,7 +1,7 @@
-import { Button as PrimitiveButton } from '@nebula/primitives/button';
+import { Button as PrimitiveButton } from '@nebula-lab/primitives/button';
 import * as React from 'react';
 
-import type { ButtonProps as PrimitiveButtonProps } from '@nebula/primitives/button';
+import type { ButtonProps as PrimitiveButtonProps } from '@nebula-lab/primitives/button';
 
 /** Props accepted by {@link Button}. */
 interface ButtonProps extends PrimitiveButtonProps {
@@ -9,7 +9,7 @@ interface ButtonProps extends PrimitiveButtonProps {
    * Marks the button as busy: sets `aria-busy`, adds `data-loading` (for a
    * consumer's own spinner/opacity styling), and forces `disabled` so a
    * second activation can't fire mid-request. Deliberately renders no
-   * spinner icon itself — that's a visual choice for `@nebula/react-ui`'s
+   * spinner icon itself — that's a visual choice for `@nebula-lab/react-ui`'s
    * `Button` (or any other consumer) to make, not something this
    * zero-visual-opinion layer should decide.
    */
@@ -19,8 +19,8 @@ interface ButtonProps extends PrimitiveButtonProps {
 /**
  * `styleless`-tier `Button` — the reusable, complete API a moment before any
  * visual design gets applied: real `loading` semantics (`aria-busy`,
- * `data-loading`, forced `disabled`) on top of `@nebula/primitives`' bare
- * `Button`, but no Tailwind classes/variants of any kind. `@nebula/react-ui`'s
+ * `data-loading`, forced `disabled`) on top of `@nebula-lab/primitives`' bare
+ * `Button`, but no Tailwind classes/variants of any kind. `@nebula-lab/react-ui`'s
  * `Button` wraps this one and adds only `cva`-driven styling — see that
  * package's `button.tsx` for the themed version.
  *

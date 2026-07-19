@@ -1,8 +1,8 @@
-import { HoverCardContent as HeadlessHoverCardContent } from '@nebula/headless/hover-card';
-import { cn } from '@nebula/primitives/cn';
+import { HoverCardContent as HeadlessHoverCardContent } from '@nebula-lab/headless/hover-card';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
-import type { HoverCardContentProps as HeadlessHoverCardContentProps } from '@nebula/headless/hover-card';
+import type { HoverCardContentProps as HeadlessHoverCardContentProps } from '@nebula-lab/headless/hover-card';
 
 type HoverCardContentProps = HeadlessHoverCardContentProps;
 

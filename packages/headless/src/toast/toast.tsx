@@ -1,12 +1,12 @@
-import { useControllableState, useId } from '@nebula/hooks';
-import { Presence } from '@nebula/primitives/presence';
-import { Primitive } from '@nebula/primitives/primitive';
+import { useControllableState, useId } from '@nebula-lab/hooks';
+import { Presence } from '@nebula-lab/primitives/presence';
+import { Primitive } from '@nebula-lab/primitives/primitive';
 import * as React from 'react';
 
 import { ToastProvider } from './toast-context';
 
 import type { ScopedProps } from './toast-context';
-import type { PrimitivePropsWithRef } from '@nebula/primitives/primitive';
+import type { PrimitivePropsWithRef } from '@nebula-lab/primitives/primitive';
 
 interface ToastProps extends PrimitivePropsWithRef<'div'> {
   open?: boolean;

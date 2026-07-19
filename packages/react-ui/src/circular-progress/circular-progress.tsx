@@ -1,8 +1,8 @@
-import { Progress as HeadlessProgress } from '@nebula/headless/progress';
-import { cn } from '@nebula/primitives/cn';
+import { Progress as HeadlessProgress } from '@nebula-lab/headless/progress';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
-import type { ProgressProps as HeadlessProgressProps } from '@nebula/headless/progress';
+import type { ProgressProps as HeadlessProgressProps } from '@nebula-lab/headless/progress';
 
 type ProgressColor =
   | 'primary'
@@ -48,12 +48,12 @@ const STROKE_INDICATOR: Record<ProgressColor, string> = {
 };
 
 /**
- * An SVG-ring variant of `Progress` — same `@nebula/headless` `Progress`
+ * An SVG-ring variant of `Progress` — same `@nebula-lab/headless` `Progress`
  * underneath (unchanged `role="progressbar"` + `aria-valuenow`/`valuemin`/
  * `valuemax` semantics), just a different visual: a ring built from two
  * stacked `<circle>`s (a dim full track, a bright arc sized via
  * `stroke-dasharray`/`stroke-dashoffset`) instead of `Progress`'s linear
- * bar. Not built as its own `@nebula/headless` or `@nebula/styleless`
+ * bar. Not built as its own `@nebula-lab/headless` or `@nebula-lab/styleless`
  * component — same "skip straight to react-ui" call `SegmentedControl`
  * already makes for `ToggleGroup`, since there's no new behavior here, only
  * a different geometry applied to `Progress`'s existing value/percent math.

@@ -1,11 +1,11 @@
-import { useControllableState } from '@nebula/hooks';
-import { Primitive } from '@nebula/primitives/primitive';
+import { useControllableState } from '@nebula-lab/hooks';
+import { Primitive } from '@nebula-lab/primitives/primitive';
 import * as React from 'react';
 
 import { StepperProvider } from './stepper-context';
 
 import type { ScopedProps, StepperOrientation } from './stepper-context';
-import type { PrimitivePropsWithRef } from '@nebula/primitives/primitive';
+import type { PrimitivePropsWithRef } from '@nebula-lab/primitives/primitive';
 
 interface StepperProps extends PrimitivePropsWithRef<'nav'> {
   /** Controlled: the current (0-indexed) step. */

@@ -1,4 +1,4 @@
-import { useDataTableContext } from '@nebula/styleless/data-table';
+import { useDataTableContext } from '@nebula-lab/styleless/data-table';
 
 import { Checkbox } from '../checkbox/checkbox';
 

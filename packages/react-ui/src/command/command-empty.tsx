@@ -1,8 +1,8 @@
-import { CommandEmpty as HeadlessCommandEmpty } from '@nebula/headless/command';
-import { cn } from '@nebula/primitives/cn';
+import { CommandEmpty as HeadlessCommandEmpty } from '@nebula-lab/headless/command';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
-import type { CommandEmptyProps as HeadlessCommandEmptyProps } from '@nebula/headless/command';
+import type { CommandEmptyProps as HeadlessCommandEmptyProps } from '@nebula-lab/headless/command';
 
 type CommandEmptyProps = HeadlessCommandEmptyProps;
 

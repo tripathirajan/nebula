@@ -1,8 +1,8 @@
-import { PaginationEllipsis as HeadlessPaginationEllipsis } from '@nebula/headless/pagination';
-import { cn } from '@nebula/primitives/cn';
+import { PaginationEllipsis as HeadlessPaginationEllipsis } from '@nebula-lab/headless/pagination';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
-import type { PaginationEllipsisProps as HeadlessPaginationEllipsisProps } from '@nebula/headless/pagination';
+import type { PaginationEllipsisProps as HeadlessPaginationEllipsisProps } from '@nebula-lab/headless/pagination';
 
 type PaginationEllipsisProps = HeadlessPaginationEllipsisProps;
 

@@ -17,7 +17,7 @@ type IconButtonProps = Omit<ButtonProps, 'children'> & {
  * adds exactly one structural rule on top: `children` and `aria-label` are
  * both required, since an icon-only button has no accessible name unless
  * one is supplied explicitly. No sizing/shape classes here — `IconButton`'s
- * square shape is a visual decision `@nebula/react-ui`'s version makes.
+ * square shape is a visual decision `@nebula-lab/react-ui`'s version makes.
  *
  * @example
  * ```tsx

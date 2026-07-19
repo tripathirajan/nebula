@@ -1,11 +1,11 @@
-import { DrawerOverlay as HeadlessDrawerOverlay } from '@nebula/headless/drawer';
-import { cn } from '@nebula/primitives/cn';
+import { DrawerOverlay as HeadlessDrawerOverlay } from '@nebula-lab/headless/drawer';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
 import { backdropVariantClassName } from '../backdrop';
 
 import type { BackdropBlurIntensity } from '../backdrop';
-import type { DrawerOverlayProps as HeadlessDrawerOverlayProps } from '@nebula/headless/drawer';
+import type { DrawerOverlayProps as HeadlessDrawerOverlayProps } from '@nebula-lab/headless/drawer';
 
 interface DrawerOverlayOwnProps {
   /**

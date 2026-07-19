@@ -1,8 +1,8 @@
-import { Tree as HeadlessTree } from '@nebula/headless/tree';
-import { cn } from '@nebula/primitives/cn';
+import { Tree as HeadlessTree } from '@nebula-lab/headless/tree';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
-import type { TreeProps as HeadlessTreeProps } from '@nebula/headless/tree';
+import type { TreeProps as HeadlessTreeProps } from '@nebula-lab/headless/tree';
 
 type TreeProps = HeadlessTreeProps;
 
@@ -22,4 +22,4 @@ Tree.displayName = 'Tree';
 
 export { Tree };
 export type { TreeProps };
-export type { TreeSingleProps, TreeMultipleProps } from '@nebula/headless/tree';
+export type { TreeSingleProps, TreeMultipleProps } from '@nebula-lab/headless/tree';

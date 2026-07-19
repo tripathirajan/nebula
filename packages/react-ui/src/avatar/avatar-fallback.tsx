@@ -1,13 +1,13 @@
-import { cn } from '@nebula/primitives/cn';
-import { AvatarFallback as StylelessAvatarFallback } from '@nebula/styleless/avatar';
+import { cn } from '@nebula-lab/primitives/cn';
+import { AvatarFallback as StylelessAvatarFallback } from '@nebula-lab/styleless/avatar';
 import * as React from 'react';
 
-import type { AvatarFallbackProps as StylelessAvatarFallbackProps } from '@nebula/styleless/avatar';
+import type { AvatarFallbackProps as StylelessAvatarFallbackProps } from '@nebula-lab/styleless/avatar';
 
 type AvatarFallbackProps = StylelessAvatarFallbackProps;
 
 /**
- * Styled wrapper around `@nebula/styleless`'s `AvatarFallback` — the
+ * Styled wrapper around `@nebula-lab/styleless`'s `AvatarFallback` — the
  * loading-status check and `delayMs` timer come from there unchanged. This
  * layer adds only the centered-text visual treatment.
  *

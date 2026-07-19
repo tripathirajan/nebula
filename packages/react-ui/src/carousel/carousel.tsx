@@ -1,12 +1,12 @@
-import { useControllableState } from '@nebula/hooks';
-import { cn } from '@nebula/primitives/cn';
-import { Primitive } from '@nebula/primitives/primitive';
+import { useControllableState } from '@nebula-lab/hooks';
+import { cn } from '@nebula-lab/primitives/cn';
+import { Primitive } from '@nebula-lab/primitives/primitive';
 import * as React from 'react';
 
 import { CarouselContext } from './carousel-context';
 
 import type { CarouselOrientation } from './carousel-context';
-import type { PrimitivePropsWithRef } from '@nebula/primitives/primitive';
+import type { PrimitivePropsWithRef } from '@nebula-lab/primitives/primitive';
 
 interface CarouselOwnProps {
   /** Total number of slides — known upfront by the consumer (unlike `Tree`'s dynamic nesting), so it's a plain prop rather than something `CarouselItem`s register themselves into. */
@@ -39,8 +39,8 @@ interface CarouselOwnProps {
 type CarouselProps = PrimitivePropsWithRef<'div'> & CarouselOwnProps;
 
 /**
- * Root of the Carousel compound component. No `@nebula/headless` layer
- * behind this one — a `react-ui`/`@nebula/hooks` project owner decision this
+ * Root of the Carousel compound component. No `@nebula-lab/headless` layer
+ * behind this one — a `react-ui`/`@nebula-lab/hooks` project owner decision this
  * session (see `AGENTS.md`'s `react-ui` row): a carousel's complexity is
  * slide-index state plus a CSS transform, not an independent ARIA-behavior
  * layer worth decoupling from styling.

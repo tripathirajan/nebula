@@ -6,7 +6,7 @@ import { Checkbox } from './checkbox';
 import type { Meta, StoryObj } from '@storybook/react';
 
 /**
- * Headless — no styling, only behavior + ARIA. `@nebula/react-ui` will wrap
+ * Headless — no styling, only behavior + ARIA. `@nebula-lab/react-ui` will wrap
  * this in a themed checkmark/box once it exists.
  */
 const meta = {

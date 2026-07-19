@@ -1,9 +1,9 @@
-import { cn } from '@nebula/primitives/cn';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
 import { AppLayout } from '../app-layout/app-layout';
 
-import type { Theme } from '@nebula/react-ui/theme-provider';
+import type { Theme } from '@nebula-lab/react-ui/theme-provider';
 
 interface AuthLayoutProps {
   /** Typically a `LoginForm`/a sign-up form/a password-reset form — this component only provides the centered-card page frame, not any form content itself. */

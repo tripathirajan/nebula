@@ -1,8 +1,8 @@
-import { DialogClose as HeadlessDialogClose } from '@nebula/headless/dialog';
-import { cn } from '@nebula/primitives/cn';
+import { DialogClose as HeadlessDialogClose } from '@nebula-lab/headless/dialog';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
-import type { DialogCloseProps as HeadlessDialogCloseProps } from '@nebula/headless/dialog';
+import type { DialogCloseProps as HeadlessDialogCloseProps } from '@nebula-lab/headless/dialog';
 
 type DialogCloseProps = HeadlessDialogCloseProps;
 

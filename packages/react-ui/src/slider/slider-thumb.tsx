@@ -1,8 +1,8 @@
-import { SliderThumb as HeadlessSliderThumb } from '@nebula/headless/slider';
-import { cn } from '@nebula/primitives/cn';
+import { SliderThumb as HeadlessSliderThumb } from '@nebula-lab/headless/slider';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
-import type { SliderThumbProps as HeadlessSliderThumbProps } from '@nebula/headless/slider';
+import type { SliderThumbProps as HeadlessSliderThumbProps } from '@nebula-lab/headless/slider';
 
 type SliderThumbProps = HeadlessSliderThumbProps;
 

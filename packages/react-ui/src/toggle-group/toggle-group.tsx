@@ -1,8 +1,8 @@
-import { ToggleGroup as HeadlessToggleGroup } from '@nebula/headless/toggle-group';
-import { cn } from '@nebula/primitives/cn';
+import { ToggleGroup as HeadlessToggleGroup } from '@nebula-lab/headless/toggle-group';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
-import type { ToggleGroupProps as HeadlessToggleGroupProps } from '@nebula/headless/toggle-group';
+import type { ToggleGroupProps as HeadlessToggleGroupProps } from '@nebula-lab/headless/toggle-group';
 
 type ToggleGroupProps = HeadlessToggleGroupProps;
 

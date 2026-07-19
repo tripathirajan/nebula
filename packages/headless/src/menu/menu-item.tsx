@@ -1,14 +1,14 @@
 
-import { composeEventHandlers } from '@nebula/primitives/compose-event-handlers';
-import { Primitive } from '@nebula/primitives/primitive';
-import { FocusItem } from '@nebula/primitives/roving-focus-group';
+import { composeEventHandlers } from '@nebula-lab/primitives/compose-event-handlers';
+import { Primitive } from '@nebula-lab/primitives/primitive';
+import { FocusItem } from '@nebula-lab/primitives/roving-focus-group';
 import * as React from 'react';
 
 
 import { useMenuContext } from './menu-context';
 
 import type { ScopedProps } from './menu-context';
-import type { PrimitivePropsWithRef } from '@nebula/primitives/primitive';
+import type { PrimitivePropsWithRef } from '@nebula-lab/primitives/primitive';
 
 const MENU_ITEM_NAME = 'MenuItem';
 
@@ -29,7 +29,7 @@ interface MenuItemProps extends Omit<PrimitivePropsWithRef<'div'>, 'onSelect'> {
 }
 
 /**
- * `role="menuitem"`. Wrapped in `@nebula/primitives`' `FocusItem` for the
+ * `role="menuitem"`. Wrapped in `@nebula-lab/primitives`' `FocusItem` for the
  * roving-tabindex + arrow-key/Home/End behavior `MenuContent`'s
  * `RovingFocusGroup` provides — selecting via click, Enter, and Space all
  * call the same `select()`. Moving the pointer over an item also focuses

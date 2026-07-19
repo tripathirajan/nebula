@@ -1,4 +1,4 @@
-# Implementation Task: Build `@nebula/react-ui-blocks`
+# Implementation Task: Build `@nebula-lab/react-ui-blocks`
 
 You are acting as a senior UI library developer with experience building large-scale design systems such as Tailwind UI, shadcn/ui, Mantine, Chakra UI, MUI, Ant Design, Ark UI, and React Aria.
 
@@ -7,16 +7,16 @@ You are acting as a senior UI library developer with experience building large-s
 The Nebula UI ecosystem is built on this package architecture:
 
 ```text
-@nebula/primitives
+@nebula-lab/primitives
     ↓
-@nebula/styleless & @nebula/headless
+@nebula-lab/styleless & @nebula-lab/headless
     ↓
-@nebula/react-ui
+@nebula-lab/react-ui
     ↓
-@nebula/react-ui-blocks
+@nebula-lab/react-ui-blocks
 ```
 
-`@nebula/react-ui-blocks` is the package that composes `@nebula/react-ui` components into ready-to-use page sections, pages, and interface patterns.
+`@nebula-lab/react-ui-blocks` is the package that composes `@nebula-lab/react-ui` components into ready-to-use page sections, pages, and interface patterns.
 
 This task is implementation-first: add real UI block components, Storybook stories, and tests.
 
@@ -27,22 +27,22 @@ This task is implementation-first: add real UI block components, Storybook stori
 Implement a scalable block library inside `packages/react-ui-blocks` that includes:
 
 - A clear folder structure for block categories
-- Reusable block components built from `@nebula/react-ui`
+- Reusable block components built from `@nebula-lab/react-ui`
 - Responsive Tailwind-based layouts
 - Attractive, production-ready visuals
 - Storybook stories for each block
 - Tests covering rendering and basic accessibility
 
-Use existing `@nebula/react-ui` components whenever possible.
+Use existing `@nebula-lab/react-ui` components whenever possible.
 
 If a needed component is missing, add it in the appropriate package layer first:
 
-- `@nebula/primitives` for low-level DOM abstractions
-- `@nebula/headless` for behavior/ARIA patterns
-- `@nebula/styleless` for unstyled reusable UI shells
-- `@nebula/react-ui` for styled components
+- `@nebula-lab/primitives` for low-level DOM abstractions
+- `@nebula-lab/headless` for behavior/ARIA patterns
+- `@nebula-lab/styleless` for unstyled reusable UI shells
+- `@nebula-lab/react-ui` for styled components
 
-Then use that component inside `@nebula/react-ui-blocks`.
+Then use that component inside `@nebula-lab/react-ui-blocks`.
 
 ---
 
@@ -103,9 +103,9 @@ Start by delivering at least one complete block in each category:
 - Navigation: `AppHeader`
 - Layouts: `PageSection`
 
-Each block should use `@nebula/react-ui` components such as `Button`, `Card`, `Heading`, `Text`, `Badge`, `Input`, etc.
+Each block should use `@nebula-lab/react-ui` components such as `Button`, `Card`, `Heading`, `Text`, `Badge`, `Input`, etc.
 
-If a styled wrapper or UI component is missing in `@nebula/react-ui`, add it there before using it.
+If a styled wrapper or UI component is missing in `@nebula-lab/react-ui`, add it there before using it.
 
 ---
 
@@ -142,7 +142,7 @@ If Storybook or testing support is not already configured in `packages/react-ui-
 - Use **Markdown only** for this prompt file.
 - Focus on implementation code, not architecture research.
 - Add real components, stories, and tests.
-- Reuse `@nebula/react-ui` components.
+- Reuse `@nebula-lab/react-ui` components.
 - Add missing UI components in the correct package layer when needed.
 - Build attractive, responsive block designs.
 
@@ -154,7 +154,7 @@ If Storybook or testing support is not already configured in `packages/react-ui-
 - [ ] Implement at least one block in each target category
 - [ ] Add Storybook stories for each block
 - [ ] Add tests for each block
-- [ ] Add any missing UI components in `@nebula/react-ui` or lower layers
+- [ ] Add any missing UI components in `@nebula-lab/react-ui` or lower layers
 - [ ] Ensure all new code is TypeScript and uses existing Nebula conventions
 - [ ] Keep the package layer dependency direction correct
 
@@ -268,7 +268,7 @@ Identify:
 
 # Deliverable 12 — Differentiators
 
-Recommend features that would make `@nebula/react-ui-blocks` unique.
+Recommend features that would make `@nebula-lab/react-ui-blocks` unique.
 
 Examples:
 

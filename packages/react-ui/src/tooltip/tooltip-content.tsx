@@ -1,8 +1,8 @@
-import { TooltipContent as HeadlessTooltipContent } from '@nebula/headless/tooltip';
-import { cn } from '@nebula/primitives/cn';
+import { TooltipContent as HeadlessTooltipContent } from '@nebula-lab/headless/tooltip';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
-import type { TooltipContentProps as HeadlessTooltipContentProps } from '@nebula/headless/tooltip';
+import type { TooltipContentProps as HeadlessTooltipContentProps } from '@nebula-lab/headless/tooltip';
 
 type TooltipContentProps = HeadlessTooltipContentProps;
 
@@ -14,7 +14,7 @@ type TooltipContentProps = HeadlessTooltipContentProps;
  * tooltip visually pops off the page instead of blending in as "more page
  * surface." Radius from `--radius-tooltip`. All positioning (`side`/
  * `align`/`sideOffset`/collision handling) and the hover/focus open-delay
- * behavior are inherited unchanged from `@nebula/headless`.
+ * behavior are inherited unchanged from `@nebula-lab/headless`.
  *
  * @example
  * ```tsx

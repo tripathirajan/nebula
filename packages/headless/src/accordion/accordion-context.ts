@@ -1,7 +1,7 @@
-import { createContextScope } from '@nebula/primitives/create-context-scope';
+import { createContextScope } from '@nebula-lab/primitives/create-context-scope';
 
-import type { Scope } from '@nebula/primitives/create-context-scope';
-import type { RovingFocusGroupOrientation } from '@nebula/primitives/roving-focus-group';
+import type { Scope } from '@nebula-lab/primitives/create-context-scope';
+import type { RovingFocusGroupOrientation } from '@nebula-lab/primitives/roving-focus-group';
 
 interface AccordionContextValue {
   /** True if `value` (an item's identifying value) is currently expanded — abstracts over the `single`/`multiple` value-shape difference so `AccordionItem`/`AccordionTrigger` never need to know which `type` the root is. */

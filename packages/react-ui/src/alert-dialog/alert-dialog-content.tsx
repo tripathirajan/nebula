@@ -1,8 +1,8 @@
-import { AlertDialogContent as HeadlessAlertDialogContent } from '@nebula/headless/alert-dialog';
-import { cn } from '@nebula/primitives/cn';
+import { AlertDialogContent as HeadlessAlertDialogContent } from '@nebula-lab/headless/alert-dialog';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
-import type { AlertDialogContentProps as HeadlessAlertDialogContentProps } from '@nebula/headless/alert-dialog';
+import type { AlertDialogContentProps as HeadlessAlertDialogContentProps } from '@nebula-lab/headless/alert-dialog';
 
 type AlertDialogContentProps = HeadlessAlertDialogContentProps;
 

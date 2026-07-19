@@ -1,4 +1,4 @@
-import { useVirtualizer } from '@nebula/hooks';
+import { useVirtualizer } from '@nebula-lab/hooks';
 import * as React from 'react';
 
 interface DataGridColumn<T> {
@@ -81,7 +81,7 @@ function DataGridRow<T>(props: DataGridRowProps<T>) {
 
 /**
  * `styleless`-tier `DataGrid` — the real behavior extracted from
- * `@nebula/react-ui`'s `DataGrid`: composes `@nebula/hooks`' `useVirtualizer`
+ * `@nebula-lab/react-ui`'s `DataGrid`: composes `@nebula-lab/hooks`' `useVirtualizer`
  * directly (not `DataTable`, whose real un-virtualized `<table>` row model
  * actively resists the absolute positioning virtualized rows need — see
  * that component's own doc comment) and renders the WAI-ARIA Grid pattern

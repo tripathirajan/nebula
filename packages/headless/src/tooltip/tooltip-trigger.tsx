@@ -1,14 +1,14 @@
 
-import { composeEventHandlers } from '@nebula/primitives/compose-event-handlers';
-import { PopperAnchor } from '@nebula/primitives/popper';
-import { Primitive } from '@nebula/primitives/primitive';
+import { composeEventHandlers } from '@nebula-lab/primitives/compose-event-handlers';
+import { PopperAnchor } from '@nebula-lab/primitives/popper';
+import { Primitive } from '@nebula-lab/primitives/primitive';
 import * as React from 'react';
 
 
 import { useTooltipContext, usePopperScope } from './tooltip-context';
 
 import type { ScopedProps } from './tooltip-context';
-import type { PrimitivePropsWithRef } from '@nebula/primitives/primitive';
+import type { PrimitivePropsWithRef } from '@nebula-lab/primitives/primitive';
 
 const TOOLTIP_TRIGGER_NAME = 'TooltipTrigger';
 

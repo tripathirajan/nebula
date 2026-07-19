@@ -1,10 +1,10 @@
-import { Primitive } from '@nebula/primitives/primitive';
+import { Primitive } from '@nebula-lab/primitives/primitive';
 import * as React from 'react';
 
 import { AvatarProvider } from './avatar-context';
 
 import type { ImageLoadingStatus } from './avatar-context';
-import type { PrimitivePropsWithRef } from '@nebula/primitives/primitive';
+import type { PrimitivePropsWithRef } from '@nebula-lab/primitives/primitive';
 
 type AvatarProps = PrimitivePropsWithRef<'span'>;
 
@@ -14,7 +14,7 @@ type AvatarProps = PrimitivePropsWithRef<'span'>;
  * components (`Avatar`/`AvatarImage`/`AvatarFallback`) rather than one
  * `src`+`fallback`-prop component so the fallback can be arbitrary markup
  * (initials, an icon, a skeleton) instead of a single `ReactNode` prop.
- * Unstyled — `@nebula/react-ui`'s `Avatar` applies the circular frame/size.
+ * Unstyled — `@nebula-lab/react-ui`'s `Avatar` applies the circular frame/size.
  *
  * @example
  * ```tsx

@@ -1,8 +1,8 @@
-import { ColorPickerTrigger as HeadlessColorPickerTrigger } from '@nebula/headless/color-picker';
-import { cn } from '@nebula/primitives/cn';
+import { ColorPickerTrigger as HeadlessColorPickerTrigger } from '@nebula-lab/headless/color-picker';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
-import type { ColorPickerTriggerProps as HeadlessColorPickerTriggerProps } from '@nebula/headless/color-picker';
+import type { ColorPickerTriggerProps as HeadlessColorPickerTriggerProps } from '@nebula-lab/headless/color-picker';
 
 type ColorPickerTriggerProps = HeadlessColorPickerTriggerProps;
 

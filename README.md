@@ -1,6 +1,6 @@
 # nebula
 
-A composable React UI platform: design tokens → headless (behavior-only, ARIA-complete) components → styleless (unstyled but structurally complete) components → hooks → a Tailwind-powered styled design system. Ships as independently-versioned `@nebula/*` packages in a pnpm + Nx monorepo.
+A composable React UI platform: design tokens → headless (behavior-only, ARIA-complete) components → styleless (unstyled but structurally complete) components → hooks → a Tailwind-powered styled design system. Ships as independently-versioned `@nebula-lab/*` packages in a pnpm + Nx monorepo.
 
 ## Layers
 
@@ -12,13 +12,13 @@ utilities → hooks → primitives → headless → styleless → react-ui → r
 
 | Package | What it is |
 | --- | --- |
-| [`@nebula/utilities`](./packages/utilities) | Framework-agnostic helpers (`clamp`, `debounce`, `throttle`, `deepMerge`, DOM predicates). No dependencies on anything else in this repo. |
-| [`@nebula/hooks`](./packages/hooks) | Reusable React hooks (`useControllableState`, `useFocusTrap`, `useLocalStorage`, observers, ...). No dependency on `utilities` or any other workspace package, by design. |
-| [`@nebula/primitives`](./packages/primitives) | Unstyled, polymorphic low-level building blocks — `Primitive`/`Slot` (the `as`/`asChild` pattern everything else is built on), layout (`Box`/`Flex`/`Grid`/`Stack`/...), text, accessibility (`FocusScope`/`DismissibleLayer`/`RovingFocusGroup`/...), form, and visibility (`Portal`/`Presence`/`Overlay`) primitives. Zero in-workspace dependencies. |
-| [`@nebula/headless`](./packages/headless) | Behavior-only, ARIA-complete compound components (`Tabs`, `Dialog`, `Combobox`, `Checkbox`, `Switch`, `RadioGroup`, ...) — solves interaction/state/a11y/keyboard/focus/positioning, no styling opinions at all. (Renamed from this repo's earlier, differently-scoped `@nebula/styleless`.) |
-| [`@nebula/styleless`](./packages/styleless) | **Just started.** The new middle layer: reusable UI components (`Button`, `Input`, `Card`, `Table`, ...) that compose `primitives`/`headless` with a complete, semantic API but zero visual opinion. `Button` is the first extraction; see `LAYER_TAXONOMY.md` for the full remaining plan. |
-| [`@nebula/react-ui`](./packages/react-ui) | Tailwind-styled components (atoms) built on `primitives` + `headless` (and, once extracted, `styleless`), plus the 3-layer design token system and `ThemeProvider`/`useTheme` (light/dark/system) — this package absorbed the former standalone `@nebula/theme` package, since nothing else in the workspace needed tokens/theming. |
-| [`@nebula/react-ui-blocks`](./packages/react-ui-blocks) | Domain-neutral, ready-to-use screens/modules built from `react-ui` — page shells, theme switchers, forms, dashboards, auth flows (`ThemeSwitcher`, `AppLayout`, `LoginForm`, `DashboardLayout`, ...). Top of the dependency graph. |
+| [`@nebula-lab/utilities`](./packages/utilities) | Framework-agnostic helpers (`clamp`, `debounce`, `throttle`, `deepMerge`, DOM predicates). No dependencies on anything else in this repo. |
+| [`@nebula-lab/hooks`](./packages/hooks) | Reusable React hooks (`useControllableState`, `useFocusTrap`, `useLocalStorage`, observers, ...). No dependency on `utilities` or any other workspace package, by design. |
+| [`@nebula-lab/primitives`](./packages/primitives) | Unstyled, polymorphic low-level building blocks — `Primitive`/`Slot` (the `as`/`asChild` pattern everything else is built on), layout (`Box`/`Flex`/`Grid`/`Stack`/...), text, accessibility (`FocusScope`/`DismissibleLayer`/`RovingFocusGroup`/...), form, and visibility (`Portal`/`Presence`/`Overlay`) primitives. Zero in-workspace dependencies. |
+| [`@nebula-lab/headless`](./packages/headless) | Behavior-only, ARIA-complete compound components (`Tabs`, `Dialog`, `Combobox`, `Checkbox`, `Switch`, `RadioGroup`, ...) — solves interaction/state/a11y/keyboard/focus/positioning, no styling opinions at all. (Renamed from this repo's earlier, differently-scoped `@nebula-lab/styleless`.) |
+| [`@nebula-lab/styleless`](./packages/styleless) | **Just started.** The new middle layer: reusable UI components (`Button`, `Input`, `Card`, `Table`, ...) that compose `primitives`/`headless` with a complete, semantic API but zero visual opinion. `Button` is the first extraction; see `LAYER_TAXONOMY.md` for the full remaining plan. |
+| [`@nebula-lab/react-ui`](./packages/react-ui) | Tailwind-styled components (atoms) built on `primitives` + `headless` (and, once extracted, `styleless`), plus the 3-layer design token system and `ThemeProvider`/`useTheme` (light/dark/system) — this package absorbed the former standalone `@nebula-lab/theme` package, since nothing else in the workspace needed tokens/theming. |
+| [`@nebula-lab/react-ui-blocks`](./packages/react-ui-blocks) | Domain-neutral, ready-to-use screens/modules built from `react-ui` — page shells, theme switchers, forms, dashboards, auth flows (`ThemeSwitcher`, `AppLayout`, `LoginForm`, `DashboardLayout`, ...). Top of the dependency graph. |
 
 Every package has its own README with more detail. See `AGENTS.md` for the full non-negotiable architecture rules (layering, file-per-component convention, style guide) and its status table for exactly what's built vs. still pending — that table is the source of truth, not this file.
 
@@ -35,7 +35,7 @@ pnpm lint / pnpm lint:fix
 pnpm format / pnpm format:check
 ```
 
-Scope any script to a single package with `pnpm --filter @nebula/<package> <script>`.
+Scope any script to a single package with `pnpm --filter @nebula-lab/<package> <script>`.
 
 ## Custom theming
 

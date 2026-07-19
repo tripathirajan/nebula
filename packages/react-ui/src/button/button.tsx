@@ -1,10 +1,10 @@
 
-import { cn } from '@nebula/primitives/cn';
-import { Button as StylelessButton } from '@nebula/styleless/button';
+import { cn } from '@nebula-lab/primitives/cn';
+import { Button as StylelessButton } from '@nebula-lab/styleless/button';
 import { cva } from 'class-variance-authority';
 import * as React from 'react';
 
-import type { ButtonProps as StylelessButtonProps } from '@nebula/styleless/button';
+import type { ButtonProps as StylelessButtonProps } from '@nebula-lab/styleless/button';
 import type { VariantProps } from 'class-variance-authority';
 
 /**
@@ -264,10 +264,10 @@ type ButtonProps = StylelessButtonProps & VariantProps<typeof buttonVariants>;
 
 /**
  * Styled `Button` — the `react-ui` layer's job is purely visual, so this
- * wraps `@nebula/styleless`'s `Button` (which already gives `asChild`
+ * wraps `@nebula-lab/styleless`'s `Button` (which already gives `asChild`
  * support, the `type="button"` default, and real `loading` semantics —
  * `aria-busy`/`data-loading`/forced-`disabled`) rather than reaching for
- * `@nebula/primitives` directly, per the layering in
+ * `@nebula-lab/primitives` directly, per the layering in
  * `component-library-architecture.md` §2: `react-ui` builds on `styleless`,
  * not around it. This file's own job is exactly one thing: turning
  * `variant`/`color`/`size` into Tailwind classes via `buttonVariants`.

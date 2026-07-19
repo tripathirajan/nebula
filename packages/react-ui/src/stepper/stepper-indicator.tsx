@@ -1,8 +1,8 @@
-import { StepperIndicator as HeadlessStepperIndicator } from '@nebula/headless/stepper';
-import { cn } from '@nebula/primitives/cn';
+import { StepperIndicator as HeadlessStepperIndicator } from '@nebula-lab/headless/stepper';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
-import type { StepperIndicatorProps as HeadlessStepperIndicatorProps } from '@nebula/headless/stepper';
+import type { StepperIndicatorProps as HeadlessStepperIndicatorProps } from '@nebula-lab/headless/stepper';
 
 type StepperIndicatorProps = HeadlessStepperIndicatorProps;
 

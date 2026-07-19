@@ -1,8 +1,8 @@
-import { FileUploadRemoveTrigger as HeadlessFileUploadRemoveTrigger } from '@nebula/headless/file-upload';
-import { cn } from '@nebula/primitives/cn';
+import { FileUploadRemoveTrigger as HeadlessFileUploadRemoveTrigger } from '@nebula-lab/headless/file-upload';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
-import type { FileUploadRemoveTriggerProps as HeadlessFileUploadRemoveTriggerProps } from '@nebula/headless/file-upload';
+import type { FileUploadRemoveTriggerProps as HeadlessFileUploadRemoveTriggerProps } from '@nebula-lab/headless/file-upload';
 
 type FileUploadRemoveTriggerProps = HeadlessFileUploadRemoveTriggerProps;
 

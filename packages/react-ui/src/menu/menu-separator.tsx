@@ -1,8 +1,8 @@
-import { MenuSeparator as HeadlessMenuSeparator } from '@nebula/headless/menu';
-import { cn } from '@nebula/primitives/cn';
+import { MenuSeparator as HeadlessMenuSeparator } from '@nebula-lab/headless/menu';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
-import type { MenuSeparatorProps as HeadlessMenuSeparatorProps } from '@nebula/headless/menu';
+import type { MenuSeparatorProps as HeadlessMenuSeparatorProps } from '@nebula-lab/headless/menu';
 
 type MenuSeparatorProps = HeadlessMenuSeparatorProps;
 

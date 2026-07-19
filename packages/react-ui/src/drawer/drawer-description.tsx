@@ -1,8 +1,8 @@
-import { DrawerDescription as HeadlessDrawerDescription } from '@nebula/headless/drawer';
-import { cn } from '@nebula/primitives/cn';
+import { DrawerDescription as HeadlessDrawerDescription } from '@nebula-lab/headless/drawer';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
-import type { DrawerDescriptionProps as HeadlessDrawerDescriptionProps } from '@nebula/headless/drawer';
+import type { DrawerDescriptionProps as HeadlessDrawerDescriptionProps } from '@nebula-lab/headless/drawer';
 
 type DrawerDescriptionProps = HeadlessDrawerDescriptionProps;
 

@@ -1,5 +1,5 @@
-import { composeEventHandlers } from '@nebula/primitives/compose-event-handlers';
-import { Primitive } from '@nebula/primitives/primitive';
+import { composeEventHandlers } from '@nebula-lab/primitives/compose-event-handlers';
+import { Primitive } from '@nebula-lab/primitives/primitive';
 import * as React from 'react';
 
 import { useStepperContext } from './stepper-context';
@@ -7,7 +7,7 @@ import { useStepperItemContext } from './stepper-item-context';
 
 import type { ScopedProps } from './stepper-context';
 import type { ItemScopedProps } from './stepper-item-context';
-import type { PrimitivePropsWithRef } from '@nebula/primitives/primitive';
+import type { PrimitivePropsWithRef } from '@nebula-lab/primitives/primitive';
 
 const STEPPER_TRIGGER_NAME = 'StepperTrigger';
 

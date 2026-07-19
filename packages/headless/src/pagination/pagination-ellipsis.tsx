@@ -1,8 +1,8 @@
-import { Primitive } from '@nebula/primitives/primitive';
-import { VisuallyHidden } from '@nebula/primitives/visually-hidden';
+import { Primitive } from '@nebula-lab/primitives/primitive';
+import { VisuallyHidden } from '@nebula-lab/primitives/visually-hidden';
 import * as React from 'react';
 
-import type { PrimitivePropsWithRef } from '@nebula/primitives/primitive';
+import type { PrimitivePropsWithRef } from '@nebula-lab/primitives/primitive';
 
 type PaginationEllipsisProps = PrimitivePropsWithRef<'span'>;
 

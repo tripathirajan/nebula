@@ -1,13 +1,13 @@
-import { cn } from '@nebula/primitives/cn';
-import { AvatarImage as StylelessAvatarImage } from '@nebula/styleless/avatar';
+import { cn } from '@nebula-lab/primitives/cn';
+import { AvatarImage as StylelessAvatarImage } from '@nebula-lab/styleless/avatar';
 import * as React from 'react';
 
-import type { AvatarImageProps as StylelessAvatarImageProps } from '@nebula/styleless/avatar';
+import type { AvatarImageProps as StylelessAvatarImageProps } from '@nebula-lab/styleless/avatar';
 
 type AvatarImageProps = StylelessAvatarImageProps;
 
 /**
- * Styled wrapper around `@nebula/styleless`'s `AvatarImage` — the
+ * Styled wrapper around `@nebula-lab/styleless`'s `AvatarImage` — the
  * load/error reporting to `Avatar`'s context, and hiding the `img` entirely
  * on error, come from there unchanged. This layer adds only the fill/crop
  * treatment.

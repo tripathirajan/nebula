@@ -1,8 +1,8 @@
-import { cn } from '@nebula/primitives/cn';
-import { Overlay } from '@nebula/primitives/overlay';
+import { cn } from '@nebula-lab/primitives/cn';
+import { Overlay } from '@nebula-lab/primitives/overlay';
 import * as React from 'react';
 
-import type { OverlayProps } from '@nebula/primitives/overlay';
+import type { OverlayProps } from '@nebula-lab/primitives/overlay';
 
 /** `variant="blur"`'s three intensity levels — blur radius + saturation boost + tint opacity move together, not independently, since a lighter blur needs less saturation compensation and reads better with a bit more tint (less material behind it means less color to filter through). */
 type BackdropBlurIntensity = 'subtle' | 'regular' | 'strong';
@@ -76,7 +76,7 @@ function backdropVariantClassName(
 }
 
 /**
- * The styled counterpart of `@nebula/primitives`' bare `Overlay` (`fixed
+ * The styled counterpart of `@nebula-lab/primitives`' bare `Overlay` (`fixed
  * inset-0`, zero color/blur of its own by design) — a standalone,
  * theme-aware backdrop usable anywhere a full-viewport scrim is needed, not
  * just behind `Dialog`/`Drawer`/`AlertPopup`. Those three call this file's

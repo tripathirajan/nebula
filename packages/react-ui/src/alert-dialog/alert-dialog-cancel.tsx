@@ -1,8 +1,8 @@
-import { AlertDialogCancel as HeadlessAlertDialogCancel } from '@nebula/headless/alert-dialog';
-import { cn } from '@nebula/primitives/cn';
+import { AlertDialogCancel as HeadlessAlertDialogCancel } from '@nebula-lab/headless/alert-dialog';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
-import type { AlertDialogCancelProps as HeadlessAlertDialogCancelProps } from '@nebula/headless/alert-dialog';
+import type { AlertDialogCancelProps as HeadlessAlertDialogCancelProps } from '@nebula-lab/headless/alert-dialog';
 
 type AlertDialogCancelProps = HeadlessAlertDialogCancelProps;
 

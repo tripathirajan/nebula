@@ -1,5 +1,5 @@
-import { Field, FieldControl, FieldLabel } from '@nebula/react-ui/field';
-import { Input } from '@nebula/react-ui/input';
+import { Field, FieldControl, FieldLabel } from '@nebula-lab/react-ui/field';
+import { Input } from '@nebula-lab/react-ui/input';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 import { axe } from 'vitest-axe';

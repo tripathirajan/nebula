@@ -1,13 +1,13 @@
-import { TabList as HeadlessTabList } from '@nebula/headless/tabs';
-import { cn } from '@nebula/primitives/cn';
+import { TabList as HeadlessTabList } from '@nebula-lab/headless/tabs';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
-import type { TabListProps as HeadlessTabListProps } from '@nebula/headless/tabs';
+import type { TabListProps as HeadlessTabListProps } from '@nebula-lab/headless/tabs';
 
 type TabListProps = HeadlessTabListProps;
 
 /**
- * Styled wrapper around `@nebula/headless`'s `TabList` — arrow-key roving
+ * Styled wrapper around `@nebula-lab/headless`'s `TabList` — arrow-key roving
  * navigation (`role="tablist"`) comes from there unchanged. This layer adds
  * the bottom rule every `Tab` sits on top of (`--tabs-list-border`, see
  * `../tokens/component.ts`); each `Tab`'s active-state border overlaps it

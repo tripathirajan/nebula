@@ -1,11 +1,11 @@
-import { cn } from '@nebula/primitives/cn';
-import { IconButton as StylelessIconButton } from '@nebula/styleless/icon-button';
+import { cn } from '@nebula-lab/primitives/cn';
+import { IconButton as StylelessIconButton } from '@nebula-lab/styleless/icon-button';
 import { cva } from 'class-variance-authority';
 import * as React from 'react';
 
 import { buttonVariants } from '../button/button';
 
-import type { IconButtonProps as StylelessIconButtonProps } from '@nebula/styleless/icon-button';
+import type { IconButtonProps as StylelessIconButtonProps } from '@nebula-lab/styleless/icon-button';
 import type { VariantProps } from 'class-variance-authority';
 
 const iconButtonSizeVariants = cva('', {
@@ -24,7 +24,7 @@ const iconButtonSizeVariants = cva('', {
 type IconButtonProps = StylelessIconButtonProps & VariantProps<typeof buttonVariants>;
 
 /**
- * A square, icon-only `Button` — wraps `@nebula/styleless`'s `IconButton`
+ * A square, icon-only `Button` — wraps `@nebula-lab/styleless`'s `IconButton`
  * (which already enforces the required-`aria-label` contract and carries
  * `Button`'s `loading` semantics), then reuses this package's own
  * `buttonVariants` recipe for color/border/focus-ring so it always matches

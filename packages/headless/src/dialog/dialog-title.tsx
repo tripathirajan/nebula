@@ -1,12 +1,12 @@
 
-import { Primitive } from '@nebula/primitives/primitive';
+import { Primitive } from '@nebula-lab/primitives/primitive';
 import * as React from 'react';
 
 
 import { useDialogContext } from './dialog-context';
 
 import type { ScopedProps } from './dialog-context';
-import type { PrimitivePropsWithRef } from '@nebula/primitives/primitive';
+import type { PrimitivePropsWithRef } from '@nebula-lab/primitives/primitive';
 
 const DIALOG_TITLE_NAME = 'DialogTitle';
 
@@ -16,7 +16,7 @@ type DialogTitleProps = PrimitivePropsWithRef<'h2'>;
  * The dialog's accessible name — its `id` is what `DialogContent`'s
  * `aria-labelledby` points to. Required content per the WAI-ARIA Dialog
  * pattern (every dialog needs an accessible name); render one even if
- * visually hiding it (via `@nebula/primitives`' `VisuallyHidden`) rather than
+ * visually hiding it (via `@nebula-lab/primitives`' `VisuallyHidden`) rather than
  * omitting it.
  *
  * @example

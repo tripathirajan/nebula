@@ -3,9 +3,9 @@
 **Headless-primitive, Tailwind v4-styled, WAI-ARIA-compliant React component system**
 _Prepared for: Budget Tracker (React + Firebase) — reusable as a standalone OSS package_
 
-> **Reference alignment:** This revision is aligned to the existing reference repo [`tripathirajan/nebula`](https://github.com/tripathirajan/nebula), which already implements Layers 0–2 below (`utilities`, `hooks`, `primitives`, `headless`, `theme`, `ui`). We are **extending** it with the two missing layers — `sections` and `layouts` — plus the additional primitives/headless components the budget tracker needs (DataTable, Combobox, DatePicker, Chart adapter). Package names below use the repo's real `@nebula/*` scope and its 3-layer token system rather than the earlier placeholder naming.
+> **Reference alignment:** This revision is aligned to the existing reference repo [`tripathirajan/nebula`](https://github.com/tripathirajan/nebula), which already implements Layers 0–2 below (`utilities`, `hooks`, `primitives`, `headless`, `theme`, `ui`). We are **extending** it with the two missing layers — `sections` and `layouts` — plus the additional primitives/headless components the budget tracker needs (DataTable, Combobox, DatePicker, Chart adapter). Package names below use the repo's real `@nebula-lab/*` scope and its 3-layer token system rather than the earlier placeholder naming.
 
-> **Naming update (post-implementation):** `@nebula/ui` was renamed to **`@nebula/react-ui`**, and `sections` + `layouts` were merged into a single **`@nebula/react-ui-blocks`** package — both had the identical dependency shape (built purely on `react-ui` + `theme`, nothing above them) so keeping them split was a package boundary without a real architectural distinction. `react-ui-blocks` is deliberately domain-neutral, not ecommerce- or budget-tracker-specific — this doc's `sections`/`layouts` inventory (§5/§6) still describes real, wanted components, just landing in one merged package now. `@nebula/theme` was subsequently **absorbed into `@nebula/react-ui`** — nothing else in the workspace (`primitives`/`headless` are deliberately unstyled) ever consumed tokens/theming, so the split was a package boundary with exactly one real consumer; `react-ui` now owns `Button` + the 3-layer token system + `ThemeProvider`/`useTheme` together. `@nebula/headless` was then renamed to **`@nebula/styleless`**, and — per a subsequent architecture pass — renamed back to **`@nebula/headless`**, this time for real: the project owner confirmed a 5-tier model (`primitives → headless → styleless → react-ui → react-ui-blocks`) where `headless` (behavior/ARIA, zero styling) and `styleless` (unstyled but structurally complete `Button`/`Input`/`Card`/etc.) are two genuinely distinct layers, not one renamed package. `styleless` in that final sense is a **new, not-yet-built** package — see `LAYER_TAXONOMY.md` for the full extraction plan and `AGENTS.md`'s "Layer placement" section for the current 5-way test. Everywhere below that says `ui`, `sections`, `layouts`, `theme`, or `headless`, read `react-ui` / `react-ui-blocks` / `react-ui-blocks` / `react-ui` / `headless` respectively (not `styleless` — that name now means the different, new middle layer). See `AGENTS.md`'s status table for what's actually built.
+> **Naming update (post-implementation):** `@nebula-lab/ui` was renamed to **`@nebula-lab/react-ui`**, and `sections` + `layouts` were merged into a single **`@nebula-lab/react-ui-blocks`** package — both had the identical dependency shape (built purely on `react-ui` + `theme`, nothing above them) so keeping them split was a package boundary without a real architectural distinction. `react-ui-blocks` is deliberately domain-neutral, not ecommerce- or budget-tracker-specific — this doc's `sections`/`layouts` inventory (§5/§6) still describes real, wanted components, just landing in one merged package now. `@nebula-lab/theme` was subsequently **absorbed into `@nebula-lab/react-ui`** — nothing else in the workspace (`primitives`/`headless` are deliberately unstyled) ever consumed tokens/theming, so the split was a package boundary with exactly one real consumer; `react-ui` now owns `Button` + the 3-layer token system + `ThemeProvider`/`useTheme` together. `@nebula-lab/headless` was then renamed to **`@nebula-lab/styleless`**, and — per a subsequent architecture pass — renamed back to **`@nebula-lab/headless`**, this time for real: the project owner confirmed a 5-tier model (`primitives → headless → styleless → react-ui → react-ui-blocks`) where `headless` (behavior/ARIA, zero styling) and `styleless` (unstyled but structurally complete `Button`/`Input`/`Card`/etc.) are two genuinely distinct layers, not one renamed package. `styleless` in that final sense is a **new, not-yet-built** package — see `LAYER_TAXONOMY.md` for the full extraction plan and `AGENTS.md`'s "Layer placement" section for the current 5-way test. Everywhere below that says `ui`, `sections`, `layouts`, `theme`, or `headless`, read `react-ui` / `react-ui-blocks` / `react-ui-blocks` / `react-ui` / `headless` respectively (not `styleless` — that name now means the different, new middle layer). See `AGENTS.md`'s status table for what's actually built.
 
 ---
 
@@ -39,18 +39,18 @@ You have **1 week** for the whole product. A full MUI-scale library (primitives 
 ## 2. Layered Architecture (matches `nebula` package boundaries)
 
 ```
-@nebula/utilities   Framework-agnostic helpers: mergeRefs, composeEventHandlers,
+@nebula-lab/utilities   Framework-agnostic helpers: mergeRefs, composeEventHandlers,
                          createContext, clamp, debounce, throttle, deepMerge,
                          isHTMLElement, isFocusable
                          │
-@nebula/hooks       React hooks: useControllableState, useClickOutside,
+@nebula-lab/hooks       React hooks: useControllableState, useClickOutside,
                          useMediaQuery, useScrollLock, useFocusTrap,
                          useResizeObserver, useIntersectionObserver,
                          useLocalStorage, useDebounce, useId, useBoolean,
                          useToggle, useStableCallback, useEventListener,
                          usePrevious, useMounted
                          │
-@nebula/primitives   Slot, Primitive, Portal, Presence, Boundary,
+@nebula-lab/primitives   Slot, Primitive, Portal, Presence, Boundary,
                          FocusScope, DismissibleLayer, Overlay, VisuallyHidden
                          + unstyled layout/text primitives: Box, Container, Flex,
                          Grid, Stack, Inline, Center, AspectRatio, Text, Heading,
@@ -58,26 +58,26 @@ You have **1 week** for the whole product. A full MUI-scale library (primitives 
                          + unstyled form primitives: Button, Input, Textarea,
                          Label, Form
                          │
-@nebula/headless     Behavior-only, ARIA-complete: Tabs/TabList/Tab/TabPanel,
+@nebula-lab/headless     Behavior-only, ARIA-complete: Tabs/TabList/Tab/TabPanel,
                          Accordion/AccordionItem/Header/Panel, Dialog + subparts,
                          Switch, Checkbox, RadioGroup/RadioGroupItem,
                          Collapsible + subparts, Toggle/ToggleGroup/Item,
                          Tooltip + subparts, Popover + subparts
                          │
-@nebula/react-ui           Tailwind-powered styled versions of the above, built on
+@nebula-lab/react-ui           Tailwind-powered styled versions of the above, built on
                          theme tokens: Button, Input/Textarea, Card + subparts,
                          Badge, Separator, Avatar + subparts, Switch, Checkbox,
                          Tabs, Accordion, Dialog, cn() (clsx + tailwind-merge)
                          │
-@nebula/sections     ← NEW (this project) — composite product blocks
+@nebula-lab/sections     ← NEW (this project) — composite product blocks
                          (LoginForm, ChangePasswordForm, TransactionForm,
                          DataTable, ChartCard, BudgetProgressCard, FilterBar...)
                          │
-@nebula/layouts      ← NEW (this project) — page-level shells
+@nebula-lab/layouts      ← NEW (this project) — page-level shells
                          (AppLayout, DashboardLayout, AuthLayout, SettingsLayout)
 
 Cross-cutting:
-@nebula/theme        3-layer tokens (primitive → semantic → component),
+@nebula-lab/theme        3-layer tokens (primitive → semantic → component),
                          delivered as CSS custom properties, ThemeProvider/useTheme,
                          single `data-theme` attribute switch (no hydration flicker)
 ```
@@ -232,7 +232,7 @@ These compose Layer 1/2 primitives into ready-made blocks — the "MUI templates
 
 ---
 
-## 7. Theming — 3-layer token system (as implemented in `@nebula/theme`)
+## 7. Theming — 3-layer token system (as implemented in `@nebula-lab/theme`)
 
 1. **Primitive tokens** — raw numeric scales, no meaning attached: `blue.500`, `gray.200`, `spacing.4`, `radius.md`. Numeric scale, not t-shirt sizes (`blue.500`, not `blue.medium`) — easier to insert intermediate values later.
 2. **Semantic tokens** — intent-based aliases following `category.role.variant`: `color.bg.subtle`, `color.text.muted`, `color.border.interactive`. Readable without knowing the underlying primitive; this is the layer light/dark mappings live on.
@@ -257,7 +257,7 @@ A single `data-theme` attribute on `<html>` switches every token at once — no 
 
 **Regenerating tokens:** edit `packages/theme/src/tokens/primitive.ts` (scales) or `semantic.ts` (light/dark mappings), then run `npx tsx packages/theme/src/tokens/generate.ts` to rebuild `theme.css`.
 
-- `cva` (class-variance-analysis) + `tailwind-merge` (wrapped as `cn()`) power every styled component's variant API (`variant`, `size`, `intent`, `tone`) in `@nebula/react-ui`.
+- `cva` (class-variance-analysis) + `tailwind-merge` (wrapped as `cn()`) power every styled component's variant API (`variant`, `size`, `intent`, `tone`) in `@nebula-lab/react-ui`.
 
 ---
 
@@ -267,7 +267,7 @@ A single `data-theme` attribute on `<html>` switches every token at once — no 
 | --------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
 | Monorepo                    | **Nx** (recommend over Lerna for this — better task caching, generators, and affected-graph for a component-library-scale repo) |
 | Package manager             | pnpm (workspaces)                                                                                                               |
-| Build                       | `tsup` (fast, ESM-only + `.d.ts`) per package — CJS output was dropped once the workspace standardized on React 19; every `@nebula/*` package ships `type: "module"` with no `require` export condition |
+| Build                       | `tsup` (fast, ESM-only + `.d.ts`) per package — CJS output was dropped once the workspace standardized on React 19; every `@nebula-lab/*` package ships `type: "module"` with no `require` export condition |
 | Styling                     | Tailwind CSS v4 + CVA + `tailwind-merge`                                                                                        |
 | Primitives base             | Hand-rolled `Slot`/`Primitive` (Radix's MIT-licensed source is a legitimate reference implementation to study/adapt)            |
 | Docs/dev environment        | Storybook 8 (Vite builder) + `@storybook/addon-a11y` + `@storybook/test` (play functions)                                       |
@@ -304,7 +304,7 @@ vitest.config.ts / .setup.ts  # ✅ exists — testing already wired
 
 Each `packages/*` is independently versioned/published (Changesets recommended — not yet in the repo, worth adding). `budget-tracker` (once it exists) consumes workspace packages directly during development (`workspace:*` protocol via pnpm) and published versions post-release. There is no `apps/playground` anymore — it was a smoke-test harness that duplicated per-component Storybook coverage and was removed; use Storybook for isolated component review during development instead.
 
-**Package scope:** the repo uses `@nebula/*` (e.g. `@nebula/react-ui`, `@nebula/headless`). Keep this scope consistent for `sections` and `layouts` too: `@nebula/sections`, `@nebula/layouts`.
+**Package scope:** the repo uses `@nebula-lab/*` (e.g. `@nebula-lab/react-ui`, `@nebula-lab/headless`). Keep this scope consistent for `sections` and `layouts` too: `@nebula-lab/sections`, `@nebula-lab/layouts`.
 
 ---
 
@@ -338,7 +338,7 @@ packages/sections/src/
 ```
 
 - Package `index.ts` files are **barrels only** — zero logic, just re-exports. Bundlers can tree-shake per-component when consumers import from the subpath.
-- `package.json` for each new package sets `"sideEffects": false` and defines an `exports` map with per-component subpaths (e.g. `@nebula/sections/login-form`), same convention `ui`/`headless` already use — confirm by checking their existing `package.json` `exports` field before scaffolding `sections`/`layouts` so the convention matches exactly.
+- `package.json` for each new package sets `"sideEffects": false` and defines an `exports` map with per-component subpaths (e.g. `@nebula-lab/sections/login-form`), same convention `ui`/`headless` already use — confirm by checking their existing `package.json` `exports` field before scaffolding `sections`/`layouts` so the convention matches exactly.
 - `tsup.config.ts` (already shared at the repo root) should get multiple entry points added for the new packages — one per component/category — not a single bundled entry, exactly as the existing packages are built.
 
 ---
@@ -367,11 +367,11 @@ Each component ships with:
 
 ## 12. Week-1 Build Order (updated: most of Layer 0–2 already exists in `nebula`)
 
-0. **Audit first (Day 0, ~2 hrs):** clone `nebula`, run `pnpm install && pnpm storybook`, and inventory exactly which of the components in section 4 already exist vs. still need building. Don't rebuild `Button`/`Tabs` — they're already implemented in `@nebula/primitives`/`headless`/`ui`; `Dialog`/`Accordion`/`Checkbox`/`Switch`/`Card`/`Badge`/`Avatar`/`Separator` are still open (see AGENTS.md's status table for the current, accurate list — this section predates several of them actually landing).
+0. **Audit first (Day 0, ~2 hrs):** clone `nebula`, run `pnpm install && pnpm storybook`, and inventory exactly which of the components in section 4 already exist vs. still need building. Don't rebuild `Button`/`Tabs` — they're already implemented in `@nebula-lab/primitives`/`headless`/`ui`; `Dialog`/`Accordion`/`Checkbox`/`Switch`/`Card`/`Badge`/`Avatar`/`Separator` are still open (see AGENTS.md's status table for the current, accurate list — this section predates several of them actually landing).
 1. **Fill primitive/headless/ui gaps** needed for the budget tracker that aren't in the repo yet: `Select`/`Combobox`, `Toast`, `Table`, `Progress`, `Skeleton`, `Spinner`, `DateRangePicker`. Follow the exact same file-per-component + barrel pattern already used for `Dialog`/`Tabs`.
-2. **New package `@nebula/layouts`**: `AppLayout`, `AuthLayout`, `DashboardLayout` — built on existing `Box`/`Flex`/`Grid`/`Stack` primitives, themed via existing `@nebula/theme`.
-3. **New package `@nebula/sections`**: `LoginForm`, `SignupForm`, `ChangePasswordForm`, `TransactionForm`, `TransactionTable` (on the new `Table` primitive), `ChartCard` (adapter over Recharts/Visx — decide below), `BudgetProgressCard` (on existing `Progress` once built), `SummaryStatsRow`, `FilterBar`.
-4. Wire `apps/budget-tracker` (a new, standalone app — there's no more `apps/playground` to sit alongside) into Firebase Auth/Firestore, consuming `@nebula/sections` + `@nebula/layouts`.
+2. **New package `@nebula-lab/layouts`**: `AppLayout`, `AuthLayout`, `DashboardLayout` — built on existing `Box`/`Flex`/`Grid`/`Stack` primitives, themed via existing `@nebula-lab/theme`.
+3. **New package `@nebula-lab/sections`**: `LoginForm`, `SignupForm`, `ChangePasswordForm`, `TransactionForm`, `TransactionTable` (on the new `Table` primitive), `ChartCard` (adapter over Recharts/Visx — decide below), `BudgetProgressCard` (on existing `Progress` once built), `SummaryStatsRow`, `FilterBar`.
+4. Wire `apps/budget-tracker` (a new, standalone app — there's no more `apps/playground` to sit alongside) into Firebase Auth/Firestore, consuming `@nebula-lab/sections` + `@nebula-lab/layouts`.
 5. Storybook stories + tests for every new component (in parallel with steps 1–3, not after) — reuse the repo's existing `.storybook` config and CI-gated Pages deploy workflow.
 6. Add Changesets (not yet in the repo) + version bump + `npm publish --access public` for the two new packages (and any updated existing ones).
 

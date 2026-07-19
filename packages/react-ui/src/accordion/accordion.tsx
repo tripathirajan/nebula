@@ -1,13 +1,13 @@
-import { Accordion as HeadlessAccordion } from '@nebula/headless/accordion';
-import { cn } from '@nebula/primitives/cn';
+import { Accordion as HeadlessAccordion } from '@nebula-lab/headless/accordion';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
-import type { AccordionProps as HeadlessAccordionProps } from '@nebula/headless/accordion';
+import type { AccordionProps as HeadlessAccordionProps } from '@nebula-lab/headless/accordion';
 
 type AccordionProps = HeadlessAccordionProps;
 
 /**
- * Styled wrapper around `@nebula/headless`'s `Accordion` — all ARIA/keyboard
+ * Styled wrapper around `@nebula-lab/headless`'s `Accordion` — all ARIA/keyboard
  * behavior (single/multiple, roving-tabindex, `collapsible`) comes from
  * there unchanged; this layer only adds visual styling, per `ui`'s job
  * description in `component-library-architecture.md` §2. The root itself

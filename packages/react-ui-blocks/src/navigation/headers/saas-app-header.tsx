@@ -1,5 +1,5 @@
-import { cn } from '@nebula/primitives/cn';
-import { Avatar, AvatarFallback, AvatarImage } from '@nebula/react-ui/avatar';
+import { cn } from '@nebula-lab/primitives/cn';
+import { Avatar, AvatarFallback, AvatarImage } from '@nebula-lab/react-ui/avatar';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -7,9 +7,9 @@ import {
   DropdownMenuPortal,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@nebula/react-ui/dropdown-menu';
-import { Heading } from '@nebula/react-ui/heading';
-import { IconButton } from '@nebula/react-ui/icon-button';
+} from '@nebula-lab/react-ui/dropdown-menu';
+import { Heading } from '@nebula-lab/react-ui/heading';
+import { IconButton } from '@nebula-lab/react-ui/icon-button';
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -18,10 +18,10 @@ import {
   NavigationMenuList,
   NavigationMenuPortal,
   NavigationMenuTrigger,
-} from '@nebula/react-ui/navigation-menu';
-import { Popover, PopoverContent, PopoverPortal, PopoverTrigger } from '@nebula/react-ui/popover';
-import { Sheet, SheetContent, SheetPortal, SheetTitle, SheetTrigger } from '@nebula/react-ui/sheet';
-import { Text } from '@nebula/react-ui/text';
+} from '@nebula-lab/react-ui/navigation-menu';
+import { Popover, PopoverContent, PopoverPortal, PopoverTrigger } from '@nebula-lab/react-ui/popover';
+import { Sheet, SheetContent, SheetPortal, SheetTitle, SheetTrigger } from '@nebula-lab/react-ui/sheet';
+import { Text } from '@nebula-lab/react-ui/text';
 import * as React from 'react';
 
 const BellIcon = (props: React.SVGProps<SVGSVGElement>) => (
@@ -168,7 +168,7 @@ function MobileNavEntry({ link }: { link: AppHeaderNavLink }) {
  * over, `md:hidden`/`hidden md:block` split, same breakpoint convention
  * `BottomNav` uses) on the left, a notification bell (`Popover` panel,
  * unread-count pulse dot) and a user profile menu on the right. Built
- * purely from `@nebula/react-ui` (`NavigationMenu`, `Popover`, `Sheet`,
+ * purely from `@nebula-lab/react-ui` (`NavigationMenu`, `Popover`, `Sheet`,
  * `DropdownMenu`, `Avatar`, `IconButton`) — no marketing-specific primitive
  * exists below this layer, so this block owns the whole composition,
  * matching every other block in this package. Named `SaasAppHeader` rather

@@ -1,8 +1,8 @@
-import { ToastViewport as HeadlessToastViewport } from '@nebula/headless/toast';
-import { cn } from '@nebula/primitives/cn';
+import { ToastViewport as HeadlessToastViewport } from '@nebula-lab/headless/toast';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
-import type { ToastViewportProps as HeadlessToastViewportProps } from '@nebula/headless/toast';
+import type { ToastViewportProps as HeadlessToastViewportProps } from '@nebula-lab/headless/toast';
 
 type ToastViewportProps = HeadlessToastViewportProps;
 

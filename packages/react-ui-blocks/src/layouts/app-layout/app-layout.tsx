@@ -1,10 +1,10 @@
 
-import { Primitive } from '@nebula/primitives/primitive';
-import { ThemeProvider } from '@nebula/react-ui/theme-provider';
-import { ThemeSwitcher } from '@nebula/react-ui/theme-switcher';
+import { Primitive } from '@nebula-lab/primitives/primitive';
+import { ThemeProvider } from '@nebula-lab/react-ui/theme-provider';
+import { ThemeSwitcher } from '@nebula-lab/react-ui/theme-switcher';
 import * as React from 'react';
 
-import type { Theme } from '@nebula/react-ui/theme-provider';
+import type { Theme } from '@nebula-lab/react-ui/theme-provider';
 
 
 const PORTAL_ROOT_ID = 'nebula-portal-root';
@@ -23,7 +23,7 @@ interface AppLayoutProps {
  * Root shell: wraps the app in `ThemeProvider`, renders a minimal header
  * (title + `ThemeSwitcher`), a main content region, and a portal-root `div`
  * that `Dialog`/`Popover`/`Toast` (once built) render into via
- * `@nebula/primitives`' `Portal` — so every overlay in the app shares one
+ * `@nebula-lab/primitives`' `Portal` — so every overlay in the app shares one
  * DOM mount point instead of each component picking its own.
  *
  * This is intentionally minimal — `DashboardLayout`/`AuthLayout`/

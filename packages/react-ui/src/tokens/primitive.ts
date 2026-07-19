@@ -327,7 +327,7 @@ const zIndex = {
  *
  * @example
  * ```ts
- * import { primitiveTokens } from '@nebula/react-ui/tokens';
+ * import { primitiveTokens } from '@nebula-lab/react-ui/tokens';
  *
  * // Only for use inside semantic.ts / component.ts — never import this
  * // directly into a component or story.

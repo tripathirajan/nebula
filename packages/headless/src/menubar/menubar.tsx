@@ -1,6 +1,6 @@
 
-import { useControllableState } from '@nebula/hooks';
-import { RovingFocusGroup } from '@nebula/primitives/roving-focus-group';
+import { useControllableState } from '@nebula-lab/hooks';
+import { RovingFocusGroup } from '@nebula-lab/primitives/roving-focus-group';
 import * as React from 'react';
 
 

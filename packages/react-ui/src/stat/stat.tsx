@@ -1,14 +1,14 @@
-import { cn } from '@nebula/primitives/cn';
-import { Primitive } from '@nebula/primitives/primitive';
+import { cn } from '@nebula-lab/primitives/cn';
+import { Primitive } from '@nebula-lab/primitives/primitive';
 import * as React from 'react';
 
-import type { PrimitivePropsWithRef } from '@nebula/primitives/primitive';
+import type { PrimitivePropsWithRef } from '@nebula-lab/primitives/primitive';
 
 type StatProps = PrimitivePropsWithRef<'div'>;
 
 /**
  * A single metric display — `StatLabel`/`StatValue`/`StatDescription` are
- * purely presentational structure, same "no matching `@nebula/headless`
+ * purely presentational structure, same "no matching `@nebula-lab/headless`
  * compound" treatment `Card` documents (single-file compound, not a
  * folder-per-sub-part family, since none of these have behavior of their
  * own either).

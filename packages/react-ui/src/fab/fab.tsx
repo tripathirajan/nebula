@@ -1,9 +1,9 @@
-import { cn } from '@nebula/primitives/cn';
-import { FAB as StylelessFAB } from '@nebula/styleless/fab';
+import { cn } from '@nebula-lab/primitives/cn';
+import { FAB as StylelessFAB } from '@nebula-lab/styleless/fab';
 import { cva } from 'class-variance-authority';
 import * as React from 'react';
 
-import type { FABProps as StylelessFABProps } from '@nebula/styleless/fab';
+import type { FABProps as StylelessFABProps } from '@nebula-lab/styleless/fab';
 import type { VariantProps } from 'class-variance-authority';
 
 /**
@@ -151,7 +151,7 @@ const fabVariants = cva(
 type FABProps = StylelessFABProps & VariantProps<typeof fabVariants>;
 
 /**
- * Floating Action Button — wraps `@nebula/styleless`'s `FAB` (required
+ * Floating Action Button — wraps `@nebula-lab/styleless`'s `FAB` (required
  * `aria-label`, `Button`'s `loading` semantics) and adds the circular,
  * elevated styling. Deliberately does not apply `fixed` positioning itself
  * (position is a page-layout concern the consumer owns, same "don't

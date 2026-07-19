@@ -1,8 +1,8 @@
-import { cn } from '@nebula/primitives/cn';
-import { Primitive } from '@nebula/primitives/primitive';
+import { cn } from '@nebula-lab/primitives/cn';
+import { Primitive } from '@nebula-lab/primitives/primitive';
 import * as React from 'react';
 
-import type { PrimitivePropsWithRef } from '@nebula/primitives/primitive';
+import type { PrimitivePropsWithRef } from '@nebula-lab/primitives/primitive';
 
 interface SparklineOwnProps {
   /** The series to plot — order matters, values don't need to be sorted or non-negative. */
@@ -40,12 +40,12 @@ function toPoints(data: number[]): { x: number; y: number }[] {
 
 /**
  * A dependency-free inline mini line/area chart — no matching
- * `@nebula/headless` compound, same "purely presentational, no ARIA
+ * `@nebula-lab/headless` compound, same "purely presentational, no ARIA
  * behavior of its own" treatment `Stat`/`Timeline`/`EmptyState` already
  * document. Deliberately plain SVG rather than reaching for `recharts`:
  * `react-ui` has no charting dependency and shouldn't gain one just for a
  * decorative trend glyph — `recharts` stays scoped to
- * `@nebula/react-ui-blocks`'s `ChartCard`, which needs real axes/tooltips/
+ * `@nebula-lab/react-ui-blocks`'s `ChartCard`, which needs real axes/tooltips/
  * legends a sparkline never does. `aria-hidden` by default (the same
  * convention this repo's decorative-icon SVGs already use, e.g. `Button`'s
  * own inline icons) — a sparkline restates a trend a `Stat`/trend badge

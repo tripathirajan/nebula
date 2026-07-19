@@ -1,8 +1,8 @@
-import { SliderTrack as HeadlessSliderTrack } from '@nebula/headless/slider';
-import { cn } from '@nebula/primitives/cn';
+import { SliderTrack as HeadlessSliderTrack } from '@nebula-lab/headless/slider';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
-import type { SliderTrackProps as HeadlessSliderTrackProps } from '@nebula/headless/slider';
+import type { SliderTrackProps as HeadlessSliderTrackProps } from '@nebula-lab/headless/slider';
 
 type SliderTrackProps = HeadlessSliderTrackProps;
 

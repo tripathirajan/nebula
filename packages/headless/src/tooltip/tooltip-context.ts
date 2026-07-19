@@ -1,7 +1,7 @@
-import { createContextScope } from '@nebula/primitives/create-context-scope';
-import { createPopperScope } from '@nebula/primitives/popper';
+import { createContextScope } from '@nebula-lab/primitives/create-context-scope';
+import { createPopperScope } from '@nebula-lab/primitives/popper';
 
-import type { Scope } from '@nebula/primitives/create-context-scope';
+import type { Scope } from '@nebula-lab/primitives/create-context-scope';
 
 interface TooltipContextValue {
   open: boolean;
@@ -19,7 +19,7 @@ interface TooltipContextValue {
 const TOOLTIP_NAME = 'Tooltip';
 
 /**
- * Composes its own scope with `@nebula/primitives`' `Popper` scope, same
+ * Composes its own scope with `@nebula-lab/primitives`' `Popper` scope, same
  * pattern as `Popover` — a single `__scopeTooltip` prop threads through to
  * both `Tooltip`'s own context and the `Popper` positioning context
  * `TooltipTrigger`/`TooltipContent` are built on.

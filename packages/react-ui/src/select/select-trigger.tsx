@@ -1,8 +1,8 @@
-import { SelectTrigger as HeadlessSelectTrigger } from '@nebula/headless/select';
-import { cn } from '@nebula/primitives/cn';
+import { SelectTrigger as HeadlessSelectTrigger } from '@nebula-lab/headless/select';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
-import type { SelectTriggerProps as HeadlessSelectTriggerProps } from '@nebula/headless/select';
+import type { SelectTriggerProps as HeadlessSelectTriggerProps } from '@nebula-lab/headless/select';
 
 type SelectTriggerProps = HeadlessSelectTriggerProps;
 

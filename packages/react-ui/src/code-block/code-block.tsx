@@ -1,13 +1,13 @@
-import { cn } from '@nebula/primitives/cn';
-import { CodeBlock as StylelessCodeBlock } from '@nebula/styleless/code-block';
+import { cn } from '@nebula-lab/primitives/cn';
+import { CodeBlock as StylelessCodeBlock } from '@nebula-lab/styleless/code-block';
 import * as React from 'react';
 
-import type { CodeBlockProps as StylelessCodeBlockProps } from '@nebula/styleless/code-block';
+import type { CodeBlockProps as StylelessCodeBlockProps } from '@nebula-lab/styleless/code-block';
 
 type CodeBlockProps = Omit<StylelessCodeBlockProps, 'classNames'> & { className?: string };
 
 /**
- * Wraps `@nebula/styleless`'s `CodeBlock` (which owns the real behavior:
+ * Wraps `@nebula-lab/styleless`'s `CodeBlock` (which owns the real behavior:
  * `copied` state, the clipboard write, splitting `code` into lines) and
  * supplies every part's Tailwind classes via its `classNames` prop — this
  * file's whole job is visual, matching every other `react-ui` wrapper's

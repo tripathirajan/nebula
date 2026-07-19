@@ -1,17 +1,17 @@
-import { cn } from '@nebula/primitives/cn';
-import { Link } from '@nebula/primitives/link';
-import { Badge } from '@nebula/react-ui/badge';
-import { Button } from '@nebula/react-ui/button';
-import { Heading } from '@nebula/react-ui/heading';
-import { IconButton } from '@nebula/react-ui/icon-button';
-import { NumberInput, NumberInputDecrement, NumberInputField, NumberInputIncrement } from '@nebula/react-ui/number-input';
-import { RadioGroup, RadioGroupItem } from '@nebula/react-ui/radio-group';
-import { SegmentedControl, SegmentedControlItem } from '@nebula/react-ui/segmented-control';
-import { StaticRating } from '@nebula/react-ui/static-rating';
-import { Text } from '@nebula/react-ui/text';
+import { cn } from '@nebula-lab/primitives/cn';
+import { Link } from '@nebula-lab/primitives/link';
+import { Badge } from '@nebula-lab/react-ui/badge';
+import { Button } from '@nebula-lab/react-ui/button';
+import { Heading } from '@nebula-lab/react-ui/heading';
+import { IconButton } from '@nebula-lab/react-ui/icon-button';
+import { NumberInput, NumberInputDecrement, NumberInputField, NumberInputIncrement } from '@nebula-lab/react-ui/number-input';
+import { RadioGroup, RadioGroupItem } from '@nebula-lab/react-ui/radio-group';
+import { SegmentedControl, SegmentedControlItem } from '@nebula-lab/react-ui/segmented-control';
+import { StaticRating } from '@nebula-lab/react-ui/static-rating';
+import { Text } from '@nebula-lab/react-ui/text';
 import * as React from 'react';
 
-import type { BadgeProps } from '@nebula/react-ui/badge';
+import type { BadgeProps } from '@nebula-lab/react-ui/badge';
 
 interface ProductColorOption {
   value: string;

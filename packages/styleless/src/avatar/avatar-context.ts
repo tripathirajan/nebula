@@ -1,4 +1,4 @@
-import { createContext } from '@nebula/primitives/create-context-scope';
+import { createContext } from '@nebula-lab/primitives/create-context-scope';
 
 type ImageLoadingStatus = 'idle' | 'loading' | 'loaded' | 'error';
 
@@ -20,7 +20,7 @@ const AVATAR_NAME = 'Avatar';
  * `PasswordInput`'s visibility toggle and `ImagePreview`'s object-URL
  * lifecycle already live in, not a full WAI-ARIA widget pattern (that's
  * what distinguishes it from `Progress`/`Spinner`/`Skeleton`, which stayed
- * in `@nebula/headless` since they carry a real ARIA role).
+ * in `@nebula-lab/headless` since they carry a real ARIA role).
  */
 const [AvatarProvider, useAvatarContext] = createContext<AvatarContextValue>(AVATAR_NAME);
 

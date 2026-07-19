@@ -1,18 +1,18 @@
-import { cn } from '@nebula/primitives/cn';
+import { cn } from '@nebula-lab/primitives/cn';
 import {
   getPasswordStrength,
   PasswordStrengthIndicator as StylelessPasswordStrengthIndicator,
-} from '@nebula/styleless/password-strength-indicator';
+} from '@nebula-lab/styleless/password-strength-indicator';
 import * as React from 'react';
 
-import type { PasswordStrengthIndicatorProps as StylelessPasswordStrengthIndicatorProps } from '@nebula/styleless/password-strength-indicator';
+import type { PasswordStrengthIndicatorProps as StylelessPasswordStrengthIndicatorProps } from '@nebula-lab/styleless/password-strength-indicator';
 
 type PasswordStrengthIndicatorProps = Omit<StylelessPasswordStrengthIndicatorProps, 'classNames'> & {
   className?: string;
 };
 
 /**
- * Wraps `@nebula/styleless`'s `PasswordStrengthIndicator` (which owns the
+ * Wraps `@nebula-lab/styleless`'s `PasswordStrengthIndicator` (which owns the
  * real behavior: the length/character-class scoring heuristic and the
  * `role="meter"` semantics) and supplies every part's Tailwind classes via
  * its `classNames` prop — this file's whole job is visual, matching every

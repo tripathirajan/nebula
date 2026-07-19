@@ -1,8 +1,8 @@
-import { CommandList as HeadlessCommandList } from '@nebula/headless/command';
-import { cn } from '@nebula/primitives/cn';
+import { CommandList as HeadlessCommandList } from '@nebula-lab/headless/command';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
-import type { CommandListProps as HeadlessCommandListProps } from '@nebula/headless/command';
+import type { CommandListProps as HeadlessCommandListProps } from '@nebula-lab/headless/command';
 
 type CommandListProps = HeadlessCommandListProps;
 

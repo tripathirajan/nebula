@@ -1,10 +1,10 @@
-import { cn } from '@nebula/primitives/cn';
-import { Primitive } from '@nebula/primitives/primitive';
+import { cn } from '@nebula-lab/primitives/cn';
+import { Primitive } from '@nebula-lab/primitives/primitive';
 import * as React from 'react';
 
 import { Kbd } from '../kbd/kbd';
 
-import type { PrimitivePropsWithRef } from '@nebula/primitives/primitive';
+import type { PrimitivePropsWithRef } from '@nebula-lab/primitives/primitive';
 
 interface KbdShortcutOwnProps {
   /** Each key in the sequence, rendered as its own `Kbd` pill — e.g. `['⌘', 'K']` or `['Ctrl', 'Shift', 'P']`. */

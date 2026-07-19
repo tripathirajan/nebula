@@ -1,5 +1,5 @@
-import { Badge } from '@nebula/react-ui/badge';
-import { MenuItem } from '@nebula/react-ui/menu';
+import { Badge } from '@nebula-lab/react-ui/badge';
+import { MenuItem } from '@nebula-lab/react-ui/menu';
 
 import { ListingCard } from './listing-card';
 

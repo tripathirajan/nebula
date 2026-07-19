@@ -11,8 +11,8 @@
 // chunk every entry references — this test only means something against
 // the *built* `dist/` output, since source-file imports would trivially
 // share one module regardless.
-import { ThemeProvider } from '@nebula/react-ui';
-import { useTheme } from '@nebula/react-ui/theme-provider';
+import { ThemeProvider } from '@nebula-lab/react-ui';
+import { useTheme } from '@nebula-lab/react-ui/theme-provider';
 import { render, screen } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 

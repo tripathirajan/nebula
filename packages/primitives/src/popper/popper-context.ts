@@ -12,7 +12,7 @@ const POPPER_NAME = 'Popper';
 /**
  * Scoped context factory for Popper — same `createContextScope` pattern as
  * every other compound primitive (`RovingFocusGroup`, `Tabs` in
- * `@nebula/headless`, ...), so a `Popper` nested inside another one (a
+ * `@nebula-lab/headless`, ...), so a `Popper` nested inside another one (a
  * submenu anchored off a popover, say) mints its own anchor reference
  * instead of colliding with the outer one's.
  */

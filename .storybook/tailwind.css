@@ -7,4 +7,4 @@
  * AGENTS.md), this is the single entry point for both.
  */
 @import 'tailwindcss';
-@import '@nebula/react-ui/theme.css';
+@import '@nebula-lab/react-ui/theme.css';

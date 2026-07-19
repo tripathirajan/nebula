@@ -1,4 +1,4 @@
-import { useControllableState, useId } from '@nebula/hooks';
+import { useControllableState, useId } from '@nebula-lab/hooks';
 import * as React from 'react';
 
 import { FileUploadProvider } from './file-upload-context';

@@ -1,4 +1,4 @@
-# @nebula/utilities
+# @nebula-lab/utilities
 
 Framework-agnostic helpers — no React dependency, nothing in the workspace depends below this. Everything else (`hooks`, `primitives`, ...) may depend on this package.
 
@@ -12,7 +12,7 @@ Framework-agnostic helpers — no React dependency, nothing in the workspace dep
 ## Import
 
 ```ts
-import { clamp, debounce } from '@nebula/utilities';
+import { clamp, debounce } from '@nebula-lab/utilities';
 // or per-module subpath
-import { clamp } from '@nebula/utilities/clamp';
+import { clamp } from '@nebula-lab/utilities/clamp';
 ```

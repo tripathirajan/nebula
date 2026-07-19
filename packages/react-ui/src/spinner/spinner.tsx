@@ -1,9 +1,9 @@
-import { Spinner as HeadlessSpinner } from '@nebula/headless/spinner';
-import { cn } from '@nebula/primitives/cn';
+import { Spinner as HeadlessSpinner } from '@nebula-lab/headless/spinner';
+import { cn } from '@nebula-lab/primitives/cn';
 import { cva } from 'class-variance-authority';
 import * as React from 'react';
 
-import type { SpinnerProps as HeadlessSpinnerProps } from '@nebula/headless/spinner';
+import type { SpinnerProps as HeadlessSpinnerProps } from '@nebula-lab/headless/spinner';
 import type { VariantProps } from 'class-variance-authority';
 
 /**
@@ -31,7 +31,7 @@ const spinnerVariants = cva('inline-block h-5 w-5 animate-spin rounded-full bord
 type SpinnerProps = HeadlessSpinnerProps & VariantProps<typeof spinnerVariants>;
 
 /**
- * Styled wrapper around `@nebula/headless`'s `Spinner` — the `role="status"`
+ * Styled wrapper around `@nebula-lab/headless`'s `Spinner` — the `role="status"`
  * + visually-hidden label announcement come from there unchanged. This
  * layer adds the actual spinning visual: a ring built from two stacked
  * borders (a dim full circle track, a bright quarter-arc indicator on just

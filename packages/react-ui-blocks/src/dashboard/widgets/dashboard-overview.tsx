@@ -1,8 +1,8 @@
-import { cn } from '@nebula/primitives/cn';
-import { Card, CardContent } from '@nebula/react-ui/card';
-import { Heading } from '@nebula/react-ui/heading';
-import { Sparkline } from '@nebula/react-ui/sparkline';
-import { Stat, StatDescription, StatLabel, StatValue } from '@nebula/react-ui/stat';
+import { cn } from '@nebula-lab/primitives/cn';
+import { Card, CardContent } from '@nebula-lab/react-ui/card';
+import { Heading } from '@nebula-lab/react-ui/heading';
+import { Sparkline } from '@nebula-lab/react-ui/sparkline';
+import { Stat, StatDescription, StatLabel, StatValue } from '@nebula-lab/react-ui/stat';
 import * as React from 'react';
 
 interface DashboardMetricTrend {
@@ -74,7 +74,7 @@ function TrendArrow({ direction }: { direction: 'up' | 'down' }) {
  * `../charts/chart-card`, for that; see
  * `compositions/saas-dashboard-home.stories.tsx` for an example combining
  * both on one page alongside `WelcomeBanner`) — `sparkline` here is only the
- * small inline trend glyph `@nebula/react-ui/sparkline` provides, not a full
+ * small inline trend glyph `@nebula-lab/react-ui/sparkline` provides, not a full
  * chart with axes/tooltips.
  *
  * Every card in the grid shares one shape; `icon`/`trend`/`sparkline` are

@@ -134,8 +134,8 @@ export default defineConfig({
   // `carousel`, `sortable`, `data-table` — confirmed via
   // `grep -rl "React.createContext" src`, none of the others are re-exported
   // from more than their own single entry) is reachable from *two* separate
-  // public entry points: its own subpath (`@nebula/react-ui/theme-provider`)
-  // and the root barrel (`@nebula/react-ui`). Under `splitting: false` each
+  // public entry points: its own subpath (`@nebula-lab/react-ui/theme-provider`)
+  // and the root barrel (`@nebula-lab/react-ui`). Under `splitting: false` each
   // entry bundles that module fully self-contained, re-running its
   // module-level `createContext()` call separately in both `dist/index.js`
   // and `dist/theme-provider/index.js` — a consumer that imports
@@ -154,5 +154,5 @@ export default defineConfig({
   splitting: true,
   clean: true,
   treeshake: true,
-  external: ['react', 'react-dom', '@nebula/hooks', '@nebula/primitives', '@nebula/headless'],
+  external: ['react', 'react-dom', '@nebula-lab/hooks', '@nebula-lab/primitives', '@nebula-lab/headless'],
 });

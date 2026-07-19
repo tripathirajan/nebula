@@ -1,8 +1,8 @@
-import { CommandGroup as HeadlessCommandGroup } from '@nebula/headless/command';
-import { cn } from '@nebula/primitives/cn';
+import { CommandGroup as HeadlessCommandGroup } from '@nebula-lab/headless/command';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
-import type { CommandGroupProps as HeadlessCommandGroupProps } from '@nebula/headless/command';
+import type { CommandGroupProps as HeadlessCommandGroupProps } from '@nebula-lab/headless/command';
 
 type CommandGroupProps = HeadlessCommandGroupProps;
 

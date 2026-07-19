@@ -1,13 +1,13 @@
-import { Tab as HeadlessTab } from '@nebula/headless/tabs';
-import { cn } from '@nebula/primitives/cn';
+import { Tab as HeadlessTab } from '@nebula-lab/headless/tabs';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
-import type { TabProps as HeadlessTabProps } from '@nebula/headless/tabs';
+import type { TabProps as HeadlessTabProps } from '@nebula-lab/headless/tabs';
 
 type TabProps = HeadlessTabProps;
 
 /**
- * Styled wrapper around `@nebula/headless`'s `Tab` — selection,
+ * Styled wrapper around `@nebula-lab/headless`'s `Tab` — selection,
  * `role="tab"`, and automatic/manual activation-mode handling all come
  * from there unchanged. This layer adds the underline treatment: a
  * transparent 2px bottom border that becomes `--tabs-trigger-active-border`

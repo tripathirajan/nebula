@@ -1,9 +1,9 @@
-import { Link } from '@nebula/primitives/link';
-import { Badge } from '@nebula/react-ui/badge';
-import { Card, CardContent } from '@nebula/react-ui/card';
-import { Heading } from '@nebula/react-ui/heading';
-import { Tab, TabList, TabPanel, Tabs } from '@nebula/react-ui/tabs';
-import { Text } from '@nebula/react-ui/text';
+import { Link } from '@nebula-lab/primitives/link';
+import { Badge } from '@nebula-lab/react-ui/badge';
+import { Card, CardContent } from '@nebula-lab/react-ui/card';
+import { Heading } from '@nebula-lab/react-ui/heading';
+import { Tab, TabList, TabPanel, Tabs } from '@nebula-lab/react-ui/tabs';
+import { Text } from '@nebula-lab/react-ui/text';
 
 import { ReviewsList } from '../dashboard/widgets/reviews-list';
 import { ProductGallery } from '../ecommerce/product-discovery/product-gallery';

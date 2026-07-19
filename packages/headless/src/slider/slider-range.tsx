@@ -1,10 +1,10 @@
-import { Primitive } from '@nebula/primitives/primitive';
+import { Primitive } from '@nebula-lab/primitives/primitive';
 import * as React from 'react';
 
 import { useSliderContext } from './slider-context';
 
 import type { ScopedProps } from './slider-context';
-import type { PrimitivePropsWithRef } from '@nebula/primitives/primitive';
+import type { PrimitivePropsWithRef } from '@nebula-lab/primitives/primitive';
 
 const SLIDER_RANGE_NAME = 'SliderRange';
 

@@ -1,12 +1,12 @@
-import { composeEventHandlers } from '@nebula/primitives/compose-event-handlers';
-import { Input } from '@nebula/primitives/input';
-import { PopperAnchor } from '@nebula/primitives/popper';
+import { composeEventHandlers } from '@nebula-lab/primitives/compose-event-handlers';
+import { Input } from '@nebula-lab/primitives/input';
+import { PopperAnchor } from '@nebula-lab/primitives/popper';
 import * as React from 'react';
 
 import { useComboboxContext, usePopperScope } from './combobox-context';
 
 import type { ScopedProps } from './combobox-context';
-import type { InputProps } from '@nebula/primitives/input';
+import type { InputProps } from '@nebula-lab/primitives/input';
 
 const COMBOBOX_INPUT_NAME = 'ComboboxInput';
 

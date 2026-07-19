@@ -1,8 +1,8 @@
-import { useId } from '@nebula/hooks';
-import { Primitive } from '@nebula/primitives/primitive';
+import { useId } from '@nebula-lab/hooks';
+import { Primitive } from '@nebula-lab/primitives/primitive';
 import * as React from 'react';
 
-import type { PrimitivePropsWithRef } from '@nebula/primitives/primitive';
+import type { PrimitivePropsWithRef } from '@nebula-lab/primitives/primitive';
 
 const COMMAND_GROUP_NAME = 'CommandGroup';
 

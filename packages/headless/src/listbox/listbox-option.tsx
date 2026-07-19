@@ -1,12 +1,12 @@
-import { composeEventHandlers } from '@nebula/primitives/compose-event-handlers';
-import { Primitive } from '@nebula/primitives/primitive';
-import { FocusItem } from '@nebula/primitives/roving-focus-group';
+import { composeEventHandlers } from '@nebula-lab/primitives/compose-event-handlers';
+import { Primitive } from '@nebula-lab/primitives/primitive';
+import { FocusItem } from '@nebula-lab/primitives/roving-focus-group';
 import * as React from 'react';
 
 import { useListboxContext } from './listbox-context';
 
 import type { ScopedProps } from './listbox-context';
-import type { PrimitivePropsWithRef } from '@nebula/primitives/primitive';
+import type { PrimitivePropsWithRef } from '@nebula-lab/primitives/primitive';
 
 const LISTBOX_OPTION_NAME = 'ListboxOption';
 
@@ -19,7 +19,7 @@ interface ListboxOptionProps extends PrimitivePropsWithRef<'div'> {
 /**
  * `role="option"`. Selected state comes entirely from `Listbox`'s context
  * (comparing this option's `value` against the list's selected value(s)) —
- * this component holds no local state. Wrapped in `@nebula/primitives`'
+ * this component holds no local state. Wrapped in `@nebula-lab/primitives`'
  * `FocusItem` for roving-tabindex + arrow-key movement.
  *
  * @example

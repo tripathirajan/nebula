@@ -1,5 +1,5 @@
-import { cn } from '@nebula/primitives/cn';
-import { Carousel, CarouselContent, CarouselIndicators, CarouselItem } from '@nebula/react-ui/carousel';
+import { cn } from '@nebula-lab/primitives/cn';
+import { Carousel, CarouselContent, CarouselIndicators, CarouselItem } from '@nebula-lab/react-ui/carousel';
 
 import { PromoBanner } from './promo-banner';
 

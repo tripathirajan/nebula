@@ -1,10 +1,10 @@
-import { Label } from '@nebula/primitives/label';
+import { Label } from '@nebula-lab/primitives/label';
 import * as React from 'react';
 
 import { useFieldContext } from './field-context';
 
 import type { ScopedProps } from './field-context';
-import type { LabelProps } from '@nebula/primitives/label';
+import type { LabelProps } from '@nebula-lab/primitives/label';
 
 const FIELD_LABEL_NAME = 'FieldLabel';
 

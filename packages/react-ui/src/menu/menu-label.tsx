@@ -1,8 +1,8 @@
-import { MenuLabel as HeadlessMenuLabel } from '@nebula/headless/menu';
-import { cn } from '@nebula/primitives/cn';
+import { MenuLabel as HeadlessMenuLabel } from '@nebula-lab/headless/menu';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
-import type { MenuLabelProps as HeadlessMenuLabelProps } from '@nebula/headless/menu';
+import type { MenuLabelProps as HeadlessMenuLabelProps } from '@nebula-lab/headless/menu';
 
 type MenuLabelProps = HeadlessMenuLabelProps;
 

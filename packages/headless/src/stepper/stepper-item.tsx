@@ -1,4 +1,4 @@
-import { Primitive } from '@nebula/primitives/primitive';
+import { Primitive } from '@nebula-lab/primitives/primitive';
 import * as React from 'react';
 
 import { useStepperContext } from './stepper-context';
@@ -6,7 +6,7 @@ import { StepperItemProvider } from './stepper-item-context';
 
 import type { ScopedProps } from './stepper-context';
 import type { ItemScopedProps, StepStatus } from './stepper-item-context';
-import type { PrimitivePropsWithRef } from '@nebula/primitives/primitive';
+import type { PrimitivePropsWithRef } from '@nebula-lab/primitives/primitive';
 
 const STEPPER_ITEM_NAME = 'StepperItem';
 

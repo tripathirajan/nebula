@@ -1,9 +1,9 @@
-import { cn } from '@nebula/primitives/cn';
-import { Input as StylelessInput } from '@nebula/styleless/input';
+import { cn } from '@nebula-lab/primitives/cn';
+import { Input as StylelessInput } from '@nebula-lab/styleless/input';
 import { cva } from 'class-variance-authority';
 import * as React from 'react';
 
-import type { InputProps as StylelessInputProps } from '@nebula/styleless/input';
+import type { InputProps as StylelessInputProps } from '@nebula-lab/styleless/input';
 import type { VariantProps } from 'class-variance-authority';
 
 /**
@@ -34,8 +34,8 @@ const inputClassName = inputVariants({ variant: 'outline' });
 type InputProps = StylelessInputProps & VariantProps<typeof inputVariants>;
 
 /**
- * Styled `input` — wraps `@nebula/styleless`'s `Input` (itself a thin pass-
- * through of `@nebula/primitives`' `Input`, which gives `invalid` ->
+ * Styled `input` — wraps `@nebula-lab/styleless`'s `Input` (itself a thin pass-
+ * through of `@nebula-lab/primitives`' `Input`, which gives `invalid` ->
  * `aria-invalid` wiring and ref forwarding) rather than reaching past it to
  * `primitives` directly, per `react-ui`'s "builds on `styleless`, not
  * around it" rule (see `component-library-architecture.md` §2 — same

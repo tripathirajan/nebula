@@ -1,4 +1,4 @@
-import { Button } from '@nebula/react-ui';
+import { Button } from '@nebula-lab/react-ui';
 
 import { PageSection } from './page-section';
 

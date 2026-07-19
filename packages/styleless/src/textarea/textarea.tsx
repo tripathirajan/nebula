@@ -1,16 +1,16 @@
-import { Textarea as PrimitiveTextarea } from '@nebula/primitives/textarea';
+import { Textarea as PrimitiveTextarea } from '@nebula-lab/primitives/textarea';
 import * as React from 'react';
 
-import type { TextareaProps as PrimitiveTextareaProps } from '@nebula/primitives/textarea';
+import type { TextareaProps as PrimitiveTextareaProps } from '@nebula-lab/primitives/textarea';
 
 /** Props accepted by {@link Textarea}. */
 type TextareaProps = PrimitiveTextareaProps;
 
 /**
- * `styleless`-tier `Textarea` — a thin pass-through of `@nebula/primitives`'
+ * `styleless`-tier `Textarea` — a thin pass-through of `@nebula-lab/primitives`'
  * own `Textarea` (already gives `invalid` -> `aria-invalid` wiring and
  * `autoResize`), same reasoning as this package's `Input`: exists so
- * `@nebula/react-ui`'s `TextArea` chains through `styleless` consistently.
+ * `@nebula-lab/react-ui`'s `TextArea` chains through `styleless` consistently.
  *
  * @example
  * ```tsx

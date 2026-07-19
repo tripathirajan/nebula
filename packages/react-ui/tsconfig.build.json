@@ -4,7 +4,7 @@
     // See packages/headless/tsconfig.build.json for why `paths` is cleared
     // here: without it, `tsc -p tsconfig.build.json` (composite + rootDir:
     // './src') pulls other packages' *source* files (resolved via the
-    // workspace-wide `@nebula/*` path aliases) into this program, which
+    // workspace-wide `@nebula-lab/*` path aliases) into this program, which
     // then fails since they fall outside this package's rootDir. Clearing
     // it falls back to node_modules resolution, i.e. the dependency's built
     // `dist` output via its package.json `exports` map.

@@ -1,7 +1,7 @@
 {
-  "name": "@nebula/headless",
+  "name": "@nebula-lab/headless",
   "version": "0.1.0",
-  "description": "Behavior-only, ARIA-complete compound components — no styling opinions. Renamed @nebula/headless -> @nebula/styleless -> back to @nebula/headless; the project owner's confirmed 5-tier model treats headless (this package) and styleless (a distinct, new, not-yet-built layer) as two different things. Built on @nebula/primitives + @nebula/hooks; styled by @nebula/react-ui.",
+  "description": "Behavior-only, ARIA-complete compound components — no styling opinions. Renamed @nebula-lab/headless -> @nebula-lab/styleless -> back to @nebula-lab/headless; the project owner's confirmed 5-tier model treats headless (this package) and styleless (a distinct, new, not-yet-built layer) as two different things. Built on @nebula-lab/primitives + @nebula-lab/hooks; styled by @nebula-lab/react-ui.",
   "license": "MIT",
   "author": "Rajan Tripathi <tripathirajan3@gmail.com>",
   "repository": {
@@ -201,8 +201,8 @@
     "react-dom": "^19.0.0"
   },
   "dependencies": {
-    "@nebula/hooks": "workspace:*",
-    "@nebula/primitives": "workspace:*"
+    "@nebula-lab/hooks": "workspace:*",
+    "@nebula-lab/primitives": "workspace:*"
   },
   "devDependencies": {
     "@storybook/react": "^8.6.18",

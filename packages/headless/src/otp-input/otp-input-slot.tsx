@@ -1,12 +1,12 @@
-import { composeEventHandlers } from '@nebula/primitives/compose-event-handlers';
-import { useComposedRefs } from '@nebula/primitives/compose-refs';
-import { Input } from '@nebula/primitives/input';
+import { composeEventHandlers } from '@nebula-lab/primitives/compose-event-handlers';
+import { useComposedRefs } from '@nebula-lab/primitives/compose-refs';
+import { Input } from '@nebula-lab/primitives/input';
 import * as React from 'react';
 
 import { useOTPInputContext } from './otp-input-context';
 
 import type { ScopedProps } from './otp-input-context';
-import type { InputProps } from '@nebula/primitives/input';
+import type { InputProps } from '@nebula-lab/primitives/input';
 
 const OTP_INPUT_SLOT_NAME = 'OTPInputSlot';
 

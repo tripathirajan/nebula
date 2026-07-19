@@ -1,8 +1,8 @@
-import { NumberInputDecrement as HeadlessNumberInputDecrement } from '@nebula/headless/number-input';
-import { cn } from '@nebula/primitives/cn';
+import { NumberInputDecrement as HeadlessNumberInputDecrement } from '@nebula-lab/headless/number-input';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
-import type { NumberInputDecrementProps as HeadlessNumberInputDecrementProps } from '@nebula/headless/number-input';
+import type { NumberInputDecrementProps as HeadlessNumberInputDecrementProps } from '@nebula-lab/headless/number-input';
 
 type NumberInputDecrementProps = HeadlessNumberInputDecrementProps;
 

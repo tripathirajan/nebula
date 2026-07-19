@@ -1,7 +1,7 @@
-import { Badge } from '@nebula/react-ui/badge';
-import { Button } from '@nebula/react-ui/button';
-import { MenuItem } from '@nebula/react-ui/menu';
-import { Text } from '@nebula/react-ui/text';
+import { Badge } from '@nebula-lab/react-ui/badge';
+import { Button } from '@nebula-lab/react-ui/button';
+import { MenuItem } from '@nebula-lab/react-ui/menu';
+import { Text } from '@nebula-lab/react-ui/text';
 import { useState } from 'react';
 
 import { DataTableBlock } from '../data-display/data-table/data-table-block';

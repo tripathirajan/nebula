@@ -16,7 +16,7 @@ type FABProps = Omit<ButtonProps, 'children'> & {
  * `IconButton` (icon-only, requires `aria-label`, inherits `Button`'s
  * `loading` semantics) with its own name because it's a distinct semantic
  * role (a page's single most prominent action) even though the unstyled
- * shape is the same; `@nebula/react-ui`'s `FAB` is what actually makes it
+ * shape is the same; `@nebula-lab/react-ui`'s `FAB` is what actually makes it
  * *look* circular/elevated. Deliberately applies no positioning of its own
  * — `fixed`/`bottom-*`/`right-*` placement is a page-layout concern the
  * consumer (or the `react-ui` layer) owns.

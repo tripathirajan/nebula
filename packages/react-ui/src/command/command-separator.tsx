@@ -1,8 +1,8 @@
-import { CommandSeparator as HeadlessCommandSeparator } from '@nebula/headless/command';
-import { cn } from '@nebula/primitives/cn';
+import { CommandSeparator as HeadlessCommandSeparator } from '@nebula-lab/headless/command';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
-import type { CommandSeparatorProps as HeadlessCommandSeparatorProps } from '@nebula/headless/command';
+import type { CommandSeparatorProps as HeadlessCommandSeparatorProps } from '@nebula-lab/headless/command';
 
 type CommandSeparatorProps = HeadlessCommandSeparatorProps;
 

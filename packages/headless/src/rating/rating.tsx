@@ -1,13 +1,13 @@
-import { useControllableState } from '@nebula/hooks';
-import { composeEventHandlers } from '@nebula/primitives/compose-event-handlers';
-import { Primitive } from '@nebula/primitives/primitive';
-import { RovingFocusGroup } from '@nebula/primitives/roving-focus-group';
+import { useControllableState } from '@nebula-lab/hooks';
+import { composeEventHandlers } from '@nebula-lab/primitives/compose-event-handlers';
+import { Primitive } from '@nebula-lab/primitives/primitive';
+import { RovingFocusGroup } from '@nebula-lab/primitives/roving-focus-group';
 import * as React from 'react';
 
 import { RatingProvider } from './rating-context';
 
 import type { ScopedProps } from './rating-context';
-import type { PrimitivePropsWithRef } from '@nebula/primitives/primitive';
+import type { PrimitivePropsWithRef } from '@nebula-lab/primitives/primitive';
 
 interface RatingProps extends PrimitivePropsWithRef<'div'> {
   value?: number;

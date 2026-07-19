@@ -1,5 +1,5 @@
-import { useControllableState } from '@nebula/hooks';
-import { cn } from '@nebula/primitives/cn';
+import { useControllableState } from '@nebula-lab/hooks';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
 import { Calendar } from '../calendar/calendar';

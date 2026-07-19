@@ -1,12 +1,12 @@
 
-import { Primitive } from '@nebula/primitives/primitive';
+import { Primitive } from '@nebula-lab/primitives/primitive';
 import * as React from 'react';
 
 
 import { ProgressProvider } from './progress-context';
 
 import type { ProgressState, ScopedProps } from './progress-context';
-import type { PrimitivePropsWithRef } from '@nebula/primitives/primitive';
+import type { PrimitivePropsWithRef } from '@nebula-lab/primitives/primitive';
 
 const DEFAULT_MAX = 100;
 

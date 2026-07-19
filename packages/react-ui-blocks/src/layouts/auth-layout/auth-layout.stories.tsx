@@ -1,4 +1,4 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@nebula/react-ui';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@nebula-lab/react-ui';
 
 import { AuthLayout } from './auth-layout';
 

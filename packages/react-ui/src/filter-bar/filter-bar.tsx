@@ -1,13 +1,13 @@
-import { cn } from '@nebula/primitives/cn';
-import { Button } from '@nebula/react-ui/button';
-import { Chip } from '@nebula/react-ui/chip';
+import { cn } from '@nebula-lab/primitives/cn';
+import { Button } from '@nebula-lab/react-ui/button';
+import { Chip } from '@nebula-lab/react-ui/chip';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuPortal,
   DropdownMenuTrigger,
-} from '@nebula/react-ui/dropdown-menu';
+} from '@nebula-lab/react-ui/dropdown-menu';
 import * as React from 'react';
 
 const PlusIcon = (props: React.SVGProps<SVGSVGElement>) => (

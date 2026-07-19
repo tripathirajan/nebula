@@ -1,8 +1,8 @@
-import { PopoverContent as HeadlessPopoverContent } from '@nebula/headless/popover';
-import { cn } from '@nebula/primitives/cn';
+import { PopoverContent as HeadlessPopoverContent } from '@nebula-lab/headless/popover';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
-import type { PopoverContentProps as HeadlessPopoverContentProps } from '@nebula/headless/popover';
+import type { PopoverContentProps as HeadlessPopoverContentProps } from '@nebula-lab/headless/popover';
 
 type PopoverContentProps = HeadlessPopoverContentProps;
 
@@ -12,7 +12,7 @@ type PopoverContentProps = HeadlessPopoverContentProps;
  * (smaller than `Dialog`'s `--radius-dialog` by default in this theme's
  * token values, though both currently share the same `2rem` — see
  * `tokens/primitive.ts`). All positioning (`side`/`align`/`sideOffset`/
- * collision handling) is inherited unchanged from `@nebula/headless`.
+ * collision handling) is inherited unchanged from `@nebula-lab/headless`.
  *
  * Fades/scales in on open and out on close via `data-[state]`, reading the
  * shared `--motion-duration-fast`/`--motion-ease-out` tokens and the

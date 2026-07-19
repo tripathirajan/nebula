@@ -1,12 +1,12 @@
-import { useMediaQuery, useSwipe } from '@nebula/hooks';
-import { cn } from '@nebula/primitives/cn';
-import { composeEventHandlers } from '@nebula/primitives/compose-event-handlers';
-import { Primitive } from '@nebula/primitives/primitive';
+import { useMediaQuery, useSwipe } from '@nebula-lab/hooks';
+import { cn } from '@nebula-lab/primitives/cn';
+import { composeEventHandlers } from '@nebula-lab/primitives/compose-event-handlers';
+import { Primitive } from '@nebula-lab/primitives/primitive';
 import * as React from 'react';
 
 import { useCarouselContext } from './carousel-context';
 
-import type { PrimitivePropsWithRef } from '@nebula/primitives/primitive';
+import type { PrimitivePropsWithRef } from '@nebula-lab/primitives/primitive';
 
 /** Minimum horizontal wheel delta (px) before a trackpad/wheel gesture commits to a slide change. */
 const WHEEL_THRESHOLD = 24;
@@ -24,7 +24,7 @@ type CarouselContentProps = PrimitivePropsWithRef<'div'>;
  * deliberately simpler model than a scroll-snap-based carousel, which would
  * need its own scroll-position-to-index sync logic).
  *
- * Also swipeable via `@nebula/hooks`' `useSwipe`: dragging follows the
+ * Also swipeable via `@nebula-lab/hooks`' `useSwipe`: dragging follows the
  * pointer in real time (live `delta` composed on top of the index-based
  * `translate`, transition disabled mid-drag so it doesn't lag), and a
  * release past the drag threshold advances/retreats the index the same way

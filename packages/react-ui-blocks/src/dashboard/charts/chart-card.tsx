@@ -1,6 +1,6 @@
-import { cn } from '@nebula/primitives/cn';
-import { Card, CardContent, CardHeader, CardTitle } from '@nebula/react-ui/card';
-import { Text } from '@nebula/react-ui/text';
+import { cn } from '@nebula-lab/primitives/cn';
+import { Card, CardContent, CardHeader, CardTitle } from '@nebula-lab/react-ui/card';
+import { Text } from '@nebula-lab/react-ui/text';
 import * as React from 'react';
 import {
   Area,
@@ -177,7 +177,7 @@ function chartAriaLabel(title: React.ReactNode, description?: React.ReactNode): 
  * themed entirely off Nebula's own `--color-*` semantic tokens (never a
  * hardcoded hex), so a chart re-themes for free the same way every other
  * component in this repo does. Built on `recharts` (the one external,
- * non-`@nebula/*` runtime dependency this package has — no charting
+ * non-`@nebula-lab/*` runtime dependency this package has — no charting
  * primitive exists at any lower layer, and building one from scratch is a
  * much larger investment than this single block needs; `recharts` is
  * marked `external` in `tsup.config.ts` like `react`/`react-dom`, resolved

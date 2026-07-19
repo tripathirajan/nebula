@@ -1,13 +1,13 @@
-import { RadioGroupItem as HeadlessRadioGroupItem } from '@nebula/headless/radio-group';
-import { cn } from '@nebula/primitives/cn';
+import { RadioGroupItem as HeadlessRadioGroupItem } from '@nebula-lab/headless/radio-group';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
-import type { RadioGroupItemProps as HeadlessRadioGroupItemProps } from '@nebula/headless/radio-group';
+import type { RadioGroupItemProps as HeadlessRadioGroupItemProps } from '@nebula-lab/headless/radio-group';
 
 type RadioGroupItemProps = HeadlessRadioGroupItemProps;
 
 /**
- * Styled wrapper around `@nebula/headless`'s `RadioGroupItem`. Note the
+ * Styled wrapper around `@nebula-lab/headless`'s `RadioGroupItem`. Note the
  * underlying `headless` item is itself the full clickable control — its
  * `children` become the accessible name (see its stories:
  * `<RadioGroupItem value="compact">Compact</RadioGroupItem>`), not a

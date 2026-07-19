@@ -1,5 +1,5 @@
-import { Primitive } from '@nebula/primitives/primitive';
-import { VisuallyHidden } from '@nebula/primitives/visually-hidden';
+import { Primitive } from '@nebula-lab/primitives/primitive';
+import { VisuallyHidden } from '@nebula-lab/primitives/visually-hidden';
 import * as React from 'react';
 
 import { PopoverTrigger } from '../popover/popover-trigger';
@@ -7,7 +7,7 @@ import { PopoverTrigger } from '../popover/popover-trigger';
 import { useColorPickerContext } from './color-picker-context';
 
 import type { ScopedProps } from './color-picker-context';
-import type { PrimitivePropsWithRef } from '@nebula/primitives/primitive';
+import type { PrimitivePropsWithRef } from '@nebula-lab/primitives/primitive';
 
 const COLOR_PICKER_TRIGGER_NAME = 'ColorPickerTrigger';
 

@@ -1,8 +1,8 @@
-import { RatingItem as HeadlessRatingItem } from '@nebula/headless/rating';
-import { cn } from '@nebula/primitives/cn';
+import { RatingItem as HeadlessRatingItem } from '@nebula-lab/headless/rating';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
-import type { RatingItemProps as HeadlessRatingItemProps } from '@nebula/headless/rating';
+import type { RatingItemProps as HeadlessRatingItemProps } from '@nebula-lab/headless/rating';
 
 type RatingItemProps = HeadlessRatingItemProps;
 

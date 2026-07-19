@@ -1,5 +1,5 @@
 
-import { Primitive } from '@nebula/primitives/primitive';
+import { Primitive } from '@nebula-lab/primitives/primitive';
 import * as React from 'react';
 
 
@@ -8,7 +8,7 @@ import { AccordionItemProvider } from './accordion-item-context';
 
 import type { ScopedProps } from './accordion-context';
 import type { ItemScopedProps } from './accordion-item-context';
-import type { PrimitivePropsWithRef } from '@nebula/primitives/primitive';
+import type { PrimitivePropsWithRef } from '@nebula-lab/primitives/primitive';
 
 const ACCORDION_ITEM_NAME = 'AccordionItem';
 

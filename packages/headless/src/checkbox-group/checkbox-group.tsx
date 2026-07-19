@@ -1,11 +1,11 @@
-import { useControllableState } from '@nebula/hooks';
-import { Primitive } from '@nebula/primitives/primitive';
+import { useControllableState } from '@nebula-lab/hooks';
+import { Primitive } from '@nebula-lab/primitives/primitive';
 import * as React from 'react';
 
 import { CheckboxGroupProvider } from './checkbox-group-context';
 
 import type { ScopedProps } from './checkbox-group-context';
-import type { PrimitivePropsWithRef } from '@nebula/primitives/primitive';
+import type { PrimitivePropsWithRef } from '@nebula-lab/primitives/primitive';
 
 interface CheckboxGroupProps extends PrimitivePropsWithRef<'div'> {
   /** Controlled: the set of currently checked items' values. */
@@ -22,7 +22,7 @@ interface CheckboxGroupProps extends PrimitivePropsWithRef<'div'> {
  * `RadioGroup`/`ToggleGroup`, there's no roving-tabindex here: native
  * checkboxes in a group are each independently `Tab`-reachable (there's no
  * "arrow keys move between them" convention the way radio buttons have), so
- * this doesn't wrap `@nebula/primitives`' `RovingFocusGroup` at all —
+ * this doesn't wrap `@nebula-lab/primitives`' `RovingFocusGroup` at all —
  * `CheckboxGroupItem` is just a plain `Checkbox` reading its checked state
  * from context.
  *

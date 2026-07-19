@@ -1,16 +1,16 @@
-import { cn } from '@nebula/primitives/cn';
-import { UrlInput as StylelessUrlInput } from '@nebula/styleless/url-input';
+import { cn } from '@nebula-lab/primitives/cn';
+import { UrlInput as StylelessUrlInput } from '@nebula-lab/styleless/url-input';
 import * as React from 'react';
 
 import { inputVariants } from '../input/input';
 
-import type { UrlInputProps as StylelessUrlInputProps } from '@nebula/styleless/url-input';
+import type { UrlInputProps as StylelessUrlInputProps } from '@nebula-lab/styleless/url-input';
 import type { VariantProps } from 'class-variance-authority';
 
 type UrlFieldProps = StylelessUrlInputProps & VariantProps<typeof inputVariants>;
 
 /**
- * Styled `type="url"` `Input` preset — wraps `@nebula/styleless`'s
+ * Styled `type="url"` `Input` preset — wraps `@nebula-lab/styleless`'s
  * `UrlInput` and reuses `Input`'s exact class recipe (`inputVariants`).
  *
  * @example

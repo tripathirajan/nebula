@@ -20,5 +20,5 @@ export default defineConfig({
   splitting: false,
   clean: true,
   treeshake: true,
-  external: ['react', 'react-dom', '@nebula/primitives', '@nebula/react-ui', 'recharts'],
+  external: ['react', 'react-dom', '@nebula-lab/primitives', '@nebula-lab/react-ui', 'recharts'],
 });

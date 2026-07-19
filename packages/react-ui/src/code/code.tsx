@@ -1,9 +1,9 @@
-import { cn } from '@nebula/primitives/cn';
-import { Code as PrimitiveCode } from '@nebula/primitives/code';
+import { cn } from '@nebula-lab/primitives/cn';
+import { Code as PrimitiveCode } from '@nebula-lab/primitives/code';
 import * as React from 'react';
 
-import type { CodeProps as PrimitiveCodeProps } from '@nebula/primitives/code';
-import type { PolymorphicComponent } from '@nebula/primitives/types';
+import type { CodeProps as PrimitiveCodeProps } from '@nebula-lab/primitives/code';
+import type { PolymorphicComponent } from '@nebula-lab/primitives/types';
 
 /**
  * Styled inline `Code` — overrides the unstyled primitive's hardcoded

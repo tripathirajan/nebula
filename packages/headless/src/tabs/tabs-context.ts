@@ -1,6 +1,6 @@
-import { createContextScope } from '@nebula/primitives/create-context-scope';
+import { createContextScope } from '@nebula-lab/primitives/create-context-scope';
 
-import type { Scope } from '@nebula/primitives/create-context-scope';
+import type { Scope } from '@nebula-lab/primitives/create-context-scope';
 
 type Orientation = 'horizontal' | 'vertical';
 type ActivationMode = 'automatic' | 'manual';
@@ -18,7 +18,7 @@ const TABS_NAME = 'Tabs';
 /**
  * Scoped context factory for Tabs — lets a `Tabs` nested inside another
  * `Tabs` mint its own context instead of colliding with the outer one (see
- * `@nebula/primitives/create-context-scope`).
+ * `@nebula-lab/primitives/create-context-scope`).
  */
 const [createTabsContext, createTabsScope] = createContextScope(TABS_NAME);
 const [TabsProvider, useTabsContext] = createTabsContext<TabsContextValue>(TABS_NAME);

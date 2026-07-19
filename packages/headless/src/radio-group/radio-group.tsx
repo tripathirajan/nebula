@@ -1,15 +1,15 @@
 
-import { useControllableState } from '@nebula/hooks';
-import { Primitive } from '@nebula/primitives/primitive';
-import { RovingFocusGroup } from '@nebula/primitives/roving-focus-group';
+import { useControllableState } from '@nebula-lab/hooks';
+import { Primitive } from '@nebula-lab/primitives/primitive';
+import { RovingFocusGroup } from '@nebula-lab/primitives/roving-focus-group';
 import * as React from 'react';
 
 
 import { RadioGroupProvider } from './radio-group-context';
 
 import type { ScopedProps } from './radio-group-context';
-import type { PrimitivePropsWithRef } from '@nebula/primitives/primitive';
-import type { RovingFocusGroupOrientation } from '@nebula/primitives/roving-focus-group';
+import type { PrimitivePropsWithRef } from '@nebula-lab/primitives/primitive';
+import type { RovingFocusGroupOrientation } from '@nebula-lab/primitives/roving-focus-group';
 
 interface RadioGroupProps extends PrimitivePropsWithRef<'div'> {
   /** Controlled: the currently selected item's value. */
@@ -29,7 +29,7 @@ interface RadioGroupProps extends PrimitivePropsWithRef<'div'> {
 
 /**
  * `role="radiogroup"` — a single-select group of {@link RadioGroupItem}s.
- * Keyboard navigation is delegated entirely to `@nebula/primitives`'
+ * Keyboard navigation is delegated entirely to `@nebula-lab/primitives`'
  * `RovingFocusGroup`/`FocusItem` rather than reimplementing roving-tabindex
  * here — matching native `<input type="radio">` behavior, arrow-key
  * movement also selects the newly-focused item immediately (there's no

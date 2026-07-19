@@ -1,7 +1,7 @@
-import { composeEventHandlers } from '@nebula/primitives/compose-event-handlers';
-import { PopperAnchor } from '@nebula/primitives/popper';
-import { Primitive } from '@nebula/primitives/primitive';
-import { FocusItem } from '@nebula/primitives/roving-focus-group';
+import { composeEventHandlers } from '@nebula-lab/primitives/compose-event-handlers';
+import { PopperAnchor } from '@nebula-lab/primitives/popper';
+import { Primitive } from '@nebula-lab/primitives/primitive';
+import { FocusItem } from '@nebula-lab/primitives/roving-focus-group';
 import * as React from 'react';
 
 import { usePopoverContext, usePopperScope } from '../popover/popover-context';
@@ -10,7 +10,7 @@ import { useNavigationMenuContext } from './navigation-menu-context';
 import { useNavigationMenuItemContext } from './navigation-menu-item-context';
 
 import type { ScopedProps } from './navigation-menu-context';
-import type { PrimitivePropsWithRef } from '@nebula/primitives/primitive';
+import type { PrimitivePropsWithRef } from '@nebula-lab/primitives/primitive';
 
 const NAVIGATION_MENU_TRIGGER_NAME = 'NavigationMenuTrigger';
 

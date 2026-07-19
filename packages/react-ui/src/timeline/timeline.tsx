@@ -1,14 +1,14 @@
-import { cn } from '@nebula/primitives/cn';
-import { Primitive } from '@nebula/primitives/primitive';
+import { cn } from '@nebula-lab/primitives/cn';
+import { Primitive } from '@nebula-lab/primitives/primitive';
 import * as React from 'react';
 
-import type { PrimitivePropsWithRef } from '@nebula/primitives/primitive';
+import type { PrimitivePropsWithRef } from '@nebula-lab/primitives/primitive';
 
 type TimelineProps = PrimitivePropsWithRef<'ol'>;
 
 /**
  * A vertical sequence of dated/ordered events — purely presentational
- * structure, no matching `@nebula/headless` compound, same treatment
+ * structure, no matching `@nebula-lab/headless` compound, same treatment
  * `List`/`Stat`/`Card` document (nothing here is a widget with its own ARIA
  * behavior to separate out; it's a real `<ol>` since a timeline's items are
  * inherently ordered, same reasoning `List`'s `ordered` prop exists for).

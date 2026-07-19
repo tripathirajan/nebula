@@ -55,46 +55,46 @@
     // anything actually resolves to.
     "paths": {
       // Add an entry here each time a new packages/* is scaffolded.
-      "@nebula/utilities": [
+      "@nebula-lab/utilities": [
         "./packages/utilities/src/index.ts"
       ],
-      "@nebula/utilities/*": [
+      "@nebula-lab/utilities/*": [
         "./packages/utilities/src/*"
       ],
-      "@nebula/hooks": [
+      "@nebula-lab/hooks": [
         "./packages/hooks/src/index.ts"
       ],
-      "@nebula/hooks/*": [
+      "@nebula-lab/hooks/*": [
         "./packages/hooks/src/*"
       ],
-      "@nebula/primitives": [
+      "@nebula-lab/primitives": [
         "./packages/primitives/src/index.ts"
       ],
-      "@nebula/primitives/*": [
+      "@nebula-lab/primitives/*": [
         "./packages/primitives/src/*"
       ],
-      "@nebula/headless": [
+      "@nebula-lab/headless": [
         "./packages/headless/src/index.ts"
       ],
-      "@nebula/headless/*": [
+      "@nebula-lab/headless/*": [
         "./packages/headless/src/*"
       ],
-      "@nebula/styleless": [
+      "@nebula-lab/styleless": [
         "./packages/styleless/src/index.ts"
       ],
-      "@nebula/styleless/*": [
+      "@nebula-lab/styleless/*": [
         "./packages/styleless/src/*"
       ],
-      "@nebula/react-ui": [
+      "@nebula-lab/react-ui": [
         "./packages/react-ui/src/index.ts"
       ],
-      "@nebula/react-ui/*": [
+      "@nebula-lab/react-ui/*": [
         "./packages/react-ui/src/*"
       ],
-      "@nebula/react-ui-blocks": [
+      "@nebula-lab/react-ui-blocks": [
         "./packages/react-ui-blocks/src/index.ts"
       ],
-      "@nebula/react-ui-blocks/*": [
+      "@nebula-lab/react-ui-blocks/*": [
         "./packages/react-ui-blocks/src/*"
       ]
     }

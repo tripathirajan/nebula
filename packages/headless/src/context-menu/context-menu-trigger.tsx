@@ -1,14 +1,14 @@
 
-import { composeEventHandlers } from '@nebula/primitives/compose-event-handlers';
-import { usePopperContext } from '@nebula/primitives/popper';
-import { Primitive } from '@nebula/primitives/primitive';
+import { composeEventHandlers } from '@nebula-lab/primitives/compose-event-handlers';
+import { usePopperContext } from '@nebula-lab/primitives/popper';
+import { Primitive } from '@nebula-lab/primitives/primitive';
 import * as React from 'react';
 
 
 import { useMenuContext, usePopperScope } from '../menu/menu-context';
 
 import type { ScopedProps } from '../menu/menu-context';
-import type { PrimitivePropsWithRef } from '@nebula/primitives/primitive';
+import type { PrimitivePropsWithRef } from '@nebula-lab/primitives/primitive';
 
 const CONTEXT_MENU_TRIGGER_NAME = 'ContextMenuTrigger';
 

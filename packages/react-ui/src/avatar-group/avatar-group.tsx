@@ -1,16 +1,16 @@
-import { cn } from '@nebula/primitives/cn';
-import { AvatarGroup as StylelessAvatarGroup } from '@nebula/styleless/avatar-group';
+import { cn } from '@nebula-lab/primitives/cn';
+import { AvatarGroup as StylelessAvatarGroup } from '@nebula-lab/styleless/avatar-group';
 import * as React from 'react';
 
 import { Avatar } from '../avatar/avatar';
 import { AvatarFallback } from '../avatar/avatar-fallback';
 
-import type { AvatarGroupProps as StylelessAvatarGroupProps } from '@nebula/styleless/avatar-group';
+import type { AvatarGroupProps as StylelessAvatarGroupProps } from '@nebula-lab/styleless/avatar-group';
 
 type AvatarGroupProps = StylelessAvatarGroupProps;
 
 /**
- * Styled wrapper around `@nebula/styleless`'s `AvatarGroup` — the `max`
+ * Styled wrapper around `@nebula-lab/styleless`'s `AvatarGroup` — the `max`
  * truncation math comes from there unchanged. This layer adds the overlap
  * treatment (negative margin + a ring in the page background color, so each
  * avatar reads as a distinct circle rather than abutting edges) and supplies

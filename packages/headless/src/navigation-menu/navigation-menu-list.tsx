@@ -1,14 +1,14 @@
-import { Primitive } from '@nebula/primitives/primitive';
-import { RovingFocusGroup } from '@nebula/primitives/roving-focus-group';
+import { Primitive } from '@nebula-lab/primitives/primitive';
+import { RovingFocusGroup } from '@nebula-lab/primitives/roving-focus-group';
 import * as React from 'react';
 
-import type { PrimitivePropsWithRef } from '@nebula/primitives/primitive';
+import type { PrimitivePropsWithRef } from '@nebula-lab/primitives/primitive';
 
 type NavigationMenuListProps = PrimitivePropsWithRef<'ul'>;
 
 /**
  * `<ul>` wrapper for `NavigationMenuItem`s, wrapped in
- * `@nebula/primitives`' `RovingFocusGroup` (horizontal, looping) so
+ * `@nebula-lab/primitives`' `RovingFocusGroup` (horizontal, looping) so
  * Left/Right arrow keys move focus between sibling triggers/links — same
  * technique `Menubar` uses for its top-level triggers.
  *

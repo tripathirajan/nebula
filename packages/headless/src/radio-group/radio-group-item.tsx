@@ -1,15 +1,15 @@
 
-import { composeEventHandlers } from '@nebula/primitives/compose-event-handlers';
-import { useComposedRefs } from '@nebula/primitives/compose-refs';
-import { Primitive } from '@nebula/primitives/primitive';
-import { FocusItem } from '@nebula/primitives/roving-focus-group';
-import { VisuallyHidden } from '@nebula/primitives/visually-hidden';
+import { composeEventHandlers } from '@nebula-lab/primitives/compose-event-handlers';
+import { useComposedRefs } from '@nebula-lab/primitives/compose-refs';
+import { Primitive } from '@nebula-lab/primitives/primitive';
+import { FocusItem } from '@nebula-lab/primitives/roving-focus-group';
+import { VisuallyHidden } from '@nebula-lab/primitives/visually-hidden';
 import * as React from 'react';
 
 import { useRadioGroupContext } from './radio-group-context';
 
 import type { ScopedProps } from './radio-group-context';
-import type { PrimitivePropsWithRef } from '@nebula/primitives/primitive';
+import type { PrimitivePropsWithRef } from '@nebula-lab/primitives/primitive';
 
 const RADIO_GROUP_ITEM_NAME = 'RadioGroupItem';
 
@@ -22,7 +22,7 @@ interface RadioGroupItemProps extends PrimitivePropsWithRef<'button'> {
 /**
  * `role="radio"`. Selected state comes entirely from `RadioGroup`'s context
  * (comparing this item's `value` against the group's selected value) — this
- * component holds no local selection state. Wrapped in `@nebula/primitives`'
+ * component holds no local selection state. Wrapped in `@nebula-lab/primitives`'
  * `FocusItem` for the roving-tabindex + arrow-key behavior (it finds the
  * ambient `RovingFocusGroup` that `RadioGroup` renders automatically, via
  * ordinary React context — no manual scope wiring needed here), so

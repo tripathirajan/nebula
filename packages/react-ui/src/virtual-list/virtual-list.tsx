@@ -1,5 +1,5 @@
-import { useVirtualizer } from '@nebula/hooks';
-import { cn } from '@nebula/primitives/cn';
+import { useVirtualizer } from '@nebula-lab/hooks';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
 interface VirtualListProps<T> {
@@ -28,7 +28,7 @@ interface VirtualListRowProps<T> {
 /**
  * One virtualized row, its own component (not inlined in `.map()`) so its
  * `ref` callback can be `useCallback`-stabilized per row — the same fix
- * `@nebula/styleless`'s `DataGrid` needed: an inline
+ * `@nebula-lab/styleless`'s `DataGrid` needed: an inline
  * `(element) => measureElement(index, element)` created fresh inside
  * `.map()` gets a new identity every render, which makes React tear down
  * and reattach every *visible* row's `ResizeObserver` on every single
@@ -55,10 +55,10 @@ function VirtualListRow<T>(props: VirtualListRowProps<T>) {
 }
 
 /**
- * A virtualized single-column list — composes `@nebula/hooks`' `useVirtualizer`
+ * A virtualized single-column list — composes `@nebula-lab/hooks`' `useVirtualizer`
  * directly, the same "pure windowing math, no ARIA behavior split worth
- * decoupling" project-owner call `DataGrid` documents (no `@nebula/headless`/
- * `@nebula/styleless` layer underneath). Renders `role="list"`/`"listitem"`
+ * decoupling" project-owner call `DataGrid` documents (no `@nebula-lab/headless`/
+ * `@nebula-lab/styleless` layer underneath). Renders `role="list"`/`"listitem"`
  * over plain `div`s rather than a real `<ul>`/`<li>` — a virtualized list's
  * items are absolutely positioned, which breaks native list flow anyway, so
  * this uses the same accessible-role-on-a-div technique `DataGrid` already

@@ -1,13 +1,13 @@
-import { cn } from '@nebula/primitives/cn';
-import { DataTableHead as StylelessDataTableHead } from '@nebula/styleless/data-table';
+import { cn } from '@nebula-lab/primitives/cn';
+import { DataTableHead as StylelessDataTableHead } from '@nebula-lab/styleless/data-table';
 import * as React from 'react';
 
-import type { DataTableHeadProps as StylelessDataTableHeadProps } from '@nebula/styleless/data-table';
+import type { DataTableHeadProps as StylelessDataTableHeadProps } from '@nebula-lab/styleless/data-table';
 
 type DataTableHeadProps = Omit<StylelessDataTableHeadProps, 'classNames'> & { className?: string };
 
 /**
- * Wraps `@nebula/styleless`'s `DataTableHead` (which owns the real
+ * Wraps `@nebula-lab/styleless`'s `DataTableHead` (which owns the real
  * behavior: the sort `<button>`, `aria-sort` computation, and `data-active`/
  * `data-direction` on the `<th>`) and supplies every part's classes via its
  * `classNames` prop — the sort-direction chevron reacts to the `<th>`'s own

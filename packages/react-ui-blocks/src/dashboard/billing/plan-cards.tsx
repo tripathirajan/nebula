@@ -1,8 +1,8 @@
-import { cn } from '@nebula/primitives/cn';
-import { Badge } from '@nebula/react-ui/badge';
-import { List, ListItem } from '@nebula/react-ui/list';
-import { RadioGroup, RadioGroupItem } from '@nebula/react-ui/radio-group';
-import { Text } from '@nebula/react-ui/text';
+import { cn } from '@nebula-lab/primitives/cn';
+import { Badge } from '@nebula-lab/react-ui/badge';
+import { List, ListItem } from '@nebula-lab/react-ui/list';
+import { RadioGroup, RadioGroupItem } from '@nebula-lab/react-ui/radio-group';
+import { Text } from '@nebula-lab/react-ui/text';
 import * as React from 'react';
 
 interface PlanCardsPlan {

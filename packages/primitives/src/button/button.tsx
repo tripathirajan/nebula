@@ -12,7 +12,7 @@ type ButtonProps = PrimitivePropsWithRef<'button'>;
  * `<button>` is defaulting `type="button"` instead of the native default
  * (`"submit"`), which silently submits the nearest `<form>` and is almost
  * never what you want for a button that isn't literally a submit button.
- * Pass `type="submit"` explicitly when you do want that. See `@nebula/react-ui`'s
+ * Pass `type="submit"` explicitly when you do want that. See `@nebula-lab/react-ui`'s
  * `Button` for the themed/`cva`-variant version built on this.
  *
  * @example

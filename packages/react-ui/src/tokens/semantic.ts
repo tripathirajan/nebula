@@ -77,7 +77,7 @@ const dark = {
  *
  * @example
  * ```ts
- * import { semanticTokens } from '@nebula/react-ui/tokens';
+ * import { semanticTokens } from '@nebula-lab/react-ui/tokens';
  *
  * // Consumed by generate.ts to emit `:root` / `.dark` CSS vars — components
  * // should read the resulting `var(--color-...)` custom properties rather

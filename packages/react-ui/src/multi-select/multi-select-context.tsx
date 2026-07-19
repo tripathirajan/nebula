@@ -10,7 +10,7 @@ interface MultiSelectContextValue {
   getItemLabel: (itemValue: string) => string | undefined;
 }
 
-// A plain `React.createContext`, not `@nebula/primitives`' `createContextScope`
+// A plain `React.createContext`, not `@nebula-lab/primitives`' `createContextScope`
 // — same reasoning `Carousel`/`DataTable`'s own contexts document: nothing
 // else in this workspace ever needs to compose another component into a
 // `MultiSelect` instance's scope, so the extra scoping machinery would be

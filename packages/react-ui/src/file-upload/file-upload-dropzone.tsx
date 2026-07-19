@@ -1,8 +1,8 @@
-import { FileUploadDropzone as HeadlessFileUploadDropzone } from '@nebula/headless/file-upload';
-import { cn } from '@nebula/primitives/cn';
+import { FileUploadDropzone as HeadlessFileUploadDropzone } from '@nebula-lab/headless/file-upload';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
-import type { FileUploadDropzoneProps as HeadlessFileUploadDropzoneProps } from '@nebula/headless/file-upload';
+import type { FileUploadDropzoneProps as HeadlessFileUploadDropzoneProps } from '@nebula-lab/headless/file-upload';
 
 type FileUploadDropzoneProps = HeadlessFileUploadDropzoneProps;
 

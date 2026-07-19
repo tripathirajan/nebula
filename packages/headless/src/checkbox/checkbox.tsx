@@ -1,12 +1,12 @@
 
-import { useControllableState } from '@nebula/hooks';
-import { composeEventHandlers } from '@nebula/primitives/compose-event-handlers';
-import { useComposedRefs } from '@nebula/primitives/compose-refs';
-import { Primitive } from '@nebula/primitives/primitive';
-import { VisuallyHidden } from '@nebula/primitives/visually-hidden';
+import { useControllableState } from '@nebula-lab/hooks';
+import { composeEventHandlers } from '@nebula-lab/primitives/compose-event-handlers';
+import { useComposedRefs } from '@nebula-lab/primitives/compose-refs';
+import { Primitive } from '@nebula-lab/primitives/primitive';
+import { VisuallyHidden } from '@nebula-lab/primitives/visually-hidden';
 import * as React from 'react';
 
-import type { PrimitivePropsWithRef } from '@nebula/primitives/primitive';
+import type { PrimitivePropsWithRef } from '@nebula-lab/primitives/primitive';
 
 type CheckedState = boolean | 'indeterminate';
 
@@ -25,7 +25,7 @@ interface CheckboxProps extends Omit<PrimitivePropsWithRef<'button'>, 'checked' 
 
 /**
  * `role="checkbox"` — a `button`, not a native `<input type="checkbox">`, so
- * `@nebula/react-ui` can fully style the check mark instead of fighting
+ * `@nebula-lab/react-ui` can fully style the check mark instead of fighting
  * browser-native checkbox rendering. A visually-hidden native checkbox
  * mirrors the state underneath for free `<form>` participation (name/value
  * submission, browser autofill, constraint validation) — the same technique

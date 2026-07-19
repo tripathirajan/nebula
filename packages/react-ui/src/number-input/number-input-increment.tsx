@@ -1,8 +1,8 @@
-import { NumberInputIncrement as HeadlessNumberInputIncrement } from '@nebula/headless/number-input';
-import { cn } from '@nebula/primitives/cn';
+import { NumberInputIncrement as HeadlessNumberInputIncrement } from '@nebula-lab/headless/number-input';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
-import type { NumberInputIncrementProps as HeadlessNumberInputIncrementProps } from '@nebula/headless/number-input';
+import type { NumberInputIncrementProps as HeadlessNumberInputIncrementProps } from '@nebula-lab/headless/number-input';
 
 type NumberInputIncrementProps = HeadlessNumberInputIncrementProps;
 

@@ -1,12 +1,12 @@
-import { cn } from '@nebula/primitives/cn';
-import { Text as PrimitiveText } from '@nebula/primitives/text';
+import { cn } from '@nebula-lab/primitives/cn';
+import { Text as PrimitiveText } from '@nebula-lab/primitives/text';
 import * as React from 'react';
 
-import type { TextOwnProps, TextProps as PrimitiveTextProps } from '@nebula/primitives/text';
-import type { PolymorphicComponent } from '@nebula/primitives/types';
+import type { TextOwnProps, TextProps as PrimitiveTextProps } from '@nebula-lab/primitives/text';
+import type { PolymorphicComponent } from '@nebula-lab/primitives/types';
 
 /**
- * Styled `Text` — wraps `@nebula/primitives`' unstyled, polymorphic `Text`
+ * Styled `Text` — wraps `@nebula-lab/primitives`' unstyled, polymorphic `Text`
  * (which already gives `as`/`truncate`) and only adds this theme's default
  * body color (`--text-color`, see `../tokens/component.ts`) — no font-size
  * or weight opinion here either, same as the primitive it wraps; reach for

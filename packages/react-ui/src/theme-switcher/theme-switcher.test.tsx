@@ -1,4 +1,4 @@
-import { ThemeProvider } from '@nebula/react-ui/theme-provider';
+import { ThemeProvider } from '@nebula-lab/react-ui/theme-provider';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';

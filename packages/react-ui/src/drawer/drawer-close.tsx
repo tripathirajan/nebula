@@ -1,8 +1,8 @@
-import { DrawerClose as HeadlessDrawerClose } from '@nebula/headless/drawer';
-import { cn } from '@nebula/primitives/cn';
+import { DrawerClose as HeadlessDrawerClose } from '@nebula-lab/headless/drawer';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
-import type { DrawerCloseProps as HeadlessDrawerCloseProps } from '@nebula/headless/drawer';
+import type { DrawerCloseProps as HeadlessDrawerCloseProps } from '@nebula-lab/headless/drawer';
 
 type DrawerCloseProps = HeadlessDrawerCloseProps;
 

@@ -1,14 +1,14 @@
-import { cn } from '@nebula/primitives/cn';
-import { Primitive } from '@nebula/primitives/primitive';
+import { cn } from '@nebula-lab/primitives/cn';
+import { Primitive } from '@nebula-lab/primitives/primitive';
 import * as React from 'react';
 
-import type { PrimitivePropsWithRef } from '@nebula/primitives/primitive';
+import type { PrimitivePropsWithRef } from '@nebula-lab/primitives/primitive';
 
 type BlockquoteProps = PrimitivePropsWithRef<'blockquote'>;
 
 /**
- * A quoted passage — purely presentational, no `@nebula/primitives`/
- * `@nebula/headless` counterpart underneath (unlike `Text`/`Heading`/
+ * A quoted passage — purely presentational, no `@nebula-lab/primitives`/
+ * `@nebula-lab/headless` counterpart underneath (unlike `Text`/`Heading`/
  * `Code`, which wrap an existing unstyled primitive), same "thin `cn()`
  * wrapper directly around `Primitive`" treatment this session's `Header`/
  * `Footer`/etc. use — there was nowhere else in the layer stack this

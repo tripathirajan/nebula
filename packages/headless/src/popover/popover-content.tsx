@@ -1,15 +1,15 @@
 
-import { DismissibleLayer } from '@nebula/primitives/dismissible-layer';
-import { FocusScope } from '@nebula/primitives/focus-scope';
-import { PopperContent } from '@nebula/primitives/popper';
-import { Presence } from '@nebula/primitives/presence';
+import { DismissibleLayer } from '@nebula-lab/primitives/dismissible-layer';
+import { FocusScope } from '@nebula-lab/primitives/focus-scope';
+import { PopperContent } from '@nebula-lab/primitives/popper';
+import { Presence } from '@nebula-lab/primitives/presence';
 import * as React from 'react';
 
 
 import { usePopoverContext, usePopperScope } from './popover-context';
 
 import type { ScopedProps } from './popover-context';
-import type { Align, PopperContentProps, Side } from '@nebula/primitives/popper';
+import type { Align, PopperContentProps, Side } from '@nebula-lab/primitives/popper';
 
 const POPOVER_CONTENT_NAME = 'PopoverContent';
 
@@ -31,7 +31,7 @@ interface PopoverContentProps
 /**
  * `role="dialog"` (no `aria-modal` — this is the non-modal counterpart to
  * `DialogContent`), positioned against `PopoverTrigger`'s anchor via
- * `@nebula/primitives`' `PopperContent`. Same `asChild`-chaining trick as
+ * `@nebula-lab/primitives`' `PopperContent`. Same `asChild`-chaining trick as
  * `DialogContent` (`Presence` > `DismissibleLayer` > `FocusScope` >
  * `PopperContent`) collapses all of that behavior onto one real DOM node.
  * `trapped={false}` on `FocusScope` is the key difference from `Dialog`:

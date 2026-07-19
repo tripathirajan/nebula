@@ -1,13 +1,13 @@
-import { useControllableState } from '@nebula/hooks';
-import { composeEventHandlers } from '@nebula/primitives/compose-event-handlers';
-import { useComposedRefs } from '@nebula/primitives/compose-refs';
-import { Primitive } from '@nebula/primitives/primitive';
+import { useControllableState } from '@nebula-lab/hooks';
+import { composeEventHandlers } from '@nebula-lab/primitives/compose-event-handlers';
+import { useComposedRefs } from '@nebula-lab/primitives/compose-refs';
+import { Primitive } from '@nebula-lab/primitives/primitive';
 import * as React from 'react';
 
 import { TreeProvider } from './tree-context';
 
 import type { ScopedProps } from './tree-context';
-import type { PrimitivePropsWithRef } from '@nebula/primitives/primitive';
+import type { PrimitivePropsWithRef } from '@nebula-lab/primitives/primitive';
 
 const TREE_NAME = 'Tree';
 const TYPEAHEAD_RESET_MS = 500;
@@ -45,7 +45,7 @@ type TreeProps = TreeSingleProps | TreeMultipleProps;
  *
  * Unlike `Listbox` (a flat list), Tree items nest arbitrarily deep, so its
  * keyboard navigation is implemented from scratch here rather than reusing
- * `@nebula/primitives`' `RovingFocusGroup` (which assumes one flat group of
+ * `@nebula-lab/primitives`' `RovingFocusGroup` (which assumes one flat group of
  * items — it has no notion of "this item's children" or "collapse and move
  * focus to my parent"). Collapsed `TreeGroup`s unmount entirely (see
  * `tree-group.tsx`), so a plain `[role="treeitem"]` DOM query already yields

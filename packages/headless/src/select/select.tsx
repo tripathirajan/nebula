@@ -1,6 +1,6 @@
-import { useControllableState, useId } from '@nebula/hooks';
-import { Popper } from '@nebula/primitives/popper';
-import { VisuallyHidden } from '@nebula/primitives/visually-hidden';
+import { useControllableState, useId } from '@nebula-lab/hooks';
+import { Popper } from '@nebula-lab/primitives/popper';
+import { VisuallyHidden } from '@nebula-lab/primitives/visually-hidden';
 import * as React from 'react';
 
 import { SelectProvider, usePopperScope } from './select-context';
@@ -56,7 +56,7 @@ function collectStaticItemLabels(children: React.ReactNode, labels: Map<string, 
  * [collapsible listbox pattern](https://www.w3.org/WAI/ARIA/apg/patterns/listbox/examples/listbox-collapsible/):
  * a button (`SelectTrigger`, `aria-haspopup="listbox"`) that opens an
  * anchor-positioned `role="listbox"` popup (`SelectContent`), built on
- * `@nebula/primitives`' `Popper` exactly like `Popover`. `SelectContent`
+ * `@nebula-lab/primitives`' `Popper` exactly like `Popover`. `SelectContent`
  * reuses `Listbox`'s single-select roving-tabindex/typeahead behavior
  * directly instead of reimplementing it a third time — see `SelectContent`'s
  * doc comment for how the two compose into one DOM node.

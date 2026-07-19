@@ -1,14 +1,14 @@
-import { Portal } from '@nebula/primitives/portal';
+import { Portal } from '@nebula-lab/primitives/portal';
 import * as React from 'react';
 
-import type { PortalProps } from '@nebula/primitives/portal';
+import type { PortalProps } from '@nebula-lab/primitives/portal';
 
 const COMBOBOX_PORTAL_NAME = 'ComboboxPortal';
 
 type ComboboxPortalProps = PortalProps;
 
 /**
- * Thin re-export of `@nebula/primitives`' `Portal` — same rationale as
+ * Thin re-export of `@nebula-lab/primitives`' `Portal` — same rationale as
  * `SelectPortal`/`PopoverPortal`.
  *
  * @example

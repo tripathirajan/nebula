@@ -1,9 +1,9 @@
-import { Skeleton as HeadlessSkeleton } from '@nebula/headless/skeleton';
-import { cn } from '@nebula/primitives/cn';
+import { Skeleton as HeadlessSkeleton } from '@nebula-lab/headless/skeleton';
+import { cn } from '@nebula-lab/primitives/cn';
 import { cva } from 'class-variance-authority';
 import * as React from 'react';
 
-import type { SkeletonProps as HeadlessSkeletonProps } from '@nebula/headless/skeleton';
+import type { SkeletonProps as HeadlessSkeletonProps } from '@nebula-lab/headless/skeleton';
 import type { VariantProps } from 'class-variance-authority';
 
 /**
@@ -27,7 +27,7 @@ const skeletonVariants = cva('animate-pulse bg-[var(--skeleton-bg)]', {
 type SkeletonProps = HeadlessSkeletonProps & VariantProps<typeof skeletonVariants>;
 
 /**
- * Styled wrapper around `@nebula/headless`'s `Skeleton` — the `aria-hidden`
+ * Styled wrapper around `@nebula-lab/headless`'s `Skeleton` — the `aria-hidden`
  * behavior comes from there unchanged. This layer adds the visual shimmer: a
  * muted fill (`--skeleton-bg`) pulsing via Tailwind's built-in
  * `animate-pulse`, plus the `shape` variant (`rectangle` default, `circle`,

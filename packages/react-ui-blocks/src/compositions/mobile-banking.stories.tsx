@@ -1,9 +1,9 @@
-import { Avatar, AvatarFallback } from '@nebula/react-ui/avatar';
-import { BottomNav } from '@nebula/react-ui/bottom-nav';
-import { BottomNavItem } from '@nebula/react-ui/bottom-nav';
-import { Card } from '@nebula/react-ui/card';
-import { IconButton } from '@nebula/react-ui/icon-button';
-import { Text } from '@nebula/react-ui/text';
+import { Avatar, AvatarFallback } from '@nebula-lab/react-ui/avatar';
+import { BottomNav } from '@nebula-lab/react-ui/bottom-nav';
+import { BottomNavItem } from '@nebula-lab/react-ui/bottom-nav';
+import { Card } from '@nebula-lab/react-ui/card';
+import { IconButton } from '@nebula-lab/react-ui/icon-button';
+import { Text } from '@nebula-lab/react-ui/text';
 
 import { BalanceCard } from '../dashboard/billing/balance-card';
 import { ThumbnailList } from '../dashboard/widgets/thumbnail-list';

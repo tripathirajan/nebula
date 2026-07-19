@@ -1,7 +1,7 @@
-import { Image } from '@nebula/primitives/image';
+import { Image } from '@nebula-lab/primitives/image';
 import * as React from 'react';
 
-import type { ImageProps } from '@nebula/primitives/image';
+import type { ImageProps } from '@nebula-lab/primitives/image';
 
 /** Props accepted by {@link ImagePreview}. */
 interface ImagePreviewProps extends Omit<ImageProps, 'src'> {
@@ -11,13 +11,13 @@ interface ImagePreviewProps extends Omit<ImageProps, 'src'> {
 
 /**
  * `styleless`-tier `ImagePreview` — the real behavior an "image upload"
- * preset needs on top of `@nebula/headless`'s `FileUpload`: turning a
+ * preset needs on top of `@nebula-lab/headless`'s `FileUpload`: turning a
  * selected `File` into a renderable image without leaking memory. Calls
  * `URL.createObjectURL(file)` once per `file` identity and revokes it
  * (`URL.revokeObjectURL`) on unmount or whenever `file` changes — a real,
  * non-trivial lifecycle a consumer would otherwise have to hand-roll (and
- * often forgets the revoke half of). Renders `@nebula/primitives`' bare
- * `Image` with no size/border/grid classes — `@nebula/react-ui`'s
+ * often forgets the revoke half of). Renders `@nebula-lab/primitives`' bare
+ * `Image` with no size/border/grid classes — `@nebula-lab/react-ui`'s
  * `ImageUpload` composes this inside a styled thumbnail grid.
  *
  * @example

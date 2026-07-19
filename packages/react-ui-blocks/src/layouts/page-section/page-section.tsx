@@ -1,7 +1,7 @@
-import { cn } from '@nebula/primitives/cn';
-import { Heading } from '@nebula/react-ui/heading';
-import { Section } from '@nebula/react-ui/section';
-import { Text } from '@nebula/react-ui/text';
+import { cn } from '@nebula-lab/primitives/cn';
+import { Heading } from '@nebula-lab/react-ui/heading';
+import { Section } from '@nebula-lab/react-ui/section';
+import { Text } from '@nebula-lab/react-ui/text';
 import * as React from 'react';
 
 interface PageSectionProps {

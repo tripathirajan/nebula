@@ -1,15 +1,15 @@
 
-import { DismissibleLayer } from '@nebula/primitives/dismissible-layer';
-import { FocusScope } from '@nebula/primitives/focus-scope';
-import { Presence } from '@nebula/primitives/presence';
-import { Primitive } from '@nebula/primitives/primitive';
+import { DismissibleLayer } from '@nebula-lab/primitives/dismissible-layer';
+import { FocusScope } from '@nebula-lab/primitives/focus-scope';
+import { Presence } from '@nebula-lab/primitives/presence';
+import { Primitive } from '@nebula-lab/primitives/primitive';
 import * as React from 'react';
 
 
 import { useDialogContext } from './dialog-context';
 
 import type { ScopedProps } from './dialog-context';
-import type { PrimitivePropsWithRef } from '@nebula/primitives/primitive';
+import type { PrimitivePropsWithRef } from '@nebula-lab/primitives/primitive';
 
 const DIALOG_CONTENT_NAME = 'DialogContent';
 

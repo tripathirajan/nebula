@@ -32,7 +32,7 @@ export const Family: Story = {
       </Heading>
       <Paragraph>
         Body copy with comfortable line-height by default — run{' '}
-        <Code>pnpm --filter @nebula/primitives dev</Code> to watch this package rebuild, or read
+        <Code>pnpm --filter @nebula-lab/primitives dev</Code> to watch this package rebuild, or read
         the <Link href="#nebula">full docs</Link> / an{' '}
         <Link href="https://example.com" external>
           external reference
@@ -40,7 +40,7 @@ export const Family: Story = {
         .
       </Paragraph>
       <Pre>
-        <Code>{`import { Text } from '@nebula/primitives';\n\nexport const Label = () => <Text>Hi</Text>;`}</Code>
+        <Code>{`import { Text } from '@nebula-lab/primitives';\n\nexport const Label = () => <Text>Hi</Text>;`}</Code>
       </Pre>
       <Text truncate className="max-w-[200px]">
         A long string that will truncate with an ellipsis once it overflows its container width

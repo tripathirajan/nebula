@@ -1,4 +1,4 @@
-import { cn } from '@nebula/primitives/cn';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
 import {
@@ -47,7 +47,7 @@ interface TreeTableProps<T extends TreeTableNode>
  * sort/selection, there's no obvious controlled-prop shape a consumer would
  * want to own — collapse the tree in-place, not in URL/query state, is the
  * overwhelmingly common case (mirrors `Tree`'s own local-state precedent
- * in `@nebula/headless`).
+ * in `@nebula-lab/headless`).
  *
  * Rows are flattened depth-first at render time, skipping any subtree whose
  * parent isn't in the expanded set, rather than each row-recursion emitting

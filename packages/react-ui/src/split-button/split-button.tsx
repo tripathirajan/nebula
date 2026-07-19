@@ -1,15 +1,15 @@
-import { cn } from '@nebula/primitives/cn';
-import { SplitButton as StylelessSplitButton } from '@nebula/styleless/split-button';
+import { cn } from '@nebula-lab/primitives/cn';
+import { SplitButton as StylelessSplitButton } from '@nebula-lab/styleless/split-button';
 import * as React from 'react';
 
-import type { SplitButtonProps as StylelessSplitButtonProps } from '@nebula/styleless/split-button';
+import type { SplitButtonProps as StylelessSplitButtonProps } from '@nebula-lab/styleless/split-button';
 
 type SplitButtonProps = StylelessSplitButtonProps;
 
 /**
  * A primary action button attached to a second, smaller trigger button
  * (typically an `IconButton` chevron opening a `DropdownMenu` of related
- * actions). Wraps `@nebula/styleless`'s `SplitButton` (which already
+ * actions). Wraps `@nebula-lab/styleless`'s `SplitButton` (which already
  * supplies the `role="group"` structural contract) and adds only the
  * visual-merge CSS trick `ButtonGroup` also uses — border-radius removal
  * between adjacent children, `-ml-px`, and focus-visible `z-index` — just

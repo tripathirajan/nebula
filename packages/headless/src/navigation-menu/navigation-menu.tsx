@@ -1,11 +1,11 @@
-import { useControllableState } from '@nebula/hooks';
-import { Primitive } from '@nebula/primitives/primitive';
+import { useControllableState } from '@nebula-lab/hooks';
+import { Primitive } from '@nebula-lab/primitives/primitive';
 import * as React from 'react';
 
 import { NavigationMenuProvider } from './navigation-menu-context';
 
 import type { ScopedProps } from './navigation-menu-context';
-import type { PrimitivePropsWithRef } from '@nebula/primitives/primitive';
+import type { PrimitivePropsWithRef } from '@nebula-lab/primitives/primitive';
 
 interface NavigationMenuProps extends PrimitivePropsWithRef<'nav'> {
   /** Controlled: which `NavigationMenuItem`'s `value` currently has its content open. */
