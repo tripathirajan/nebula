@@ -71,7 +71,7 @@ jobs:
         run: pnpm nx release version "${{ github.event.inputs.bump }}" --preid "${{ github.event.inputs.preid }}"
 
       - name: Build packages
-        run: pnpm -r build
+        run: pnpm build
 
       - name: Publish packages with Nx
         env:
