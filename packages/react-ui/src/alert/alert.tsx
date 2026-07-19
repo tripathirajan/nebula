@@ -20,7 +20,7 @@ import type { VariantProps } from 'class-variance-authority';
  * same `alertTokens.<color>` triple — see that token group's own comment
  * for why `text` is safe to reuse unchanged across all three shapes.
  */
-const alertVariants = cva('flex items-start gap-3 rounded-[var(--radius-box)] p-4 text-sm', {
+const alertVariants = cva('flex items-start gap-3 rounded-[var(--radius-alert)] p-4 text-sm', {
   variants: {
     variant: {
       filled: '',

@@ -8,6 +8,8 @@ interface CarouselContextValue {
   count: number;
   loop: boolean;
   orientation: CarouselOrientation;
+  /** Auto-advance interval (ms) — `undefined` means off. See `Carousel`'s own prop doc for the full pause/reduced-motion contract. */
+  autoSwipeInterval: number | undefined;
 }
 
 /**

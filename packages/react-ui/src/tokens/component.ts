@@ -123,6 +123,15 @@ const accordionTokens = {
   text: 'var(--color-base-content)',
 } as const;
 
+// The standalone `Backdrop` component's own default tint — used whenever
+// it's rendered outside a `Dialog`/`Drawer` (e.g. behind a bespoke search
+// panel). `dialogTokens.overlayBg`/`drawerTokens.overlayBg` deliberately
+// stay their own independent tokens even though all three currently
+// resolve to the same value — see `drawerTokens`' own comment for why.
+const backdropTokens = {
+  bg: 'var(--color-base-content)',
+} as const;
+
 const dialogTokens = {
   overlayBg: 'var(--color-base-content)',
   contentBg: 'var(--color-base-100)',
@@ -662,6 +671,7 @@ const componentTokens = {
   badge: badgeTokens,
   avatar: avatarTokens,
   accordion: accordionTokens,
+  backdrop: backdropTokens,
   dialog: dialogTokens,
   popover: popoverTokens,
   tooltip: tooltipTokens,
@@ -732,6 +742,7 @@ export {
   badgeTokens,
   avatarTokens,
   accordionTokens,
+  backdropTokens,
   dialogTokens,
   popoverTokens,
   tooltipTokens,

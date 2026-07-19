@@ -53,6 +53,11 @@ describe('Alert', () => {
     expect(screen.queryByRole('button')).not.toBeInTheDocument();
   });
 
+  it('uses its own dedicated 1rem radius token, not the shared --radius-box', () => {
+    render(<Alert>Radius check</Alert>);
+    expect(screen.getByRole('status').className).toContain('rounded-[var(--radius-alert)]');
+  });
+
   it('has no axe violations', async () => {
     const { container } = render(
       <Alert title="Heads up" onDismiss={() => {}} dismissLabel="Dismiss">

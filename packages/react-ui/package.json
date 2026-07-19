@@ -41,9 +41,17 @@
       "types": "./dist/alert/index.d.ts",
       "import": "./dist/alert/index.js"
     },
+    "./alert-popup": {
+      "types": "./dist/alert-popup/index.d.ts",
+      "import": "./dist/alert-popup/index.js"
+    },
     "./avatar": {
       "types": "./dist/avatar/index.d.ts",
       "import": "./dist/avatar/index.js"
+    },
+    "./backdrop": {
+      "types": "./dist/backdrop/index.d.ts",
+      "import": "./dist/backdrop/index.js"
     },
     "./separator": {
       "types": "./dist/separator/index.d.ts",

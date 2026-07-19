@@ -66,6 +66,37 @@ describe('Dialog (ui)', () => {
     await waitFor(() => expect(screen.queryByRole('dialog')).not.toBeInTheDocument());
   });
 
+  it('overlay defaults to a solid tint and switches to a blurred one via backdrop="blur"', () => {
+    const { rerender } = render(
+      <Dialog open>
+        <DialogPortal>
+          <DialogOverlay />
+          <DialogContent>
+            <DialogTitle>Title</DialogTitle>
+          </DialogContent>
+        </DialogPortal>
+      </Dialog>,
+    );
+    const solidOverlay = document.querySelector('.fixed.inset-0')!;
+    expect(solidOverlay.className).toContain('bg-[var(--dialog-overlay-bg)]/50');
+    expect(solidOverlay.className).not.toContain('backdrop-blur');
+
+    rerender(
+      <Dialog open>
+        <DialogPortal>
+          <DialogOverlay backdrop="blur" />
+          <DialogContent>
+            <DialogTitle>Title</DialogTitle>
+          </DialogContent>
+        </DialogPortal>
+      </Dialog>,
+    );
+    const blurredOverlay = document.querySelector('.fixed.inset-0')!;
+    expect(blurredOverlay.className).toContain('bg-[var(--dialog-overlay-bg)]/20');
+    expect(blurredOverlay.className).toContain('backdrop-blur-xl');
+    expect(blurredOverlay.className).toContain('backdrop-saturate-150');
+  });
+
   it('has no axe violations', async () => {
     render(<DemoDialog />);
     fireEvent.click(screen.getByRole('button', { name: 'Delete item' }));

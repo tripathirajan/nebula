@@ -143,6 +143,14 @@ const radius = {
   popover: '0.75rem',
   tooltip: '2rem',
   progress: '2rem',
+  // Deliberately its own role rather than reusing `box` (both were `2rem`
+  // until this was split out): an `Alert` is a static, always-visible
+  // status message sitting inline in a page's content flow, not a
+  // floating/pill-shaped surface — a full `2rem` pill radius reads as
+  // over-rounded for a rectangular block of body text next to other
+  // square-ish content. `1rem` keeps the softened-corner language every
+  // other surface in this theme uses without the pill look.
+  alert: '1rem',
 } as const;
 
 /**

@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { act, fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
 import { axe } from 'vitest-axe';
@@ -10,10 +10,23 @@ import { CarouselItem } from './carousel-item';
 import { CarouselNext } from './carousel-next';
 import { CarouselPrevious } from './carousel-previous';
 
-function DemoCarousel(props: { count?: number; loop?: boolean; index?: number; onIndexChange?: (index: number) => void }) {
-  const { count = 3, loop, index, onIndexChange } = props;
+function DemoCarousel(props: {
+  count?: number;
+  loop?: boolean;
+  index?: number;
+  onIndexChange?: (index: number) => void;
+  autoSwipeInterval?: number;
+}) {
+  const { count = 3, loop, index, onIndexChange, autoSwipeInterval } = props;
   return (
-    <Carousel count={count} loop={loop} index={index} onIndexChange={onIndexChange} aria-label="Featured products">
+    <Carousel
+      count={count}
+      loop={loop}
+      index={index}
+      onIndexChange={onIndexChange}
+      autoSwipeInterval={autoSwipeInterval}
+      aria-label="Featured products"
+    >
       <CarouselContent>
         {Array.from({ length: count }, (_, i) => (
           <CarouselItem key={i} index={i}>
@@ -106,5 +119,124 @@ describe('Carousel', () => {
   it('has no axe violations', async () => {
     const { container } = render(<DemoCarousel />);
     expect(await axe(container)).toHaveNoViolations();
+  });
+
+  describe('autoSwipeInterval', () => {
+    it('advances automatically once the interval elapses', () => {
+      vi.useFakeTimers();
+      render(<DemoCarousel count={3} autoSwipeInterval={1000} />);
+      expect(screen.getByText('Slide 1').closest('[role="group"]')).toHaveAttribute('data-state', 'active');
+
+      act(() => {
+        vi.advanceTimersByTime(1000);
+      });
+      expect(screen.getByText('Slide 2').closest('[role="group"]')).toHaveAttribute('data-state', 'active');
+      vi.useRealTimers();
+    });
+
+    it('stops at the last slide without looping, rather than wrapping on its own', () => {
+      vi.useFakeTimers();
+      render(<DemoCarousel count={2} autoSwipeInterval={1000} />);
+      act(() => {
+        vi.advanceTimersByTime(1000);
+      });
+      expect(screen.getByText('Slide 2').closest('[role="group"]')).toHaveAttribute('data-state', 'active');
+
+      act(() => {
+        vi.advanceTimersByTime(5000);
+      });
+      expect(screen.getByText('Slide 2').closest('[role="group"]')).toHaveAttribute('data-state', 'active');
+      vi.useRealTimers();
+    });
+
+    it('loops back to the first slide when loop is set', () => {
+      vi.useFakeTimers();
+      render(<DemoCarousel count={2} loop autoSwipeInterval={1000} />);
+      act(() => {
+        vi.advanceTimersByTime(1000);
+      });
+      expect(screen.getByText('Slide 2').closest('[role="group"]')).toHaveAttribute('data-state', 'active');
+
+      act(() => {
+        vi.advanceTimersByTime(1000);
+      });
+      expect(screen.getByText('Slide 1').closest('[role="group"]')).toHaveAttribute('data-state', 'active');
+      vi.useRealTimers();
+    });
+
+    it('resets the countdown after a manual interaction instead of firing immediately after', () => {
+      vi.useFakeTimers();
+      render(<DemoCarousel count={3} loop autoSwipeInterval={1000} />);
+
+      act(() => {
+        vi.advanceTimersByTime(600);
+      });
+      const dots = screen.getAllByRole('tab');
+      fireEvent.click(dots[2]!);
+      expect(screen.getByText('Slide 3').closest('[role="group"]')).toHaveAttribute('data-state', 'active');
+
+      // Only 400ms left of what would've been the original countdown —
+      // shouldn't have advanced yet, since the manual jump reset the timer.
+      act(() => {
+        vi.advanceTimersByTime(400);
+      });
+      expect(screen.getByText('Slide 3').closest('[role="group"]')).toHaveAttribute('data-state', 'active');
+
+      act(() => {
+        vi.advanceTimersByTime(600);
+      });
+      expect(screen.getByText('Slide 1').closest('[role="group"]')).toHaveAttribute('data-state', 'active');
+      vi.useRealTimers();
+    });
+
+    it('is disabled entirely under prefers-reduced-motion', () => {
+      const originalMatchMedia = window.matchMedia;
+      window.matchMedia = (query: string) =>
+        ({
+          matches: query.includes('prefers-reduced-motion'),
+          media: query,
+          onchange: null,
+          addListener: () => {},
+          removeListener: () => {},
+          addEventListener: () => {},
+          removeEventListener: () => {},
+          dispatchEvent: () => false,
+        }) as MediaQueryList;
+
+      vi.useFakeTimers();
+      render(<DemoCarousel count={3} autoSwipeInterval={1000} />);
+      act(() => {
+        vi.advanceTimersByTime(5000);
+      });
+      expect(screen.getByText('Slide 1').closest('[role="group"]')).toHaveAttribute('data-state', 'active');
+
+      vi.useRealTimers();
+      window.matchMedia = originalMatchMedia;
+    });
+  });
+
+  describe('CarouselIndicators overlay', () => {
+    it('is absolutely positioned by default', () => {
+      render(<DemoCarousel count={3} />);
+      const dots = screen.getAllByRole('tab')[0]!.closest('[role="tablist"]')!;
+      expect(dots.className).toContain('absolute');
+    });
+
+    it('renders in normal document flow when overlay={false}', () => {
+      render(
+        <Carousel count={3} aria-label="Featured products">
+          <CarouselContent>
+            {[0, 1, 2].map((i) => (
+              <CarouselItem key={i} index={i}>
+                Slide {i + 1}
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselIndicators overlay={false} />
+        </Carousel>,
+      );
+      const dots = screen.getAllByRole('tab')[0]!.closest('[role="tablist"]')!;
+      expect(dots.className).not.toContain('absolute');
+    });
   });
 });

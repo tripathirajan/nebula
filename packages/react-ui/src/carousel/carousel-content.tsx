@@ -1,4 +1,4 @@
-import { useSwipe } from '@nebula/hooks';
+import { useMediaQuery, useSwipe } from '@nebula/hooks';
 import { cn } from '@nebula/primitives/cn';
 import { composeEventHandlers } from '@nebula/primitives/compose-event-handlers';
 import { Primitive } from '@nebula/primitives/primitive';
@@ -59,6 +59,22 @@ const CarouselContent = React.forwardRef<HTMLDivElement, CarouselContentProps>(
     // resists (rather than freely drags past) its first/last slide.
     const clampedDelta =
       atEnd && delta < 0 ? Math.max(delta, -80) : atStart && delta > 0 ? Math.min(delta, 80) : delta;
+
+    // Autoswipe — see `Carousel`'s `autoSwipeInterval` doc for the full
+    // contract. Depending on `context.index` (not just mounting once) means
+    // the timer tears down and restarts on *every* index change, whether it
+    // came from this same timer or a real user interaction — so a manual
+    // swipe always gets the full interval before autoswipe resumes, never a
+    // half-finished countdown.
+    const prefersReducedMotion = useMediaQuery('(prefers-reduced-motion: reduce)');
+    React.useEffect(() => {
+      if (!context.autoSwipeInterval || prefersReducedMotion || isDragging || context.count <= 1) return;
+      if (atEnd) return;
+      const timer = window.setTimeout(() => {
+        context.setIndex(context.index + 1);
+      }, context.autoSwipeInterval);
+      return () => window.clearTimeout(timer);
+    }, [context, isDragging, prefersReducedMotion, atEnd]);
 
     // Trackpad/mouse-wheel navigation — horizontal only. A vertical
     // carousel skips this entirely: its natural wheel gesture (plain
