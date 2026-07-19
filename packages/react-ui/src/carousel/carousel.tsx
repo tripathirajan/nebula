@@ -93,7 +93,14 @@ const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>((props, forward
         aria-roledescription="carousel"
         aria-label={ariaLabel ?? 'Carousel'}
         data-orientation={orientation}
-        className={cn('relative', className)}
+        // Vertical mode needs a real height in this box, not just on
+        // `CarouselContent`: a percentage height (`CarouselContent`'s
+        // `h-full`) only resolves against an ancestor with a *definite*
+        // height per the CSS spec — without this, this root stays
+        // `height: auto` (shrinks to fit all stacked slides), so
+        // `CarouselContent`'s `overflow-hidden` never actually has anything
+        // to clip and every slide renders fully visible at once.
+        className={cn('relative', orientation === 'vertical' && 'h-full', className)}
         {...rest}
         ref={forwardedRef}
       />

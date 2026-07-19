@@ -13,10 +13,21 @@ interface CarouselItemOwnProps {
 
 type CarouselItemProps = PrimitivePropsWithRef<'div'> & CarouselItemOwnProps;
 
-/** `role="group"` + `aria-roledescription="slide"` per the WAI-ARIA Carousel pattern — `aria-label` announces this slide's position (`"2 of 5"`), read from `Carousel`'s `count`. */
+/**
+ * `role="group"` + `aria-roledescription="slide"` per the WAI-ARIA Carousel
+ * pattern — `aria-label` announces this slide's position (`"2 of 5"`), read
+ * from `Carousel`'s `count`. Inactive slides also get `inert`: `aria-hidden`
+ * alone hides content from assistive tech but does *not* remove focusable
+ * descendants (links/buttons) from the tab order, so a sighted keyboard user
+ * could tab into an invisible off-screen slide — a real WCAG violation once a
+ * slide holds any interactive content. `inert` (React 19+, baseline browser
+ * support) removes the whole subtree from both focus and the AT tree in one
+ * attribute, so `aria-hidden` becomes redundant but is kept for older AT.
+ */
 const CarouselItem = React.forwardRef<HTMLDivElement, CarouselItemProps>((props, forwardedRef) => {
   const { className, index, 'aria-label': ariaLabel, ...rest } = props;
   const context = useCarouselContext('CarouselItem');
+  const inactive = context.index !== index;
 
   return (
     <Primitive
@@ -24,8 +35,9 @@ const CarouselItem = React.forwardRef<HTMLDivElement, CarouselItemProps>((props,
       role="group"
       aria-roledescription="slide"
       aria-label={ariaLabel ?? `${index + 1} of ${context.count}`}
-      aria-hidden={context.index !== index}
-      data-state={context.index === index ? 'active' : 'inactive'}
+      aria-hidden={inactive}
+      inert={inactive}
+      data-state={inactive ? 'inactive' : 'active'}
       className={cn('shrink-0', context.orientation === 'vertical' ? 'h-full' : 'w-full', className)}
       {...rest}
       ref={forwardedRef}
