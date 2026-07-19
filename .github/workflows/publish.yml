@@ -76,20 +76,14 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Version packages with Nx
+        # `nx release version` (run standalone, not via the full `nx
+        # release` orchestrator) only stages the package.json changes —
+        # it does not commit them. That's fine: build/publish below read
+        # the bumped versions straight off disk, and "Generate changelog
+        # and tag release" further down commits both this version bump
+        # and the changelog files together in one commit, once publish
+        # has actually succeeded.
         run: pnpm nx release version "${{ github.event.inputs.bump }}" --preid "${{ github.event.inputs.preid }}"
-
-      - name: Commit version bump
-        # `nx release version` (run standalone, not via the full `nx release`
-        # orchestrator) only stages the package.json changes — it does not
-        # commit them. Without this step the bump lives only in this run's
-        # ephemeral working directory: `git push` later finds nothing to
-        # push, so every subsequent run recomputes the exact same version
-        # number, which already exists on the registry, and publish becomes
-        # a silent no-op (just re-tagging the old version) instead of an
-        # error or a real new release.
-        run: |
-          git add -A
-          git commit -m "chore(release): version bump to ${{ github.event.inputs.bump }} (${{ github.event.inputs.preid }})"
 
       - name: Build packages
         run: pnpm build
@@ -100,13 +94,21 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: pnpm nx release publish --yes --tag "${{ github.event.inputs.tag }}"
 
-      - name: Push version commit and tags
+      - name: Generate changelog and tag release
         # Runs only once publish actually succeeds, so a build/publish
-        # failure never leaves a version bump committed to git for
-        # something that was never really published. This step is what
-        # actually persists the bump from "Commit version bump" above —
-        # without it (as originally shipped), the commit stayed local to
-        # the runner and every subsequent run recomputed the exact same
-        # version number nx read from package.json, which had never
-        # changed on the real `main` branch.
+        # failure never leaves a version bump or changelog committed for
+        # something that was never really published. Every package in
+        # this workspace is bumped together in practice (even though
+        # they're versioned independently), so `react-ui`'s resulting
+        # version is a representative label for the changelog entries —
+        # each package's own changelog content is still scoped correctly
+        # from its own git history regardless. This also creates the git
+        # tags nx release version doesn't create on its own (confirmed:
+        # this repo had zero tags before the first real v1.0.0 release).
+        # Doesn't push yet — the next step does that once this succeeds.
+        run: |
+          VERSION=$(node -p "require('./packages/react-ui/package.json').version")
+          pnpm nx release changelog "$VERSION" --git-push=false
+
+      - name: Push version commit, changelog, and tags
         run: git push --follow-tags

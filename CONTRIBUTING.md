@@ -69,7 +69,7 @@ Then, for anything visual, start Storybook and check the change live — type ch
 
 ## Publishing (maintainers only)
 
-Releases go out via the **Publish Package** GitHub Actions workflow (`workflow_dispatch`, manual trigger only) — it versions every package independently with Nx, builds, and publishes to npm under the `@nebula-lab` scope. Not something a regular contributor needs to touch.
+Releases go out via the **Publish Package** GitHub Actions workflow (`workflow_dispatch`, manual trigger only) — it versions every package independently with Nx, builds, publishes to npm under the `@nebula-lab` scope, and generates each package's `CHANGELOG.md` + a `<package>@<version>` git tag per package. Not something a regular contributor needs to touch.
 
 **Always dispatch this workflow against the `release` branch, never `main`.** `main`'s branch protection requires a PR review for every push, which `github-actions[bot]` can't satisfy — the workflow's own version-bump commit would be rejected (`GH006: Protected branch update failed`). `release` has no protection rule, so the bot can commit and push its version bumps/tags directly there.
 
@@ -92,7 +92,12 @@ Releases go out via the **Publish Package** GitHub Actions workflow (`workflow_d
    curl -s "https://registry.npmjs.org/@nebula-lab%2Fhooks" | jq '.["dist-tags"], (.versions | keys)'
    ```
    and spot-check that the newly-published version's `fileCount`/`unpackedSize` look like a real package (hundreds of files, hundreds of KB+), not a handful of files and a few KB — an empty/broken publish has looked identical to a successful one in this workflow's own logs before.
-4. `release` now has the version-bump commit the bot made — merge it back into `main` so `main`'s `package.json` files don't drift out of sync with what's actually published:
+4. `release` now has the bot's version-bump + changelog commit and new `<package>@<version>` tags — check for one known, not-yet-automated gotcha before syncing back: `nx release version`'s dependent-rewrite step pins internal `@nebula-lab/*` dependency ranges to literal versions (e.g. `"1.0.0"`) instead of leaving them as `workspace:*`. That's correct for the published npm tarballs, but if it lands in the committed `package.json` on `release`/`main` it breaks pnpm's workspace-symlinking for local dev and fails the next `pnpm install --frozen-lockfile` in CI. Check with:
+   ```bash
+   grep -r '"@nebula-lab/' packages/*/package.json | grep -v 'workspace:\*'
+   ```
+   If that finds anything, revert those lines back to `"workspace:*"` and run `pnpm install` (should report "up to date", confirming the lockfile never actually needed those pinned versions) before continuing.
+5. Merge `release` back into `main` so `main`'s `package.json`/`CHANGELOG.md` files don't drift out of sync with what's actually published:
    ```bash
    git checkout main
    git merge release
