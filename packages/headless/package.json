@@ -1,6 +1,6 @@
 {
   "name": "@nebula-lab/headless",
-  "version": "0.1.1-beta.1",
+  "version": "1.0.0",
   "description": "Behavior-only, ARIA-complete compound components — no styling opinions. Renamed @nebula-lab/headless -> @nebula-lab/styleless -> back to @nebula-lab/headless; the project owner's confirmed 5-tier model treats headless (this package) and styleless (a distinct, new, not-yet-built layer) as two different things. Built on @nebula-lab/primitives + @nebula-lab/hooks; styled by @nebula-lab/react-ui.",
   "license": "MIT",
   "publishConfig": {

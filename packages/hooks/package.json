@@ -1,6 +1,6 @@
 {
   "name": "@nebula-lab/hooks",
-  "version": "0.1.1-beta.1",
+  "version": "1.0.0",
   "description": "React hooks with no dependency on @nebula-lab/primitives or higher layers — state/DOM/lifecycle utilities every other package can build on.",
   "license": "MIT",
   "publishConfig": {
