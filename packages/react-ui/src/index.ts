@@ -95,6 +95,7 @@ export * from './list';
 export * from './description-list';
 export * from './data-grid';
 export * from './virtual-list';
+export * from './swipeable-cards';
 export * from './tree-table';
 export * from './calendar';
 export * from './date-picker';

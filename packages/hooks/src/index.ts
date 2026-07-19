@@ -17,3 +17,4 @@ export * from './use-event-listener';
 export * from './use-previous';
 export * from './use-mounted';
 export * from './use-virtualizer';
+export * from './use-swipe';

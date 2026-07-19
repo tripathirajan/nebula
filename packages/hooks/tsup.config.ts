@@ -22,6 +22,7 @@ export default defineConfig({
     'use-previous/index': 'src/use-previous/index.ts',
     'use-mounted/index': 'src/use-mounted/index.ts',
     'use-virtualizer/index': 'src/use-virtualizer/index.ts',
+    'use-swipe/index': 'src/use-swipe/index.ts',
   },
   format: ['esm'],
   target: 'es2022',

@@ -19,13 +19,21 @@ const CarouselIndicators = React.forwardRef<HTMLDivElement, CarouselIndicatorsPr
   (props, forwardedRef) => {
     const { className, ...rest } = props;
     const context = useCarouselContext('CarouselIndicators');
+    const vertical = context.orientation === 'vertical';
 
     return (
       <Primitive
         as="div"
         role="tablist"
         aria-label="Slides"
-        className={cn('absolute bottom-2 left-1/2 z-[var(--z-local)] flex -translate-x-1/2 gap-1.5', className)}
+        aria-orientation={context.orientation}
+        className={cn(
+          'absolute z-[var(--z-local)] flex gap-1.5',
+          vertical
+            ? 'right-2 top-1/2 -translate-y-1/2 flex-col'
+            : 'bottom-2 left-1/2 -translate-x-1/2',
+          className,
+        )}
         {...rest}
         ref={forwardedRef}
       >

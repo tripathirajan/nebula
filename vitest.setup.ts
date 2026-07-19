@@ -58,6 +58,46 @@ if (typeof window !== 'undefined' && window?.document) {
         dispatchEvent: () => false,
       }) as MediaQueryList;
   }
+
+  // JSDOM has no Pointer Events implementation at all — `window.PointerEvent`
+  // doesn't exist, so `new PointerEvent(...)` throws, and even
+  // `@testing-library`'s `fireEvent.pointerDown(...)` (which falls back to a
+  // plain `Event`/`MouseEvent` when the real constructor is missing) silently
+  // drops pointer-specific init fields like `pointerId`/`clientX`. `@nebula/
+  // hooks`' `useSwipe` (and anything built on it, e.g. `Carousel`'s drag
+  // gesture, `SwipeableCards`) reads exactly those fields, so without this
+  // shim every simulated drag resolves to `NaN` deltas instead of a real
+  // direction/distance. Extends `MouseEvent` (which jsdom does implement)
+  // rather than `Event`, since `PointerEvent` is a `MouseEvent` subtype and
+  // callers expect `clientX`/`clientY`/`button` to already be present.
+  if (typeof window.PointerEvent !== 'function') {
+    class PointerEventPolyfill extends window.MouseEvent {
+      pointerId: number;
+      pointerType: string;
+      isPrimary: boolean;
+
+      constructor(type: string, params: PointerEventInit = {}) {
+        super(type, params);
+        this.pointerId = params.pointerId ?? 0;
+        this.pointerType = params.pointerType ?? 'mouse';
+        this.isPrimary = params.isPrimary ?? true;
+      }
+    }
+    // @ts-expect-error — assigning a polyfill onto a read-only global type.
+    window.PointerEvent = PointerEventPolyfill;
+  }
+
+  if (typeof window.Element !== 'undefined') {
+    if (!window.Element.prototype.setPointerCapture) {
+      window.Element.prototype.setPointerCapture = () => {};
+    }
+    if (!window.Element.prototype.releasePointerCapture) {
+      window.Element.prototype.releasePointerCapture = () => {};
+    }
+    if (!window.Element.prototype.hasPointerCapture) {
+      window.Element.prototype.hasPointerCapture = () => false;
+    }
+  }
 }
 
 // `@testing-library/react` only self-registers its `afterEach(cleanup)` when

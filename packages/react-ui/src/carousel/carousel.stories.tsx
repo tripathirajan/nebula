@@ -19,7 +19,10 @@ const meta: Meta<typeof Carousel> = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const slides = ['#f87171', '#fb923c', '#facc15', '#4ade80', '#60a5fa'];
+// 600-shade Tailwind colors, not the lighter 400-shades — white slide text
+// needs roughly a 4.5:1 contrast ratio to pass WCAG AA, which the lighter
+// shades (particularly yellow) don't reliably clear.
+const slides = ['#dc2626', '#ea580c', '#ca8a04', '#16a34a', '#2563eb'];
 
 function Slide({ color, index }: { color: string; index: number }) {
   return (
@@ -89,6 +92,8 @@ export const Vertical: Story = {
             </CarouselItem>
           ))}
         </CarouselContent>
+        <CarouselPrevious />
+        <CarouselNext />
         <CarouselIndicators />
       </Carousel>
     </div>

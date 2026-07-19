@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
 import { axe } from 'vitest-axe';
@@ -56,6 +56,17 @@ describe('Carousel', () => {
   it('CarouselPrevious is disabled at the first slide without loop', () => {
     render(<DemoCarousel />);
     expect(screen.getByRole('button', { name: 'Previous slide' })).toBeDisabled();
+  });
+
+  it('advances on a horizontal-dominant wheel gesture but ignores a vertical one', () => {
+    render(<DemoCarousel count={3} />);
+    const content = screen.getByText('Slide 1').closest('[role="region"] > div')!;
+
+    fireEvent.wheel(content, { deltaX: 0, deltaY: 80 });
+    expect(screen.getByText('Slide 1').closest('[role="group"]')).toHaveAttribute('data-state', 'active');
+
+    fireEvent.wheel(content, { deltaX: 40, deltaY: 0 });
+    expect(screen.getByText('Slide 2').closest('[role="group"]')).toHaveAttribute('data-state', 'active');
   });
 
   it('wraps past the bounds when loop is set', async () => {

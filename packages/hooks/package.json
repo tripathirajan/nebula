@@ -91,6 +91,10 @@
       "types": "./dist/use-virtualizer/index.d.ts",
       "import": "./dist/use-virtualizer/index.js"
     },
+    "./use-swipe": {
+      "types": "./dist/use-swipe/index.d.ts",
+      "import": "./dist/use-swipe/index.js"
+    },
     "./package.json": "./package.json"
   },
   "files": [

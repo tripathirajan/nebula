@@ -405,6 +405,10 @@
       "types": "./dist/virtual-list/index.d.ts",
       "import": "./dist/virtual-list/index.js"
     },
+    "./swipeable-cards": {
+      "types": "./dist/swipeable-cards/index.d.ts",
+      "import": "./dist/swipeable-cards/index.js"
+    },
     "./tree-table": {
       "types": "./dist/tree-table/index.d.ts",
       "import": "./dist/tree-table/index.js"

@@ -63,7 +63,7 @@ export const WithNotificationsAndMenu: Story = {
     // canvas to a width ≥ the `md` breakpoint, this play function's
     // "Products" trigger query fails wherever the ambient Storybook canvas
     // happens to be narrower (same class of issue BottomNav's story
-    // documents for its own `mobile1` pin, just the opposite direction).
+    // documents for its own `mobile` pin, just the opposite direction).
     viewport: {
       viewports: { desktopWide: { name: 'Desktop', styles: { width: '1280px', height: '800px' }, type: 'desktop' } },
       defaultViewport: 'desktopWide',
@@ -136,7 +136,7 @@ export const MobileMenu: Story = {
     navLinks,
     user: { name: 'Jane Cooper', role: 'Admin' },
   },
-  parameters: { viewport: { defaultViewport: 'mobile1' } },
+  parameters: { viewport: { defaultViewport: 'mobile' } },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const menuTrigger = await canvas.findByRole('button', { name: 'Open navigation menu', hidden: true });
