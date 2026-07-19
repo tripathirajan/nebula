@@ -1,6 +1,14 @@
 name: Publish Package
 run-name: "Publish - manual"
 
+# Dispatch this against the `release` branch, not `main`. `main`'s
+# branch protection requires a PR review for every push, which
+# github-actions[bot] can't satisfy (enforce_admins only exempts human
+# admins) — the "Push version commit and tags" step below would fail
+# every time on `main` (confirmed: GH006 "Protected branch update
+# failed"). `release` has no protection rule, so the bot can push its
+# own version-bump commits and tags directly. See CONTRIBUTING.md's
+# "Publishing" section for the full release/hotfix flow.
 on:
   workflow_dispatch:
     inputs:
