@@ -490,10 +490,10 @@
     "react-dom": "^19.0.0"
   },
   "dependencies": {
-    "@nebula-lab/hooks": "1.0.0",
-    "@nebula-lab/primitives": "1.0.0",
-    "@nebula-lab/headless": "1.0.0",
-    "@nebula-lab/styleless": "1.0.0",
+    "@nebula-lab/hooks": "workspace:*",
+    "@nebula-lab/primitives": "workspace:*",
+    "@nebula-lab/headless": "workspace:*",
+    "@nebula-lab/styleless": "workspace:*",
     "class-variance-authority": "^0.7.1"
   },
   "devDependencies": {
