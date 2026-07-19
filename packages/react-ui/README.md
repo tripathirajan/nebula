@@ -7,10 +7,20 @@ This package absorbed the former `@nebula-lab/theme` package. Tokens/theming wer
 ## Installation
 
 ```bash
+npm install @nebula-lab/react-ui
+# or
+yarn add @nebula-lab/react-ui
+# or
 pnpm add @nebula-lab/react-ui
+# or
+bun add @nebula-lab/react-ui
 ```
 
-Peer dependencies: `react ^19.0.0`, `react-dom ^19.0.0`. Requires Tailwind CSS in the consuming app (v4 `@import` syntax — see Import below) since components' classes reference `theme.css`'s CSS custom properties.
+Peer dependencies: `react ^19.0.0`, `react-dom ^19.0.0`. Requires Tailwind CSS v4 in the consuming app (see Import below) since components' classes reference `theme.css`'s CSS custom properties. Works with any of the above package managers — pick whichever your project already uses.
+
+**Module format:** ESM only (no CommonJS build). Works out of the box with any bundler (Vite, Next.js, Webpack 5+, esbuild, Parcel) or native Node.js ESM. A plain CommonJS `require('@nebula-lab/react-ui')` is **not** supported and throws `ERR_REQUIRE_ESM` — use `import` (or dynamic `import()` from a CJS file) instead.
+
+**TypeScript / JavaScript:** Ships hand-written `.d.ts` types alongside the JS output, but nothing requires TypeScript — plain JavaScript works identically (props just won't be type-checked/autocompleted without a TS-aware editor). Every example in this README is TypeScript (`.tsx`) but drops in as plain JSX with the types simply ignored.
 
 ## What's here
 
