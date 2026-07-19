@@ -86,6 +86,35 @@ function App() {
 
 Every component also has its own subpath export (e.g. `@nebula-lab/react-ui/button`, `/card`, `/dialog`, `/tokens`, `/theme-provider`) for consumers who want to import just one component's chunk rather than the whole barrel.
 
+## Quick example: overriding a token
+
+Every color a component reads comes from a CSS custom property, so swapping in your own brand color is a plain CSS override — no fork, no rebuild. Add your own stylesheet **after** importing `theme.css`:
+
+```css
+/* your-app/globals.css */
+@import 'tailwindcss';
+@import '@nebula-lab/react-ui/theme.css';
+
+:root {
+  --color-primary: oklch(58% 0.2 275); /* swap in your own brand color, e.g. indigo instead of nebula's default orange */
+  --color-primary-content: oklch(98% 0 0); /* the text/icon color that sits on top of --color-primary */
+  --button-primary-bg: var(--color-primary);
+  --button-primary-text: var(--color-primary-content);
+  --button-primary-border: var(--color-primary);
+}
+```
+
+```tsx
+import { Button } from '@nebula-lab/react-ui';
+import './globals.css'; // your overrides, imported after theme.css
+
+function App() {
+  return <Button variant="primary">Now rendered in your brand color</Button>;
+}
+```
+
+That's it — every component that reads `--button-primary-bg` (not just `Button`) picks up the change automatically, and anything you don't override keeps nebula's default. See "Custom theming / color schemes" below for the full token vocabulary, dark-mode overrides, and two more advanced approaches (forking the token source, per-instance `className` overrides).
+
 ## Custom theming / color schemes
 
 Yes — this is designed for it. Every color a component reads comes from a CSS custom property (`--color-primary`, `--button-primary-bg`, ...), never a hardcoded Tailwind class or hex value baked into a component. There are three ways to customize, in order of how much control (and effort) each gives you.
