@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "description": "React hooks with no dependency on @nebula-lab/primitives or higher layers — state/DOM/lifecycle utilities every other package can build on.",
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "author": "Rajan Tripathi <tripathirajan3@gmail.com>",
   "repository": {
     "type": "git",
