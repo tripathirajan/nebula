@@ -70,8 +70,20 @@ jobs:
       - name: Version packages with Nx
         run: pnpm nx release version "${{ github.event.inputs.bump }}" --preid "${{ github.event.inputs.preid }}"
 
+      - name: Build packages
+        run: pnpm -r build
+
       - name: Publish packages with Nx
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: pnpm nx release publish --yes --tag "${{ github.event.inputs.tag }}"
+
+      - name: Push version commit and tags
+        # Runs only once publish actually succeeds, so a build/publish
+        # failure never leaves a version bump committed to git for
+        # something that was never really published — nx's version
+        # resolver falls back to querying the registry directly when no
+        # matching git tag exists, so the next run still computes the
+        # correct next version either way.
+        run: git push --follow-tags
