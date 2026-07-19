@@ -232,7 +232,7 @@ These compose Layer 1/2 primitives into ready-made blocks — the "MUI templates
 
 ---
 
-## 7. Theming — 3-layer token system (as implemented in `@nebula-lab/theme`)
+## 7. Theming — 3-layer token system (as implemented in `@nebula-lab/react-ui`'s `tokens/` — the former standalone `@nebula-lab/theme` package was absorbed into `react-ui`, its only real consumer)
 
 1. **Primitive tokens** — raw numeric scales, no meaning attached: `blue.500`, `gray.200`, `spacing.4`, `radius.md`. Numeric scale, not t-shirt sizes (`blue.500`, not `blue.medium`) — easier to insert intermediate values later.
 2. **Semantic tokens** — intent-based aliases following `category.role.variant`: `color.bg.subtle`, `color.text.muted`, `color.border.interactive`. Readable without knowing the underlying primitive; this is the layer light/dark mappings live on.
@@ -365,22 +365,6 @@ Each component ships with:
 
 ---
 
-## 12. Week-1 Build Order (updated: most of Layer 0–2 already exists in `nebula`)
+## 12. Historical note
 
-0. **Audit first (Day 0, ~2 hrs):** clone `nebula`, run `pnpm install && pnpm storybook`, and inventory exactly which of the components in section 4 already exist vs. still need building. Don't rebuild `Button`/`Tabs` — they're already implemented in `@nebula-lab/primitives`/`headless`/`ui`; `Dialog`/`Accordion`/`Checkbox`/`Switch`/`Card`/`Badge`/`Avatar`/`Separator` are still open (see AGENTS.md's status table for the current, accurate list — this section predates several of them actually landing).
-1. **Fill primitive/headless/ui gaps** needed for the budget tracker that aren't in the repo yet: `Select`/`Combobox`, `Toast`, `Table`, `Progress`, `Skeleton`, `Spinner`, `DateRangePicker`. Follow the exact same file-per-component + barrel pattern already used for `Dialog`/`Tabs`.
-2. **New package `@nebula-lab/layouts`**: `AppLayout`, `AuthLayout`, `DashboardLayout` — built on existing `Box`/`Flex`/`Grid`/`Stack` primitives, themed via existing `@nebula-lab/theme`.
-3. **New package `@nebula-lab/sections`**: `LoginForm`, `SignupForm`, `ChangePasswordForm`, `TransactionForm`, `TransactionTable` (on the new `Table` primitive), `ChartCard` (adapter over Recharts/Visx — decide below), `BudgetProgressCard` (on existing `Progress` once built), `SummaryStatsRow`, `FilterBar`.
-4. Wire `apps/budget-tracker` (a new, standalone app — there's no more `apps/playground` to sit alongside) into Firebase Auth/Firestore, consuming `@nebula-lab/sections` + `@nebula-lab/layouts`.
-5. Storybook stories + tests for every new component (in parallel with steps 1–3, not after) — reuse the repo's existing `.storybook` config and CI-gated Pages deploy workflow.
-6. Add Changesets (not yet in the repo) + version bump + `npm publish --access public` for the two new packages (and any updated existing ones).
-
----
-
-## 13. Open Decisions (need your input before scaffolding)
-
-- Chart library: Recharts (simplest, good a11y) vs Visx (more control, more work)?
-- Form library: react-hook-form + zod (recommended) — confirm?
-- Icon set: repo doesn't have one yet — lucide-react wrapped through a `Primitive`-based icon component, or fully custom SVGs?
-- Confirm you have write access to `tripathirajan/nebula` (or it's your own repo/alias) so we're extending it directly rather than forking — changes the setup step (`git clone` + branch vs. fork).
-- Should `sections`/`layouts` also get Changesets added now, or defer versioning until after the app ships?
+This document originally ended with a "Week-1 Build Order" and "Open Decisions" section written very early in the project, planning a specific first consumer app (a standalone `apps/budget-tracker`, with two new packages `@nebula-lab/layouts`/`@nebula-lab/sections`). That plan was superseded almost immediately — layouts/sections-style components ended up living inside `react-ui`/`react-ui-blocks` rather than as separate packages, and no `apps/budget-tracker` was ever built. Removed here rather than left as stale, misleading planning content; see `AGENTS.md`'s status table and each package's `README.md` for what's actually current.
