@@ -4,27 +4,51 @@ Tailwind-powered styled components (atoms) built on `@nebula-lab/primitives` (`P
 
 This package absorbed the former `@nebula-lab/theme` package. Tokens/theming were split out on their own early on, but no other package in the workspace ever needed them — `primitives` and `headless` are intentionally unstyled and never touch color/spacing tokens at all, so `@nebula-lab/theme` only ever had one real consumer (`react-ui` itself, plus `react-ui-blocks` transitively through it). Keeping them separate was a package boundary with no other package depending on it, so they're merged now. (Trade-off worth knowing: this does mean tokens can no longer be consumed independently of the React component code, e.g. by a future non-React consumer — a reasonable cost given there's only one implementation today.) `@nebula-lab/headless` has also been renamed twice since — `@nebula-lab/headless` → `@nebula-lab/styleless` → back to `@nebula-lab/headless` — see that package's own README and `AGENTS.md`'s "Layer placement" section for why it landed back on `headless` for good this time (a distinct, new `@nebula-lab/styleless` layer now exists conceptually, just not built yet).
 
+## Installation
+
+```bash
+pnpm add @nebula-lab/react-ui
+```
+
+Peer dependencies: `react ^19.0.0`, `react-dom ^19.0.0`. Requires Tailwind CSS in the consuming app (v4 `@import` syntax — see Import below) since components' classes reference `theme.css`'s CSS custom properties.
+
 ## What's here
 
-- `Button` — `cva`-driven `variant` (`primary` | `secondary` | `danger`) / `size` (`sm` | `md` | `lg`) API, `loading` state, `asChild` support.
-- `Input` — styled wrapper over `@nebula-lab/primitives`' unstyled `Input` (`invalid` -> `aria-invalid` wiring, ref forwarding).
-- `Card` / `CardHeader` / `CardTitle` / `CardDescription` / `CardContent` / `CardFooter` — bordered container, purely presentational (no matching `@nebula-lab/headless` compound needed).
-- `Badge` — small status/count pill, exposes all eight semantic color roles (`primary`/`secondary`/`accent`/`neutral`/`info`/`success`/`warning`/`danger`) as variants, unlike `Button`'s three — it's the component meant to show off the full palette.
-- `Avatar` / `AvatarImage` / `AvatarFallback` — image-with-fallback (Radix-style), tracks image load/error state itself so the fallback (initials, icon, ...) only shows when there's no successfully-loaded image; `AvatarFallback` takes an optional `delayMs` to avoid flashing on fast loads.
-- `Separator` — horizontal/vertical rule; `decorative` (default) renders `role="none"`, `decorative={false}` renders `role="separator"` with `aria-orientation`.
-- `Accordion` / `AccordionItem` / `AccordionHeader` / `AccordionTrigger` / `AccordionContent` — styled wrapper over `@nebula-lab/headless`'s `Accordion`; adds a chevron (inline SVG, no icon dependency) that rotates off `data-state`, hover/focus styling, and the border between items. All ARIA/keyboard behavior is unchanged from the underlying `headless` component.
-- `Dialog` / `DialogTrigger` / `DialogPortal` / `DialogOverlay` / `DialogContent` / `DialogTitle` / `DialogDescription` / `DialogClose` — styled wrapper over `@nebula-lab/headless`'s `Dialog`. `DialogContent` renders a built-in icon close button by default (`hideCloseButton` to omit it). `Dialog`/`DialogTrigger`/`DialogPortal` have no visual chrome of their own, so they're re-exported from `@nebula-lab/headless` as-is rather than wrapped with nothing to add.
-- `Popover` / `PopoverTrigger` / `PopoverPortal` / `PopoverContent` / `PopoverClose` — same pattern as `Dialog`, over `@nebula-lab/headless`'s `Popover` (anchor-positioned, non-modal).
-- `Tooltip` / `TooltipTrigger` / `TooltipPortal` / `TooltipContent` — same pattern, over `@nebula-lab/headless`'s `Tooltip` (hover/focus-driven, delay-open). Styled off the `neutral`/`neutral-content` semantic pair rather than `Popover`/`Dialog`'s `base-100`/`base-content`, so it visually pops off the page.
-- `Tabs` / `TabList` / `Tab` / `TabPanel` — styled wrapper over `@nebula-lab/headless`'s `Tabs`; adds the underline treatment (a `data-[state=active]`-driven 2px bottom border overlapping `TabList`'s own border via `-mb-px`). All keyboard/activation-mode behavior is unchanged from the underlying `headless` component.
-- `Checkbox` — styled wrapper over `@nebula-lab/headless`'s `Checkbox`; renders a checkmark/dash indicator icon toggled via `data-state`, no separate indicator subcomponent needed.
-- `Switch` — styled wrapper over `@nebula-lab/headless`'s `Switch`; a track + sliding thumb `<span>`, same `data-state`-driven technique as `Checkbox`.
-- `RadioGroup` / `RadioGroupItem` — styled wrapper over `@nebula-lab/headless`'s `RadioGroup`. Note `RadioGroupItem` renders its indicator circle *before* its own `children` — the underlying `headless` item's children are its accessible name/visible label (not a separate `<label>` element), so both live inside the one clickable control.
-- `tokens/primitive.ts` — raw OKLCH color values, per-component radius/size roles, and font stacks. Never reference these directly from a component — DaisyUI-style theme, ported from a theme file the project owner provided (see "Custom theming" below for the full story on why OKLCH/DaisyUI over the old hex scale).
-- `tokens/semantic.ts` — intent-based roles (`color.primary`, `color.base[100]`, `color.error`, ...) with light/dark mappings, plus the native `color-scheme` property value per mode. Components should reference these.
-- `tokens/component.ts` — every styled component's own `<component>Tokens` entry (e.g. `badgeTokens`, `dialogTokens`) — every component reads its colors through this layer (`var(--badge-primary-bg)`), never a semantic token directly, so overriding one component's look can never accidentally also affect another that happens to read the same semantic color. See that file's header comment for the full reasoning.
-- `tokens/generate.ts` — regenerates `theme.css` from the three files above.
-- `theme-provider/` — `ThemeProvider` + `useTheme()`, persists the choice via `@nebula-lab/hooks`'s `useLocalStorage`, resolves `'system'` via `useMediaQuery`, and reflects it on `<html>` as both `data-theme` and a `.dark` class.
+**Layout & structure** — `Card`, `Paper`, `Surface`, `Section`, `Main`, `Header`, `Footer`, `Navbar`, `Sidebar`, `DescriptionList`
+
+**Typography** — `Heading`, `Text`, `Blockquote`, `Code`, `Markdown`, `Kbd`, `KbdShortcut`
+
+**Buttons** — `Button`, `IconButton`, `Fab`, `ButtonGroup`, `SplitButton`
+
+**Forms — text input** — `Input`, `Textarea`, `EmailField`, `TelField`, `UrlField`, `PasswordField`, `SearchField`, `PasswordStrengthIndicator`, `NumberInput`, `OtpInput`
+
+**Forms — selection** — `Checkbox`, `CheckboxGroup`, `RadioGroup`, `Switch`, `Toggle`, `ToggleGroup`, `SegmentedControl`, `Select`, `MultiSelect`, `Combobox`, `Autocomplete`, `ColorPicker`, `Rating`, `StaticRating`, `Slider`
+
+**Forms — date & time** — `Calendar`, `DatePicker`, `DateRangePicker`, `TimePicker`
+
+**Forms — file** — `FileUpload`, `ImageUpload`
+
+**Forms — misc** — `Field`, `FilterBar`, `Command`
+
+**Feedback** — `Alert`, `AlertPopup`, `Toast`, `Progress`, `CircularProgress`, `Spinner`, `Skeleton`, `EmptyState`
+
+**Overlays** — `Dialog`, `AlertDialog`, `Drawer`, `Sheet`, `Popover`, `HoverCard`, `Tooltip`, `Backdrop` (standalone frosted-glass/solid scrim, usable anywhere)
+
+**Menus** — `Menu`, `DropdownMenu`, `ContextMenu`, `Menubar`, `NavigationMenu`
+
+**Navigation** — `Tabs`, `Breadcrumb`, `Pagination`, `Stepper`, `BottomNav`, `Timeline`
+
+**Data display** — `Badge`, `Chip`, `Tag`, `Avatar`, `AvatarGroup`, `DataTable`, `DataGrid`, `Tree`, `TreeView`, `TreeTable`, `List`, `VirtualList`, `Stat`, `Sparkline`, `CodeBlock`
+
+**Media & carousels** — `Audio`, `Video`, `Carousel`, `SwipeableCards`
+
+**Disclosure** — `Accordion`, `Collapsible`
+
+**Drag & drop** — `Draggable`, `Droppable`, `Sortable`
+
+**Theming** — `ThemeProvider` + `useTheme()` (persists via `@nebula-lab/hooks`'s `useLocalStorage`, resolves `'system'` via `useMediaQuery`, reflects `data-theme` + `.dark` on `<html>`), `ThemeSwitcher`, and the token system (`tokens/primitive.ts`, `tokens/semantic.ts`, `tokens/component.ts` — see "Custom theming" below)
+
+**Utility** — `Separator`
 
 ## Import
 
@@ -50,23 +74,7 @@ function App() {
 }
 ```
 
-Every component also has its own subpath export (`@nebula-lab/react-ui/button`, `/card`, `/badge`, `/avatar`, `/separator`, `/accordion`, `/dialog`, `/popover`, `/tooltip`, `/tabs`, `/checkbox`, `/switch`, `/radio-group`, `/input`, `/tokens`, `/theme-provider`) for consumers who want to import just one component's chunk rather than the whole barrel.
-
-## Regenerating tokens
-
-Edit `tokens/semantic.ts` (light/dark mappings) or `tokens/component.ts`, then:
-
-```bash
-pnpm --filter @nebula-lab/react-ui generate-tokens
-```
-
-This overwrites `src/theme.css` — never hand-edit that file. Check contrast after any color change:
-
-```bash
-pnpm --filter @nebula-lab/react-ui contrast-audit
-```
-
-See `CONTRAST_AUDIT.md` for the current pass/fail state of every semantic color pairing.
+Every component also has its own subpath export (e.g. `@nebula-lab/react-ui/button`, `/card`, `/dialog`, `/tokens`, `/theme-provider`) for consumers who want to import just one component's chunk rather than the whole barrel.
 
 ## Custom theming / color schemes
 
@@ -112,4 +120,16 @@ Every component here accepts `className`, merged via `cn()` (`clsx` + `tailwind-
 
 ## Adding the next component
 
-Most components here should be a thin `cva` + `cn` wrapper around either a `Primitive.<tag>` (for stateless components like `Button`, `Badge`, `Card`) or the matching `@nebula-lab/headless` component (for anything stateful/ARIA-heavy, e.g. the styled `Checkbox`/`Switch`/`RadioGroup` wrapping `@nebula-lab/headless`'s versions). See the `new-component` skill.
+Most components here should be a thin `cva` + `cn` wrapper around either a `Primitive.<tag>` (for stateless components like `Button`, `Badge`, `Card`) or the matching `@nebula-lab/headless` component (for anything stateful/ARIA-heavy, e.g. the styled `Checkbox`/`Switch`/`RadioGroup` wrapping `@nebula-lab/headless`'s versions). See the [monorepo's CONTRIBUTING.md](../../CONTRIBUTING.md) for the full convention, including how to regenerate design tokens.
+
+## API reference
+
+Every component here ships with a live Storybook entry (controls, source, interaction tests) — that's the authoritative API reference, not this README: **https://tripathirajan.github.io/nebula/**
+
+## Contributing
+
+See the [monorepo's CONTRIBUTING.md](../../CONTRIBUTING.md).
+
+## License
+
+MIT

@@ -2,11 +2,19 @@
 
 Low-level DOM abstractions and layout components for building accessible, composable React applications. Unstyled and polymorphic — no visuals, no opinions about styling; just behavior and composition that every other `@nebula-lab/*` package builds on.
 
+## Installation
+
+```bash
+pnpm add @nebula-lab/primitives
+```
+
+Peer dependencies: `react ^19.0.0`, `react-dom ^19.0.0`.
+
 ## Features
 
 ### 🎯 Layout Utilities
 
-`Box`, `Flex`, `Grid`, `Stack`, `Container`, `Center`, `AspectRatio`, `Inline` — polymorphic layout building blocks over `Primitive`, styled with static Tailwind classes (no arbitrary-value runtime string building).
+`Box`, `Flex`, `Grid`, `Stack`, `Container`, `Center`, `AspectRatio`, `Inline` — polymorphic layout building blocks over `Primitive`, styled with static Tailwind classes (no arbitrary-value runtime string building). Plus `HStack`/`VStack` (row/column `Flex` aliases with sensible gap/align defaults), `Wrap` (an `Inline` alias), and `Spacer` (an `aria-hidden` flex-grow filler).
 
 ### 📝 Text Components
 
@@ -18,15 +26,23 @@ Low-level DOM abstractions and layout components for building accessible, compos
 
 ### 🎛️ Form Primitives
 
-`Button`, `Input`, `Textarea`, `Label`, `Form` — unstyled form controls with sane defaults (`Button` defaults `type="button"`; `Input`/`Textarea` map `invalid` to `aria-invalid`; `Textarea` supports `autoResize`; `Label` supports a `required` indicator; `Form` always calls `preventDefault()` before your `onSubmit`).
+`Button`, `Input`, `Textarea`, `Label`, `Form`, `NativeSelect` — unstyled form controls with sane defaults (`Button` defaults `type="button"`; `Input`/`Textarea` map `invalid` to `aria-invalid`; `Textarea` supports `autoResize`; `Label` supports a `required` indicator; `Form` always calls `preventDefault()` before your `onSubmit`; `NativeSelect` wraps the real `<select>` element, not a custom listbox — for a fully custom dropdown see `@nebula-lab/headless`'s `Select`).
 
 ### 👁️ Visibility
 
-`Portal`, `Presence`, `Overlay` — SSR-safe portal rendering, an exit-animation-aware presence state machine (waits for `animationend`/`transitionend` before unmounting), and a bare `fixed inset-0` overlay layer.
+`Portal`, `Presence`, `Overlay` — SSR-safe portal rendering, an exit-animation-aware presence state machine (waits for `animationend`/`transitionend` before unmounting), and a bare `fixed inset-0` overlay layer with zero color/opacity of its own.
+
+### 📍 Positioning
+
+`Popper` / `PopperAnchor` / `PopperContent` — side/align/offset placement, collision-flip, and viewport clamping for anchor-positioned surfaces (popovers, menus, tooltips), built from scratch with no external dependency. Also exports a pure `computePosition` function and `usePopperContext` for pushing a virtual anchor (any object with `getBoundingClientRect()`) into `Popper`'s context.
+
+### 🖼️ Media
+
+`Image` — an unstyled polymorphic `img` wrapper (no load/error tracking — see `@nebula-lab/react-ui`'s `Avatar` for that).
 
 ### 🔗 Composition
 
-`Primitive` — a polymorphic component supporting the `as` prop (tag swap) and `asChild` (via `Slot`, merges props/ref/className/style onto a single child instead of adding a wrapper element). `Slot` / `Slottable` back `asChild` everywhere in the library.
+`Primitive` — a polymorphic component supporting the `as` prop (tag swap) and `asChild` (via `Slot`, merges props/ref/className/style onto a single child instead of adding a wrapper element). `Slot` / `Slottable` back `asChild` everywhere in the library. `createContextScope` builds scoped React contexts for compound components (used throughout `@nebula-lab/headless`).
 
 ### 📡 Observers
 
@@ -101,3 +117,15 @@ pnpm --filter @nebula-lab/primitives build      # tsup -> dist (ESM + .d.ts)
 pnpm --filter @nebula-lab/primitives dev        # tsup --watch
 pnpm --filter @nebula-lab/primitives typecheck  # tsc --noEmit
 ```
+
+## API reference
+
+Every component here ships with a live Storybook entry (controls, source, interaction tests) — that's the authoritative API reference, not this README: **https://tripathirajan.github.io/nebula/**
+
+## Contributing
+
+See the [monorepo's CONTRIBUTING.md](../../CONTRIBUTING.md).
+
+## License
+
+MIT

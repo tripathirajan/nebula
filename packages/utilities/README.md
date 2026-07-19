@@ -2,6 +2,14 @@
 
 Framework-agnostic helpers — no React dependency, nothing in the workspace depends below this. Everything else (`hooks`, `primitives`, ...) may depend on this package.
 
+## Installation
+
+```bash
+pnpm add @nebula-lab/utilities
+```
+
+No peer dependencies — works in any JS/TS environment, browser or Node.
+
 ## What's here
 
 - `clamp(value, min, max)`
@@ -16,3 +24,11 @@ import { clamp, debounce } from '@nebula-lab/utilities';
 // or per-module subpath
 import { clamp } from '@nebula-lab/utilities/clamp';
 ```
+
+## Contributing
+
+See the [monorepo's CONTRIBUTING.md](../../CONTRIBUTING.md).
+
+## License
+
+MIT

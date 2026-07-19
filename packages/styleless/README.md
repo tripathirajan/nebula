@@ -11,16 +11,30 @@ This is the newest layer in the pipeline (`primitives → headless → styleless
 4. Does it add the Nebula design system (Tailwind, variants, themes)?        → React UI
 ```
 
-See `LAYER_TAXONOMY.md` (repo root) for the full ~50-component extraction plan — every component tagged **[extract]** there is currently styled directly in `@nebula-lab/react-ui` and needs an unstyled version factored out into this package. Only `Button` has been extracted so far.
+See `LAYER_TAXONOMY.md` (repo root) for the ongoing extraction plan — components tagged **[extract]** there are currently styled directly in `@nebula-lab/react-ui` and still need an unstyled version factored out into this package.
+
+## Installation
+
+```bash
+pnpm add @nebula-lab/styleless
+```
+
+Peer dependencies: `react ^19.0.0`, `react-dom ^19.0.0`.
 
 ## What's here
 
-- `Button` — wraps `@nebula-lab/primitives`' bare `Button` and adds real `loading` semantics (`aria-busy`, `data-loading`, forced `disabled`) — no Tailwind classes, no `cva` variants. `@nebula-lab/react-ui`'s `Button` wraps this one and adds only styling.
+**Buttons** — `Button` (real `loading` semantics: `aria-busy`, `data-loading`, forced `disabled`), `IconButton`, `Fab`, `SplitButton`
+
+**Media** — `Avatar`, `AvatarGroup`, `ImagePreview`
+
+**Text input** — `Input`, `Textarea`, `EmailInput`, `TelInput`, `UrlInput`, `PasswordInput`, `SearchInput`, `PasswordStrengthIndicator`
+
+**Data display** — `DataTable`, `DataGrid`, `CodeBlock`
 
 ## Import
 
 ```tsx
-import { Button } from '@nebula-lab/styleless';
+import { Button, Avatar, DataTable } from '@nebula-lab/styleless';
 // or per-component subpath
 import { Button } from '@nebula-lab/styleless/button';
 ```
@@ -29,3 +43,15 @@ import { Button } from '@nebula-lab/styleless/button';
 <Button onClick={() => {}}>Click me</Button>
 <Button loading>Saving…</Button>
 ```
+
+## API reference
+
+Every component here ships with a live Storybook entry (controls, source, interaction tests) — that's the authoritative API reference, not this README: **https://tripathirajan.github.io/nebula/**
+
+## Contributing
+
+See the [monorepo's CONTRIBUTING.md](../../CONTRIBUTING.md).
+
+## License
+
+MIT

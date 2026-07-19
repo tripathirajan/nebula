@@ -4,20 +4,45 @@ Ready-to-use, domain-neutral screens and composite blocks — built purely from 
 
 This package merges what used to be two separate packages, `sections` (composite product-flavored blocks) and `layouts` (page-level shells) — both had the exact same dependency shape (`react-ui`, nothing above them) and the same "assemble ready-made UI out of the lower layers" purpose, so keeping them split added a package boundary without adding a real architectural distinction. Deliberately **not** ecommerce- or any other domain-specific — a dashboard shell and a theme switcher are just as useful to an expense-tracker PWA as to a storefront. If a genuinely domain-specific vertical (ecommerce blocks, say) becomes worth shipping, that's a good candidate for its own separate package built on top of this one later, rather than folding domain-specific components in here.
 
+## Installation
+
+```bash
+pnpm add @nebula-lab/react-ui-blocks
+```
+
+Peer dependencies: `react ^19.0.0`, `react-dom ^19.0.0`. Also pulls in `recharts` for the chart blocks.
+
 ## What's here
 
-- `ThemeSwitcher` — light/dark/system toggle built on `@nebula-lab/react-ui`'s `Button` and `useTheme`. Must render inside a `ThemeProvider`.
-- `AppLayout` — root shell: `ThemeProvider`, a minimal header (title + `ThemeSwitcher`), a `Primitive.main` content region, and a `#nebula-portal-root` div for `Dialog`/`Popover`/`Toast` to portal into.
-- `LoginForm` — email/password sign-in card (`Card`+`Field`+`Input`+`PasswordField`+`Checkbox`+`Button`); does no validation of its own, hands `{email, password, remember}` to `onSubmit`.
-- `TransactionForm` — generic income/expense entry form (`Select` for a consumer-supplied `categories` list, `DatePicker`, a `ToggleGroup` for income/expense); deliberately not ecommerce-specific, same domain-neutral rule as the rest of this package.
-- `DashboardLayout` — `Sidebar` + header + content shell for an internal app/admin home screen, composed on top of `AppLayout`.
-- `AuthLayout` — centered-card page shell (header hidden) for sign-in/sign-up/password-reset flows, composed on top of `AppLayout`.
-- `SettingsLayout` — settings-nav `Sidebar` + capped-width content panel, composed on top of `AppLayout`; kept distinct from `DashboardLayout` since a settings nav and a primary app nav are different content models, not just a shared component with a variant prop.
+Domain-neutral blocks (layouts, forms, data display, navigation) are exported from the package root. Domain-flavored verticals (authentication, dashboard, ecommerce, marketing, communication, social) each have their own subpath — see Import below.
+
+**Layouts** — `AppLayout` (root shell: `ThemeProvider`, header, content region, portal root for `Dialog`/`Popover`/`Toast`), `DashboardLayout`, `AuthLayout`, `SettingsLayout`, `PageSection`
+
+**Forms** — `TransactionForm` (generic income/expense entry, category list supplied by the consumer), `EntityFormLayout`
+
+**Data display** — `DataTableBlock`, `ListingCard`, `CardListItem`
+
+**Navigation** — `SaasAppHeader`
+
+**Authentication** (`@nebula-lab/react-ui-blocks/authentication`) — `LoginForm`, `SignupForm`
+
+**Dashboard** (`@nebula-lab/react-ui-blocks/dashboard`) — `DashboardOverview`, `ChartCard`, `WelcomeBanner`, `BalanceCard`, `BillingSummaryCard`, `PaymentMethodList`, `PlanCards`, `RankedList`, `ReviewsList`, `TeamMemberCard`, `ThumbnailList`
+
+**Ecommerce** (`@nebula-lab/react-ui-blocks/ecommerce`) — `ProductCard`, `ProductGallery`, `ProductInfoPanel`
+
+**Marketing** (`@nebula-lab/react-ui-blocks/marketing`) — `Hero`, `PromoBanner`, `PromoBannerCarousel`
+
+**Communication** (`@nebula-lab/react-ui-blocks/communication`) — `ChatWindow`, `NotificationCenter`
+
+**Social** (`@nebula-lab/react-ui-blocks/social`) — `ProfileHeader`
+
+**Flagship compositions** — full example screens combining many blocks (SaaS dashboard home, mobile banking, invoice list, product details, analytics overview, transaction list, user list, banking home) — Storybook-only, see the `compositions` stories rather than importable exports.
 
 ## Import
 
 ```tsx
-import { AppLayout, ThemeSwitcher } from '@nebula-lab/react-ui-blocks';
+import { AppLayout } from '@nebula-lab/react-ui-blocks';
+import { ThemeSwitcher } from '@nebula-lab/react-ui';
 import '@nebula-lab/react-ui/theme.css';
 
 function App() {
@@ -29,18 +54,25 @@ function App() {
 }
 ```
 
-Or per-component subpath:
+Vertical-specific blocks come from their own subpath, not the root barrel:
 
 ```ts
-import { ThemeSwitcher } from '@nebula-lab/react-ui-blocks/theme-switcher';
-import { AppLayout } from '@nebula-lab/react-ui-blocks/app-layout';
-import { LoginForm } from '@nebula-lab/react-ui-blocks/login-form';
-import { TransactionForm } from '@nebula-lab/react-ui-blocks/transaction-form';
-import { DashboardLayout } from '@nebula-lab/react-ui-blocks/dashboard-layout';
-import { AuthLayout } from '@nebula-lab/react-ui-blocks/auth-layout';
-import { SettingsLayout } from '@nebula-lab/react-ui-blocks/settings-layout';
+import { LoginForm, SignupForm } from '@nebula-lab/react-ui-blocks/authentication';
+import { DashboardOverview, ChartCard } from '@nebula-lab/react-ui-blocks/dashboard';
+import { ProductCard } from '@nebula-lab/react-ui-blocks/ecommerce';
+import { Hero, PromoBanner } from '@nebula-lab/react-ui-blocks/marketing';
+import { ChatWindow, NotificationCenter } from '@nebula-lab/react-ui-blocks/communication';
+import { ProfileHeader } from '@nebula-lab/react-ui-blocks/social';
 ```
 
-## Still to build
+## API reference
 
-Per `component-library-architecture.md` §5/§6 and `BLOCKS_ARCHITECTURE.md`'s Phase 1 list: `SignupForm`, `ChartCard`, `FilterBar`, `NotificationCenter`. Compose new layouts on top of `AppLayout` rather than re-wiring `ThemeProvider`/portal-root from scratch; add new sections here following the same file-per-component convention as everything else.
+Every block here ships with a live Storybook entry — that's the authoritative API reference, not this README: **https://tripathirajan.github.io/nebula/**
+
+## Contributing
+
+See the [monorepo's CONTRIBUTING.md](../../CONTRIBUTING.md). Compose new layouts on top of `AppLayout` rather than re-wiring `ThemeProvider`/portal-root from scratch, and keep new blocks domain-neutral in the root barrel or under the matching vertical subpath.
+
+## License
+
+MIT
