@@ -25,7 +25,7 @@ pnpm add @nebula-lab/styleless
 bun add @nebula-lab/styleless
 ```
 
-Peer dependencies: `react ^19.0.0`, `react-dom ^19.0.0`. Works with any of the above package managers — pick whichever your project already uses.
+Peer dependencies: `react ^19.0.0`, `react-dom ^19.0.0`. npm is shown first since it ships with Node.js and remains the most widely used option, but yarn, pnpm, and bun all work identically.
 
 **Module format:** ESM only (no CommonJS build). Works out of the box with any bundler (Vite, Next.js, Webpack 5+, esbuild, Parcel) or native Node.js ESM. A plain CommonJS `require('@nebula-lab/styleless')` is **not** supported and throws `ERR_REQUIRE_ESM` — use `import` (or dynamic `import()` from a CJS file) instead.
 
