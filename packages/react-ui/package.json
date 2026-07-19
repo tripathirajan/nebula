@@ -1,6 +1,6 @@
 {
   "name": "@nebula-lab/react-ui",
-  "version": "0.1.1-beta.1",
+  "version": "1.0.0",
   "description": "Tailwind-powered styled components (atoms) built on @nebula-lab/primitives + @nebula-lab/headless, plus the 3-layer design token system and ThemeProvider/useTheme they're styled from. Absorbed the former @nebula-lab/theme package — nothing else in the workspace needs tokens/theming, only this package's own components do.",
   "license": "MIT",
   "publishConfig": {
@@ -490,10 +490,10 @@
     "react-dom": "^19.0.0"
   },
   "dependencies": {
-    "@nebula-lab/hooks": "workspace:*",
-    "@nebula-lab/primitives": "workspace:*",
-    "@nebula-lab/headless": "workspace:*",
-    "@nebula-lab/styleless": "workspace:*",
+    "@nebula-lab/hooks": "1.0.0",
+    "@nebula-lab/primitives": "1.0.0",
+    "@nebula-lab/headless": "1.0.0",
+    "@nebula-lab/styleless": "1.0.0",
     "class-variance-authority": "^0.7.1"
   },
   "devDependencies": {
