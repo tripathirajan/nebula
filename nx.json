@@ -55,7 +55,12 @@
     }
   },
   "release": {
-    "projectsRelationship": "independent"
+    "projectsRelationship": "independent",
+    "version": {
+      "generatorOptions": {
+        "skipLockFileUpdate": true
+      }
+    }
   },
   "plugins": [
     {
