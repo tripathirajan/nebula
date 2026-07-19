@@ -1,5 +1,5 @@
 // Barrel only — zero logic. Consumers can import from here or from a
-// per-component subpath (e.g. `@nebula/primitives/slot`) for tree-shaking.
+// per-component subpath (e.g. `@nebula-lab/primitives/slot`) for tree-shaking.
 export * from './types';
 export * from './slot';
 export * from './primitive';

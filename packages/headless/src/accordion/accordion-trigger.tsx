@@ -1,7 +1,7 @@
 
-import { composeEventHandlers } from '@nebula/primitives/compose-event-handlers';
-import { Primitive } from '@nebula/primitives/primitive';
-import { FocusItem } from '@nebula/primitives/roving-focus-group';
+import { composeEventHandlers } from '@nebula-lab/primitives/compose-event-handlers';
+import { Primitive } from '@nebula-lab/primitives/primitive';
+import { FocusItem } from '@nebula-lab/primitives/roving-focus-group';
 import * as React from 'react';
 
 
@@ -10,7 +10,7 @@ import { useAccordionItemContext } from './accordion-item-context';
 
 import type { ScopedProps } from './accordion-context';
 import type { ItemScopedProps } from './accordion-item-context';
-import type { PrimitivePropsWithRef } from '@nebula/primitives/primitive';
+import type { PrimitivePropsWithRef } from '@nebula-lab/primitives/primitive';
 
 const ACCORDION_TRIGGER_NAME = 'AccordionTrigger';
 
@@ -18,7 +18,7 @@ type AccordionTriggerProps = PrimitivePropsWithRef<'button'>;
 
 /**
  * `role="button"` (native, via the `button` tag) with `aria-expanded`/
- * `aria-controls` wired to this item's panel. Wrapped in `@nebula/primitives`'
+ * `aria-controls` wired to this item's panel. Wrapped in `@nebula-lab/primitives`'
  * `FocusItem` for arrow-key movement between triggers (it finds the ambient
  * `RovingFocusGroup` the `Accordion` root renders, same as `RadioGroupItem` —
  * no manual scope wiring needed) — unlike `RadioGroupItem`, moving focus here

@@ -1,6 +1,6 @@
 
-import { useControllableState, useId } from '@nebula/hooks';
-import { Popper } from '@nebula/primitives/popper';
+import { useControllableState, useId } from '@nebula-lab/hooks';
+import { Popper } from '@nebula-lab/primitives/popper';
 import * as React from 'react';
 
 

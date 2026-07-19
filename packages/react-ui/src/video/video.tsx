@@ -1,8 +1,8 @@
-import { cn } from '@nebula/primitives/cn';
-import { Primitive } from '@nebula/primitives/primitive';
+import { cn } from '@nebula-lab/primitives/cn';
+import { Primitive } from '@nebula-lab/primitives/primitive';
 import * as React from 'react';
 
-import type { PrimitivePropsWithRef } from '@nebula/primitives/primitive';
+import type { PrimitivePropsWithRef } from '@nebula-lab/primitives/primitive';
 
 type VideoProps = PrimitivePropsWithRef<'video'>;
 
@@ -10,7 +10,7 @@ type VideoProps = PrimitivePropsWithRef<'video'>;
  * A themed `<video>` — purely presentational (rounded, clipped corners),
  * no custom player chrome of its own; native browser `controls` are shown
  * by default (pass `controls={false}` to drive playback entirely yourself).
- * No `@nebula/primitives`/`@nebula/headless` layer underneath — a native
+ * No `@nebula-lab/primitives`/`@nebula-lab/headless` layer underneath — a native
  * `<video controls>` already has full keyboard/screen-reader operability
  * for free, same "nothing to decouple" reasoning `SearchField`'s native
  * `type="search"` affordances document.

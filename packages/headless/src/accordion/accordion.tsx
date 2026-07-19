@@ -1,15 +1,15 @@
 
-import { useControllableState, useId } from '@nebula/hooks';
-import { Primitive } from '@nebula/primitives/primitive';
-import { RovingFocusGroup } from '@nebula/primitives/roving-focus-group';
+import { useControllableState, useId } from '@nebula-lab/hooks';
+import { Primitive } from '@nebula-lab/primitives/primitive';
+import { RovingFocusGroup } from '@nebula-lab/primitives/roving-focus-group';
 import * as React from 'react';
 
 
 import { AccordionProvider } from './accordion-context';
 
 import type { ScopedProps } from './accordion-context';
-import type { PrimitivePropsWithRef } from '@nebula/primitives/primitive';
-import type { RovingFocusGroupOrientation } from '@nebula/primitives/roving-focus-group';
+import type { PrimitivePropsWithRef } from '@nebula-lab/primitives/primitive';
+import type { RovingFocusGroupOrientation } from '@nebula-lab/primitives/roving-focus-group';
 
 interface AccordionSharedProps extends PrimitivePropsWithRef<'div'> {
   disabled?: boolean;

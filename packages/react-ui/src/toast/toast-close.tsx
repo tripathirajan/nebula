@@ -1,8 +1,8 @@
-import { ToastClose as HeadlessToastClose } from '@nebula/headless/toast';
-import { cn } from '@nebula/primitives/cn';
+import { ToastClose as HeadlessToastClose } from '@nebula-lab/headless/toast';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
-import type { ToastCloseProps as HeadlessToastCloseProps } from '@nebula/headless/toast';
+import type { ToastCloseProps as HeadlessToastCloseProps } from '@nebula-lab/headless/toast';
 
 type ToastCloseProps = HeadlessToastCloseProps;
 

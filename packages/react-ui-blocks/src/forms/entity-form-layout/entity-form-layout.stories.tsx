@@ -1,5 +1,5 @@
-import { Field, FieldControl, FieldLabel } from '@nebula/react-ui/field';
-import { Input } from '@nebula/react-ui/input';
+import { Field, FieldControl, FieldLabel } from '@nebula-lab/react-ui/field';
+import { Input } from '@nebula-lab/react-ui/input';
 import { expect, userEvent, within } from '@storybook/test';
 import { useState } from 'react';
 

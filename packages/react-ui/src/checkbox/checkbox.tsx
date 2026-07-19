@@ -1,13 +1,13 @@
-import { Checkbox as HeadlessCheckbox } from '@nebula/headless/checkbox';
-import { cn } from '@nebula/primitives/cn';
+import { Checkbox as HeadlessCheckbox } from '@nebula-lab/headless/checkbox';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
-import type { CheckboxProps as HeadlessCheckboxProps } from '@nebula/headless/checkbox';
+import type { CheckboxProps as HeadlessCheckboxProps } from '@nebula-lab/headless/checkbox';
 
 type CheckboxProps = HeadlessCheckboxProps;
 
 /**
- * Styled wrapper around `@nebula/headless`'s `Checkbox` — tri-state
+ * Styled wrapper around `@nebula-lab/headless`'s `Checkbox` — tri-state
  * behavior (`checked`/`false`/`'indeterminate'`), keyboard handling
  * (Space), and hidden-native-input form participation all come from there
  * unchanged. This layer only adds the box's visual styling (`--checkbox-*`

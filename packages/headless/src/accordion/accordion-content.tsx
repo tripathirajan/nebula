@@ -1,13 +1,13 @@
 
-import { Presence } from '@nebula/primitives/presence';
-import { Primitive } from '@nebula/primitives/primitive';
+import { Presence } from '@nebula-lab/primitives/presence';
+import { Primitive } from '@nebula-lab/primitives/primitive';
 import * as React from 'react';
 
 
 import { useAccordionItemContext } from './accordion-item-context';
 
 import type { ItemScopedProps } from './accordion-item-context';
-import type { PrimitivePropsWithRef } from '@nebula/primitives/primitive';
+import type { PrimitivePropsWithRef } from '@nebula-lab/primitives/primitive';
 
 const ACCORDION_CONTENT_NAME = 'AccordionContent';
 
@@ -23,7 +23,7 @@ interface AccordionContentProps extends PrimitivePropsWithRef<'div'> {
 
 /**
  * `role="region"`, labelled by its `AccordionTrigger`. Wrapped in
- * `@nebula/primitives`' `Presence` (not a plain unmount like `TabPanel`)
+ * `@nebula-lab/primitives`' `Presence` (not a plain unmount like `TabPanel`)
  * because accordion panels are the canonical case for an expand/collapse
  * *animation* — `Presence` keeps this mounted through a CSS transition
  * instead of vanishing the instant `open` flips to `false`; consumers gate

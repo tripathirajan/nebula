@@ -1,12 +1,12 @@
-import { ColorPickerHexInput as HeadlessColorPickerHexInput } from '@nebula/headless/color-picker';
-import { cn } from '@nebula/primitives/cn';
+import { ColorPickerHexInput as HeadlessColorPickerHexInput } from '@nebula-lab/headless/color-picker';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
-import type { ColorPickerHexInputProps as HeadlessColorPickerHexInputProps } from '@nebula/headless/color-picker';
+import type { ColorPickerHexInputProps as HeadlessColorPickerHexInputProps } from '@nebula-lab/headless/color-picker';
 
 type ColorPickerHexInputProps = HeadlessColorPickerHexInputProps;
 
-/** Built on `@nebula/primitives`' bare `Input` (see the headless source), not this package's own styled `Input` — so this needs the same `--input-*` treatment applied directly, rather than getting it for free by wrapping `react-ui`'s `Input`. */
+/** Built on `@nebula-lab/primitives`' bare `Input` (see the headless source), not this package's own styled `Input` — so this needs the same `--input-*` treatment applied directly, rather than getting it for free by wrapping `react-ui`'s `Input`. */
 const ColorPickerHexInput = React.forwardRef<HTMLInputElement, ColorPickerHexInputProps>(
   (props, forwardedRef) => {
     const { className, ...rest } = props;

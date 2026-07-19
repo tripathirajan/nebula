@@ -1,12 +1,12 @@
-import { composeEventHandlers } from '@nebula/primitives/compose-event-handlers';
-import { Input } from '@nebula/primitives/input';
-import { VisuallyHidden } from '@nebula/primitives/visually-hidden';
+import { composeEventHandlers } from '@nebula-lab/primitives/compose-event-handlers';
+import { Input } from '@nebula-lab/primitives/input';
+import { VisuallyHidden } from '@nebula-lab/primitives/visually-hidden';
 import * as React from 'react';
 
 import { useFileUploadContext } from './file-upload-context';
 
 import type { ScopedProps } from './file-upload-context';
-import type { InputProps } from '@nebula/primitives/input';
+import type { InputProps } from '@nebula-lab/primitives/input';
 
 const FILE_UPLOAD_INPUT_NAME = 'FileUploadInput';
 

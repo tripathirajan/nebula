@@ -1,6 +1,6 @@
 
-import { useControllableState, useId } from '@nebula/hooks';
-import { Popper } from '@nebula/primitives/popper';
+import { useControllableState, useId } from '@nebula-lab/hooks';
+import { Popper } from '@nebula-lab/primitives/popper';
 import * as React from 'react';
 
 
@@ -19,7 +19,7 @@ interface PopoverProps {
  * Root of the Popover compound component. Unlike `Dialog`, non-modal:
  * `PopoverContent` doesn't trap Tab and doesn't mark the rest of the page
  * inert — it's an anchored, dismissible surface, not a page-blocking one.
- * Wraps children in `@nebula/primitives`' `Popper` (via `usePopperScope`, so
+ * Wraps children in `@nebula-lab/primitives`' `Popper` (via `usePopperScope`, so
  * `__scopePopover` threads through to `Popper`'s own scope too) for the
  * anchor-positioning `PopoverTrigger`/`PopoverContent` are built on. Renders
  * no DOM of its own, same as `Dialog`.

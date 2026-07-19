@@ -1,8 +1,8 @@
 
-import { composeEventHandlers } from '@nebula/primitives/compose-event-handlers';
-import { PopperAnchor } from '@nebula/primitives/popper';
-import { Primitive } from '@nebula/primitives/primitive';
-import { FocusItem } from '@nebula/primitives/roving-focus-group';
+import { composeEventHandlers } from '@nebula-lab/primitives/compose-event-handlers';
+import { PopperAnchor } from '@nebula-lab/primitives/popper';
+import { Primitive } from '@nebula-lab/primitives/primitive';
+import { FocusItem } from '@nebula-lab/primitives/roving-focus-group';
 import * as React from 'react';
 
 
@@ -12,7 +12,7 @@ import { useMenubarContext } from './menubar-context';
 import { useMenubarMenuContext } from './menubar-menu-context';
 
 import type { ScopedProps } from './menubar-context';
-import type { PrimitivePropsWithRef } from '@nebula/primitives/primitive';
+import type { PrimitivePropsWithRef } from '@nebula-lab/primitives/primitive';
 
 const MENUBAR_TRIGGER_NAME = 'MenubarTrigger';
 
@@ -23,7 +23,7 @@ type MenubarTriggerProps = PrimitivePropsWithRef<'button'>;
  * (click toggles this menu; `ArrowDown`/`ArrowUp` open it and focus the
  * first item — reads the enclosing `MenubarMenu`'s `Menu` context directly,
  * unscoped, same as `MenuTrigger` itself does), plus two menubar-specific
- * behaviors layered on top via `@nebula/primitives`' `FocusItem`:
+ * behaviors layered on top via `@nebula-lab/primitives`' `FocusItem`:
  *
  * - Registers into `Menubar`'s `RovingFocusGroup` (also unscoped — see
  *   `menubar.tsx`) so Left/Right arrow keys move focus between sibling

@@ -1,4 +1,4 @@
-import { composeEventHandlers } from '@nebula/primitives/compose-event-handlers';
+import { composeEventHandlers } from '@nebula-lab/primitives/compose-event-handlers';
 import * as React from 'react';
 
 import { Checkbox } from '../checkbox/checkbox';

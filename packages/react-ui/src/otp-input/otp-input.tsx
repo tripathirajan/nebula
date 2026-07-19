@@ -1,8 +1,8 @@
-import { OTPInput as HeadlessOTPInput } from '@nebula/headless/otp-input';
-import { cn } from '@nebula/primitives/cn';
+import { OTPInput as HeadlessOTPInput } from '@nebula-lab/headless/otp-input';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
-import type { OTPInputProps as HeadlessOTPInputProps } from '@nebula/headless/otp-input';
+import type { OTPInputProps as HeadlessOTPInputProps } from '@nebula-lab/headless/otp-input';
 
 /**
  * The headless root has no `className` of its own — it renders no DOM at

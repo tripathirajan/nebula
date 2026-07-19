@@ -1,13 +1,13 @@
 
-import { Presence } from '@nebula/primitives/presence';
-import { Primitive } from '@nebula/primitives/primitive';
+import { Presence } from '@nebula-lab/primitives/presence';
+import { Primitive } from '@nebula-lab/primitives/primitive';
 import * as React from 'react';
 
 
 import { useCollapsibleContext } from './collapsible-context';
 
 import type { ScopedProps } from './collapsible-context';
-import type { PrimitivePropsWithRef } from '@nebula/primitives/primitive';
+import type { PrimitivePropsWithRef } from '@nebula-lab/primitives/primitive';
 
 const COLLAPSIBLE_CONTENT_NAME = 'CollapsibleContent';
 
@@ -17,7 +17,7 @@ interface CollapsibleContentProps extends PrimitivePropsWithRef<'div'> {
 }
 
 /**
- * Wrapped in `@nebula/primitives`' `Presence` (not a plain conditional
+ * Wrapped in `@nebula-lab/primitives`' `Presence` (not a plain conditional
  * unmount) so consumers can animate expand/collapse via CSS gated on
  * `data-state="open"|"closed"` — same reasoning `AccordionContent`
  * documents, since this is effectively the single-panel version of it.

@@ -1,6 +1,6 @@
-import { Avatar, AvatarFallback } from '@nebula/react-ui/avatar';
-import { Badge } from '@nebula/react-ui/badge';
-import { MenuItem } from '@nebula/react-ui/menu';
+import { Avatar, AvatarFallback } from '@nebula-lab/react-ui/avatar';
+import { Badge } from '@nebula-lab/react-ui/badge';
+import { MenuItem } from '@nebula-lab/react-ui/menu';
 import { expect, userEvent, waitFor, within } from '@storybook/test';
 
 import { CardListItem } from './card-list-item';

@@ -1,5 +1,5 @@
-import { composeEventHandlers } from '@nebula/primitives/compose-event-handlers';
-import { Primitive } from '@nebula/primitives/primitive';
+import { composeEventHandlers } from '@nebula-lab/primitives/compose-event-handlers';
+import { Primitive } from '@nebula-lab/primitives/primitive';
 import * as React from 'react';
 
 import { useTreeContext } from './tree-context';
@@ -7,7 +7,7 @@ import { TreeItemProvider } from './tree-item-context';
 
 import type { ScopedProps } from './tree-context';
 import type { ItemScopedProps } from './tree-item-context';
-import type { PrimitivePropsWithRef } from '@nebula/primitives/primitive';
+import type { PrimitivePropsWithRef } from '@nebula-lab/primitives/primitive';
 
 const TREE_ITEM_NAME = 'TreeItem';
 
@@ -27,7 +27,7 @@ interface TreeItemProps extends PrimitivePropsWithRef<'li'> {
  * tree row's whole line is the interactive unit). Roving-tabindex is
  * computed by comparing this item's `value` against the root's
  * `activeValue` (see `tree-context.ts`) rather than via
- * `@nebula/primitives`' `RovingFocusGroup`, since Tree's nested structure
+ * `@nebula-lab/primitives`' `RovingFocusGroup`, since Tree's nested structure
  * needs `Tree`'s own custom arrow-key handling (see `tree.tsx`) — this
  * component only needs to expose the resulting `tabIndex`, register itself
  * so the root can default `activeValue` to the first item, track focus,

@@ -1,8 +1,8 @@
-import { MenuItem as HeadlessMenuItem } from '@nebula/headless/menu';
-import { cn } from '@nebula/primitives/cn';
+import { MenuItem as HeadlessMenuItem } from '@nebula-lab/headless/menu';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
-import type { MenuItemProps as HeadlessMenuItemProps } from '@nebula/headless/menu';
+import type { MenuItemProps as HeadlessMenuItemProps } from '@nebula-lab/headless/menu';
 
 type MenuItemProps = HeadlessMenuItemProps;
 

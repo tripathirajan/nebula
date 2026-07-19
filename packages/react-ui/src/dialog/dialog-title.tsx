@@ -1,8 +1,8 @@
-import { DialogTitle as HeadlessDialogTitle } from '@nebula/headless/dialog';
-import { cn } from '@nebula/primitives/cn';
+import { DialogTitle as HeadlessDialogTitle } from '@nebula-lab/headless/dialog';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
-import type { DialogTitleProps as HeadlessDialogTitleProps } from '@nebula/headless/dialog';
+import type { DialogTitleProps as HeadlessDialogTitleProps } from '@nebula-lab/headless/dialog';
 
 type DialogTitleProps = HeadlessDialogTitleProps;
 

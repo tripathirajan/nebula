@@ -1,14 +1,14 @@
-import { composeEventHandlers } from '@nebula/primitives/compose-event-handlers';
-import { useComposedRefs } from '@nebula/primitives/compose-refs';
-import { Primitive } from '@nebula/primitives/primitive';
-import { FocusItem } from '@nebula/primitives/roving-focus-group';
-import { VisuallyHidden } from '@nebula/primitives/visually-hidden';
+import { composeEventHandlers } from '@nebula-lab/primitives/compose-event-handlers';
+import { useComposedRefs } from '@nebula-lab/primitives/compose-refs';
+import { Primitive } from '@nebula-lab/primitives/primitive';
+import { FocusItem } from '@nebula-lab/primitives/roving-focus-group';
+import { VisuallyHidden } from '@nebula-lab/primitives/visually-hidden';
 import * as React from 'react';
 
 import { useRatingContext } from './rating-context';
 
 import type { ScopedProps } from './rating-context';
-import type { PrimitivePropsWithRef } from '@nebula/primitives/primitive';
+import type { PrimitivePropsWithRef } from '@nebula-lab/primitives/primitive';
 
 const RATING_ITEM_NAME = 'RatingItem';
 

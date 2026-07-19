@@ -1,16 +1,16 @@
-import { cn } from '@nebula/primitives/cn';
-import { Primitive } from '@nebula/primitives/primitive';
+import { cn } from '@nebula-lab/primitives/cn';
+import { Primitive } from '@nebula-lab/primitives/primitive';
 import * as React from 'react';
 
-import type { PrimitivePropsWithRef } from '@nebula/primitives/primitive';
+import type { PrimitivePropsWithRef } from '@nebula-lab/primitives/primitive';
 
 type EmptyStateProps = PrimitivePropsWithRef<'div'>;
 
 /**
  * A placeholder for an empty list/search-result/inbox — `EmptyStateIcon`/
  * `EmptyStateTitle`/`EmptyStateDescription`/`EmptyStateAction` are purely
- * presentational structure, same "no matching `@nebula/headless` or
- * `@nebula/styleless` compound" treatment `Card`/`Stat`/`Timeline` already
+ * presentational structure, same "no matching `@nebula-lab/headless` or
+ * `@nebula-lab/styleless` compound" treatment `Card`/`Stat`/`Timeline` already
  * document (nothing here is a widget with its own behavior to separate
  * out — it's a themed, centered column, not a state machine).
  *

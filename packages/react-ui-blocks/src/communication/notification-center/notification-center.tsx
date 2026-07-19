@@ -1,8 +1,8 @@
-import { cn } from '@nebula/primitives/cn';
-import { Badge } from '@nebula/react-ui/badge';
-import { Button } from '@nebula/react-ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@nebula/react-ui/card';
-import { Tab, TabList, TabPanel, Tabs } from '@nebula/react-ui/tabs';
+import { cn } from '@nebula-lab/primitives/cn';
+import { Badge } from '@nebula-lab/react-ui/badge';
+import { Button } from '@nebula-lab/react-ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@nebula-lab/react-ui/card';
+import { Tab, TabList, TabPanel, Tabs } from '@nebula-lab/react-ui/tabs';
 import * as React from 'react';
 
 const CheckIcon = (props: React.SVGProps<SVGSVGElement>) => (

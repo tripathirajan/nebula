@@ -1,7 +1,7 @@
-import { cn } from '@nebula/primitives/cn';
-import { Card, CardContent, CardHeader, CardTitle } from '@nebula/react-ui/card';
-import { List, ListItem } from '@nebula/react-ui/list';
-import { Text } from '@nebula/react-ui/text';
+import { cn } from '@nebula-lab/primitives/cn';
+import { Card, CardContent, CardHeader, CardTitle } from '@nebula-lab/react-ui/card';
+import { List, ListItem } from '@nebula-lab/react-ui/list';
+import { Text } from '@nebula-lab/react-ui/text';
 import * as React from 'react';
 
 interface RankedListItem {

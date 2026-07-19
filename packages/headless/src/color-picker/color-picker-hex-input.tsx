@@ -1,11 +1,11 @@
-import { composeEventHandlers } from '@nebula/primitives/compose-event-handlers';
-import { Input } from '@nebula/primitives/input';
+import { composeEventHandlers } from '@nebula-lab/primitives/compose-event-handlers';
+import { Input } from '@nebula-lab/primitives/input';
 import * as React from 'react';
 
 import { useColorPickerContext } from './color-picker-context';
 
 import type { ScopedProps } from './color-picker-context';
-import type { InputProps } from '@nebula/primitives/input';
+import type { InputProps } from '@nebula-lab/primitives/input';
 
 const COLOR_PICKER_HEX_INPUT_NAME = 'ColorPickerHexInput';
 

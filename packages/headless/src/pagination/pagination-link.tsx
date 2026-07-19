@@ -1,11 +1,11 @@
-import { composeEventHandlers } from '@nebula/primitives/compose-event-handlers';
-import { Primitive } from '@nebula/primitives/primitive';
+import { composeEventHandlers } from '@nebula-lab/primitives/compose-event-handlers';
+import { Primitive } from '@nebula-lab/primitives/primitive';
 import * as React from 'react';
 
 import { usePaginationContext } from './pagination-context';
 
 import type { ScopedProps } from './pagination-context';
-import type { PrimitivePropsWithRef } from '@nebula/primitives/primitive';
+import type { PrimitivePropsWithRef } from '@nebula-lab/primitives/primitive';
 
 const PAGINATION_LINK_NAME = 'PaginationLink';
 

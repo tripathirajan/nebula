@@ -1,19 +1,19 @@
-import { Switch as HeadlessSwitch } from '@nebula/headless/switch';
-import { cn } from '@nebula/primitives/cn';
+import { Switch as HeadlessSwitch } from '@nebula-lab/headless/switch';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
-import type { SwitchProps as HeadlessSwitchProps } from '@nebula/headless/switch';
+import type { SwitchProps as HeadlessSwitchProps } from '@nebula-lab/headless/switch';
 
 type SwitchProps = HeadlessSwitchProps;
 
 /**
- * Styled wrapper around `@nebula/headless`'s `Switch` — on/off behavior,
+ * Styled wrapper around `@nebula-lab/headless`'s `Switch` — on/off behavior,
  * `role="switch"`, and hidden-native-input form participation all come
  * from there unchanged. This layer only adds the track's styling
  * (`--switch-track-*` tokens, see `../tokens/component.ts`) and a thumb
  * `<span>` that slides via `data-state`, using the same `group`/
  * `group-data-*` technique `Checkbox`'s indicator icons use — the thumb
- * isn't a separate `@nebula/headless` part, just a purely visual child.
+ * isn't a separate `@nebula-lab/headless` part, just a purely visual child.
  *
  * @example
  * ```tsx

@@ -1,8 +1,8 @@
-import { PopoverClose as HeadlessPopoverClose } from '@nebula/headless/popover';
-import { cn } from '@nebula/primitives/cn';
+import { PopoverClose as HeadlessPopoverClose } from '@nebula-lab/headless/popover';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
-import type { PopoverCloseProps as HeadlessPopoverCloseProps } from '@nebula/headless/popover';
+import type { PopoverCloseProps as HeadlessPopoverCloseProps } from '@nebula-lab/headless/popover';
 
 type PopoverCloseProps = HeadlessPopoverCloseProps;
 

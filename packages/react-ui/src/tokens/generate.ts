@@ -1,7 +1,7 @@
 /**
  * Regenerates `theme.css` from `primitive.ts` + `semantic.ts` + `component.ts`.
  *
- * Run with: `pnpm --filter @nebula/react-ui generate-tokens`
+ * Run with: `pnpm --filter @nebula-lab/react-ui generate-tokens`
  * (or `npx tsx packages/react-ui/src/tokens/generate.ts` from the repo root,
  * per component-library-architecture.md §7).
  *
@@ -13,7 +13,7 @@
  *
  * @example
  * ```sh
- * pnpm --filter @nebula/react-ui generate-tokens
+ * pnpm --filter @nebula-lab/react-ui generate-tokens
  * # -> Wrote 54 tokens to .../packages/react-ui/src/theme.css
  * ```
  */
@@ -115,7 +115,7 @@ const zIndexEntries = flatten(primitiveTokens.zIndex, ['z']);
 const css = `/**
  * GENERATED FILE — do not hand-edit.
  * Source: packages/react-ui/src/tokens/{primitive,semantic,component}.ts
- * Regenerate: pnpm --filter @nebula/react-ui generate-tokens
+ * Regenerate: pnpm --filter @nebula-lab/react-ui generate-tokens
  */
 
 ${toCssBlock(':root', [...lightEntries, ...componentEntries, ...radiusEntries, ...sizeEntries, ...fontEntries, ...effectEntries, ...motionEntries, ...elevationEntries, ...zIndexEntries])}

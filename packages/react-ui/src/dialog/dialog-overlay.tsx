@@ -1,11 +1,11 @@
-import { DialogOverlay as HeadlessDialogOverlay } from '@nebula/headless/dialog';
-import { cn } from '@nebula/primitives/cn';
+import { DialogOverlay as HeadlessDialogOverlay } from '@nebula-lab/headless/dialog';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
 import { backdropVariantClassName } from '../backdrop';
 
 import type { BackdropBlurIntensity } from '../backdrop';
-import type { DialogOverlayProps as HeadlessDialogOverlayProps } from '@nebula/headless/dialog';
+import type { DialogOverlayProps as HeadlessDialogOverlayProps } from '@nebula-lab/headless/dialog';
 
 interface DialogOverlayOwnProps {
   /**

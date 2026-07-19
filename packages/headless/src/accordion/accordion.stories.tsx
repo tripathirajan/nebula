@@ -37,7 +37,7 @@ function FaqAccordion({ collapsible = true }: { collapsible?: boolean }) {
         <AccordionHeader>
           <AccordionTrigger>Is it themeable?</AccordionTrigger>
         </AccordionHeader>
-        <AccordionContent>Yes, via @nebula/react-ui&apos;s token system.</AccordionContent>
+        <AccordionContent>Yes, via @nebula-lab/react-ui&apos;s token system.</AccordionContent>
       </AccordionItem>
       <AccordionItem value="item-3" disabled>
         <AccordionHeader>

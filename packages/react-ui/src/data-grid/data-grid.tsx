@@ -1,12 +1,12 @@
-import { cn } from '@nebula/primitives/cn';
-import { DataGrid as StylelessDataGrid } from '@nebula/styleless/data-grid';
+import { cn } from '@nebula-lab/primitives/cn';
+import { DataGrid as StylelessDataGrid } from '@nebula-lab/styleless/data-grid';
 
-import type { DataGridColumn, DataGridProps as StylelessDataGridProps } from '@nebula/styleless/data-grid';
+import type { DataGridColumn, DataGridProps as StylelessDataGridProps } from '@nebula-lab/styleless/data-grid';
 
 type DataGridProps<T> = Omit<StylelessDataGridProps<T>, 'classNames'> & { className?: string };
 
 /**
- * Themed wrapper over `@nebula/styleless`'s `DataGrid` — a virtualized,
+ * Themed wrapper over `@nebula-lab/styleless`'s `DataGrid` — a virtualized,
  * WAI-ARIA Grid-pattern row/column grid (see that package's own doc comment
  * for why this is a separate component from `DataTable`, not a variant of
  * it: virtualization needs absolutely-positioned rows, which a native

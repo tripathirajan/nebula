@@ -1,4 +1,4 @@
-import { Avatar, AvatarFallback } from '@nebula/react-ui/avatar';
+import { Avatar, AvatarFallback } from '@nebula-lab/react-ui/avatar';
 import { expect, within } from '@storybook/test';
 
 import { VirtualList } from './virtual-list';

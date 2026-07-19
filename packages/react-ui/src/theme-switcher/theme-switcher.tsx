@@ -1,4 +1,4 @@
-import { Button } from '@nebula/react-ui/button';
+import { Button } from '@nebula-lab/react-ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -6,13 +6,13 @@ import {
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
-} from '@nebula/react-ui/dropdown-menu';
-import { IconButton } from '@nebula/react-ui/icon-button';
-import { useTheme } from '@nebula/react-ui/theme-provider';
+} from '@nebula-lab/react-ui/dropdown-menu';
+import { IconButton } from '@nebula-lab/react-ui/icon-button';
+import { useTheme } from '@nebula-lab/react-ui/theme-provider';
 import * as React from 'react';
 
-import type { ButtonProps } from '@nebula/react-ui/button';
-import type { Theme } from '@nebula/react-ui/theme-provider';
+import type { ButtonProps } from '@nebula-lab/react-ui/button';
+import type { Theme } from '@nebula-lab/react-ui/theme-provider';
 
 const SunIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
@@ -96,7 +96,7 @@ interface ThemeSwitcherProps {
  * package's own `Button`/`IconButton`/`DropdownMenu` and `ThemeProvider`,
  * no new primitives. Originally shipped as `react-ui-blocks`' first
  * component (a demonstration of composing domain-neutral UI purely from
- * `@nebula/react-ui`); moved here since it has no domain knowledge of its
+ * `@nebula-lab/react-ui`); moved here since it has no domain knowledge of its
  * own — exactly the "atoms and molecules belong in `react-ui`" rule
  * `react-ui-blocks` is supposed to sit on top of, not include. Must be
  * rendered inside a `ThemeProvider`.

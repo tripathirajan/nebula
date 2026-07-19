@@ -24,7 +24,7 @@ interface PasswordInputProps extends Omit<InputProps, 'type'> {
 
 /**
  * `styleless`-tier `PasswordInput` — the real behavior extracted from
- * `@nebula/react-ui`'s `PasswordField`: a password `Input` with a show/hide
+ * `@nebula-lab/react-ui`'s `PasswordField`: a password `Input` with a show/hide
  * toggle button. Local `visible` state starts `false` (masked); toggling it
  * swaps the underlying native `<input>`'s `type` between
  * `"password"`/`"text"` rather than hiding/revealing text via CSS, so

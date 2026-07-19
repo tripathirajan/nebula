@@ -1,8 +1,8 @@
-import { AccordionItem as HeadlessAccordionItem } from '@nebula/headless/accordion';
-import { cn } from '@nebula/primitives/cn';
+import { AccordionItem as HeadlessAccordionItem } from '@nebula-lab/headless/accordion';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
-import type { AccordionItemProps as HeadlessAccordionItemProps } from '@nebula/headless/accordion';
+import type { AccordionItemProps as HeadlessAccordionItemProps } from '@nebula-lab/headless/accordion';
 
 type AccordionItemProps = HeadlessAccordionItemProps;
 

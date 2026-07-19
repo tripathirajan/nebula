@@ -1,10 +1,10 @@
-import { cn } from '@nebula/primitives/cn';
-import { Primitive } from '@nebula/primitives/primitive';
+import { cn } from '@nebula-lab/primitives/cn';
+import { Primitive } from '@nebula-lab/primitives/primitive';
 import * as React from 'react';
 
 import { badgeVariants } from '../badge/badge';
 
-import type { PrimitivePropsWithRef } from '@nebula/primitives/primitive';
+import type { PrimitivePropsWithRef } from '@nebula-lab/primitives/primitive';
 import type { VariantProps } from 'class-variance-authority';
 
 interface TagProps extends Omit<PrimitivePropsWithRef<'span'>, 'color'> {

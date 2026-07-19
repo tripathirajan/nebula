@@ -1,13 +1,13 @@
-import { useComposedRefs } from '@nebula/primitives/compose-refs';
-import { DismissibleLayer } from '@nebula/primitives/dismissible-layer';
-import { PopperContent } from '@nebula/primitives/popper';
-import { Presence } from '@nebula/primitives/presence';
+import { useComposedRefs } from '@nebula-lab/primitives/compose-refs';
+import { DismissibleLayer } from '@nebula-lab/primitives/dismissible-layer';
+import { PopperContent } from '@nebula-lab/primitives/popper';
+import { Presence } from '@nebula-lab/primitives/presence';
 import * as React from 'react';
 
 import { useComboboxContext, usePopperScope } from './combobox-context';
 
 import type { ScopedProps } from './combobox-context';
-import type { Align, PopperContentProps, Side } from '@nebula/primitives/popper';
+import type { Align, PopperContentProps, Side } from '@nebula-lab/primitives/popper';
 
 const COMBOBOX_CONTENT_NAME = 'ComboboxContent';
 
@@ -23,7 +23,7 @@ interface ComboboxContentProps
 
 /**
  * `role="listbox"`, anchor-positioned against `ComboboxInput` via
- * `@nebula/primitives`' `PopperContent`. Deliberately NOT wrapped in
+ * `@nebula-lab/primitives`' `PopperContent`. Deliberately NOT wrapped in
  * `FocusScope` (unlike `SelectContent`/`PopoverContent`) — DOM focus must
  * stay on `ComboboxInput` the entire time the popup is open, since that's
  * where typing happens; dismissal on outside-pointerdown is still handled

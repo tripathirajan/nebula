@@ -1,8 +1,8 @@
-import { cn } from '@nebula/primitives/cn';
-import { Button } from '@nebula/react-ui/button';
-import { Card, CardContent } from '@nebula/react-ui/card';
-import { Heading } from '@nebula/react-ui/heading';
-import { Text } from '@nebula/react-ui/text';
+import { cn } from '@nebula-lab/primitives/cn';
+import { Button } from '@nebula-lab/react-ui/button';
+import { Card, CardContent } from '@nebula-lab/react-ui/card';
+import { Heading } from '@nebula-lab/react-ui/heading';
+import { Text } from '@nebula-lab/react-ui/text';
 import * as React from 'react';
 
 interface WelcomeBannerAction {

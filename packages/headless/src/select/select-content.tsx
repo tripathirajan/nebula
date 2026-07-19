@@ -1,7 +1,7 @@
-import { DismissibleLayer } from '@nebula/primitives/dismissible-layer';
-import { FocusScope } from '@nebula/primitives/focus-scope';
-import { PopperContent } from '@nebula/primitives/popper';
-import { Presence } from '@nebula/primitives/presence';
+import { DismissibleLayer } from '@nebula-lab/primitives/dismissible-layer';
+import { FocusScope } from '@nebula-lab/primitives/focus-scope';
+import { PopperContent } from '@nebula-lab/primitives/popper';
+import { Presence } from '@nebula-lab/primitives/presence';
 import * as React from 'react';
 
 import { Listbox } from '../listbox/listbox';
@@ -9,7 +9,7 @@ import { Listbox } from '../listbox/listbox';
 import { useSelectContext, usePopperScope } from './select-context';
 
 import type { ScopedProps } from './select-context';
-import type { Align, PopperContentProps, Side } from '@nebula/primitives/popper';
+import type { Align, PopperContentProps, Side } from '@nebula-lab/primitives/popper';
 
 const SELECT_CONTENT_NAME = 'SelectContent';
 
@@ -27,7 +27,7 @@ interface SelectContentProps
 
 /**
  * `role="listbox"`, anchor-positioned against `SelectTrigger` via
- * `@nebula/primitives`' `PopperContent` — same `Presence` > `DismissibleLayer`
+ * `@nebula-lab/primitives`' `PopperContent` — same `Presence` > `DismissibleLayer`
  * > `FocusScope` > (positioning) `asChild` chain `PopoverContent` uses, with
  * one more link added: `Listbox` (`type="single"`, no explicit scope passed
  * — it mints its own default-scoped context, the same "ambient, unscoped

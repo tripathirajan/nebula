@@ -34,7 +34,7 @@ interface CodeBlockProps {
 
 /**
  * `styleless`-tier `CodeBlock` — the real behavior extracted from
- * `@nebula/react-ui`'s `CodeBlock`: `copied` state (reset after 1.5s via
+ * `@nebula-lab/react-ui`'s `CodeBlock`: `copied` state (reset after 1.5s via
  * `window.setTimeout`), the `navigator.clipboard.writeText` copy action
  * (silently no-ops on denied clipboard access — permissions/insecure
  * context — same "best-effort convenience" treatment a copy button gets

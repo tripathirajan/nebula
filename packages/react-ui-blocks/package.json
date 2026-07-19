@@ -1,7 +1,7 @@
 {
-  "name": "@nebula/react-ui-blocks",
+  "name": "@nebula-lab/react-ui-blocks",
   "version": "0.1.0",
-  "description": "Ready-to-use, domain-neutral screens and composite blocks (theme switchers, page shells, forms, dashboards, auth flows, ...) built purely from @nebula/react-ui (which owns both the styled components and the token/theme system). The top of the dependency graph — nothing else in this repo depends on it.",
+  "description": "Ready-to-use, domain-neutral screens and composite blocks (theme switchers, page shells, forms, dashboards, auth flows, ...) built purely from @nebula-lab/react-ui (which owns both the styled components and the token/theme system). The top of the dependency graph — nothing else in this repo depends on it.",
   "license": "MIT",
   "author": "Rajan Tripathi <tripathirajan3@gmail.com>",
   "repository": {
@@ -61,9 +61,9 @@
     "react-dom": "^19.0.0"
   },
   "dependencies": {
-    "@nebula/hooks": "workspace:*",
-    "@nebula/primitives": "workspace:*",
-    "@nebula/react-ui": "workspace:*",
+    "@nebula-lab/hooks": "workspace:*",
+    "@nebula-lab/primitives": "workspace:*",
+    "@nebula-lab/react-ui": "workspace:*",
     "recharts": "^3.9.2"
   },
   "devDependencies": {

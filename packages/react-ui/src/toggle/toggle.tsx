@@ -1,8 +1,8 @@
-import { Toggle as HeadlessToggle } from '@nebula/headless/toggle';
-import { cn } from '@nebula/primitives/cn';
+import { Toggle as HeadlessToggle } from '@nebula-lab/headless/toggle';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
-import type { ToggleProps as HeadlessToggleProps } from '@nebula/headless/toggle';
+import type { ToggleProps as HeadlessToggleProps } from '@nebula-lab/headless/toggle';
 
 type ToggleProps = HeadlessToggleProps;
 

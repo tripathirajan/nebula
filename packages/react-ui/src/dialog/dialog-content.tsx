@@ -1,10 +1,10 @@
-import { DialogContent as HeadlessDialogContent } from '@nebula/headless/dialog';
-import { cn } from '@nebula/primitives/cn';
+import { DialogContent as HeadlessDialogContent } from '@nebula-lab/headless/dialog';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
 import { DialogClose } from './dialog-close';
 
-import type { DialogContentProps as HeadlessDialogContentProps } from '@nebula/headless/dialog';
+import type { DialogContentProps as HeadlessDialogContentProps } from '@nebula-lab/headless/dialog';
 
 interface DialogContentOwnProps {
   /** Hide the built-in top-right close icon (e.g. for a dialog that only closes via an explicit in-body action). @default false */

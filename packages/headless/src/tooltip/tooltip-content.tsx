@@ -1,13 +1,13 @@
 
-import { PopperContent } from '@nebula/primitives/popper';
-import { Presence } from '@nebula/primitives/presence';
+import { PopperContent } from '@nebula-lab/primitives/popper';
+import { Presence } from '@nebula-lab/primitives/presence';
 import * as React from 'react';
 
 
 import { useTooltipContext, usePopperScope } from './tooltip-context';
 
 import type { ScopedProps } from './tooltip-context';
-import type { Align, PopperContentProps, Side } from '@nebula/primitives/popper';
+import type { Align, PopperContentProps, Side } from '@nebula-lab/primitives/popper';
 
 const TOOLTIP_CONTENT_NAME = 'TooltipContent';
 
@@ -24,7 +24,7 @@ interface TooltipContentProps
 
 /**
  * `role="tooltip"`, positioned against `TooltipTrigger`'s anchor via
- * `@nebula/primitives`' `PopperContent`. Unlike `PopoverContent`/
+ * `@nebula-lab/primitives`' `PopperContent`. Unlike `PopoverContent`/
  * `DialogContent`, deliberately NOT wrapped in `DismissibleLayer` or
  * `FocusScope` — a tooltip is purely informational: it never receives
  * focus, never traps Tab, and isn't dismissed by an outside click (there's

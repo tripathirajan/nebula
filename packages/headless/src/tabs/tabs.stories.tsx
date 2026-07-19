@@ -10,7 +10,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import type { ComponentProps } from 'react';
 
 /**
- * Headless — no styling, only behavior + ARIA. `@nebula/react-ui` will wrap this
+ * Headless — no styling, only behavior + ARIA. `@nebula-lab/react-ui` will wrap this
  * in a themed `Tabs` once it exists; these stories exist to prove the
  * keyboard/ARIA contract, not to look good.
  */

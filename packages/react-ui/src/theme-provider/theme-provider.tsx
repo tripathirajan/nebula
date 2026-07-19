@@ -1,6 +1,6 @@
 
-import { useLocalStorage, useMediaQuery } from '@nebula/hooks';
-import { createContext } from '@nebula/primitives/create-context-scope';
+import { useLocalStorage, useMediaQuery } from '@nebula-lab/hooks';
+import { createContext } from '@nebula-lab/primitives/create-context-scope';
 import * as React from 'react';
 
 type Theme = 'light' | 'dark' | 'system';

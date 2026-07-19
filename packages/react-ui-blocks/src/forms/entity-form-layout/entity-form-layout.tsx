@@ -1,9 +1,9 @@
-import { cn } from '@nebula/primitives/cn';
-import { Avatar, AvatarFallback, AvatarImage } from '@nebula/react-ui/avatar';
-import { Button } from '@nebula/react-ui/button';
-import { Card, CardContent } from '@nebula/react-ui/card';
-import { Switch } from '@nebula/react-ui/switch';
-import { Text } from '@nebula/react-ui/text';
+import { cn } from '@nebula-lab/primitives/cn';
+import { Avatar, AvatarFallback, AvatarImage } from '@nebula-lab/react-ui/avatar';
+import { Button } from '@nebula-lab/react-ui/button';
+import { Card, CardContent } from '@nebula-lab/react-ui/card';
+import { Switch } from '@nebula-lab/react-ui/switch';
+import { Text } from '@nebula-lab/react-ui/text';
 import * as React from 'react';
 
 interface EntityFormLayoutToggle {

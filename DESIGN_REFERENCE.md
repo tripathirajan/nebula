@@ -173,10 +173,10 @@ Always respect Nebula's architecture.
 
 Use:
 
-- `@nebula/primitives`
-- `@nebula/styleless`
-- `@nebula/react-ui`
-- `@nebula/react-ui-blocks`
+- `@nebula-lab/primitives`
+- `@nebula-lab/styleless`
+- `@nebula-lab/react-ui`
+- `@nebula-lab/react-ui-blocks`
 
 Never bypass existing primitives.
 

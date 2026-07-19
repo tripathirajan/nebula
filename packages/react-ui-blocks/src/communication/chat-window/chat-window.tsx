@@ -1,11 +1,11 @@
-import { cn } from '@nebula/primitives/cn';
-import { Avatar, AvatarFallback, AvatarImage } from '@nebula/react-ui/avatar';
-import { Badge } from '@nebula/react-ui/badge';
-import { Button } from '@nebula/react-ui/button';
-import { Card } from '@nebula/react-ui/card';
-import { EmptyState, EmptyStateDescription, EmptyStateTitle } from '@nebula/react-ui/empty-state';
-import { Input } from '@nebula/react-ui/input';
-import { Text } from '@nebula/react-ui/text';
+import { cn } from '@nebula-lab/primitives/cn';
+import { Avatar, AvatarFallback, AvatarImage } from '@nebula-lab/react-ui/avatar';
+import { Badge } from '@nebula-lab/react-ui/badge';
+import { Button } from '@nebula-lab/react-ui/button';
+import { Card } from '@nebula-lab/react-ui/card';
+import { EmptyState, EmptyStateDescription, EmptyStateTitle } from '@nebula-lab/react-ui/empty-state';
+import { Input } from '@nebula-lab/react-ui/input';
+import { Text } from '@nebula-lab/react-ui/text';
 import * as React from 'react';
 
 interface ChatContact {

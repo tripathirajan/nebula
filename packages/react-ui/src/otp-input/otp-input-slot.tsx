@@ -1,12 +1,12 @@
-import { OTPInputSlot as HeadlessOTPInputSlot } from '@nebula/headless/otp-input';
-import { cn } from '@nebula/primitives/cn';
+import { OTPInputSlot as HeadlessOTPInputSlot } from '@nebula-lab/headless/otp-input';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
-import type { OTPInputSlotProps as HeadlessOTPInputSlotProps } from '@nebula/headless/otp-input';
+import type { OTPInputSlotProps as HeadlessOTPInputSlotProps } from '@nebula-lab/headless/otp-input';
 
 type OTPInputSlotProps = HeadlessOTPInputSlotProps;
 
-/** Built on `@nebula/primitives`' bare `Input` (see the headless source), same `--input-*` treatment `ColorPickerHexInput`/`NumberInputField` apply directly for the same reason, sized/centered as one square digit box. */
+/** Built on `@nebula-lab/primitives`' bare `Input` (see the headless source), same `--input-*` treatment `ColorPickerHexInput`/`NumberInputField` apply directly for the same reason, sized/centered as one square digit box. */
 const OTPInputSlot = React.forwardRef<HTMLInputElement, OTPInputSlotProps>(
   (props, forwardedRef) => {
     const { className, ...rest } = props;

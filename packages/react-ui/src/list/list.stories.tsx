@@ -1,6 +1,6 @@
-import { Avatar, AvatarFallback } from '@nebula/react-ui/avatar';
-import { IconButton } from '@nebula/react-ui/icon-button';
-import { Switch } from '@nebula/react-ui/switch';
+import { Avatar, AvatarFallback } from '@nebula-lab/react-ui/avatar';
+import { IconButton } from '@nebula-lab/react-ui/icon-button';
+import { Switch } from '@nebula-lab/react-ui/switch';
 import { useState } from 'react';
 
 import {

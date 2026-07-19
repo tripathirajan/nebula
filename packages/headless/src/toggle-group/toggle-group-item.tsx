@@ -1,6 +1,6 @@
 
-import { composeEventHandlers } from '@nebula/primitives/compose-event-handlers';
-import { FocusItem } from '@nebula/primitives/roving-focus-group';
+import { composeEventHandlers } from '@nebula-lab/primitives/compose-event-handlers';
+import { FocusItem } from '@nebula-lab/primitives/roving-focus-group';
 import * as React from 'react';
 
 
@@ -23,7 +23,7 @@ interface ToggleGroupItemProps extends Omit<ToggleProps, 'pressed' | 'defaultPre
  * context (comparing this item's `value` against the group's pressed
  * value(s)) rather than local state — this component holds none itself,
  * same relationship `RadioGroupItem` has to `RadioGroup`. Wrapped in
- * `@nebula/primitives`' `FocusItem` for roving-tabindex + arrow-key movement
+ * `@nebula-lab/primitives`' `FocusItem` for roving-tabindex + arrow-key movement
  * between items (finds the ambient `RovingFocusGroup` `ToggleGroup` renders,
  * via ordinary React context — no manual scope wiring needed). Unlike
  * `RadioGroupItem`, arrow-key focus movement does *not* also press the item

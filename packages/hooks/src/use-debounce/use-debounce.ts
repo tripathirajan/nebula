@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 /**
  * Returns a debounced copy of `value` that only updates after `delay`ms have
  * passed without `value` changing. For debouncing a callback instead of a
- * value, use `debounce()` from `@nebula/utilities` directly.
+ * value, use `debounce()` from `@nebula-lab/utilities` directly.
  *
  * @typeParam T - The value's type.
  * @param value - The value to debounce.

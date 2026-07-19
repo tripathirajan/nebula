@@ -493,7 +493,7 @@ const textTokens = {
   color: 'var(--color-base-content)',
 } as const;
 
-/** Overrides `@nebula/primitives`' `Code`'s hardcoded pre-token-system `bg-gray-100` (see `code.tsx`'s doc comment). */
+/** Overrides `@nebula-lab/primitives`' `Code`'s hardcoded pre-token-system `bg-gray-100` (see `code.tsx`'s doc comment). */
 const codeTokens = {
   bg: 'var(--color-base-200)',
   text: 'var(--color-base-content)',
@@ -656,7 +656,7 @@ const alertTokens = {
  *
  * @example
  * ```ts
- * import { componentTokens } from '@nebula/react-ui/tokens';
+ * import { componentTokens } from '@nebula-lab/react-ui/tokens';
  *
  * // Emitted as `--button-primary-bg` etc. by generate.ts; consume the CSS
  * // variable in a stylesheet rather than importing this object at runtime.

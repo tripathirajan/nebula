@@ -91,7 +91,7 @@ export default tseslint.config(
         {
           patterns: [
             {
-              group: ['@nebula/*'],
+              group: ['@nebula-lab/*'],
               message:
                 'Layering violation: packages/utilities depends on nothing else in the workspace. See component-library-architecture.md §2.',
             },
@@ -109,7 +109,7 @@ export default tseslint.config(
         {
           patterns: [
             {
-              group: ['@nebula/*'],
+              group: ['@nebula-lab/*'],
               message:
                 'Layering violation: packages/hooks depends on nothing else in the workspace. See component-library-architecture.md §2.',
             },
@@ -127,7 +127,7 @@ export default tseslint.config(
         {
           patterns: [
             {
-              group: ['@nebula/headless*', '@nebula/react-ui*', '@nebula/react-ui-blocks*'],
+              group: ['@nebula-lab/headless*', '@nebula-lab/react-ui*', '@nebula-lab/react-ui-blocks*'],
               message:
                 'Layering violation: packages/primitives cannot depend on higher layers. See component-library-architecture.md §2.',
             },
@@ -145,7 +145,7 @@ export default tseslint.config(
         {
           patterns: [
             {
-              group: ['@nebula/react-ui*', '@nebula/react-ui-blocks*'],
+              group: ['@nebula-lab/react-ui*', '@nebula-lab/react-ui-blocks*'],
               message:
                 'Layering violation: packages/headless depends only on primitives + hooks. See component-library-architecture.md §2.',
             },
@@ -163,7 +163,7 @@ export default tseslint.config(
         {
           patterns: [
             {
-              group: ['@nebula/react-ui*', '@nebula/react-ui-blocks*'],
+              group: ['@nebula-lab/react-ui*', '@nebula-lab/react-ui-blocks*'],
               message:
                 'Layering violation: packages/styleless depends only on primitives + hooks + headless. See component-library-architecture.md §2 and LAYER_TAXONOMY.md.',
             },
@@ -181,7 +181,7 @@ export default tseslint.config(
         {
           patterns: [
             {
-              group: ['@nebula/react-ui-blocks*'],
+              group: ['@nebula-lab/react-ui-blocks*'],
               message:
                 'Layering violation: packages/react-ui cannot depend on react-ui-blocks. See component-library-architecture.md §2.',
             },

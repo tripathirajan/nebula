@@ -1,7 +1,7 @@
-import { createContextScope } from '@nebula/primitives/create-context-scope';
-import { createPopperScope } from '@nebula/primitives/popper';
+import { createContextScope } from '@nebula-lab/primitives/create-context-scope';
+import { createPopperScope } from '@nebula-lab/primitives/popper';
 
-import type { Scope } from '@nebula/primitives/create-context-scope';
+import type { Scope } from '@nebula-lab/primitives/create-context-scope';
 import type { RefObject } from 'react';
 
 interface ComboboxContextValue {
@@ -30,7 +30,7 @@ interface ComboboxContextValue {
 const COMBOBOX_NAME = 'Combobox';
 
 /**
- * Composes its own scope with `@nebula/primitives`' `Popper` scope, same
+ * Composes its own scope with `@nebula-lab/primitives`' `Popper` scope, same
  * technique `Select`'s context uses.
  */
 const [createComboboxContext, createComboboxScope] = createContextScope(COMBOBOX_NAME, [

@@ -1,8 +1,8 @@
-import { ToggleGroupItem as HeadlessToggleGroupItem } from '@nebula/headless/toggle-group';
-import { cn } from '@nebula/primitives/cn';
+import { ToggleGroupItem as HeadlessToggleGroupItem } from '@nebula-lab/headless/toggle-group';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
-import type { ToggleGroupItemProps as HeadlessToggleGroupItemProps } from '@nebula/headless/toggle-group';
+import type { ToggleGroupItemProps as HeadlessToggleGroupItemProps } from '@nebula-lab/headless/toggle-group';
 
 type SegmentedControlItemProps = HeadlessToggleGroupItemProps;
 

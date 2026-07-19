@@ -1,9 +1,9 @@
-import { Button } from '@nebula/react-ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@nebula/react-ui/card';
-import { Checkbox } from '@nebula/react-ui/checkbox';
-import { Field, FieldControl, FieldLabel } from '@nebula/react-ui/field';
-import { Input } from '@nebula/react-ui/input';
-import { PasswordField } from '@nebula/react-ui/password-field';
+import { Button } from '@nebula-lab/react-ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@nebula-lab/react-ui/card';
+import { Checkbox } from '@nebula-lab/react-ui/checkbox';
+import { Field, FieldControl, FieldLabel } from '@nebula-lab/react-ui/field';
+import { Input } from '@nebula-lab/react-ui/input';
+import { PasswordField } from '@nebula-lab/react-ui/password-field';
 import * as React from 'react';
 
 interface LoginFormValues {
@@ -28,7 +28,7 @@ interface LoginFormProps {
 }
 
 /**
- * A email/password sign-in card composed entirely from `@nebula/react-ui`
+ * A email/password sign-in card composed entirely from `@nebula-lab/react-ui`
  * components (`Card`, `Field`, `Input`, `PasswordField`, `Checkbox`,
  * `Button`) — no new primitives, matching this package's own README rule
  * that everything here builds purely on the layer below.

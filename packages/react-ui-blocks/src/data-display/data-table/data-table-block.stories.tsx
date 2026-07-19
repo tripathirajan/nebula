@@ -1,8 +1,8 @@
 
-import { Avatar, AvatarFallback, AvatarImage } from '@nebula/react-ui/avatar';
-import { Badge } from '@nebula/react-ui/badge';
-import { MenuItem } from '@nebula/react-ui/menu';
-import { Text } from '@nebula/react-ui/text';
+import { Avatar, AvatarFallback, AvatarImage } from '@nebula-lab/react-ui/avatar';
+import { Badge } from '@nebula-lab/react-ui/badge';
+import { MenuItem } from '@nebula-lab/react-ui/menu';
+import { Text } from '@nebula-lab/react-ui/text';
 import { expect, userEvent, waitFor, within } from '@storybook/test';
 import { useState } from 'react';
 

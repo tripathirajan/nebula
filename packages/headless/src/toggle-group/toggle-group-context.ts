@@ -1,7 +1,7 @@
-import { createContextScope } from '@nebula/primitives/create-context-scope';
+import { createContextScope } from '@nebula-lab/primitives/create-context-scope';
 
-import type { Scope } from '@nebula/primitives/create-context-scope';
-import type { RovingFocusGroupOrientation } from '@nebula/primitives/roving-focus-group';
+import type { Scope } from '@nebula-lab/primitives/create-context-scope';
+import type { RovingFocusGroupOrientation } from '@nebula-lab/primitives/roving-focus-group';
 
 interface ToggleGroupContextValue {
   /** True if `value` (an item's identifying value) is currently pressed — abstracts over the `single`/`multiple` value-shape difference so `ToggleGroupItem` never needs to know which `type` the root is (same pattern `AccordionContextValue.isItemOpen` uses). */

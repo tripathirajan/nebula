@@ -1,18 +1,18 @@
-import { cn } from '@nebula/primitives/cn';
-import { SearchInput as StylelessSearchInput } from '@nebula/styleless/search-input';
+import { cn } from '@nebula-lab/primitives/cn';
+import { SearchInput as StylelessSearchInput } from '@nebula-lab/styleless/search-input';
 import * as React from 'react';
 
 import { inputVariants } from '../input/input';
 
-import type { SearchInputProps as StylelessSearchInputProps } from '@nebula/styleless/search-input';
+import type { SearchInputProps as StylelessSearchInputProps } from '@nebula-lab/styleless/search-input';
 import type { VariantProps } from 'class-variance-authority';
 
 type SearchFieldProps = StylelessSearchInputProps & VariantProps<typeof inputVariants>;
 
 /**
- * Wraps `@nebula/styleless`'s `SearchInput` (the `type="search"` preset)
+ * Wraps `@nebula-lab/styleless`'s `SearchInput` (the `type="search"` preset)
  * and adds a leading search icon — like `PasswordField`, a `react-ui`-
- * layer-only visual addition (no `@nebula/headless` counterpart), since a
+ * layer-only visual addition (no `@nebula-lab/headless` counterpart), since a
  * native `type="search"` input already gives the platform's own clear-
  * button/Escape-to-clear affordance for free, with nothing left for a
  * lower layer to add behaviorally.

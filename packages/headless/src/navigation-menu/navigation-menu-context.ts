@@ -1,6 +1,6 @@
-import { createContextScope } from '@nebula/primitives/create-context-scope';
+import { createContextScope } from '@nebula-lab/primitives/create-context-scope';
 
-import type { Scope } from '@nebula/primitives/create-context-scope';
+import type { Scope } from '@nebula-lab/primitives/create-context-scope';
 
 interface NavigationMenuContextValue {
   /** Which `NavigationMenuItem`'s `value` currently has its content open — at most one at a time, mirrors `MenubarContextValue.value`. */

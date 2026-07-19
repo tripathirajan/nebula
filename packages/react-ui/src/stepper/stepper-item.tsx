@@ -1,8 +1,8 @@
-import { StepperItem as HeadlessStepperItem } from '@nebula/headless/stepper';
-import { cn } from '@nebula/primitives/cn';
+import { StepperItem as HeadlessStepperItem } from '@nebula-lab/headless/stepper';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
-import type { StepperItemProps as HeadlessStepperItemProps } from '@nebula/headless/stepper';
+import type { StepperItemProps as HeadlessStepperItemProps } from '@nebula-lab/headless/stepper';
 
 type StepperItemProps = HeadlessStepperItemProps;
 

@@ -1,7 +1,7 @@
 {
-  "name": "@nebula/styleless",
+  "name": "@nebula-lab/styleless",
   "version": "0.1.0",
-  "description": "Reusable UI components with a complete, semantic API but zero visual opinion — composes @nebula/primitives + @nebula/headless. Styled by @nebula/react-ui. See LAYER_TAXONOMY.md for the full component list this package extracts from react-ui.",
+  "description": "Reusable UI components with a complete, semantic API but zero visual opinion — composes @nebula-lab/primitives + @nebula-lab/headless. Styled by @nebula-lab/react-ui. See LAYER_TAXONOMY.md for the full component list this package extracts from react-ui.",
   "license": "MIT",
   "author": "Rajan Tripathi <tripathirajan3@gmail.com>",
   "repository": {
@@ -109,9 +109,9 @@
     "react-dom": "^19.0.0"
   },
   "dependencies": {
-    "@nebula/headless": "workspace:*",
-    "@nebula/hooks": "workspace:*",
-    "@nebula/primitives": "workspace:*"
+    "@nebula-lab/headless": "workspace:*",
+    "@nebula-lab/hooks": "workspace:*",
+    "@nebula-lab/primitives": "workspace:*"
   },
   "devDependencies": {
     "@storybook/react": "^8.6.18",

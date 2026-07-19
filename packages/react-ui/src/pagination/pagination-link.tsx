@@ -1,14 +1,14 @@
-import { PaginationLink as HeadlessPaginationLink } from '@nebula/headless/pagination';
-import { cn } from '@nebula/primitives/cn';
+import { PaginationLink as HeadlessPaginationLink } from '@nebula-lab/headless/pagination';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
-import type { PaginationLinkProps as HeadlessPaginationLinkProps } from '@nebula/headless/pagination';
+import type { PaginationLinkProps as HeadlessPaginationLinkProps } from '@nebula-lab/headless/pagination';
 
 type PaginationLinkProps = HeadlessPaginationLinkProps;
 
 /**
  * One page number — filled with `--pagination-link-active-bg`/`-active-text`
- * on `data-state="active"` (set by the underlying `@nebula/headless` link),
+ * on `data-state="active"` (set by the underlying `@nebula-lab/headless` link),
  * a subtle hover background otherwise (see `../tokens/component.ts`).
  *
  * @example

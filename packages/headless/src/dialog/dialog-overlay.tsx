@@ -1,13 +1,13 @@
 
-import { Overlay } from '@nebula/primitives/overlay';
-import { Presence } from '@nebula/primitives/presence';
+import { Overlay } from '@nebula-lab/primitives/overlay';
+import { Presence } from '@nebula-lab/primitives/presence';
 import * as React from 'react';
 
 
 import { useDialogContext } from './dialog-context';
 
 import type { ScopedProps } from './dialog-context';
-import type { OverlayProps } from '@nebula/primitives/overlay';
+import type { OverlayProps } from '@nebula-lab/primitives/overlay';
 
 const DIALOG_OVERLAY_NAME = 'DialogOverlay';
 

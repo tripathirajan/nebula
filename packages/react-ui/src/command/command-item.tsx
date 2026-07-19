@@ -1,8 +1,8 @@
-import { CommandItem as HeadlessCommandItem } from '@nebula/headless/command';
-import { cn } from '@nebula/primitives/cn';
+import { CommandItem as HeadlessCommandItem } from '@nebula-lab/headless/command';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
-import type { CommandItemProps as HeadlessCommandItemProps } from '@nebula/headless/command';
+import type { CommandItemProps as HeadlessCommandItemProps } from '@nebula-lab/headless/command';
 
 type CommandItemProps = HeadlessCommandItemProps;
 

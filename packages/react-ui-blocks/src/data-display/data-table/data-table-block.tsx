@@ -1,7 +1,7 @@
-import { useMediaQuery } from '@nebula/hooks';
-import { cn } from '@nebula/primitives/cn';
-import { Badge } from '@nebula/react-ui/badge';
-import { Card } from '@nebula/react-ui/card';
+import { useMediaQuery } from '@nebula-lab/hooks';
+import { cn } from '@nebula-lab/primitives/cn';
+import { Badge } from '@nebula-lab/react-ui/badge';
+import { Card } from '@nebula-lab/react-ui/card';
 import {
   DataTable,
   DataTableBody,
@@ -11,16 +11,16 @@ import {
   DataTableRow,
   DataTableSelectAllCell,
   DataTableSelectionCell,
-} from '@nebula/react-ui/data-table';
-import { EmptyState, EmptyStateDescription, EmptyStateTitle } from '@nebula/react-ui/empty-state';
-import { IconButton } from '@nebula/react-ui/icon-button';
-import { Menu, MenuContent, MenuPortal, MenuTrigger } from '@nebula/react-ui/menu';
-import { Pagination, PaginationNext, PaginationPrevious } from '@nebula/react-ui/pagination';
-import { SearchField } from '@nebula/react-ui/search-field';
-import { SegmentedControl, SegmentedControlItem } from '@nebula/react-ui/segmented-control';
+} from '@nebula-lab/react-ui/data-table';
+import { EmptyState, EmptyStateDescription, EmptyStateTitle } from '@nebula-lab/react-ui/empty-state';
+import { IconButton } from '@nebula-lab/react-ui/icon-button';
+import { Menu, MenuContent, MenuPortal, MenuTrigger } from '@nebula-lab/react-ui/menu';
+import { Pagination, PaginationNext, PaginationPrevious } from '@nebula-lab/react-ui/pagination';
+import { SearchField } from '@nebula-lab/react-ui/search-field';
+import { SegmentedControl, SegmentedControlItem } from '@nebula-lab/react-ui/segmented-control';
 import * as React from 'react';
 
-import type { SortDirection } from '@nebula/react-ui/data-table';
+import type { SortDirection } from '@nebula-lab/react-ui/data-table';
 
 interface DataTableBlockColumn<TRow> {
   key: string;
@@ -104,7 +104,7 @@ const DEFAULT_PAGE_SIZE_OPTIONS = [5, 10, 25];
 /**
  * The `BLOCKS_ARCHITECTURE.md` §3.5 "Generic Data Table Block" — status
  * tabs + filter toolbar + sortable/selectable table + pagination footer,
- * composed entirely from `@nebula/react-ui`'s own `DataTable` compound
+ * composed entirely from `@nebula-lab/react-ui`'s own `DataTable` compound
  * (sort/selection state already lives there) rather than re-implementing
  * any of that. One block, reused with a different `columns` schema per
  * entity (User/Product/Order/Invoice/Job/Tour/File-manager lists all share

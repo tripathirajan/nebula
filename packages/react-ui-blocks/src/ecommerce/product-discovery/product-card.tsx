@@ -1,15 +1,15 @@
-import { cn } from '@nebula/primitives/cn';
-import { Image } from '@nebula/primitives/image';
-import { Badge } from '@nebula/react-ui/badge';
-import { Button } from '@nebula/react-ui/button';
-import { Card, CardContent } from '@nebula/react-ui/card';
-import { Heading } from '@nebula/react-ui/heading';
-import { IconButton } from '@nebula/react-ui/icon-button';
-import { StaticRating } from '@nebula/react-ui/static-rating';
-import { Text } from '@nebula/react-ui/text';
+import { cn } from '@nebula-lab/primitives/cn';
+import { Image } from '@nebula-lab/primitives/image';
+import { Badge } from '@nebula-lab/react-ui/badge';
+import { Button } from '@nebula-lab/react-ui/button';
+import { Card, CardContent } from '@nebula-lab/react-ui/card';
+import { Heading } from '@nebula-lab/react-ui/heading';
+import { IconButton } from '@nebula-lab/react-ui/icon-button';
+import { StaticRating } from '@nebula-lab/react-ui/static-rating';
+import { Text } from '@nebula-lab/react-ui/text';
 import * as React from 'react';
 
-import type { BadgeProps } from '@nebula/react-ui/badge';
+import type { BadgeProps } from '@nebula-lab/react-ui/badge';
 
 interface ProductCardProps {
   imageSrc: string;
@@ -35,8 +35,8 @@ interface ProductCardProps {
  * A single product tile — image with a hover zoom, a wishlist heart toggle
  * and status badge overlaid on opposite corners, name, price (with an
  * optional struck-through original price for a discount), an optional
- * star-rating row, and a cart CTA. Built purely from `@nebula/react-ui`/
- * `@nebula/primitives` (no styled `Image` wrapper exists in `react-ui`
+ * star-rating row, and a cart CTA. Built purely from `@nebula-lab/react-ui`/
+ * `@nebula-lab/primitives` (no styled `Image` wrapper exists in `react-ui`
  * itself — see that package's `Image` doc comment — so this block reaches
  * one layer down for the bare primitive directly). The heart icon reuses
  * `ProductInfoPanel`'s exact same outline-heart SVG so a product's card and

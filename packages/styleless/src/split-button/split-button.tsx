@@ -1,7 +1,7 @@
-import { Primitive } from '@nebula/primitives/primitive';
+import { Primitive } from '@nebula-lab/primitives/primitive';
 import * as React from 'react';
 
-import type { PrimitivePropsWithRef } from '@nebula/primitives/primitive';
+import type { PrimitivePropsWithRef } from '@nebula-lab/primitives/primitive';
 
 /** Props accepted by {@link SplitButton}. */
 type SplitButtonProps = PrimitivePropsWithRef<'div'>;
@@ -11,7 +11,7 @@ type SplitButtonProps = PrimitivePropsWithRef<'div'>;
  * `role="group"` wrapper around a primary action button and a second,
  * smaller trigger (typically a `DropdownMenu`-opening `IconButton`
  * chevron). No visual merging (border-radius removal, `-ml-px`,
- * focus-visible `z-index`) here — that's `@nebula/react-ui`'s job; this
+ * focus-visible `z-index`) here — that's `@nebula-lab/react-ui`'s job; this
  * layer's contribution is purely "these buttons are one semantic group,"
  * same test `Card`/`FormControl` groupings use elsewhere in this package.
  * Composition, not a new state machine — wrap a `DropdownMenu` yourself.

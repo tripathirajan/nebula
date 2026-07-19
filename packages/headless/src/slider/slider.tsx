@@ -1,4 +1,4 @@
-import { useControllableState } from '@nebula/hooks';
+import { useControllableState } from '@nebula-lab/hooks';
 import * as React from 'react';
 
 import { SliderProvider } from './slider-context';

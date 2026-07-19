@@ -1,7 +1,7 @@
-import { cn } from '@nebula/primitives/cn';
-import { Card, CardContent, CardHeader, CardTitle } from '@nebula/react-ui/card';
-import { Progress } from '@nebula/react-ui/progress';
-import { Text } from '@nebula/react-ui/text';
+import { cn } from '@nebula-lab/primitives/cn';
+import { Card, CardContent, CardHeader, CardTitle } from '@nebula-lab/react-ui/card';
+import { Progress } from '@nebula-lab/react-ui/progress';
+import { Text } from '@nebula-lab/react-ui/text';
 import * as React from 'react';
 
 /** One of Nebula's 8 semantic color roles — matches `ChartCard`'s `ChartCardColor` vocabulary, kept as its own local type since this block has no dependency on `ChartCard`. */

@@ -1,11 +1,11 @@
-import { cn } from '@nebula/primitives/cn';
-import { Badge } from '@nebula/react-ui/badge';
-import { Button } from '@nebula/react-ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@nebula/react-ui/card';
-import { IconButton } from '@nebula/react-ui/icon-button';
-import { List, ListItem } from '@nebula/react-ui/list';
-import { Menu, MenuContent, MenuItem, MenuPortal, MenuTrigger } from '@nebula/react-ui/menu';
-import { Text } from '@nebula/react-ui/text';
+import { cn } from '@nebula-lab/primitives/cn';
+import { Badge } from '@nebula-lab/react-ui/badge';
+import { Button } from '@nebula-lab/react-ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@nebula-lab/react-ui/card';
+import { IconButton } from '@nebula-lab/react-ui/icon-button';
+import { List, ListItem } from '@nebula-lab/react-ui/list';
+import { Menu, MenuContent, MenuItem, MenuPortal, MenuTrigger } from '@nebula-lab/react-ui/menu';
+import { Text } from '@nebula-lab/react-ui/text';
 
 interface PaymentMethod {
   id: string;

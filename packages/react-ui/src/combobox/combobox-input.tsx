@@ -1,8 +1,8 @@
-import { ComboboxInput as HeadlessComboboxInput } from '@nebula/headless/combobox';
-import { cn } from '@nebula/primitives/cn';
+import { ComboboxInput as HeadlessComboboxInput } from '@nebula-lab/headless/combobox';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
-import type { ComboboxInputProps as HeadlessComboboxInputProps } from '@nebula/headless/combobox';
+import type { ComboboxInputProps as HeadlessComboboxInputProps } from '@nebula-lab/headless/combobox';
 
 type ComboboxInputProps = HeadlessComboboxInputProps;
 

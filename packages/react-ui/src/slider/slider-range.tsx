@@ -1,8 +1,8 @@
-import { SliderRange as HeadlessSliderRange } from '@nebula/headless/slider';
-import { cn } from '@nebula/primitives/cn';
+import { SliderRange as HeadlessSliderRange } from '@nebula-lab/headless/slider';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
-import type { SliderRangeProps as HeadlessSliderRangeProps } from '@nebula/headless/slider';
+import type { SliderRangeProps as HeadlessSliderRangeProps } from '@nebula-lab/headless/slider';
 
 type SliderRangeProps = HeadlessSliderRangeProps;
 

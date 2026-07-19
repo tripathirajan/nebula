@@ -1,8 +1,8 @@
-import { FieldLabel as HeadlessFieldLabel } from '@nebula/headless/field';
-import { cn } from '@nebula/primitives/cn';
+import { FieldLabel as HeadlessFieldLabel } from '@nebula-lab/headless/field';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
-import type { LabelProps } from '@nebula/primitives/label';
+import type { LabelProps } from '@nebula-lab/primitives/label';
 
 type FieldLabelProps = LabelProps;
 

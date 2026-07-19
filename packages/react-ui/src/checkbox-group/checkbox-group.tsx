@@ -1,8 +1,8 @@
-import { CheckboxGroup as HeadlessCheckboxGroup } from '@nebula/headless/checkbox-group';
-import { cn } from '@nebula/primitives/cn';
+import { CheckboxGroup as HeadlessCheckboxGroup } from '@nebula-lab/headless/checkbox-group';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
-import type { CheckboxGroupProps as HeadlessCheckboxGroupProps } from '@nebula/headless/checkbox-group';
+import type { CheckboxGroupProps as HeadlessCheckboxGroupProps } from '@nebula-lab/headless/checkbox-group';
 
 type CheckboxGroupProps = HeadlessCheckboxGroupProps;
 

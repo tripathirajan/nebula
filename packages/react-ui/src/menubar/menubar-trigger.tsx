@@ -1,8 +1,8 @@
-import { MenubarTrigger as HeadlessMenubarTrigger } from '@nebula/headless/menubar';
-import { cn } from '@nebula/primitives/cn';
+import { MenubarTrigger as HeadlessMenubarTrigger } from '@nebula-lab/headless/menubar';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
-import type { MenubarTriggerProps as HeadlessMenubarTriggerProps } from '@nebula/headless/menubar';
+import type { MenubarTriggerProps as HeadlessMenubarTriggerProps } from '@nebula-lab/headless/menubar';
 
 type MenubarTriggerProps = HeadlessMenubarTriggerProps;
 

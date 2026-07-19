@@ -1,7 +1,7 @@
-import { createContextScope } from '@nebula/primitives/create-context-scope';
-import { createPopperScope } from '@nebula/primitives/popper';
+import { createContextScope } from '@nebula-lab/primitives/create-context-scope';
+import { createPopperScope } from '@nebula-lab/primitives/popper';
 
-import type { Scope } from '@nebula/primitives/create-context-scope';
+import type { Scope } from '@nebula-lab/primitives/create-context-scope';
 
 interface HoverCardContextValue {
   open: boolean;
@@ -16,7 +16,7 @@ interface HoverCardContextValue {
 const HOVER_CARD_NAME = 'HoverCard';
 
 /**
- * Composes its own scope with `@nebula/primitives`' `Popper` scope, same as
+ * Composes its own scope with `@nebula-lab/primitives`' `Popper` scope, same as
  * `Popover`'s context — `HoverCardContent` is anchor-positioned against
  * `HoverCardTrigger` exactly like `PopoverContent` is.
  */

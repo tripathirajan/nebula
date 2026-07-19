@@ -1,12 +1,12 @@
-import { NumberInputField as HeadlessNumberInputField } from '@nebula/headless/number-input';
-import { cn } from '@nebula/primitives/cn';
+import { NumberInputField as HeadlessNumberInputField } from '@nebula-lab/headless/number-input';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
-import type { NumberInputFieldProps as HeadlessNumberInputFieldProps } from '@nebula/headless/number-input';
+import type { NumberInputFieldProps as HeadlessNumberInputFieldProps } from '@nebula-lab/headless/number-input';
 
 type NumberInputFieldProps = HeadlessNumberInputFieldProps;
 
-/** Same `--input-*` treatment `react-ui`'s own `Input` uses — built on `@nebula/primitives`' bare `Input` (see the headless source), not this package's styled one, so needs it applied directly, same reasoning `ColorPickerHexInput` documents. */
+/** Same `--input-*` treatment `react-ui`'s own `Input` uses — built on `@nebula-lab/primitives`' bare `Input` (see the headless source), not this package's styled one, so needs it applied directly, same reasoning `ColorPickerHexInput` documents. */
 const NumberInputField = React.forwardRef<HTMLInputElement, NumberInputFieldProps>(
   (props, forwardedRef) => {
     const { className, ...rest } = props;

@@ -1,17 +1,17 @@
-import { Listbox } from '@nebula/headless/listbox';
-import { PopoverContent as HeadlessPopoverContent } from '@nebula/headless/popover';
-import { cn } from '@nebula/primitives/cn';
+import { Listbox } from '@nebula-lab/headless/listbox';
+import { PopoverContent as HeadlessPopoverContent } from '@nebula-lab/headless/popover';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
 import { useMultiSelectContext } from './multi-select-context';
 
-import type { PopoverContentProps as HeadlessPopoverContentProps } from '@nebula/headless/popover';
+import type { PopoverContentProps as HeadlessPopoverContentProps } from '@nebula-lab/headless/popover';
 
 type MultiSelectContentProps = HeadlessPopoverContentProps;
 
 /**
  * The popup panel — a `PopoverContent` (this package's own `--popover-*`
- * surface treatment) with a `@nebula/headless` `Listbox` (`type="multiple"`)
+ * surface treatment) with a `@nebula-lab/headless` `Listbox` (`type="multiple"`)
  * rendered directly inside it as the one child, rather than two visually
  * distinct layers. The `Listbox`'s `value`/`onValueChange` are wired
  * straight to `MultiSelect`'s own context state — this component owns no

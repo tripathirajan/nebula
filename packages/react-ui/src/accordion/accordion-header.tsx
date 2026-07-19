@@ -1,8 +1,8 @@
-import { AccordionHeader as HeadlessAccordionHeader } from '@nebula/headless/accordion';
-import { cn } from '@nebula/primitives/cn';
+import { AccordionHeader as HeadlessAccordionHeader } from '@nebula-lab/headless/accordion';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
-import type { AccordionHeaderProps as HeadlessAccordionHeaderProps } from '@nebula/headless/accordion';
+import type { AccordionHeaderProps as HeadlessAccordionHeaderProps } from '@nebula-lab/headless/accordion';
 
 type AccordionHeaderProps = HeadlessAccordionHeaderProps;
 

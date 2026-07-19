@@ -1,8 +1,8 @@
-import { Primitive } from '@nebula/primitives/primitive';
-import { FocusItem } from '@nebula/primitives/roving-focus-group';
+import { Primitive } from '@nebula-lab/primitives/primitive';
+import { FocusItem } from '@nebula-lab/primitives/roving-focus-group';
 import * as React from 'react';
 
-import type { PrimitivePropsWithRef } from '@nebula/primitives/primitive';
+import type { PrimitivePropsWithRef } from '@nebula-lab/primitives/primitive';
 
 const NAVIGATION_MENU_LINK_NAME = 'NavigationMenuLink';
 

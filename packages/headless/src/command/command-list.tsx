@@ -1,11 +1,11 @@
-import { useComposedRefs } from '@nebula/primitives/compose-refs';
-import { Primitive } from '@nebula/primitives/primitive';
+import { useComposedRefs } from '@nebula-lab/primitives/compose-refs';
+import { Primitive } from '@nebula-lab/primitives/primitive';
 import * as React from 'react';
 
 import { useCommandContext } from './command-context';
 
 import type { ScopedProps } from './command-context';
-import type { PrimitivePropsWithRef } from '@nebula/primitives/primitive';
+import type { PrimitivePropsWithRef } from '@nebula-lab/primitives/primitive';
 
 const COMMAND_LIST_NAME = 'CommandList';
 

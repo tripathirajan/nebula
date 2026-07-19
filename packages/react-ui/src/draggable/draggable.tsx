@@ -1,8 +1,8 @@
-import { cn } from '@nebula/primitives/cn';
-import { Primitive } from '@nebula/primitives/primitive';
+import { cn } from '@nebula-lab/primitives/cn';
+import { Primitive } from '@nebula-lab/primitives/primitive';
 import * as React from 'react';
 
-import type { PrimitivePropsWithRef } from '@nebula/primitives/primitive';
+import type { PrimitivePropsWithRef } from '@nebula-lab/primitives/primitive';
 
 /** The MIME type this project's drag-and-drop components read/write on `DataTransfer` — namespaced so a page with its own unrelated native drag-and-drop doesn't collide with it. */
 const NEBULA_DRAG_MIME_TYPE = 'application/x-nebula-drag-id';
@@ -18,7 +18,7 @@ type DraggableProps = PrimitivePropsWithRef<'div'> & DraggableOwnProps;
 /**
  * Makes its content draggable via the native HTML5 Drag and Drop API
  * (`draggable`, `dragstart`/`dragend`) — built directly in `react-ui`, no
- * `@nebula/headless` layer underneath (project owner decision, see
+ * `@nebula-lab/headless` layer underneath (project owner decision, see
  * `AGENTS.md`'s `react-ui` row): drag-and-drop *is* its own behavior, but
  * the native API it's built on has no ARIA semantics of its own to
  * decouple from styling the way `Dialog`/`Menu`/etc. do.

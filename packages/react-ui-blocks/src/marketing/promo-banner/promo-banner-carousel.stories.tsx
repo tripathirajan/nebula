@@ -1,4 +1,4 @@
-import { Image } from '@nebula/primitives/image';
+import { Image } from '@nebula-lab/primitives/image';
 import { expect, fireEvent, within } from '@storybook/test';
 
 import { PromoBannerCarousel } from './promo-banner-carousel';

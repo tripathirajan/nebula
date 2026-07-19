@@ -1,8 +1,8 @@
-import { ComboboxItem as HeadlessComboboxItem } from '@nebula/headless/combobox';
-import { cn } from '@nebula/primitives/cn';
+import { ComboboxItem as HeadlessComboboxItem } from '@nebula-lab/headless/combobox';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
-import type { ComboboxItemProps as HeadlessComboboxItemProps } from '@nebula/headless/combobox';
+import type { ComboboxItemProps as HeadlessComboboxItemProps } from '@nebula-lab/headless/combobox';
 
 type ComboboxItemProps = HeadlessComboboxItemProps;
 

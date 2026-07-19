@@ -1,5 +1,5 @@
-import { useControllableState, useSwipe } from '@nebula/hooks';
-import { cn } from '@nebula/primitives/cn';
+import { useControllableState, useSwipe } from '@nebula-lab/hooks';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
 interface SwipeableCardsProps<T> {
@@ -31,7 +31,7 @@ interface SwipeableCardsProps<T> {
  * cards behind it are `inert` (decorative depth cues only, same reasoning
  * `CarouselItem` documents for its inactive slides: a translucent sliver of
  * a card that's still in the tab order would be a real a11y trap). Built on
- * the same `@nebula/hooks`' `useSwipe` primitive `Carousel` uses, just with
+ * the same `@nebula-lab/hooks`' `useSwipe` primitive `Carousel` uses, just with
  * a per-card fan transform instead of one shared track transform.
  *
  * The root always renders `h-full w-full` (not left to the caller to

@@ -1,13 +1,13 @@
 
-import { useControllableState, useId } from '@nebula/hooks';
-import { Primitive } from '@nebula/primitives/primitive';
+import { useControllableState, useId } from '@nebula-lab/hooks';
+import { Primitive } from '@nebula-lab/primitives/primitive';
 import * as React from 'react';
 
 
 import { CollapsibleProvider } from './collapsible-context';
 
 import type { ScopedProps } from './collapsible-context';
-import type { PrimitivePropsWithRef } from '@nebula/primitives/primitive';
+import type { PrimitivePropsWithRef } from '@nebula-lab/primitives/primitive';
 
 interface CollapsibleProps extends PrimitivePropsWithRef<'div'> {
   open?: boolean;

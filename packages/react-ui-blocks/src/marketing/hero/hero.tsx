@@ -1,7 +1,7 @@
-import { cn } from '@nebula/primitives/cn';
-import { Button } from '@nebula/react-ui/button';
-import { Heading } from '@nebula/react-ui/heading';
-import { Text } from '@nebula/react-ui/text';
+import { cn } from '@nebula-lab/primitives/cn';
+import { Button } from '@nebula-lab/react-ui/button';
+import { Heading } from '@nebula-lab/react-ui/heading';
+import { Text } from '@nebula-lab/react-ui/text';
 import * as React from 'react';
 
 interface HeroAction {
@@ -42,7 +42,7 @@ function renderAction(action: HeroAction, variant?: 'text') {
  * A marketing landing-page hero — headline/subheadline/CTA(s), with an
  * optional media slot that switches the layout from a single centered
  * column to a two-column split once supplied. Built purely from
- * `@nebula/react-ui` (`Heading`, `Text`, `Button`) — no marketing-specific
+ * `@nebula-lab/react-ui` (`Heading`, `Text`, `Button`) — no marketing-specific
  * primitive exists below this layer, so this block owns the whole
  * composition, matching every other block in this package.
  *

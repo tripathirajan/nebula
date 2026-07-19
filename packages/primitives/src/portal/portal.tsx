@@ -31,7 +31,7 @@ type PortalProps = PrimitivePropsWithRef<'div'> & PortalOwnProps;
  *   <DismissibleLayer onDismiss={onClose}>{content}</DismissibleLayer>
  * </Portal>
  *
- * // Custom mount point, e.g. `@nebula/react-ui-blocks`' AppLayout portal root:
+ * // Custom mount point, e.g. `@nebula-lab/react-ui-blocks`' AppLayout portal root:
  * <Portal container={document.getElementById('nebula-portal-root')}>
  *   {content}
  * </Portal>

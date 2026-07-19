@@ -1,6 +1,6 @@
-import { createContextScope } from '@nebula/primitives/create-context-scope';
+import { createContextScope } from '@nebula-lab/primitives/create-context-scope';
 
-import type { Scope } from '@nebula/primitives/create-context-scope';
+import type { Scope } from '@nebula-lab/primitives/create-context-scope';
 
 interface FieldContextValue {
   id: string;

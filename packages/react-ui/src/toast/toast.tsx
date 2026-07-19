@@ -1,8 +1,8 @@
-import { Toast as HeadlessToast } from '@nebula/headless/toast';
-import { cn } from '@nebula/primitives/cn';
+import { Toast as HeadlessToast } from '@nebula-lab/headless/toast';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
-import type { ToastProps as HeadlessToastProps } from '@nebula/headless/toast';
+import type { ToastProps as HeadlessToastProps } from '@nebula-lab/headless/toast';
 
 type ToastProps = HeadlessToastProps;
 

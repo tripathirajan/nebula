@@ -1,5 +1,5 @@
 {
-  "name": "@nebula/utilities",
+  "name": "@nebula-lab/utilities",
   "version": "0.1.0",
   "description": "Framework-agnostic helpers with zero React dependency — the bottom of the nebula dependency graph. Everything else may depend on this; this depends on nothing in the workspace.",
   "license": "MIT",

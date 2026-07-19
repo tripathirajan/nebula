@@ -1,8 +1,8 @@
-import { MenuRadioItem as HeadlessMenuRadioItem } from '@nebula/headless/menu';
-import { cn } from '@nebula/primitives/cn';
+import { MenuRadioItem as HeadlessMenuRadioItem } from '@nebula-lab/headless/menu';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
-import type { MenuRadioItemProps as HeadlessMenuRadioItemProps } from '@nebula/headless/menu';
+import type { MenuRadioItemProps as HeadlessMenuRadioItemProps } from '@nebula-lab/headless/menu';
 
 type MenuRadioItemProps = HeadlessMenuRadioItemProps;
 

@@ -1,14 +1,14 @@
-import { AccordionTrigger as HeadlessAccordionTrigger } from '@nebula/headless/accordion';
-import { cn } from '@nebula/primitives/cn';
+import { AccordionTrigger as HeadlessAccordionTrigger } from '@nebula-lab/headless/accordion';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
-import type { AccordionTriggerProps as HeadlessAccordionTriggerProps } from '@nebula/headless/accordion';
+import type { AccordionTriggerProps as HeadlessAccordionTriggerProps } from '@nebula-lab/headless/accordion';
 
 type AccordionTriggerProps = HeadlessAccordionTriggerProps;
 
 /**
  * Adds hover/focus styling and a chevron that rotates 180° off
- * `data-state="open"` (set by the underlying `@nebula/headless` trigger) —
+ * `data-state="open"` (set by the underlying `@nebula-lab/headless` trigger) —
  * a plain CSS transform driven by a data attribute, no JS/animation library.
  * No external icon dependency — this package doesn't have one yet, so the
  * chevron is a small inline `<svg>` rather than pulling one in for a single

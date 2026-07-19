@@ -31,12 +31,12 @@ If the component has sub-parts (e.g. `Dialog` -> `DialogTrigger`, `DialogContent
 
 ## Component implementation checklist
 
-- Named export, `forwardRef`, typed via `PrimitivePropsWithRef<'tag'>` (fixed tag) or `PolymorphicComponentPropsWithRef<E>` (needs `as`) from `@nebula/primitives`.
-- Renders through `Primitive` (from `@nebula/primitives/primitive`) rather than a raw JSX tag, passing `as="tag"`, and supports `asChild` where tag flexibility makes sense.
-- Controlled + uncontrolled support (`value`/`defaultValue` + `onValueChange`) if it holds state -- use `useControllableState` from `@nebula/hooks`.
+- Named export, `forwardRef`, typed via `PrimitivePropsWithRef<'tag'>` (fixed tag) or `PolymorphicComponentPropsWithRef<E>` (needs `as`) from `@nebula-lab/primitives`.
+- Renders through `Primitive` (from `@nebula-lab/primitives/primitive`) rather than a raw JSX tag, passing `as="tag"`, and supports `asChild` where tag flexibility makes sense.
+- Controlled + uncontrolled support (`value`/`defaultValue` + `onValueChange`) if it holds state -- use `useControllableState` from `@nebula-lab/hooks`.
 - State reflected via `data-state` / `data-disabled` / `data-orientation` attributes, not conditional class toggling.
 - If interactive: full keyboard support per its WAI-ARIA APG pattern, `:focus-visible` ring, correct `role`/`aria-*` attributes.
-- Styled components (`react-ui` layer and above) use `cn()` from `@nebula/primitives`, never hardcoded classes/colors -- pull from this package's own tokens (`@nebula/react-ui/tokens`, since `react-ui` owns tokens/theming), and build on the matching `@nebula/headless` component where one exists rather than wrapping raw `Primitive` directly.
+- Styled components (`react-ui` layer and above) use `cn()` from `@nebula-lab/primitives`, never hardcoded classes/colors -- pull from this package's own tokens (`@nebula-lab/react-ui/tokens`, since `react-ui` owns tokens/theming), and build on the matching `@nebula-lab/headless` component where one exists rather than wrapping raw `Primitive` directly.
 - Add TSDoc with an `@example` block on every exported symbol.
 
 ## Wiring it in
@@ -49,4 +49,4 @@ If the component has sub-parts (e.g. `Dialog` -> `DialogTrigger`, `DialogContent
 ## After scaffolding
 
 - Update the status table in `AGENTS.md` if this changes a package from "not started" to "in progress" or adds a notable component.
-- Run `pnpm --filter @nebula/<layer> typecheck`, `pnpm --filter @nebula/<layer> lint`, and `pnpm --filter @nebula/<layer> test` before considering the component done (if the sandbox has registry access; otherwise flag that this needs to be run locally).
+- Run `pnpm --filter @nebula-lab/<layer> typecheck`, `pnpm --filter @nebula-lab/<layer> lint`, and `pnpm --filter @nebula-lab/<layer> test` before considering the component done (if the sandbox has registry access; otherwise flag that this needs to be run locally).

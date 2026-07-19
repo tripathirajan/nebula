@@ -1,8 +1,8 @@
-import { StepperTrigger as HeadlessStepperTrigger } from '@nebula/headless/stepper';
-import { cn } from '@nebula/primitives/cn';
+import { StepperTrigger as HeadlessStepperTrigger } from '@nebula-lab/headless/stepper';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
-import type { StepperTriggerProps as HeadlessStepperTriggerProps } from '@nebula/headless/stepper';
+import type { StepperTriggerProps as HeadlessStepperTriggerProps } from '@nebula-lab/headless/stepper';
 
 type StepperTriggerProps = HeadlessStepperTriggerProps;
 

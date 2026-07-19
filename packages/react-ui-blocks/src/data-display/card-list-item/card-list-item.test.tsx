@@ -1,4 +1,4 @@
-import { MenuItem } from '@nebula/react-ui/menu';
+import { MenuItem } from '@nebula-lab/react-ui/menu';
 import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';

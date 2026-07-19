@@ -17,7 +17,7 @@ interface DataTableHeadProps extends Omit<React.ThHTMLAttributes<HTMLTableCellEl
 
 /**
  * `styleless`-tier `DataTableHead` — the real behavior extracted from
- * `@nebula/react-ui`'s `DataTableHead`: when `sortKey` is given, wraps
+ * `@nebula-lab/react-ui`'s `DataTableHead`: when `sortKey` is given, wraps
  * `children` in a real `<button>` (a native, keyboard-operable control, not
  * a `<th>` with a hand-rolled click handler) and computes/sets `aria-sort`
  * on the `<th>` itself per the native table-sorting convention (`aria-sort`

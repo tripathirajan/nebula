@@ -75,5 +75,5 @@ export default defineConfig({
   splitting: true,
   clean: true,
   treeshake: true,
-  external: ['react', 'react-dom', '@nebula/hooks', '@nebula/primitives'],
+  external: ['react', 'react-dom', '@nebula-lab/hooks', '@nebula-lab/primitives'],
 });

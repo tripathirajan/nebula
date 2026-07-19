@@ -1,8 +1,8 @@
-import { CollapsibleContent as HeadlessCollapsibleContent } from '@nebula/headless/collapsible';
-import { cn } from '@nebula/primitives/cn';
+import { CollapsibleContent as HeadlessCollapsibleContent } from '@nebula-lab/headless/collapsible';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
-import type { CollapsibleContentProps as HeadlessCollapsibleContentProps } from '@nebula/headless/collapsible';
+import type { CollapsibleContentProps as HeadlessCollapsibleContentProps } from '@nebula-lab/headless/collapsible';
 
 type CollapsibleContentProps = HeadlessCollapsibleContentProps;
 

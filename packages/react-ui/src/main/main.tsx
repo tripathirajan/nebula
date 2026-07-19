@@ -1,8 +1,8 @@
-import { cn } from '@nebula/primitives/cn';
-import { Primitive } from '@nebula/primitives/primitive';
+import { cn } from '@nebula-lab/primitives/cn';
+import { Primitive } from '@nebula-lab/primitives/primitive';
 import * as React from 'react';
 
-import type { PrimitivePropsWithRef } from '@nebula/primitives/primitive';
+import type { PrimitivePropsWithRef } from '@nebula-lab/primitives/primitive';
 
 type MainProps = PrimitivePropsWithRef<'main'>;
 

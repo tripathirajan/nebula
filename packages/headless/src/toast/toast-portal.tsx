@@ -1,14 +1,14 @@
-import { Portal } from '@nebula/primitives/portal';
+import { Portal } from '@nebula-lab/primitives/portal';
 import * as React from 'react';
 
-import type { PortalProps } from '@nebula/primitives/portal';
+import type { PortalProps } from '@nebula-lab/primitives/portal';
 
 const TOAST_PORTAL_NAME = 'ToastPortal';
 
 type ToastPortalProps = PortalProps;
 
 /**
- * Thin re-export of `@nebula/primitives`' `Portal` — wraps `ToastViewport`
+ * Thin re-export of `@nebula-lab/primitives`' `Portal` — wraps `ToastViewport`
  * (once, near the root of an app), not each individual `Toast`, unlike
  * `DialogPortal`/`PopoverPortal` which wrap one piece of overlay content per
  * open/close cycle.

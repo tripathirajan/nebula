@@ -1,13 +1,13 @@
-import { cn } from '@nebula/primitives/cn';
-import { Image } from '@nebula/primitives/image';
+import { cn } from '@nebula-lab/primitives/cn';
+import { Image } from '@nebula-lab/primitives/image';
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from '@nebula/react-ui/carousel';
-import { Text } from '@nebula/react-ui/text';
+} from '@nebula-lab/react-ui/carousel';
+import { Text } from '@nebula-lab/react-ui/text';
 import * as React from 'react';
 
 interface ProductGalleryImage {

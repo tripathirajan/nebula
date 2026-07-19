@@ -8,7 +8,7 @@ import { defineConfig } from 'vitest/config';
 //
 // Run everything:            pnpm test
 // Watch everything:          pnpm test:watch
-// Scope to one package:      pnpm --filter @nebula/primitives test
+// Scope to one package:      pnpm --filter @nebula-lab/primitives test
 //   (packages that have tests define their own "test" script that filters
 //   this same config down to their own path — see that package's package.json)
 export default defineConfig({

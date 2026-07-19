@@ -1,13 +1,13 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    // Unset the workspace-wide `@nebula/*` -> `packages/*/src` path aliases
+    // Unset the workspace-wide `@nebula-lab/*` -> `packages/*/src` path aliases
     // from tsconfig.base.json for this build. With them in effect, `tsc -p
     // tsconfig.build.json` (composite + rootDir: './src') pulls other
     // packages' *source* files into this program, which then fails since
     // they fall outside this package's rootDir. Clearing `paths` here
     // (build-only, not tsconfig.json) makes module resolution fall back to
-    // node_modules, resolving `@nebula/*` to the dependency's built `dist`
+    // node_modules, resolving `@nebula-lab/*` to the dependency's built `dist`
     // output via its package.json `exports` map instead — which is what a
     // build step should type-check against anyway.
     "paths": {},

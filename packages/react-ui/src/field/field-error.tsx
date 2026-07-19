@@ -1,8 +1,8 @@
-import { FieldError as HeadlessFieldError } from '@nebula/headless/field';
-import { cn } from '@nebula/primitives/cn';
+import { FieldError as HeadlessFieldError } from '@nebula-lab/headless/field';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
-import type { PrimitivePropsWithRef } from '@nebula/primitives/primitive';
+import type { PrimitivePropsWithRef } from '@nebula-lab/primitives/primitive';
 
 type FieldErrorProps = PrimitivePropsWithRef<'p'>;
 

@@ -1,15 +1,15 @@
-import { cn } from '@nebula/primitives/cn';
-import { Textarea as StylelessTextarea } from '@nebula/styleless/textarea';
+import { cn } from '@nebula-lab/primitives/cn';
+import { Textarea as StylelessTextarea } from '@nebula-lab/styleless/textarea';
 import * as React from 'react';
 
-import type { TextareaProps as StylelessTextareaProps } from '@nebula/styleless/textarea';
+import type { TextareaProps as StylelessTextareaProps } from '@nebula-lab/styleless/textarea';
 
 /**
- * Styled `textarea` — wraps `@nebula/styleless`'s `Textarea` (itself a thin
- * pass-through of `@nebula/primitives`' `Textarea`, which gives `invalid`
+ * Styled `textarea` — wraps `@nebula-lab/styleless`'s `Textarea` (itself a thin
+ * pass-through of `@nebula-lab/primitives`' `Textarea`, which gives `invalid`
  * -> `aria-invalid` wiring, ref forwarding, and the optional `autoResize`
  * behavior) the same way this package's `Input` wraps `styleless`'s
- * `Input`; there's no separate `@nebula/headless` layer for this the way
+ * `Input`; there's no separate `@nebula-lab/headless` layer for this the way
  * most other form fields have, mirroring how `headless` itself has no
  * `Textarea` (see `AGENTS.md`'s `packages/headless` row).
  *

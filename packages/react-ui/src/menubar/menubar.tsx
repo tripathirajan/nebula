@@ -1,8 +1,8 @@
-import { Menubar as HeadlessMenubar } from '@nebula/headless/menubar';
-import { cn } from '@nebula/primitives/cn';
+import { Menubar as HeadlessMenubar } from '@nebula-lab/headless/menubar';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
-import type { MenubarProps as HeadlessMenubarProps } from '@nebula/headless/menubar';
+import type { MenubarProps as HeadlessMenubarProps } from '@nebula-lab/headless/menubar';
 
 type MenubarProps = HeadlessMenubarProps;
 
@@ -11,7 +11,7 @@ type MenubarProps = HeadlessMenubarProps;
  * own), `Menubar`'s root *is* the horizontal bar itself — it renders
  * `RovingFocusGroup` directly rather than through a portal, so it's the one
  * root in this family that needs real layout styling. Relies on the
- * `className` passthrough added to `@nebula/headless`'s `Menubar` for this.
+ * `className` passthrough added to `@nebula-lab/headless`'s `Menubar` for this.
  */
 const Menubar = React.forwardRef<HTMLDivElement, MenubarProps>((props, forwardedRef) => {
   const { className, ...rest } = props;

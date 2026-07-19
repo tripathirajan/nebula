@@ -1,7 +1,7 @@
-import { createContextScope } from '@nebula/primitives/create-context-scope';
+import { createContextScope } from '@nebula-lab/primitives/create-context-scope';
 
-import type { Scope } from '@nebula/primitives/create-context-scope';
-import type { RovingFocusGroupOrientation } from '@nebula/primitives/roving-focus-group';
+import type { Scope } from '@nebula-lab/primitives/create-context-scope';
+import type { RovingFocusGroupOrientation } from '@nebula-lab/primitives/roving-focus-group';
 
 interface ListboxContextValue {
   /** True if `value` (an option's identifying value) is currently selected — abstracts over the `single`/`multiple` value-shape difference, same technique `AccordionContextValue.isItemOpen`/`ToggleGroupContextValue.isItemPressed` use. */

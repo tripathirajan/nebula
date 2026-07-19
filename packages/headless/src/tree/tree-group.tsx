@@ -1,11 +1,11 @@
-import { Presence } from '@nebula/primitives/presence';
-import { Primitive } from '@nebula/primitives/primitive';
+import { Presence } from '@nebula-lab/primitives/presence';
+import { Primitive } from '@nebula-lab/primitives/primitive';
 import * as React from 'react';
 
 import { useTreeItemContext } from './tree-item-context';
 
 import type { ItemScopedProps } from './tree-item-context';
-import type { PrimitivePropsWithRef } from '@nebula/primitives/primitive';
+import type { PrimitivePropsWithRef } from '@nebula-lab/primitives/primitive';
 
 const TREE_GROUP_NAME = 'TreeGroup';
 
@@ -23,7 +23,7 @@ interface TreeGroupProps extends PrimitivePropsWithRef<'ul'> {
 
 /**
  * `role="group"` — the nested `<ul>` holding one `TreeItem`'s children.
- * Wrapped in `@nebula/primitives`' `Presence` so collapse/expand can be
+ * Wrapped in `@nebula-lab/primitives`' `Presence` so collapse/expand can be
  * animated like `AccordionContent`, but defaults to fully unmounting (not
  * just `hidden`) while collapsed, unlike `AccordionContent` — see
  * `forceMount`.

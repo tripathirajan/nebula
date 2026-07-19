@@ -1,10 +1,10 @@
-import { DrawerContent as HeadlessDrawerContent } from '@nebula/headless/drawer';
-import { cn } from '@nebula/primitives/cn';
+import { DrawerContent as HeadlessDrawerContent } from '@nebula-lab/headless/drawer';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
 import { DrawerClose } from './drawer-close';
 
-import type { DrawerContentProps as HeadlessDrawerContentProps } from '@nebula/headless/drawer';
+import type { DrawerContentProps as HeadlessDrawerContentProps } from '@nebula-lab/headless/drawer';
 
 interface DrawerContentOwnProps {
   /** Hide the built-in top-right close icon. @default false */
@@ -72,4 +72,4 @@ DrawerContent.displayName = 'DrawerContent';
 
 export { DrawerContent };
 export type { DrawerContentProps };
-export type { DrawerSide } from '@nebula/headless/drawer';
+export type { DrawerSide } from '@nebula-lab/headless/drawer';

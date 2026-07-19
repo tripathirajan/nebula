@@ -1,16 +1,16 @@
-import { cn } from '@nebula/primitives/cn';
-import { PasswordInput as StylelessPasswordInput } from '@nebula/styleless/password-input';
+import { cn } from '@nebula-lab/primitives/cn';
+import { PasswordInput as StylelessPasswordInput } from '@nebula-lab/styleless/password-input';
 import * as React from 'react';
 
 import { inputVariants } from '../input/input';
 
-import type { PasswordInputProps as StylelessPasswordInputProps } from '@nebula/styleless/password-input';
+import type { PasswordInputProps as StylelessPasswordInputProps } from '@nebula-lab/styleless/password-input';
 import type { VariantProps } from 'class-variance-authority';
 
 type PasswordFieldProps = StylelessPasswordInputProps & VariantProps<typeof inputVariants>;
 
 /**
- * Wraps `@nebula/styleless`'s `PasswordInput` (which owns the real
+ * Wraps `@nebula-lab/styleless`'s `PasswordInput` (which owns the real
  * behavior: `visible` state, `type="password"|"text"` swapping,
  * `aria-pressed` wiring) and supplies the eye/eye-off icon pair via
  * `renderToggle` plus the `absolute`-positioned toggle button styling via

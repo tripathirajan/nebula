@@ -1,12 +1,12 @@
 import {
   Progress as HeadlessProgress,
   ProgressIndicator as HeadlessProgressIndicator,
-} from '@nebula/headless/progress';
-import { cn } from '@nebula/primitives/cn';
+} from '@nebula-lab/headless/progress';
+import { cn } from '@nebula-lab/primitives/cn';
 import { cva } from 'class-variance-authority';
 import * as React from 'react';
 
-import type { ProgressProps as HeadlessProgressProps } from '@nebula/headless/progress';
+import type { ProgressProps as HeadlessProgressProps } from '@nebula-lab/headless/progress';
 import type { VariantProps } from 'class-variance-authority';
 
 /** No shape axis applies to a progress bar/fill — the one axis is named `color`, matching `Spinner`/`Badge`/`Chip`'s vocabulary. */
@@ -45,7 +45,7 @@ const progressIndicatorVariants = cva('h-full rounded-[var(--radius-progress)]',
 type ProgressProps = HeadlessProgressProps & VariantProps<typeof progressTrackVariants>;
 
 /**
- * Styled wrapper around `@nebula/headless`'s `Progress`/`ProgressIndicator`
+ * Styled wrapper around `@nebula-lab/headless`'s `Progress`/`ProgressIndicator`
  * pair — the `role="progressbar"` semantics, `aria-valuenow`/`valuemin`/
  * `valuemax`/`valuetext`, and indeterminate handling all come from there
  * unchanged. Unlike `Accordion`/`Dialog`/etc., this layer doesn't re-expose

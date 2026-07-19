@@ -1,10 +1,10 @@
-import { ListboxOption } from '@nebula/headless/listbox';
-import { cn } from '@nebula/primitives/cn';
+import { ListboxOption } from '@nebula-lab/headless/listbox';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
 import { useMultiSelectContext } from './multi-select-context';
 
-import type { ListboxOptionProps } from '@nebula/headless/listbox';
+import type { ListboxOptionProps } from '@nebula-lab/headless/listbox';
 
 interface MultiSelectItemProps extends ListboxOptionProps {
   /** The accessible/displayed label registered with `MultiSelect` for `MultiSelectTrigger`'s summary — defaults to `children` when `children` is a plain string, same fallback `SelectItem`'s `textValue` convention documents. */

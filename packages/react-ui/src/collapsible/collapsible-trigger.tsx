@@ -1,8 +1,8 @@
-import { CollapsibleTrigger as HeadlessCollapsibleTrigger } from '@nebula/headless/collapsible';
-import { cn } from '@nebula/primitives/cn';
+import { CollapsibleTrigger as HeadlessCollapsibleTrigger } from '@nebula-lab/headless/collapsible';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
-import type { CollapsibleTriggerProps as HeadlessCollapsibleTriggerProps } from '@nebula/headless/collapsible';
+import type { CollapsibleTriggerProps as HeadlessCollapsibleTriggerProps } from '@nebula-lab/headless/collapsible';
 
 type CollapsibleTriggerProps = HeadlessCollapsibleTriggerProps;
 

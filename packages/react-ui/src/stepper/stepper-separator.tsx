@@ -1,8 +1,8 @@
-import { StepperSeparator as HeadlessStepperSeparator } from '@nebula/headless/stepper';
-import { cn } from '@nebula/primitives/cn';
+import { StepperSeparator as HeadlessStepperSeparator } from '@nebula-lab/headless/stepper';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
-import type { StepperSeparatorProps as HeadlessStepperSeparatorProps } from '@nebula/headless/stepper';
+import type { StepperSeparatorProps as HeadlessStepperSeparatorProps } from '@nebula-lab/headless/stepper';
 
 type StepperSeparatorProps = HeadlessStepperSeparatorProps;
 

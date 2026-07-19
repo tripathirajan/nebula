@@ -1,8 +1,8 @@
-import { NavigationMenuTrigger as HeadlessNavigationMenuTrigger } from '@nebula/headless/navigation-menu';
-import { cn } from '@nebula/primitives/cn';
+import { NavigationMenuTrigger as HeadlessNavigationMenuTrigger } from '@nebula-lab/headless/navigation-menu';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
-import type { NavigationMenuTriggerProps as HeadlessNavigationMenuTriggerProps } from '@nebula/headless/navigation-menu';
+import type { NavigationMenuTriggerProps as HeadlessNavigationMenuTriggerProps } from '@nebula-lab/headless/navigation-menu';
 
 type NavigationMenuTriggerProps = HeadlessNavigationMenuTriggerProps;
 

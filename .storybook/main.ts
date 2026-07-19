@@ -21,12 +21,12 @@ const config: StorybookConfig = {
     reactDocgen: 'react-docgen-typescript',
     // Without an explicit `tsconfigPath`, `react-docgen-typescript` falls
     // back to default compiler options with no knowledge of this repo's
-    // `@nebula/*` path aliases — every component prop type that's imported
+    // `@nebula-lab/*` path aliases — every component prop type that's imported
     // across a package boundary (e.g. `PrimitivePropsWithRef` from
-    // `@nebula/primitives/primitive`, which is nearly all of them) then
+    // `@nebula-lab/primitives/primitive`, which is nearly all of them) then
     // fails to resolve, and Storybook silently renders an empty Controls
     // table instead of erroring. Pointing this at the workspace-root
-    // `tsconfig.base.json` (which owns the full `@nebula/*` -> `packages/*/src`
+    // `tsconfig.base.json` (which owns the full `@nebula-lab/*` -> `packages/*/src`
     // `paths` map every package's own tsconfig extends) is what lets docgen
     // actually see through those imports.
     reactDocgenTypescriptOptions: {

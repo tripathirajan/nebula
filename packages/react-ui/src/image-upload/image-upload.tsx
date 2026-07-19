@@ -1,6 +1,6 @@
-import { useControllableState } from '@nebula/hooks';
-import { cn } from '@nebula/primitives/cn';
-import { ImagePreview } from '@nebula/styleless/image-preview';
+import { useControllableState } from '@nebula-lab/hooks';
+import { cn } from '@nebula-lab/primitives/cn';
+import { ImagePreview } from '@nebula-lab/styleless/image-preview';
 import * as React from 'react';
 
 import {
@@ -10,7 +10,7 @@ import {
   FileUploadRemoveTrigger,
 } from '../file-upload';
 
-import type { FileUploadProps } from '@nebula/headless/file-upload';
+import type { FileUploadProps } from '@nebula-lab/headless/file-upload';
 
 /** Props accepted by {@link ImageUpload}. */
 interface ImageUploadProps extends Omit<FileUploadProps, 'accept' | 'children'> {
@@ -21,8 +21,8 @@ interface ImageUploadProps extends Omit<FileUploadProps, 'accept' | 'children'> 
 }
 
 /**
- * A ready-to-use image uploader — composes `@nebula/headless`'s
- * `FileUpload` (defaulting `accept="image/*"`) with `@nebula/styleless`'s
+ * A ready-to-use image uploader — composes `@nebula-lab/headless`'s
+ * `FileUpload` (defaulting `accept="image/*"`) with `@nebula-lab/styleless`'s
  * `ImagePreview` (which owns the real object-URL-lifecycle behavior) inside
  * a themed thumbnail grid. Deliberately a single self-contained component
  * rather than exposing `Root`/`Item` sub-parts — same call `PasswordField`/

@@ -1,9 +1,9 @@
-import { cn } from '@nebula/primitives/cn';
-import { Avatar, AvatarFallback, AvatarImage } from '@nebula/react-ui/avatar';
-import { Card, CardContent, CardHeader, CardTitle } from '@nebula/react-ui/card';
-import { List, ListItem } from '@nebula/react-ui/list';
-import { StaticRating } from '@nebula/react-ui/static-rating';
-import { Text } from '@nebula/react-ui/text';
+import { cn } from '@nebula-lab/primitives/cn';
+import { Avatar, AvatarFallback, AvatarImage } from '@nebula-lab/react-ui/avatar';
+import { Card, CardContent, CardHeader, CardTitle } from '@nebula-lab/react-ui/card';
+import { List, ListItem } from '@nebula-lab/react-ui/list';
+import { StaticRating } from '@nebula-lab/react-ui/static-rating';
+import { Text } from '@nebula-lab/react-ui/text';
 import * as React from 'react';
 
 interface Review {

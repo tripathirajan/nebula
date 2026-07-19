@@ -1,8 +1,8 @@
-import { ToastTitle as HeadlessToastTitle } from '@nebula/headless/toast';
-import { cn } from '@nebula/primitives/cn';
+import { ToastTitle as HeadlessToastTitle } from '@nebula-lab/headless/toast';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
-import type { ToastTitleProps as HeadlessToastTitleProps } from '@nebula/headless/toast';
+import type { ToastTitleProps as HeadlessToastTitleProps } from '@nebula-lab/headless/toast';
 
 type ToastTitleProps = HeadlessToastTitleProps;
 

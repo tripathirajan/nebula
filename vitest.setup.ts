@@ -36,7 +36,7 @@ if (typeof window !== 'undefined' && window?.document) {
     };
   }
 
-  // JSDOM doesn't implement `window.matchMedia` at all — `@nebula/hooks`'
+  // JSDOM doesn't implement `window.matchMedia` at all — `@nebula-lab/hooks`'
   // `useMediaQuery` (and anything built on it, e.g. `DataTableBlock`'s
   // responsive card/table switch) throws immediately without this. Defaults
   // to `matches: false` (the safe, non-surprising default — "no viewport
@@ -63,7 +63,7 @@ if (typeof window !== 'undefined' && window?.document) {
   // doesn't exist, so `new PointerEvent(...)` throws, and even
   // `@testing-library`'s `fireEvent.pointerDown(...)` (which falls back to a
   // plain `Event`/`MouseEvent` when the real constructor is missing) silently
-  // drops pointer-specific init fields like `pointerId`/`clientX`. `@nebula/
+  // drops pointer-specific init fields like `pointerId`/`clientX`. `@nebula-lab/
   // hooks`' `useSwipe` (and anything built on it, e.g. `Carousel`'s drag
   // gesture, `SwipeableCards`) reads exactly those fields, so without this
   // shim every simulated drag resolves to `NaN` deltas instead of a real

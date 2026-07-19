@@ -1,12 +1,12 @@
 
-import { useControllableState } from '@nebula/hooks';
-import { composeEventHandlers } from '@nebula/primitives/compose-event-handlers';
-import { useComposedRefs } from '@nebula/primitives/compose-refs';
-import { Primitive } from '@nebula/primitives/primitive';
-import { VisuallyHidden } from '@nebula/primitives/visually-hidden';
+import { useControllableState } from '@nebula-lab/hooks';
+import { composeEventHandlers } from '@nebula-lab/primitives/compose-event-handlers';
+import { useComposedRefs } from '@nebula-lab/primitives/compose-refs';
+import { Primitive } from '@nebula-lab/primitives/primitive';
+import { VisuallyHidden } from '@nebula-lab/primitives/visually-hidden';
 import * as React from 'react';
 
-import type { PrimitivePropsWithRef } from '@nebula/primitives/primitive';
+import type { PrimitivePropsWithRef } from '@nebula-lab/primitives/primitive';
 
 interface SwitchProps extends Omit<PrimitivePropsWithRef<'button'>, 'checked' | 'defaultChecked'> {
   /** Controlled on/off state. */

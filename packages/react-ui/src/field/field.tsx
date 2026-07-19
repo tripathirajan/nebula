@@ -1,8 +1,8 @@
-import { Field as HeadlessField } from '@nebula/headless/field';
-import { cn } from '@nebula/primitives/cn';
+import { Field as HeadlessField } from '@nebula-lab/headless/field';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
-import type { FieldProps as HeadlessFieldProps } from '@nebula/headless/field';
+import type { FieldProps as HeadlessFieldProps } from '@nebula-lab/headless/field';
 
 type FieldProps = HeadlessFieldProps;
 

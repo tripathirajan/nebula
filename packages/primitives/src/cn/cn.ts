@@ -6,7 +6,7 @@ import type { ClassValue } from 'clsx';
 /**
  * Combines `clsx` (conditional class composition) with `tailwind-merge`
  * (resolves conflicting Tailwind utility classes, last one wins) — the single
- * class-name helper every `@nebula/*` styled component should use instead of
+ * class-name helper every `@nebula-lab/*` styled component should use instead of
  * hand-rolled string concatenation.
  *
  * @param inputs - Any number of class values: strings, falsy values (ignored), arrays, or `{ [className]: boolean }` objects — anything `clsx` accepts.

@@ -1,4 +1,4 @@
-import { useControllableState } from '@nebula/hooks';
+import { useControllableState } from '@nebula-lab/hooks';
 import * as React from 'react';
 
 import { DataTableContext } from './data-table-context';
@@ -21,10 +21,10 @@ interface DataTableProps extends React.TableHTMLAttributes<HTMLTableElement> {
 
 /**
  * `styleless`-tier root of the DataTable compound component — the real
- * behavior extracted from `@nebula/react-ui`'s `DataTable`: sort state
+ * behavior extracted from `@nebula-lab/react-ui`'s `DataTable`: sort state
  * (`sortKey`/`sortDirection`, both controllable) and row-selection state
  * (`selected`, also controllable), threaded to every descendant via
- * context. No `@nebula/headless` layer underneath (a sortable `<table>`'s
+ * context. No `@nebula-lab/headless` layer underneath (a sortable `<table>`'s
  * `<th>` already has well-defined native semantics via `aria-sort`, and row
  * selection is just checkboxes — neither needs a bespoke ARIA widget
  * pattern the way `Tree`/`Combobox` do, per the project owner's own

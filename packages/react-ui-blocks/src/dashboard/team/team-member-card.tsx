@@ -1,8 +1,8 @@
-import { cn } from '@nebula/primitives/cn';
-import { Avatar, AvatarFallback, AvatarImage } from '@nebula/react-ui/avatar';
-import { Card } from '@nebula/react-ui/card';
-import { IconButton } from '@nebula/react-ui/icon-button';
-import { Text } from '@nebula/react-ui/text';
+import { cn } from '@nebula-lab/primitives/cn';
+import { Avatar, AvatarFallback, AvatarImage } from '@nebula-lab/react-ui/avatar';
+import { Card } from '@nebula-lab/react-ui/card';
+import { IconButton } from '@nebula-lab/react-ui/icon-button';
+import { Text } from '@nebula-lab/react-ui/text';
 import * as React from 'react';
 
 interface TeamMemberSocialLink {

@@ -1,6 +1,6 @@
-import { createContextScope } from '@nebula/primitives/create-context-scope';
+import { createContextScope } from '@nebula-lab/primitives/create-context-scope';
 
-import type { Scope } from '@nebula/primitives/create-context-scope';
+import type { Scope } from '@nebula-lab/primitives/create-context-scope';
 
 interface TreeContextValue {
   /** Abstracts over the `single`/`multiple` value-shape difference, same technique `ListboxContextValue.isItemSelected` uses. */

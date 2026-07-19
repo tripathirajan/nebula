@@ -1,9 +1,9 @@
-import { cn } from '@nebula/primitives/cn';
-import { Avatar as StylelessAvatar } from '@nebula/styleless/avatar';
+import { cn } from '@nebula-lab/primitives/cn';
+import { Avatar as StylelessAvatar } from '@nebula-lab/styleless/avatar';
 import { cva } from 'class-variance-authority';
 import * as React from 'react';
 
-import type { AvatarProps as StylelessAvatarProps } from '@nebula/styleless/avatar';
+import type { AvatarProps as StylelessAvatarProps } from '@nebula-lab/styleless/avatar';
 import type { VariantProps } from 'class-variance-authority';
 
 /**
@@ -32,7 +32,7 @@ const avatarVariants = cva(
 type AvatarProps = StylelessAvatarProps & VariantProps<typeof avatarVariants>;
 
 /**
- * Styled wrapper around `@nebula/styleless`'s `Avatar` — the image
+ * Styled wrapper around `@nebula-lab/styleless`'s `Avatar` — the image
  * load/error tracking that lets `AvatarFallback` know when to render comes
  * from there unchanged (moved down this session, since it's reusable
  * non-visual state with no styling opinion, same bucket `PasswordInput`'s

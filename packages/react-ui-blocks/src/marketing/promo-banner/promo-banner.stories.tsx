@@ -1,4 +1,4 @@
-import { Image } from '@nebula/primitives/image';
+import { Image } from '@nebula-lab/primitives/image';
 
 import { PromoBanner } from './promo-banner';
 

@@ -1,8 +1,8 @@
-import { FileUploadFileList as HeadlessFileUploadFileList } from '@nebula/headless/file-upload';
-import { cn } from '@nebula/primitives/cn';
+import { FileUploadFileList as HeadlessFileUploadFileList } from '@nebula-lab/headless/file-upload';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
-import type { FileUploadFileListProps as HeadlessFileUploadFileListProps } from '@nebula/headless/file-upload';
+import type { FileUploadFileListProps as HeadlessFileUploadFileListProps } from '@nebula-lab/headless/file-upload';
 
 type FileUploadFileListProps = HeadlessFileUploadFileListProps;
 

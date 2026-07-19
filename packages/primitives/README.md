@@ -1,6 +1,6 @@
-# @nebula/primitives
+# @nebula-lab/primitives
 
-Low-level DOM abstractions and layout components for building accessible, composable React applications. Unstyled and polymorphic — no visuals, no opinions about styling; just behavior and composition that every other `@nebula/*` package builds on.
+Low-level DOM abstractions and layout components for building accessible, composable React applications. Unstyled and polymorphic — no visuals, no opinions about styling; just behavior and composition that every other `@nebula-lab/*` package builds on.
 
 ## Features
 
@@ -30,7 +30,7 @@ Low-level DOM abstractions and layout components for building accessible, compos
 
 ### 📡 Observers
 
-Note: the `ResizeObserver`/`IntersectionObserver`/`MutationObserver` hooks (`useResizeObserver`, `useIntersectionObserver`, `useMutationObserver`) live in `@nebula/hooks`, not here — `primitives` has zero in-workspace dependencies by design, so observer *hooks* belong one layer up. Components in this package that need equivalent behavior (`FocusScope`, `DismissibleLayer`) implement it locally instead of importing across the boundary.
+Note: the `ResizeObserver`/`IntersectionObserver`/`MutationObserver` hooks (`useResizeObserver`, `useIntersectionObserver`, `useMutationObserver`) live in `@nebula-lab/hooks`, not here — `primitives` has zero in-workspace dependencies by design, so observer *hooks* belong one layer up. Components in this package that need equivalent behavior (`FocusScope`, `DismissibleLayer`) implement it locally instead of importing across the boundary.
 
 ### 🎭 Interaction
 
@@ -39,7 +39,7 @@ Focus management (`FocusScope`, `RovingFocusGroup`), dismissible-layer patterns 
 ## Example
 
 ```tsx
-import { Box, Flex, Stack, Text, Heading } from '@nebula/primitives';
+import { Box, Flex, Stack, Text, Heading } from '@nebula-lab/primitives';
 
 function Card({ title, children }: { title: string; children: React.ReactNode }) {
   return (
@@ -61,8 +61,8 @@ Every component in this package is (directly or indirectly) `Primitive` with a r
 
 ```tsx
 import * as React from 'react';
-import { Primitive } from '@nebula/primitives/primitive';
-import type { PolymorphicComponentPropsWithRef } from '@nebula/primitives/types';
+import { Primitive } from '@nebula-lab/primitives/primitive';
+import type { PolymorphicComponentPropsWithRef } from '@nebula-lab/primitives/types';
 
 type BoxProps<E extends React.ElementType = 'div'> = PolymorphicComponentPropsWithRef<E>;
 
@@ -81,23 +81,23 @@ const Box = React.forwardRef(
 
 ```ts
 // barrel
-import { Slot, Primitive, Box, Flex, Button, cn } from '@nebula/primitives';
+import { Slot, Primitive, Box, Flex, Button, cn } from '@nebula-lab/primitives';
 
 // or per-component subpath (identical runtime code, just explicit — and what
 // tsup's per-entry build + the package.json `exports` map are keyed on)
-import { Slot } from '@nebula/primitives/slot';
-import { Primitive } from '@nebula/primitives/primitive';
-import { cn } from '@nebula/primitives/cn';
+import { Slot } from '@nebula-lab/primitives/slot';
+import { Primitive } from '@nebula-lab/primitives/primitive';
+import { cn } from '@nebula-lab/primitives/cn';
 ```
 
 ## Conventions
 
-One module per folder (`src/<name>/<name>.ts(x)` + `index.ts` barrel) — see `component-library-architecture.md` §9.1 at the repo root. Package `index.ts` and every folder's `index.ts` are re-exports only, no logic. `primitives` has no in-workspace dependencies — not even `@nebula/utilities` or `@nebula/hooks` — so small pieces of logic (focusable-element queries, outside-click detection) are duplicated locally rather than imported, keeping this package installable standalone.
+One module per folder (`src/<name>/<name>.ts(x)` + `index.ts` barrel) — see `component-library-architecture.md` §9.1 at the repo root. Package `index.ts` and every folder's `index.ts` are re-exports only, no logic. `primitives` has no in-workspace dependencies — not even `@nebula-lab/utilities` or `@nebula-lab/hooks` — so small pieces of logic (focusable-element queries, outside-click detection) are duplicated locally rather than imported, keeping this package installable standalone.
 
 ## Scripts
 
 ```
-pnpm --filter @nebula/primitives build      # tsup -> dist (ESM + .d.ts)
-pnpm --filter @nebula/primitives dev        # tsup --watch
-pnpm --filter @nebula/primitives typecheck  # tsc --noEmit
+pnpm --filter @nebula-lab/primitives build      # tsup -> dist (ESM + .d.ts)
+pnpm --filter @nebula-lab/primitives dev        # tsup --watch
+pnpm --filter @nebula-lab/primitives typecheck  # tsc --noEmit
 ```

@@ -1,8 +1,8 @@
-import { PaginationPrevious as HeadlessPaginationPrevious } from '@nebula/headless/pagination';
-import { cn } from '@nebula/primitives/cn';
+import { PaginationPrevious as HeadlessPaginationPrevious } from '@nebula-lab/headless/pagination';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
-import type { PaginationPreviousProps as HeadlessPaginationPreviousProps } from '@nebula/headless/pagination';
+import type { PaginationPreviousProps as HeadlessPaginationPreviousProps } from '@nebula-lab/headless/pagination';
 
 type PaginationPreviousProps = HeadlessPaginationPreviousProps;
 

@@ -1,8 +1,8 @@
-import { BreadcrumbItem as HeadlessBreadcrumbItem } from '@nebula/headless/breadcrumb';
-import { cn } from '@nebula/primitives/cn';
+import { BreadcrumbItem as HeadlessBreadcrumbItem } from '@nebula-lab/headless/breadcrumb';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
-import type { BreadcrumbItemProps as HeadlessBreadcrumbItemProps } from '@nebula/headless/breadcrumb';
+import type { BreadcrumbItemProps as HeadlessBreadcrumbItemProps } from '@nebula-lab/headless/breadcrumb';
 
 type BreadcrumbItemProps = HeadlessBreadcrumbItemProps;
 

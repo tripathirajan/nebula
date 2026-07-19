@@ -1,8 +1,8 @@
-import { composeEventHandlers } from '@nebula/primitives/compose-event-handlers';
-import { DismissibleLayer } from '@nebula/primitives/dismissible-layer';
-import { FocusScope } from '@nebula/primitives/focus-scope';
-import { PopperContent } from '@nebula/primitives/popper';
-import { Presence } from '@nebula/primitives/presence';
+import { composeEventHandlers } from '@nebula-lab/primitives/compose-event-handlers';
+import { DismissibleLayer } from '@nebula-lab/primitives/dismissible-layer';
+import { FocusScope } from '@nebula-lab/primitives/focus-scope';
+import { PopperContent } from '@nebula-lab/primitives/popper';
+import { Presence } from '@nebula-lab/primitives/presence';
 import * as React from 'react';
 
 import { usePopoverContext, usePopperScope } from '../popover/popover-context';
@@ -10,7 +10,7 @@ import { usePopoverContext, usePopperScope } from '../popover/popover-context';
 import { useNavigationMenuContext } from './navigation-menu-context';
 
 import type { ScopedProps } from './navigation-menu-context';
-import type { Align, PopperContentProps, Side } from '@nebula/primitives/popper';
+import type { Align, PopperContentProps, Side } from '@nebula-lab/primitives/popper';
 
 const NAVIGATION_MENU_CONTENT_NAME = 'NavigationMenuContent';
 

@@ -1,9 +1,9 @@
-import { cn } from '@nebula/primitives/cn';
-import { Primitive } from '@nebula/primitives/primitive';
+import { cn } from '@nebula-lab/primitives/cn';
+import { Primitive } from '@nebula-lab/primitives/primitive';
 import { cva } from 'class-variance-authority';
 import * as React from 'react';
 
-import type { PrimitivePropsWithRef } from '@nebula/primitives/primitive';
+import type { PrimitivePropsWithRef } from '@nebula-lab/primitives/primitive';
 import type { VariantProps } from 'class-variance-authority';
 
 /**
@@ -40,7 +40,7 @@ type CardProps = PrimitivePropsWithRef<'div'> & VariantProps<typeof cardVariants
  * A bordered container — `CardHeader`/`CardTitle`/`CardDescription`/
  * `CardContent`/`CardFooter` are purely presentational structure, no
  * behavior, so (unlike `Accordion`/`Dialog`/`Popover`) there's no matching
- * `@nebula/headless` compound underneath this one; it's a thin `cn()`
+ * `@nebula-lab/headless` compound underneath this one; it's a thin `cn()`
  * wrapper around `Primitive` directly, same as `Badge`/`Separator`.
  *
  * Colors read `--card-*` (see `../tokens/component.ts`).

@@ -1,8 +1,8 @@
-import { cn } from '@nebula/primitives/cn';
-import { Avatar, AvatarFallback, AvatarImage } from '@nebula/react-ui/avatar';
-import { Heading } from '@nebula/react-ui/heading';
-import { Tab, TabList, TabPanel, Tabs } from '@nebula/react-ui/tabs';
-import { Text } from '@nebula/react-ui/text';
+import { cn } from '@nebula-lab/primitives/cn';
+import { Avatar, AvatarFallback, AvatarImage } from '@nebula-lab/react-ui/avatar';
+import { Heading } from '@nebula-lab/react-ui/heading';
+import { Tab, TabList, TabPanel, Tabs } from '@nebula-lab/react-ui/tabs';
+import { Text } from '@nebula-lab/react-ui/text';
 import * as React from 'react';
 
 interface ProfileHeaderStat {

@@ -1,8 +1,8 @@
-import { PaginationList as HeadlessPaginationList } from '@nebula/headless/pagination';
-import { cn } from '@nebula/primitives/cn';
+import { PaginationList as HeadlessPaginationList } from '@nebula-lab/headless/pagination';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
-import type { PaginationListProps as HeadlessPaginationListProps } from '@nebula/headless/pagination';
+import type { PaginationListProps as HeadlessPaginationListProps } from '@nebula-lab/headless/pagination';
 
 type PaginationListProps = HeadlessPaginationListProps;
 

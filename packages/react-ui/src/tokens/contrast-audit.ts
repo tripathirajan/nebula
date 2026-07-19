@@ -7,7 +7,7 @@
  * - 1.4.11 Non-text Contrast — UI component boundaries (borders, focus
  *   indicators) need >= 3:1 against their background.
  *
- * Run with: `pnpm --filter @nebula/react-ui contrast-audit`
+ * Run with: `pnpm --filter @nebula-lab/react-ui contrast-audit`
  * (or `npx tsx packages/react-ui/src/tokens/contrast-audit.ts` from the repo root).
  *
  * This does not replace visual/automated review of real rendered UI — it

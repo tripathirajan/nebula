@@ -13,7 +13,7 @@ interface CarouselContextValue {
 }
 
 /**
- * Plain `React.createContext`, not `@nebula/primitives`' `createContextScope`
+ * Plain `React.createContext`, not `@nebula-lab/primitives`' `createContextScope`
  * — every other compound component's scoped context in this workspace
  * exists so a *different* component can compose its own instance into the
  * same scope (e.g. `NavigationMenuItem` minting an unscoped `Popover`, or

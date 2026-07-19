@@ -1,8 +1,8 @@
-import { cn } from '@nebula/primitives/cn';
-import { Primitive } from '@nebula/primitives/primitive';
+import { cn } from '@nebula-lab/primitives/cn';
+import { Primitive } from '@nebula-lab/primitives/primitive';
 import * as React from 'react';
 
-import type { PrimitivePropsWithRef } from '@nebula/primitives/primitive';
+import type { PrimitivePropsWithRef } from '@nebula-lab/primitives/primitive';
 
 interface StaticRatingOwnProps {
   /** 0-5, need not be a whole number (e.g. `4.5`) — rounds to the nearest whole star for the filled count. */
@@ -34,7 +34,7 @@ function StarIcon(props: { filled: boolean }) {
  * A read-only star rating display — `n`/5 filled stars plus an
  * `aria-label` announcing the score as a sentence. Deliberately **not**
  * `Rating` (a `role="radiogroup"` *input* for collecting a score, built on
- * `@nebula/headless`'s `Rating`/`RatingItem`): reusing an input control to
+ * `@nebula-lab/headless`'s `Rating`/`RatingItem`): reusing an input control to
  * merely display an average would announce a static number as an editable
  * control to assistive tech, which is wrong. This is `role="img"` instead
  * — one static node, not five separately-focusable ones — since there's no

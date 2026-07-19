@@ -1,5 +1,5 @@
-import { useControllableState } from '@nebula/hooks';
-import { cn } from '@nebula/primitives/cn';
+import { useControllableState } from '@nebula-lab/hooks';
+import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
 import {
@@ -60,7 +60,7 @@ type CalendarProps = CalendarSingleProps | CalendarRangeProps;
  * `tabIndex={0}`; every other date is `-1`) and manual arrow-key handling
  * (`ArrowLeft`/`Right` ±1 day, `Up`/`Down` ±1 week, `Home`/`End` jump to the
  * week's start/end, `PageUp`/`PageDown` ±1 month) — not built on
- * `@nebula/primitives`' `RovingFocusGroup`, since that component is only
+ * `@nebula-lab/primitives`' `RovingFocusGroup`, since that component is only
  * ever 1-dimensional (a single row or column); a calendar grid's vertical
  * *and* horizontal arrow-key movement needs its own logic either way.
  *

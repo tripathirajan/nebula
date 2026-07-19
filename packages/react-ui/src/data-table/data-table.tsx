@@ -1,13 +1,13 @@
-import { cn } from '@nebula/primitives/cn';
-import { DataTable as StylelessDataTable } from '@nebula/styleless/data-table';
+import { cn } from '@nebula-lab/primitives/cn';
+import { DataTable as StylelessDataTable } from '@nebula-lab/styleless/data-table';
 import * as React from 'react';
 
-import type { DataTableProps as StylelessDataTableProps } from '@nebula/styleless/data-table';
+import type { DataTableProps as StylelessDataTableProps } from '@nebula-lab/styleless/data-table';
 
 type DataTableProps = StylelessDataTableProps & { className?: string };
 
 /**
- * Wraps `@nebula/styleless`'s `DataTable` (which owns the real behavior:
+ * Wraps `@nebula-lab/styleless`'s `DataTable` (which owns the real behavior:
  * controllable sort state, controllable row-selection state, both threaded
  * to every descendant via context) and adds only the table's own Tailwind
  * classes — this file's whole job is visual, matching every other

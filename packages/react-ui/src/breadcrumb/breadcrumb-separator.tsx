@@ -1,7 +1,7 @@
-import { BreadcrumbSeparator as HeadlessBreadcrumbSeparator } from '@nebula/headless/breadcrumb';
+import { BreadcrumbSeparator as HeadlessBreadcrumbSeparator } from '@nebula-lab/headless/breadcrumb';
 import * as React from 'react';
 
-import type { BreadcrumbSeparatorProps as HeadlessBreadcrumbSeparatorProps } from '@nebula/headless/breadcrumb';
+import type { BreadcrumbSeparatorProps as HeadlessBreadcrumbSeparatorProps } from '@nebula-lab/headless/breadcrumb';
 
 type BreadcrumbSeparatorProps = HeadlessBreadcrumbSeparatorProps;
 

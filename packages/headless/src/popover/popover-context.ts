@@ -1,7 +1,7 @@
-import { createContextScope } from '@nebula/primitives/create-context-scope';
-import { createPopperScope } from '@nebula/primitives/popper';
+import { createContextScope } from '@nebula-lab/primitives/create-context-scope';
+import { createPopperScope } from '@nebula-lab/primitives/popper';
 
-import type { Scope } from '@nebula/primitives/create-context-scope';
+import type { Scope } from '@nebula-lab/primitives/create-context-scope';
 
 interface PopoverContextValue {
   open: boolean;
@@ -12,7 +12,7 @@ interface PopoverContextValue {
 const POPOVER_NAME = 'Popover';
 
 /**
- * Composes its own scope with `@nebula/primitives`' `Popper` scope (passed
+ * Composes its own scope with `@nebula-lab/primitives`' `Popper` scope (passed
  * as a context-scope dependency, per `createContextScope`'s `deps`
  * parameter) — so a single `__scopePopover` prop threads through to both
  * `Popover`'s own context *and* the `Popper` positioning context underneath

@@ -1,11 +1,11 @@
-import { cn } from '@nebula/primitives/cn';
-import { Section } from '@nebula/react-ui/section';
-import { Sidebar } from '@nebula/react-ui/sidebar';
+import { cn } from '@nebula-lab/primitives/cn';
+import { Section } from '@nebula-lab/react-ui/section';
+import { Sidebar } from '@nebula-lab/react-ui/sidebar';
 import * as React from 'react';
 
 import { AppLayout } from '../app-layout/app-layout';
 
-import type { Theme } from '@nebula/react-ui/theme-provider';
+import type { Theme } from '@nebula-lab/react-ui/theme-provider';
 
 interface SettingsLayoutProps {
   /** The settings page's own content — usually a stack of `Section`s, one per settings panel (profile, security, billing, ...). */

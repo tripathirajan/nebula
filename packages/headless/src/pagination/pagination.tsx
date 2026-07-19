@@ -1,11 +1,11 @@
-import { useControllableState } from '@nebula/hooks';
-import { Primitive } from '@nebula/primitives/primitive';
+import { useControllableState } from '@nebula-lab/hooks';
+import { Primitive } from '@nebula-lab/primitives/primitive';
 import * as React from 'react';
 
 import { PaginationProvider } from './pagination-context';
 
 import type { ScopedProps } from './pagination-context';
-import type { PrimitivePropsWithRef } from '@nebula/primitives/primitive';
+import type { PrimitivePropsWithRef } from '@nebula-lab/primitives/primitive';
 
 interface PaginationProps extends PrimitivePropsWithRef<'nav'> {
   page?: number;

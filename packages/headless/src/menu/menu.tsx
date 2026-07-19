@@ -1,6 +1,6 @@
 
-import { useControllableState, useId } from '@nebula/hooks';
-import { Popper } from '@nebula/primitives/popper';
+import { useControllableState, useId } from '@nebula-lab/hooks';
+import { Popper } from '@nebula-lab/primitives/popper';
 import * as React from 'react';
 
 
@@ -19,7 +19,7 @@ interface MenuProps {
  * Root of the Menu compound component — the shared foundation `DropdownMenu`,
  * `ContextMenu`, and `Menubar` are all built on (same relationship `Popper`
  * has to `Popover`/`Tooltip`: one implementation, several triggers/contexts
- * on top of it). Wraps children in `@nebula/primitives`' `Popper` for the
+ * on top of it). Wraps children in `@nebula-lab/primitives`' `Popper` for the
  * anchor-positioning `MenuTrigger`/`MenuContent` need.
  *
  * Deliberately simplified vs. a full Radix-parity menu: no submenus
