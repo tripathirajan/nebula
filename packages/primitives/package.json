@@ -1,6 +1,6 @@
 {
   "name": "@nebula-lab/primitives",
-  "version": "0.1.0",
+  "version": "0.1.1-beta.0",
   "description": "Unstyled polymorphic base primitives (Slot, Primitive, cn, ref/event composition, scoped context) — the foundation every other @nebula-lab/* package builds on.",
   "license": "MIT",
   "publishConfig": {

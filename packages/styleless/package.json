@@ -1,6 +1,6 @@
 {
   "name": "@nebula-lab/styleless",
-  "version": "0.1.0",
+  "version": "0.1.1-beta.0",
   "description": "Reusable UI components with a complete, semantic API but zero visual opinion — composes @nebula-lab/primitives + @nebula-lab/headless. Styled by @nebula-lab/react-ui. See LAYER_TAXONOMY.md for the full component list this package extracts from react-ui.",
   "license": "MIT",
   "publishConfig": {

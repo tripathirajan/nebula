@@ -70,6 +70,19 @@ jobs:
       - name: Version packages with Nx
         run: pnpm nx release version "${{ github.event.inputs.bump }}" --preid "${{ github.event.inputs.preid }}"
 
+      - name: Commit version bump
+        # `nx release version` (run standalone, not via the full `nx release`
+        # orchestrator) only stages the package.json changes — it does not
+        # commit them. Without this step the bump lives only in this run's
+        # ephemeral working directory: `git push` later finds nothing to
+        # push, so every subsequent run recomputes the exact same version
+        # number, which already exists on the registry, and publish becomes
+        # a silent no-op (just re-tagging the old version) instead of an
+        # error or a real new release.
+        run: |
+          git add -A
+          git commit -m "chore(release): version bump to ${{ github.event.inputs.bump }} (${{ github.event.inputs.preid }})"
+
       - name: Build packages
         run: pnpm build
 
@@ -82,8 +95,10 @@ jobs:
       - name: Push version commit and tags
         # Runs only once publish actually succeeds, so a build/publish
         # failure never leaves a version bump committed to git for
-        # something that was never really published — nx's version
-        # resolver falls back to querying the registry directly when no
-        # matching git tag exists, so the next run still computes the
-        # correct next version either way.
+        # something that was never really published. This step is what
+        # actually persists the bump from "Commit version bump" above —
+        # without it (as originally shipped), the commit stayed local to
+        # the runner and every subsequent run recomputed the exact same
+        # version number nx read from package.json, which had never
+        # changed on the real `main` branch.
         run: git push --follow-tags

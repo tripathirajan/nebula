@@ -1,6 +1,6 @@
 {
   "name": "@nebula-lab/react-ui-blocks",
-  "version": "0.1.0",
+  "version": "0.1.2-beta.1",
   "description": "Ready-to-use, domain-neutral screens and composite blocks (theme switchers, page shells, forms, dashboards, auth flows, ...) built purely from @nebula-lab/react-ui (which owns both the styled components and the token/theme system). The top of the dependency graph — nothing else in this repo depends on it.",
   "license": "MIT",
   "publishConfig": {
