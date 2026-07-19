@@ -1,10 +1,36 @@
 # @nebula-lab/headless
 
-Behavior-only, ARIA-complete compound components. No styling opinions — that's `@nebula-lab/react-ui`'s job (via the new, not-yet-built `@nebula-lab/styleless` middle layer, once it exists — see `LAYER_TAXONOMY.md`), built on top of this package. (This package was renamed `@nebula-lab/headless` → `@nebula-lab/styleless` → back to `@nebula-lab/headless`: the project owner confirmed a 5-tier model where `headless` — this package — and `styleless` — a distinct, new unstyled-but-structurally-complete layer — are two different things, not one renamed package. See `AGENTS.md`'s "Layer placement" section.)
+Behavior-only, ARIA-complete compound components. No styling opinions — that's `@nebula-lab/react-ui`'s job, built on top of this package and `@nebula-lab/styleless`. (This package was renamed `@nebula-lab/headless` → `@nebula-lab/styleless` → back to `@nebula-lab/headless`: the project owner confirmed a 5-tier model where `headless` — this package — and `styleless` — a distinct layer — are two different things, not one renamed package. See `AGENTS.md`'s "Layer placement" section.)
 
-> **Note:** this README predates several components now built in this package (`Tooltip`, `Menu`/`DropdownMenu`/`ContextMenu`/`Menubar`, `Progress`/`Spinner`/`Skeleton`, `Field`/`Select`/`Combobox`, `Slider`/`Rating`/`ColorPicker`/`FileUpload`, `Pagination`/`Stepper`/`Tree`/`NavigationMenu`, `HoverCard`/`Toast`/`Drawer`, `Command`, and more) — see `AGENTS.md`'s status table for the authoritative current inventory.
+## Installation
+
+```bash
+pnpm add @nebula-lab/headless
+```
+
+Peer dependencies: `react ^19.0.0`, `react-dom ^19.0.0`.
 
 ## What's here
+
+Every component below follows its WAI-ARIA APG pattern (roving-tabindex, correct roles/states, full keyboard support) and exposes state via `data-state`/`data-orientation`/`data-disabled` attributes rather than requiring you to track it yourself.
+
+**Overlays** — `Dialog`, `AlertDialog`, `Drawer`, `Popover`, `HoverCard`, `Tooltip`
+
+**Menus** — `Menu`, `DropdownMenu`, `ContextMenu`, `Menubar`, `NavigationMenu`, `Command`
+
+**Disclosure** — `Accordion`, `Collapsible`
+
+**Selection controls** — `Checkbox`, `CheckboxGroup`, `RadioGroup`, `Switch`, `Toggle`, `ToggleGroup`, `Select`, `Listbox`, `Combobox`, `Autocomplete`, `ColorPicker`, `Rating`
+
+**Text/numeric input** — `NumberInput`, `OtpInput`, `Slider`, `FileUpload`, `Field` (label/control/description/error wiring)
+
+**Navigation** — `Tabs`, `Breadcrumb`, `Pagination`, `Stepper`
+
+**Feedback** — `Toast`, `Progress`, `Spinner`, `Skeleton`
+
+**Data** — `Tree`, `TreeView`
+
+See `AGENTS.md`'s status table for the authoritative, currently-maintained inventory as new components land.
 
 - `Tabs` / `TabList` / `Tab` / `TabPanel` — WAI-ARIA Tabs pattern: roving-tabindex arrow-key navigation (Left/Right or Up/Down depending on `orientation`, plus Home/End), `automatic` or `manual` activation mode, controlled or uncontrolled `value`. Nested `Tabs` instances don't collide (scoped context via `@nebula-lab/primitives`).
 - `Checkbox` — tri-state (`checked` / `unchecked` / `indeterminate`), hidden-native-input technique so it participates in real `<form>`/`FormData` submission and fires genuine `click`/`input`/`change` events.
@@ -91,4 +117,14 @@ import {
 </Popover>
 ```
 
-Next up in this layer (not yet built): `Tooltip` — see `component-library-architecture.md` §4.2–§4.3 and `AGENTS.md`'s status table for what's actually built.
+## API reference
+
+Every component here ships with a live Storybook entry (controls, source, interaction tests) — that's the authoritative API reference, not this README: **https://tripathirajan.github.io/nebula/**
+
+## Contributing
+
+See the [monorepo's CONTRIBUTING.md](../../CONTRIBUTING.md).
+
+## License
+
+MIT
