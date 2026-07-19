@@ -70,3 +70,41 @@ Then, for anything visual, start Storybook and check the change live — type ch
 ## Publishing (maintainers only)
 
 Releases go out via the **Publish Package** GitHub Actions workflow (`workflow_dispatch`, manual trigger only) — it versions every package independently with Nx, builds, and publishes to npm under the `@nebula-lab` scope. Not something a regular contributor needs to touch.
+
+**Always dispatch this workflow against the `release` branch, never `main`.** `main`'s branch protection requires a PR review for every push, which `github-actions[bot]` can't satisfy — the workflow's own version-bump commit would be rejected (`GH006: Protected branch update failed`). `release` has no protection rule, so the bot can commit and push its version bumps/tags directly there.
+
+### Cutting a new release
+
+1. Bring `release` up to date with everything merged into `main` since the last release:
+   ```bash
+   git checkout release
+   git pull
+   git merge main
+   git push
+   ```
+2. Trigger the workflow against `release`:
+   ```bash
+   gh workflow run "Publish Package" --ref release -f bump=prerelease -f preid=beta -f tag=beta
+   ```
+   (or `bump=patch`/`minor`/`major` with `tag=latest` for a real, non-prerelease release once the library is ready for one).
+3. **Don't trust a green checkmark alone** — verify the actual published content, not just that the workflow succeeded:
+   ```bash
+   curl -s "https://registry.npmjs.org/@nebula-lab%2Fhooks" | jq '.["dist-tags"], (.versions | keys)'
+   ```
+   and spot-check that the newly-published version's `fileCount`/`unpackedSize` look like a real package (hundreds of files, hundreds of KB+), not a handful of files and a few KB — an empty/broken publish has looked identical to a successful one in this workflow's own logs before.
+4. `release` now has the version-bump commit the bot made — merge it back into `main` so `main`'s `package.json` files don't drift out of sync with what's actually published:
+   ```bash
+   git checkout main
+   git merge release
+   git push
+   ```
+   (`main`'s protection allows a normal PR-based merge here — this is a regular push-to-a-feature-branch-then-PR flow, not the bot pushing directly.)
+
+### Hotfixes
+
+For an urgent fix that needs to ship without waiting for `main`'s next full sync into `release`:
+
+1. Branch off `release` (not `main`): `git checkout -b hotfix/<name> release`.
+2. Make the minimal fix, verify it (`pnpm typecheck && pnpm lint && pnpm test && pnpm build`).
+3. Merge (via PR, following the normal branch protection on whichever base you target) into **both** `release` (to actually ship it) and `main` (so the fix isn't lost the next time `main` gets merged into `release` — otherwise a subsequent `release` sync could silently revert it).
+4. Publish from `release` following the steps above.
