@@ -104,8 +104,13 @@ jobs:
         # each package's own changelog content is still scoped correctly
         # from its own git history regardless. This also creates the git
         # tags nx release version doesn't create on its own (confirmed:
-        # this repo had zero tags before the first real v1.0.0 release).
-        # Doesn't push yet — the next step does that once this succeeds.
+        # this repo had zero tags before the first real v1.0.0 release),
+        # and (via nx.json's release.changelog.projectChangelogs.createRelease
+        # = "github") a real GitHub Release per package tag — needs
+        # GITHUB_TOKEN to call the GitHub API for that. Doesn't push yet —
+        # the next step does that once this succeeds.
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           VERSION=$(node -p "require('./packages/react-ui/package.json').version")
           pnpm nx release changelog "$VERSION" --git-push=false
