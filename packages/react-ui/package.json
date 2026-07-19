@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "description": "Tailwind-powered styled components (atoms) built on @nebula-lab/primitives + @nebula-lab/headless, plus the 3-layer design token system and ThemeProvider/useTheme they're styled from. Absorbed the former @nebula-lab/theme package — nothing else in the workspace needs tokens/theming, only this package's own components do.",
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "author": "Rajan Tripathi <tripathirajan3@gmail.com>",
   "repository": {
     "type": "git",

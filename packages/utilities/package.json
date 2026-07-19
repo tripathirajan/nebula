@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "description": "Framework-agnostic helpers with zero React dependency — the bottom of the nebula dependency graph. Everything else may depend on this; this depends on nothing in the workspace.",
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "author": "Rajan Tripathi <tripathirajan3@gmail.com>",
   "repository": {
     "type": "git",
