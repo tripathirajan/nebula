@@ -1,20 +1,22 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@nebula-lab/react-ui/avatar';
 import { Badge } from '@nebula-lab/react-ui/badge';
 import { Button } from '@nebula-lab/react-ui/button';
+import { Heading } from '@nebula-lab/react-ui/heading';
 import { MenuItem } from '@nebula-lab/react-ui/menu';
+import { Section } from '@nebula-lab/react-ui/section';
 import { Text } from '@nebula-lab/react-ui/text';
 import { useState } from 'react';
 
 import { CardListItem } from '../data-display/card-list-item/card-list-item';
 import { DataTableBlock } from '../data-display/data-table/data-table-block';
-import { PageSection } from '../layouts/page-section/page-section';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
 // Assembled-page story — see saas-dashboard-home.stories.tsx's header
 // comment for the "Assembled Page" pattern (BLOCKS_ARCHITECTURE.md §9).
-// No component of its own — PageSection + DataTableBlock wrapping is the
-// generic entity-list shell §5's own "Table Block" variant note describes:
+// No component of its own — a plain title/description/actions header row
+// over `DataTableBlock` is the generic entity-list shell §5's own "Table
+// Block" variant note describes:
 // swap the column schema and this becomes the Product/Order/Invoice list
 // too, not a bespoke page per entity. `renderCard` demonstrates
 // `DataTableBlock`'s responsive table/card switch — resize the Storybook
@@ -63,11 +65,18 @@ function UserListPage() {
   return (
     <div className="min-h-screen bg-[var(--color-base-200)] p-6">
       <div className="mx-auto max-w-6xl">
-        <PageSection
-          title="User list"
-          description="Manage your team members and their account permissions here."
-          actions={<Button color="primary">New user</Button>}
-        >
+        <Section className="space-y-6">
+          <div className="flex items-start justify-between gap-4">
+            <div>
+              <Heading as="h2" level={3}>
+                User list
+              </Heading>
+              <Text className="mt-1 opacity-70">
+                Manage your team members and their account permissions here.
+              </Text>
+            </div>
+            <Button color="primary">New user</Button>
+          </div>
           <DataTableBlock
             columns={[
               {
@@ -145,7 +154,7 @@ function UserListPage() {
             page={1}
             totalCount={filtered.length}
           />
-        </PageSection>
+        </Section>
       </div>
     </div>
   );

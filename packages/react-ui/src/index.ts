@@ -111,3 +111,5 @@ export * from './markdown';
 export * from './circular-progress';
 export * from './empty-state';
 export * from './bottom-nav';
+export * from './side-nav';
+export * from './logo';

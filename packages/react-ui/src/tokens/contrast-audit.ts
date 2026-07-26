@@ -109,19 +109,24 @@ function buildPairings(theme: SemanticTheme, themeName: string): Pairing[] {
     base,
     primary,
     primaryContent,
+    primaryText,
     secondary,
     secondaryContent,
+    secondaryText,
     accent,
     accentContent,
+    accentText,
     neutral,
     neutralContent,
     info,
     infoContent,
+    infoText,
     success,
     successContent,
     successText,
     warning,
     warningContent,
+    warningText,
     error,
     errorContent,
     errorText,
@@ -156,6 +161,9 @@ function buildPairings(theme: SemanticTheme, themeName: string): Pairing[] {
     { label: `[${themeName}] error on base.100 (inline error text)`, fg: error, bg: base[100], level: 'text' },
     { label: `[${themeName}] success on base.100 (inline success text)`, fg: success, bg: base[100], level: 'text' },
     { label: `[${themeName}] warning on base.100 (inline warning text)`, fg: warning, bg: base[100], level: 'text' },
+    { label: `[${themeName}] secondary on base.100 (raw fill as text — Button ghost/text/link before the fix)`, fg: secondary, bg: base[100], level: 'text' },
+    { label: `[${themeName}] accent on base.100 (raw fill as text — Button ghost/text/link before the fix)`, fg: accent, bg: base[100], level: 'text' },
+    { label: `[${themeName}] info on base.100 (raw fill as text — Button ghost/text/link before the fix)`, fg: info, bg: base[100], level: 'text' },
     {
       label: `[${themeName}] successText on base.100 (trend/status text, e.g. DashboardOverview's trend arrow)`,
       fg: successText,
@@ -169,22 +177,51 @@ function buildPairings(theme: SemanticTheme, themeName: string): Pairing[] {
       level: 'text',
     },
     {
+      label: `[${themeName}] secondaryText on base.100 (Button ghost/text/link color="secondary")`,
+      fg: secondaryText,
+      bg: base[100],
+      level: 'text',
+    },
+    {
+      label: `[${themeName}] accentText on base.100 (Button ghost/text/link color="accent")`,
+      fg: accentText,
+      bg: base[100],
+      level: 'text',
+    },
+    {
+      label: `[${themeName}] infoText on base.100 (Button ghost/text/link color="info")`,
+      fg: infoText,
+      bg: base[100],
+      level: 'text',
+    },
+    {
+      label: `[${themeName}] warningText on base.100 (Button ghost/text/link color="warning")`,
+      fg: warningText,
+      bg: base[100],
+      level: 'text',
+    },
+    {
       label: `[${themeName}] base.300 on base.100 (default divider/border)`,
       fg: base[300],
       bg: base[100],
       level: 'ui',
     },
-    // No `primary`-on-`base.100` pairing here — recomputed directly (not
-    // just inferred from `primaryContent on primary` above): 14.82:1 in
-    // light mode, 3.97:1 in dark, both clearing the 3:1 non-text minimum
-    // with room to spare. `Button` still rings every color in
-    // `base.content` regardless (see its own doc comment) — a uniform,
-    // always-safe ring across every `color` value, not a workaround for
-    // `primary` specifically, since several *other* colors genuinely do
-    // fail as a standalone ring (see `error`/`success`/`warning`-on-
-    // `base.100` below). A `primary`-on-`base.100` entry would just
-    // duplicate what `primaryContent on primary` already establishes about
-    // `primary`'s lightness, so it's omitted rather than added back.
+    // Reskin-era pairings — `primary` is now theme-independent (one
+    // measured blue, both modes; see `primitive.ts`'s own comment on why),
+    // adjusted from the source kit's raw #078DEE specifically because it
+    // failed this exact check (3.47:1 with white `primaryContent`).
+    {
+      label: `[${themeName}] primary on base.100 (raw fill as text, pre-primaryText-fix check)`,
+      fg: primary,
+      bg: base[100],
+      level: 'text',
+    },
+    {
+      label: `[${themeName}] primaryText on base.100 (Button ghost/text/link color="primary", active SideNavItem text)`,
+      fg: primaryText,
+      bg: base[100],
+      level: 'text',
+    },
   ];
 }
 

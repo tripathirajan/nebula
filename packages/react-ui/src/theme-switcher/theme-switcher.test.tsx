@@ -27,7 +27,7 @@ beforeEach(() => {
 });
 
 describe('ThemeSwitcher (block)', () => {
-  it('renders a labeled group with Light/Dark/System buttons', () => {
+  it('defaults to variant="icon": a labeled group of icon-only Light/Dark/System buttons', () => {
     render(
       <ThemeProvider>
         <ThemeSwitcher />
@@ -65,38 +65,6 @@ describe('ThemeSwitcher (block)', () => {
     const { container } = render(
       <ThemeProvider>
         <ThemeSwitcher />
-      </ThemeProvider>,
-    );
-    expect(await axe(container)).toHaveNoViolations();
-  });
-
-  it('renders an icon-only toggle group with variant="icon"', () => {
-    render(
-      <ThemeProvider>
-        <ThemeSwitcher variant="icon" />
-      </ThemeProvider>,
-    );
-    expect(screen.getByRole('group', { name: 'Theme' })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'Light' })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'Dark' })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'System' })).toBeInTheDocument();
-  });
-
-  it('icon variant moves the pressed state on click', async () => {
-    const user = userEvent.setup();
-    render(
-      <ThemeProvider>
-        <ThemeSwitcher variant="icon" />
-      </ThemeProvider>,
-    );
-    await user.click(screen.getByRole('button', { name: 'Dark' }));
-    expect(screen.getByRole('button', { name: 'Dark' })).toHaveAttribute('aria-pressed', 'true');
-  });
-
-  it('icon variant has no axe violations', async () => {
-    const { container } = render(
-      <ThemeProvider>
-        <ThemeSwitcher variant="icon" />
       </ThemeProvider>,
     );
     expect(await axe(container)).toHaveNoViolations();

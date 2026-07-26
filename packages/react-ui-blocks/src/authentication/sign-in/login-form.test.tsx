@@ -59,4 +59,37 @@ describe('LoginForm (block)', () => {
     const { container } = render(<LoginForm error="Invalid email or password" />);
     expect(await axe(container)).toHaveNoViolations();
   });
+
+  it('card={false} renders the same fields with no Card wrapper', () => {
+    const { container } = render(<LoginForm card={false} />);
+    expect(screen.getByRole('heading', { name: 'Sign in' })).toBeInTheDocument();
+    expect(screen.getByLabelText('Email')).toBeInTheDocument();
+    expect(screen.getByLabelText('Password')).toBeInTheDocument();
+    // Card's own root class — its absence is the real signal `card={false}`
+    // actually skipped the wrapper, not just a generic "no 'card' substring"
+    // check (this form's own text intentionally reuses `--card-text` for
+    // color consistency even without the wrapper).
+    expect(container.querySelector('[class*="radius-card"]')).toBeNull();
+  });
+
+  it('card={false} still calls onSubmit with the current field values', async () => {
+    const user = userEvent.setup();
+    const onSubmit = vi.fn();
+    render(<LoginForm card={false} onSubmit={onSubmit} />);
+
+    await user.type(screen.getByLabelText('Email'), 'jane@example.com');
+    await user.type(screen.getByLabelText('Password'), 'hunter2');
+    await user.click(screen.getByRole('button', { name: 'Sign in' }));
+
+    expect(onSubmit).toHaveBeenCalledWith({
+      email: 'jane@example.com',
+      password: 'hunter2',
+      remember: false,
+    });
+  });
+
+  it('card={false} has no axe violations', async () => {
+    const { container } = render(<LoginForm card={false} error="Invalid email or password" />);
+    expect(await axe(container)).toHaveNoViolations();
+  });
 });

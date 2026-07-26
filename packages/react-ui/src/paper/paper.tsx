@@ -12,6 +12,11 @@ import type { VariantProps } from 'class-variance-authority';
  * `variant="elevation"` renders a shadow (depth controlled by `elevation`)
  * and no border. `elevation={0}` under the default `"elevation"` variant is
  * the flat/borderless look (no shadow, no border).
+ *
+ * Same real per-theme shadow tokens `Card` uses (`--card-shadow`/
+ * `--shadow-anchored`/`--shadow-modal`) rather than Tailwind's generic grey
+ * `shadow-sm`/`md`/`lg` — `Paper` and `Card` are the same visual surface,
+ * so they should shadow identically.
  */
 const paperVariants = cva('rounded-[var(--radius-card)] bg-[var(--paper-bg)] text-[var(--paper-text)]', {
   variants: {
@@ -21,9 +26,9 @@ const paperVariants = cva('rounded-[var(--radius-card)] bg-[var(--paper-bg)] tex
     },
     elevation: {
       0: 'shadow-none',
-      1: 'shadow-sm',
-      2: 'shadow-md',
-      3: 'shadow-lg',
+      1: 'shadow-[var(--card-shadow)]',
+      2: 'shadow-[var(--shadow-anchored)]',
+      3: 'shadow-[var(--shadow-modal)]',
     },
   },
   compoundVariants: [

@@ -98,6 +98,11 @@ const cardTokens = {
   bg: 'var(--color-base-100)',
   border: 'var(--color-base-300)',
   text: 'var(--color-base-content)',
+  // New — Card had no shadow at all before this reskin (see the design
+  // doc's §Shadows: a flat `border`-only look wasn't a deliberate choice,
+  // just never speced). Applied in `card.tsx`'s `cardVariants` via
+  // `shadow-[var(--card-shadow)]` at `elevation={1}` (the default).
+  shadow: 'var(--shadow-card)',
 } as const;
 
 /** All eight semantic color roles — unlike `Button` (3 variants), `Badge` is meant to show off the full palette. */
@@ -161,7 +166,7 @@ const tooltipTokens = {
 const tabsTokens = {
   listBorder: 'var(--color-base-300)',
   triggerText: 'var(--color-base-content)',
-  triggerActiveText: 'var(--color-primary)',
+  triggerActiveText: 'var(--color-primary-text)',
   triggerActiveBorder: 'var(--color-primary)',
 } as const;
 
@@ -267,7 +272,7 @@ const navigationMenuTokens = {
   triggerHoverBg: 'var(--color-base-200)',
   contentBg: 'var(--color-base-100)',
   contentBorder: 'var(--color-base-300)',
-  linkActiveText: 'var(--color-primary)',
+  linkActiveText: 'var(--color-primary-text)',
 } as const;
 
 const drawerTokens = {
@@ -381,7 +386,7 @@ const menubarTokens = {
 
 const breadcrumbTokens = {
   text: 'var(--color-base-content)',
-  linkHoverText: 'var(--color-primary)',
+  linkHoverText: 'var(--color-primary-text)',
   currentText: 'var(--color-base-content)',
 } as const;
 
@@ -415,7 +420,7 @@ const sliderTokens = {
 const fieldTokens = {
   labelText: 'var(--color-base-content)',
   descriptionText: 'var(--color-base-content)',
-  errorText: 'var(--color-error)',
+  errorText: 'var(--color-error-text)',
 } as const;
 
 /** Same `base-content`/`primary`-adjacent "filled when active" treatment `paginationTokens`'s active link and `stepperTokens`'s active indicator use. */
@@ -465,14 +470,52 @@ const navbarTokens = {
  * `bg`/`border` are the tab-bar's own chrome (same `base-100`/`base-300`
  * surface pairing `navbarTokens` uses); `itemText`/`itemActiveText` mirror
  * `tabsTokens.triggerText`/`triggerActiveText` — the inactive-vs-active
- * text-color pair every other tab-like component in this package already
- * uses `primary` for.
+ * text-color pair every other tab-like component in this package uses
+ * `primary-text` (not raw `primary`) for — `primary` itself is a
+ * theme-independent fill tuned for a white `primary-content` on top of it,
+ * not for use as text directly on `base-100`: it fails WCAG 1.4.3 in dark
+ * mode (3.44:1, needs 4.5:1 — see `tokens/contrast-audit.ts`'s "raw fill as
+ * text, pre-primaryText-fix check" entry). `primary-text` is the same hue,
+ * lightened for dark mode, built for exactly this role.
  */
 const bottomNavTokens = {
   bg: 'var(--color-base-100)',
   border: 'var(--color-base-300)',
   itemText: 'var(--color-base-content)',
-  itemActiveText: 'var(--color-primary)',
+  itemActiveText: 'var(--color-primary-text)',
+  // Same "ghost button" tint pattern `sideNavTokens` uses (12% at rest,
+  // 20% on hover) — an active `BottomNavItem` previously only changed text
+  // color with no background at all; this brings it in line with
+  // `SideNavItem`'s active treatment instead of the two nav components
+  // reading differently for the same "current page" state.
+  itemHoverBg: 'var(--color-base-200)',
+  itemActiveBg: 'color-mix(in oklch, var(--color-primary) 12%, transparent)',
+  itemActiveHoverBg: 'color-mix(in oklch, var(--color-primary) 20%, transparent)',
+} as const;
+
+/**
+ * Renders inside `Sidebar`, which already supplies the surrounding
+ * `bg`/`border`/`text` triple — `SideNav`/`SideNavItem`/`SideNavGroup` only
+ * need their own item-state colors, not a second surface triple. `itemActiveBg`
+ * is the same low-opacity `primary` tint `listTokens.itemSelectedBg` uses (a
+ * "tinted pill" affordance, not a solid fill, so it doesn't compete visually
+ * with `Sidebar`'s own surface); `itemActiveText` reads `primary-text` (not
+ * raw `primary`) for the same WCAG 1.4.3 reason `bottomNavTokens.itemActiveText`
+ * above documents — `primary` alone fails as text in dark mode (3.44:1).
+ */
+const sideNavTokens = {
+  itemText: 'var(--color-base-content)',
+  itemHoverBg: 'var(--color-base-200)',
+  itemActiveBg: 'color-mix(in oklch, var(--color-primary) 12%, transparent)',
+  itemActiveText: 'var(--color-primary-text)',
+  // Same "ghost button" rest->hover jump `buttonVariants`' `ghost` variant
+  // uses (10% -> 20% tint) — an active `SideNavItem`, hovered, deepens its
+  // own colored tint rather than switching to the neutral `itemHoverBg`
+  // (which previously applied unconditionally, so hovering the active item
+  // showed a plain grey fill fighting the colored active state instead of
+  // reading as "the same ghost affordance, one step darker").
+  itemActiveHoverBg: 'color-mix(in oklch, var(--color-primary) 20%, transparent)',
+  groupLabelText: 'var(--color-base-content)',
 } as const;
 
 /** No border/radius — the plainest possible themed background, one step below `Card`/`Paper`. */
@@ -544,7 +587,7 @@ const listTokens = {
   itemHoverBg: 'var(--color-base-200)',
   /** `ListItemButton[data-selected]`'s fill/text — a low-opacity tint of `primary` plus the solid hue as text, the same "tinted badge" pairing `DashboardMetric`'s icon badges use, so a selected list row and a colored stat icon read as the same "primary, softened" affordance. */
   itemSelectedBg: 'color-mix(in oklch, var(--color-primary) 12%, transparent)',
-  itemSelectedText: 'var(--color-primary)',
+  itemSelectedText: 'var(--color-primary-text)',
 } as const;
 
 /** `DescriptionTerm`/`DescriptionDetails` read separate tokens even though both currently resolve to `base-content` — kept independently themeable per the per-component indirection rule, same as `Header`/`Footer`/`Sidebar` all sharing one triple. */
@@ -711,6 +754,7 @@ const componentTokens = {
   sidebar: sidebarTokens,
   navbar: navbarTokens,
   bottomNav: bottomNavTokens,
+  sideNav: sideNavTokens,
   surface: surfaceTokens,
   paper: paperTokens,
   text: textTokens,
@@ -782,6 +826,7 @@ export {
   sidebarTokens,
   navbarTokens,
   bottomNavTokens,
+  sideNavTokens,
   surfaceTokens,
   paperTokens,
   textTokens,

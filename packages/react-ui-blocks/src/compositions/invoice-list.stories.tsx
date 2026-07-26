@@ -1,20 +1,22 @@
 import { Badge } from '@nebula-lab/react-ui/badge';
 import { Button } from '@nebula-lab/react-ui/button';
+import { Heading } from '@nebula-lab/react-ui/heading';
 import { MenuItem } from '@nebula-lab/react-ui/menu';
+import { Section } from '@nebula-lab/react-ui/section';
 import { Text } from '@nebula-lab/react-ui/text';
 import { useState } from 'react';
 
 import { DataTableBlock } from '../data-display/data-table/data-table-block';
-import { PageSection } from '../layouts/page-section/page-section';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
 // Assembled-page story — see saas-dashboard-home.stories.tsx's header
 // comment for the "Assembled Page" pattern (BLOCKS_ARCHITECTURE.md §9). No
 // component of its own — structurally identical to user-list.stories.tsx's
-// own PageSection+DataTableBlock shell, per BLOCKS_ARCHITECTURE.md §5's own
-// "Table Block" variant note: only the column schema and status vocabulary
-// change between an entity list and an invoice list, not the shape.
+// own title/description/actions + `DataTableBlock` shell, per
+// BLOCKS_ARCHITECTURE.md §5's own "Table Block" variant note: only the
+// column schema and status vocabulary change between an entity list and an
+// invoice list, not the shape.
 const meta = {
   title: 'Blocks/Compositions/Invoice List',
   tags: ['autodocs'],
@@ -64,11 +66,18 @@ function InvoiceListPage() {
   return (
     <div className="min-h-screen bg-[var(--color-base-200)] p-6">
       <div className="mx-auto max-w-6xl">
-        <PageSection
-          title="Invoices"
-          description="Track billing status and payment due dates across every client."
-          actions={<Button color="primary">New invoice</Button>}
-        >
+        <Section className="space-y-6">
+          <div className="flex items-start justify-between gap-4">
+            <div>
+              <Heading as="h2" level={3}>
+                Invoices
+              </Heading>
+              <Text className="mt-1 opacity-70">
+                Track billing status and payment due dates across every client.
+              </Text>
+            </div>
+            <Button color="primary">New invoice</Button>
+          </div>
           <DataTableBlock
             columns={[
               {
@@ -126,7 +135,7 @@ function InvoiceListPage() {
             page={1}
             totalCount={filtered.length}
           />
-        </PageSection>
+        </Section>
       </div>
     </div>
   );

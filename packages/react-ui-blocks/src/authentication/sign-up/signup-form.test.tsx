@@ -65,4 +65,16 @@ describe('SignupForm (block)', () => {
     const { container } = render(<SignupForm error="Email already in use" />);
     expect(await axe(container)).toHaveNoViolations();
   });
+
+  it('card={false} renders the same fields with no Card wrapper', () => {
+    const { container } = render(<SignupForm card={false} />);
+    expect(screen.getByText('Create an account')).toBeInTheDocument();
+    expect(screen.getByLabelText('Name')).toBeInTheDocument();
+    expect(container.querySelector('[class*="radius-card"]')).toBeNull();
+  });
+
+  it('card={false} has no axe violations', async () => {
+    const { container } = render(<SignupForm card={false} error="Email already in use" />);
+    expect(await axe(container)).toHaveNoViolations();
+  });
 });

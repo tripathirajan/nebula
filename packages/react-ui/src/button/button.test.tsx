@@ -25,6 +25,21 @@ describe('Button (ui)', () => {
     expect(button.className).toContain('h-12'); // lg size
   });
 
+  it('defaults to shape="rounded" (--radius-button)', () => {
+    render(<Button>Save</Button>);
+    expect(screen.getByRole('button', { name: 'Save' }).className).toContain(
+      'rounded-[var(--radius-button)]',
+    );
+  });
+
+  it('shape="pill" renders fully rounded, shape="square" renders no rounding', () => {
+    const { rerender } = render(<Button shape="pill">Save</Button>);
+    expect(screen.getByRole('button', { name: 'Save' }).className).toContain('rounded-full');
+
+    rerender(<Button shape="square">Save</Button>);
+    expect(screen.getByRole('button', { name: 'Save' }).className).toContain('rounded-none');
+  });
+
   it('ghost variant renders a colored border with no filled background', () => {
     render(
       <Button variant="ghost" color="danger">
@@ -61,7 +76,7 @@ describe('Button (ui)', () => {
     );
     const button = screen.getByRole('button', { name: 'Learn more' });
     const classes = button.className.split(' ');
-    expect(classes).toContain('text-[var(--button-primary-border)]');
+    expect(classes).toContain('text-[var(--color-primary-text)]');
     expect(classes).toContain('border-transparent');
     // Only the hover-only tinted fill should be present, not a base bg class.
     expect(classes).not.toContain('bg-[var(--button-primary-bg)]');
@@ -75,7 +90,7 @@ describe('Button (ui)', () => {
     );
     const button = screen.getByRole('button', { name: 'Learn more' });
     expect(button.className).toContain('hover:underline');
-    expect(button.className).toContain('text-[var(--button-primary-border)]');
+    expect(button.className).toContain('text-[var(--color-primary-text)]');
   });
 
   it('ghost + neutral reproduces the old colorless "Google sign-in" look, not the secondary hue', () => {

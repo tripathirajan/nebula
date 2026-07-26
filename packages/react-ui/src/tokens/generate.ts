@@ -94,10 +94,16 @@ function toCssBlock(selector: string, entries: [string, string][], indent = ''):
 const lightEntries: [string, string][] = [
   ['color-scheme', semanticTokens.light.colorScheme],
   ...flatten(semanticTokens.light.color, ['color']),
+  // `elevation` is theme-aware (colored shadows differ light/dark — see
+  // primitive.ts's own comment on why), so it's flattened per-theme
+  // alongside `color` rather than with the theme-independent "shape"
+  // groups (`radius`/`size`/etc.) below.
+  ...flatten(semanticTokens.light.elevation, ['shadow']),
 ];
 const darkEntries: [string, string][] = [
   ['color-scheme', semanticTokens.dark.colorScheme],
   ...flatten(semanticTokens.dark.color, ['color']),
+  ...flatten(semanticTokens.dark.elevation, ['shadow']),
 ];
 const componentEntries = flatten(componentTokens);
 

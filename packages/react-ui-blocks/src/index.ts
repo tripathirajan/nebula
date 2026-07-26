@@ -9,11 +9,6 @@
 // organisms only (see each component's own doc comment for the full
 // reasoning).
 export * from './navigation/headers';
-export * from './layouts/app-layout';
-export * from './layouts/auth-layout';
-export * from './layouts/dashboard-layout';
-export * from './layouts/settings-layout';
-export * from './layouts/page-section';
 export * from './forms/transaction-form';
 export * from './forms/entity-form-layout';
 export * from './data-display/data-table';

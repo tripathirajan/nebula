@@ -24,90 +24,185 @@
 const color = {
   base: {
     light100: 'oklch(100% 0 29.234)',
-    light200: 'oklch(98% 0.003 247.858)',
+    light200: 'oklch(98.12% 0.0034 247.858)',
     light300: 'oklch(92% 0.004 286.32)',
-    lightContent: 'oklch(21% 0.006 285.885)',
-    dark100: 'oklch(27% 0.041 260.031)',
-    dark200: 'oklch(20% 0.042 265.755)',
-    dark300: 'oklch(12% 0.042 264.695)',
+    // Was 'oklch(21% 0.006 285.885)' — 17.73:1 against white, effectively
+    // flat black with negligible chroma. Softened to the same soft
+    // charcoal-blue family the dark-tier trio above uses (reusing
+    // `dark100`'s own value) — 15.52:1 against white, still far past AAA's
+    // 7:1, just no longer "the darkest possible black" the project owner
+    // flagged directly.
+    lightContent: 'oklch(25.99% 0.0213 248.655)',
+    // Dark-tier trio provided directly by the project owner as real RGB
+    // values (rgb(28,37,46) / rgb(20,26,33) / rgb(40,50,61)), converted to
+    // OKLCH via the same sRGB->linear->OKLab pipeline `contrast-audit.ts`
+    // uses in reverse — not hand-approximated. Supersedes the earlier
+    // `dark200` fix (widening the gap from `dark100` so Card wasn't the
+    // literal same fill as the page canvas in dark mode, see git history) —
+    // these three values already have real, distinct separation from each
+    // other by construction, so that fix's specific numbers are moot, but
+    // the underlying wiring it depended on (page canvas -> base-200, Card
+    // -> base-100) is unchanged and still required.
+    dark100: 'oklch(25.99% 0.0213 248.655)',
+    dark200: 'oklch(21.50% 0.0165 252.504)',
+    dark300: 'oklch(31.26% 0.0241 251.039)',
     darkContent: 'oklch(97.807% 0.029 256.847)',
   },
-  primary: {
-    light: 'oklch(28% 0.091 267.935)',
-    dark: 'oklch(62% 0.214 259.815)',
+  // Second reskin pass — palette swapped to match a new reference style
+  // guide (Primary #5A6FFA / Secondary #2C3D9F, provided directly). Neither
+  // hex is used verbatim:
+  //
+  // - `#5A6FFA` (oklch 60.26% 0.2069 272.161) fails WCAG 1.4.3 with white
+  //   button text (4.13:1, needs 4.5:1 — same class of failure the first
+  //   reskin pass's `primary` hit, verified the same way, not eyeballed).
+  // - Separately, the project owner asked for "decent tone... not high
+  //   contrast or high saturated color" — `0.2069` chroma is a fairly vivid
+  //   violet-blue. Rather than only fixing contrast (darken-only would keep
+  //   the full saturation), chroma is cut to `0.12` (~42% reduction) *and*
+  //   lightness adjusted for contrast — a muted slate-indigo, not the
+  //   source's vivid periwinkle. Confirmed with the project owner (picked
+  //   from 3 computed options) before landing, same confirm-before-landing
+  //   discipline the first reskin pass's `primary` decision used.
+  //
+  // Result: oklch(55.75% 0.12 272.161) / #5C6DBA, 4.81:1 with white.
+  primary: 'oklch(55.75% 0.12 272.161)',
+  primaryContent: 'oklch(100% 0 0)',
+  // For `primary` used as *inline text on base.100* (links, active
+  // `SideNavItem` text, `Button`'s `ghost`/`text`/`link` variants). Light
+  // reuses `primary` itself (4.81:1 vs white — already computed above).
+  // Dark needs a brighter step since `primary`'s 55.75% lightness only
+  // reads ~4:1 against dark-mode `base.100` — reuses the ramp's own
+  // `light` step below (10.37:1 against `base.dark200`).
+  // `light` is darkened below `primary` itself (55.75% -> 48%), not equal
+  // to it — real bug caught by Storybook's a11y addon on `SideNavItem`'s
+  // active state: `primaryText.light` used to just equal `primary`, which
+  // clears 4.5:1 against pure white `base.100` (4.81:1) but NOT against the
+  // 12% `color-mix(in oklch, primary, transparent)` tinted background
+  // `SideNavItem`/`Button`'s `ghost` variant actually render behind this
+  // text (axe measured 4.16:1 there) — `contrast-audit.ts`'s token-level
+  // check only ever verified against plain `base.100`, the same class of
+  // gap `primary-text`'s `Button` ghost fix hit earlier. Darkened with
+  // real margin against the tinted case, not just barely clearing it.
+  primaryText: {
+    light: 'oklch(48% 0.12 272.161)',
+    dark: 'oklch(80.44% 0.075 272.161)',
   },
-  // `light` keeps the source theme's near-white value — `primary.light`'s
-  // 28% lightness is dark enough to support it (14.06:1). `dark` can't
-  // reuse it: `primary.dark` is a much brighter 62%-lightness blue, so
-  // near-white text on it only clears ~3.6:1 (fails WCAG 1.4.3's 4.5:1; see
-  // `CONTRAST_AUDIT.md`, re-run after `primary` was split into a `{ light,
-  // dark }` pair). Fixed the same way this theme's `success`/`warning`/
-  // `error` `-Content` pairs and `accentContent` below are: a low-lightness,
-  // low-chroma shade *of the fill's own hue* rather than a generic
-  // near-black, so filled buttons/badges still read as "on-brand" rather
-  // than tinted gray. 5.12:1 against `primary.dark`.
-  primaryContent: {
-    light: 'oklch(98% 0.014 180.72)',
-    dark: 'oklch(16% 0.05 259.815)',
+  // Full lightest→darkest ramp, regenerated at the new hue (272.161) so it
+  // stays a coherent family with `primary` above rather than keeping the
+  // old hue (250.999) the previous palette's ramp was measured at.
+  // Lightness steps carried over unchanged from the first reskin pass's
+  // ramp shape; chroma tapered down at both extremes (same "muted, not
+  // vivid" instruction `primary` itself follows) rather than held flat.
+  primaryLightest: 'oklch(95.17% 0.026 272.161)',
+  primaryLighter: 'oklch(87.72% 0.055 272.161)',
+  primaryLight: 'oklch(80.44% 0.075 272.161)',
+  primaryDark: 'oklch(45.00% 0.14 272.161)',
+  primaryDarker: 'oklch(35.74% 0.11 272.161)',
+  primaryDarkest: 'oklch(26.75% 0.075 272.161)',
+  // Style guide's Secondary (`#2C3D9F`, oklch 41.04% 0.1593 270.208) — a
+  // full hue swap from the previous palette's orange-hued secondary
+  // (hue 58.318), per "follow this color scheme." Chroma cut to `0.11`
+  // (from `0.1593`) for the same "decent tone" reason `primary`'s chroma
+  // was cut, lightness held at the source's own 41.04% (already dark
+  // enough that no contrast-driven adjustment was needed).
+  // Result: oklch(41.04% 0.11 270.208) / #344586.
+  secondary: 'oklch(41.04% 0.11 270.208)',
+  // White passes easily against the new secondary (9.02:1) — secondary is
+  // dark enough on its own, unlike the old orange-hued secondary which
+  // needed a dedicated dark shade here.
+  secondaryContent: 'oklch(100% 0 0)',
+  // For `secondary` used as *inline text on base.100* — light reuses
+  // `secondary` itself (9.02:1 vs `base.100`, same reasoning `primaryText`
+  // above uses). Dark needs a lighter step for legibility against
+  // `base.dark200` — 12.03:1, comfortable margin.
+  secondaryText: {
+    light: 'oklch(41.04% 0.11 270.208)',
+    dark: 'oklch(85% 0.08 270.208)',
   },
-  secondary: 'oklch(66% 0.179 58.318)',
-  // Was a near-white `{ light, dark }` pair (`oklch(98%.../93%...)`) —
-  // both failed WCAG 1.4.3 against `secondary` (3.09:1/2.66:1; see
-  // `CONTRAST_AUDIT.md`, re-run after `secondary`'s value changed and this
-  // pairing was never rechecked). `secondary` itself is one shared value in
-  // both themes, so — same fix pattern as `accentContent` — this collapses
-  // to a single low-lightness, low-chroma shade of `secondary`'s own hue.
-  // 5.35:1 against `secondary`.
-  secondaryContent: 'oklch(22% 0.05 58.318)',
   accent: 'oklch(65% 0.241 354.308)',
   // Same fix and reasoning as `primaryContent` above — the source theme's
   // `oklch(97%.../94%...)` near-white pair failed at 3.35:1/3.05:1 against
   // `accent`. 5.00:1 against `accent`.
   accentContent: 'oklch(20% 0.05 354.308)',
+  // Same role/reasoning as `secondaryText` above — raw `accent` fails as
+  // text in both themes (3.67:1 light, 4.11:1 dark), so both need a
+  // dedicated shade, not just light. 14.40:1 light / 6.85:1 dark against
+  // `base.100`.
+  accentText: {
+    light: 'oklch(30% 0.12 354.308)',
+    dark: 'oklch(80% 0.18 354.308)',
+  },
   neutral: {
     light: 'oklch(44% 0.043 257.281)',
     lightContent: 'oklch(98% 0 0)',
     dark: 'oklch(96% 0.003 264.542)',
     darkContent: 'oklch(27% 0.033 256.848)',
   },
-  info: 'oklch(74% 0.16 232.661)',
-  infoContent: 'oklch(29% 0.066 243.157)',
-  success: {
-    light: 'oklch(79% 0.209 151.711)',
-    lightContent: 'oklch(26% 0.065 152.934)',
-    dark: 'oklch(76% 0.177 163.223)',
-    darkContent: 'oklch(37% 0.077 168.94)',
+  // Nebula-reskin semantic palette — `main` values measured live off real
+  // status chips (banking table, both themes) or (`info`) inferred from the
+  // source kit's conventional light-blue info role, per the reskin doc's
+  // §Color. `Content` (text-on-fill) values are NOT the source kit's own —
+  // white fails badly against every one of these fills (info 2.37:1,
+  // success 2.28:1, warning 1.90:1, error 3.17:1; verified the same way the
+  // `primary` adjustment above was), so each gets a real, computed dark
+  // same-hue shade instead, continuing this theme's own pre-existing
+  // pattern (the old `successContent`/`warningContent`/`errorContent`
+  // values below were already dark, non-white shades before this reskin —
+  // this isn't a new technique, just corrected math for new hues).
+  info: 'oklch(72.15% 0.1287 216.761)',
+  infoContent: 'oklch(30.89% 0.0575 222.858)',
+  // For `info` used as *inline text on base.100* — same role
+  // `successText`/`errorText`/etc. serve. Raw `info` fails in light mode
+  // (2.37:1) exactly like every other fill above, passes comfortably in
+  // dark (7.39:1) — reuses `infoContent`'s already-computed dark shade for
+  // light mode (same target: dark, same-hue, legible on white) rather than
+  // deriving a third value that would land in the same place anyway.
+  infoText: {
+    light: 'oklch(30.89% 0.0575 222.858)',
+    dark: 'oklch(72.15% 0.1287 216.761)',
   },
-  warning: 'oklch(85% 0.199 91.936)',
-  warningContent: {
-    light: 'oklch(28% 0.066 53.813)',
-    dark: 'oklch(42% 0.095 57.708)',
-  },
-  error: {
-    light: 'oklch(70% 0.191 22.216)',
-    lightContent: 'oklch(25% 0.092 26.042)',
-    dark: 'oklch(71% 0.194 13.428)',
-    darkContent: 'oklch(27% 0.105 12.094)',
-  },
-  // For `success`/`error` used as *inline text on `base.100`* (a trend
-  // arrow's "+2.6%", not a filled badge) — a distinct pairing from
-  // `-Content` above (that's for text *on the fill*). `success`/`error`
-  // themselves fail WCAG 1.4.3 as light-mode text (`CONTRAST_AUDIT.md`
-  // documented this as a known, deliberately-unfixed gap until something
-  // actually needed it — `DashboardOverview`'s `trend` prop now does).
-  // `dark` mode already passes using the existing fill color directly (a
-  // bright, saturated hue reads fine against dark-mode's near-black
-  // `base.100`), so only `light` needed a real new value: a dark,
-  // low-chroma shade of the same hue, same pattern as `primaryContent`/
-  // `secondaryContent`/`accentContent`. 13.21:1 / 14.22:1 against
-  // `base.light100`.
+  success: 'oklch(72.27% 0.1920 149.579)',
+  successContent: 'oklch(30.62% 0.0960 145.103)',
   successText: {
-    light: 'oklch(30% 0.065 151.711)',
-    dark: 'oklch(76% 0.177 163.223)',
+    light: 'oklch(30.62% 0.0960 145.103)',
+    dark: 'oklch(72.27% 0.1920 149.579)',
   },
+  warning: 'oklch(80.34% 0.1704 73.788)',
+  warningContent: 'oklch(30.10% 0.0721 57.955)',
+  // Raw `warning` is the worst offender of the four measured this session —
+  // 1.90:1 with white as `Content`, 1.90:1 as light-mode inline text (same
+  // fill, same failure). Dark mode passes at 9.24:1 either way.
+  warningText: {
+    light: 'oklch(30.10% 0.0721 57.955)',
+    dark: 'oklch(80.34% 0.1704 73.788)',
+  },
+  error: 'oklch(67.90% 0.2114 34.020)',
+  // 5.01:1 against `error` — deliberately darker than the first candidate
+  // tried (4.51:1, too thin a margin to check in given every other pairing
+  // in this file lands 5:1+).
+  errorContent: 'oklch(26.40% 0.0990 32.399)',
   errorText: {
-    light: 'oklch(30% 0.092 22.216)',
-    dark: 'oklch(71% 0.194 13.428)',
+    light: 'oklch(26.40% 0.0990 32.399)',
+    dark: 'oklch(67.90% 0.2114 34.020)',
+  },
+  // 9-step neutral scale, theme-independent (one set of greys, `base.*`
+  // above decides which end of it each theme's page/card/text roles pull
+  // from). Deliberately NOT MUI's stock neutral grey — derived from
+  // `#919EAB`, the same blue-tinted anchor `base.dark100`'s divider and
+  // `text.secondary` (`base.lightContent`'s sibling role, see `semantic.ts`)
+  // already key off. Using stock neutral grey here would visibly clash with
+  // those already-real, already-shipped tokens.
+  grey: {
+    50: 'oklch(99.33% 0.0011 197.139)',
+    100: 'oklch(98.12% 0.0034 247.858)',
+    200: 'oklch(92.91% 0.0069 247.899)',
+    300: 'oklch(85.04% 0.0131 244.281)',
+    400: 'oklch(69.32% 0.0242 248.177)',
+    500: 'oklch(54.74% 0.0291 244.757)',
+    600: 'oklch(42.34% 0.0238 253.084)',
+    700: 'oklch(25.99% 0.0213 248.655)',
+    800: 'oklch(21.50% 0.0165 252.504)',
+    900: 'oklch(16.65% 0.0124 254.168)',
   },
 } as const;
 
@@ -115,32 +210,49 @@ const color = {
  * Per-component corner radius — a fixed value per component *role* rather
  * than a numeric scale (DaisyUI's convention), so a consumer can dial in
  * "pill-shaped buttons but square cards" by overriding one custom property
- * without touching any others. All default to the same value here (a fully
- * rounded/pill look); see `component.ts` for how these become CSS vars.
+ * without touching any others. See `component.ts` for how these become CSS
+ * vars.
+ *
+ * `card`/`button`/`field`/`popover`/`dialog`/`avatar` below are reskinned
+ * per the design doc's §Shape — real values measured off the source kit
+ * (card/button), or deliberately aligned to one of those two so adjacent
+ * surfaces don't visually clash (field matches button; dialog matches
+ * card; avatar becomes a true circle, not a large pill radius). Everything
+ * else (`selector`/`box`/`menu`/`tooltip`/`progress`) is unchanged — not
+ * measured against the source kit, left as-is rather than guessed.
  */
 const radius = {
   selector: '2rem',
-  field: '1rem',
+  // Aligned to `button`, not left at the old `1rem` — inputs and buttons
+  // sit side-by-side in every real form, and a mismatched radius between
+  // them reads as an error, not a style choice.
+  field: '0.5rem',
   box: '2rem',
-  button: '2rem',
-  card: '2rem',
-  dialog: '2rem',
+  button: '0.5rem',
+  card: '1rem',
+  // Matches `card` — a dialog is a card that floats (see `elevation.modal`
+  // below, which now shares `card`'s shadow family too).
+  dialog: '1rem',
   badge: '2rem',
   chip: '2rem',
-  avatar: '2rem',
+  // True circle, not a large pill radius — visually distinct from
+  // `badge`/`chip`'s pill at small sizes even though both render as
+  // `border-radius: 2rem` today; `50%` is the correct value regardless of
+  // the element's own size, `2rem` only reads as circular by coincidence
+  // at the specific sizes `Avatar` happens to use.
+  avatar: '50%',
   menu: '2rem',
   // Deliberately smaller than every other role here: `--radius-popover`
   // backs every floating list/panel surface (`Popover`, `Menu` and its
   // `ContextMenu`/`Menubar`/`DropdownMenu` variants, `Combobox`, `Select`,
   // `MultiSelect`, `HoverCard` — see each `*-content.tsx`'s
   // `rounded-[var(--radius-popover)]`), all of which pad their content by
-  // only `p-1`. At the same pill radius as `button`/`card`/etc. (`2rem`),
-  // that corner curve is far bigger than the padding meant to keep content
-  // clear of it, so items nearest a corner visually clip into the rounded
-  // edge instead of sitting inside a clean rectangle — the "weird padding"
-  // a menu/popover reads at a glance. A modest radius keeps the same
-  // rounded-corner language without outgrowing a compact panel's padding.
-  popover: '0.75rem',
+  // only `p-1`. Was already the smallest role before this reskin
+  // (`0.75rem` vs `2rem` everywhere else) for exactly this reason; now
+  // aligned to `button`'s new `0.5rem` instead of sitting at its own
+  // independent value, since both are now "the restrained end of the
+  // scale" rather than one pill-radius exception among many.
+  popover: '0.5rem',
   tooltip: '2rem',
   progress: '2rem',
   // Deliberately its own role rather than reusing `box` (both were `2rem`
@@ -149,7 +261,9 @@ const radius = {
   // floating/pill-shaped surface — a full `2rem` pill radius reads as
   // over-rounded for a rectangular block of body text next to other
   // square-ish content. `1rem` keeps the softened-corner language every
-  // other surface in this theme uses without the pill look.
+  // other surface in this theme uses without the pill look. Now the same
+  // value as `card`/`dialog` — no longer a special case, just this
+  // theme's one non-pill radius, shared by every non-pill surface.
   alert: '1rem',
 } as const;
 
@@ -257,9 +371,15 @@ const effect = {
   noise: '0',
 } as const;
 
+// `'Public Sans Variable'` is self-hosted, not a CDN link — see
+// `../fonts.css` (a hand-authored file, not generated by `generate.ts`,
+// since font binary data has no source token to regenerate from). A
+// consumer who only imports `theme.css` and skips `fonts.css` gets the
+// exact same fallback stack this theme already shipped with — the font
+// name is additive, nothing breaks if it's never loaded.
 const fontStack = {
-  sans: "system-ui, 'Segoe UI', Roboto, sans-serif",
-  heading: "system-ui, 'Segoe UI', Roboto, sans-serif",
+  sans: "'Public Sans Variable', system-ui, 'Segoe UI', Roboto, sans-serif",
+  heading: "'Public Sans Variable', system-ui, 'Segoe UI', Roboto, sans-serif",
   mono: 'ui-monospace, Consolas, monospace',
 } as const;
 
@@ -286,23 +406,39 @@ const motion = {
 } as const;
 
 /**
- * Two named shadow tiers for floating/overlay surfaces — formalizes a
- * distinction that already existed as two different hardcoded Tailwind
- * shadow classes with no shared name: `modal` (`shadow-lg`'s value) for
- * surfaces that take over the interaction — `Dialog`, `AlertDialog`,
- * `Drawer`, `Toast`, `FAB` — and `anchored` (`shadow-md`'s value) for
- * surfaces that follow a trigger — `Popover`, `Menu` (and its
- * `DropdownMenu`/`ContextMenu` variants), `NavigationMenu`, `Select`,
- * `Combobox`, `MultiSelect`, `HoverCard`, `Tooltip`. Deliberately distinct
- * from `Card`/`Paper`'s own `elevation` prop (0-3, `shadow-none` through
- * `shadow-lg`) — that's a per-instance design choice for content surfaces;
- * this is a fixed property of what *kind* of overlay a component is.
- * Literal shadow values (not `shadow-md`/`shadow-lg` class references) so
- * these are real, independent, themeable tokens.
+ * Shadow tiers — reskinned per the design doc's §Shadows/§Elevation.
+ * `card` is genuinely new: `Card` never had its own shadow token before
+ * this (it only had `border`, see `component.ts`'s `cardTokens`) — flat
+ * black-based shadows read muddy against a light-grey page, so every tier
+ * here is colored (tinted toward this theme's own neutral grey in light
+ * mode, pure black in dark mode, where a tinted shadow reads muddy
+ * against an already-dark surface instead) rather than the old flat
+ * `rgb(0 0 0 / alpha)` values.
+ *
+ * `anchored` (`Popover`/`Menu`/`Select`/`Tooltip`/etc. — surfaces that
+ * follow a trigger) and `modal` (`Dialog`/`Drawer`/`Toast`/`FAB` —
+ * surfaces that take over the interaction) keep their existing semantic
+ * split and existing consumers, just updated values: `anchored` now
+ * matches the measured "raised" tier, `modal` is one step stronger
+ * (derived, not independently measured — reserved for a genuine
+ * full-screen takeover, nothing built yet actually differs visually from
+ * `anchored` at this tier). All three now vary by theme — plain strings
+ * before this reskin, since flat black-based shadows needed no per-theme
+ * distinction; colored ones do.
  */
 const elevation = {
-  anchored: '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
-  modal: '0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)',
+  card: {
+    light: 'oklch(69.32% 0.0242 248.177 / 0.2) 0 0 2px, oklch(69.32% 0.0242 248.177 / 0.12) 0 12px 24px -4px',
+    dark: 'rgb(0 0 0 / 0.2) 0 0 2px, rgb(0 0 0 / 0.12) 0 12px 24px -4px',
+  },
+  anchored: {
+    light: 'oklch(69.32% 0.0242 248.177 / 0.24) 0 0 2px, oklch(69.32% 0.0242 248.177 / 0.24) 0 20px 40px -4px',
+    dark: 'rgb(0 0 0 / 0.24) 0 0 2px, rgb(0 0 0 / 0.28) 0 20px 40px -4px',
+  },
+  modal: {
+    light: 'oklch(69.32% 0.0242 248.177 / 0.28) 0 0 4px, oklch(69.32% 0.0242 248.177 / 0.32) 0 32px 64px -8px',
+    dark: 'rgb(0 0 0 / 0.28) 0 0 4px, rgb(0 0 0 / 0.36) 0 32px 64px -8px',
+  },
 } as const;
 
 /**

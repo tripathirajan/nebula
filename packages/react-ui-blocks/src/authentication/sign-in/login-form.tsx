@@ -24,6 +24,8 @@ interface LoginFormProps {
   submitLabel?: React.ReactNode;
   /** Rendered below the submit button — e.g. a "Forgot password?" link or a "Don't have an account? Sign up" line. Left to the consumer since routing/link components vary per app. */
   footer?: React.ReactNode;
+  /** `true` (default) wraps the form in `Card` — a self-contained sign-in widget droppable anywhere. `false` renders the same title/description/fields with no card border/shadow, for a consumer whose page background already provides the surface (e.g. inside `AuthSplitLayout`'s right panel, matching a plain "form floats on the page" reference design rather than a card-on-a-page one). @default true */
+  card?: boolean;
   className?: string;
 }
 
@@ -57,6 +59,10 @@ interface LoginFormProps {
  *   onSubmit={(values) => signIn(values)}
  *   footer={<a href="/forgot-password">Forgot password?</a>}
  * />
+ *
+ * // No card border/shadow — for a consumer supplying its own surface,
+ * // e.g. AuthSplitLayout's right panel:
+ * <LoginForm card={false} onSubmit={(values) => signIn(values)} />
  * ```
  */
 function LoginForm(props: LoginFormProps) {
@@ -68,6 +74,7 @@ function LoginForm(props: LoginFormProps) {
     description = 'Enter your email and password to continue.',
     submitLabel = 'Sign in',
     footer,
+    card = true,
     className,
   } = props;
 
@@ -80,66 +87,80 @@ function LoginForm(props: LoginFormProps) {
     onSubmit?.({ email, password, remember });
   };
 
+  const formBody = (
+    <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+      {error ? (
+        <p role="alert" className="text-sm text-[var(--button-danger-bg)]">
+          {error}
+        </p>
+      ) : null}
+      <Field>
+        <FieldLabel>Email</FieldLabel>
+        <FieldControl asChild>
+          <Input
+            type="email"
+            name="email"
+            autoComplete="email"
+            required
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
+          />
+        </FieldControl>
+      </Field>
+      <Field>
+        <FieldLabel>Password</FieldLabel>
+        <FieldControl asChild>
+          <PasswordField
+            name="password"
+            autoComplete="current-password"
+            required
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
+          />
+        </FieldControl>
+      </Field>
+      <div className="flex items-center gap-2 text-sm text-[var(--card-text)]">
+        <Checkbox
+          id="login-form-remember"
+          name="remember"
+          checked={remember}
+          onCheckedChange={(checked) => setRemember(checked === true)}
+        />
+        {/* `htmlFor`/`id` rather than nesting the `Checkbox` inside this
+            `<label>` — `Checkbox` renders a `role="checkbox"` `<button>`
+            as its visible element (the real `<input type="checkbox">`
+            is visually hidden inside it for native form participation),
+            and `<button>` is one of the "labelable" native elements, so
+            a real `<label htmlFor>` still gets genuine click-forwarding
+            and accessible-name association here, unlike wrapping. */}
+        <label htmlFor="login-form-remember">Remember me</label>
+      </div>
+      <Button type="submit" loading={isSubmitting} className="w-full">
+        {submitLabel}
+      </Button>
+      {footer}
+    </form>
+  );
+
+  if (!card) {
+    return (
+      <div className={className}>
+        {title ? <h2 className="text-lg font-semibold leading-none tracking-tight">{title}</h2> : null}
+        {description ? (
+          <p className="mt-1.5 text-sm text-[var(--card-text)]/70">{description}</p>
+        ) : null}
+        <div className={title || description ? 'mt-6' : undefined}>{formBody}</div>
+      </div>
+    );
+  }
+
   return (
     <Card className={className}>
       <CardHeader>
         <CardTitle>{title}</CardTitle>
         {description ? <CardDescription>{description}</CardDescription> : null}
       </CardHeader>
-      <CardContent>
-        <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
-          {error ? (
-            <p role="alert" className="text-sm text-[var(--button-danger-bg)]">
-              {error}
-            </p>
-          ) : null}
-          <Field>
-            <FieldLabel>Email</FieldLabel>
-            <FieldControl asChild>
-              <Input
-                type="email"
-                name="email"
-                autoComplete="email"
-                required
-                value={email}
-                onChange={(event) => setEmail(event.target.value)}
-              />
-            </FieldControl>
-          </Field>
-          <Field>
-            <FieldLabel>Password</FieldLabel>
-            <FieldControl asChild>
-              <PasswordField
-                name="password"
-                autoComplete="current-password"
-                required
-                value={password}
-                onChange={(event) => setPassword(event.target.value)}
-              />
-            </FieldControl>
-          </Field>
-          <div className="flex items-center gap-2 text-sm text-[var(--card-text)]">
-            <Checkbox
-              id="login-form-remember"
-              name="remember"
-              checked={remember}
-              onCheckedChange={(checked) => setRemember(checked === true)}
-            />
-            {/* `htmlFor`/`id` rather than nesting the `Checkbox` inside this
-                `<label>` — `Checkbox` renders a `role="checkbox"` `<button>`
-                as its visible element (the real `<input type="checkbox">`
-                is visually hidden inside it for native form participation),
-                and `<button>` is one of the "labelable" native elements, so
-                a real `<label htmlFor>` still gets genuine click-forwarding
-                and accessible-name association here, unlike wrapping. */}
-            <label htmlFor="login-form-remember">Remember me</label>
-          </div>
-          <Button type="submit" loading={isSubmitting} className="w-full">
-            {submitLabel}
-          </Button>
-          {footer}
-        </form>
-      </CardContent>
+      <CardContent>{formBody}</CardContent>
     </Card>
   );
 }

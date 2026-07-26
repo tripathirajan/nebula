@@ -12,6 +12,13 @@ import type { VariantProps } from 'class-variance-authority';
  * `variant="elevation"` renders a shadow (depth controlled by `elevation`)
  * and no border. `elevation={0}` under the default `"elevation"` variant is
  * the flat/borderless look (no shadow, no border).
+ *
+ * Tiers 1-3 read the reskin's own per-theme colored-shadow tokens
+ * (`--card-shadow`/`--shadow-anchored`/`--shadow-modal` — see
+ * `tokens/component.ts`/`tokens/primitive.ts`'s `elevation` group) rather
+ * than Tailwind's generic grey `shadow-sm`/`md`/`lg`, so a card's shadow
+ * actually tints with the theme (blue-grey in light mode, flat black in
+ * dark) instead of the same neutral grey regardless of surface color.
  */
 const cardVariants = cva('rounded-[var(--radius-card)] bg-[var(--card-bg)] text-[var(--card-text)]', {
   variants: {
@@ -21,9 +28,9 @@ const cardVariants = cva('rounded-[var(--radius-card)] bg-[var(--card-bg)] text-
     },
     elevation: {
       0: 'shadow-none',
-      1: 'shadow-sm',
-      2: 'shadow-md',
-      3: 'shadow-lg',
+      1: 'shadow-[var(--card-shadow)]',
+      2: 'shadow-[var(--shadow-anchored)]',
+      3: 'shadow-[var(--shadow-modal)]',
     },
   },
   compoundVariants: [

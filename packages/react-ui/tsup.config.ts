@@ -116,6 +116,8 @@ export default defineConfig({
     'circular-progress/index': 'src/circular-progress/index.ts',
     'empty-state/index': 'src/empty-state/index.ts',
     'bottom-nav/index': 'src/bottom-nav/index.ts',
+    'side-nav/index': 'src/side-nav/index.ts',
+    'logo/index': 'src/logo/index.ts',
   },
   format: ['esm'],
   target: 'es2022',

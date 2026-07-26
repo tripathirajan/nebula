@@ -1,4 +1,3 @@
-import { Button } from '@nebula-lab/react-ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -87,30 +86,34 @@ const OPTIONS: ThemeOption[] = Object.values(OPTION_BY_THEME);
 
 interface ThemeSwitcherProps {
   size?: ButtonProps['size'];
-  /** `'button'` — labeled buttons (original look). `'icon'` — a compact icon-only toggle group (sun/moon/monitor), same behavior, less horizontal space. `'dropdown'` — a single icon button (its icon tracks the current selection) that opens a Light/Dark/System menu — the least horizontal space of the three, since only one control is ever on screen at once. @default 'button' */
-  variant?: 'button' | 'icon' | 'dropdown';
+  /** `'icon'` — a compact icon-only toggle group (sun/moon/monitor), one control per option. `'dropdown'` — a single icon button (its icon tracks the current selection) that opens a Light/Dark/System menu — the more compact of the two, since only one control is ever on screen at once. @default 'icon' */
+  variant?: 'icon' | 'dropdown';
 }
 
 /**
  * A three-way light/dark/system switcher — built purely from this
- * package's own `Button`/`IconButton`/`DropdownMenu` and `ThemeProvider`,
- * no new primitives. Originally shipped as `react-ui-blocks`' first
- * component (a demonstration of composing domain-neutral UI purely from
+ * package's own `IconButton`/`DropdownMenu` and `ThemeProvider`, no new
+ * primitives. Originally shipped as `react-ui-blocks`' first component (a
+ * demonstration of composing domain-neutral UI purely from
  * `@nebula-lab/react-ui`); moved here since it has no domain knowledge of its
  * own — exactly the "atoms and molecules belong in `react-ui`" rule
  * `react-ui-blocks` is supposed to sit on top of, not include. Must be
  * rendered inside a `ThemeProvider`.
  *
+ * A third variant (`'button'` — three labeled Light/Dark/System buttons)
+ * existed here previously; removed per the project owner's own call — the
+ * labeled-button row read as visual clutter compared to the two compact
+ * variants below, and nothing in this repo rendered it.
+ *
  * @example
  * ```tsx
  * <ThemeProvider>
  *   <ThemeSwitcher size="md" />
- *   <ThemeSwitcher variant="icon" />
  *   <ThemeSwitcher variant="dropdown" />
  * </ThemeProvider>
  * ```
  */
-function ThemeSwitcher({ size = 'sm', variant = 'button' }: ThemeSwitcherProps) {
+function ThemeSwitcher({ size = 'sm', variant = 'icon' }: ThemeSwitcherProps) {
   const { theme, setTheme } = useTheme();
 
   if (variant === 'dropdown') {
@@ -146,40 +149,21 @@ function ThemeSwitcher({ size = 'sm', variant = 'button' }: ThemeSwitcherProps) 
     );
   }
 
-  if (variant === 'icon') {
-    return (
-      <div role="group" aria-label="Theme" className="inline-flex gap-1">
-        {OPTIONS.map((option) => (
-          <IconButton
-            key={option.value}
-            type="button"
-            size={size}
-            variant={theme === option.value ? 'default' : 'ghost'}
-            color={theme === option.value ? 'primary' : 'neutral'}
-            aria-label={option.label}
-            aria-pressed={theme === option.value}
-            onClick={() => setTheme(option.value)}
-          >
-            {option.icon}
-          </IconButton>
-        ))}
-      </div>
-    );
-  }
-
   return (
     <div role="group" aria-label="Theme" className="inline-flex gap-1">
       {OPTIONS.map((option) => (
-        <Button
+        <IconButton
           key={option.value}
           type="button"
           size={size}
-          color={theme === option.value ? 'primary' : 'secondary'}
+          variant={theme === option.value ? 'default' : 'ghost'}
+          color={theme === option.value ? 'primary' : 'neutral'}
+          aria-label={option.label}
           aria-pressed={theme === option.value}
           onClick={() => setTheme(option.value)}
         >
-          {option.label}
-        </Button>
+          {option.icon}
+        </IconButton>
       ))}
     </div>
   );

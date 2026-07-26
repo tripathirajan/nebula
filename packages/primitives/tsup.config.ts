@@ -64,7 +64,28 @@ export default defineConfig({
   // .d.ts output since tsconfig.json already mirrors src/ 1:1 into dist/.
   dts: false,
   sourcemap: true,
-  splitting: false,
+  // `splitting: false` here used to mean every one of the 30+ entries above
+  // bundled its own fully self-contained copy of any module it pulled in via
+  // a relative import — including `slot.tsx`, which `primitive.tsx` imports
+  // relatively (`../slot/slot`) to power `asChild`. That module-level
+  // `Slottable = ({children}) => <>...</>` and `isSlottable` pair got
+  // re-instantiated separately in *both* `dist/primitive/index.js` and
+  // `dist/slot/index.js` (confirmed by grepping both files: each has its own
+  // `var Slottable = ...`), producing two distinct function references. A
+  // consumer importing `Slottable` from `@nebula-lab/primitives/slot` and
+  // using it inside a component built on `Primitive`'s `asChild` (from
+  // `@nebula-lab/primitives/primitive`) — exactly `BottomNavItem`'s
+  // documented icon/label + `asChild` pattern — silently failed
+  // `isSlottable`'s `child.type === Slottable` check against the *other*
+  // entry's `Slottable`, so `Slot` never found its slotted child and crashed
+  // with "React.Children.only expected to receive a single React element
+  // child." `headless/tsup.config.ts` already hit and fixed this identical
+  // class of bug for its own relatively-imported shared Context modules —
+  // same fix here: `splitting: true` lets tsup/rollup extract a module like
+  // `slot.tsx` into one shared chunk every entry references, so there's only
+  // ever one `Slottable`/`isSlottable`/`Slot`, no matter how many public
+  // subpaths pull it in.
+  splitting: true,
   clean: true,
   treeshake: true,
   external: ['react', 'react-dom'],

@@ -26,6 +26,8 @@ interface SignupFormProps {
   termsLabel?: React.ReactNode;
   /** Rendered below the submit button — e.g. "Already have an account? Sign in". */
   footer?: React.ReactNode;
+  /** `true` (default) wraps the form in `Card`. `false` renders the same title/description/fields with no card border/shadow — same reasoning `LoginForm`'s own `card` prop documents. @default true */
+  card?: boolean;
   className?: string;
 }
 
@@ -63,6 +65,7 @@ function SignupForm(props: SignupFormProps) {
     submitLabel = 'Sign up',
     termsLabel = 'I agree to the Terms of Service and Privacy Policy',
     footer,
+    card = true,
     className,
   } = props;
 
@@ -77,88 +80,102 @@ function SignupForm(props: SignupFormProps) {
     onSubmit?.({ name, email, password, confirmPassword, acceptedTerms });
   };
 
+  const formBody = (
+    <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+      {error ? (
+        <p role="alert" className="text-sm text-[var(--button-danger-bg)]">
+          {error}
+        </p>
+      ) : null}
+      <Field>
+        <FieldLabel>Name</FieldLabel>
+        <FieldControl asChild>
+          <Input
+            type="text"
+            name="name"
+            autoComplete="name"
+            required
+            value={name}
+            onChange={(event) => setName(event.target.value)}
+          />
+        </FieldControl>
+      </Field>
+      <Field>
+        <FieldLabel>Email</FieldLabel>
+        <FieldControl asChild>
+          <Input
+            type="email"
+            name="email"
+            autoComplete="email"
+            required
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
+          />
+        </FieldControl>
+      </Field>
+      <Field>
+        <FieldLabel>Password</FieldLabel>
+        <FieldControl asChild>
+          <PasswordField
+            name="password"
+            autoComplete="new-password"
+            required
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
+          />
+        </FieldControl>
+      </Field>
+      <Field>
+        <FieldLabel>Confirm password</FieldLabel>
+        <FieldControl asChild>
+          <PasswordField
+            name="confirmPassword"
+            autoComplete="new-password"
+            required
+            value={confirmPassword}
+            onChange={(event) => setConfirmPassword(event.target.value)}
+          />
+        </FieldControl>
+      </Field>
+      <div className="flex items-center gap-2 text-sm text-[var(--card-text)]">
+        <Checkbox
+          id="signup-form-terms"
+          name="acceptedTerms"
+          required
+          checked={acceptedTerms}
+          onCheckedChange={(checked) => setAcceptedTerms(checked === true)}
+        />
+        {/* `htmlFor`/`id` rather than nesting — see `LoginForm`'s identical
+            "Remember me" comment for why this still gets real
+            click-forwarding and accessible-name association. */}
+        <label htmlFor="signup-form-terms">{termsLabel}</label>
+      </div>
+      <Button type="submit" loading={isSubmitting} className="w-full">
+        {submitLabel}
+      </Button>
+      {footer}
+    </form>
+  );
+
+  if (!card) {
+    return (
+      <div className={className}>
+        {title ? <h2 className="text-lg font-semibold leading-none tracking-tight">{title}</h2> : null}
+        {description ? (
+          <p className="mt-1.5 text-sm text-[var(--card-text)]/70">{description}</p>
+        ) : null}
+        <div className={title || description ? 'mt-6' : undefined}>{formBody}</div>
+      </div>
+    );
+  }
+
   return (
     <Card className={className}>
       <CardHeader>
         <CardTitle>{title}</CardTitle>
         {description ? <CardDescription>{description}</CardDescription> : null}
       </CardHeader>
-      <CardContent>
-        <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
-          {error ? (
-            <p role="alert" className="text-sm text-[var(--button-danger-bg)]">
-              {error}
-            </p>
-          ) : null}
-          <Field>
-            <FieldLabel>Name</FieldLabel>
-            <FieldControl asChild>
-              <Input
-                type="text"
-                name="name"
-                autoComplete="name"
-                required
-                value={name}
-                onChange={(event) => setName(event.target.value)}
-              />
-            </FieldControl>
-          </Field>
-          <Field>
-            <FieldLabel>Email</FieldLabel>
-            <FieldControl asChild>
-              <Input
-                type="email"
-                name="email"
-                autoComplete="email"
-                required
-                value={email}
-                onChange={(event) => setEmail(event.target.value)}
-              />
-            </FieldControl>
-          </Field>
-          <Field>
-            <FieldLabel>Password</FieldLabel>
-            <FieldControl asChild>
-              <PasswordField
-                name="password"
-                autoComplete="new-password"
-                required
-                value={password}
-                onChange={(event) => setPassword(event.target.value)}
-              />
-            </FieldControl>
-          </Field>
-          <Field>
-            <FieldLabel>Confirm password</FieldLabel>
-            <FieldControl asChild>
-              <PasswordField
-                name="confirmPassword"
-                autoComplete="new-password"
-                required
-                value={confirmPassword}
-                onChange={(event) => setConfirmPassword(event.target.value)}
-              />
-            </FieldControl>
-          </Field>
-          <div className="flex items-center gap-2 text-sm text-[var(--card-text)]">
-            <Checkbox
-              id="signup-form-terms"
-              name="acceptedTerms"
-              required
-              checked={acceptedTerms}
-              onCheckedChange={(checked) => setAcceptedTerms(checked === true)}
-            />
-            {/* `htmlFor`/`id` rather than nesting — see `LoginForm`'s identical
-                "Remember me" comment for why this still gets real
-                click-forwarding and accessible-name association. */}
-            <label htmlFor="signup-form-terms">{termsLabel}</label>
-          </div>
-          <Button type="submit" loading={isSubmitting} className="w-full">
-            {submitLabel}
-          </Button>
-          {footer}
-        </form>
-      </CardContent>
+      <CardContent>{formBody}</CardContent>
     </Card>
   );
 }

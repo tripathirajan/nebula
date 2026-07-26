@@ -52,6 +52,7 @@ const meta: Meta<typeof Button> = {
     variant: { control: 'select', options: VARIANTS },
     color: { control: 'select', options: COLORS },
     size: { control: 'select', options: ['sm', 'md', 'lg'] },
+    shape: { control: 'select', options: ['rounded', 'pill', 'square'] },
   },
 };
 
@@ -99,6 +100,24 @@ export const AllVariants: Story = {
 /** Try any `variant`/`color`/`size` combination via the Controls panel. */
 export const Playground: Story = {
   args: { variant: 'default', color: 'primary' },
+};
+
+/** The `shape` axis — independent of `variant`/`color`, controls corner radius only. */
+export const Shapes: Story = {
+  parameters: { controls: { disable: true } },
+  render: (args) => (
+    <div style={{ display: 'flex', gap: 16, alignItems: 'center' }}>
+      <Button {...args} shape="rounded">
+        Rounded
+      </Button>
+      <Button {...args} shape="pill">
+        Pill
+      </Button>
+      <Button {...args} shape="square">
+        Square
+      </Button>
+    </div>
+  ),
 };
 
 export const Loading: Story = {

@@ -36,3 +36,16 @@ export const Submitting: Story = {
     onSubmit: (values) => console.log(values),
   },
 };
+
+/** No card border/shadow — for a consumer supplying its own surface, e.g. `AuthSplitLayout`'s right panel. */
+export const NoCard: Story = {
+  args: {
+    card: false,
+    onSubmit: (values) => console.log(values),
+    footer: (
+      <a className="text-sm text-[var(--color-primary)]" href="#forgot-password">
+        Forgot password?
+      </a>
+    ),
+  },
+};

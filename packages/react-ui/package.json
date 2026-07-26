@@ -468,15 +468,25 @@
       "types": "./dist/bottom-nav/index.d.ts",
       "import": "./dist/bottom-nav/index.js"
     },
+    "./side-nav": {
+      "types": "./dist/side-nav/index.d.ts",
+      "import": "./dist/side-nav/index.js"
+    },
+    "./logo": {
+      "types": "./dist/logo/index.d.ts",
+      "import": "./dist/logo/index.js"
+    },
     "./theme.css": "./src/theme.css",
+    "./fonts.css": "./src/fonts.css",
     "./package.json": "./package.json"
   },
   "files": [
     "dist",
-    "src/theme.css"
+    "src/theme.css",
+    "src/fonts.css"
   ],
   "scripts": {
-    "build": "tsup && tsc -p tsconfig.build.json --emitDeclarationOnly && rm -f dist/*.tsbuildinfo && tsx src/tokens/generate.ts && cp src/theme.css dist/theme.css",
+    "build": "tsup && tsc -p tsconfig.build.json --emitDeclarationOnly && rm -f dist/*.tsbuildinfo && tsx src/tokens/generate.ts && cp src/theme.css dist/theme.css && cp src/fonts.css dist/fonts.css",
     "dev": "tsup --watch",
     "generate-tokens": "tsx src/tokens/generate.ts",
     "contrast-audit": "tsx src/tokens/contrast-audit.ts",

@@ -29,7 +29,36 @@ const VIEWPORTS = {
   },
 } as const;
 
+// Global light/dark toggle in Storybook's own toolbar (next to the
+// viewport picker) — sets `data-theme` on the preview iframe's
+// `<html>`, the same attribute `ThemeProvider`/`ThemeSwitcher` set at
+// runtime, so every story (not just ones that opt in) re-renders in
+// whichever theme is picked, no per-story wiring needed. Answers a real
+// gap: before this, only a component with its own hand-built toggle (e.g.
+// the Design Tokens reference page) could be checked in dark mode inside
+// Storybook at all.
 const preview: Preview = {
+  globalTypes: {
+    theme: {
+      description: 'Light/dark theme',
+      defaultValue: 'light',
+      toolbar: {
+        title: 'Theme',
+        icon: 'circlehollow',
+        items: [
+          { value: 'light', icon: 'sun', title: 'Light' },
+          { value: 'dark', icon: 'moon', title: 'Dark' },
+        ],
+        dynamicTitle: true,
+      },
+    },
+  },
+  decorators: [
+    (Story, context) => {
+      document.documentElement.setAttribute('data-theme', context.globals.theme as string);
+      return Story();
+    },
+  ],
   parameters: {
     controls: {
       matchers: {
