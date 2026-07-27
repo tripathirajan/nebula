@@ -212,5 +212,20 @@ export default tseslint.config(
     },
   },
 
+  {
+    // CI-only Node scripts (e.g. `determine-release-projects.mjs`) —
+    // plain `.mjs`, not part of any package's tsconfig project, so they
+    // don't inherit `types: ["node"]` the way `tokens/generate.ts` etc.
+    // do; `no-undef` otherwise flags `process`/`console` as unknown
+    // globals.
+    files: ['.github/scripts/**/*.mjs'],
+    languageOptions: {
+      globals: {
+        process: 'readonly',
+        console: 'readonly',
+      },
+    },
+  },
+
   prettierConfig,
 );

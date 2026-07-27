@@ -43,7 +43,7 @@ concurrency:
 
 jobs:
   publish:
-    name: Version, tag, and publish workspace packages
+    name: Version, tag, and publish only the packages that actually changed
     runs-on: ubuntu-latest
     environment: npm
     env:
@@ -75,45 +75,73 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Version packages with Nx
-        # `nx release version` (run standalone, not via the full `nx
-        # release` orchestrator) only stages the package.json changes —
-        # it does not commit them. That's fine: build/publish below read
-        # the bumped versions straight off disk, and "Generate changelog
-        # and tag release" further down commits both this version bump
-        # and the changelog files together in one commit, once publish
-        # has actually succeeded.
-        run: pnpm nx release version "${{ github.event.inputs.bump }}" --preid "${{ github.event.inputs.preid }}"
+      - name: Determine which packages to release
+        id: projects
+        # `nx.json`'s `release.projectsRelationship: "independent"` means
+        # each package already carries its own version — but `nx release
+        # version <bump>` with no `--projects` filter still bumps *every*
+        # project by the same amount regardless of whether it actually
+        # changed (confirmed: this is why every package has shipped in
+        # lockstep so far despite being versioned independently). This step
+        # computes the real subset to release instead — see
+        # `.github/scripts/determine-release-projects.mjs`'s own doc
+        # comment for the exact two-step rule (direct-changes + the
+        # foundational-package cascade to `react-ui`/`react-ui-blocks`) and
+        # why it deliberately doesn't use `nx show projects --affected`.
+        run: |
+          BASE=$(git describe --tags --abbrev=0)
+          echo "Diffing against $BASE"
+
+          PROJECTS=$(node .github/scripts/determine-release-projects.mjs "$BASE")
+
+          echo "Releasing: $PROJECTS"
+          echo "projects=$PROJECTS" >> "$GITHUB_OUTPUT"
+          echo "has_projects=$([ -n "$PROJECTS" ] && echo true || echo false)" >> "$GITHUB_OUTPUT"
+
+      - name: Version affected packages with Nx
+        if: steps.projects.outputs.has_projects == 'true'
+        # Only stages the package.json changes — it does not commit them.
+        # That's fine: build/publish below read the bumped versions
+        # straight off disk, and "Generate changelog and tag release"
+        # further down commits both this version bump and the changelog
+        # files together in one commit, once publish has actually
+        # succeeded.
+        run: pnpm nx release version "${{ github.event.inputs.bump }}" --preid "${{ github.event.inputs.preid }}" --projects="${{ steps.projects.outputs.projects }}"
 
       - name: Build packages
+        if: steps.projects.outputs.has_projects == 'true'
         run: pnpm build
 
       - name: Publish packages with Nx
+        if: steps.projects.outputs.has_projects == 'true'
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: pnpm nx release publish --yes --tag "${{ github.event.inputs.tag }}"
+        run: pnpm nx release publish --yes --tag "${{ github.event.inputs.tag }}" --projects="${{ steps.projects.outputs.projects }}"
 
       - name: Generate changelog and tag release
         # Runs only once publish actually succeeds, so a build/publish
         # failure never leaves a version bump or changelog committed for
-        # something that was never really published. Every package in
-        # this workspace is bumped together in practice (even though
-        # they're versioned independently), so `react-ui`'s resulting
-        # version is a representative label for the changelog entries —
-        # each package's own changelog content is still scoped correctly
-        # from its own git history regardless. This also creates the git
-        # tags nx release version doesn't create on its own (confirmed:
-        # this repo had zero tags before the first real v1.0.0 release),
-        # and (via nx.json's release.changelog.projectChangelogs.createRelease
-        # = "github") a real GitHub Release per package tag — needs
-        # GITHUB_TOKEN to call the GitHub API for that. Doesn't push yet —
-        # the next step does that once this succeeds.
+        # something that was never really published. No single shared
+        # version string here — each project in `--projects` now carries
+        # its own independently-bumped version (see "Determine which
+        # packages to release" above), and `nx release changelog` reads
+        # each one straight off its freshly-versioned `package.json`. This
+        # also creates the git tags `nx release version` doesn't create on
+        # its own, and (via `nx.json`'s
+        # `release.changelog.projectChangelogs.createRelease = "github"`) a
+        # real GitHub Release per released project's tag — needs
+        # `GITHUB_TOKEN` to call the GitHub API for that. Doesn't push yet
+        # — the next step does that once this succeeds.
+        if: steps.projects.outputs.has_projects == 'true'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          VERSION=$(node -p "require('./packages/react-ui/package.json').version")
-          pnpm nx release changelog "$VERSION" --git-push=false
+        run: pnpm nx release changelog --projects="${{ steps.projects.outputs.projects }}" --git-push=false
 
       - name: Push version commit, changelog, and tags
+        if: steps.projects.outputs.has_projects == 'true'
         run: git push --follow-tags
+
+      - name: No changed packages
+        if: steps.projects.outputs.has_projects != 'true'
+        run: echo "No package has changed since the last release — nothing to publish."
