@@ -122,13 +122,16 @@ jobs:
       - name: Generate changelog and tag release
         # Runs only once publish actually succeeds, so a build/publish
         # failure never leaves a version bump or changelog committed for
-        # something that was never really published. No single shared
-        # version string here — each project in `--projects` now carries
-        # its own independently-bumped version (see "Determine which
-        # packages to release" above), and `nx release changelog` reads
-        # each one straight off its freshly-versioned `package.json`. This
-        # also creates the git tags `nx release version` doesn't create on
-        # its own, and (via `nx.json`'s
+        # something that was never really published. Delegates to
+        # `.github/scripts/generate-changelogs.mjs` — `nx release
+        # changelog` requires an explicit `[version]` positional when run
+        # directly, which doesn't exist as a single value across
+        # independently-versioned projects, so the script calls it once
+        # per released project with that project's own version (confirmed
+        # necessary: the previous single `--projects=...` call with no
+        # version failed with "An explicit target version must be
+        # specified"). Also creates the git tags `nx release version`
+        # doesn't create on its own, and (via `nx.json`'s
         # `release.changelog.projectChangelogs.createRelease = "github"`) a
         # real GitHub Release per released project's tag — needs
         # `GITHUB_TOKEN` to call the GitHub API for that. Doesn't push yet
@@ -136,7 +139,7 @@ jobs:
         if: steps.projects.outputs.has_projects == 'true'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: pnpm nx release changelog --projects="${{ steps.projects.outputs.projects }}" --git-push=false
+        run: node .github/scripts/generate-changelogs.mjs "${{ steps.projects.outputs.projects }}"
 
       - name: Push version commit, changelog, and tags
         if: steps.projects.outputs.has_projects == 'true'
