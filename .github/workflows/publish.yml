@@ -85,14 +85,12 @@ jobs:
         # lockstep so far despite being versioned independently). This step
         # computes the real subset to release instead — see
         # `.github/scripts/determine-release-projects.mjs`'s own doc
-        # comment for the exact two-step rule (direct-changes + the
+        # comment for the exact two-step rule (each package diffed against
+        # its *own* last release tag, not one repo-wide base, plus the
         # foundational-package cascade to `react-ui`/`react-ui-blocks`) and
         # why it deliberately doesn't use `nx show projects --affected`.
         run: |
-          BASE=$(git describe --tags --abbrev=0)
-          echo "Diffing against $BASE"
-
-          PROJECTS=$(node .github/scripts/determine-release-projects.mjs "$BASE")
+          PROJECTS=$(node .github/scripts/determine-release-projects.mjs)
 
           echo "Releasing: $PROJECTS"
           echo "projects=$PROJECTS" >> "$GITHUB_OUTPUT"
