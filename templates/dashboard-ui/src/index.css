@@ -1,0 +1,21 @@
+@import 'tailwindcss';
+
+/*
+ * Tailwind v4's automatic source detection is rooted at this app's own
+ * directory — it never walks up to sibling workspace packages. Every
+ * nebula component's utility classes (`flex`, `gap-4`, `rounded-full`, ...)
+ * live in `@nebula-lab/react-ui`/`@nebula-lab/react-ui-blocks`'s *built*
+ * `dist` output (what `exports` in each package.json actually resolves
+ * to, even in this pnpm-workspace dev setup), so those classes are
+ * invisible to Tailwind unless explicitly added as extra sources — without
+ * this, every nebula component renders completely unstyled.
+ */
+@source '../../../packages/react-ui/dist';
+@source '../../../packages/react-ui-blocks/dist';
+
+@import '@nebula-lab/react-ui/theme.css';
+@import '@nebula-lab/react-ui/fonts.css';
+
+body {
+  margin: 0;
+}

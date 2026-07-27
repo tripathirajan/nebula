@@ -6,6 +6,18 @@
       "runtimeExecutable": "pnpm",
       "runtimeArgs": ["storybook"],
       "port": 6006
+    },
+    {
+      "name": "dashboard-ui-template",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["--filter", "dashboard-ui-template", "dev"],
+      "port": 5180
+    },
+    {
+      "name": "mobile-ui-template",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["--filter", "mobile-ui-template", "dev"],
+      "port": 5181
     }
   ]
 }
