@@ -9,11 +9,11 @@ const monthlySpend = [
   { month: 'Jun', spend: 1950 },
 ];
 
-export function Stats() {
+export function Budget() {
   return (
     <div className="flex flex-col gap-4 p-4">
       <Heading as="h2" level={4}>
-        Stats
+        Budget
       </Heading>
       <ChartCard title="Monthly spend" type="bar" data={monthlySpend} categoryKey="month" series={[{ key: 'spend', label: 'Spend', color: 'primary' }]} />
       <BillingSummaryCard

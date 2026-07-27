@@ -8,15 +8,15 @@ import { ThemeSwitcher } from '@nebula-lab/react-ui/theme-switcher';
 import { SaasAppHeader } from '@nebula-lab/react-ui-blocks';
 import { Link, useLocation } from 'react-router-dom';
 
-import { BillingIcon, HomeIcon, TeamIcon, UsersIcon } from '../icons';
+import { HomeIcon, TargetIcon, TransactionsIcon, WalletIcon } from '../icons';
 
 import type { ReactNode } from 'react';
 
 const navItems = [
   { to: '/', label: 'Overview', icon: <HomeIcon /> },
-  { to: '/users', label: 'Users', icon: <UsersIcon /> },
-  { to: '/team', label: 'Team', icon: <TeamIcon /> },
-  { to: '/billing', label: 'Billing', icon: <BillingIcon /> },
+  { to: '/transactions', label: 'Transactions', icon: <TransactionsIcon /> },
+  { to: '/accounts', label: 'Accounts', icon: <WalletIcon /> },
+  { to: '/budgets', label: 'Budgets', icon: <TargetIcon /> },
 ];
 
 /**
@@ -43,7 +43,7 @@ export function AppShell(props: { children: ReactNode }) {
             `p-4` so their dividers reach the sidebar's full width. */}
         <div className="-mx-4 -mt-4 flex h-14 items-center gap-2 border-b border-[var(--color-base-300)] px-4">
           <Logo size={22} className="text-[var(--color-primary)]" />
-          <Text className="text-sm font-semibold">Nebula</Text>
+          <Text className="text-sm font-semibold">Expensiona</Text>
         </div>
         <SideNav className="flex-1 overflow-y-auto py-2">
           {navItems.map((item) => (
@@ -66,13 +66,13 @@ export function AppShell(props: { children: ReactNode }) {
 
       <div className="flex flex-1 flex-col">
         <SaasAppHeader
-          brand="Nebula Dashboard"
+          brand="Expensiona"
           navLinks={navItems.map((item) => ({
             label: item.label,
             href: item.to,
             active: location.pathname === item.to,
           }))}
-          user={{ name: 'Jane Cooper', role: 'Admin' }}
+          user={{ name: 'Jane Cooper', role: 'Account owner' }}
         />
         <Main className="mx-auto w-full max-w-6xl p-6">{children}</Main>
       </div>

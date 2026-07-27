@@ -35,11 +35,13 @@ export function HomeIcon(props: SVGProps<SVGSVGElement>) {
   );
 }
 
-export function CardIcon(props: SVGProps<SVGSVGElement>) {
+export function TransactionsIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg {...baseProps(props)}>
-      <rect x="2" y="5" width="20" height="14" rx="2" />
-      <path d="M2 10h20" />
+      <path d="M17 2l4 4-4 4" />
+      <path d="M3 11V6h18" />
+      <path d="M7 22l-4-4 4-4" />
+      <path d="M21 13v5H3" />
     </svg>
   );
 }
@@ -57,6 +59,14 @@ export function UserIcon(props: SVGProps<SVGSVGElement>) {
     <svg {...baseProps(props)}>
       <circle cx="12" cy="8" r="4" />
       <path d="M4 20c0-4 3.5-6 8-6s8 2 8 6" />
+    </svg>
+  );
+}
+
+export function PlusIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg {...baseProps(props)} className="h-5 w-5">
+      <path d="M12 5v14M5 12h14" />
     </svg>
   );
 }

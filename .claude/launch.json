@@ -8,15 +8,15 @@
       "port": 6006
     },
     {
-      "name": "dashboard-ui-template",
+      "name": "expensiona-desktop-template",
       "runtimeExecutable": "pnpm",
-      "runtimeArgs": ["--filter", "dashboard-ui-template", "dev"],
+      "runtimeArgs": ["--filter", "expensiona-desktop-template", "dev"],
       "port": 5180
     },
     {
-      "name": "mobile-ui-template",
+      "name": "expensiona-mobile-template",
       "runtimeExecutable": "pnpm",
-      "runtimeArgs": ["--filter", "mobile-ui-template", "dev"],
+      "runtimeArgs": ["--filter", "expensiona-mobile-template", "dev"],
       "port": 5181
     }
   ]

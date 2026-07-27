@@ -1,14 +1,14 @@
 import { BottomNav, BottomNavItem } from '@nebula-lab/react-ui/bottom-nav';
 import { Link, useLocation } from 'react-router-dom';
 
-import { CardIcon, ChartIcon, HomeIcon, UserIcon } from '../icons';
+import { ChartIcon, HomeIcon, TransactionsIcon, UserIcon } from '../icons';
 
 import type { ReactNode } from 'react';
 
 const navItems = [
   { to: '/', label: 'Home', icon: <HomeIcon /> },
-  { to: '/cards', label: 'Cards', icon: <CardIcon /> },
-  { to: '/stats', label: 'Stats', icon: <ChartIcon /> },
+  { to: '/transactions', label: 'Transactions', icon: <TransactionsIcon /> },
+  { to: '/budget', label: 'Budget', icon: <ChartIcon /> },
   { to: '/profile', label: 'Profile', icon: <UserIcon /> },
 ];
 

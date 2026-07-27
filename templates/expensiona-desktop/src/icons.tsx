@@ -26,54 +26,59 @@ export function HomeIcon(props: SVGProps<SVGSVGElement>) {
   );
 }
 
-export function UsersIcon(props: SVGProps<SVGSVGElement>) {
+export function TransactionsIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg {...baseProps(props)}>
-      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
+      <path d="M17 2l4 4-4 4" />
+      <path d="M3 11V6h18" />
+      <path d="M7 22l-4-4 4-4" />
+      <path d="M21 13v5H3" />
     </svg>
   );
 }
 
-export function TeamIcon(props: SVGProps<SVGSVGElement>) {
+export function WalletIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg {...baseProps(props)}>
-      <circle cx="9" cy="7" r="4" />
-      <path d="M17 11a4 4 0 1 0 0-8" />
-      <path d="M1 21v-2a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v2" />
-      <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+      <path d="M21 12V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5Z" />
+      <path d="M16 12h4" />
     </svg>
   );
 }
 
-export function BillingIcon(props: SVGProps<SVGSVGElement>) {
+export function TargetIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg {...baseProps(props)}>
-      <rect x="2" y="5" width="20" height="14" rx="2" />
-      <path d="M2 10h20" />
+      <circle cx="12" cy="12" r="9" />
+      <circle cx="12" cy="12" r="5" />
+      <circle cx="12" cy="12" r="1" />
     </svg>
   );
 }
 
-export function RevenueIcon(props: SVGProps<SVGSVGElement>) {
+export function TrendUpIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg {...baseProps(props)}>
-      <path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+      <path d="M22 7 13.5 15.5 8.5 10.5 2 17" />
+      <path d="M16 7h6v6" />
     </svg>
   );
 }
 
-export function ConversionIcon(props: SVGProps<SVGSVGElement>) {
+export function TrendDownIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg {...baseProps(props)}>
-      <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+      <path d="M22 17 13.5 8.5 8.5 13.5 2 7" />
+      <path d="M16 17h6v-6" />
     </svg>
   );
 }
 
-export function ChurnIcon(props: SVGProps<SVGSVGElement>) {
+export function PiggyBankIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg {...baseProps(props)}>
-      <path d="M18 6 6 18M6 6l12 12" />
+      <path d="M11 5a5 5 0 0 0-5 5v1H3l2 3v3a1 1 0 0 0 1 1h2v2h4v-2h2a5 5 0 0 0 5-5v-1a2 2 0 0 0 2-2 2 2 0 0 0-2-2c-.83-1.83-2.75-3-5-3Z" />
+      <circle cx="15" cy="9" r="0.5" fill="currentColor" />
     </svg>
   );
 }

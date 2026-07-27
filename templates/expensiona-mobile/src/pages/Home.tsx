@@ -101,8 +101,8 @@ export function Home() {
           amount="$24,500.00"
           description="+2.5% from last month"
           actions={[
-            { label: 'Send', onClick: () => {} },
-            { label: 'Top up', onClick: () => {} },
+            { label: 'Add expense', onClick: () => {} },
+            { label: 'Add income', onClick: () => {} },
           ]}
         />
         <div className="grid grid-cols-2 gap-3">

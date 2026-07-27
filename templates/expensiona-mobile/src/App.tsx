@@ -1,18 +1,18 @@
 import { Route, Routes } from 'react-router-dom';
 
 import { MobileShell } from './layout/MobileShell';
-import { Cards } from './pages/Cards';
+import { Budget } from './pages/Budget';
 import { Home } from './pages/Home';
 import { Profile } from './pages/Profile';
-import { Stats } from './pages/Stats';
+import { Transactions } from './pages/Transactions';
 
 export function App() {
   return (
     <MobileShell>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/cards" element={<Cards />} />
-        <Route path="/stats" element={<Stats />} />
+        <Route path="/transactions" element={<Transactions />} />
+        <Route path="/budget" element={<Budget />} />
         <Route path="/profile" element={<Profile />} />
       </Routes>
     </MobileShell>

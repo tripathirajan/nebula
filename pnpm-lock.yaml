@@ -458,7 +458,7 @@ importers:
         specifier: ^5.6.3
         version: 5.9.3
 
-  templates/dashboard-ui:
+  templates/expensiona-desktop:
     dependencies:
       '@nebula-lab/primitives':
         specifier: workspace:*
@@ -501,7 +501,7 @@ importers:
         specifier: ^5.4.11
         version: 5.4.21(@types/node@22.20.0)(lightningcss@1.32.0)
 
-  templates/mobile-ui:
+  templates/expensiona-mobile:
     dependencies:
       '@nebula-lab/primitives':
         specifier: workspace:*
