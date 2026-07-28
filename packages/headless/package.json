@@ -192,7 +192,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsup && tsc -p tsconfig.build.json --emitDeclarationOnly && rm -f dist/*.tsbuildinfo",
+    "build": "tsup && tsc -p tsconfig.build.json --emitDeclarationOnly && node scripts/flatten-family-dts.mjs menu:menu,context-menu,dropdown-menu dialog:dialog,alert-dialog,drawer combobox:combobox,autocomplete tree:tree,tree-view && rm -f dist/*.tsbuildinfo",
     "dev": "tsup --watch",
     "typecheck": "tsc -p tsconfig.typecheck.json --noEmit",
     "lint": "eslint .",

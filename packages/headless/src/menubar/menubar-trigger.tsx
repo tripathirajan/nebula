@@ -6,7 +6,7 @@ import { FocusItem } from '@nebula-lab/primitives/roving-focus-group';
 import * as React from 'react';
 
 
-import { useMenuContext, usePopperScope } from '../menu/menu-context';
+import { useMenuContext, usePopperScope } from '../menu/menu/menu-context';
 
 import { useMenubarContext } from './menubar-context';
 import { useMenubarMenuContext } from './menubar-menu-context';

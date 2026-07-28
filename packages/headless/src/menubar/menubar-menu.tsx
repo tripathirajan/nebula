@@ -2,7 +2,7 @@
 import * as React from 'react';
 
 
-import { Menu } from '../menu/menu';
+import { Menu } from '../menu/menu/menu';
 
 import { useMenubarContext } from './menubar-context';
 import { MenubarMenuContext } from './menubar-menu-context';
