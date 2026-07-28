@@ -14,7 +14,31 @@ interface ThemeContextValue {
   setTheme: (theme: Theme) => void;
 }
 
-const [ThemeContextProvider, useThemeContext] = createContext<ThemeContextValue>('ThemeProvider');
+// Registered on `globalThis` by a `Symbol.for` key rather than a plain
+// module-scope const. This package's build (`tsup.config.ts`, `splitting:
+// false`) can compile this file into more than one physical `dist/` output
+// (its own subpath, the root barrel, and `theme-switcher`'s bundle, which
+// uses `useTheme` internally) — a plain module-scope `createContext()` call
+// would run once per copy, producing distinct Context objects depending on
+// which entry point a consumer reached this through. `Symbol.for` uses the
+// global symbol registry, so every copy of this module resolves the same
+// key and shares the same Context object regardless of how many times this
+// source ends up compiled in. See `theme-provider.test.tsx` for the
+// regression test this guards.
+const THEME_CONTEXT_KEY = Symbol.for('@nebula-lab/react-ui/theme-context');
+
+type ThemeContextTuple = readonly [
+  (props: ThemeContextValue & { children: React.ReactNode }) => React.ReactElement,
+  (consumerName: string) => ThemeContextValue,
+];
+
+function getThemeContext(): ThemeContextTuple {
+  const registry = globalThis as typeof globalThis & { [THEME_CONTEXT_KEY]?: ThemeContextTuple };
+  registry[THEME_CONTEXT_KEY] ??= createContext<ThemeContextValue>('ThemeProvider');
+  return registry[THEME_CONTEXT_KEY];
+}
+
+const [ThemeContextProvider, useThemeContext] = getThemeContext();
 
 interface ThemeProviderProps {
   children: React.ReactNode;
@@ -42,17 +66,6 @@ interface ThemeProviderProps {
  * and sets `data-theme`/`.dark` before React hydrates — `theme.css`'s
  * `[data-theme="system"]` `@media (prefers-color-scheme)` fallback covers
  * everyone else acceptably in the meantime.
- *
- * Note on import style: pick one entry-point style for `ThemeProvider`,
- * `useTheme`, and `ThemeSwitcher` within a single app — either always the
- * root barrel (`@nebula-lab/react-ui`) or always their own subpaths
- * (`@nebula-lab/react-ui/theme-provider`, `.../theme-switcher`) — and use
- * it consistently. This package's build (`tsup.config.ts`, `splitting:
- * false`) doesn't extract a shared chunk for this context across its
- * public entry points, so mixing styles for these three specifically can
- * produce two distinct Context instances and a "must be used within
- * ThemeProvider" error, even though every other export in this package is
- * safe to reach via either style interchangeably.
  *
  * @example
  * ```tsx

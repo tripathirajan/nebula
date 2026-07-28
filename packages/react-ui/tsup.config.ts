@@ -164,11 +164,10 @@ export default defineConfig((options) => ({
   // also call `createContext()`, but grep confirms none of those context
   // modules is ever imported outside their own component's own folder — so
   // they're never duplicated across entries regardless of splitting.
-  // `theme-provider`'s own doc comment documents the resulting constraint:
-  // import `ThemeProvider`/`useTheme`/`ThemeSwitcher` consistently from one
-  // entry-point style (all root-barrel, or all subpaths) within a single
-  // app — mixing them can produce two distinct Context instances now that
-  // nothing extracts a shared chunk to prevent it.
+  // `theme-provider`'s own module handles its cross-entry duplication risk
+  // directly (registers its Context on `globalThis` via `Symbol.for` rather
+  // than a plain module-scope const — see its own comment), so nothing
+  // here needs a shared chunk to stay correct.
   splitting: false,
   clean: true,
   treeshake: true,
