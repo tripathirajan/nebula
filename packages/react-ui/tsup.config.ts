@@ -9,6 +9,8 @@ export default defineConfig((options) => ({
     'input/index': 'src/forms/input/index.ts',
     'card/index': 'src/data-display/card/index.ts',
     'badge/index': 'src/data-display/badge/index.ts',
+    'card-list-item/index': 'src/data-display/card-list-item/index.ts',
+    'payment-method-list/index': 'src/data-display/payment-method-list/index.ts',
     'alert/index': 'src/feedback/alert/index.ts',
     'alert-popup/index': 'src/feedback/alert-popup/index.ts',
     'avatar/index': 'src/data-display/avatar/index.ts',

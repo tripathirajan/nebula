@@ -40,6 +40,14 @@
       "types": "./dist/badge/index.d.ts",
       "import": "./dist/badge/index.js"
     },
+    "./card-list-item": {
+      "types": "./dist/card-list-item/index.d.ts",
+      "import": "./dist/card-list-item/index.js"
+    },
+    "./payment-method-list": {
+      "types": "./dist/payment-method-list/index.d.ts",
+      "import": "./dist/payment-method-list/index.js"
+    },
     "./alert": {
       "types": "./dist/alert/index.d.ts",
       "import": "./dist/alert/index.js"

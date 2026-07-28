@@ -1,8 +1,9 @@
-import { MenuItem } from '@nebula-lab/react-ui/menu';
 import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
 import { axe } from 'vitest-axe';
+
+import { MenuItem } from '../../overlays/menu';
 
 import { CardListItem } from './card-list-item';
 
@@ -58,6 +59,20 @@ describe('CardListItem (block)', () => {
     );
     fireEvent.click(screen.getByRole('button', { name: 'Row actions' }));
     expect(onClick).not.toHaveBeenCalled();
+  });
+
+  it('applies classNames overrides to their respective slots', () => {
+    render(
+      <CardListItem
+        title="Row"
+        description="desc"
+        trailing={<span>$1.00</span>}
+        classNames={{ root: 'root-x', title: 'title-x', description: 'description-x', trailing: 'trailing-x' }}
+      />,
+    );
+    expect(screen.getByText('Row').className).toContain('title-x');
+    expect(screen.getByText('desc').className).toContain('description-x');
+    expect(screen.getByText('$1.00').closest('.root-x')).toBeInTheDocument();
   });
 
   it('has no axe violations', async () => {

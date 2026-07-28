@@ -1,13 +1,13 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@nebula-lab/react-ui/avatar';
 import { Badge } from '@nebula-lab/react-ui/badge';
 import { Button } from '@nebula-lab/react-ui/button';
+import { CardListItem } from '@nebula-lab/react-ui/card-list-item';
 import { Heading } from '@nebula-lab/react-ui/heading';
 import { MenuItem } from '@nebula-lab/react-ui/menu';
 import { Section } from '@nebula-lab/react-ui/section';
 import { Text } from '@nebula-lab/react-ui/text';
 import { useState } from 'react';
 
-import { CardListItem } from '../data-display/card-list-item/card-list-item';
 import { DataTableBlock } from '../data-display/data-table/data-table-block';
 
 import type { Meta, StoryObj } from '@storybook/react';

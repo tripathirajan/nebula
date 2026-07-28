@@ -1,11 +1,12 @@
 import { cn } from '@nebula-lab/primitives/cn';
-import { Badge } from '@nebula-lab/react-ui/badge';
-import { Button } from '@nebula-lab/react-ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@nebula-lab/react-ui/card';
-import { IconButton } from '@nebula-lab/react-ui/icon-button';
-import { List, ListItem } from '@nebula-lab/react-ui/list';
-import { Menu, MenuContent, MenuItem, MenuPortal, MenuTrigger } from '@nebula-lab/react-ui/menu';
-import { Text } from '@nebula-lab/react-ui/text';
+
+import { Button } from '../../actions/button/button';
+import { IconButton } from '../../actions/icon-button/icon-button';
+import { Menu, MenuContent, MenuItem, MenuPortal, MenuTrigger } from '../../overlays/menu';
+import { Text } from '../../typography/text/text';
+import { Badge } from '../badge/badge';
+import { Card, CardContent, CardHeader, CardTitle } from '../card';
+import { List, ListItem } from '../list';
 
 interface PaymentMethod {
   id: string;
@@ -17,6 +18,21 @@ interface PaymentMethod {
   isDefault?: boolean;
 }
 
+/** One optional class per part, for restyling a slot without forking the whole component — e.g. `classNames={{ item: 'py-4' }}` to loosen row spacing. */
+interface PaymentMethodListClassNames {
+  root?: string;
+  header?: string;
+  title?: string;
+  list?: string;
+  item?: string;
+  icon?: string;
+  brand?: string;
+  badge?: string;
+  expiry?: string;
+  actionsTrigger?: string;
+  addButton?: string;
+}
+
 interface PaymentMethodListProps {
   methods: PaymentMethod[];
   /** Omit to hide the "Set as default" row action entirely. */
@@ -26,11 +42,23 @@ interface PaymentMethodListProps {
   /** Omit to hide the "Add payment method" button. */
   onAdd?: () => void;
   className?: string;
+  /** Per-slot class overrides — see `PaymentMethodListClassNames`. */
+  classNames?: PaymentMethodListClassNames;
 }
 
-function CardIcon() {
+function CardIcon({ className }: { className?: string }) {
   return (
-    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-8 w-11 shrink-0 rounded-[var(--radius-selector)] border border-[var(--card-border)] p-1.5">
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.5}
+      className={cn(
+        'h-8 w-11 shrink-0 rounded-[var(--radius-selector)] border border-[var(--card-border)] p-1.5',
+        className,
+      )}
+    >
       <rect x="1" y="4" width="22" height="16" rx="2" />
       <path strokeLinecap="round" d="M1 9h22" />
     </svg>
@@ -56,36 +84,40 @@ function CardIcon() {
  * ```
  */
 function PaymentMethodList(props: PaymentMethodListProps) {
-  const { methods, onSetDefault, onRemove, onAdd, className } = props;
+  const { methods, onSetDefault, onRemove, onAdd, className, classNames } = props;
   const hasRowActions = Boolean(onSetDefault || onRemove);
 
   return (
-    <Card variant="outlined" className={cn('flex flex-col', className)}>
-      <CardHeader bordered={false}>
-        <CardTitle className="text-base">Payment methods</CardTitle>
+    <Card variant="outlined" className={cn('flex flex-col', className, classNames?.root)}>
+      <CardHeader bordered={false} className={classNames?.header}>
+        <CardTitle className={cn('text-base', classNames?.title)}>Payment methods</CardTitle>
       </CardHeader>
       <CardContent className="flex flex-col gap-4 pt-0">
-        <List className="flex flex-col gap-3">
+        <List className={cn('flex flex-col gap-3', classNames?.list)}>
           {methods.map((method) => (
-            <ListItem key={method.id} className="flex items-center gap-3">
-              <CardIcon />
+            <ListItem key={method.id} className={cn('flex items-center gap-3', classNames?.item)}>
+              <CardIcon className={classNames?.icon} />
               <div className="flex flex-1 flex-col">
                 <div className="flex items-center gap-2">
-                  <Text className="text-sm font-medium">
+                  <Text className={cn('text-sm font-medium', classNames?.brand)}>
                     {method.brand} •••• {method.last4}
                   </Text>
                   {method.isDefault ? (
-                    <Badge color="neutral" className="text-[10px]">
+                    <Badge color="neutral" className={cn('text-[10px]', classNames?.badge)}>
                       Default
                     </Badge>
                   ) : null}
                 </div>
-                <Text className="text-xs opacity-70">Expires {method.expiry}</Text>
+                <Text className={cn('text-xs opacity-70', classNames?.expiry)}>Expires {method.expiry}</Text>
               </div>
               {hasRowActions ? (
                 <Menu>
                   <MenuTrigger asChild>
-                    <IconButton aria-label={`Actions for ${method.brand} ending in ${method.last4}`} size="sm">
+                    <IconButton
+                      aria-label={`Actions for ${method.brand} ending in ${method.last4}`}
+                      size="sm"
+                      className={classNames?.actionsTrigger}
+                    >
                       <svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4">
                         <circle cx="12" cy="5" r="1.5" />
                         <circle cx="12" cy="12" r="1.5" />
@@ -107,7 +139,13 @@ function PaymentMethodList(props: PaymentMethodListProps) {
           ))}
         </List>
         {onAdd ? (
-          <Button variant="ghost" color="primary" size="sm" className="self-start" onClick={onAdd}>
+          <Button
+            variant="ghost"
+            color="primary"
+            size="sm"
+            className={cn('self-start', classNames?.addButton)}
+            onClick={onAdd}
+          >
             + Add payment method
           </Button>
         ) : null}

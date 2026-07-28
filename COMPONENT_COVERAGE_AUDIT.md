@@ -42,8 +42,21 @@ Each is a thin styled wrapper (same pattern as `primitives/text` → `react-ui/t
 
 ### B. react-ui-blocks → react-ui: generic molecules, decided 2026-07-28
 
-**Move to `react-ui` as molecules (14)**, each gaining an additive `classNames` slot-map prop (e.g. `classNames={{ root, item }}`) so consumers can restyle sub-parts without forking — the concrete fix for "no way to override `PaymentMethodList`'s row styling":
-`CardListItem`, `ListingCard`, `ChartCard`, `BalanceCard`, `BillingSummaryCard`, `TeamMemberCard`, `DashboardOverview`, `ThumbnailList`, `RankedList`, `ReviewsList`, `WelcomeBanner`, `PlanCards`, `PaymentMethodList`, `ProfileHeader`.
+**Move to `react-ui` as molecules (14)**, each gaining an additive `classNames` slot-map prop (e.g. `classNames={{ root, item }}`) so consumers can restyle sub-parts without forking — the concrete fix for "no way to override `PaymentMethodList`'s row styling". Pilot batch done 2026-07-28 (proved the scaffold + `classNames` pattern, consumers repointed, both packages re-verified clean):
+- [x] `CardListItem` — `classNames`: `root`/`avatar`/`icon`/`content`/`title`/`description`/`trailing`/`actionsTrigger`
+- [x] `PaymentMethodList` — `classNames`: `root`/`header`/`title`/`list`/`item`/`icon`/`brand`/`badge`/`expiry`/`actionsTrigger`/`addButton`
+- [ ] `ListingCard`
+- [ ] `ChartCard`
+- [ ] `BalanceCard`
+- [ ] `BillingSummaryCard`
+- [ ] `TeamMemberCard`
+- [ ] `DashboardOverview`
+- [ ] `ThumbnailList`
+- [ ] `RankedList`
+- [ ] `ReviewsList`
+- [ ] `WelcomeBanner`
+- [ ] `PlanCards`
+- [ ] `ProfileHeader`
 
 **Delete outright (4) — not moved anywhere:**
 - [ ] `AuthSplitLayout` — page/view-level (owns a whole two-panel page shell), not an organism; templates compose their own pages
@@ -71,8 +84,8 @@ Whether the existing ~100 ever join this structure is a future, separate decisio
 
 ### Execution order
 
-1. Scaffold the 17 primitives/styleless gaps (§A) into their §D category subfolders — no dependencies on §B, can start immediately.
-2. Pilot 2 of the 14 §B moves (`CardListItem`, `PaymentMethodList`) into `data-display/` to prove the scaffold + `classNames` pattern before batching the rest.
+1. ~~Scaffold the 17 primitives/styleless gaps (§A) into their §D category subfolders~~ — done.
+2. ~~Pilot 2 of the 14 §B moves (`CardListItem`, `PaymentMethodList`) into `data-display/` to prove the scaffold + `classNames` pattern~~ — done 2026-07-28.
 3. Batch the remaining 12 §B moves into `data-display/`.
 4. Repoint every consumer (react-ui-blocks' own `compositions/*.stories.tsx`, both `templates/expensiona-*` apps) off the old `@nebula-lab/react-ui-blocks` paths.
 5. Delete the 4 §B removals and their old source folders; update both packages' barrels/`exports` maps.

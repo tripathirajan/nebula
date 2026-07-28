@@ -1,9 +1,22 @@
 import { cn } from '@nebula-lab/primitives/cn';
-import { Card } from '@nebula-lab/react-ui/card';
-import { IconButton } from '@nebula-lab/react-ui/icon-button';
-import { Menu, MenuContent, MenuPortal, MenuTrigger } from '@nebula-lab/react-ui/menu';
-import { Text } from '@nebula-lab/react-ui/text';
 import * as React from 'react';
+
+import { IconButton } from '../../actions/icon-button/icon-button';
+import { Menu, MenuContent, MenuPortal, MenuTrigger } from '../../overlays/menu';
+import { Text } from '../../typography/text/text';
+import { Card } from '../card/card';
+
+/** One optional class per part, for restyling a slot without forking the whole component — e.g. `classNames={{ title: 'font-semibold' }}` to bump just the title's weight. */
+interface CardListItemClassNames {
+  root?: string;
+  avatar?: string;
+  icon?: string;
+  content?: string;
+  title?: string;
+  description?: string;
+  trailing?: string;
+  actionsTrigger?: string;
+}
 
 interface CardListItemProps {
   /** A leading `Avatar` — mutually exclusive with `icon` in practice (pass whichever fits the row), rendered in the same `h-10 w-10 shrink-0` slot either way. */
@@ -20,6 +33,8 @@ interface CardListItemProps {
   actionsLabel?: string;
   onClick?: () => void;
   className?: string;
+  /** Per-slot class overrides — see `CardListItemClassNames`. */
+  classNames?: CardListItemClassNames;
 }
 
 /**
@@ -59,14 +74,24 @@ interface CardListItemProps {
  * ```
  */
 function CardListItem(props: CardListItemProps) {
-  const { avatar, icon, title, description, trailing, actions, actionsLabel = 'Row actions', onClick, className } =
-    props;
+  const {
+    avatar,
+    icon,
+    title,
+    description,
+    trailing,
+    actions,
+    actionsLabel = 'Row actions',
+    onClick,
+    className,
+    classNames,
+  } = props;
 
   const titleId = React.useId();
   const isInteractive = onClick !== undefined;
 
   return (
-    <Card variant="outlined" className={cn('relative flex items-center gap-3 p-3', className)}>
+    <Card variant="outlined" className={cn('relative flex items-center gap-3 p-3', className, classNames?.root)}>
       {isInteractive ? (
         <button
           type="button"
@@ -76,33 +101,52 @@ function CardListItem(props: CardListItemProps) {
         />
       ) : null}
       {avatar ? (
-        <div className="pointer-events-none flex h-10 w-10 shrink-0 items-center justify-center">{avatar}</div>
+        <div
+          className={cn(
+            'pointer-events-none flex h-10 w-10 shrink-0 items-center justify-center',
+            classNames?.avatar,
+          )}
+        >
+          {avatar}
+        </div>
       ) : null}
       {icon && !avatar ? (
         <div
           aria-hidden="true"
-          className="pointer-events-none flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[var(--color-base-200)] text-[var(--color-base-content)]"
+          className={cn(
+            'pointer-events-none flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[var(--color-base-200)] text-[var(--color-base-content)]',
+            classNames?.icon,
+          )}
         >
           {icon}
         </div>
       ) : null}
-      <div className="pointer-events-none min-w-0 flex-1">
+      <div className={cn('pointer-events-none min-w-0 flex-1', classNames?.content)}>
         {/* `Text` defaults to an inline `<span>` — `truncate`'s `text-overflow:
         ellipsis` has no effect on `display: inline` (only block-ish boxes),
         so without `block` here this text silently overflows past its
         measured width into `trailing` instead of actually truncating; caught
         by measuring a real overlap between the description and a trailing
         badge, not just eyeballing a screenshot. */}
-        <Text id={titleId} className="block truncate text-sm font-medium">
+        <Text id={titleId} className={cn('block truncate text-sm font-medium', classNames?.title)}>
           {title}
         </Text>
-        {description ? <Text className="block truncate text-xs opacity-70">{description}</Text> : null}
+        {description ? (
+          <Text className={cn('block truncate text-xs opacity-70', classNames?.description)}>{description}</Text>
+        ) : null}
       </div>
-      {trailing ? <div className="pointer-events-none shrink-0 text-right text-sm">{trailing}</div> : null}
+      {trailing ? (
+        <div className={cn('pointer-events-none shrink-0 text-right text-sm', classNames?.trailing)}>{trailing}</div>
+      ) : null}
       {actions ? (
         <Menu>
           <MenuTrigger asChild>
-            <IconButton aria-label={actionsLabel} size="sm" variant="ghost" className="shrink-0">
+            <IconButton
+              aria-label={actionsLabel}
+              size="sm"
+              variant="ghost"
+              className={cn('shrink-0', classNames?.actionsTrigger)}
+            >
               <svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4">
                 <circle cx="12" cy="5" r="1.5" />
                 <circle cx="12" cy="12" r="1.5" />

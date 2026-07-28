@@ -59,6 +59,19 @@ describe('PaymentMethodList (block)', () => {
     expect(onRemove).toHaveBeenCalledWith('1');
   });
 
+  it('applies classNames overrides to their respective slots', () => {
+    render(
+      <PaymentMethodList
+        methods={methods}
+        classNames={{ root: 'root-x', title: 'title-x', item: 'item-x', brand: 'brand-x' }}
+      />,
+    );
+    expect(screen.getByText('Payment methods').className).toContain('title-x');
+    expect(screen.getByText('Visa •••• 4242').className).toContain('brand-x');
+    expect(screen.getByText('Visa •••• 4242').closest('.root-x')).toBeInTheDocument();
+    expect(screen.getByText('Visa •••• 4242').closest('.item-x')).toBeInTheDocument();
+  });
+
   it('has no axe violations', async () => {
     const { container } = render(
       <PaymentMethodList methods={methods} onSetDefault={() => {}} onRemove={() => {}} onAdd={() => {}} />,

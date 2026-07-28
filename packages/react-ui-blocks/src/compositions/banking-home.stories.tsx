@@ -1,6 +1,7 @@
+import { PaymentMethodList } from '@nebula-lab/react-ui/payment-method-list';
+
 import { BalanceCard } from '../dashboard/billing/balance-card';
 import { BillingSummaryCard } from '../dashboard/billing/billing-summary-card';
-import { PaymentMethodList } from '../dashboard/billing/payment-method-list';
 import { ChartCard } from '../dashboard/charts/chart-card';
 import { DashboardOverview } from '../dashboard/widgets/dashboard-overview';
 

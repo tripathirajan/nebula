@@ -1,14 +1,15 @@
-import { Avatar, AvatarFallback } from '@nebula-lab/react-ui/avatar';
-import { Badge } from '@nebula-lab/react-ui/badge';
-import { MenuItem } from '@nebula-lab/react-ui/menu';
 import { expect, userEvent, waitFor, within } from '@storybook/test';
+
+import { MenuItem } from '../../overlays/menu';
+import { Avatar, AvatarFallback } from '../avatar';
+import { Badge } from '../badge/badge';
 
 import { CardListItem } from './card-list-item';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
 const meta: Meta<typeof CardListItem> = {
-  title: 'Blocks/Data Display/Card List Item',
+  title: 'React UI/CardListItem',
   component: CardListItem,
   tags: ['autodocs'],
   parameters: { layout: 'padded' },

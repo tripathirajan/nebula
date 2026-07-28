@@ -5,7 +5,7 @@ import { PaymentMethodList } from './payment-method-list';
 import type { Meta, StoryObj } from '@storybook/react';
 
 const meta = {
-  title: 'Blocks/Dashboard/Billing/Payment Method List',
+  title: 'React UI/PaymentMethodList',
   component: PaymentMethodList,
   tags: ['autodocs'],
   parameters: { layout: 'padded' },
