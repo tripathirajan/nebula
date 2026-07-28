@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-import { cn } from '../cn/cn';
 import { Primitive } from '../primitive/primitive';
 
 import type { PrimitiveProps } from '../primitive/primitive';
@@ -10,14 +9,16 @@ import type { PolymorphicComponent, PolymorphicComponentPropsWithRef } from '../
 type ParagraphProps<E extends React.ElementType = 'p'> = PolymorphicComponentPropsWithRef<E>;
 
 /**
- * A `p` with comfortable reading line-height by default — for body copy,
- * as distinct from `Text` (no line-height opinion, meant for inline runs).
+ * A `p` by another name, no classes of its own (unstyled primitives own
+ * behavior, not visuals — `@nebula-lab/react-ui`'s `Paragraph` supplies the
+ * comfortable-reading line-height), distinct from `Text` (meant for inline
+ * runs, no line-height opinion at any layer).
  *
  * @example
  * ```tsx
  * <Paragraph>
- *   A block of body copy that reads comfortably at paragraph length,
- *   without needing a manually-applied leading-relaxed class every time.
+ *   A block of body copy — reach for @nebula-lab/react-ui's Paragraph for
+ *   the comfortable-reading line-height; this unstyled layer adds none.
  * </Paragraph>
  * ```
  */
@@ -26,15 +27,8 @@ const Paragraph = React.forwardRef(
     props: ParagraphProps<E>,
     forwardedRef: React.Ref<unknown>,
   ) => {
-    const { as, className, ...rest } = props;
-    return (
-      <Primitive
-        as={as ?? ('p' as E)}
-        {...(rest as PrimitiveProps<E>)}
-        ref={forwardedRef}
-        className={cn('leading-relaxed', className)}
-      />
-    );
+    const { as, ...rest } = props;
+    return <Primitive as={as ?? ('p' as E)} {...(rest as PrimitiveProps<E>)} ref={forwardedRef} />;
   },
 ) as PolymorphicComponent<'p'>;
 

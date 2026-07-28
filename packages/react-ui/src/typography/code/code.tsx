@@ -6,11 +6,10 @@ import type { CodeProps as PrimitiveCodeProps } from '@nebula-lab/primitives/cod
 import type { PolymorphicComponent } from '@nebula-lab/primitives/types';
 
 /**
- * Styled inline `Code` — overrides the unstyled primitive's hardcoded
- * `bg-gray-100` (a pre-token-system leftover, not yet themed at that layer)
- * with `--code-bg`/`-text` (see `../tokens/component.ts`); `cn()`'s
- * `tailwind-merge` dedupes the conflicting `bg-*` class so only this
- * layer's themed one survives regardless of import order.
+ * Styled inline `Code` — the unstyled primitive carries no classes of its
+ * own (unstyled primitives own behavior, not visuals), so this layer is the
+ * sole source of the monospace/pill-background look, via `--code-bg`/`-text`
+ * (see `../tokens/component.ts`).
  *
  * @example
  * ```tsx

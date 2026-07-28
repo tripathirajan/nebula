@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-import { cn } from '../cn/cn';
 import { Primitive } from '../primitive/primitive';
 
 import type { PrimitiveProps } from '../primitive/primitive';
@@ -10,10 +9,11 @@ import type { PolymorphicComponent, PolymorphicComponentPropsWithRef } from '../
 type PreProps<E extends React.ElementType = 'pre'> = PolymorphicComponentPropsWithRef<E>;
 
 /**
- * A multi-line code block container — monospace, padded, horizontally
- * scrollable instead of wrapping/overflowing. Nest a `Code` inside for the
- * native `<pre><code>` structure (or plain text/a syntax highlighter's
- * output).
+ * A multi-line code block container — a `pre` by another name, no classes
+ * of its own (unstyled primitives own behavior, not visuals —
+ * `@nebula-lab/react-ui`'s `Pre` supplies the monospace/padding/scroll/
+ * background styling). Nest a `Code` inside for the native `<pre><code>`
+ * structure (or plain text/a syntax highlighter's output).
  *
  * @example
  * ```tsx
@@ -24,15 +24,8 @@ type PreProps<E extends React.ElementType = 'pre'> = PolymorphicComponentPropsWi
  */
 const Pre = React.forwardRef(
   <E extends React.ElementType = 'pre'>(props: PreProps<E>, forwardedRef: React.Ref<unknown>) => {
-    const { as, className, ...rest } = props;
-    return (
-      <Primitive
-        as={as ?? ('pre' as E)}
-        {...(rest as PrimitiveProps<E>)}
-        ref={forwardedRef}
-        className={cn('overflow-x-auto rounded-md bg-gray-100 p-4 font-mono text-sm', className)}
-      />
-    );
+    const { as, ...rest } = props;
+    return <Primitive as={as ?? ('pre' as E)} {...(rest as PrimitiveProps<E>)} ref={forwardedRef} />;
   },
 ) as PolymorphicComponent<'pre'>;
 
