@@ -1,10 +1,10 @@
 import { expect, fireEvent, fn, within } from '@storybook/test';
 
-import { Button } from '../../button/button';
-import { Field } from '../../field/field';
-import { FieldControl } from '../../field/field-control';
-import { FieldLabel } from '../../field/field-label';
-import { Input } from '../../input/input';
+import { Button } from '../../actions/button/button';
+import { Field } from '../field/field';
+import { FieldControl } from '../field/field-control';
+import { FieldLabel } from '../field/field-label';
+import { Input } from '../input/input';
 
 import { Form } from './form';
 

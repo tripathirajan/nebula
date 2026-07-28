@@ -1,0 +1,5 @@
+// Thin renamed re-export of this package's own `PopoverContent` — mirrors
+// `@nebula-lab/headless`'s `ColorPickerContent`-wraps-`PopoverContent`
+// relationship, so this needs no separate styling of its own.
+export { PopoverContent as ColorPickerContent } from '../../overlays/popover/popover-content';
+export type { PopoverContentProps as ColorPickerContentProps } from '../../overlays/popover/popover-content';

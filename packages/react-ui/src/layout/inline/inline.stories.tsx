@@ -1,4 +1,4 @@
-import { Badge } from '../../badge/badge';
+import { Badge } from '../../data-display/badge/badge';
 
 import { Inline } from './inline';
 

@@ -2,7 +2,7 @@ import { cn } from '@nebula-lab/primitives/cn';
 import { NativeSelect as PrimitiveNativeSelect } from '@nebula-lab/primitives/native-select';
 import * as React from 'react';
 
-import { inputVariants } from '../../input/input';
+import { inputVariants } from '../input/input';
 
 import type { NativeSelectProps as PrimitiveNativeSelectProps } from '@nebula-lab/primitives/native-select';
 import type { VariantProps } from 'class-variance-authority';

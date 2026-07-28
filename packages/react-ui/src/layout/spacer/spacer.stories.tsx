@@ -1,4 +1,4 @@
-import { Button } from '../../button/button';
+import { Button } from '../../actions/button/button';
 import { HStack } from '../hstack/hstack';
 
 import { Spacer } from './spacer';
