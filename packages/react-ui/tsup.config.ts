@@ -6,6 +6,9 @@ export default defineConfig((options) => ({
   entry: {
     index: 'src/index.ts',
     'button/index': 'src/actions/button/index.ts',
+    'box/index': 'src/layout/box/index.ts',
+    'paragraph/index': 'src/typography/paragraph/index.ts',
+    'pre/index': 'src/typography/pre/index.ts',
     'input/index': 'src/forms/input/index.ts',
     'card/index': 'src/data-display/card/index.ts',
     'badge/index': 'src/data-display/badge/index.ts',

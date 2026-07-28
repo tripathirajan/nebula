@@ -1,6 +1,9 @@
 // Barrel only — zero logic. `theme.css` is not re-exported from here since
 // it's a CSS asset, not JS — import it directly: `@nebula-lab/react-ui/theme.css`.
 export * from './actions/button';
+export * from './layout/box';
+export * from './typography/paragraph';
+export * from './typography/pre';
 export * from './forms/input';
 export * from './data-display/card';
 export * from './data-display/badge';

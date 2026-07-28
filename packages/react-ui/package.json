@@ -28,6 +28,18 @@
       "types": "./dist/button/index.d.ts",
       "import": "./dist/button/index.js"
     },
+    "./box": {
+      "types": "./dist/box/index.d.ts",
+      "import": "./dist/box/index.js"
+    },
+    "./paragraph": {
+      "types": "./dist/paragraph/index.d.ts",
+      "import": "./dist/paragraph/index.js"
+    },
+    "./pre": {
+      "types": "./dist/pre/index.d.ts",
+      "import": "./dist/pre/index.js"
+    },
     "./input": {
       "types": "./dist/input/index.d.ts",
       "import": "./dist/input/index.js"

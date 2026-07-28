@@ -378,11 +378,31 @@ doc += tableSection(
   { header: 'Built On (react-ui)', value: (r) => r.builtOn },
 );
 
+const primitiveGaps = rows.primitives.filter((r) => r.notes.startsWith('**Gap**'));
+const headlessGaps = rows.headless.filter((r) => r.notes.startsWith('**Gap**'));
+const styleGaps = rows.styleless.filter((r) => r.notes.startsWith('**Gap**'));
+
 doc += `---
 
-## Known gaps (from this table)
+## Known gaps (computed from this table, not hand-listed)
 
-- **\`primitives\`**: \`Box\`, \`Paragraph\`, \`Pre\` have no \`react-ui\` wrapper yet — real, usable primitives that never got the standard thin-wrapper treatment the other layout/typography atoms got.
+${
+  primitiveGaps.length === 0 && headlessGaps.length === 0 && styleGaps.length === 0
+    ? '_None right now — every non-internal-utility component in `primitives`/`headless`/`styleless` has a `react-ui` wrapper._'
+    : [
+        primitiveGaps.length
+          ? `- **\`primitives\`**: ${primitiveGaps.map((r) => `\`${r.displayName}\``).join(', ')} — no \`react-ui\` wrapper yet.`
+          : null,
+        headlessGaps.length
+          ? `- **\`headless\`**: ${headlessGaps.map((r) => `\`${r.displayName}\``).join(', ')} — no \`react-ui\` wrapper yet.`
+          : null,
+        styleGaps.length
+          ? `- **\`styleless\`**: ${styleGaps.map((r) => `\`${r.displayName}\``).join(', ')} — no \`react-ui\` wrapper yet.`
+          : null,
+      ]
+        .filter(Boolean)
+        .join('\n')
+}
 - **\`headless/listbox\`**: deliberately has no \`react-ui\` wrapper — it's \`Select\`/\`Combobox\`/\`Autocomplete\`'s shared internal engine, not meant to be styled standalone.
 - **Renames across layers**: \`styleless\`'s \`email-input\`/\`password-input\`/\`search-input\`/\`tel-input\`/\`url-input\` are exposed in \`react-ui\` as \`email-field\`/\`password-field\`/\`search-field\`/\`tel-field\`/\`url-field\` — same component, different public name.
 

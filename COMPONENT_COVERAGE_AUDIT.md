@@ -29,6 +29,7 @@ Confirmed by diffing every folder in `packages/{primitives,headless,styleless}/s
 - [x] `Inline` — wraps `primitives/inline`
 - [x] `Wrap` — wraps `primitives/wrap`
 - [x] `Spacer` — wraps `primitives/spacer`
+- [x] `Box` — wraps `primitives/box`; found 2026-07-28 re-auditing against the generated `COMPONENT_INVENTORY.md` — a real, usable primitive (the plainest polymorphic div-by-another-name) that never got the standard thin-wrapper treatment the other 11 layout primitives got
 
 **Other real gaps (6):**
 - [x] `Image` — wraps `primitives/image`; no styled bare-image atom exists (`image-upload`/`image-preview` exist but aren't this)
@@ -37,6 +38,8 @@ Confirmed by diffing every folder in `packages/{primitives,headless,styleless}/s
 - [x] `NativeSelect` — wraps `primitives/native-select`; no styled native `<select>` (confirmed: hand-wrote a raw `<select>` in `templates/expensiona-desktop/src/components/QuickTransferCard.tsx` for exactly this reason). Matches MUI's own `NativeSelect`/`Select` split naming.
 - [x] `Form` — wraps `primitives/form`; no styled `<form>` wrapper
 - [x] `ImagePreview` — `styleless/image-preview` exists and is already used internally by `ImageUpload`, but has no standalone `@nebula-lab/react-ui/image-preview` export for a bare preview-only use case
+- [x] `Paragraph` — wraps `primitives/paragraph`; found alongside `Box`/`Pre`, same reason (real primitive, never wrapped)
+- [x] `Pre` — wraps `primitives/pre`; also overrides the primitive's hardcoded `bg-gray-100` with the `--code-block-*` tokens `CodeBlock` already uses, matching `Code`'s own precedent for the identical fix
 
 Each is a thin styled wrapper (same pattern as `primitives/text` → `react-ui/text`) — scaffold via the `new-component` skill, no new design decisions needed per component.
 
@@ -72,15 +75,13 @@ Not splitting `react-ui` into per-category packages. It already ships tree-shake
 
 ### D. Folder arrangement for the 31 new/moved components — decided 2026-07-28
 
-Not reorganizing the existing ~100 `packages/react-ui/src` components — that's a separate, higher-risk migration (moving stable files, updating every import across stories/tests/consumers) with no urgency. Instead, every component newly created by §A/§B lands directly in a category subfolder from the start, since it costs nothing (nothing existing moves) and gets the navigability win where it actually matters right now. Export paths are unaffected — still flat `@nebula-lab/react-ui/<name>` regardless of `src/` folder depth.
+**Superseded 2026-07-28**: the "not reorganizing the existing ~100" call below was reversed later the same day — all ~114 existing `react-ui` components were moved into the same category-subfolder structure (see git history, commit `bca2c3c`), once the mechanical risk (per-file relative import recalculation) was scripted rather than done by hand. Export paths stayed flat throughout, exactly as this section anticipated. Kept here for the historical reasoning, not as the current state — see `COMPONENT_INVENTORY.md` for the real, current per-package component list.
 
-- `layout/` (11) — AspectRatio, Center, Container, Flex, Grid, HStack, VStack, Stack, Inline, Wrap, Spacer
-- `typography/` (2) — Label, Link
+- `layout/` (12) — AspectRatio, Center, Container, Flex, Grid, HStack, VStack, Stack, Inline, Wrap, Spacer, Box
+- `typography/` (4) — Label, Link, Paragraph, Pre
 - `media/` (2) — Image, ImagePreview
 - `forms/` (2) — NativeSelect, Form
 - `data-display/` (14, the §B moves) — CardListItem, ListingCard, ChartCard, BalanceCard, BillingSummaryCard, TeamMemberCard, DashboardOverview, ThumbnailList, RankedList, ReviewsList, WelcomeBanner, PlanCards, PaymentMethodList, ProfileHeader
-
-Whether the existing ~100 ever join this structure is a future, separate decision — left flat for now.
 
 ### Execution order
 
