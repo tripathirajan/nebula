@@ -149,34 +149,27 @@ export default defineConfig((options) => ({
   // (ERR_WORKER_OUT_OF_MEMORY — https://github.com/egoist/tsup/issues/920).
   dts: false,
   sourcemap: !!options.watch, // maps are dev/debug DX weight only, not needed by consumers; skip them for the real publish build, keep them under `tsup --watch` (this package's `dev` script) for local debugging
-  // Same reasoning `packages/headless/tsup.config.ts` documents for its own
-  // `splitting: true` — but here the duplication doesn't come from a
-  // cross-folder *relative* import (headless's Dialog/AlertDialog case);
-  // every one of this package's ~100 entries is genuinely self-contained.
-  // It comes from the root barrel (`index.ts`) doing `export * from './X'`
-  // for every subpath — so any component that owns its own
-  // `React.createContext()` call (`theme-provider`, `multi-select`,
-  // `carousel`, `sortable`, `data-table` — confirmed via
-  // `grep -rl "React.createContext" src`, none of the others are re-exported
-  // from more than their own single entry) is reachable from *two* separate
-  // public entry points: its own subpath (`@nebula-lab/react-ui/theme-provider`)
-  // and the root barrel (`@nebula-lab/react-ui`). Under `splitting: false` each
-  // entry bundles that module fully self-contained, re-running its
-  // module-level `createContext()` call separately in both `dist/index.js`
-  // and `dist/theme-provider/index.js` — a consumer that imports
-  // `ThemeProvider` from one and `useTheme` from the other gets two
-  // distinct Context objects and a "must be used within ThemeProvider"
-  // runtime error, despite typechecking cleanly (reproduced building
-  // `packages/react-ui-blocks`'s `SaasAppHeader`/`ThemeSwitcher` this
-  // session — see `BLOCKS_ARCHITECTURE.md` §14). `splitting: true` lets
-  // tsup/rollup extract a shared chunk for a module referenced by multiple
-  // entries, so there's exactly one `createContext()` call per context,
-  // regardless of which public entry point a consumer reaches it through.
-  // Regression test: `theme-provider/theme-provider.test.tsx` imports
-  // `ThemeProvider`/`useTheme` from the two different entry points
-  // deliberately, via the package specifier (not a relative path), so it
-  // actually exercises the built `dist/` output this comment describes.
-  splitting: true,
+  // Deliberately off (unlike packages/headless's `splitting: true`, which
+  // guards a different, still-real case: two entries sharing code via a
+  // cross-folder *relative* import). With ~130 entries and a root barrel
+  // that re-exports every one of them, `splitting: true` here was
+  // producing ~160 anonymous shared chunk files — most of them for plain
+  // stateless components, where duplicate bytes across `dist/index.js` and
+  // `dist/<name>/index.js` cost package size but nothing else. Confirmed
+  // via `grep -rl "createContext(" src` (excluding tests/stories) that only
+  // one module in this package actually owns its own `React.createContext()`
+  // call *and* is reachable from more than one public entry point:
+  // `theme-provider` (root barrel, its own subpath, and `theme-switcher`,
+  // which uses `useTheme` internally). `multi-select`/`sortable`/`carousel`
+  // also call `createContext()`, but grep confirms none of those context
+  // modules is ever imported outside their own component's own folder — so
+  // they're never duplicated across entries regardless of splitting.
+  // `theme-provider`'s own doc comment documents the resulting constraint:
+  // import `ThemeProvider`/`useTheme`/`ThemeSwitcher` consistently from one
+  // entry-point style (all root-barrel, or all subpaths) within a single
+  // app — mixing them can produce two distinct Context instances now that
+  // nothing extracts a shared chunk to prevent it.
+  splitting: false,
   clean: true,
   treeshake: true,
   external: ['react', 'react-dom', '@nebula-lab/hooks', '@nebula-lab/primitives', '@nebula-lab/headless'],
