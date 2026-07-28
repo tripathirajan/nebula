@@ -1,6 +1,9 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
+    // See packages/primitives/tsconfig.build.json for why `.d.ts.map` is
+    // off here — editor DX only, not needed by a published build.
+    "declarationMap": false,
     // Unset the workspace-wide `@nebula-lab/*` -> `packages/*/src` path aliases
     // from tsconfig.base.json for this build. With them in effect, `tsc -p
     // tsconfig.build.json` (composite + rootDir: './src') pulls other

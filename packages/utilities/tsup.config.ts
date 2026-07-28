@@ -1,7 +1,7 @@
 import { defineConfig } from 'tsup';
 
 // One entry per module — see component-library-architecture.md §9.1.
-export default defineConfig({
+export default defineConfig((options) => ({
   entry: {
     index: 'src/index.ts',
     'clamp/index': 'src/clamp/index.ts',
@@ -17,8 +17,8 @@ export default defineConfig({
   // separate `tsc --emitDeclarationOnly` pass instead of tsup's `dts: true`
   // (ERR_WORKER_OUT_OF_MEMORY — https://github.com/egoist/tsup/issues/920).
   dts: false,
-  sourcemap: true,
+  sourcemap: !!options.watch, // maps are dev/debug DX weight only, not needed by consumers; skip them for the real publish build, keep them under `tsup --watch` (this package's `dev` script) for local debugging
   splitting: false,
   clean: true,
   treeshake: true,
-});
+}));

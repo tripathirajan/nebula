@@ -3,7 +3,7 @@ import { defineConfig } from 'tsup';
 // One entry per component/module (see component-library-architecture.md §9.1) —
 // never a single bundled entry, so consumers can import per-component subpaths
 // and bundlers can tree-shake accordingly.
-export default defineConfig({
+export default defineConfig((options) => ({
   entry: {
     index: 'src/index.ts',
     'types/index': 'src/types/index.ts',
@@ -63,7 +63,7 @@ export default defineConfig({
   // has no such worker-memory ceiling and produces equivalent per-entry
   // .d.ts output since tsconfig.json already mirrors src/ 1:1 into dist/.
   dts: false,
-  sourcemap: true,
+  sourcemap: !!options.watch, // maps are dev/debug DX weight only, not needed by consumers; skip them for the real publish build, keep them under `tsup --watch` (this package's `dev` script) for local debugging
   // `splitting: false` here used to mean every one of the 30+ entries above
   // bundled its own fully self-contained copy of any module it pulled in via
   // a relative import — including `slot.tsx`, which `primitive.tsx` imports
@@ -89,4 +89,4 @@ export default defineConfig({
   clean: true,
   treeshake: true,
   external: ['react', 'react-dom'],
-});
+}));

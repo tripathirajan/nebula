@@ -1,6 +1,9 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
+    // See packages/primitives/tsconfig.build.json for why `.d.ts.map` is
+    // off here — editor DX only, not needed by a published build.
+    "declarationMap": false,
     // See packages/primitives/tsconfig.build.json for why this needs to
     // live inside `dist`: otherwise a failed build's `.tsbuildinfo` survives
     // in the package root (untouched by `rm -f dist/*.tsbuildinfo`) and

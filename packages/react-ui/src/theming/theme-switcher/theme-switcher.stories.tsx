@@ -1,5 +1,6 @@
-import { ThemeProvider } from '@nebula-lab/react-ui/theme-provider';
 import { expect, userEvent, within } from '@storybook/test';
+
+import { ThemeProvider } from '../theme-provider/theme-provider';
 
 import { ThemeSwitcher } from './theme-switcher';
 

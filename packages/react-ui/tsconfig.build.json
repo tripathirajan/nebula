@@ -1,6 +1,9 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
+    // See packages/primitives/tsconfig.build.json for why `.d.ts.map` is
+    // off here — editor DX only, not needed by a published build.
+    "declarationMap": false,
     // See packages/headless/tsconfig.build.json for why `paths` is cleared
     // here: without it, `tsc -p tsconfig.build.json` (composite + rootDir:
     // './src') pulls other packages' *source* files (resolved via the

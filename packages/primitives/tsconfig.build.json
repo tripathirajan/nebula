@@ -1,6 +1,13 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
+    // `.d.ts.map` lets an editor's "go to definition" land on the real
+    // source instead of the compiled `.d.ts` — an editor/DX nicety for
+    // consumers, not something a published build needs to ship. Same
+    // reasoning as `tsup.config.ts`'s `sourcemap: !!options.watch`, just
+    // unconditional here since this build-only tsconfig is never used in
+    // watch mode (declarations are emitted once, by the `build` script).
+    "declarationMap": false,
     // Without this, a composite project's `.tsbuildinfo` defaults to living
     // next to this config file (i.e. the package root, outside `dist`) —
     // so `rm -f dist/*.tsbuildinfo` in the `build` script's cleanup never

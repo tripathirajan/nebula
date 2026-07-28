@@ -554,7 +554,7 @@
     "src/fonts.css"
   ],
   "scripts": {
-    "build": "tsup && tsc -p tsconfig.build.json --emitDeclarationOnly && rm -f dist/*.tsbuildinfo && tsx src/tokens/generate.ts && cp src/theme.css dist/theme.css && cp src/fonts.css dist/fonts.css",
+    "build": "tsup && tsc -p tsconfig.build.json --emitDeclarationOnly && node scripts/flatten-dts.mjs && rm -f dist/*.tsbuildinfo && tsx src/tokens/generate.ts && cp src/theme.css dist/theme.css && cp src/fonts.css dist/fonts.css",
     "dev": "tsup --watch",
     "generate-tokens": "tsx src/tokens/generate.ts",
     "contrast-audit": "tsx src/tokens/contrast-audit.ts",

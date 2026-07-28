@@ -1,8 +1,9 @@
-import { ThemeProvider } from '@nebula-lab/react-ui/theme-provider';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { axe } from 'vitest-axe';
+
+import { ThemeProvider } from '../theme-provider/theme-provider';
 
 import { ThemeSwitcher } from './theme-switcher';
 
