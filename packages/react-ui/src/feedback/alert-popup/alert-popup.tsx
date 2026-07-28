@@ -11,9 +11,9 @@ import {
   AlertDialogPortal,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from '../alert-dialog';
+} from '../../overlays/dialog/alert-dialog';
 
-import type { AlertDialogOverlayProps } from '../alert-dialog';
+import type { AlertDialogOverlayProps } from '../../overlays/dialog/alert-dialog';
 
 /** Same severity vocabulary `Alert`'s `color` prop uses, plus `question` — a neutral confirm-prompt icon `Alert` has no equivalent for, since `Alert` only ever reports a status, never asks something. */
 type AlertPopupIcon = 'success' | 'warning' | 'danger' | 'info' | 'question';

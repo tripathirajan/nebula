@@ -1,12 +1,12 @@
 import { expect, userEvent, waitFor, within } from '@storybook/test';
 import * as React from 'react';
 
-import { Button } from '../../actions/button/button';
-import { Field } from '../../forms/field/field';
-import { FieldControl } from '../../forms/field/field-control';
-import { FieldLabel } from '../../forms/field/field-label';
-import { Input } from '../../forms/input/input';
-import { SearchField } from '../../forms/search-field/search-field';
+import { Button } from '../../../actions/button/button';
+import { Field } from '../../../forms/field/field';
+import { FieldControl } from '../../../forms/field/field-control';
+import { FieldLabel } from '../../../forms/field/field-label';
+import { Input } from '../../../forms/input/input';
+import { SearchField } from '../../../forms/search-field/search-field';
 
 import { Dialog } from './dialog';
 import { DialogClose } from './dialog-close';

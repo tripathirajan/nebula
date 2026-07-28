@@ -2,7 +2,7 @@ import { cn } from '@nebula-lab/primitives/cn';
 
 import { Button } from '../../actions/button/button';
 import { IconButton } from '../../actions/icon-button/icon-button';
-import { Menu, MenuContent, MenuItem, MenuPortal, MenuTrigger } from '../../overlays/menu';
+import { Menu, MenuContent, MenuItem, MenuPortal, MenuTrigger } from '../../overlays/menu/menu';
 import { Text } from '../../typography/text/text';
 import { Badge } from '../badge/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '../card';

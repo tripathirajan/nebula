@@ -8,7 +8,7 @@ import {
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
-} from '../../overlays/dropdown-menu';
+} from '../../overlays/menu/dropdown-menu';
 import { useTheme } from '../theme-provider/theme-provider';
 
 import type { ButtonProps } from '../../actions/button/button';

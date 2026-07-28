@@ -1,6 +1,6 @@
 import { expect, userEvent, waitFor, within } from '@storybook/test';
 
-import { Button } from '../../actions/button/button';
+import { Button } from '../../../actions/button/button';
 
 import { AlertDialog } from './alert-dialog';
 import { AlertDialogAction } from './alert-dialog-action';

@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
 import { axe } from 'vitest-axe';
 
-import { MenuItem } from '../../overlays/menu';
+import { MenuItem } from '../../overlays/menu/menu';
 
 import { CardListItem } from './card-list-item';
 

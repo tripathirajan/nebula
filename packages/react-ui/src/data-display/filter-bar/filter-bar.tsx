@@ -8,7 +8,7 @@ import {
   DropdownMenuItem,
   DropdownMenuPortal,
   DropdownMenuTrigger,
-} from '../../overlays/dropdown-menu';
+} from '../../overlays/menu/dropdown-menu';
 import { Chip } from '../chip/chip';
 
 const PlusIcon = (props: React.SVGProps<SVGSVGElement>) => (

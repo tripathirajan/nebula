@@ -2,7 +2,7 @@ import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
 import { IconButton } from '../../actions/icon-button/icon-button';
-import { Menu, MenuContent, MenuPortal, MenuTrigger } from '../../overlays/menu';
+import { Menu, MenuContent, MenuPortal, MenuTrigger } from '../../overlays/menu/menu';
 import { Text } from '../../typography/text/text';
 import { Card } from '../card/card';
 

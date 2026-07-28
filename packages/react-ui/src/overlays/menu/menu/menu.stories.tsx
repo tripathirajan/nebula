@@ -1,7 +1,7 @@
 import { expect, userEvent, waitFor, within } from '@storybook/test';
 import { useState } from 'react';
 
-import { Button } from '../../actions/button/button';
+import { Button } from '../../../actions/button/button';
 
 import { Menu } from './menu';
 import { MenuCheckboxItem } from './menu-checkbox-item';

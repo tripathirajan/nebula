@@ -1,6 +1,6 @@
 import { expect, userEvent, waitFor, within } from '@storybook/test';
 
-import { MenuItem } from '../../overlays/menu';
+import { MenuItem } from '../../overlays/menu/menu';
 import { Avatar, AvatarFallback } from '../avatar';
 import { Badge } from '../badge/badge';
 
