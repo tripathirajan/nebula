@@ -77,9 +77,13 @@ describe('Dialog (ui)', () => {
         </DialogPortal>
       </Dialog>,
     );
-    const solidOverlay = document.querySelector('.fixed.inset-0')!;
-    expect(solidOverlay.className).toContain('bg-[var(--dialog-overlay-bg)]/50');
+    const solidOverlay = document.querySelector('.fixed.inset-0') as HTMLElement;
+    expect(solidOverlay.className).toContain('bg-[color-mix(in_oklch,var(--backdrop-tint)_50%,transparent)]');
     expect(solidOverlay.className).not.toContain('backdrop-blur');
+    // The real token lives in `style`, not the class string — see
+    // `backdrop.test.tsx`'s own regression test for why that distinction
+    // is what actually catches a "class never generates a CSS rule" bug.
+    expect(solidOverlay.style.getPropertyValue('--backdrop-tint')).toBe('var(--dialog-overlay-bg)');
 
     rerender(
       <Dialog open>
@@ -91,10 +95,11 @@ describe('Dialog (ui)', () => {
         </DialogPortal>
       </Dialog>,
     );
-    const blurredOverlay = document.querySelector('.fixed.inset-0')!;
-    expect(blurredOverlay.className).toContain('bg-[var(--dialog-overlay-bg)]/20');
+    const blurredOverlay = document.querySelector('.fixed.inset-0') as HTMLElement;
+    expect(blurredOverlay.className).toContain('bg-[color-mix(in_oklch,var(--backdrop-tint)_20%,transparent)]');
     expect(blurredOverlay.className).toContain('backdrop-blur-xl');
     expect(blurredOverlay.className).toContain('backdrop-saturate-150');
+    expect(blurredOverlay.style.getPropertyValue('--backdrop-tint')).toBe('var(--dialog-overlay-bg)');
   });
 
   it('has no axe violations', async () => {

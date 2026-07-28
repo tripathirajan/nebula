@@ -1,4 +1,5 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import * as React from 'react';
 import { describe, expect, it, vi } from 'vitest';
 import { axe } from 'vitest-axe';
 
@@ -8,6 +9,8 @@ import { SelectItem } from './select-item';
 import { SelectPortal } from './select-portal';
 import { SelectTrigger } from './select-trigger';
 import { SelectValue } from './select-value';
+
+import type { SelectItemProps } from './select-item';
 
 function DemoSelect(props: React.ComponentProps<typeof Select>) {
   return (
@@ -19,6 +22,31 @@ function DemoSelect(props: React.ComponentProps<typeof Select>) {
         <SelectContent>
           <SelectItem value="apple">Apple</SelectItem>
           <SelectItem value="banana">Banana</SelectItem>
+        </SelectContent>
+      </SelectPortal>
+    </Select>
+  );
+}
+
+// Stands in for `@nebula-lab/react-ui`'s styled `SelectItem` — a `forwardRef`
+// wrapper around the headless one, i.e. a *different* component reference
+// than `SelectItem` itself. Every real consumer renders through a wrapper
+// shaped like this, never the headless component directly.
+const WrappedSelectItem = React.forwardRef<HTMLDivElement, SelectItemProps>((props, ref) => (
+  <SelectItem {...props} ref={ref} />
+));
+WrappedSelectItem.displayName = 'WrappedSelectItem';
+
+function WrappedDemoSelect(props: React.ComponentProps<typeof Select>) {
+  return (
+    <Select {...props}>
+      <SelectTrigger>
+        <SelectValue placeholder="Pick a fruit" />
+      </SelectTrigger>
+      <SelectPortal>
+        <SelectContent>
+          <WrappedSelectItem value="apple">Apple</WrappedSelectItem>
+          <WrappedSelectItem value="banana">Banana</WrappedSelectItem>
         </SelectContent>
       </SelectPortal>
     </Select>
@@ -93,5 +121,30 @@ describe('Select', () => {
   it('has no axe violations', async () => {
     const { container } = render(<DemoSelect />);
     expect(await axe(container)).toHaveNoViolations();
+  });
+
+  describe('with a wrapped SelectItem (e.g. a styled component around the headless one)', () => {
+    // Regression: `Select`'s static-label collection previously matched
+    // items via `child.type === SelectItem` — true for the headless item
+    // used directly (every test above), but false for any wrapper, since a
+    // `forwardRef` wrapper is a different component reference. Every real
+    // app renders through `@nebula-lab/react-ui`'s styled `SelectItem`
+    // wrapper, never this headless one directly, so this was a real,
+    // shipped bug: `SelectTrigger` fell back to its placeholder text the
+    // instant the popup closed post-selection, even though the underlying
+    // value was set correctly.
+    it('keeps showing the selected label after the popup closes', async () => {
+      render(<WrappedDemoSelect />);
+      fireEvent.click(screen.getByRole('button'));
+      fireEvent.click(screen.getByRole('option', { name: 'Banana' }));
+
+      await waitFor(() => expect(screen.queryByRole('listbox')).not.toBeInTheDocument());
+      expect(screen.getByRole('button')).toHaveTextContent('Banana');
+    });
+
+    it('shows a defaultValue label immediately, before the item has ever mounted open', () => {
+      render(<WrappedDemoSelect defaultValue="apple" />);
+      expect(screen.getByRole('button')).toHaveTextContent('Apple');
+    });
   });
 });

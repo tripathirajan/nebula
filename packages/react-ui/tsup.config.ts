@@ -118,6 +118,27 @@ export default defineConfig({
     'bottom-nav/index': 'src/bottom-nav/index.ts',
     'side-nav/index': 'src/side-nav/index.ts',
     'logo/index': 'src/logo/index.ts',
+    // Source lives under a category subfolder (see COMPONENT_COVERAGE_AUDIT.md
+    // §D) but the entry *key* below controls the output path, so published
+    // subpaths stay flat (`@nebula-lab/react-ui/flex`, not `.../layout/flex`) —
+    // consistent with every component above regardless of `src/` depth.
+    'aspect-ratio/index': 'src/layout/aspect-ratio/index.ts',
+    'center/index': 'src/layout/center/index.ts',
+    'container/index': 'src/layout/container/index.ts',
+    'flex/index': 'src/layout/flex/index.ts',
+    'grid/index': 'src/layout/grid/index.ts',
+    'hstack/index': 'src/layout/hstack/index.ts',
+    'vstack/index': 'src/layout/vstack/index.ts',
+    'stack/index': 'src/layout/stack/index.ts',
+    'inline/index': 'src/layout/inline/index.ts',
+    'wrap/index': 'src/layout/wrap/index.ts',
+    'spacer/index': 'src/layout/spacer/index.ts',
+    'label/index': 'src/typography/label/index.ts',
+    'link/index': 'src/typography/link/index.ts',
+    'image/index': 'src/media/image/index.ts',
+    'image-preview/index': 'src/media/image-preview/index.ts',
+    'native-select/index': 'src/forms/native-select/index.ts',
+    'form/index': 'src/forms/form/index.ts',
   },
   format: ['esm'],
   target: 'es2022',

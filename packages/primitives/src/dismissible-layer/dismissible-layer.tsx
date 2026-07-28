@@ -78,6 +78,17 @@ const DismissibleLayer = React.forwardRef<HTMLDivElement, DismissibleLayerProps>
         if (!isTopmost()) return;
         const target = event.target as Node | null;
         if (target && node.contains(target)) return;
+        // A pointerdown inside some *other* currently-open layer (e.g. a
+        // `Select`'s listbox opened from within this `Dialog`) isn't a DOM
+        // descendant of `node` — each layer is typically portaled to
+        // `document.body` independently, landing as DOM siblings rather
+        // than nested elements — but it's still logically "inside" from
+        // the user's point of view. Without this check, picking an option
+        // from a `Select`/`Combobox`/`DatePicker` opened inside a `Dialog`
+        // reads as an outside click on the dialog and closes it out from
+        // under the still-open (or just-closed) nested popover — confirmed
+        // as a real, reproduced bug in exactly that composition.
+        if (target && openLayers.some((other) => other !== node && other.contains(target))) return;
         onPointerDownOutside?.(event);
         if (!event.defaultPrevented) onDismiss?.();
       };

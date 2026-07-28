@@ -45,10 +45,25 @@ const BLUR_INTENSITY: Record<BackdropBlurIntensity, string> = {
   strong: 'backdrop-blur-2xl backdrop-saturate-[2]',
 };
 
-const BLUR_TINT_OPACITY: Record<BackdropBlurIntensity, number> = {
-  subtle: 25,
-  regular: 20,
-  strong: 15,
+// Every branch here is a complete, literal string — Tailwind's JIT scanner
+// extracts candidate class names via static text matching against the
+// built output, so a class assembled via `` `bg-[${bgVar}]/50` `` (this
+// function's previous shape) is invisible to it and silently never
+// generates a CSS rule, same pitfall `button.tsx`'s own `buttonVariants`
+// comment documents — confirmed as a real, shipped bug here: every
+// `Dialog`/`Drawer`/`AlertPopup`/`AlertDialog` backdrop rendered fully
+// transparent (`getComputedStyle` showed `rgba(0,0,0,0)`) because this
+// exact class string never appeared as real text anywhere in the source,
+// only as a runtime-interpolated value. `--backdrop-tint` is always this
+// same fixed custom-property name in every branch below; which real token
+// it points at (`--backdrop-bg`/`--dialog-overlay-bg`/`--drawer-overlay-bg`)
+// is set dynamically via the `style` prop instead (see `backdropTintStyle`),
+// since inline styles aren't subject to static class-name scanning at all.
+const SOLID_TINT_CLASS = 'bg-[color-mix(in_oklch,var(--backdrop-tint)_50%,transparent)]';
+const BLUR_TINT_CLASS: Record<BackdropBlurIntensity, string> = {
+  subtle: 'bg-[color-mix(in_oklch,var(--backdrop-tint)_25%,transparent)]',
+  regular: 'bg-[color-mix(in_oklch,var(--backdrop-tint)_20%,transparent)]',
+  strong: 'bg-[color-mix(in_oklch,var(--backdrop-tint)_15%,transparent)]',
 };
 
 /**
@@ -59,20 +74,23 @@ const BLUR_TINT_OPACITY: Record<BackdropBlurIntensity, number> = {
  * wiring tied to dialog/drawer context, so there's no seam to nest a second
  * component into — but they still call this exact function, so "what does
  * blur vs. solid actually look like" has exactly one definition regardless
- * of which token backs it.
+ * of which token backs it. Always pair with `backdropTintStyle` (below) —
+ * this only returns the opacity/blur classes; the actual tint color comes
+ * from the `--backdrop-tint` custom property that `style` sets.
  *
  * @param variant - `'solid'` or `'blur'`, same contract as `Backdrop`'s own prop.
- * @param bgVar - The token to tint with, as a `var(--...)` CSS value — defaults to `Backdrop`'s own `--backdrop-bg`, but `DialogOverlay`/`DrawerOverlay` pass their own `--dialog-overlay-bg`/`--drawer-overlay-bg` instead.
  * @param blurIntensity - Same contract as `Backdrop`'s own `blurIntensity` prop; ignored when `variant="solid"`.
  */
 function backdropVariantClassName(
   variant: 'solid' | 'blur' = 'solid',
-  bgVar = 'var(--backdrop-bg)',
   blurIntensity: BackdropBlurIntensity = 'regular',
 ): string {
-  return variant === 'blur'
-    ? `bg-[${bgVar}]/${BLUR_TINT_OPACITY[blurIntensity]} ${BLUR_INTENSITY[blurIntensity]}`
-    : `bg-[${bgVar}]/50`;
+  return variant === 'blur' ? cn(BLUR_TINT_CLASS[blurIntensity], BLUR_INTENSITY[blurIntensity]) : SOLID_TINT_CLASS;
+}
+
+/** Sets `--backdrop-tint` to `bgVar` (a `var(--...)` CSS value) — pass as this element's `style`, alongside `backdropVariantClassName`'s classes, so the static `color-mix(...)` classes above actually tint with the right token. */
+function backdropTintStyle(bgVar: string): React.CSSProperties {
+  return { '--backdrop-tint': bgVar } as React.CSSProperties;
 }
 
 /**
@@ -104,12 +122,13 @@ function backdropVariantClassName(
  * ```
  */
 const Backdrop = React.forwardRef<HTMLDivElement, BackdropProps>((props, forwardedRef) => {
-  const { className, variant = 'solid', blurIntensity = 'regular', ...rest } = props;
+  const { className, style, variant = 'solid', blurIntensity = 'regular', ...rest } = props;
 
   return (
     <Overlay
       aria-hidden="true"
-      className={cn('z-[var(--z-overlay)]', backdropVariantClassName(variant, undefined, blurIntensity), className)}
+      className={cn('z-[var(--z-overlay)]', backdropVariantClassName(variant, blurIntensity), className)}
+      style={{ ...backdropTintStyle('var(--backdrop-bg)'), ...style }}
       {...rest}
       ref={forwardedRef}
     />
@@ -118,5 +137,5 @@ const Backdrop = React.forwardRef<HTMLDivElement, BackdropProps>((props, forward
 
 Backdrop.displayName = 'Backdrop';
 
-export { Backdrop, backdropVariantClassName };
+export { Backdrop, backdropVariantClassName, backdropTintStyle };
 export type { BackdropProps, BackdropBlurIntensity };

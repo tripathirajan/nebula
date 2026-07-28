@@ -2,7 +2,7 @@ import { DrawerOverlay as HeadlessDrawerOverlay } from '@nebula-lab/headless/dra
 import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
-import { backdropVariantClassName } from '../backdrop';
+import { backdropTintStyle, backdropVariantClassName } from '../backdrop';
 
 import type { BackdropBlurIntensity } from '../backdrop';
 import type { DrawerOverlayProps as HeadlessDrawerOverlayProps } from '@nebula-lab/headless/drawer';
@@ -25,14 +25,11 @@ type DrawerOverlayProps = HeadlessDrawerOverlayProps & DrawerOverlayOwnProps;
 /** The dimmed backdrop — styled off `--drawer-overlay-bg` (see `../tokens/component.ts`), kept as its own token rather than reusing `--dialog-overlay-bg` even though both currently point at the same semantic color, so restyling one doesn't silently affect the other. */
 const DrawerOverlay = React.forwardRef<HTMLDivElement, DrawerOverlayProps>(
   (props, forwardedRef) => {
-    const { className, backdrop = 'solid', blurIntensity = 'regular', ...rest } = props;
+    const { className, style, backdrop = 'solid', blurIntensity = 'regular', ...rest } = props;
     return (
       <HeadlessDrawerOverlay
-        className={cn(
-          'fixed inset-0 z-[var(--z-overlay)]',
-          backdropVariantClassName(backdrop, 'var(--drawer-overlay-bg)', blurIntensity),
-          className,
-        )}
+        className={cn('fixed inset-0 z-[var(--z-overlay)]', backdropVariantClassName(backdrop, blurIntensity), className)}
+        style={{ ...backdropTintStyle('var(--drawer-overlay-bg)'), ...style }}
         {...rest}
         ref={forwardedRef}
       />

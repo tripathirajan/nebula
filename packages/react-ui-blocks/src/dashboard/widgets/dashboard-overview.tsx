@@ -124,7 +124,7 @@ function DashboardOverview(props: DashboardOverviewProps) {
 
           return (
             // Index as key: metrics have no stable identity of their own, and `label` isn't guaranteed unique.
-            <Card key={index} variant="outlined">
+            <Card key={index} variant="elevation" className="overflow-hidden">
               <CardContent className="flex flex-col gap-3">
                 {metric.icon ? (
                   <span

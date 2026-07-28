@@ -2,7 +2,7 @@ import { DialogOverlay as HeadlessDialogOverlay } from '@nebula-lab/headless/dia
 import { cn } from '@nebula-lab/primitives/cn';
 import * as React from 'react';
 
-import { backdropVariantClassName } from '../backdrop';
+import { backdropTintStyle, backdropVariantClassName } from '../backdrop';
 
 import type { BackdropBlurIntensity } from '../backdrop';
 import type { DialogOverlayProps as HeadlessDialogOverlayProps } from '@nebula-lab/headless/dialog';
@@ -28,14 +28,11 @@ type DialogOverlayProps = HeadlessDialogOverlayProps & DialogOverlayOwnProps;
 /** The dimmed backdrop — styled off `--dialog-overlay-bg` at low opacity (see `../tokens/component.ts`). */
 const DialogOverlay = React.forwardRef<HTMLDivElement, DialogOverlayProps>(
   (props, forwardedRef) => {
-    const { className, backdrop = 'solid', blurIntensity = 'regular', ...rest } = props;
+    const { className, style, backdrop = 'solid', blurIntensity = 'regular', ...rest } = props;
     return (
       <HeadlessDialogOverlay
-        className={cn(
-          'fixed inset-0 z-[var(--z-overlay)]',
-          backdropVariantClassName(backdrop, 'var(--dialog-overlay-bg)', blurIntensity),
-          className,
-        )}
+        className={cn('fixed inset-0 z-[var(--z-overlay)]', backdropVariantClassName(backdrop, blurIntensity), className)}
+        style={{ ...backdropTintStyle('var(--dialog-overlay-bg)'), ...style }}
         {...rest}
         ref={forwardedRef}
       />

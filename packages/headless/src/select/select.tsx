@@ -4,7 +4,6 @@ import { VisuallyHidden } from '@nebula-lab/primitives/visually-hidden';
 import * as React from 'react';
 
 import { SelectProvider, usePopperScope } from './select-context';
-import { SelectItem } from './select-item';
 
 import type { ScopedProps } from './select-context';
 import type { SelectItemProps } from './select-item';
@@ -36,18 +35,28 @@ interface SelectProps {
  * `select-content.tsx`), so the registration effect alone can't explain a
  * `defaultValue`'s label on the very first render, or the label surviving
  * after the item unmounts when the popup closes post-selection.
+ *
+ * Identifies a `SelectItem` by prop shape (a string `value` prop), not by
+ * `child.type === SelectItem` — confirmed as a real, shipped bug the
+ * type-identity check had: every real consumer renders `@nebula-lab/react-ui`'s
+ * *styled* `SelectItem` (a `forwardRef` wrapper around this headless one),
+ * which is a different component reference, so the identity check never
+ * matched, `staticLabels` stayed permanently empty, and a `SelectTrigger`
+ * fell back to its placeholder the instant the popup closed post-selection
+ * even though the underlying value was set correctly (confirmed: reopening
+ * the popup showed the right item checked). Duck-typing on `value` works
+ * for the headless item, the styled wrapper, and any future wrapper alike,
+ * with no cross-package coordination required.
  */
 function collectStaticItemLabels(children: React.ReactNode, labels: Map<string, string>): void {
   React.Children.forEach(children, (child) => {
     if (!React.isValidElement(child)) return;
-    if (child.type === SelectItem) {
-      const { value, textValue, children: itemChildren } = child.props as SelectItemProps;
-      const label = textValue ?? (typeof itemChildren === 'string' ? itemChildren : undefined);
-      if (label !== undefined) labels.set(value, label);
-      return;
+    const props = child.props as Partial<SelectItemProps> & { children?: React.ReactNode };
+    if (typeof props.value === 'string') {
+      const label = props.textValue ?? (typeof props.children === 'string' ? props.children : undefined);
+      if (label !== undefined) labels.set(props.value, label);
     }
-    const childProps = child.props as { children?: React.ReactNode } | undefined;
-    if (childProps?.children) collectStaticItemLabels(childProps.children, labels);
+    if (props.children) collectStaticItemLabels(props.children, labels);
   });
 }
 

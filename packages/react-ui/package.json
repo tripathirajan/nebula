@@ -476,6 +476,74 @@
       "types": "./dist/logo/index.d.ts",
       "import": "./dist/logo/index.js"
     },
+    "./aspect-ratio": {
+      "types": "./dist/aspect-ratio/index.d.ts",
+      "import": "./dist/aspect-ratio/index.js"
+    },
+    "./center": {
+      "types": "./dist/center/index.d.ts",
+      "import": "./dist/center/index.js"
+    },
+    "./container": {
+      "types": "./dist/container/index.d.ts",
+      "import": "./dist/container/index.js"
+    },
+    "./flex": {
+      "types": "./dist/flex/index.d.ts",
+      "import": "./dist/flex/index.js"
+    },
+    "./grid": {
+      "types": "./dist/grid/index.d.ts",
+      "import": "./dist/grid/index.js"
+    },
+    "./hstack": {
+      "types": "./dist/hstack/index.d.ts",
+      "import": "./dist/hstack/index.js"
+    },
+    "./vstack": {
+      "types": "./dist/vstack/index.d.ts",
+      "import": "./dist/vstack/index.js"
+    },
+    "./stack": {
+      "types": "./dist/stack/index.d.ts",
+      "import": "./dist/stack/index.js"
+    },
+    "./inline": {
+      "types": "./dist/inline/index.d.ts",
+      "import": "./dist/inline/index.js"
+    },
+    "./wrap": {
+      "types": "./dist/wrap/index.d.ts",
+      "import": "./dist/wrap/index.js"
+    },
+    "./spacer": {
+      "types": "./dist/spacer/index.d.ts",
+      "import": "./dist/spacer/index.js"
+    },
+    "./label": {
+      "types": "./dist/label/index.d.ts",
+      "import": "./dist/label/index.js"
+    },
+    "./link": {
+      "types": "./dist/link/index.d.ts",
+      "import": "./dist/link/index.js"
+    },
+    "./image": {
+      "types": "./dist/image/index.d.ts",
+      "import": "./dist/image/index.js"
+    },
+    "./image-preview": {
+      "types": "./dist/image-preview/index.d.ts",
+      "import": "./dist/image-preview/index.js"
+    },
+    "./native-select": {
+      "types": "./dist/native-select/index.d.ts",
+      "import": "./dist/native-select/index.js"
+    },
+    "./form": {
+      "types": "./dist/form/index.d.ts",
+      "import": "./dist/form/index.js"
+    },
     "./theme.css": "./src/theme.css",
     "./fonts.css": "./src/fonts.css",
     "./package.json": "./package.json"

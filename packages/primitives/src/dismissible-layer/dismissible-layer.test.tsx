@@ -78,4 +78,32 @@ describe('DismissibleLayer', () => {
     expect(onDismissInner).toHaveBeenCalledTimes(1);
     expect(onDismissOuter).not.toHaveBeenCalled();
   });
+
+  it('does not dismiss an outer layer on pointerdown inside a sibling-portaled inner layer (e.g. a Select listbox portaled to document.body from inside a Dialog)', () => {
+    // Regression test: `Dialog`'s content and a `Select`'s listbox are each
+    // portaled to `document.body` independently, landing as DOM siblings —
+    // not nested — even though the Select is logically "inside" the
+    // Dialog from the user's point of view. A pointerdown on a Select
+    // option previously read as an outside click on the Dialog (DOM
+    // containment found nothing), closing the whole Dialog the moment a
+    // user picked any dropdown option inside it — confirmed as a real,
+    // reproduced bug in exactly this composition (a form's account/category
+    // `Select` inside a `Dialog`).
+    const onDismissOuter = vi.fn();
+    const onDismissInner = vi.fn();
+    render(
+      <>
+        <DismissibleLayer onDismiss={onDismissOuter} data-testid="outer">
+          outer
+        </DismissibleLayer>
+        <DismissibleLayer onDismiss={onDismissInner} data-testid="inner">
+          <button data-testid="inner-option">option</button>
+        </DismissibleLayer>
+      </>,
+    );
+
+    fireEvent.pointerDown(screen.getByTestId('inner-option'));
+
+    expect(onDismissOuter).not.toHaveBeenCalled();
+  });
 });

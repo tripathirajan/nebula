@@ -8,7 +8,7 @@ import { ThemeSwitcher } from '@nebula-lab/react-ui/theme-switcher';
 import { SaasAppHeader } from '@nebula-lab/react-ui-blocks';
 import { Link, useLocation } from 'react-router-dom';
 
-import { HomeIcon, TargetIcon, TransactionsIcon, WalletIcon } from '../icons';
+import { CalendarIcon, HomeIcon, ReportsIcon, SettingsIcon, TagIcon, TargetIcon, TransactionsIcon, WalletIcon } from '../icons';
 
 import type { ReactNode } from 'react';
 
@@ -16,7 +16,11 @@ const navItems = [
   { to: '/', label: 'Overview', icon: <HomeIcon /> },
   { to: '/transactions', label: 'Transactions', icon: <TransactionsIcon /> },
   { to: '/accounts', label: 'Accounts', icon: <WalletIcon /> },
+  { to: '/categories', label: 'Categories', icon: <TagIcon /> },
+  { to: '/calendar', label: 'Calendar', icon: <CalendarIcon /> },
   { to: '/budgets', label: 'Budgets', icon: <TargetIcon /> },
+  { to: '/reports', label: 'Reports', icon: <ReportsIcon /> },
+  { to: '/settings', label: 'Settings', icon: <SettingsIcon /> },
 ];
 
 /**
@@ -25,6 +29,10 @@ const navItems = [
  * `navLinks` doubles as the mobile nav fallback (its built-in hamburger
  * menu), since `Sidebar` hides itself below `md` by design.
  */
+function isActive(pathname: string, to: string): boolean {
+  return pathname === to || (to !== '/' && pathname.startsWith(`${to}/`));
+}
+
 export function AppShell(props: { children: ReactNode }) {
   const { children } = props;
   const location = useLocation();
@@ -51,7 +59,7 @@ export function AppShell(props: { children: ReactNode }) {
               key={item.to}
               icon={item.icon}
               label={item.label}
-              active={location.pathname === item.to}
+              active={isActive(location.pathname, item.to)}
               asChild
             >
               <Link to={item.to} />
@@ -70,7 +78,7 @@ export function AppShell(props: { children: ReactNode }) {
           navLinks={navItems.map((item) => ({
             label: item.label,
             href: item.to,
-            active: location.pathname === item.to,
+            active: isActive(location.pathname, item.to),
           }))}
           user={{ name: 'Jane Cooper', role: 'Account owner' }}
         />
