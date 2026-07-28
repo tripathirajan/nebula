@@ -3,8 +3,8 @@ import * as React from 'react';
 
 import { Stack } from '../stack/stack';
 
+import type { PolymorphicComponent } from '../../types/polymorphic';
 import type { StackOwnProps, StackProps } from '../stack/stack';
-import type { PolymorphicComponent } from '../types/polymorphic';
 
 
 /** Props accepted by {@link VStack} — identical to {@link Stack}'s. */

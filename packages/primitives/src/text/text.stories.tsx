@@ -1,10 +1,10 @@
 
 import { Code } from '../code/code';
+import { Stack } from '../flex/stack/stack';
 import { Heading } from '../heading/heading';
 import { Link } from '../link/link';
 import { Paragraph } from '../paragraph/paragraph';
 import { Pre } from '../pre/pre';
-import { Stack } from '../stack/stack';
 
 import { Text } from './text';
 

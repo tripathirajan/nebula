@@ -1,10 +1,10 @@
 import * as React from 'react';
 
-import { cn } from '../cn/cn';
-import { Primitive } from '../primitive/primitive';
+import { cn } from '../../cn/cn';
+import { Primitive } from '../../primitive/primitive';
 
-import type { PrimitiveProps } from '../primitive/primitive';
-import type { PolymorphicComponent, PolymorphicComponentPropsWithRef } from '../types/polymorphic';
+import type { PrimitiveProps } from '../../primitive/primitive';
+import type { PolymorphicComponent, PolymorphicComponentPropsWithRef } from '../../types/polymorphic';
 
 type FlexDirection = 'row' | 'row-reverse' | 'column' | 'column-reverse';
 type FlexAlign = 'start' | 'center' | 'end' | 'stretch' | 'baseline';

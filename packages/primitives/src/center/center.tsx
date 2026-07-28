@@ -1,8 +1,8 @@
 import * as React from 'react';
 
-import { Flex } from '../flex/flex';
+import { Flex } from '../flex/flex/flex';
 
-import type { FlexProps } from '../flex/flex';
+import type { FlexProps } from '../flex/flex/flex';
 import type { PolymorphicComponent, PolymorphicComponentPropsWithRef } from '../types/polymorphic';
 
 /** Props accepted by {@link Center}. */

@@ -3,8 +3,8 @@ import * as React from 'react';
 
 import { Inline } from '../inline/inline';
 
+import type { PolymorphicComponent } from '../../types/polymorphic';
 import type { InlineOwnProps, InlineProps } from '../inline/inline';
-import type { PolymorphicComponent } from '../types/polymorphic';
 
 
 /** Props accepted by {@link Wrap} — identical to {@link Inline}'s. */

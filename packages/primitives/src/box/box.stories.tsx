@@ -3,9 +3,9 @@ import { AspectRatio } from '../aspect-ratio/aspect-ratio';
 import { Center } from '../center/center';
 import { Container } from '../container/container';
 import { Flex } from '../flex/flex';
+import { Inline } from '../flex/inline/inline';
+import { Stack } from '../flex/stack/stack';
 import { Grid } from '../grid/grid';
-import { Inline } from '../inline/inline';
-import { Stack } from '../stack/stack';
 
 import { Box } from './box';
 

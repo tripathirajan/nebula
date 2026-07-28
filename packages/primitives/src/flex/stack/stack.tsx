@@ -2,8 +2,8 @@ import * as React from 'react';
 
 import { Flex } from '../flex/flex';
 
+import type { PolymorphicComponent, PolymorphicComponentPropsWithRef } from '../../types/polymorphic';
 import type { FlexAlign, FlexJustify, FlexProps } from '../flex/flex';
-import type { PolymorphicComponent, PolymorphicComponentPropsWithRef } from '../types/polymorphic';
 
 interface StackOwnProps {
   align?: FlexAlign;

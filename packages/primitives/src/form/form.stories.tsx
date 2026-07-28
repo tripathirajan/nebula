@@ -1,9 +1,9 @@
 import { expect, fn, userEvent, within } from '@storybook/test';
 
 import { Button } from '../button/button';
+import { Stack } from '../flex/stack/stack';
 import { Input } from '../input/input';
 import { Label } from '../label/label';
-import { Stack } from '../stack/stack';
 import { Textarea } from '../textarea/textarea';
 
 import { Form } from './form';

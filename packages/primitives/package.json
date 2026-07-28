@@ -192,7 +192,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsup && tsc -p tsconfig.build.json --emitDeclarationOnly && rm -f dist/*.tsbuildinfo",
+    "build": "tsup && tsc -p tsconfig.build.json --emitDeclarationOnly && node scripts/flatten-family-dts.mjs flex flex stack hstack vstack inline wrap && rm -f dist/*.tsbuildinfo",
     "dev": "tsup --watch",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "lint": "eslint .",
