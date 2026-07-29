@@ -47,6 +47,7 @@ Every color/radius/size value ships as a CSS custom property (`--color-primary`,
 - [`CLAUDE.md`](./CLAUDE.md) — Claude-Code-specific notes on top of `AGENTS.md` (sandbox limitations, before-you-write-a-component checklist).
 - [`ARCHITECTURE.md`](./ARCHITECTURE.md) — the single source of truth for how this codebase is organized and why: core philosophy, the layered architecture, token system, file-per-component convention, and outstanding work.
 - [`COMPONENT_INVENTORY.md`](./COMPONENT_INVENTORY.md), [`COMPONENT_FAMILIES.md`](./COMPONENT_FAMILIES.md), [`LAYER_ARCHITECTURE_MAP.md`](./LAYER_ARCHITECTURE_MAP.md) — generated, current-state component-level detail (full inventory, generic-root/variant families, and the verified `headless`/`styleless` → `react-ui` mapping).
+- Each package's own `API_DOC.md` (e.g. [`packages/react-ui/API_DOC.md`](./packages/react-ui/API_DOC.md)) — generated, real prop/parameter reference table per component/hook/utility, extracted from the TypeScript source itself via `scripts/generate-api-docs.mjs`.
 - [`STATUS_AND_COMPLIANCE_REPORT.md`](./STATUS_AND_COMPLIANCE_REPORT.md) — build checklist plus a WAI-ARIA/WCAG conformance and international accessibility-law compliance analysis.
 
 ## License
