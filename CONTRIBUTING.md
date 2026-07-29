@@ -25,9 +25,17 @@ Requires Node 24 and pnpm 9 (see `package.json`'s `packageManager` field — `co
 
 Run a command for a single package with `pnpm --filter @nebula-lab/<pkg> <command>` (e.g. `pnpm --filter @nebula-lab/react-ui test`).
 
-## Adding a new component
+## Adding a new component, hook, or utility
 
-Use the `new-component` skill (if you're working with Claude Code) or follow the same convention by hand: one folder per component under the right layer's `src/`, a barrel-only `index.ts`, a subpath entry in that package's `package.json` `exports` map and `tsup.config.ts`. See `ARCHITECTURE.md`'s "Layer placement" section for which layer (`primitives` / `headless` / `styleless` / `react-ui` / `react-ui-blocks`) a given component belongs in, and `AGENTS.md`'s status table for what already exists.
+Use the matching Claude Code skill rather than hand-copying an existing one and forgetting to update its barrel/exports map:
+
+- `new-component` — any `primitives`/`headless`/`styleless`/`react-ui`/`react-ui-blocks` component.
+- `new-hook` — a hook in `packages/hooks`.
+- `new-utility` — a framework-agnostic helper in `packages/utilities`.
+
+All three apply the same underlying convention: one folder per unit under the right package's `src/`, a barrel-only `index.ts`, a subpath entry in that package's `package.json` `exports` map and `tsup.config.ts`. See `ARCHITECTURE.md`'s "Layer placement" section for which layer (`primitives` / `headless` / `styleless` / `react-ui` / `react-ui-blocks`) a given component belongs in, `AGENTS.md`'s status table for what already exists, and each package's own `API_DOC.md` for its current real prop/parameter reference (regenerate with `node scripts/generate-api-docs.mjs` after adding something).
+
+Not using Claude Code? Follow the same convention by hand — it's spelled out in each skill's `.claude/skills/<name>/SKILL.md`.
 
 Every component needs:
 - A named export, `forwardRef`, typed via `PrimitivePropsWithRef`/`PolymorphicComponentPropsWithRef` from `@nebula-lab/primitives`.
@@ -72,6 +80,8 @@ Then, for anything visual, start Storybook and check the change live — type ch
 Releases go out via the **Publish Package** GitHub Actions workflow (`workflow_dispatch`, manual trigger only) — it versions every package independently with Nx, builds, publishes to npm under the `@nebula-lab` scope, and generates each package's `CHANGELOG.md` + a `<package>@<version>` git tag + a matching GitHub Release per package (`nx.json`'s `release.changelog.projectChangelogs.createRelease: "github"`). Not something a regular contributor needs to touch.
 
 **Always dispatch this workflow against the `release` branch, never `main`.** `main`'s branch protection requires a PR review for every push, which `github-actions[bot]` can't satisfy — the workflow's own version-bump commit would be rejected (`GH006: Protected branch update failed`). `release` has no protection rule, so the bot can commit and push its version bumps/tags directly there.
+
+If you're working with Claude Code, use the `release-checklist` skill instead of following the steps below by hand — it walks through the same pre-flight sync, dispatch, and post-publish verification, including the gotchas in steps 3-4 below (both of which have actually happened, not just theoretical risks).
 
 ### Cutting a new release
 

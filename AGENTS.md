@@ -110,9 +110,15 @@ Expanded per-question tests, with this codebase's own examples:
 
 Applying this test resolves every future placement question — five real buckets (hooks / primitives / headless / styleless / react-ui) cover the space; check `COMPONENT_INVENTORY.md` and `COMPONENT_FAMILIES.md` (see `ARCHITECTURE.md`) before re-deriving a placement from scratch — a plausible-sounding new component is very often already a named variant of something that exists.
 
-## Adding a new component
+## Adding a new component, hook, or utility
 
-Use the `new-component` skill (`.claude/skills/new-component/SKILL.md`) to scaffold the folder structure above with the correct boilerplate rather than hand-copying an existing component and forgetting to update its barrel/exports map.
+Use the matching skill to scaffold the correct boilerplate rather than hand-copying an existing unit and forgetting to update its barrel/exports map:
+
+- `new-component` (`.claude/skills/new-component/SKILL.md`) — the folder structure above, for `primitives`/`headless`/`styleless`/`react-ui`/`react-ui-blocks`.
+- `new-hook` (`.claude/skills/new-hook/SKILL.md`) — `packages/hooks` (zero DOM, no in-workspace deps).
+- `new-utility` (`.claude/skills/new-utility/SKILL.md`) — `packages/utilities` (framework-agnostic, no in-workspace deps).
+
+Publishing a release? Use the `release-checklist` skill (`.claude/skills/release-checklist/SKILL.md`) rather than dispatching the `Publish Package` workflow from memory — it encodes real gotchas this repo has actually hit (a stale `latest` dist-tag, `nx release version` pinning internal deps and breaking the next CI install), not just the happy path.
 
 ## When in doubt
 
