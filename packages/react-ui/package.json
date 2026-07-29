@@ -574,7 +574,7 @@
     "src/fonts.css"
   ],
   "scripts": {
-    "build": "tsup && tsc -p tsconfig.build.json --emitDeclarationOnly && node scripts/flatten-dts.mjs && node scripts/flatten-family-dts.mjs menu:menu,context-menu,dropdown-menu dialog:dialog,alert-dialog,drawer,sheet combobox:combobox,autocomplete tree:tree,tree-view && rm -f dist/*.tsbuildinfo && tsx src/tokens/generate.ts && cp src/theme.css dist/theme.css && cp src/fonts.css dist/fonts.css",
+    "build": "tsup && tsc -p tsconfig.build.json --emitDeclarationOnly && node scripts/flatten-dts.mjs && node scripts/flatten-family-dts.mjs menu:menu,context-menu,dropdown-menu dialog:dialog,alert-dialog,drawer,sheet combobox:combobox,autocomplete tree:tree,tree-view && rm -f dist/*.tsbuildinfo && tsx src/tokens/generate.ts",
     "dev": "tsup --watch",
     "generate-tokens": "tsx src/tokens/generate.ts",
     "contrast-audit": "tsx src/tokens/contrast-audit.ts",
