@@ -29,7 +29,7 @@ interface TooltipProps {
  * pointer-leave/blur cancel the timer and close immediately (see
  * `tooltip-trigger.tsx`).
  *
- * Deliberately simplified vs. Radix: no `TooltipProvider`-level shared
+ * Deliberately simplified: no `TooltipProvider`-level shared
  * "skip delay" group across multiple tooltips (the optimization where
  * hopping from one tooltip's trigger straight to another's skips the delay
  * for a short grace period). Each `Tooltip` instance manages its own delay

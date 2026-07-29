@@ -15,7 +15,7 @@ type ToastViewportProps = PrimitivePropsWithRef<'div'>;
  * an invalid role override for an `<li>` (and invalidates the parent list
  * along with it) — a labelled region is the valid way to group a set of
  * independently-announced live regions. Deliberately simple otherwise —
- * unlike Radix's `ToastViewport`, this doesn't implement the F6/F8
+ * this doesn't implement an F6/F8-style
  * keyboard shortcut to jump focus into the region or reverse tab-order
  * handling for visually-last-but-DOM-first toasts; a documented scope cut,
  * not an oversight, since a live region's whole point is that sighted and

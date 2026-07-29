@@ -29,8 +29,7 @@ type ContextMenuTriggerProps = PrimitivePropsWithRef<'div'>;
  * `PopperContent` ever calls on the anchor — see `popper-content.tsx`),
  * cast to `HTMLElement` and pushed directly into `Popper`'s context via
  * `usePopperContext`. This avoids needing a second, point-based positioning
- * primitive alongside `Popper` — the same technique Radix's `ContextMenu`
- * uses. The virtual anchor is zero-sized (`width`/`height` 0) at the pointer
+ * primitive alongside `Popper`. The virtual anchor is zero-sized (`width`/`height` 0) at the pointer
  * coordinates, so `PopperContent`'s existing side/align math places content
  * relative to that single point rather than a real element's box.
  *

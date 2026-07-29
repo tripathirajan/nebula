@@ -39,7 +39,7 @@ interface HoverCardContentProps
  * timer, not a deliberate "open this" action, so it must never steal
  * keyboard focus away from wherever the user actually is (e.g. mid-typing
  * in a form) just because the pointer happened to rest on a trigger. This
- * is the same tradeoff Radix's own `HoverCard` makes; the documented cost is
+ * is a deliberate tradeoff; the documented cost is
  * that content reachable only via a portal isn't Tab-reachable in visual
  * order, which is an acceptable limitation for supplementary preview
  * content (same class of tradeoff as `Tooltip`'s content never taking focus

@@ -187,7 +187,7 @@ const color = {
   },
   // 9-step neutral scale, theme-independent (one set of greys, `base.*`
   // above decides which end of it each theme's page/card/text roles pull
-  // from). Deliberately NOT MUI's stock neutral grey — derived from
+  // from). Deliberately not a generic stock neutral grey — derived from
   // `#919EAB`, the same blue-tinted anchor `base.dark100`'s divider and
   // `text.secondary` (`base.lightContent`'s sibling role, see `semantic.ts`)
   // already key off. Using stock neutral grey here would visibly clash with

@@ -30,7 +30,7 @@ interface NavigationMenuProps extends PrimitivePropsWithRef<'nav'> {
  *
  * Unlike `Popover`/`Dialog`, opening is hover-driven (`openDelay`), matching
  * the site-header mega-menu convention this component targets — deliberately
- * simplified vs. Radix's `NavigationMenu`: no shared `Viewport` (the
+ * deliberately scoped down: no shared `Viewport` (the
  * animated width/height crossfade between different items' content) and no
  * `NavigationMenuIndicator` (the little arrow/underline that tracks the open
  * trigger) — both are visual polish layered on top of the same open/close

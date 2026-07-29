@@ -22,7 +22,7 @@ interface MenuProps {
  * on top of it). Wraps children in `@nebula-lab/primitives`' `Popper` for the
  * anchor-positioning `MenuTrigger`/`MenuContent` need.
  *
- * Deliberately simplified vs. a full Radix-parity menu: no submenus
+ * Deliberately simplified: no submenus
  * (`MenuSub`/`MenuSubTrigger`/`MenuSubContent`) and no typeahead
  * (type-to-jump-to-item) — both real, valuable features, scoped out here to
  * keep this a tractable single build alongside `DropdownMenu`/`ContextMenu`/

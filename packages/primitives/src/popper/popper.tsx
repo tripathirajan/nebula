@@ -11,9 +11,9 @@ interface PopperProps {
 /**
  * Root of the Popper compound primitive — the shared anchor-positioning
  * building block `Popover` and `Tooltip` (once built) are both meant to be
- * built on, the same way Radix's `Popover`/`Tooltip`/`DropdownMenu` all
- * share one `Popper` primitive rather than each reimplementing collision
- * detection. Renders no DOM of its own, just holds the anchor element
+ * built on, so overlay-positioning components share one `Popper` primitive
+ * rather than each reimplementing collision detection. Renders no DOM of
+ * its own, just holds the anchor element
  * `PopperAnchor` registers so `PopperContent` can measure and position
  * against it.
  *

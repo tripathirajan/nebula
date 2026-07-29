@@ -29,7 +29,7 @@ interface CheckboxProps extends Omit<PrimitivePropsWithRef<'button'>, 'checked' 
  * browser-native checkbox rendering. A visually-hidden native checkbox
  * mirrors the state underneath for free `<form>` participation (name/value
  * submission, browser autofill, constraint validation) — the same technique
- * `Switch` and native-input-averse libraries like Radix use.
+ * `Switch` uses.
  *
  * Tri-state: `checked` accepts `'indeterminate'` for a "some but not all
  * children selected" visual (e.g. a parent checkbox over a list) — Space

@@ -4,8 +4,8 @@ import * as React from 'react';
 import type { VStackProps as PrimitiveVStackProps } from '@nebula-lab/primitives/vstack';
 
 /**
- * Styled `VStack` — alias of `Stack` under the name consumers coming from
- * Chakra UI reach for first. Thin re-export; see `Flex`'s own doc comment
+ * Styled `VStack` — alias of `Stack` under a name consumers coming from
+ * other component libraries reach for first. Thin re-export; see `Flex`'s own doc comment
  * for why this layer adds nothing beyond re-exporting.
  *
  * @example

@@ -228,7 +228,7 @@ ListItemSecondaryAction.displayName = 'ListItemSecondaryAction';
 
 type ListSubheaderProps = PrimitivePropsWithRef<'li'>;
 
-/** A non-interactive section label between groups of `ListItem`s — a real `<li>` (valid anywhere inside a `<ul>`/`<ol>`, unlike a `<div>`), `sticky top-0` by default so it stays visible while its section scrolls past, matching the pattern MUI's own `ListSubheader` uses for the same reason. */
+/** A non-interactive section label between groups of `ListItem`s — a real `<li>` (valid anywhere inside a `<ul>`/`<ol>`, unlike a `<div>`), `sticky top-0` by default so it stays visible while its section scrolls past. */
 const ListSubheader = React.forwardRef<HTMLLIElement, ListSubheaderProps>((props, forwardedRef) => {
   const { className, ...rest } = props;
   return (

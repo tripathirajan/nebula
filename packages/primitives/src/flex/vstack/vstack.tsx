@@ -11,8 +11,8 @@ import type { StackOwnProps, StackProps } from '../stack/stack';
 type VStackProps<E extends React.ElementType = 'div'> = StackProps<E>;
 
 /**
- * Alias of `Stack` under the name some consumers reach for first coming
- * from other component libraries (Chakra UI's `VStack`, notably) — a thin
+ * Alias of `Stack` under a name some consumers reach for first coming
+ * from other component libraries — a thin
  * pass-through wrapper rather than `const VStack = Stack` directly, so it
  * gets its own `displayName` in devtools instead of mutating `Stack`'s
  * (they're the same rendered output either way; there's no behavior to

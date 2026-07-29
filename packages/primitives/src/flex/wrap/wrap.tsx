@@ -11,8 +11,8 @@ import type { InlineOwnProps, InlineProps } from '../inline/inline';
 type WrapProps<E extends React.ElementType = 'div'> = InlineProps<E>;
 
 /**
- * Alias of `Inline` under the name some consumers reach for first (Chakra
- * UI's `Wrap`, notably) — `Inline` already *is* "a wrapping row of
+ * Alias of `Inline` under a name some consumers reach for first coming
+ * from other component libraries — `Inline` already *is* "a wrapping row of
  * children," so this is a thin pass-through wrapper (own `displayName`,
  * same behavior) rather than a second implementation to keep in sync.
  *

@@ -1,6 +1,6 @@
-// Thin renamed re-export of this package's own `Drawer` parts — a "Sheet"
-// (the shadcn/Radix naming) and a "Drawer" (the Chakra/MUI naming) are the
-// same edge-anchored overlay pattern under two different vocabularies; no
+// Thin renamed re-export of this package's own `Drawer` parts — "Sheet"
+// and "Drawer" are two names for the same edge-anchored overlay pattern
+// used by different component-library naming conventions; no
 // project in this workspace needs both to look or behave differently, so
 // this mirrors the `DropdownMenu`-reuses-`Menu` / `TreeView`-reuses-`Tree`
 // convention rather than duplicating `DrawerContent`'s real `data-[side=*]`

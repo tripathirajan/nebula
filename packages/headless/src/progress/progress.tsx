@@ -46,7 +46,7 @@ function getProgressState(value: number | null, max: number): ProgressState {
  * visual bar itself; the actual filled/empty track is `ProgressIndicator`'s
  * job (a plain `div` exposing `data-state`/`data-value`/`data-max` for
  * `react-ui` to style off of — root computes the semantics, the indicator
- * renders the visual, same split Radix's `Progress` uses).
+ * renders the visual).
  *
  * `value={null}` (the default) renders an indeterminate progress bar —
  * `aria-valuenow` is omitted entirely per the ARIA spec, since a determinate
