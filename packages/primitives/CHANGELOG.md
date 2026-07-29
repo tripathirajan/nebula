@@ -1,3 +1,13 @@
+## 2.0.1 (2026-07-29)
+
+### 🩹 Fixes
+
+- **release:** revert nx's pinned internal @nebula-lab/* deps to workspace:* ([9c7265a](https://github.com/tripathirajan/nebula/commit/9c7265a))
+
+### ❤️ Thank You
+
+- Rajan Tripathi @tripathirajan
+
 ## 2.0.1-beta.0 (2026-07-29)
 
 ### 🚀 Features

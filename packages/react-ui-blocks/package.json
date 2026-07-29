@@ -1,6 +1,6 @@
 {
   "name": "@nebula-lab/react-ui-blocks",
-  "version": "2.0.2-beta.1",
+  "version": "2.0.4",
   "description": "Ready-to-use, domain-neutral screens and composite blocks (theme switchers, page shells, forms, dashboards, auth flows, ...) built purely from @nebula-lab/react-ui (which owns both the styled components and the token/theme system). The top of the dependency graph — nothing else in this repo depends on it.",
   "license": "MIT",
   "publishConfig": {
@@ -64,9 +64,9 @@
     "react-dom": "^19.0.0"
   },
   "dependencies": {
-    "@nebula-lab/hooks": "workspace:*",
-    "@nebula-lab/primitives": "workspace:*",
-    "@nebula-lab/react-ui": "workspace:*",
+    "@nebula-lab/hooks": "2.0.1",
+    "@nebula-lab/primitives": "2.0.1",
+    "@nebula-lab/react-ui": "2.0.1",
     "recharts": "^3.9.2"
   },
   "devDependencies": {

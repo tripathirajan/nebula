@@ -1,6 +1,6 @@
 {
   "name": "@nebula-lab/styleless",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Reusable UI components with a complete, semantic API but zero visual opinion — composes @nebula-lab/primitives + @nebula-lab/headless. Styled by @nebula-lab/react-ui.",
   "license": "MIT",
   "publishConfig": {
@@ -112,9 +112,9 @@
     "react-dom": "^19.0.0"
   },
   "dependencies": {
-    "@nebula-lab/headless": "workspace:*",
-    "@nebula-lab/hooks": "workspace:*",
-    "@nebula-lab/primitives": "workspace:*"
+    "@nebula-lab/headless": "2.0.1",
+    "@nebula-lab/hooks": "2.0.1",
+    "@nebula-lab/primitives": "2.0.1"
   },
   "devDependencies": {
     "@storybook/react": "^8.6.18",
