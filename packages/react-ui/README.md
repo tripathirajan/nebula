@@ -2,7 +2,7 @@
 
 Tailwind-powered styled components (atoms) built on `@nebula-lab/primitives` (`Primitive`, `cn`) and `@nebula-lab/headless` (for anything with interactive/ARIA state beyond what `Primitive` gives for free) — plus the 3-layer design token system and `ThemeProvider`/`useTheme` those components are styled from.
 
-This package absorbed the former `@nebula-lab/theme` package. Tokens/theming were split out on their own early on, but no other package in the workspace ever needed them — `primitives` and `headless` are intentionally unstyled and never touch color/spacing tokens at all, so `@nebula-lab/theme` only ever had one real consumer (`react-ui` itself, plus `react-ui-blocks` transitively through it). Keeping them separate was a package boundary with no other package depending on it, so they're merged now. (Trade-off worth knowing: this does mean tokens can no longer be consumed independently of the React component code, e.g. by a future non-React consumer — a reasonable cost given there's only one implementation today.) `@nebula-lab/headless` has also been renamed twice since — `@nebula-lab/headless` → `@nebula-lab/styleless` → back to `@nebula-lab/headless` — see that package's own README and `AGENTS.md`'s "Layer placement" section for why it landed back on `headless` for good this time (a distinct, new `@nebula-lab/styleless` layer now exists conceptually, just not built yet).
+This package absorbed the former `@nebula-lab/theme` package. Tokens/theming were split out on their own early on, but no other package in the workspace ever needed them — `primitives` and `headless` are intentionally unstyled and never touch color/spacing tokens at all, so `@nebula-lab/theme` only ever had one real consumer (`react-ui` itself, plus `react-ui-blocks` transitively through it). Keeping them separate was a package boundary with no other package depending on it, so they're merged now. (Trade-off worth knowing: this does mean tokens can no longer be consumed independently of the React component code, e.g. by a future non-React consumer — a reasonable cost given there's only one implementation today.) `react-ui` also builds on `@nebula-lab/styleless` (stable, coverage-complete) below `headless` — see `ARCHITECTURE.md` at the repo root for the full layer breakdown and naming history.
 
 ## Installation
 
@@ -24,9 +24,9 @@ Peer dependencies: `react ^19.0.0`, `react-dom ^19.0.0`. Requires Tailwind CSS v
 
 ## What's here
 
-**Layout & structure** — `Card`, `Paper`, `Surface`, `Section`, `Main`, `Header`, `Footer`, `Navbar`, `Sidebar`, `DescriptionList`
+**Layout & structure** — `Box`, `Card`, `Paper`, `Surface`, `Section`, `Main`, `Header`, `Footer`, `Navbar`, `Sidebar`, `DescriptionList`
 
-**Typography** — `Heading`, `Text`, `Blockquote`, `Code`, `Markdown`, `Kbd`, `KbdShortcut`
+**Typography** — `Heading`, `Text`, `Paragraph`, `Pre`, `Blockquote`, `Code`, `Markdown`, `Kbd`, `KbdShortcut`
 
 **Buttons** — `Button`, `IconButton`, `Fab`, `ButtonGroup`, `SplitButton`
 
@@ -48,7 +48,7 @@ Peer dependencies: `react ^19.0.0`, `react-dom ^19.0.0`. Requires Tailwind CSS v
 
 **Navigation** — `Tabs`, `Breadcrumb`, `Pagination`, `Stepper`, `BottomNav`, `Timeline`
 
-**Data display** — `Badge`, `Chip`, `Tag`, `Avatar`, `AvatarGroup`, `DataTable`, `DataGrid`, `Tree`, `TreeView`, `TreeTable`, `List`, `VirtualList`, `Stat`, `Sparkline`, `CodeBlock`
+**Data display** — `Badge`, `Chip`, `Tag`, `Avatar`, `AvatarGroup`, `CardListItem`, `PaymentMethodList`, `DataTable`, `DataGrid`, `Tree`, `TreeView`, `TreeTable`, `List`, `VirtualList`, `Stat`, `Sparkline`, `CodeBlock`
 
 **Media & carousels** — `Audio`, `Video`, `Carousel`, `SwipeableCards`
 

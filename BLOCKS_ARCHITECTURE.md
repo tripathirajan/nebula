@@ -886,6 +886,8 @@ Ranked by leverage (how much existing Nebula infrastructure it reuses vs. requir
 
 ## 13. Future Roadmap
 
+See `MINIMALS_COMPONENT_INVENTORY.md` (repo root) for the concrete, page-by-page gap analysis this roadmap's early phases draw on — a live audit of the Minimals dashboard cross-referenced against this doc's own category/family taxonomy (§2/§3), identifying exactly which blocks are missing and which existing ones (`DashboardOverview`, `ChartCard`, ...) already cover a given pattern. That doc's own phase numbering is a tighter, dashboard-specific ordering of the same backlog described here, not a competing plan.
+
 Phased by real-world developer demand (landing pages and dashboards are asked for immediately by almost every consumer; enterprise/industry-specific patterns are asked for by a narrower, later-stage audience) and by leverage (what's cheapest to ship well given the existing `react-ui` component inventory today vs. what requires new lower-layer components first — cross-reference the still-substantial `headless`/`react-ui` backlog tracked separately in this project).
 
 ### Phase 1 — Essential Blocks (highest demand, lowest dependency risk)

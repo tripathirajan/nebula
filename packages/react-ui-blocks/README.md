@@ -30,13 +30,13 @@ Domain-neutral blocks (layouts, forms, data display, navigation) are exported fr
 
 **Forms** — `TransactionForm` (generic income/expense entry, category list supplied by the consumer), `EntityFormLayout`
 
-**Data display** — `DataTableBlock`, `ListingCard`, `CardListItem`
+**Data display** — `DataTableBlock`, `ListingCard`
 
 **Navigation** — `SaasAppHeader`
 
 **Authentication** (`@nebula-lab/react-ui-blocks/authentication`) — `LoginForm`, `SignupForm`
 
-**Dashboard** (`@nebula-lab/react-ui-blocks/dashboard`) — `DashboardOverview`, `ChartCard`, `WelcomeBanner`, `BalanceCard`, `BillingSummaryCard`, `PaymentMethodList`, `PlanCards`, `RankedList`, `ReviewsList`, `TeamMemberCard`, `ThumbnailList`
+**Dashboard** (`@nebula-lab/react-ui-blocks/dashboard`) — `DashboardOverview`, `ChartCard`, `WelcomeBanner`, `BalanceCard`, `BillingSummaryCard`, `PlanCards`, `RankedList`, `ReviewsList`, `TeamMemberCard`, `ThumbnailList`
 
 **Ecommerce** (`@nebula-lab/react-ui-blocks/ecommerce`) — `ProductCard`, `ProductGallery`, `ProductInfoPanel`
 
