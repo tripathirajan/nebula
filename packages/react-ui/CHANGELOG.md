@@ -1,3 +1,26 @@
+## 2.0.1-beta.0 (2026-07-29)
+
+### 🚀 Features
+
+- **react-ui:** add Box, Paragraph, Pre — close the last 3 primitive gaps ([4ce2972](https://github.com/tripathirajan/nebula/commit/4ce2972))
+- **react-ui:** add 17 missing atoms; fix backdrop/select/dismissible-layer bugs ([2513d31](https://github.com/tripathirajan/nebula/commit/2513d31))
+- retheme templates into expensiona expense-tracker demo ([87c1304](https://github.com/tripathirajan/nebula/commit/87c1304))
+- add dashboard-ui and mobile-ui example templates ([55199c0](https://github.com/tripathirajan/nebula/commit/55199c0))
+
+### 🩹 Fixes
+
+- **react-ui:** make ThemeProvider's context immune to cross-entry duplication ([e96559d](https://github.com/tripathirajan/nebula/commit/e96559d))
+- **build:** flatten dts output for the reorg, strip maps from published builds ([040c8d1](https://github.com/tripathirajan/nebula/commit/040c8d1))
+- **release:** diff each package against its own last release tag ([f2b96f6](https://github.com/tripathirajan/nebula/commit/f2b96f6))
+
+### 🔥 Performance
+
+- **react-ui:** disable tsup splitting, eliminate all chunk-*.js files ([5855c20](https://github.com/tripathirajan/nebula/commit/5855c20))
+
+### ❤️ Thank You
+
+- Rajan Tripathi @tripathirajan
+
 # 1.0.0 (2026-07-19)
 
 ### 🚀 Features

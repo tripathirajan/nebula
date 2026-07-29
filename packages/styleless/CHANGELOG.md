@@ -1,3 +1,25 @@
+## 1.0.1-beta.0 (2026-07-29)
+
+### 🚀 Features
+
+- **react-ui:** add Box, Paragraph, Pre — close the last 3 primitive gaps ([4ce2972](https://github.com/tripathirajan/nebula/commit/4ce2972))
+- retheme templates into expensiona expense-tracker demo ([87c1304](https://github.com/tripathirajan/nebula/commit/87c1304))
+- add dashboard-ui and mobile-ui example templates ([55199c0](https://github.com/tripathirajan/nebula/commit/55199c0))
+- **release:** publish only packages that actually changed ([915bed6](https://github.com/tripathirajan/nebula/commit/915bed6))
+- refactor ui and color scheme ([bedf94e](https://github.com/tripathirajan/nebula/commit/bedf94e))
+- **release:** auto-create GitHub Releases on publish ([77ff1ff](https://github.com/tripathirajan/nebula/commit/77ff1ff))
+- **release:** generate changelogs and git tags on every publish ([45ce11e](https://github.com/tripathirajan/nebula/commit/45ce11e))
+
+### 🩹 Fixes
+
+- **build:** flatten dts output for the reorg, strip maps from published builds ([040c8d1](https://github.com/tripathirajan/nebula/commit/040c8d1))
+- **release:** diff each package against its own last release tag ([f2b96f6](https://github.com/tripathirajan/nebula/commit/f2b96f6))
+- **release:** supply explicit version to nx release changelog per project ([352cee8](https://github.com/tripathirajan/nebula/commit/352cee8))
+
+### ❤️ Thank You
+
+- Rajan Tripathi @tripathirajan
+
 # 1.0.0 (2026-07-19)
 
 ### 🚀 Features
