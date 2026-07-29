@@ -5,11 +5,11 @@ description: Scaffold a new nebula component (primitive, headless, styleless, re
 
 # new-component
 
-Scaffolds one nebula component following the repo's non-negotiable convention (see `AGENTS.md` and `component-library-architecture.md` §9.1): one folder per component, barrel-only `index.ts` files, no god-files.
+Scaffolds one nebula component following the repo's non-negotiable convention (see `AGENTS.md` and `ARCHITECTURE.md` §9.1): one folder per component, barrel-only `index.ts` files, no god-files.
 
 ## Before scaffolding
 
-1. Ask (or infer from context) which layer the component belongs in: `primitives`, `headless`, `styleless` (not yet built, see `LAYER_TAXONOMY.md`), `react-ui`, or `react-ui-blocks`.
+1. Ask (or infer from context) which layer the component belongs in: `primitives`, `headless`, `styleless`, `react-ui`, or `react-ui-blocks`. See `ARCHITECTURE.md`'s "Layer placement" section for the decision tree.
 2. Check `packages/<layer>/src/` to confirm it doesn't already exist under a different name.
 3. Check the target layer only depends on layers below it (`utilities` -> `hooks` -> `primitives` -> `headless` -> `styleless` -> `react-ui` -> `react-ui-blocks`) -- don't import from a higher layer.
 

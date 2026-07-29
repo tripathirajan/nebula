@@ -6,7 +6,7 @@ This project's full agent instructions live in **`AGENTS.md`** — read it first
 
 > A composable React UI platform with design tokens, headless components, hooks, and a Tailwind-powered design system. Cover all the elements.
 
-"Cover all the elements" means: as work continues, every layer in `component-library-architecture.md` §2 (`utilities`, `hooks`, `primitives`, `headless`, `theme`, `ui`, `sections`, `layouts`) should eventually exist with real content — don't let one layer (e.g. `ui`) grow while `theme` or `hooks` stay empty stubs. Check `AGENTS.md`'s status table before starting new work to see what's actually missing.
+"Cover all the elements" means: as work continues, every layer in `ARCHITECTURE.md`'s "Layered architecture" section (`utilities`, `hooks`, `primitives`, `headless`, `styleless`, `react-ui`, `react-ui-blocks`) should eventually exist with real content — don't let one layer (e.g. `react-ui`) grow while another stays an empty stub. Check `AGENTS.md`'s status table before starting new work to see what's actually missing.
 
 ## Sandbox note
 
@@ -15,7 +15,7 @@ This repo may be edited from a sandboxed environment without npm registry access
 ## Before writing a new component
 
 1. Check `AGENTS.md`'s status table and the real `packages/*/src` tree — don't assume a component is missing (or already exists) without checking.
-2. Confirm which layer it belongs in (`primitives` vs `headless` vs `ui` vs `sections` vs `layouts`) using `component-library-architecture.md` §2–§6.
+2. Confirm which layer it belongs in (`primitives` vs `headless` vs `styleless` vs `react-ui` vs `react-ui-blocks`) using `ARCHITECTURE.md`'s "Layer placement" section.
 3. Use the `new-component` skill to scaffold it, so the file-per-component + barrel + `exports` map convention is applied consistently.
 4. Update `AGENTS.md`'s status table in the same change.
 

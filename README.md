@@ -16,7 +16,7 @@ utilities → hooks → primitives → headless → styleless → react-ui → r
 | [`@nebula-lab/hooks`](./packages/hooks) | Reusable React hooks (`useControllableState`, `useFocusTrap`, `useLocalStorage`, observers, ...). No dependency on `utilities` or any other workspace package, by design. |
 | [`@nebula-lab/primitives`](./packages/primitives) | Unstyled, polymorphic low-level building blocks — `Primitive`/`Slot` (the `as`/`asChild` pattern everything else is built on), layout (`Box`/`Flex`/`Grid`/`Stack`/...), text, accessibility (`FocusScope`/`DismissibleLayer`/`RovingFocusGroup`/...), form, and visibility (`Portal`/`Presence`/`Overlay`) primitives. Zero in-workspace dependencies. |
 | [`@nebula-lab/headless`](./packages/headless) | Behavior-only, ARIA-complete compound components (`Tabs`, `Dialog`, `Combobox`, `Checkbox`, `Switch`, `RadioGroup`, ...) — solves interaction/state/a11y/keyboard/focus/positioning, no styling opinions at all. (Renamed from this repo's earlier, differently-scoped `@nebula-lab/styleless`.) |
-| [`@nebula-lab/styleless`](./packages/styleless) | **Just started.** The new middle layer: reusable UI components (`Button`, `Input`, `Card`, `Table`, ...) that compose `primitives`/`headless` with a complete, semantic API but zero visual opinion. `Button` is the first extraction; see `LAYER_TAXONOMY.md` for the full remaining plan. |
+| [`@nebula-lab/styleless`](./packages/styleless) | **Stable, coverage-complete.** Reusable UI components (`Button`, `Input`, `Avatar`, `DataTable`, ...) that compose `primitives`/`headless` with a complete, semantic API but zero visual opinion. See `ARCHITECTURE.md` for the full status. |
 | [`@nebula-lab/react-ui`](./packages/react-ui) | Tailwind-styled components (atoms) built on `primitives` + `headless` (and, once extracted, `styleless`), plus the 3-layer design token system and `ThemeProvider`/`useTheme` (light/dark/system) — this package absorbed the former standalone `@nebula-lab/theme` package, since nothing else in the workspace needed tokens/theming. |
 | [`@nebula-lab/react-ui-blocks`](./packages/react-ui-blocks) | Domain-neutral, ready-to-use screens/modules built from `react-ui` — page shells, theme switchers, forms, dashboards, auth flows (`ThemeSwitcher`, `AppLayout`, `LoginForm`, `DashboardLayout`, ...). Top of the dependency graph. |
 
@@ -45,7 +45,8 @@ Every color/radius/size value ships as a CSS custom property (`--color-primary`,
 
 - [`AGENTS.md`](./AGENTS.md) — canonical rules for any agent (human or AI) working in this repo: layering, conventions, current build status, commands.
 - [`CLAUDE.md`](./CLAUDE.md) — Claude-Code-specific notes on top of `AGENTS.md` (sandbox limitations, before-you-write-a-component checklist).
-- [`component-library-architecture.md`](./component-library-architecture.md) — the original discursive design rationale and full component inventory/roadmap.
+- [`ARCHITECTURE.md`](./ARCHITECTURE.md) — the single source of truth for how this codebase is organized and why: core philosophy, the layered architecture, token system, file-per-component convention, and outstanding work.
+- [`COMPONENT_INVENTORY.md`](./COMPONENT_INVENTORY.md), [`COMPONENT_FAMILIES.md`](./COMPONENT_FAMILIES.md), [`LAYER_ARCHITECTURE_MAP.md`](./LAYER_ARCHITECTURE_MAP.md) — generated, current-state component-level detail (full inventory, generic-root/variant families, and the verified `headless`/`styleless` → `react-ui` mapping).
 - [`STATUS_AND_COMPLIANCE_REPORT.md`](./STATUS_AND_COMPLIANCE_REPORT.md) — build checklist plus a WAI-ARIA/WCAG conformance and international accessibility-law compliance analysis.
 
 ## License

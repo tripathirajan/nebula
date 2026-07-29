@@ -3,7 +3,7 @@
  *
  * Run with: `pnpm --filter @nebula-lab/react-ui generate-tokens`
  * (or `npx tsx packages/react-ui/src/tokens/generate.ts` from the repo root,
- * per component-library-architecture.md §7).
+ * per ARCHITECTURE.md §7).
  *
  * Unlike `semantic.ts`/`component.ts`, `primitive.ts`'s `radius`/`size`/
  * `effect`/`fontStack` groups (not its `color` group) *are* walked directly

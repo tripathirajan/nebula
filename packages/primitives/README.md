@@ -118,7 +118,7 @@ import { cn } from '@nebula-lab/primitives/cn';
 
 ## Conventions
 
-One module per folder (`src/<name>/<name>.ts(x)` + `index.ts` barrel) — see `component-library-architecture.md` §9.1 at the repo root. Package `index.ts` and every folder's `index.ts` are re-exports only, no logic. `primitives` has no in-workspace dependencies — not even `@nebula-lab/utilities` or `@nebula-lab/hooks` — so small pieces of logic (focusable-element queries, outside-click detection) are duplicated locally rather than imported, keeping this package installable standalone.
+One module per folder (`src/<name>/<name>.ts(x)` + `index.ts` barrel) — see `ARCHITECTURE.md` §9.1 at the repo root. Package `index.ts` and every folder's `index.ts` are re-exports only, no logic. `primitives` has no in-workspace dependencies — not even `@nebula-lab/utilities` or `@nebula-lab/hooks` — so small pieces of logic (focusable-element queries, outside-click detection) are duplicated locally rather than imported, keeping this package installable standalone.
 
 ## Scripts
 

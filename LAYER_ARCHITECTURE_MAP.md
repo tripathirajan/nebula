@@ -6,7 +6,7 @@ Verified mapping of every `primitives`/`headless`/`styleless` component to its `
 
 **No architecture cleanup needed.** Every `headless`/`styleless` component either has a `react-ui` wrapper that imports it directly, or is reached through a sibling re-export chain `react-ui` mirrors from `headless` itself (e.g. `AlertDialog`/`ContextMenu`/`DropdownMenu`/`TreeView`/`Autocomplete` at both layers) — the same, deliberate pattern in both places, not a duplication.
 
-Layering rule (per `component-library-architecture.md`, verified 2026-07-28 — see `COMPONENT_INVENTORY.md` for the full per-package component list this map is built from): `primitives` → `headless` → `styleless` → `react-ui`, each layer only ever importing from the one(s) below it. Confirmed via direct grep: zero reverse-direction imports anywhere in the workspace.
+Layering rule (per `ARCHITECTURE.md`, verified 2026-07-28 — see `COMPONENT_INVENTORY.md` for the full per-package component list this map is built from): `primitives` → `headless` → `styleless` → `react-ui`, each layer only ever importing from the one(s) below it. Confirmed via direct grep: zero reverse-direction imports anywhere in the workspace.
 
 ---
 
@@ -19,25 +19,25 @@ Standalone elements + layout primitives + low-level mechanisms. See `COMPONENT_I
 | SN | headless Component | react-ui Component | Status |
 |---|---|---|---|
 | 1 | `Accordion` | `Accordion` | Direct import |
-| 2 | `AlertDialog` | `AlertDialog` | Via sibling re-export (`Dialog`) |
-| 3 | `Autocomplete` | `Autocomplete` | Via sibling re-export (`Combobox`) |
-| 4 | `Breadcrumb` | `Breadcrumb` | Direct import |
-| 5 | `Checkbox` | `Checkbox` | Direct import |
-| 6 | `CheckboxGroup` | `CheckboxGroup` | Direct import |
-| 7 | `Collapsible` | `Collapsible` | Direct import |
-| 8 | `ColorPicker` | `ColorPicker` | Direct import |
-| 9 | `Combobox` | `Combobox` | Direct import |
-| 10 | `Command` | `Command` | Direct import |
-| 11 | `ContextMenu` | `ContextMenu` | Via sibling re-export (`Menu`) |
-| 12 | `Dialog` | `Dialog` | Direct import |
-| 13 | `Drawer` | `Drawer` | Direct import |
-| 14 | `DropdownMenu` | `DropdownMenu` | Via sibling re-export (`Menu`) |
-| 15 | `Field` | `Field` | Direct import |
-| 16 | `FileUpload` | `FileUpload` | Direct import |
-| 17 | `HoverCard` | `HoverCard` | Direct import |
-| 18 | `Listbox` | `_(none)_` | _Deliberate — internal engine for Select/Combobox/Autocomplete_ |
-| 19 | `Menu` | `Menu` | Direct import |
-| 20 | `Menubar` | `Menubar` | Direct import |
+| 2 | `Breadcrumb` | `Breadcrumb` | Direct import |
+| 3 | `Checkbox` | `Checkbox` | Direct import |
+| 4 | `CheckboxGroup` | `CheckboxGroup` | Direct import |
+| 5 | `Collapsible` | `Collapsible` | Direct import |
+| 6 | `ColorPicker` | `ColorPicker` | Direct import |
+| 7 | `Autocomplete` | `Autocomplete` | Via sibling re-export (`Combobox`) |
+| 8 | `Combobox` | `Combobox` | Direct import |
+| 9 | `Command` | `Command` | Direct import |
+| 10 | `AlertDialog` | `AlertDialog` | Via sibling re-export (`Dialog`) |
+| 11 | `Dialog` | `Dialog` | Direct import |
+| 12 | `Drawer` | `Drawer` | Direct import |
+| 13 | `Field` | `Field` | Direct import |
+| 14 | `FileUpload` | `FileUpload` | Direct import |
+| 15 | `HoverCard` | `HoverCard` | Direct import |
+| 16 | `Listbox` | `_(none)_` | _Deliberate — internal engine for Select/Combobox/Autocomplete_ |
+| 17 | `Menubar` | `Menubar` | Direct import |
+| 18 | `ContextMenu` | `ContextMenu` | Via sibling re-export (`Menu`) |
+| 19 | `DropdownMenu` | `DropdownMenu` | Via sibling re-export (`Menu`) |
+| 20 | `Menu` | `Menu` | Direct import |
 | 21 | `NavigationMenu` | `NavigationMenu` | Direct import |
 | 22 | `NumberInput` | `NumberInput` | Direct import |
 | 23 | `OTPInput` | `OTPInput` | Direct import |
@@ -93,11 +93,11 @@ Not a gap — every one of these is legitimate, split into two real categories:
 
 ### Sibling re-exports (5) — mirrors an identical headless-layer relationship
 
-- `TreeView` (`data-display`)
-- `AlertDialog` (`feedback`)
-- `Autocomplete` (`forms`)
-- `ContextMenu` (`overlays`)
-- `DropdownMenu` (`overlays`)
+- `TreeView` (`data-display/tree`)
+- `Autocomplete` (`forms/combobox`)
+- `AlertDialog` (`overlays/dialog`)
+- `ContextMenu` (`overlays/menu`)
+- `DropdownMenu` (`overlays/menu`)
 
 These re-export another react-ui component under a new name (e.g. `ContextMenu`/`DropdownMenu` both re-export `Menu`) — the *sibling* file is the one with the real `headless`/`styleless` import, already counted as "ok-via-sibling" in the tables above.
 
@@ -105,7 +105,7 @@ These re-export another react-ui component under a new name (e.g. `ContextMenu`/
 
 - `MultiSelect` (`forms`)
 - `Logo` (`media`)
-- `Sheet` (`overlays`)
+- `Sheet` (`overlays/dialog`)
 - `ThemeSwitcher` (`theming`)
 
 Worth a specific note on **`MultiSelect`**: unlike the others in this list (which compose existing react-ui atoms like `Popover`/`IconButton`), it defines its own bespoke `MultiSelectContext` directly in `react-ui` rather than in `headless`/`styleless`. Not necessarily wrong — there's no multi-select WAI-ARIA pattern distinct enough to warrant a full `headless` extraction, and `Popover` already supplies the positioning/dismissal behavior — but it's the one component in this list where "should this logic actually live one layer down?" is a genuine, open question rather than an obvious no.

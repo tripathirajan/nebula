@@ -312,7 +312,7 @@ type ButtonProps = StylelessButtonProps & VariantProps<typeof buttonVariants>;
  * support, the `type="button"` default, and real `loading` semantics —
  * `aria-busy`/`data-loading`/forced-`disabled`) rather than reaching for
  * `@nebula-lab/primitives` directly, per the layering in
- * `component-library-architecture.md` §2: `react-ui` builds on `styleless`,
+ * `ARCHITECTURE.md`: `react-ui` builds on `styleless`,
  * not around it. This file's own job is exactly one thing: turning
  * `variant`/`color`/`size` into Tailwind classes via `buttonVariants`.
  *

@@ -9,8 +9,8 @@ type AccordionProps = HeadlessAccordionProps;
 /**
  * Styled wrapper around `@nebula-lab/headless`'s `Accordion` — all ARIA/keyboard
  * behavior (single/multiple, roving-tabindex, `collapsible`) comes from
- * there unchanged; this layer only adds visual styling, per `ui`'s job
- * description in `component-library-architecture.md` §2. The root itself
+ * there unchanged; this layer only adds visual styling, per `react-ui`'s job
+ * description in `ARCHITECTURE.md`. The root itself
  * has no visual chrome of its own (a plain `flex flex-col` stack) — the
  * border between items lives on `AccordionItem`.
  *

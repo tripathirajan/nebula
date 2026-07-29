@@ -192,7 +192,7 @@ ${
     : 'Some components need review — see the "Needs review" rows below.'
 }
 
-Layering rule (per \`component-library-architecture.md\`, verified 2026-07-28 — see \`COMPONENT_INVENTORY.md\` for the full per-package component list this map is built from): \`primitives\` → \`headless\` → \`styleless\` → \`react-ui\`, each layer only ever importing from the one(s) below it. Confirmed via direct grep: zero reverse-direction imports anywhere in the workspace.
+Layering rule (per \`ARCHITECTURE.md\`, verified 2026-07-28 — see \`COMPONENT_INVENTORY.md\` for the full per-package component list this map is built from): \`primitives\` → \`headless\` → \`styleless\` → \`react-ui\`, each layer only ever importing from the one(s) below it. Confirmed via direct grep: zero reverse-direction imports anywhere in the workspace.
 
 ---
 

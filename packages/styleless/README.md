@@ -11,7 +11,7 @@ This is the newest layer in the pipeline (`primitives → headless → styleless
 4. Does it add the Nebula design system (Tailwind, variants, themes)?        → React UI
 ```
 
-See `LAYER_TAXONOMY.md` (repo root) for the ongoing extraction plan — components tagged **[extract]** there are currently styled directly in `@nebula-lab/react-ui` and still need an unstyled version factored out into this package.
+See `ARCHITECTURE.md` (repo root) for the full layered architecture and current status — this layer is stable and coverage-complete; see its "Outstanding work" section for anything still pending elsewhere in the stack.
 
 ## Installation
 

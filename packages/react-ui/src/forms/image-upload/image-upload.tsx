@@ -31,7 +31,7 @@ interface ImageUploadProps extends Omit<FileUploadProps, 'accept' | 'children'> 
  * own `styleless`-tier component: the grid layout, thumbnail sizing, and
  * remove-button overlay position are all visual choices with nothing
  * structural left to decouple once `ImagePreview` already owns the one real
- * behavior (see `LAYER_TAXONOMY.md` §4's File Upload note).
+ * behavior.
  *
  * Owns its own `files` controllable state (via the same `useControllableState`
  * hook `FileUpload` itself uses internally) rather than reaching into

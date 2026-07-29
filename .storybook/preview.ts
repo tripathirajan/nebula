@@ -68,7 +68,7 @@ const preview: Preview = {
     },
     a11y: {
       // Fails CI on a11y violations rather than only warning — matches the
-      // "zero violations gate" contract in component-library-architecture.md §11.
+      // "zero violations gate" contract in ARCHITECTURE.md §11.
       test: 'error',
     },
     options: {

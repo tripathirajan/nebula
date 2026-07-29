@@ -1,6 +1,6 @@
 import { defineConfig } from 'tsup';
 
-// One entry per hook — see component-library-architecture.md §9.1.
+// One entry per hook — see ARCHITECTURE.md §9.1.
 export default defineConfig((options) => ({
   entry: {
     index: 'src/index.ts',

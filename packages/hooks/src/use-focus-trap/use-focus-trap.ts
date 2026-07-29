@@ -3,7 +3,7 @@ import { useEffect, useRef } from 'react';
 import type { RefObject } from 'react';
 
 // `@nebula-lab/hooks` intentionally has no workspace dependencies (see
-// component-library-architecture.md §2), so this duplicates the small
+// ARCHITECTURE.md §2), so this duplicates the small
 // focusable-element query that also lives in `@nebula-lab/utilities` rather than
 // importing it. If that layering rule ever relaxes, collapse this into a
 // shared import from `@nebula-lab/utilities/is-focusable`.

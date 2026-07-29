@@ -56,9 +56,8 @@ type FlexProps<E extends React.ElementType = 'div'> = PolymorphicComponentPropsW
 /**
  * A `display: flex` container with small, literal-CSS convenience props
  * (`direction`, `align`, `justify`, `wrap`, `gap`) instead of hand-written
- * Tailwind flex utility classes — see `component-library-architecture.md`
- * §6 ("thin Tailwind-token-driven layout primitives so consumers don't
- * write raw flex/grid classes").
+ * Tailwind flex utility classes — thin Tailwind-token-driven layout
+ * primitives so consumers don't write raw flex/grid classes.
  *
  * @example
  * ```tsx

@@ -73,10 +73,8 @@ export default tseslint.config(
     },
   },
 
-  // Package-boundary / layering rules from component-library-architecture.md §2:
+  // Package-boundary / layering rules from ARCHITECTURE.md's "Layered architecture" section:
   // utilities -> hooks -> primitives -> headless -> styleless -> react-ui -> react-ui-blocks.
-  // (`styleless` only has one component (`Button`) extracted so far — see LAYER_TAXONOMY.md
-  // §4 for the ~49 remaining — but its layering block below is already in place.)
   // Each block below blocks imports from higher layers than itself.
   // `utilities` and `hooks` sit at the bottom and depend on nothing else in
   // the workspace (not even each other — see packages/hooks/README.md).
@@ -93,7 +91,7 @@ export default tseslint.config(
             {
               group: ['@nebula-lab/*'],
               message:
-                'Layering violation: packages/utilities depends on nothing else in the workspace. See component-library-architecture.md §2.',
+                'Layering violation: packages/utilities depends on nothing else in the workspace. See ARCHITECTURE.md §2.',
             },
           ],
         },
@@ -111,7 +109,7 @@ export default tseslint.config(
             {
               group: ['@nebula-lab/*'],
               message:
-                'Layering violation: packages/hooks depends on nothing else in the workspace. See component-library-architecture.md §2.',
+                'Layering violation: packages/hooks depends on nothing else in the workspace. See ARCHITECTURE.md §2.',
             },
           ],
         },
@@ -129,7 +127,7 @@ export default tseslint.config(
             {
               group: ['@nebula-lab/headless*', '@nebula-lab/react-ui*', '@nebula-lab/react-ui-blocks*'],
               message:
-                'Layering violation: packages/primitives cannot depend on higher layers. See component-library-architecture.md §2.',
+                'Layering violation: packages/primitives cannot depend on higher layers. See ARCHITECTURE.md §2.',
             },
           ],
         },
@@ -147,7 +145,7 @@ export default tseslint.config(
             {
               group: ['@nebula-lab/react-ui*', '@nebula-lab/react-ui-blocks*'],
               message:
-                'Layering violation: packages/headless depends only on primitives + hooks. See component-library-architecture.md §2.',
+                'Layering violation: packages/headless depends only on primitives + hooks. See ARCHITECTURE.md §2.',
             },
           ],
         },
@@ -165,7 +163,7 @@ export default tseslint.config(
             {
               group: ['@nebula-lab/react-ui*', '@nebula-lab/react-ui-blocks*'],
               message:
-                'Layering violation: packages/styleless depends only on primitives + hooks + headless. See component-library-architecture.md §2 and LAYER_TAXONOMY.md.',
+                'Layering violation: packages/styleless depends only on primitives + hooks + headless. See ARCHITECTURE.md.',
             },
           ],
         },
@@ -183,7 +181,7 @@ export default tseslint.config(
             {
               group: ['@nebula-lab/react-ui-blocks*'],
               message:
-                'Layering violation: packages/react-ui cannot depend on react-ui-blocks. See component-library-architecture.md §2.',
+                'Layering violation: packages/react-ui cannot depend on react-ui-blocks. See ARCHITECTURE.md §2.',
             },
           ],
         },

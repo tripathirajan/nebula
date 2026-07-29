@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // `tsc -p tsconfig.build.json --emitDeclarationOnly` mirrors `src/`'s
 // category subfolders (`src/typography/label/` etc — see AGENTS.md /
-// component-library-architecture.md §D) 1:1 into `dist/`, since tsc has no
+// ARCHITECTURE.md §D) 1:1 into `dist/`, since tsc has no
 // concept of tsup's flat per-entry output keys. tsup's own JS output stays
 // flat (`dist/label/index.js`) because its `entry` map's KEY controls the
 // output path regardless of the source VALUE's folder depth — but nothing
@@ -28,7 +28,7 @@ const DIST = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', 'dist
 
 // Any top-level `dist/` dir that isn't itself a flat public entry is a
 // category folder from `src/`'s layout — keep in sync with the category
-// list in `component-library-architecture.md` §2 / `AGENTS.md`'s status
+// list in `ARCHITECTURE.md` §2 / `AGENTS.md`'s status
 // table if a new one is ever added.
 const CATEGORY_DIRS = [
   'layout',

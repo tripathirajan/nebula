@@ -27,7 +27,7 @@ Run a command for a single package with `pnpm --filter @nebula-lab/<pkg> <comman
 
 ## Adding a new component
 
-Use the `new-component` skill (if you're working with Claude Code) or follow the same convention by hand: one folder per component under the right layer's `src/`, a barrel-only `index.ts`, a subpath entry in that package's `package.json` `exports` map and `tsup.config.ts`. See `component-library-architecture.md` §2–§6 for which layer (`primitives` / `headless` / `styleless` / `react-ui` / `react-ui-blocks`) a given component belongs in, and `AGENTS.md`'s status table for what already exists.
+Use the `new-component` skill (if you're working with Claude Code) or follow the same convention by hand: one folder per component under the right layer's `src/`, a barrel-only `index.ts`, a subpath entry in that package's `package.json` `exports` map and `tsup.config.ts`. See `ARCHITECTURE.md`'s "Layer placement" section for which layer (`primitives` / `headless` / `styleless` / `react-ui` / `react-ui-blocks`) a given component belongs in, and `AGENTS.md`'s status table for what already exists.
 
 Every component needs:
 - A named export, `forwardRef`, typed via `PrimitivePropsWithRef`/`PolymorphicComponentPropsWithRef` from `@nebula-lab/primitives`.

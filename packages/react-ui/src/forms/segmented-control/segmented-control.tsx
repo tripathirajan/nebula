@@ -16,8 +16,7 @@ type SegmentedControlProps = Omit<HeadlessToggleGroupSingleProps, 'type'>;
  * than through an intermediate `@nebula-lab/styleless` shell — same call
  * `react-ui`'s own `Toggle` already makes, since there's no structural
  * behavior here beyond what `ToggleGroup` already provides, only a
- * different visual treatment of it (see `LAYER_TAXONOMY.md` §4's
- * Selection note).
+ * different visual treatment of it.
  *
  * @example
  * ```tsx

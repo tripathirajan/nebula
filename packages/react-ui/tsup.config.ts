@@ -123,8 +123,8 @@ export default defineConfig((options) => ({
     'bottom-nav/index': 'src/navigation/bottom-nav/index.ts',
     'side-nav/index': 'src/navigation/side-nav/index.ts',
     'logo/index': 'src/media/logo/index.ts',
-    // Source lives under a category subfolder (see COMPONENT_COVERAGE_AUDIT.md
-    // §D) but the entry *key* below controls the output path, so published
+    // Source lives under a category subfolder (see ARCHITECTURE.md's
+    // "File-per-component convention" section) but the entry *key* below controls the output path, so published
     // subpaths stay flat (`@nebula-lab/react-ui/flex`, not `.../layout/flex`) —
     // consistent with every component above regardless of `src/` depth.
     'aspect-ratio/index': 'src/layout/aspect-ratio/index.ts',

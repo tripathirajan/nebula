@@ -40,7 +40,7 @@ import { useControllableState } from '@nebula-lab/hooks/use-controllable-state';
 
 ## Note on `@nebula-lab/utilities`
 
-This package intentionally does not import from `@nebula-lab/utilities` (see `component-library-architecture.md` §2: both packages sit at the bottom of the dependency graph with no cross-dependency). Where a hook needs logic that overlaps with a utility (e.g. `useFocusTrap`'s focusable-element query vs. `isFocusable`), it's duplicated locally with a comment pointing at the utilities equivalent rather than creating a cross-import.
+This package intentionally does not import from `@nebula-lab/utilities` (see `ARCHITECTURE.md`'s "Layered architecture" section: both packages sit at the bottom of the dependency graph with no cross-dependency). Where a hook needs logic that overlaps with a utility (e.g. `useFocusTrap`'s focusable-element query vs. `isFocusable`), it's duplicated locally with a comment pointing at the utilities equivalent rather than creating a cross-import.
 
 ## Contributing
 

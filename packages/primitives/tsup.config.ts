@@ -1,6 +1,6 @@
 import { defineConfig } from 'tsup';
 
-// One entry per component/module (see component-library-architecture.md §9.1) —
+// One entry per component/module (see ARCHITECTURE.md §9.1) —
 // never a single bundled entry, so consumers can import per-component subpaths
 // and bundlers can tree-shake accordingly.
 export default defineConfig((options) => ({

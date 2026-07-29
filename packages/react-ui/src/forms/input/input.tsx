@@ -38,8 +38,7 @@ type InputProps = StylelessInputProps & VariantProps<typeof inputVariants>;
  * through of `@nebula-lab/primitives`' `Input`, which gives `invalid` ->
  * `aria-invalid` wiring and ref forwarding) rather than reaching past it to
  * `primitives` directly, per `react-ui`'s "builds on `styleless`, not
- * around it" rule (see `component-library-architecture.md` §2 — same
- * reasoning as `Button`).
+ * around it" rule (see `ARCHITECTURE.md` — same reasoning as `Button`).
  *
  * Colors read `--input-*` (see `../tokens/component.ts`), not `--color-*`
  * directly — same indirection `Button` already used, applied consistently
