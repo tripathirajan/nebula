@@ -99,6 +99,38 @@ for (const category of categoryDirsPresent) {
 }
 console.log(`flatten-dts: rewrote relative type references in ${rewrittenFiles} .d.ts files`);
 
+// 1b. The root barrel (`dist/index.d.ts`, from the `index` entry whose key
+// has no `/` — the one tsup/tsc entry that already sits directly in `DIST`
+// rather than under a category dir) re-exports every component via
+// `export * from './actions/button'`-style specifiers copied verbatim from
+// `src/index.ts`. Those paths are only ever valid pre-flatten; step 1 above
+// never touches this file since it walks *into* `categoryDirsPresent`
+// dirs, and this file isn't under one. Left alone, none of this package's
+// ~150 named exports resolve for a consumer writing
+// `import { Button } from '@nebula-lab/react-ui'` (the JS is unaffected —
+// `dist/index.js` is a fully bundled, self-contained file — this is a
+// declarations-only bug). Same rewrite, just sourced from `DIST` itself
+// instead of a category subdirectory.
+let rewrittenRootFiles = 0;
+for (const entry of fs.readdirSync(DIST, { withFileTypes: true })) {
+  if (!entry.isFile() || !entry.name.endsWith('.d.ts')) continue;
+  const file = path.join(DIST, entry.name);
+  const content = fs.readFileSync(file, 'utf8');
+  const next = content.replace(importRe, (whole, prefix, quote, spec) => {
+    const oldTargetAbs = path.resolve(path.dirname(file), spec);
+    const newTargetAbs = newLocationFor(oldTargetAbs);
+    let newSpec = path.relative(path.dirname(file), newTargetAbs).split(path.sep).join('/');
+    if (!newSpec.startsWith('.')) newSpec = './' + newSpec;
+    if (newSpec === spec) return whole;
+    return `${prefix}${quote}${newSpec}${quote}`;
+  });
+  if (next !== content) {
+    fs.writeFileSync(file, next);
+    rewrittenRootFiles++;
+  }
+}
+console.log(`flatten-dts: rewrote relative type references in ${rewrittenRootFiles} root-level .d.ts files`);
+
 // 2. Move each category dir's per-component subfolder contents up into
 // the flat `dist/<name>/` directory tsup's JS build already created
 // (merging — the .d.ts/.d.ts.map files join the existing .js/.js.map).
